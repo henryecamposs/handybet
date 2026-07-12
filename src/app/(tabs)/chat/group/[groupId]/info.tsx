@@ -1,0 +1,96 @@
+import React from 'react';
+import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { Users, Info, Settings, Shield, Bell, LogOut, ChevronRight } from 'lucide-react-native';
+import { handyBetGroups } from '../../../../../mockdata/handyBetMock';
+
+export default function GroupInfoScreen() {
+  const { groupId } = useLocalSearchParams();
+  const router = useRouter();
+
+  const group = handyBetGroups.find((g: any) => g.id === groupId) || handyBetGroups[0];
+
+  return (
+    <ScrollView className="flex-1 bg-zinc-950 px-4 pt-12" showsVerticalScrollIndicator={false}>
+      {/* Header */}
+      <View className="flex-row items-center justify-between mb-6">
+        <TouchableOpacity onPress={() => router.back()} className="flex-row items-center gap-2">
+          <Text className="text-zinc-400 font-bold text-sm">◀ Volver al Chat</Text>
+        </TouchableOpacity>
+        <TouchableOpacity className="w-10 h-10 bg-zinc-900 rounded-full items-center justify-center border border-zinc-800">
+          <Settings size={18} color="#71717a" />
+        </TouchableOpacity>
+      </View>
+
+      {/* Info Principal */}
+      <View className="items-center mb-8">
+        <View className="w-24 h-24 rounded-3xl bg-zinc-800 items-center justify-center mb-4 border border-zinc-700 shadow-xl relative">
+          <Text className="text-4xl">🎲</Text>
+          <View className="absolute -bottom-2 -right-2 bg-primary w-8 h-8 rounded-full border-4 border-zinc-950 items-center justify-center">
+            <Shield size={12} color="#000" />
+          </View>
+        </View>
+        <Text className="text-zinc-100 font-black text-2xl mb-1">{group.name}</Text>
+        <Text className="text-primary text-xs font-bold uppercase tracking-widest mb-2">Sala de {group.type}</Text>
+        <Text className="text-zinc-400 text-sm text-center px-4">Esta es la comunidad oficial para las apuestas VIP. Juega responsablemente.</Text>
+      </View>
+
+      {/* Estadísticas / Propiedades */}
+      <View className="flex-row gap-4 mb-8">
+        <View className="flex-1 bg-zinc-900 p-4 rounded-2xl border border-zinc-800 items-center">
+          <Users size={20} color="#caee26" className="mb-1" />
+          <Text className="text-zinc-100 font-bold text-lg">{group.members.length}</Text>
+          <Text className="text-zinc-500 text-[10px] uppercase">Miembros</Text>
+        </View>
+        <View className="flex-1 bg-zinc-900 p-4 rounded-2xl border border-zinc-800 items-center">
+          <Info size={20} color="#caee26" className="mb-1" />
+          <Text className="text-zinc-100 font-bold text-lg">{group.id.slice(0, 6).toUpperCase()}</Text>
+          <Text className="text-zinc-500 text-[10px] uppercase">Código</Text>
+        </View>
+      </View>
+
+      {/* Configuraciones de Usuario */}
+      <View className="bg-zinc-900 rounded-3xl border border-zinc-800 overflow-hidden mb-8">
+        <TouchableOpacity className="p-4 border-b border-zinc-800/50 flex-row items-center justify-between">
+          <View className="flex-row items-center">
+            <View className="w-10 h-10 rounded-full bg-zinc-800 items-center justify-center mr-3">
+              <Bell size={18} color="#d4d4d8" />
+            </View>
+            <Text className="text-zinc-100 font-medium">Notificaciones</Text>
+          </View>
+          <Text className="text-primary font-bold text-xs">Activadas</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity className="p-4 border-b border-zinc-800/50 flex-row items-center justify-between">
+          <View className="flex-row items-center">
+            <View className="w-10 h-10 rounded-full bg-zinc-800 items-center justify-center mr-3">
+              <Users size={18} color="#d4d4d8" />
+            </View>
+            <Text className="text-zinc-100 font-medium">Ver Miembros</Text>
+          </View>
+          <ChevronRight size={20} color="#71717a" />
+        </TouchableOpacity>
+
+        <TouchableOpacity className="p-4 flex-row items-center justify-between">
+          <View className="flex-row items-center">
+            <View className="w-10 h-10 rounded-full bg-zinc-800 items-center justify-center mr-3">
+              <Shield size={18} color="#d4d4d8" />
+            </View>
+            <View>
+              <Text className="text-zinc-100 font-medium">Reglas del Grupo</Text>
+              <Text className="text-zinc-500 text-[10px]">Lee antes de apostar</Text>
+            </View>
+          </View>
+          <ChevronRight size={20} color="#71717a" />
+        </TouchableOpacity>
+      </View>
+
+      {/* Acciones Peligrosas */}
+      <TouchableOpacity className="bg-rose-500/10 border border-rose-500/30 p-4 rounded-2xl flex-row items-center justify-center mb-16">
+        <LogOut size={18} color="#ef4444" className="mr-2" />
+        <Text className="text-rose-500 font-bold">Salir del Grupo</Text>
+      </TouchableOpacity>
+
+    </ScrollView>
+  );
+}

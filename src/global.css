@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 247.83 0.002 0.985;
+    --foreground: 272.2 0.018 0.141;
+    --primary: 150.33 0.265 0.627;
+    --primary-foreground: 247.83 0.002 0.985;
+    --card: 271.8 0.02 0.188;
+    --card-foreground: 247.83 0.002 0.985;
+    --border: 272.3 0.033 0.278;
+    --muted: 272.3 0.025 0.24;
+    --muted-foreground: 261.9 0.022 0.707;
+  }
+  .dark {
+    --background: 272.2 0.018 0.141;
+    --foreground: 247.83 0.002 0.985;
+  }
+}
+
+body {
+  background-color: oklch(var(--background));
+  color: oklch(var(--foreground));
+  font-family: system-ui, -apple-system, sans-serif;
+}
