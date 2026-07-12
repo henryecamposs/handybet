@@ -42,8 +42,8 @@ Este flujo se ejecuta cuando el usuario solicita un despliegue del proyecto. Sig
 - **Bloqueo:** Si algún comando falla, **DEBES** resolver los errores en el código antes de continuar.
 
 ### Paso 2: Actualizar el Changelog
-- Analiza la diferencia de commits o cambios mayores de la sesión.
-- Actualiza el archivo `CHANGELOG.md` en la raíz del proyecto siguiendo el estándar Keep a Changelog (Añadido, Corregido, Cambiado, etc.).
+- Analiza la diferencia de commits o los cambios mayores realizados en la sesión.
+- Actualiza el archivo `CHANGELOG.md` en la raíz del proyecto. **Es obligatorio registrar cada cambio con la fecha actual (formato YYYY-MM-DD) y la nueva versión asignada (siguiendo SemVer, ej: [1.1.0] - 2026-07-12)**, estructurando los cambios según el estándar Keep a Changelog (Añadido, Corregido, Cambiado, etc.).
 
 ### Paso 3: Actualizar el Cerebro Portátil
 - Ejecuta los pasos descritos en el **Flujo 1** (Actualizar Cerebro Portátil) para asegurar que la documentación contextual esté sincronizada con el código que se va a desplegar.
