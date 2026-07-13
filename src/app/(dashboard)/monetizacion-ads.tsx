@@ -28,11 +28,7 @@ export default function MonetizacionAdsScreen() {
   const [validationError, setValidationError] = useState<string | null>(null);
   const [adSuccessMessage, setAdSuccessMessage] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetchDashboardData();
-  }, []);
-
-  const fetchDashboardData = async () => {
+  async function fetchDashboardData() {
     try {
       setIsLoading(true);
 
@@ -41,9 +37,9 @@ export default function MonetizacionAdsScreen() {
       if (!user) return;
 
       const { data: channelsData } = await supabase
-        .from('channels')
-        .select('*')
-        .eq('owner_id', user.id);
+          .from('channels')
+          .select('*')
+          .eq('owner_id', user.id);
 
       setChannels(channelsData || []);
       if (channelsData && channelsData.length > 0) {
@@ -52,16 +48,16 @@ export default function MonetizacionAdsScreen() {
 
       // 2. Obtener anuncios
       const { data: adsData } = await supabase
-        .from('advertisements')
-        .select('*');
+          .from('advertisements')
+          .select('*');
       setAds(adsData || []);
 
       // 3. Obtener egresos/retiros pendientes
       const { data: txData } = await supabase
-        .from('transactions')
-        .select('*, wallets(user_id, profiles(username))')
-        .eq('type', 'retiro')
-        .eq('status', 'pendiente');
+          .from('transactions')
+          .select('*, wallets(user_id, profiles(username))')
+          .eq('type', 'retiro')
+          .eq('status', 'pendiente');
 
       const processedTx = (txData || []).map((t: any) => ({
         ...t,
@@ -74,7 +70,12 @@ export default function MonetizacionAdsScreen() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchDashboardData();
+  }, []);
 
   const handleRegisterAd = async () => {
     setValidationError(null);

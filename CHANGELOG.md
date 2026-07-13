@@ -4,6 +4,24 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/), y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-07-13
+
+### Añadido
+- Barra compacta de creación de post (vista reducida) en `CreatePostWidget.tsx` con avatar del usuario y accesos rápidos de multimedia/sentimientos.
+- Modal de composición completo para crear publicaciones, desplegado al pulsar la barra compacta.
+- Botón interactivo de "Seguir/Siguiendo" en el encabezado de `PostItem.tsx` con retroalimentación visual.
+- Menú de opciones en fila horizontal (Compartir, Notificaciones, No mostrar) en la tarjeta de publicación (`PostItem.tsx`).
+- Capacidad de ocultar posts localmente ("No mostrar") con banner informativo de reemplazo y botón funcional "Deshacer".
+- Modal de compartido avanzado (`ShareModal.tsx`) con pestañas para Grupos, Canales, Usuarios y Amigos, con buscador activo.
+- Publicidad patrocinada interactiva en `PostMediaViewer.tsx` cuando se abren los comentarios de posts que no poseen imágenes.
+- Sistema de notificaciones Toast flotante para alertas rápidas en el Feed.
+
+### Cambiado
+- Corregido error de doble ScrollView anidado en `feed.tsx` que rompía el comportamiento de scroll en web.
+- Asignada altura útil de pantalla (`calc(100vh - 64px)`) y scroll independiente en el sidebar derecho (`RightSidebarWidgets.tsx`).
+- Aplicado estilo `font-bold` en la segunda palabra del texto de todos los logos de la suite (Post, Chat, Love, News, Pay, Play, Show, Store, etc.).
+- Corregidos errores de ESLint por acceso antes de declaración (Temporal Dead Zone) reestructurando y elevando las declaraciones en `monetizacion-ads.tsx` y `[canalId].tsx`.
+
 ## [1.2.0] - 2026-07-12
 
 ### Añadido

@@ -18,7 +18,17 @@ El feed de publicaciones se compila dinámicamente mediante consultas estructura
 
 ---
 
-## 3. Glosario de Términos
+## 3. Interacciones Sociales y Flujos Avanzados
+
+HandyBet integra un motor social optimizado con comportamientos interactivos y retroalimentación mediante Toasts flotantes:
+- **Sistema de Seguimiento:** Permite seguir o dejar de seguir creadores directamente desde las tarjetas de publicación.
+- **Opciones de Moderación Individual:** Los posts admiten control rápido de notificaciones y la acción de ocultar publicación ("No mostrar"). Ocultar un post genera un reemplazo temporal de la tarjeta con opción "Deshacer".
+- **Compartido Avanzado:** Permite propagar publicaciones a destinos específicos categorizados en pestañas: *Grupos*, *Canales*, *Usuarios* y *Amigos*, con filtros de búsqueda rápida.
+- **Publicidad Contextual en Comentarios:** Si el visor de comentarios (`PostMediaViewer.tsx`) se abre para una publicación sin imágenes, la columna de medios renderiza un anuncio interactivo patrocinado con llamada a la acción y enlace externo dinámico.
+
+---
+
+## 4. Glosario de Términos
 - **Taquilla/Agencia:** Entidad física o digital que gestiona cobros y pagos de tickets.
 - **Cajero:** Usuario con permisos para escanear y liquidar tickets físicos de apuestas mediante códigos QR.
 - **Muro (Feed):** Consola principal de descubrimiento donde se mezclan publicaciones sociales, pronósticos y anuncios.

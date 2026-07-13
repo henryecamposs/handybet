@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView, Image, TouchableOpacity, Linking, ActivityIndicator, TextInput , Modal } from 'react-native';
+import { View, Text, ScrollView, Image, TouchableOpacity, Linking, ActivityIndicator, TextInput, Modal } from 'react-native';
 import { supabase } from '../../lib/supabaseClient';
 import { Advertisement, VisibilityLevel } from '../../types/handyBet';
 import { socialService } from '../../services/socialService';
 import { useHandyBetStore } from '../../store/useHandyBetStore';
 import { groupMonetizationService } from '../../services/groupMonetizationService';
 import Logo from '@/components/ui/Logo';
+import HandyAdsLogo from '@/components/ui/HandyAdsLogo';
+import HandyPostLogo from '@/components/ui/HandyPostLogo';
+import CreatePostWidget from '@/components/feed/CreatePostWidget';
+import PostItem from '@/components/feed/PostItem';
+import PostMediaViewer from '@/components/feed/PostMediaViewer';
+import ShareModal from '@/components/feed/ShareModal';
 import { Heart, MessageSquare, Share2 } from 'lucide-react-native';
+import { useThemeColors, withOpacity } from '@/hooks/useThemeColors';
 
 export default function FeedScreen() {
   const [posts, setPosts] = useState<any[]>([]);
@@ -14,15 +21,28 @@ export default function FeedScreen() {
   const [isLoading, setIsLoading] = useState(true);
 
   // Estados de la nueva publicación
-  const [postContent, setPostContent] = useState('');
-  const [postType, setPostType] = useState<'regular' | 'advertisement'>('regular');
-  const [visibility, setVisibility] = useState<VisibilityLevel>('todos');
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [paymentRef, setPaymentRef] = useState('');
   const [pendingPostId, setPendingPostId] = useState<string | null>(null);
+  const [likedPosts, setLikedPosts] = useState<number[]>([]);
+  const [selectedMediaPost, setSelectedMediaPost] = useState<any | null>(null);
+  const [selectedMediaIndex, setSelectedMediaIndex] = useState<number>(0);
+
+  // Estados de compartir y notificaciones
+  const [showShareModal, setShowShareModal] = useState(false);
+  const [sharingPost, setSharingPost] = useState<any | null>(null);
+  const [toast, setToast] = useState<{ message: string; visible: boolean }>({ message: '', visible: false });
+
+  const showToast = (message: string) => {
+    setToast({ message, visible: true });
+    // Reset timeout if called multiple times could be done, but a simple timeout is fine
+    setTimeout(() => {
+      setToast(prev => ({ ...prev, visible: false }));
+    }, 3500);
+  };
 
   const { mockSession } = useHandyBetStore();
-
+  const colors = useThemeColors();
   useEffect(() => {
     fetchActiveAds();
     fetchPosts();
@@ -39,7 +59,8 @@ export default function FeedScreen() {
         time: p.created_at ? new Date(p.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'Hace un momento',
         text: p.content,
         mediaType: p.media_type || 'photo',
-        mediaUrl: p.media_url || 'https://placehold.co/600x400/222222/FFF?text=HandyBet+Post'
+        mediaUrls: (p as any).media_urls || (p.media_url ? [p.media_url] : []), // Soportar múltiples imágenes
+        feeling: (p as any).feeling || null // Si el backend lo guardara
       }));
       setPosts(mapped);
     } catch (err) {
@@ -63,16 +84,16 @@ export default function FeedScreen() {
     }
   }
 
-  async function handlePublishPost() {
-    if (!postContent.trim()) return;
-    const isAd = postType === 'advertisement';
+  async function handlePublishPost(content: string, type: 'regular' | 'advertisement', visibility: VisibilityLevel, feeling?: any, mediaUrls?: string[]): Promise<boolean> {
+    if ((!content.trim() && (!mediaUrls || mediaUrls.length === 0))) return false;
+    const isAd = type === 'advertisement';
     try {
       const newPost = await socialService.createPost({
         author_id: mockSession?.id || 'usr_player1',
         group_id: null,
-        content: postContent,
+        content: content,
         visibility_level: visibility,
-        post_type: postType,
+        post_type: type,
         payment_status: isAd ? 'pendiente_pago' : 'none_required'
       });
 
@@ -80,11 +101,24 @@ export default function FeedScreen() {
         setPendingPostId(newPost.id);
         setShowPaymentModal(true);
       } else {
-        fetchPosts();
+        // Simulamos que el nuevo post tiene el sentimiento y se agrega localmente
+        const mockNewPost = {
+          id: newPost.id,
+          author: 'Usuario',
+          username: '@usr_play',
+          avatar: 'https://i.pravatar.cc/150',
+          time: 'Ahora mismo',
+          text: content,
+          mediaType: mediaUrls && mediaUrls.length > 0 && mediaUrls[0].includes('video') ? 'video' : 'photo',
+          mediaUrls: mediaUrls || [],
+          feeling: feeling
+        };
+        setPosts(prev => [mockNewPost, ...prev]);
       }
-      setPostContent('');
+      return true;
     } catch (e) {
       console.error(e);
+      return false;
     }
   };
 
@@ -122,115 +156,41 @@ export default function FeedScreen() {
     }
   };
 
+  const handleShareSuccess = (destinationName: string, type: string) => {
+    showToast(`¡Publicación compartida en ${type}: ${destinationName}!`);
+  };
+
   return (
-    <ScrollView className="flex-1 bg-background px-4 pt-12">
+    <ScrollView className="flex-1 bg-background px-4 pt-4">
       {/* Header */}
       <View className="flex-row justify-between items-center mb-6">
         <Logo size='sm' showImage={true} />
       </View>
 
       {/* Crear Publicación */}
-      <View className="bg-background/90 border border-zinc-850 p-5 rounded-3xl mb-6 shadow-md">
-        <Text className="text-foreground font-bold text-xs mb-3 uppercase tracking-wider">Crear Publicación</Text>
-        <TextInput
-          placeholder="¿Qué estás pensando?"
-          placeholderTextColor="#71717a"
-          multiline
-          numberOfLines={3}
-          value={postContent}
-          onChangeText={setPostContent}
-          className="bg-background border border-zinc-800 rounded-2xl px-4 py-3 text-white text-xs font-bold mb-3 outline-none min-h-[60px]"
-        />
-        <View className="flex-row justify-between items-center">
-          <View className="flex-row gap-2">
-            {/* Selector de tipo */}
-            <TouchableOpacity
-              onPress={() => setPostType(postType === 'regular' ? 'advertisement' : 'regular')}
-              className={`px-3 py-1.5 rounded-full border ${postType === 'advertisement' ? 'bg-secondary/15 border-secondary' : 'bg-background border-zinc-850'}`}
-            >
-              <Text className={`text-[10px] font-black uppercase ${postType === 'advertisement' ? 'text-secondary' : 'text-foreground'}`}>
-                {postType === 'advertisement' ? '📢 Anuncio' : '📝 Post Normal'}
-              </Text>
-            </TouchableOpacity>
-
-            {/* Selector de Visibilidad */}
-            <TouchableOpacity
-              onPress={() => {
-                const levels: VisibilityLevel[] = ['todos', 'amigos', 'amigos_de_mis_amigos'];
-                const nextIndex = (levels.indexOf(visibility) + 1) % levels.length;
-                setVisibility(levels[nextIndex]);
-              }}
-              className="px-3 py-1.5 rounded-full border bg-background border-zinc-850"
-            >
-              <Text className="text-[10px] font-black uppercase text-foreground">
-                👁️ {visibility === 'todos' ? 'Público' : visibility === 'amigos' ? 'Amigos' : 'Relacional'}
-              </Text>
-            </TouchableOpacity>
-          </View>
-
-          <TouchableOpacity
-            onPress={handlePublishPost}
-            disabled={!postContent.trim()}
-            className="bg-primary px-5 py-2 rounded-full"
-          >
-            <Text className="text-foreground font-black text-xs uppercase">Publicar</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+      <CreatePostWidget onPublish={handlePublishPost} />
 
       {/* Feed List */}
       {posts.map((post) => (
-        <View key={post.id} className="bg-background/90 border border-zinc-850 p-5 rounded-3xl mb-6 shadow-md">
-          {/* Header Publicación */}
-          <View className="flex-row items-center justify-between mb-4">
-            <View className="flex-row items-center gap-3">
-              <Image source={{ uri: post.avatar }} className="w-12 h-12 rounded-full border-2 border-primary/20" />
-              <View>
-                <Text className="text-white font-black text-base">{post.author}</Text>
-                <Text className="text-foreground text-xs font-semibold">{post.username} • {post.time}</Text>
-              </View>
-            </View>
-            <TouchableOpacity>
-              <Text className="text-foreground font-black text-xl">⋮</Text>
-            </TouchableOpacity>
-          </View>
-
-          {/* Texto */}
-          <Text className="text-foreground text-sm leading-relaxed mb-4">{post.text}</Text>
-
-          {/* Media */}
-          {post.mediaType === 'photo' ? (
-            <Image source={{ uri: post.mediaUrl }} className="w-full h-48 rounded-2xl border border-zinc-800" resizeMode="cover" />
-          ) : (
-            <View className="w-full h-48 rounded-2xl border border-zinc-800 bg-black justify-center items-center relative overflow-hidden">
-              <Image source={{ uri: post.mediaUrl }} className="absolute inset-0 opacity-40" resizeMode="cover" />
-              <View className="bg-primary/90 w-14 h-14 rounded-full items-center justify-center shadow-lg border border-primary-400/50">
-                <Text className="text-white text-2xl ml-1">▶</Text>
-              </View>
-              <Text className="absolute bottom-3 right-3 bg-background/80 px-2 py-1 rounded text-white text-[10px] font-bold">
-                0:15
-              </Text>
-            </View>
-          )}
-
-          {/* Reacciones */}
-          <View className="items-center mt-4 border-t border-zinc-800/50 pt-4">
-            <View className="flex-row justify-between items-center w-1/2">
-              <TouchableOpacity className="flex-row items-center gap-2 px-2 py-1">
-                <Heart size={16} color="#caee26" fill="#caee26" />
-                <Text className="text-foreground text-xs font-bold hover:text-secondary transition-colors">1.2k</Text>
-              </TouchableOpacity>
-              <TouchableOpacity className="flex-row items-center gap-2 px-2 py-1">
-                <MessageSquare size={16} color="#a1a1aa" />
-                <Text className="text-foreground text-xs font-bold">342</Text>
-              </TouchableOpacity>
-              <TouchableOpacity className="flex-row items-center gap-2 px-2 py-1">
-                <Share2 size={16} color="#a1a1aa" />
-                <Text className="text-foreground text-xs font-bold">Compartir</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
+        <PostItem
+          key={post.id}
+          post={post}
+          isLiked={likedPosts.includes(post)}
+          onLikeToggle={() => setLikedPosts(prev => prev.includes(post) ? prev.filter(p => p !== post) : [...prev, post])}
+          onMediaPress={(index) => {
+            setSelectedMediaPost(post);
+            setSelectedMediaIndex(index);
+          }}
+          onCommentPress={() => {
+            setSelectedMediaPost(post);
+            setSelectedMediaIndex(0);
+          }}
+          onSharePress={() => {
+            setSharingPost(post);
+            setShowShareModal(true);
+          }}
+          onShowToast={showToast}
+        />
       ))}
 
       {/* Inyección Dinámica de Publicidad */}
@@ -258,7 +218,7 @@ export default function FeedScreen() {
       )}
 
       {isLoading && (
-        <ActivityIndicator size="small" color="#10b981" className="my-6" />
+        <ActivityIndicator size="small" color={colors.secondary} className="my-6" />
       )}
 
       {/* Modal de Pago Split (Pay-to-Post) */}
@@ -317,6 +277,41 @@ export default function FeedScreen() {
           </View>
         </View>
       </Modal>
+
+      <PostMediaViewer
+        post={selectedMediaPost}
+        visible={!!selectedMediaPost}
+        initialIndex={selectedMediaIndex}
+        onClose={() => {
+          setSelectedMediaPost(null);
+          setSelectedMediaIndex(0);
+        }}
+        isLiked={selectedMediaPost ? likedPosts.includes(selectedMediaPost) : false}
+        onLikeToggle={() => {
+          if (selectedMediaPost) {
+            setLikedPosts(prev => prev.includes(selectedMediaPost) ? prev.filter(p => p !== selectedMediaPost) : [...prev, selectedMediaPost]);
+          }
+        }}
+      />
+
+      <ShareModal
+        visible={showShareModal}
+        onClose={() => {
+          setShowShareModal(false);
+          setSharingPost(null);
+        }}
+        onShareSuccess={handleShareSuccess}
+      />
+
+      {/* Toast Flotante Custom */}
+      {toast.visible && (
+        <View className="absolute bottom-20 left-4 right-4 bg-zinc-900 border border-zinc-800 px-4 py-3.5 rounded-2xl flex-row items-center justify-between shadow-2xl z-[999] animate-fade-in">
+          <Text className="text-white text-xs font-bold flex-1 pr-2">{toast.message}</Text>
+          <TouchableOpacity onPress={() => setToast({ message: '', visible: false })}>
+            <Text className="text-primary text-xs font-black uppercase tracking-wider">OK</Text>
+          </TouchableOpacity>
+        </View>
+      )}
 
       <View className="h-16" />
     </ScrollView>

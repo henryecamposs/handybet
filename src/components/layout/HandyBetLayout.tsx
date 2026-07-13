@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Image, TextInput } from 'react-native';
 import { useRouter, usePathname } from 'expo-router';
 import { useDevicePlatform } from '../../hooks/useDevicePlatform';
@@ -9,7 +9,10 @@ import { Home, Tv, Users, Gamepad2, Search, MessageCircle, Bell, Clock, Bookmark
 import { useColorScheme } from 'nativewind';
 import SidebarPopover from './SidebarPopover';
 import { useThemeColors, withOpacity } from '@/hooks/useThemeColors';
-import RightSidebarWidgets from '../widgets/RightSidebarWidgets';
+import RightSidebarWidgets, { mockNews, mockPrizes, mockFriendRequests } from '../widgets/RightSidebarWidgets';
+import NewsCenterView from '../widgets/center/NewsCenterView';
+import PrizesCenterView from '../widgets/center/PrizesCenterView';
+import FriendRequestsCenterView from '../widgets/center/FriendRequestsCenterView';
 
 interface HandyBetLayoutProps {
   children: React.ReactNode;
@@ -17,6 +20,28 @@ interface HandyBetLayoutProps {
 }
 
 export default function HandyBetLayout({ children, title }: HandyBetLayoutProps) {
+  type LayoutView = 'feed' | 'all-news' | 'news-detail' | 'all-prizes' | 'prize-detail' | 'all-friend-requests' | 'friend-request-detail';
+  const [currentView, setCurrentView] = useState<LayoutView>('feed');
+  const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
+
+  const handleSelectNews = (id: string | null) => {
+    if (id === null) { setCurrentView('feed'); setSelectedItemId(null); }
+    else if (id === 'all') { setCurrentView('all-news'); setSelectedItemId(null); }
+    else { setCurrentView('news-detail'); setSelectedItemId(id); }
+  };
+
+  const handleSelectPrize = (id: string | null) => {
+    if (id === null) { setCurrentView('feed'); setSelectedItemId(null); }
+    else if (id === 'all') { setCurrentView('all-prizes'); setSelectedItemId(null); }
+    else { setCurrentView('prize-detail'); setSelectedItemId(id); }
+  };
+
+  const handleSelectFriendReq = (id: string | null) => {
+    if (id === null) { setCurrentView('feed'); setSelectedItemId(null); }
+    else if (id === 'all') { setCurrentView('all-friend-requests'); setSelectedItemId(null); }
+    else { setCurrentView('friend-request-detail'); setSelectedItemId(id); }
+  };
+
   const { isDesktop } = useDevicePlatform();
   const router = useRouter();
   const pathname = usePathname();
@@ -158,24 +183,53 @@ export default function HandyBetLayout({ children, title }: HandyBetLayoutProps)
               label="Juegos"
               items={[]}
             />
-            <TouchableOpacity className="flex-row items-center p-2 rounded-xl hover:bg-background/80/50 mt-1 transition-colors group">
+            {/* <TouchableOpacity className="flex-row items-center p-2 rounded-xl hover:bg-background/80/50 mt-1 transition-colors group">
               <View className="w-9 h-9 rounded-full bg-background/80 items-center justify-center group-hover:bg-background transition-colors border border-zinc-700/50">
                 <ChevronDown size={16} color="#a1a1aa" />
               </View>
               <Text className="font-medium text-foreground ml-3 text-[15px]">Ver más</Text>
-            </TouchableOpacity>
+            </TouchableOpacity>*/}
           </View>
         </ScrollView>
 
         {/* 2. ÁREA CENTRAL (FEED) (60%) */}
         <View className="w-[60%] flex-col relative z-0">
-          <ScrollView contentContainerStyle={{ flexGrow: 1, paddingHorizontal: 16, paddingTop: 24, paddingBottom: 64 }} showsVerticalScrollIndicator={false}>
+          <ScrollView contentContainerStyle={{ flexGrow: 1, paddingHorizontal: 2, paddingTop: 2, paddingBottom: 14 }} showsVerticalScrollIndicator={false}>
             {children}
           </ScrollView>
+
+          {/* CAPA SUPERPUESTA PARA WIDGETS */}
+          {currentView !== 'feed' && (
+            <View className="absolute inset-0 bg-background z-50">
+              <ScrollView contentContainerStyle={{ flexGrow: 1, paddingHorizontal: 16, paddingTop: 24, paddingBottom: 64 }} showsVerticalScrollIndicator={false}>
+                <NewsCenterView
+                  currentView={currentView as any}
+                  selectedItemId={selectedItemId}
+                  onBack={() => handleSelectNews(null)}
+                  onSelectNews={handleSelectNews}
+                />
+                <PrizesCenterView
+                  currentView={currentView as any}
+                  selectedItemId={selectedItemId}
+                  onBack={() => handleSelectPrize(null)}
+                  onSelectPrize={handleSelectPrize}
+                />
+                <FriendRequestsCenterView
+                  currentView={currentView as any}
+                  selectedItemId={selectedItemId}
+                  onBack={() => handleSelectFriendReq(null)}
+                />
+              </ScrollView>
+            </View>
+          )}
         </View>
 
         {/* 3. SIDEBAR DERECHO (WIDGETS - Contenedores) (20%) */}
-        <RightSidebarWidgets />
+        <RightSidebarWidgets
+          onSelectNews={handleSelectNews}
+          onSelectPrize={handleSelectPrize}
+          onSelectFriendRequest={handleSelectFriendReq}
+        />
       </View>
     </View>
   );

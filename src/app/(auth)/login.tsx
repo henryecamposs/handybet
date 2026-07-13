@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, ActivityIndicator, Image } fro
 import { useHandyBetStore } from '../../store/useHandyBetStore';
 import { authService } from '../../services/authService';
 import Logo from '../../components/ui/Logo';
+import { useThemeColors, withOpacity } from '@/hooks/useThemeColors';
 export default function LoginScreen() {
   const [isLogin, setIsLogin] = useState(true);
   const [username, setUsername] = useState('');
@@ -15,7 +16,7 @@ export default function LoginScreen() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const setMockSession = useHandyBetStore((state) => state.setMockSession);
-
+  const colors = useThemeColors();
   const handleSubmit = async () => {
     if (isLoading) return;
     setErrorMessage(null);
@@ -81,11 +82,11 @@ export default function LoginScreen() {
             <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-1.5">Usuario</Text>
             <TextInput
               placeholder="Ej: admin o joselin_lagata"
-              placeholderTextColor="#64748b"
+              placeholderTextColor={withOpacity(colors.foreground, 0.2)}
               value={username}
               onChangeText={setUsername}
               autoCapitalize="none"
-              className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
+              className="bg-primary/5 border border-primary/20 rounded-xl px-4 py-3 text-white font-bold"
             />
           </View>
 
@@ -98,7 +99,7 @@ export default function LoginScreen() {
               value={password}
               onChangeText={setPassword}
               autoCapitalize="none"
-              className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
+              className="bg-primary/5 border border-primary/20 rounded-xl px-4 py-3 text-white font-bold"
             />
           </View>
 

@@ -8,16 +8,22 @@ module.exports = {
       colors: {
         background: {
           DEFAULT: "oklch(var(--background) / <alpha-value>)",
+          light: "oklch(var(--primary) / 0.05)",
+          dark: "oklch(var(--background-dark) / <alpha-value>)",
           900: "oklch(var(--popover) / <alpha-value>)",
           950: "oklch(var(--background) / <alpha-value>)",
         },
         foreground: "oklch(var(--foreground) / <alpha-value>)",
         primary: {
           DEFAULT: "oklch(var(--primary) / <alpha-value>)",
+          light: "oklch(var(--primary-light) / <alpha-value>)",
+          dark: "oklch(var(--primary-dark) / <alpha-value>)",
           foreground: "oklch(var(--primary-foreground) / <alpha-value>)",
         },
         secondary: {
           DEFAULT: "oklch(var(--secondary) / <alpha-value>)",
+          light: "oklch(var(--secondary-light) / <alpha-value>)",
+          dark: "oklch(var(--secondary-dark) / <alpha-value>)",
           foreground: "oklch(var(--secondary-foreground) / <alpha-value>)",
         },
         muted: {

@@ -12,13 +12,7 @@ export default function CanalDetailScreen() {
   const [groups, setGroups] = useState<Group[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    if (canalId) {
-      fetchCanalDetails();
-    }
-  }, [canalId]);
-
-  const fetchCanalDetails = async () => {
+  async function fetchCanalDetails() {
     try {
       setIsLoading(true);
       // 1. Fetch Canal Info
@@ -44,7 +38,14 @@ export default function CanalDetailScreen() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }
+
+  useEffect(() => {
+    if (canalId) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      fetchCanalDetails();
+    }
+  }, [canalId]);
 
   const getIconForType = (type: string) => {
     switch (type) {

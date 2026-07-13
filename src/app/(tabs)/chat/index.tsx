@@ -3,6 +3,7 @@ import { View, Text, ScrollView, Image, TouchableOpacity, ActivityIndicator } fr
 import { useRouter } from 'expo-router';
 import { supabase } from '../../../lib/supabaseClient';
 import { Advertisement } from '../../../types/handyBet';
+import HandyChatLogo from '../../../components/ui/HandyChatLogo';
 
 export default function ChatInboxScreen() {
   const router = useRouter();
@@ -57,7 +58,7 @@ export default function ChatInboxScreen() {
   return (
     <ScrollView className="flex-1 bg-background px-4 pt-12">
       <View className="mb-6">
-        <Text className="text-2xl font-black text-white tracking-tight">Chats Privados</Text>
+        <HandyChatLogo />
         <Text className="text-foreground text-xs font-bold mt-1">Mensajería directa P2P con soporte y agencias.</Text>
       </View>
 

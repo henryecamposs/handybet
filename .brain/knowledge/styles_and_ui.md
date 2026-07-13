@@ -18,11 +18,19 @@ HandyBet utiliza un tema oscuro y elegante basado en la escala de grises de Tail
 
 ## 3. Componentes Visuales Clave
 
-### 3.1 Componente `Logo.tsx`
-El logotipo del sistema está centralizado en un componente reutilizable que admite variantes:
-- `size`: `'sm'`, `'md'`, `'lg'`, `'xl'` para redimensionar proporcionalmente el isotipo y el texto.
-- `layout`: `'horizontal'` o `'vertical'`.
-- `showImage` y `showText`: Parámetros booleanos para ocultar o mostrar el isotipo gráfico (PNG de logo) y el texto estilizado "HandyBet".
+### 3.1 Componente `Logo.tsx` y variantes `Handy*Logo`
+El logotipo del sistema está centralizado en un componente reutilizable `Logo.tsx` (que renderiza "HandyBet"). Adicionalmente, existen logotipos específicos para cada módulo de la suite (p. ej. `HandyPostLogo`, `HandyAdsLogo`, `HandyChatLogo`, etc.).
+- **Regla Tipográfica:** La primera palabra ("Handy") se escribe con peso normal (`font-normal`), mientras que la segunda palabra distintiva ("Bet", "Post", "Ads", "Chat", etc.) se escribe con peso negrita (`font-bold`) para acentuar el módulo correspondiente.
+- **Tamaños admitidos:** `'xs'`, `'sm'`, `'md'`, `'lg'`, `'xl'`.
 
-### 3.2 Barra de Reacciones Centrada al 50%
-Las tarjetas del muro/feed de la red social implementan una barra de reacciones (Me gusta, Comentario, Compartir) centrada horizontalmente y limitada al 50% del ancho del post (`w-1/2 items-center`), optimizando la visualización de la interacción y evitando el estiramiento extremo del diseño responsive en pantallas anchas. Usa iconos vectoriales nativos importados de `lucide-react-native`.
+### 3.2 Barra de Reacciones e Interacciones
+Las publicaciones (`PostItem.tsx`) muestran la etiqueta de sentimiento (ej: "Me siento Ganador") en la parte inferior izquierda de la tarjeta. Las reacciones (Me gusta, Comentarios, Compartir) se agrupan horizontalmente a la derecha, manteniendo la consistencia responsive.
+
+### 3.3 Creador de Publicaciones Compacto
+El creador de posts (`CreatePostWidget.tsx`) utiliza un patrón de barra reducida en el Feed:
+- Muestra el avatar y un campo pill con el mensaje *"¿Qué estás pensando, [Nombre]?"*.
+- Incluye iconos directos a color para Video (rojo), Foto (verde) y Sentimiento (naranja).
+- Al interactuar, abre un Modal enfocado para redactar la publicación y adjuntar archivos/estados de ánimo.
+
+### 3.4 Desplazamiento Independiente en Sidebars
+En resoluciones de escritorio, el sidebar derecho (`RightSidebarWidgets.tsx`) está restringido a una altura de `calc(100vh - 64px)` y cuenta con desplazamiento (`ScrollView`) independiente del feed central, optimizando la visualización de widgets.

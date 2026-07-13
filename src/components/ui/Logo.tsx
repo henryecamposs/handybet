@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Image, StyleProp, ViewStyle, TextStyle } from 'react-native';
 import logoImg from '../../assets/images/logo.png';
 
-export type LogoSize = 'sm' | 'md' | 'lg' | 'xl';
+export type LogoSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export type LogoLayout = 'horizontal' | 'vertical';
 
 interface LogoProps {
@@ -25,6 +25,7 @@ export default function Logo({
 
   const getImgSize = () => {
     switch (size) {
+      case 'xs': return { width: 24, height: 24 };
       case 'sm': return { width: 32, height: 32 };
       case 'lg': return { width: 70, height: 70 };
       case 'xl': return { width: 100, height: 100 };
@@ -35,6 +36,7 @@ export default function Logo({
 
   const getTextSize = () => {
     switch (size) {
+      case 'xs': return 'text-xs';
       case 'sm': return 'text-lg';
       case 'lg': return 'text-3xl';
       case 'xl': return 'text-5xl';
