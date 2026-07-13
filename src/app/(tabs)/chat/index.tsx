@@ -9,11 +9,9 @@ export default function ChatInboxScreen() {
   const [adBanner, setAdBanner] = useState<Advertisement | null>(null);
   const [isLoadingAd, setIsLoadingAd] = useState(true);
 
-  useEffect(() => {
-    fetchBannerAd();
-  }, []);
 
-  const fetchBannerAd = async () => {
+
+  async function fetchBannerAd() {
     try {
       const { data, error } = await supabase
         .from('advertisements')
@@ -30,7 +28,12 @@ export default function ChatInboxScreen() {
     } finally {
       setIsLoadingAd(false);
     }
-  };
+  }
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchBannerAd();
+  }, []);
 
   const sampleChats = [
     {
@@ -52,10 +55,10 @@ export default function ChatInboxScreen() {
   ];
 
   return (
-    <ScrollView className="flex-1 bg-zinc-950 px-4 pt-12">
+    <ScrollView className="flex-1 bg-background px-4 pt-12">
       <View className="mb-6">
         <Text className="text-2xl font-black text-white tracking-tight">Chats Privados</Text>
-        <Text className="text-zinc-400 text-xs font-bold mt-1">Mensajería directa P2P con soporte y agencias.</Text>
+        <Text className="text-foreground text-xs font-bold mt-1">Mensajería directa P2P con soporte y agencias.</Text>
       </View>
 
       {/* Inbox List */}
@@ -64,21 +67,21 @@ export default function ChatInboxScreen() {
           <TouchableOpacity
             key={chat.id}
             onPress={() => router.push(`/chat/${chat.id}` as any)}
-            className="bg-zinc-900/90 border border-zinc-850 p-4 rounded-3xl flex-row items-center gap-4 mb-3.5 shadow-sm"
+            className="bg-background/90 border border-zinc-850 p-4 rounded-3xl flex-row items-center gap-4 mb-3.5 shadow-sm"
           >
             <Image source={{ uri: chat.avatar }} className="w-12 h-12 rounded-full border border-zinc-700" />
             <View className="flex-1">
               <View className="flex-row justify-between items-center">
                 <Text className="text-white font-black text-sm">{chat.name}</Text>
-                <Text className="text-zinc-500 text-[10px] font-bold">{chat.time}</Text>
+                <Text className="text-foreground text-[10px] font-bold">{chat.time}</Text>
               </View>
-              <Text className="text-zinc-350 text-xs font-bold mt-1 line-clamp-1" numberOfLines={1}>
+              <Text className="text-foreground text-xs font-bold mt-1 line-clamp-1" numberOfLines={1}>
                 {chat.lastMessage}
               </Text>
             </View>
             {chat.unreadCount > 0 && (
               <View className="bg-secondary w-5 h-5 rounded-full items-center justify-center border border-secondary">
-                <Text className="text-zinc-900 text-[9px] font-black">{chat.unreadCount}</Text>
+                <Text className="text-foreground text-[9px] font-black">{chat.unreadCount}</Text>
               </View>
             )}
           </TouchableOpacity>
@@ -87,18 +90,18 @@ export default function ChatInboxScreen() {
 
       {/* Inyección de AdBannerRow en el chat */}
       {!isLoadingAd && adBanner && (
-        <View className="bg-zinc-900 border border-zinc-850 p-4 rounded-3xl shadow-sm mb-6 flex-row gap-4 items-center">
+        <View className="bg-background border border-zinc-850 p-4 rounded-3xl shadow-sm mb-6 flex-row gap-4 items-center">
           <Image source={{ uri: adBanner.media_url }} className="w-12 h-12 rounded-2xl border border-zinc-850" />
           <View className="flex-1">
             <Text className="text-secondary text-[9px] font-black uppercase tracking-wider">Publicidad de Interés</Text>
             <Text className="text-white font-black text-xs mt-0.5">{adBanner.business_name}</Text>
-            <Text className="text-zinc-300 text-[10px] font-bold mt-0.5" numberOfLines={1}>
+            <Text className="text-foreground text-[10px] font-bold mt-0.5" numberOfLines={1}>
               {adBanner.ad_copy}
             </Text>
           </View>
           <TouchableOpacity
             onPress={() => adBanner.target_deeplink && router.push(adBanner.target_deeplink as any)}
-            className="bg-zinc-800 border border-zinc-700 px-3 py-1.5 rounded-xl"
+            className="bg-background/80 border border-zinc-700 px-3 py-1.5 rounded-xl"
           >
             <Text className="text-secondary text-[9px] font-black uppercase">Visitar</Text>
           </TouchableOpacity>

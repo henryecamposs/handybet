@@ -105,40 +105,40 @@ export default function TaquillaScreen() {
 
   return (
     <HandyBetLayout title="Taquilla de Validación - Cajero">
-      <ScrollView className="flex-1 bg-zinc-950 p-4 rounded-3xl">
+      <ScrollView className="flex-1 bg-background p-4 rounded-3xl">
         <View className="mb-6">
           <Text className="text-2xl font-black text-white tracking-tight">Consola de Operaciones</Text>
-          <Text className="text-zinc-400 text-xs font-bold mt-1">
+          <Text className="text-foreground text-xs font-bold mt-1">
             Escanea jugadas QR de clientes, valida e imprime comprobantes, o realiza liquidaciones de premios pendientes.
           </Text>
         </View>
 
         {/* Buscador QR y Manual */}
         <View className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <View className="bg-zinc-900 border border-zinc-850 p-6 rounded-2xl justify-between">
+          <View className="bg-background border border-zinc-850 p-6 rounded-2xl justify-between">
             <View>
               <Text className="text-white font-black text-sm mb-4">Escanear Ticket QR</Text>
               <TouchableOpacity
                 onPress={() => setScannerActive(true)}
                 className="bg-secondary py-4 rounded-xl items-center border border-secondary active:scale-[0.98]"
               >
-                <Text className="text-zinc-955 font-black text-sm">📷 ESCANEAR CÓDIGO QR</Text>
+                <Text className="text-foreground font-black text-sm">📷 ESCANEAR CÓDIGO QR</Text>
               </TouchableOpacity>
             </View>
 
             <View className="border-t border-zinc-800 pt-6 mt-6">
-              <Text className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2">Ingresar Código Manual</Text>
+              <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-2">Ingresar Código Manual</Text>
               <View className="flex-row gap-2">
                 <TextInput
                   placeholder="Ej: 1234-123456"
                   placeholderTextColor="#64748b"
                   value={manualCode}
                   onChangeText={setManualCode}
-                  className="flex-1 bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white font-mono font-bold"
+                  className="flex-1 bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-mono font-bold"
                 />
                 <TouchableOpacity
                   onPress={handleManualSearch}
-                  className="bg-zinc-850 border border-zinc-750 justify-center px-6 rounded-xl"
+                  className="bg-background border border-zinc-750 justify-center px-6 rounded-xl"
                 >
                   <Text className="text-white font-black text-xs">BUSCAR</Text>
                 </TouchableOpacity>
@@ -156,7 +156,7 @@ export default function TaquillaScreen() {
                 <Text className={`font-black text-sm ${message.type === 'success' ? 'text-secondary' : 'text-rose-500'}`}>
                   {message.type === 'success' ? '✓ Operación Exitosa' : '⚠️ Transacción Fallida'}
                 </Text>
-                <Text className="text-zinc-350 text-xs font-bold mt-2 leading-relaxed">
+                <Text className="text-foreground text-xs font-bold mt-2 leading-relaxed">
                   {message.text}
                 </Text>
               </View>
@@ -185,35 +185,35 @@ export default function TaquillaScreen() {
           <View className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start mb-12">
             {/* Visualización del ticket */}
             <View>
-              <Text className="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-3 text-center">Comprobante de Apuesta</Text>
+              <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-3 text-center">Comprobante de Apuesta</Text>
               <ThermalReceiptCard bet={bet as any} />
             </View>
 
             {/* Acciones según el estado del ticket */}
-            <View className="bg-zinc-900 border border-zinc-850 p-6 rounded-2xl">
+            <View className="bg-background border border-zinc-850 p-6 rounded-2xl">
               <Text className="text-white font-black text-base mb-4">Acciones de Taquilla</Text>
 
               {/* CASO A: Apuesta pendiente (Se debe confirmar y debitar balance del monedero del grupo) */}
               {bet.status === 'pendiente' && (
                 <View>
-                  <Text className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-3">Método de Confirmación</Text>
+                  <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-3">Método de Confirmación</Text>
                   <View className="flex-row gap-2 mb-4">
                     <TouchableOpacity
                       onPress={() => setPaymentMethod('wallet')}
-                      className={`flex-1 py-3 rounded-xl border items-center ${paymentMethod === 'wallet' ? 'bg-primary/10 border-primary' : 'bg-zinc-800 border-zinc-700'
+                      className={`flex-1 py-3 rounded-xl border items-center ${paymentMethod === 'wallet' ? 'bg-primary/10 border-primary' : 'bg-background/80 border-zinc-700'
                         }`}
                     >
-                      <Text className={`font-bold text-xs ${paymentMethod === 'wallet' ? 'text-primary' : 'text-zinc-400'}`}>
+                      <Text className={`font-bold text-xs ${paymentMethod === 'wallet' ? 'text-primary' : 'text-foreground'}`}>
                         DEBITAR WALLET
                       </Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
                       onPress={() => setPaymentMethod('cash_external')}
-                      className={`flex-1 py-3 rounded-xl border items-center ${paymentMethod === 'cash_external' ? 'bg-primary/10 border-primary' : 'bg-zinc-800 border-zinc-700'
+                      className={`flex-1 py-3 rounded-xl border items-center ${paymentMethod === 'cash_external' ? 'bg-primary/10 border-primary' : 'bg-background/80 border-zinc-700'
                         }`}
                     >
-                      <Text className={`font-bold text-xs ${paymentMethod === 'cash_external' ? 'text-primary' : 'text-zinc-400'}`}>
+                      <Text className={`font-bold text-xs ${paymentMethod === 'cash_external' ? 'text-primary' : 'text-foreground'}`}>
                         EFECTIVO / PAGO MÓVIL
                       </Text>
                     </TouchableOpacity>
@@ -221,13 +221,13 @@ export default function TaquillaScreen() {
 
                   {paymentMethod === 'cash_external' && (
                     <View className="mb-4">
-                      <Text className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2">Referencia de Pago</Text>
+                      <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-2">Referencia de Pago</Text>
                       <TextInput
                         placeholder="Ej: Ref-987654"
                         placeholderTextColor="#64748b"
                         value={referenceCode}
                         onChangeText={setReferenceCode}
-                        className="bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
+                        className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
                       />
                     </View>
                   )}
@@ -240,7 +240,7 @@ export default function TaquillaScreen() {
                     {confirmMutation.isPending ? (
                       <ActivityIndicator color="#0f172a" />
                     ) : (
-                      <Text className="text-zinc-955 font-black text-sm uppercase">
+                      <Text className="text-foreground font-black text-sm uppercase">
                         Confirmar Jugada y Registrar Bs. {bet.amount.toFixed(2)}
                       </Text>
                     )}
@@ -251,24 +251,24 @@ export default function TaquillaScreen() {
               {/* CASO B: Apuesta ganadora y no cobrada (Se debe liquidar el premio) */}
               {bet.status === 'ganadora' && (
                 <View>
-                  <Text className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-3">Método de Liquidación de Premio</Text>
+                  <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-3">Método de Liquidación de Premio</Text>
                   <View className="flex-row gap-2 mb-4">
                     <TouchableOpacity
                       onPress={() => setPayoutMethod('wallet_credit')}
-                      className={`flex-1 py-3 rounded-xl border items-center ${payoutMethod === 'wallet_credit' ? 'bg-secondary/10 border-secondary' : 'bg-zinc-800 border-zinc-700'
+                      className={`flex-1 py-3 rounded-xl border items-center ${payoutMethod === 'wallet_credit' ? 'bg-secondary/10 border-secondary' : 'bg-background/80 border-zinc-700'
                         }`}
                     >
-                      <Text className={`font-bold text-xs ${payoutMethod === 'wallet_credit' ? 'text-secondary' : 'text-zinc-400'}`}>
+                      <Text className={`font-bold text-xs ${payoutMethod === 'wallet_credit' ? 'text-secondary' : 'text-foreground'}`}>
                         CRÉDITO A WALLET
                       </Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
                       onPress={() => setPayoutMethod('pago_movil')}
-                      className={`flex-1 py-3 rounded-xl border items-center ${payoutMethod === 'pago_movil' ? 'bg-secondary/10 border-secondary' : 'bg-zinc-800 border-zinc-700'
+                      className={`flex-1 py-3 rounded-xl border items-center ${payoutMethod === 'pago_movil' ? 'bg-secondary/10 border-secondary' : 'bg-background/80 border-zinc-700'
                         }`}
                     >
-                      <Text className={`font-bold text-xs ${payoutMethod === 'pago_movil' ? 'text-secondary' : 'text-zinc-400'}`}>
+                      <Text className={`font-bold text-xs ${payoutMethod === 'pago_movil' ? 'text-secondary' : 'text-foreground'}`}>
                         PAGO MÓVIL P2P
                       </Text>
                     </TouchableOpacity>
@@ -276,13 +276,13 @@ export default function TaquillaScreen() {
 
                   {payoutMethod === 'pago_movil' && (
                     <View className="mb-4">
-                      <Text className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2">Referencia Bancaria</Text>
+                      <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-2">Referencia Bancaria</Text>
                       <TextInput
                         placeholder="Ej: 010212345678"
                         placeholderTextColor="#64748b"
                         value={payoutReference}
                         onChangeText={setPayoutReference}
-                        className="bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
+                        className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
                       />
                     </View>
                   )}
@@ -295,7 +295,7 @@ export default function TaquillaScreen() {
                     {payoutMutation.isPending ? (
                       <ActivityIndicator color="#0f172a" />
                     ) : (
-                      <Text className="text-zinc-955 font-black text-sm uppercase">
+                      <Text className="text-foreground font-black text-sm uppercase">
                         Liquidar Premio de Bs. {bet.potential_prize?.toFixed(2)}
                       </Text>
                     )}
@@ -305,11 +305,11 @@ export default function TaquillaScreen() {
 
               {/* CASO C: Apuesta ya cobrada o expirada */}
               {(bet.status === 'confirmada' || bet.status === 'cobrada' || bet.status === 'perdedora') && (
-                <View className="bg-zinc-800 p-4 rounded-xl border border-zinc-700">
-                  <Text className="text-zinc-350 text-xs font-bold text-center">
+                <View className="bg-background/80 p-4 rounded-xl border border-zinc-700">
+                  <Text className="text-foreground text-xs font-bold text-center">
                     Esta jugada se encuentra en estado: <Text className="text-secondary uppercase font-black">{bet.status}</Text>
                   </Text>
-                  <Text className="text-zinc-500 text-[10px] text-center mt-2">
+                  <Text className="text-foreground text-[10px] text-center mt-2">
                     No se requieren acciones adicionales de cobro ni débito.
                   </Text>
                 </View>
@@ -317,9 +317,9 @@ export default function TaquillaScreen() {
 
               <TouchableOpacity
                 onPress={() => setActiveTicketCode(null)}
-                className="mt-4 py-3 rounded-xl items-center bg-zinc-950 border border-zinc-850"
+                className="mt-4 py-3 rounded-xl items-center bg-background border border-zinc-850"
               >
-                <Text className="text-zinc-400 font-bold text-xs uppercase">Limpiar Pantalla</Text>
+                <Text className="text-foreground font-bold text-xs uppercase">Limpiar Pantalla</Text>
               </TouchableOpacity>
             </View>
           </View>

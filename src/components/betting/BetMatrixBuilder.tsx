@@ -99,13 +99,13 @@ export default function BetMatrixBuilder({ groupId, onBetGenerated }: BetMatrixB
   };
 
   return (
-    <ScrollView className="bg-zinc-900/90 p-6 rounded-3xl border border-zinc-800 shadow-xl max-w-lg w-full mx-auto my-4">
+    <ScrollView className="bg-background/90 p-6 rounded-3xl border border-zinc-800 shadow-xl max-w-lg w-full mx-auto my-4">
       <Text className="text-2xl font-black text-white mb-6 text-center tracking-tight">
         Confeccionar Jugada
       </Text>
 
       {/* Loterías */}
-      <Text className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2">Lotería</Text>
+      <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-2">Lotería</Text>
       <View className="flex-row flex-wrap gap-2 mb-4">
         {LOTTERIES.map((lot) => (
           <TouchableOpacity
@@ -113,10 +113,10 @@ export default function BetMatrixBuilder({ groupId, onBetGenerated }: BetMatrixB
             onPress={() => setSelectedLottery(lot.id)}
             className={`px-4 py-2.5 rounded-xl border ${selectedLottery === lot.id
               ? 'bg-primary/20 border-primary'
-              : 'bg-zinc-800 border-zinc-700'
+              : 'bg-background/80 border-zinc-700'
               }`}
           >
-            <Text className={`font-bold text-sm ${selectedLottery === lot.id ? 'text-primary' : 'text-zinc-300'}`}>
+            <Text className={`font-bold text-sm ${selectedLottery === lot.id ? 'text-primary' : 'text-foreground'}`}>
               {lot.name}
             </Text>
           </TouchableOpacity>
@@ -124,7 +124,7 @@ export default function BetMatrixBuilder({ groupId, onBetGenerated }: BetMatrixB
       </View>
 
       {/* Horario */}
-      <Text className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2">Horario del Sorteo</Text>
+      <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-2">Horario del Sorteo</Text>
       <View className="flex-row flex-wrap gap-2 mb-4">
         {SCHEDULES.map((time) => (
           <TouchableOpacity
@@ -132,10 +132,10 @@ export default function BetMatrixBuilder({ groupId, onBetGenerated }: BetMatrixB
             onPress={() => setSelectedSchedule(time)}
             className={`px-4 py-2.5 rounded-xl border ${selectedSchedule === time
               ? 'bg-primary/20 border-primary'
-              : 'bg-zinc-800 border-zinc-700'
+              : 'bg-background/80 border-zinc-700'
               }`}
           >
-            <Text className={`font-bold text-sm ${selectedSchedule === time ? 'text-primary' : 'text-zinc-300'}`}>
+            <Text className={`font-bold text-sm ${selectedSchedule === time ? 'text-primary' : 'text-foreground'}`}>
               {time}
             </Text>
           </TouchableOpacity>
@@ -143,7 +143,7 @@ export default function BetMatrixBuilder({ groupId, onBetGenerated }: BetMatrixB
       </View>
 
       {/* Tipo de Juego */}
-      <Text className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2">Modalidad</Text>
+      <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-2">Modalidad</Text>
       <View className="flex-row flex-wrap gap-2 mb-4">
         {GAME_TYPES.map((type) => (
           <TouchableOpacity
@@ -154,10 +154,10 @@ export default function BetMatrixBuilder({ groupId, onBetGenerated }: BetMatrixB
             }}
             className={`px-4 py-2.5 rounded-xl border ${gameType === type.id
               ? 'bg-primary/20 border-primary'
-              : 'bg-zinc-800 border-zinc-700'
+              : 'bg-background/80 border-zinc-700'
               }`}
           >
-            <Text className={`font-bold text-sm ${gameType === type.id ? 'text-primary' : 'text-zinc-300'}`}>
+            <Text className={`font-bold text-sm ${gameType === type.id ? 'text-primary' : 'text-foreground'}`}>
               {type.name}
             </Text>
           </TouchableOpacity>
@@ -167,7 +167,7 @@ export default function BetMatrixBuilder({ groupId, onBetGenerated }: BetMatrixB
       {/* Inputs de Línea */}
       <View className="flex-row gap-2 mb-4">
         <View className="flex-1">
-          <Text className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1.5">Número</Text>
+          <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-1.5">Número</Text>
           <TextInput
             placeholder="Ej: 123"
             placeholderTextColor="#64748b"
@@ -175,39 +175,39 @@ export default function BetMatrixBuilder({ groupId, onBetGenerated }: BetMatrixB
             value={numInput}
             onChangeText={setNumInput}
             maxLength={3}
-            className="bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
+            className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
           />
         </View>
         <View className="flex-1">
-          <Text className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1.5">Monto (Bs.)</Text>
+          <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-1.5">Monto (Bs.)</Text>
           <TextInput
             placeholder="10.00"
             placeholderTextColor="#64748b"
             keyboardType="numeric"
             value={multiplierInput}
             onChangeText={setMultiplierInput}
-            className="bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
+            className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
           />
         </View>
         <TouchableOpacity
           onPress={handleAddSelection}
           className="bg-secondary justify-center items-center px-6 rounded-xl mt-6 border border-secondary"
         >
-          <Text className="text-zinc-955 font-extrabold text-sm">+</Text>
+          <Text className="text-foreground font-extrabold text-sm">+</Text>
         </TouchableOpacity>
       </View>
 
       {/* Lista de Selecciones */}
       {selections.length > 0 && (
-        <View className="bg-zinc-950/60 p-4 rounded-2xl border border-zinc-800 mb-4">
-          <Text className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2">Líneas Jugadas</Text>
+        <View className="bg-background/60 p-4 rounded-2xl border border-zinc-800 mb-4">
+          <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-2">Líneas Jugadas</Text>
           {selections.map((sel, idx) => (
             <View key={idx} className="flex-row justify-between items-center py-2 border-b border-zinc-800/80">
-              <Text className="text-zinc-200 font-bold">
+              <Text className="text-foreground font-bold">
                 {gameType.toUpperCase()} - <Text className="text-secondary text-base">{sel.number}</Text>
               </Text>
               <View className="flex-row items-center gap-3">
-                <Text className="text-zinc-400 font-bold">{sel.multiplier.toFixed(2)} Bs.</Text>
+                <Text className="text-foreground font-bold">{sel.multiplier.toFixed(2)} Bs.</Text>
                 <TouchableOpacity onPress={() => handleRemoveSelection(idx)}>
                   <Text className="text-rose-500 font-bold px-2 text-sm">Eliminar</Text>
                 </TouchableOpacity>
@@ -215,7 +215,7 @@ export default function BetMatrixBuilder({ groupId, onBetGenerated }: BetMatrixB
             </View>
           ))}
           <View className="flex-row justify-between items-center pt-3 mt-1">
-            <Text className="text-zinc-400 font-bold">Total Apuesta:</Text>
+            <Text className="text-foreground font-bold">Total Apuesta:</Text>
             <Text className="text-secondary font-black text-lg">{totalAmount.toFixed(2)} Bs.</Text>
           </View>
         </View>
@@ -232,14 +232,14 @@ export default function BetMatrixBuilder({ groupId, onBetGenerated }: BetMatrixB
         onPress={handleGenerateBet}
         disabled={isSubmitting || selections.length === 0}
         className={`w-full py-4 rounded-2xl flex-row justify-center items-center ${selections.length === 0
-          ? 'bg-zinc-800'
+          ? 'bg-background/80'
           : 'bg-primary active:scale-[0.98]'
           }`}
       >
         {isSubmitting ? (
           <ActivityIndicator color="#0f172a" />
         ) : (
-          <Text className={`font-black text-center text-base ${selections.length === 0 ? 'text-zinc-500' : 'text-zinc-955'}`}>
+          <Text className={`font-black text-center text-base ${selections.length === 0 ? 'text-foreground' : 'text-foreground'}`}>
             Guardar y Generar Código QR
           </Text>
         )}

@@ -27,7 +27,7 @@ export default function CanalDetailScreen() {
         .select('*')
         .eq('id', canalId)
         .single();
-      
+
       if (channelError) throw channelError;
       setChannel(channelData as Channel);
 
@@ -36,7 +36,7 @@ export default function CanalDetailScreen() {
         .from('groups')
         .select('*')
         .eq('channel_id', canalId);
-      
+
       if (groupsError) throw groupsError;
       setGroups(groupsData || []);
     } catch (err) {
@@ -57,10 +57,10 @@ export default function CanalDetailScreen() {
   };
 
   return (
-    <ScrollView className="flex-1 bg-zinc-950 px-4 pt-12" showsVerticalScrollIndicator={false}>
+    <ScrollView className="flex-1 bg-background px-4 pt-12" showsVerticalScrollIndicator={false}>
       {/* Header back */}
       <TouchableOpacity onPress={() => router.back()} className="flex-row items-center gap-2 mb-6">
-        <Text className="text-zinc-400 font-bold text-sm">◀ Volver a Canales</Text>
+        <Text className="text-foreground font-bold text-sm">◀ Volver a Canales</Text>
       </TouchableOpacity>
 
       {isLoading ? (
@@ -76,14 +76,14 @@ export default function CanalDetailScreen() {
           {/* Nombre Canal */}
           <View className="mb-8">
             <Text className="text-[10px] font-black text-primary uppercase tracking-widest">Consorcio de Loterías</Text>
-            <Text className="text-3xl font-black text-zinc-100 tracking-tight mt-1">{channel.name}</Text>
+            <Text className="text-3xl font-black text-foreground tracking-tight mt-1">{channel.name}</Text>
           </View>
 
           {/* Subgrupos */}
-          <Text className="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-4">Salas y Subgrupos</Text>
+          <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-4">Salas y Subgrupos</Text>
           {groups.length === 0 ? (
-            <View className="bg-zinc-900 border border-zinc-800 p-6 rounded-3xl items-center border-dashed">
-              <Text className="text-zinc-400 font-bold text-sm text-center">
+            <View className="bg-background border border-zinc-800 p-6 rounded-3xl items-center border-dashed">
+              <Text className="text-foreground font-bold text-sm text-center">
                 Esta empresa no cuenta con grupos habilitados aún.
               </Text>
             </View>
@@ -93,19 +93,19 @@ export default function CanalDetailScreen() {
                 <TouchableOpacity
                   key={group.id}
                   onPress={() => router.push(`/chat/group/${group.id}` as any)}
-                  className="bg-zinc-900 border border-zinc-800 p-5 rounded-3xl flex-row items-center gap-4 hover:bg-zinc-800/80 transition-colors"
+                  className="bg-background border border-zinc-800 p-5 rounded-3xl flex-row items-center gap-4 hover:bg-background/80/80 transition-colors"
                 >
-                  <View className="bg-zinc-800 w-12 h-12 rounded-xl items-center justify-center border border-zinc-700">
+                  <View className="bg-background/80 w-12 h-12 rounded-xl items-center justify-center border border-zinc-700">
                     <Text className="text-xl">{getIconForType(group.type)}</Text>
                   </View>
                   <View className="flex-1">
-                    <Text className="text-zinc-100 font-bold text-base">{group.name}</Text>
-                    <Text className="text-zinc-500 text-[10px] font-bold uppercase tracking-wider mt-1">
+                    <Text className="text-foreground font-bold text-base">{group.name}</Text>
+                    <Text className="text-foreground text-[10px] font-bold uppercase tracking-wider mt-1">
                       Código: <Text className="font-mono text-primary">{group.short_code}</Text> • Sala de {group.type}
                     </Text>
                   </View>
-                  <View className="w-8 h-8 rounded-full bg-zinc-800 items-center justify-center border border-zinc-700">
-                    <Text className="text-zinc-400 font-bold text-xs">▶</Text>
+                  <View className="w-8 h-8 rounded-full bg-background/80 items-center justify-center border border-zinc-700">
+                    <Text className="text-foreground font-bold text-xs">▶</Text>
                   </View>
                 </TouchableOpacity>
               ))}

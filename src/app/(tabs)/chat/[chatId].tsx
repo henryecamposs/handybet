@@ -53,7 +53,7 @@ export default function ChatDetailScreen() {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      className="flex-1 bg-zinc-950"
+      className="flex-1 bg-background"
     >
       <View className="flex-1 pt-12">
         {/* Cabecera del Chat */}
@@ -79,13 +79,13 @@ export default function ChatDetailScreen() {
                 key={msg.id}
                 className={`mb-4 max-w-[80%] rounded-2xl p-4 ${isMe
                   ? 'bg-secondary/10 border border-secondary/20 align-self-end ml-auto'
-                  : 'bg-zinc-900 border border-zinc-850 align-self-start mr-auto'
+                  : 'bg-background border border-zinc-850 align-self-start mr-auto'
                   }`}
               >
-                <Text className={`text-sm ${isMe ? 'text-secondary font-bold' : 'text-zinc-200'}`}>
+                <Text className={`text-sm ${isMe ? 'text-secondary font-bold' : 'text-foreground'}`}>
                   {msg.text}
                 </Text>
-                <Text className="text-[9px] text-zinc-500 font-bold text-right mt-1.5 uppercase font-mono">
+                <Text className="text-[9px] text-foreground font-bold text-right mt-1.5 uppercase font-mono">
                   {msg.time}
                 </Text>
               </View>
@@ -94,14 +94,14 @@ export default function ChatDetailScreen() {
         </ScrollView>
 
         {/* Caja de Entrada */}
-        <View className="p-4 border-t border-zinc-900 flex-row items-center gap-2 bg-zinc-900/40">
+        <View className="p-4 border-t border-zinc-900 flex-row items-center gap-2 bg-background/40">
           <TextInput
             placeholder={isRecording ? 'Grabando audio...' : 'Escribe tu mensaje...'}
             placeholderTextColor="#64748b"
             editable={!isRecording}
             value={inputText}
             onChangeText={setInputText}
-            className="flex-1 bg-zinc-900 border border-zinc-800 rounded-2xl px-4 py-3 text-white font-bold"
+            className="flex-1 bg-background border border-zinc-800 rounded-2xl px-4 py-3 text-white font-bold"
           />
 
           {/* Grabadora de Voz Nativa simulada */}
@@ -109,7 +109,7 @@ export default function ChatDetailScreen() {
             onPress={handleToggleRecord}
             className={`w-12 h-12 rounded-2xl justify-center items-center ${isRecording
               ? 'bg-rose-500/20 border border-rose-500'
-              : 'bg-zinc-900 border border-zinc-800'
+              : 'bg-background border border-zinc-800'
               }`}
           >
             <Text className="text-white text-base">{isRecording ? '⏹' : '🎤'}</Text>
@@ -119,10 +119,10 @@ export default function ChatDetailScreen() {
           <TouchableOpacity
             onPress={handleSend}
             disabled={isRecording || !inputText.trim()}
-            className={`w-12 h-12 rounded-2xl justify-center items-center ${!inputText.trim() ? 'bg-zinc-850 border border-zinc-800/40' : 'bg-secondary border border-secondary'
+            className={`w-12 h-12 rounded-2xl justify-center items-center ${!inputText.trim() ? 'bg-background border border-zinc-800/40' : 'bg-secondary border border-secondary'
               }`}
           >
-            <Text className={`text-base font-black ${!inputText.trim() ? 'text-zinc-600' : 'text-zinc-900'}`}>
+            <Text className={`text-base font-black ${!inputText.trim() ? 'text-foreground' : 'text-foreground'}`}>
               ▶
             </Text>
           </TouchableOpacity>

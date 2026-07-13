@@ -8,8 +8,8 @@ interface QRDisplayZoneProps {
 
 export default function QRDisplayZone({ betCode }: QRDisplayZoneProps) {
   return (
-    <View className="bg-zinc-900/90 p-8 rounded-3xl border border-zinc-800 shadow-xl items-center max-w-sm w-full mx-auto my-4">
-      <Text className="text-sm font-black text-zinc-400 uppercase tracking-widest mb-4">
+    <View className="bg-background/90 p-8 rounded-3xl border border-zinc-800 shadow-xl items-center max-w-sm w-full mx-auto my-4">
+      <Text className="text-sm font-black text-foreground uppercase tracking-widest mb-4">
         Ticket de Apuesta
       </Text>
 
@@ -24,14 +24,14 @@ export default function QRDisplayZone({ betCode }: QRDisplayZoneProps) {
       </View>
 
       {/* Código en Texto Plano */}
-      <Text className="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-1.5">
+      <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-1.5">
         Código de Taquilla
       </Text>
       <Text className="text-2xl font-black text-secondary tracking-widest font-mono">
         {betCode}
       </Text>
 
-      <Text className="text-zinc-400 text-xs text-center font-bold mt-4 leading-relaxed px-4">
+      <Text className="text-foreground text-xs text-center font-bold mt-4 leading-relaxed px-4">
         Muestra este código QR al taquillero de la agencia de lotería para procesar tu jugada.
       </Text>
     </View>

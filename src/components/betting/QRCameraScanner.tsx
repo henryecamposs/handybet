@@ -21,9 +21,9 @@ export default function QRCameraScanner({ onScanned, onClose }: QRCameraScannerP
 
   if (!permission) {
     return (
-      <View className="flex-1 justify-center items-center bg-zinc-950 p-6">
+      <View className="flex-1 justify-center items-center bg-background p-6">
         <ActivityIndicator size="large" color="#10b981" />
-        <Text className="text-zinc-400 font-bold mt-4 text-center">
+        <Text className="text-foreground font-bold mt-4 text-center">
           Solicitando permisos de cámara...
         </Text>
       </View>
@@ -32,18 +32,18 @@ export default function QRCameraScanner({ onScanned, onClose }: QRCameraScannerP
 
   if (!permission.granted) {
     return (
-      <View className="flex-1 justify-center items-center bg-zinc-950 p-6">
+      <View className="flex-1 justify-center items-center bg-background p-6">
         <Text className="text-rose-500 font-black text-lg mb-4 text-center">
           Acceso a la Cámara Denegado
         </Text>
-        <Text className="text-zinc-400 text-sm font-bold text-center mb-6 px-8">
+        <Text className="text-foreground text-sm font-bold text-center mb-6 px-8">
           Necesitamos acceso a la cámara para escanear los códigos QR de los tickets.
         </Text>
         <TouchableOpacity
           onPress={requestPermission}
           className="bg-primary px-6 py-3.5 rounded-xl border border-primary-600"
         >
-          <Text className="text-zinc-950 font-black text-sm">Conceder Permiso</Text>
+          <Text className="text-foreground font-black text-sm">Conceder Permiso</Text>
         </TouchableOpacity>
       </View>
     );
@@ -76,7 +76,7 @@ export default function QRCameraScanner({ onScanned, onClose }: QRCameraScannerP
         {onClose && (
           <TouchableOpacity
             onPress={onClose}
-            className="bg-zinc-900/60 p-2.5 rounded-full border border-zinc-700"
+            className="bg-background/60 p-2.5 rounded-full border border-zinc-700"
           >
             <Text className="text-white font-bold text-xs px-2">Cerrar</Text>
           </TouchableOpacity>
@@ -100,7 +100,7 @@ export default function QRCameraScanner({ onScanned, onClose }: QRCameraScannerP
             <View className="absolute -bottom-1 -left-1 w-6 h-6 border-b-4 border-l-4 border-secondary rounded-bl-xl" />
             <View className="absolute -bottom-1 -right-1 w-6 h-6 border-b-4 border-r-4 border-secondary rounded-br-xl" />
           </View>
-          <Text className="text-white text-xs font-bold mt-6 bg-zinc-950/80 px-4 py-2 rounded-full border border-zinc-800">
+          <Text className="text-white text-xs font-bold mt-6 bg-background/80 px-4 py-2 rounded-full border border-zinc-800">
             Alinea el código QR dentro del recuadro
           </Text>
         </View>
@@ -111,7 +111,7 @@ export default function QRCameraScanner({ onScanned, onClose }: QRCameraScannerP
         <View className="absolute bottom-10 left-0 right-0 z-10 items-center px-6">
           <View className="bg-secondary/90 p-4 rounded-2xl border border-secondary w-full max-w-xs flex-row justify-center items-center gap-2">
             <ActivityIndicator color="#0f172a" />
-            <Text className="text-zinc-955 font-black text-sm">Procesando código...</Text>
+            <Text className="text-foreground font-black text-sm">Procesando código...</Text>
           </View>
         </View>
       )}

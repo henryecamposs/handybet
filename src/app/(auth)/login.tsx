@@ -43,10 +43,10 @@ export default function LoginScreen() {
       } else {
         // Simular Registro con Servicio
         const result = await authService.register(
-          username, 
-          password, 
-          fullName, 
-          phoneWhatsapp, 
+          username,
+          password,
+          fullName,
+          phoneWhatsapp,
           whatsappHandle
         );
         setErrorMessage(result.message);
@@ -60,12 +60,12 @@ export default function LoginScreen() {
   };
 
   return (
-    <View className="flex-1 bg-zinc-900 justify-center items-center p-6">
-      <View className="w-full max-w-sm bg-zinc-950/90 border border-zinc-800 p-8 rounded-3xl shadow-xl">
+    <View className="flex-1 bg-background justify-center items-center p-6">
+      <View className="w-full max-w-sm bg-background/90 border border-zinc-800 p-8 rounded-3xl shadow-xl">
         <View className="mb-4">
           <Logo size="lg" layout="vertical" />
         </View>
-        <Text className="text-zinc-400 text-xs font-bold text-center uppercase tracking-widest mb-8">
+        <Text className="text-foreground text-xs font-bold text-center uppercase tracking-widest mb-8">
           {isLogin ? 'Iniciar Sesión' : 'Crear Cuenta'}
         </Text>
 
@@ -78,19 +78,19 @@ export default function LoginScreen() {
         {/* Inputs */}
         <View className="space-y-4">
           <View>
-            <Text className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1.5">Usuario</Text>
+            <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-1.5">Usuario</Text>
             <TextInput
               placeholder="Ej: admin o joselin_lagata"
               placeholderTextColor="#64748b"
               value={username}
               onChangeText={setUsername}
               autoCapitalize="none"
-              className="bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
+              className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
             />
           </View>
 
           <View>
-            <Text className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1.5">Contraseña</Text>
+            <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-1.5">Contraseña</Text>
             <TextInput
               placeholder="••••••••"
               placeholderTextColor="#64748b"
@@ -98,42 +98,42 @@ export default function LoginScreen() {
               value={password}
               onChangeText={setPassword}
               autoCapitalize="none"
-              className="bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
+              className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
             />
           </View>
 
           {!isLogin && (
             <>
               <View>
-                <Text className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1.5">Nombre Completo</Text>
+                <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-1.5">Nombre Completo</Text>
                 <TextInput
                   placeholder="Ej: Pedro Pérez"
                   placeholderTextColor="#64748b"
                   value={fullName}
                   onChangeText={setFullName}
-                  className="bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
+                  className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
                 />
               </View>
               <View>
-                <Text className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1.5">WhatsApp (Teléfono)</Text>
+                <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-1.5">WhatsApp (Teléfono)</Text>
                 <TextInput
                   placeholder="Ej: +584120000000"
                   placeholderTextColor="#64748b"
                   value={phoneWhatsapp}
                   onChangeText={setPhoneWhatsapp}
                   keyboardType="phone-pad"
-                  className="bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
+                  className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
                 />
               </View>
               <View>
-                <Text className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1.5">WhatsApp Handle (@usuario)</Text>
+                <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-1.5">WhatsApp Handle (@usuario)</Text>
                 <TextInput
                   placeholder="Ej: @pedrop"
                   placeholderTextColor="#64748b"
                   value={whatsappHandle}
                   onChangeText={setWhatsappHandle}
                   autoCapitalize="none"
-                  className="bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
+                  className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
                 />
               </View>
             </>
@@ -142,16 +142,16 @@ export default function LoginScreen() {
           {/* Selección de Rol si es Registro */}
           {!isLogin && (
             <View>
-              <Text className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2">Rol de Acceso</Text>
+              <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-2">Rol de Acceso</Text>
               <View className="flex-row gap-2">
                 <TouchableOpacity
                   onPress={() => setRole('player')}
                   className={`flex-1 py-2.5 rounded-xl border items-center ${role === 'player'
                     ? 'bg-secondary/20 border-secondary'
-                    : 'bg-zinc-850 border-zinc-750'
+                    : 'bg-background border-zinc-750'
                     }`}
                 >
-                  <Text className={`font-bold text-xs ${role === 'player' ? 'text-secondary' : 'text-zinc-400'}`}>
+                  <Text className={`font-bold text-xs ${role === 'player' ? 'text-secondary' : 'text-foreground'}`}>
                     Jugador P2P
                   </Text>
                 </TouchableOpacity>
@@ -159,10 +159,10 @@ export default function LoginScreen() {
                   onPress={() => setRole('cashier')}
                   className={`flex-1 py-2.5 rounded-xl border items-center ${role === 'cashier'
                     ? 'bg-secondary/20 border-secondary'
-                    : 'bg-zinc-850 border-zinc-750'
+                    : 'bg-background border-zinc-750'
                     }`}
                 >
-                  <Text className={`font-bold text-xs ${role === 'cashier' ? 'text-secondary' : 'text-zinc-400'}`}>
+                  <Text className={`font-bold text-xs ${role === 'cashier' ? 'text-secondary' : 'text-foreground'}`}>
                     Cajero Taquilla
                   </Text>
                 </TouchableOpacity>
@@ -180,7 +180,7 @@ export default function LoginScreen() {
           {isLoading ? (
             <ActivityIndicator color="#0f172a" />
           ) : (
-            <Text className="text-zinc-900 font-black text-sm uppercase">
+            <Text className="text-foreground font-black text-sm uppercase">
               {isLogin ? 'Acceder' : 'Registrar'}
             </Text>
           )}
@@ -191,7 +191,7 @@ export default function LoginScreen() {
           onPress={() => setIsLogin(!isLogin)}
           className="mt-6"
         >
-          <Text className="text-zinc-400 text-xs font-bold text-center">
+          <Text className="text-foreground text-xs font-bold text-center">
             {isLogin ? '¿No tienes cuenta? Regístrate aquí' : '¿Ya tienes cuenta? Inicia Sesión'}
           </Text>
         </TouchableOpacity>

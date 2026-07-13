@@ -7,11 +7,11 @@ export default function JuegosScreen() {
   const router = useRouter();
 
   return (
-    <ScrollView className="flex-1 bg-zinc-950 px-4 pt-12" showsVerticalScrollIndicator={false}>
+    <ScrollView className="flex-1 bg-background px-4 pt-12" showsVerticalScrollIndicator={false}>
       {/* Header */}
       <View className="mb-6">
-        <Text className="text-zinc-100 font-bold text-2xl">Juegos y Sorteos</Text>
-        <Text className="text-zinc-400 text-sm mt-1">Diviértete y participa en los sorteos de La Imaginaria.</Text>
+        <Text className="text-foreground font-bold text-2xl">Juegos y Sorteos</Text>
+        <Text className="text-foreground text-sm mt-1">Diviértete y participa en los sorteos de La Imaginaria.</Text>
       </View>
 
       {/* Hero Banner Lotería */}
@@ -21,7 +21,7 @@ export default function JuegosScreen() {
             <Text className="text-black font-bold text-xs uppercase">Sorteo Activo</Text>
           </View>
           <Text className="text-primary font-black text-3xl mb-2">Gran Kino Imaginario</Text>
-          <Text className="text-zinc-300 font-medium mb-4">¡Gana hasta 5,000 Puntos hoy a las 8:00 PM!</Text>
+          <Text className="text-foreground font-medium mb-4">¡Gana hasta 5,000 Puntos hoy a las 8:00 PM!</Text>
           <TouchableOpacity className="bg-primary px-6 py-3 rounded-xl self-start">
             <Text className="text-black font-bold">Jugar Ahora</Text>
           </TouchableOpacity>
@@ -31,50 +31,50 @@ export default function JuegosScreen() {
 
       {/* Categorías */}
       <View className="flex-row gap-4 mb-8">
-        <TouchableOpacity className="flex-1 bg-zinc-900 p-4 rounded-2xl border border-zinc-800 items-center justify-center">
+        <TouchableOpacity className="flex-1 bg-background p-4 rounded-2xl border border-zinc-800 items-center justify-center">
           <Ticket size={28} color="#caee26" className="mb-2" />
-          <Text className="text-zinc-100 font-bold text-center">Taquillas</Text>
+          <Text className="text-foreground font-bold text-center">Taquillas</Text>
         </TouchableOpacity>
-        <TouchableOpacity className="flex-1 bg-zinc-900 p-4 rounded-2xl border border-zinc-800 items-center justify-center">
+        <TouchableOpacity className="flex-1 bg-background p-4 rounded-2xl border border-zinc-800 items-center justify-center">
           <Dice1 size={28} color="#caee26" className="mb-2" />
-          <Text className="text-zinc-100 font-bold text-center">Quinielas</Text>
+          <Text className="text-foreground font-bold text-center">Quinielas</Text>
         </TouchableOpacity>
-        <TouchableOpacity className="flex-1 bg-zinc-900 p-4 rounded-2xl border border-zinc-800 items-center justify-center">
+        <TouchableOpacity className="flex-1 bg-background p-4 rounded-2xl border border-zinc-800 items-center justify-center">
           <Gamepad2 size={28} color="#caee26" className="mb-2" />
-          <Text className="text-zinc-100 font-bold text-center">Minijuegos</Text>
+          <Text className="text-foreground font-bold text-center">Minijuegos</Text>
         </TouchableOpacity>
       </View>
 
       {/* Próximos Sorteos */}
       <View className="mb-8">
-        <Text className="text-zinc-100 font-bold text-lg mb-4">Próximos Sorteos</Text>
-        <View className="bg-zinc-900 p-4 rounded-2xl border border-zinc-800 mb-3 flex-row items-center justify-between">
+        <Text className="text-foreground font-bold text-lg mb-4">Próximos Sorteos</Text>
+        <View className="bg-background p-4 rounded-2xl border border-zinc-800 mb-3 flex-row items-center justify-between">
           <View className="flex-row items-center">
-            <View className="w-12 h-12 rounded-xl bg-zinc-800 items-center justify-center mr-4 border border-zinc-700">
+            <View className="w-12 h-12 rounded-xl bg-background/80 items-center justify-center mr-4 border border-zinc-700">
               <Text className="text-xl">🎲</Text>
             </View>
             <View>
-              <Text className="text-zinc-100 font-bold">Animalitos VIP</Text>
-              <Text className="text-zinc-400 text-sm">Cierra en 45 mins</Text>
+              <Text className="text-foreground font-bold">Animalitos VIP</Text>
+              <Text className="text-foreground text-sm">Cierra en 45 mins</Text>
             </View>
           </View>
-          <TouchableOpacity className="bg-zinc-800 px-4 py-2 rounded-full border border-zinc-700">
-            <Text className="text-zinc-100 font-bold text-xs">Jugar</Text>
+          <TouchableOpacity className="bg-background/80 px-4 py-2 rounded-full border border-zinc-700">
+            <Text className="text-foreground font-bold text-xs">Jugar</Text>
           </TouchableOpacity>
         </View>
 
-        <View className="bg-zinc-900 p-4 rounded-2xl border border-zinc-800 flex-row items-center justify-between">
+        <View className="bg-background p-4 rounded-2xl border border-zinc-800 flex-row items-center justify-between">
           <View className="flex-row items-center">
-            <View className="w-12 h-12 rounded-xl bg-zinc-800 items-center justify-center mr-4 border border-zinc-700">
+            <View className="w-12 h-12 rounded-xl bg-background/80 items-center justify-center mr-4 border border-zinc-700">
               <Text className="text-xl">🏇</Text>
             </View>
             <View>
-              <Text className="text-zinc-100 font-bold">Carreras 5y6</Text>
-              <Text className="text-zinc-400 text-sm">Mañana 2:00 PM</Text>
+              <Text className="text-foreground font-bold">Carreras 5y6</Text>
+              <Text className="text-foreground text-sm">Mañana 2:00 PM</Text>
             </View>
           </View>
-          <TouchableOpacity className="bg-zinc-800 px-4 py-2 rounded-full border border-zinc-700">
-            <Text className="text-zinc-100 font-bold text-xs">Jugar</Text>
+          <TouchableOpacity className="bg-background/80 px-4 py-2 rounded-full border border-zinc-700">
+            <Text className="text-foreground font-bold text-xs">Jugar</Text>
           </TouchableOpacity>
         </View>
       </View>

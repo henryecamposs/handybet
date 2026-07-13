@@ -28,7 +28,7 @@ export default function MediaVaultGrid({
     return (
       <View
         style={{ width: cardSize, height: cardSize }}
-        className="m-2 rounded-2xl bg-zinc-900 border border-zinc-800 overflow-hidden relative"
+        className="m-2 rounded-2xl bg-background border border-zinc-800 overflow-hidden relative"
       >
         {/* Imagen o Miniatura con Blur */}
         <Image
@@ -41,15 +41,15 @@ export default function MediaVaultGrid({
         {/* Detalles del Recurso */}
         <View className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-zinc-950 to-zinc-900/10">
           <Text className="text-white text-xs font-black truncate">{item.title}</Text>
-          <Text className="text-zinc-400 text-[10px] uppercase font-bold mt-0.5">
+          <Text className="text-foreground text-[10px] uppercase font-bold mt-0.5">
             {item.media_type === 'video' ? '📹 Video' : '📷 Foto'}
           </Text>
         </View>
 
         {/* Overlay de Bloqueo */}
         {!hasAccess && (
-          <View className="absolute inset-0 bg-zinc-950/40 justify-center items-center p-3">
-            <View className="bg-zinc-900/90 border border-zinc-700/80 p-3.5 rounded-2xl items-center shadow-lg backdrop-blur-md">
+          <View className="absolute inset-0 bg-background/40 justify-center items-center p-3">
+            <View className="bg-background/90 border border-zinc-700/80 p-3.5 rounded-2xl items-center shadow-lg backdrop-blur-md">
               <Text className="text-xl mb-1">🔒</Text>
               <Text className="text-white text-[10px] font-black text-center uppercase tracking-wider mb-2">
                 Contenido Premium
@@ -58,7 +58,7 @@ export default function MediaVaultGrid({
                 onPress={() => item.plan_id && onSelectPlan(item.plan_id)}
                 className="bg-secondary px-3 py-1.5 rounded-lg border border-secondary"
               >
-                <Text className="text-zinc-900 text-[10px] font-black uppercase">
+                <Text className="text-foreground text-[10px] font-black uppercase">
                   Comprar Plan
                 </Text>
               </TouchableOpacity>
@@ -70,10 +70,10 @@ export default function MediaVaultGrid({
   };
 
   return (
-    <View className="flex-1 p-4 bg-zinc-950">
+    <View className="flex-1 p-4 bg-background">
       <View className="mb-4">
         <Text className="text-2xl font-black text-white tracking-tight">Bóveda Multimedia</Text>
-        <Text className="text-zinc-400 text-xs font-bold mt-1">
+        <Text className="text-foreground text-xs font-bold mt-1">
           Contenido exclusivo y pronósticos monetizables de la agencia.
         </Text>
       </View>
@@ -81,7 +81,7 @@ export default function MediaVaultGrid({
       {mediaItems.length === 0 ? (
         <View className="flex-1 justify-center items-center py-20">
           <Text className="text-5xl mb-4">📂</Text>
-          <Text className="text-zinc-400 font-bold text-sm text-center">
+          <Text className="text-foreground font-bold text-sm text-center">
             No se han subido archivos a esta bóveda todavía.
           </Text>
         </View>

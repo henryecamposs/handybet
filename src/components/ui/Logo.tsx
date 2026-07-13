@@ -14,15 +14,15 @@ interface LogoProps {
   showImage?: boolean;
 }
 
-export default function Logo({ 
-  size = 'md', 
-  layout = 'horizontal', 
+export default function Logo({
+  size = 'md',
+  layout = 'horizontal',
   style,
   textStyle,
   showText = true,
-  showImage = true 
+  showImage = true
 }: LogoProps) {
-  
+
   const getImgSize = () => {
     switch (size) {
       case 'sm': return { width: 32, height: 32 };
@@ -46,20 +46,20 @@ export default function Logo({
   const isHorizontal = layout === 'horizontal';
 
   return (
-    <View 
+    <View
       className={`${isHorizontal ? 'flex-row items-center gap-2' : 'flex-col items-center justify-center'}`}
       style={style}
     >
       {showImage && (
-        <Image 
-          source={logoImg} 
-          style={getImgSize()} 
-          resizeMode="contain" 
+        <Image
+          source={logoImg}
+          style={getImgSize()}
+          resizeMode="contain"
         />
       )}
       {showText && (
-        <Text 
-          className={`${getTextSize()} font-normal text-zinc-400 tracking-tight ${!isHorizontal ? 'mt-2 text-center' : ''}`}
+        <Text
+          className={`${getTextSize()} font-normal text-foreground tracking-tight ${!isHorizontal ? 'mt-2 text-center' : ''}`}
           style={textStyle}
         >
           Handy<Text className="text-secondary font-bold">Bet</Text>

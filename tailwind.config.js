@@ -2,38 +2,48 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}", "./app/**/*.{js,jsx,ts,tsx}"],
   presets: [require("nativewind/preset")],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
+        background: {
+          DEFAULT: "oklch(var(--background) / <alpha-value>)",
+          900: "oklch(var(--popover) / <alpha-value>)",
+          950: "oklch(var(--background) / <alpha-value>)",
+        },
+        foreground: "oklch(var(--foreground) / <alpha-value>)",
         primary: {
-          DEFAULT: '#FF7700', // Naranja del logo Yastaa
-          50: '#fff3e6',
-          100: '#ffe2cc',
-          200: '#ffc199',
-          300: '#ff9c66',
-          400: '#ff7733',
-          500: '#FF7700',
-          600: '#cc5f00',
-          700: '#994700',
-          800: '#663000',
-          900: '#331800',
-          950: '#1a0c00',
+          DEFAULT: "oklch(var(--primary) / <alpha-value>)",
+          foreground: "oklch(var(--primary-foreground) / <alpha-value>)",
         },
         secondary: {
-          DEFAULT: '#00C800', // Verde flecha del logo Yastaa
-          50: '#e6ffe6',
-          100: '#ccffcc',
-          200: '#99ff99',
-          300: '#66ff66',
-          400: '#33ff33',
-          500: '#00C800',
-          600: '#00a000',
-          700: '#007800',
-          800: '#005000',
-          900: '#002800',
-          950: '#001400',
-        }
-      }
+          DEFAULT: "oklch(var(--secondary) / <alpha-value>)",
+          foreground: "oklch(var(--secondary-foreground) / <alpha-value>)",
+        },
+        muted: {
+          DEFAULT: "oklch(var(--muted) / <alpha-value>)",
+          foreground: "oklch(var(--muted-foreground) / <alpha-value>)",
+        },
+        accent: {
+          DEFAULT: "oklch(var(--accent) / <alpha-value>)",
+          foreground: "oklch(var(--accent-foreground) / <alpha-value>)",
+        },
+        popover: {
+          DEFAULT: "oklch(var(--popover) / <alpha-value>)",
+          foreground: "oklch(var(--popover-foreground) / <alpha-value>)",
+        },
+        card: {
+          DEFAULT: "oklch(var(--card) / <alpha-value>)",
+          foreground: "oklch(var(--card-foreground) / <alpha-value>)",
+        },
+        destructive: {
+          DEFAULT: "oklch(var(--destructive) / <alpha-value>)",
+          foreground: "oklch(var(--destructive-foreground) / <alpha-value>)",
+        },
+        border: "oklch(var(--border) / <alpha-value>)",
+        input: "oklch(var(--input) / <alpha-value>)",
+        ring: "oklch(var(--ring) / <alpha-value>)",
+      },
     },
   },
   plugins: [],

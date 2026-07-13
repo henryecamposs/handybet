@@ -31,10 +31,10 @@ export default function TierPlanSelector({
   };
 
   return (
-    <View className="bg-zinc-950 p-6 rounded-3xl border border-zinc-800 shadow-xl w-full max-w-4xl mx-auto my-4">
+    <View className="bg-background p-6 rounded-3xl border border-zinc-800 shadow-xl w-full max-w-4xl mx-auto my-4">
       <View className="items-center mb-6">
         <Text className="text-2xl font-black text-white tracking-tight">Membresías de Contenido</Text>
-        <Text className="text-zinc-400 text-xs font-bold text-center mt-1.5 leading-relaxed max-w-md">
+        <Text className="text-foreground text-xs font-bold text-center mt-1.5 leading-relaxed max-w-md">
           Selecciona un plan de suscripción para desbloquear el contenido premium utilizando el saldo de tu wallet.
         </Text>
       </View>
@@ -59,14 +59,14 @@ export default function TierPlanSelector({
               key={plan.id}
               className={`w-72 p-6 rounded-3xl border ${isHandyBet
                 ? 'bg-secondary/10 border-secondary/80 shadow-md shadow-secondary/5'
-                : 'bg-zinc-900 border-zinc-800'
+                : 'bg-background border-zinc-800'
                 } flex flex-col justify-between`}
             >
               <View>
                 {/* Etiqueta Destacada */}
                 {isHandyBet && (
                   <View className="bg-secondary self-start px-2.5 py-1 rounded-full mb-3 border border-secondary">
-                    <Text className="text-zinc-900 text-[9px] font-black uppercase tracking-wider">
+                    <Text className="text-foreground text-[9px] font-black uppercase tracking-wider">
                       Recomendado
                     </Text>
                   </View>
@@ -78,7 +78,7 @@ export default function TierPlanSelector({
                   <Text className="text-white text-3xl font-black tracking-tight">
                     {plan.price.toFixed(2)}
                   </Text>
-                  <Text className="text-zinc-400 text-xs font-bold ml-1.5 uppercase font-mono">
+                  <Text className="text-foreground text-xs font-bold ml-1.5 uppercase font-mono">
                     Bs. / {plan.duration_days} días
                   </Text>
                 </View>
@@ -87,7 +87,7 @@ export default function TierPlanSelector({
                 <View className="border-t border-zinc-800/80 pt-4 space-y-2 mb-6">
                   <View className="flex-row items-center gap-2">
                     <Text className="text-secondary text-sm">✓</Text>
-                    <Text className="text-zinc-300 text-xs font-bold">
+                    <Text className="text-foreground text-xs font-bold">
                       {plan.max_photos === 0 || plan.max_photos > 9999
                         ? 'Fotos ilimitadas'
                         : `Hasta ${plan.max_photos} fotos premium`}
@@ -95,7 +95,7 @@ export default function TierPlanSelector({
                   </View>
                   <View className="flex-row items-center gap-2">
                     <Text className="text-secondary text-sm">✓</Text>
-                    <Text className="text-zinc-300 text-xs font-bold">
+                    <Text className="text-foreground text-xs font-bold">
                       {plan.max_videos === 0 || plan.max_videos > 9999
                         ? 'Videos ilimitados'
                         : `Hasta ${plan.max_videos} videos premium`}
@@ -103,7 +103,7 @@ export default function TierPlanSelector({
                   </View>
                   <View className="flex-row items-center gap-2">
                     <Text className="text-secondary text-sm">✓</Text>
-                    <Text className="text-zinc-300 text-xs font-bold">Soporte prioritario P2P</Text>
+                    <Text className="text-foreground text-xs font-bold">Soporte prioritario P2P</Text>
                   </View>
                 </View>
               </View>
@@ -113,10 +113,10 @@ export default function TierPlanSelector({
                 onPress={() => handlePurchase(plan.id)}
                 disabled={isActive || isProcessing}
                 className={`w-full py-3.5 rounded-2xl flex-row justify-center items-center ${isActive
-                  ? 'bg-zinc-800 border border-zinc-700'
+                  ? 'bg-background/80 border border-zinc-700'
                   : isHandyBet
                     ? 'bg-secondary active:scale-[0.98]'
-                    : 'bg-zinc-800 hover:bg-zinc-700 active:scale-[0.98]'
+                    : 'bg-background/80 hover:bg-background active:scale-[0.98]'
                   }`}
               >
                 {isProcessing ? (
@@ -124,9 +124,9 @@ export default function TierPlanSelector({
                 ) : (
                   <Text
                     className={`font-black text-xs uppercase ${isActive
-                      ? 'text-zinc-500'
+                      ? 'text-foreground'
                       : isHandyBet
-                        ? 'text-zinc-900'
+                        ? 'text-foreground'
                         : 'text-white'
                       }`}
                   >

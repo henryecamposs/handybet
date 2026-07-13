@@ -164,10 +164,10 @@ export default function MonetizacionAdsScreen() {
   };
 
   return (
-    <ScrollView className="flex-1 bg-zinc-950 p-6 md:p-12">
+    <ScrollView className="flex-1 bg-background p-6 md:p-12">
       <View className="mb-8">
         <Text className="text-3xl font-black text-white tracking-tight">Monetización y Publicidad</Text>
-        <Text className="text-zinc-400 text-xs font-bold mt-1">
+        <Text className="text-foreground text-xs font-bold mt-1">
           Crea campañas patrocinadas para el muro social y procesa egresos por cobro de premios de forma contable.
         </Text>
       </View>
@@ -180,7 +180,7 @@ export default function MonetizacionAdsScreen() {
         <View className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start mb-12">
 
           {/* Registro de Anuncios */}
-          <View className="bg-zinc-900 border border-zinc-850 p-8 rounded-3xl shadow-xl w-full">
+          <View className="bg-background border border-zinc-850 p-8 rounded-3xl shadow-xl w-full">
             <Text className="text-white font-black text-lg mb-6">Pauta Publicitaria Comercial</Text>
 
             {validationError && (
@@ -197,41 +197,41 @@ export default function MonetizacionAdsScreen() {
 
             <View className="space-y-4">
               <View>
-                <Text className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1.5">Nombre Comercial</Text>
+                <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-1.5">Nombre Comercial</Text>
                 <TextInput
                   placeholder="Empresa o Negocio"
                   placeholderTextColor="#64748b"
                   value={businessName}
                   onChangeText={setBusinessName}
-                  className="bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
+                  className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
                 />
               </View>
 
               <View>
-                <Text className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1.5">RIF Corporativo (Venezuela)</Text>
+                <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-1.5">RIF Corporativo (Venezuela)</Text>
                 <TextInput
                   placeholder="Ej: J-12345678-9"
                   placeholderTextColor="#64748b"
                   value={businessRif}
                   onChangeText={setBusinessRif}
                   autoCapitalize="characters"
-                  className="bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white font-mono font-bold"
+                  className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-mono font-bold"
                 />
               </View>
 
               <View>
-                <Text className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1.5">Teléfono / Contacto</Text>
+                <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-1.5">Teléfono / Contacto</Text>
                 <TextInput
                   placeholder="Ej: 04121234567"
                   placeholderTextColor="#64748b"
                   value={businessContact}
                   onChangeText={setBusinessContact}
-                  className="bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
+                  className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
                 />
               </View>
 
               <View>
-                <Text className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1.5">Copy / Texto de Anuncio</Text>
+                <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-1.5">Copy / Texto de Anuncio</Text>
                 <TextInput
                   placeholder="Texto publicitario que se mostrará en el muro..."
                   placeholderTextColor="#64748b"
@@ -239,41 +239,41 @@ export default function MonetizacionAdsScreen() {
                   numberOfLines={3}
                   value={adCopy}
                   onChangeText={setAdCopy}
-                  className="bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
+                  className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
                 />
               </View>
 
               <View>
-                <Text className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1.5">URL de Banner Gráfico</Text>
+                <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-1.5">URL de Banner Gráfico</Text>
                 <TextInput
                   placeholder="https://servidor.com/imagen.jpg"
                   placeholderTextColor="#64748b"
                   value={mediaUrl}
                   onChangeText={setMediaUrl}
-                  className="bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
+                  className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
                 />
               </View>
 
               <View className="grid grid-cols-2 gap-4">
                 <View>
-                  <Text className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1.5">Costo Campaña (Bs.)</Text>
+                  <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-1.5">Costo Campaña (Bs.)</Text>
                   <TextInput
                     placeholder="250.00"
                     placeholderTextColor="#64748b"
                     keyboardType="numeric"
                     value={costAmount}
                     onChangeText={setCostAmount}
-                    className="bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
+                    className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
                   />
                 </View>
                 <View>
-                  <Text className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1.5">Redirección Deeplink</Text>
+                  <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-1.5">Redirección Deeplink</Text>
                   <TextInput
                     placeholder="handyBet://grupo/id"
                     placeholderTextColor="#64748b"
                     value={targetDeeplink}
                     onChangeText={setTargetDeeplink}
-                    className="bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
+                    className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
                   />
                 </View>
               </View>
@@ -287,18 +287,18 @@ export default function MonetizacionAdsScreen() {
               {isSubmittingAd ? (
                 <ActivityIndicator color="#0f172a" />
               ) : (
-                <Text className="text-zinc-900 font-black text-sm uppercase">Registrar y Activar Anuncio</Text>
+                <Text className="text-foreground font-black text-sm uppercase">Registrar y Activar Anuncio</Text>
               )}
             </TouchableOpacity>
           </View>
 
           {/* Egresos Pendientes / Ledger */}
-          <View className="bg-zinc-900 border border-zinc-850 p-8 rounded-3xl shadow-xl w-full">
+          <View className="bg-background border border-zinc-850 p-8 rounded-3xl shadow-xl w-full">
             <Text className="text-white font-black text-lg mb-6">Premios y Retiros por Liquidar</Text>
 
             {pendingWithdrawals.length === 0 ? (
               <View className="py-12 justify-center items-center">
-                <Text className="text-zinc-450 font-bold text-sm text-center">
+                <Text className="text-foreground font-bold text-sm text-center">
                   No se registran solicitudes de retiros o premios pendientes.
                 </Text>
               </View>
@@ -307,11 +307,11 @@ export default function MonetizacionAdsScreen() {
                 {pendingWithdrawals.map((tx) => (
                   <View
                     key={tx.id}
-                    className="bg-zinc-950/60 border border-zinc-850 p-5 rounded-2xl flex-row justify-between items-center shadow-sm"
+                    className="bg-background/60 border border-zinc-850 p-5 rounded-2xl flex-row justify-between items-center shadow-sm"
                   >
                     <View>
                       <Text className="text-white font-black text-sm">@{tx.username}</Text>
-                      <Text className="text-zinc-500 text-[10px] font-bold uppercase mt-1">
+                      <Text className="text-foreground text-[10px] font-bold uppercase mt-1">
                         Solicitud de Egresos • Bs. {tx.amount.toFixed(2)}
                       </Text>
                     </View>
@@ -323,7 +323,7 @@ export default function MonetizacionAdsScreen() {
                       {processingTxId === tx.id ? (
                         <ActivityIndicator color="#0f172a" size="small" />
                       ) : (
-                        <Text className="text-zinc-900 font-black text-xs uppercase">Liquidar</Text>
+                        <Text className="text-foreground font-black text-xs uppercase">Liquidar</Text>
                       )}
                     </TouchableOpacity>
                   </View>

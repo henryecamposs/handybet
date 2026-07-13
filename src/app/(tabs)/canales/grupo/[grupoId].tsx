@@ -25,13 +25,9 @@ export default function GrupoDetailScreen() {
   const { data: mediaItems = [], isLoading: isLoadingMedia } = useGetMediaVault(grupoId || '');
   const subscribeMutation = useSubscribeToMediaPlan();
 
-  useEffect(() => {
-    if (type === 'compartir_media' && grupoId) {
-      fetchPlansAndSubs();
-    }
-  }, [grupoId, type]);
 
-  const fetchPlansAndSubs = async () => {
+
+  async function fetchPlansAndSubs() {
     try {
       setIsLoadingPlans(true);
       // 1. Obtener planes del grupo
@@ -60,7 +56,14 @@ export default function GrupoDetailScreen() {
     } finally {
       setIsLoadingPlans(false);
     }
-  };
+  }
+
+  useEffect(() => {
+    if (type === 'compartir_media' && grupoId) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      fetchPlansAndSubs();
+    }
+  }, [grupoId, type]);
 
   const handlePurchasePlan = async (planId: string) => {
     try {
@@ -108,10 +111,10 @@ export default function GrupoDetailScreen() {
   };
 
   return (
-    <ScrollView className="flex-1 bg-zinc-950 px-4 pt-12">
+    <ScrollView className="flex-1 bg-background px-4 pt-12">
       {/* Botón Volver */}
       <TouchableOpacity onPress={() => router.back()} className="flex-row items-center gap-2 mb-6">
-        <Text className="text-zinc-400 font-bold text-xs">◀ Salas</Text>
+        <Text className="text-foreground font-bold text-xs">◀ Salas</Text>
       </TouchableOpacity>
 
       {/* Switch de Renderizado */}
@@ -122,7 +125,7 @@ export default function GrupoDetailScreen() {
               <QRDisplayZone betCode={generatedBetCode} />
               <TouchableOpacity
                 onPress={() => setGeneratedBetCode(null)}
-                className="bg-zinc-900 border border-zinc-800 py-3.5 rounded-2xl items-center mt-6 w-full max-w-sm mx-auto"
+                className="bg-background border border-zinc-800 py-3.5 rounded-2xl items-center mt-6 w-full max-w-sm mx-auto"
               >
                 <Text className="text-white font-bold text-sm">Nueva Jugada</Text>
               </TouchableOpacity>
@@ -137,9 +140,9 @@ export default function GrupoDetailScreen() {
             <View>
               <TouchableOpacity
                 onPress={() => setShowPlansSelector(false)}
-                className="mb-4 self-start bg-zinc-900 px-3 py-1.5 rounded-xl border border-zinc-800"
+                className="mb-4 self-start bg-background px-3 py-1.5 rounded-xl border border-zinc-800"
               >
-                <Text className="text-zinc-400 font-bold text-xs">◀ Ver Bóveda</Text>
+                <Text className="text-foreground font-bold text-xs">◀ Ver Bóveda</Text>
               </TouchableOpacity>
               <TierPlanSelector
                 plans={plans}
