@@ -28,9 +28,21 @@ HandyBet integra un motor social optimizado con comportamientos interactivos y r
 
 ---
 
-## 4. Glosario de Términos
+## 4. Estructura de Datos y Seguridad (Supabase PostgreSQL)
+
+El ecosistema opera sobre un esquema físico robusto de base de datos donde la seguridad y las transacciones atómicas son primordiales:
+- **Seguridad Financiera RLS:** Las tablas críticas como `wallets`, `bets` y `transactions` tienen habilitado Row Level Security. Los usuarios comunes solo pueden leer sus propios saldos.
+- **Funciones Transaccionales Seguras (RPCs):** Para evitar inconsistencias o explotación de saldo del lado del cliente, todas las mutaciones financieras se ejecutan en el servidor mediante funciones SQL con privilegios de definidor (`SECURITY DEFINER`):
+  - `confirm_bet_cashier(...)`: Valida y debita de forma atómica el balance del monedero del jugador en el grupo asignado.
+  - `payout_bet_cashier(...)`: Acredita ganancias al monedero o documenta retiros de Pago Móvil con auditoría de comprobantes.
+  - `purchase_media_subscription(...)`: Adquiere planes de medios cobrando del saldo del grupo y activando membresías temporales.
+
+---
+
+## 5. Glosario de Términos
 - **Taquilla/Agencia:** Entidad física o digital que gestiona cobros y pagos de tickets.
 - **Cajero:** Usuario con permisos para escanear y liquidar tickets físicos de apuestas mediante códigos QR.
 - **Muro (Feed):** Consola principal de descubrimiento donde se mezclan publicaciones sociales, pronósticos y anuncios.
 - **Split de Wallet:** División de ingresos generados por los grupos para monetizar el contenido de los creadores de forma transparente.
 - **WhatsApp Handle:** Identidad social (`@whatsapp`) obligatoria en el perfil de usuario para agilizar transacciones P2P externas.
+

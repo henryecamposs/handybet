@@ -1,12 +1,13 @@
 # HandyBet — Guía de Estilos y UI/UX
 
 ## 1. Paleta de Colores
-HandyBet utiliza un tema oscuro y elegante basado en la escala de grises de Tailwind (Zinc):
-- **Background Principal:** `bg-zinc-950` / `#09090b` (Color ultra-oscuro para contraste premium).
-- **Cards y Contenedores:** `bg-zinc-900` / `#18181b` con bordes sutiles `border-zinc-800` / `#27272a`.
-- **Textos Secundarios:** `text-zinc-400` / `#a1a1aa` y `text-zinc-500` / `#71717a`.
-- **Destacados de Marca (Secondary):** Verde lima/amarillento `#caee26` (Color de realce principal de la marca, usado en botones primarios, iconos activos y elementos seleccionados).
-- **Destacados de Éxito:** Esmeralda `text-emerald-400` / `bg-emerald-500`.
+HandyBet utiliza un tema semántico y responsivo basado en colores OKLCH declarados dinámicamente en el tema de Tailwind y NativeWind:
+- **Background Principal:** `bg-background` / `bg-background-dark` (Mapeado a la variable `--background` en OKLCH).
+- **Cards y Contenedores:** `bg-card` / `bg-popover` (Mapeado a la variable `--card`) con bordes semánticos `border-border` o `border-input`.
+- **Textos Secundarios:** `text-muted-foreground` (Mapeado a la variable `--muted-foreground`).
+- **Destacados de Marca (Primarios):** `text-primary` / `bg-primary` (Color principal de realce deportivo).
+- **Destacados Secundarios:** `text-secondary` / `bg-secondary` (Color secundario de acentuación).
+- **Destacados de Éxito / Destructive:** Mapeados dinámicamente a través de `text-emerald-500` o variables semánticas `--destructive`.
 
 ---
 
