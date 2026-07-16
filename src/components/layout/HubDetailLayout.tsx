@@ -17,7 +17,8 @@ export interface HubDetailLayoutProps {
   
   // Encabezado
   categoryText?: string;
-  title: string;
+  title?: string;
+  headerRight?: React.ReactNode;
   
   // Listado (Opcional)
   listTitle?: string;
@@ -39,6 +40,7 @@ export default function HubDetailLayout({
   logoType = 'default',
   categoryText,
   title,
+  headerRight,
   listTitle,
   items = [],
   renderItem,
@@ -77,11 +79,14 @@ export default function HubDetailLayout({
   return (
     <View className="flex-1 bg-background">
       {/* Header estilo Twitter (Imagen 2) */}
-      <View className="flex-row items-center border-b border-primary/20 py-2 px-4 bg-background/85 sticky top-0 z-10">
-        <TouchableOpacity onPress={handleBack} className="mr-2 p-2 rounded-full hover:bg-primary/20 transition-colors">
-          <ArrowLeft size={22} color={colors.foreground} />
-        </TouchableOpacity>
-        {renderHeaderLogo()}
+      <View className="flex-row items-center justify-between border-b border-primary/20 py-2 px-4 bg-background/85 sticky top-0 z-10">
+        <View className="flex-row items-center">
+          <TouchableOpacity onPress={handleBack} className="mr-2 p-2 rounded-full hover:bg-primary/20 transition-colors">
+            <ArrowLeft size={22} color={colors.foreground} />
+          </TouchableOpacity>
+          {renderHeaderLogo()}
+        </View>
+        {headerRight}
       </View>
 
       <ScrollView className="flex-1 px-4 pt-6" showsVerticalScrollIndicator={false}>
@@ -89,23 +94,21 @@ export default function HubDetailLayout({
           <View className="flex-1 justify-center items-center py-20">
             <ActivityIndicator size="large" color={colors.secondary} />
           </View>
-        ) : !title ? (
-          <View className="flex-1 justify-center items-center py-20">
-            <Text className="text-rose-500 font-black text-center">{notFoundLabel}</Text>
-          </View>
         ) : (
           <View>
             {/* Encabezado del Detalle */}
-            <View className="mb-6">
-              {categoryText && (
-                <Text className="text-[10px] font-black text-primary uppercase tracking-widest">
-                  {categoryText}
+            {title && (
+              <View className="mb-6">
+                {categoryText && (
+                  <Text className="text-[10px] font-black text-primary uppercase tracking-widest">
+                    {categoryText}
+                  </Text>
+                )}
+                <Text className="text-3xl font-black text-foreground tracking-tight mt-1">
+                  {title}
                 </Text>
-              )}
-              <Text className="text-3xl font-black text-foreground tracking-tight mt-1">
-                {title}
-              </Text>
-            </View>
+              </View>
+            )}
 
             {/* Listado Principal de Salas/Subgrupos si existe */}
             {listTitle && (
