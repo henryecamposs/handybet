@@ -71,8 +71,8 @@ export default function CanalDetailScreen() {
 
   return (
     <HubDetailLayout
-      backLabel="Volver a Canales"
-      fallbackRoute="/(tabs)/canales"
+      backRoute="/(tabs)/canales"
+      logoType="news"
       categoryText="Consorcio de Loterías"
       title={channel?.name || ''}
       listTitle="Salas y Subgrupos"

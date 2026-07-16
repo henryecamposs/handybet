@@ -1,27 +1,22 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
-import { useLocalSearchParams, useRouter } from 'expo-router';
-import { Users, Info, Settings, Shield, Bell, LogOut, ChevronRight } from 'lucide-react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { useLocalSearchParams } from 'expo-router';
+import { Users, Info, Shield, Bell, LogOut, ChevronRight } from 'lucide-react-native';
 import { handyBetGroups } from '../../../../../mockdata/handyBetMock';
+import HubDetailLayout from '@/components/layout/HubDetailLayout';
 
 export default function GroupInfoScreen() {
   const { groupId } = useLocalSearchParams();
-  const router = useRouter();
 
   const group = handyBetGroups.find((g: any) => g.id === groupId) || handyBetGroups[0];
 
   return (
-    <ScrollView className="flex-1 bg-background/80 px-4 pt-12" showsVerticalScrollIndicator={false}>
-      {/* Header */}
-      <View className="flex-row items-center justify-between mb-6">
-        <TouchableOpacity onPress={() => router.back()} className="flex-row items-center gap-2">
-          <Text className="text-foreground font-bold text-sm">◀ Volver al Chat</Text>
-        </TouchableOpacity>
-        <TouchableOpacity className="w-10 h-10 bg-background/80 rounded-full items-center justify-center border border-zinc-800">
-          <Settings size={18} color="#71717a" />
-        </TouchableOpacity>
-      </View>
-
+    <HubDetailLayout
+      backRoute="/(tabs)/grupos"
+      logoType="chat"
+      categoryText={`Sala de ${group.type}`}
+      title={group.name}
+    >
       {/* Info Principal */}
       <View className="items-center mb-8">
         <View className="w-24 h-24 rounded-3xl bg-background/80 items-center justify-center mb-4 border border-zinc-700 shadow-xl relative">
@@ -30,8 +25,6 @@ export default function GroupInfoScreen() {
             <Shield size={12} color="#000" />
           </View>
         </View>
-        <Text className="text-foreground font-black text-2xl mb-1">{group.name}</Text>
-        <Text className="text-primary text-xs font-bold uppercase tracking-widest mb-2">Sala de {group.type}</Text>
         <Text className="text-foreground text-sm text-center px-4">Esta es la comunidad oficial para las apuestas VIP. Juega responsablemente.</Text>
       </View>
 
@@ -90,7 +83,6 @@ export default function GroupInfoScreen() {
         <LogOut size={18} color="#ef4444" className="mr-2" />
         <Text className="text-rose-500 font-bold">Salir del Grupo</Text>
       </TouchableOpacity>
-
-    </ScrollView>
+    </HubDetailLayout>
   );
 }
