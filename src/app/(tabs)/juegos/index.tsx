@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Trophy, Ticket, Dice1, Gamepad2 } from 'lucide-react-native';
+import { useRouter } from 'expo-router';
 import { useThemeColors } from '@/hooks/useThemeColors';
 import HubLayout from '@/components/layout/HubLayout';
 
 export default function JuegosScreen() {
   const colors = useThemeColors();
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState('taquillas');
 
   const tabs = [
@@ -44,7 +46,10 @@ export default function JuegosScreen() {
         </View>
         <Text className="text-primary font-black text-3xl mb-2">Gran Kino Imaginario</Text>
         <Text className="text-foreground font-medium mb-4">¡Gana hasta 5,000 Puntos hoy a las 8:00 PM!</Text>
-        <TouchableOpacity className="bg-primary px-6 py-3 rounded-xl self-start">
+        <TouchableOpacity 
+          onPress={() => router.push('/juegos/d1' as any)}
+          className="bg-primary px-6 py-3 rounded-xl self-start"
+        >
           <Text className="text-black font-bold">Jugar Ahora</Text>
         </TouchableOpacity>
       </View>
@@ -66,7 +71,10 @@ export default function JuegosScreen() {
           <Text className="text-foreground text-sm">{draw.sub}</Text>
         </View>
       </View>
-      <TouchableOpacity className="bg-background/80 px-4 py-2 rounded-full border border-zinc-700">
+      <TouchableOpacity 
+        onPress={() => router.push(`/juegos/${draw.id}` as any)}
+        className="bg-background/80 px-4 py-2 rounded-full border border-zinc-700"
+      >
         <Text className="text-foreground font-bold text-xs">Jugar</Text>
       </TouchableOpacity>
     </View>

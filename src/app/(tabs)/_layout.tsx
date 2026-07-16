@@ -97,7 +97,8 @@ export default function TabsLayout() {
         <Tabs.Screen name="canales/grupo/[grupoId]" options={{ href: null }} />
         
         <Tabs.Screen name="friends" options={{ href: null }} />
-        <Tabs.Screen name="juegos" options={{ href: null }} />
+        <Tabs.Screen name="juegos/index" options={{ href: null }} />
+        <Tabs.Screen name="juegos/[juegoId]" options={{ href: null }} />
       </Tabs>
     </HandyBetLayout>
   );

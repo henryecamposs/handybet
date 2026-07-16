@@ -42,7 +42,7 @@ export default function GroupChatScreen() {
       <View className="h-16 border-b border-zinc-800 flex-row items-center px-4 bg-background/50">
         <TouchableOpacity 
           className="mr-3" 
-          onPress={() => router.back()}
+          onPress={() => router.replace('/(tabs)/grupos' as any)}
         >
           <ArrowLeft size={24} color="#fff" />
         </TouchableOpacity>
