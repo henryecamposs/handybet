@@ -75,11 +75,11 @@ export default function SidebarPopover({ icon, label, items, onViewAll, viewAllP
             <View className="flex-1">
               <TouchableWithoutFeedback>
                 <View
-                  className="absolute left-[20%] w-72 bg-popover border border-broder rounded-xl shadow-2xl overflow-hidden"
+                  className="absolute left-[20%] w-72 bg-popover border border-border rounded-xl shadow-2xl overflow-hidden"
                   style={{ top: popupTop, elevation: 10, shadowColor: '#000', shadowOffset: { width: 0, height: 10 }, shadowOpacity: 0.5, shadowRadius: 20 }}
                 >
                   {/* Header */}
-                  <View className="flex-row items-center justify-between p-4 border-b border-broder">
+                  <View className="flex-row items-center justify-between p-4 border-b border-border">
                     <Text className="text-foreground font-bold text-lg">{label}</Text>
                     <TouchableOpacity onPress={handleViewAll}>
                       <Text className="text-primary text-sm font-semibold hover:underline">Ver todos</Text>

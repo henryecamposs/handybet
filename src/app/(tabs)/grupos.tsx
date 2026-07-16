@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, TextInput } from 'react-native';
-import { Search, Users, Plus, Compass } from 'lucide-react-native';
+import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import { Users, Compass } from 'lucide-react-native';
 import { handyBetGroups } from '../../mockdata/handyBetMock';
 import { useRouter } from 'expo-router';
-import { Modal, ActivityIndicator } from 'react-native';
+import { Modal, ActivityIndicator, ScrollView } from 'react-native';
 import { groupMonetizationService } from '../../services/groupMonetizationService';
 import { Group, GroupPlan, GroupRules } from '../../types/handyBet';
+import { useThemeColors } from '@/hooks/useThemeColors';
+import HubLayout from '@/components/layout/HubLayout';
 
 export default function GruposScreen() {
   const router = useRouter();
+  const colors = useThemeColors();
 
   // Simulamos los grupos del usuario
   const [misGrupos, setMisGrupos] = useState<Group[]>(handyBetGroups.slice(0, 2) as any);
@@ -22,6 +25,7 @@ export default function GruposScreen() {
   const [experience, setExperience] = useState('');
   const [intentions, setIntentions] = useState('');
   const [selectedPlanId, setSelectedPlanId] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const handleGroupClick = async (group: Group) => {
     // Si ya es miembro, ir directo al chat
@@ -80,84 +84,70 @@ export default function GruposScreen() {
     }
   };
 
+  const filteredDiscoverGroups = handyBetGroups.slice(2).filter((group) =>
+    group.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const renderMyGroupCard = (group: Group) => (
+    <TouchableOpacity
+      key={group.id}
+      onPress={() => handleGroupClick(group)}
+      className="w-32 h-36 bg-background/80 rounded-2xl border border-muted-foreground items-center justify-center mr-4 hover:bg-background/80/80 transition-colors"
+    >
+      <View className="w-12 h-12 rounded-full bg-background/80 items-center justify-center mb-2">
+        <Users size={20} color={colors.mutedForeground} />
+      </View>
+      <Text className="text-foreground font-bold text-center text-sm px-2" numberOfLines={2}>
+        {group.name}
+      </Text>
+      <Text className="text-foreground text-[10px] mt-1">
+        {group.members?.length || 0} miembros
+      </Text>
+    </TouchableOpacity>
+  );
+
+  const renderDiscoverGroupCard = (group: any) => (
+    <TouchableOpacity
+      key={group.id}
+      onPress={() => handleGroupClick(group as any)}
+      className="w-[48%] bg-background/80 p-4 rounded-2xl border border-muted-foreground items-center justify-center hover:bg-background/80/80 transition-colors"
+    >
+      <View className="w-10 h-10 rounded-full bg-background/80 items-center justify-center mb-2 border border-zinc-700">
+        <Text className="text-lg">🌍</Text>
+      </View>
+      <Text className="text-foreground font-bold text-center mb-1 text-sm">{group.name}</Text>
+      <Text className="text-foreground text-[10px]">{group.members?.length || 0} miembros</Text>
+    </TouchableOpacity>
+  );
+
+  const emptyState = (
+    <View className="flex-1 items-center justify-center py-20 mt-4">
+      <Compass size={48} color="#52525b" className="mb-4" />
+      <Text className="text-foreground font-bold text-lg text-center">Aún no has creado grupos</Text>
+      <Text className="text-foreground text-sm text-center mt-2 max-w-[250px]">
+        Crea tu propio grupo para conectar con amigos o descubre nuevas comunidades.
+      </Text>
+    </View>
+  );
+
   return (
-    <ScrollView className="flex-1 bg-background/80 px-4 pt-12" showsVerticalScrollIndicator={false}>
-      {/* Header */}
-      <View className="flex-row items-center justify-between mb-6">
-        <View>
-          <Text className="text-foreground font-bold text-2xl">Grupos</Text>
-          <Text className="text-foreground text-sm mt-1">Administra y descubre comunidades.</Text>
-        </View>
-      </View>
-
-      {/* Buscador */}
-      <View className="bg-background/80 rounded-full flex-row items-center px-4 py-2 border border-zinc-800 mb-6">
-        <Search size={20} color="#71717a" />
-        <TextInput
-          placeholder="Buscar grupos por interés..."
-          placeholderTextColor="#71717a"
-          className="flex-1 text-foreground ml-3 outline-none"
-        />
-      </View>
-
-      {/* Carrusel de Mis Grupos */}
-      <View className="mb-8">
-        <Text className="text-foreground font-bold text-lg mb-4">Tus Grupos</Text>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} className="flex-row">
-          {/* Botón de Crear Nuevo Grupo */}
-          <TouchableOpacity
-            onPress={() => router.push('/(tabs)/grupos/create' as any)}
-            className="w-32 h-36 bg-background/80 rounded-2xl border border-dashed border-zinc-700 items-center justify-center mr-4 hover:bg-background/80/80 transition-colors"
-          >
-            <View className="w-12 h-12 rounded-full bg-primary/20 items-center justify-center mb-2">
-              <Plus size={24} color="#caee26" />
-            </View>
-            <Text className="text-foreground font-bold text-sm">Crear Nuevo</Text>
-          </TouchableOpacity>
-
-          {misGrupos.map((group: Group) => (
-            <TouchableOpacity
-              key={group.id}
-              onPress={() => handleGroupClick(group)}
-              className="w-32 h-36 bg-background/80 rounded-2xl border border-zinc-800 items-center justify-center mr-4 hover:bg-background/80/80 transition-colors"
-            >
-              <View className="w-12 h-12 rounded-full bg-background/80 items-center justify-center mb-2">
-                <Users size={20} color="#d4d4d8" />
-              </View>
-              <Text className="text-foreground font-bold text-center text-sm px-2" numberOfLines={2}>{group.name}</Text>
-              <Text className="text-foreground text-[10px] mt-1">{group.members?.length || 0} miembros</Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-      </View>
-
-      {/* Condicional de Contenido (Empty State o Descubrir) */}
-      {misGrupos.length === 0 ? (
-        <View className="flex-1 items-center justify-center py-20 mt-4">
-          <Compass size={48} color="#52525b" className="mb-4" />
-          <Text className="text-foreground font-bold text-lg text-center">Aún no has creado grupos</Text>
-          <Text className="text-foreground text-sm text-center mt-2 max-w-[250px]">Crea tu propio grupo para conectar con amigos o descubre nuevas comunidades.</Text>
-        </View>
-      ) : (
-        <View className="mb-8 mt-4">
-          <Text className="text-foreground font-bold text-lg mb-4">Descubrir Nuevos Grupos</Text>
-          <View className="flex-row flex-wrap gap-4">
-            {handyBetGroups.slice(2).map((group) => (
-              <TouchableOpacity
-                key={group.id}
-                onPress={() => handleGroupClick(group as any)}
-                className="w-[48%] bg-background/80 p-4 rounded-2xl border border-zinc-800 items-center justify-center hover:bg-background/80/80 transition-colors"
-              >
-                <View className="w-10 h-10 rounded-full bg-background/80 items-center justify-center mb-2 border border-zinc-700">
-                  <Text className="text-lg">🌍</Text>
-                </View>
-                <Text className="text-foreground font-bold text-center mb-1 text-sm">{group.name}</Text>
-                <Text className="text-foreground text-[10px]">{group.members?.length || 0} miembros</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        </View>
-      )}
+    <HubLayout
+      title="Grupos"
+      subtitle="Administra y descubre comunidades."
+      searchPlaceholder="Buscar grupos por interés..."
+      searchValue={searchQuery}
+      onSearchChange={setSearchQuery}
+      myItemsTitle="Tus Grupos"
+      myItems={misGrupos}
+      renderMyItem={renderMyGroupCard}
+      onAddNewItem={() => router.push('/(tabs)/grupos/create' as any)}
+      addNewItemLabel="Crear Nuevo"
+      discoverTitle="Descubrir Nuevos Grupos"
+      discoverItems={filteredDiscoverGroups}
+      renderDiscoverItem={renderDiscoverGroupCard}
+      discoverLayout="grid"
+      emptyState={emptyState}
+    >
       {/* Modal de Onboarding y Selección de Plan */}
       <Modal
         visible={showOnboarding}
@@ -166,10 +156,10 @@ export default function GruposScreen() {
         onRequestClose={() => setShowOnboarding(false)}
       >
         <View className="flex-1 bg-black/60 justify-center items-center p-6">
-          <View className="bg-background/80 border border-zinc-800 w-full max-w-md rounded-3xl p-6 shadow-2xl">
+          <View className="bg-background border border-zinc-800 w-full max-w-md rounded-3xl p-6 shadow-2xl">
             {loadingOnboarding && !selectedGroup ? (
               <View className="py-10 items-center">
-                <ActivityIndicator size="large" color="#caee26" />
+                <ActivityIndicator size="large" color={colors.secondary} />
                 <Text className="text-foreground text-xs font-bold mt-4">Cargando detalles del grupo...</Text>
               </View>
             ) : (
@@ -194,10 +184,10 @@ export default function GruposScreen() {
                       </Text>
                       <TextInput
                         placeholder="Ej: Principiante, Intermedio, Experto"
-                        placeholderTextColor="#71717a"
+                        placeholderTextColor={colors.mutedForeground}
                         value={experience}
                         onChangeText={setExperience}
-                        className="bg-background/80 border border-zinc-800 rounded-xl px-4 py-2.5 text-white text-xs font-bold"
+                        className="bg-background border border-zinc-800 rounded-xl px-4 py-2.5 text-white text-xs font-bold"
                       />
                     </View>
 
@@ -207,10 +197,10 @@ export default function GruposScreen() {
                       </Text>
                       <TextInput
                         placeholder="Ej: Aprender, publicar pronósticos, etc."
-                        placeholderTextColor="#71717a"
+                        placeholderTextColor={colors.mutedForeground}
                         value={intentions}
                         onChangeText={setIntentions}
-                        className="bg-background/80 border border-zinc-800 rounded-xl px-4 py-2.5 text-white text-xs font-bold"
+                        className="bg-background border border-zinc-800 rounded-xl px-4 py-2.5 text-white text-xs font-bold"
                       />
                     </View>
                   </View>
@@ -224,10 +214,11 @@ export default function GruposScreen() {
                           <TouchableOpacity
                             key={plan.id}
                             onPress={() => setSelectedPlanId(plan.id)}
-                            className={`p-3.5 rounded-2xl border flex-row justify-between items-center ${selectedPlanId === plan.id
-                              ? 'bg-secondary/15 border-secondary'
-                              : 'bg-background/80 border-zinc-800'
-                              }`}
+                            className={`p-3.5 rounded-2xl border flex-row justify-between items-center ${
+                              selectedPlanId === plan.id
+                                ? 'bg-secondary/15 border-secondary'
+                                : 'bg-background border-zinc-800'
+                            }`}
                           >
                             <View>
                               <Text className="text-foreground text-xs font-black">{plan.name}</Text>
@@ -247,7 +238,7 @@ export default function GruposScreen() {
                 <View className="flex-row gap-2">
                   <TouchableOpacity
                     onPress={() => setShowOnboarding(false)}
-                    className="flex-1 bg-background/80 border border-zinc-800 py-3.5 rounded-2xl items-center"
+                    className="flex-1 bg-background border border-zinc-800 py-3.5 rounded-2xl items-center"
                   >
                     <Text className="text-foreground font-bold text-xs">Cancelar</Text>
                   </TouchableOpacity>
@@ -268,6 +259,7 @@ export default function GruposScreen() {
           </View>
         </View>
       </Modal>
-    </ScrollView>
+    </HubLayout>
   );
 }
+

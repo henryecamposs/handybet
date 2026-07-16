@@ -52,6 +52,11 @@ La lógica e interfaz para comentar o responder a publicaciones y noticias se ha
 - Incorpora un campo de texto *inline* con estado activo/inactivo (50% y 20% de opacidad en sus textos y botones, respectivamente).
 - Las vistas como `PostDetailView.tsx` y `NewsCenterView.tsx` delegan exclusivamente en este componente para garantizar consistencia visual en toda la aplicación.
 
+### 3.7 Contenedores Genéricos de Hub y Detalle
+Para unificar el look and feel de las secciones de Canales, Grupos y Juegos, se crearon dos layouts contenedores reutilizables:
+- **`HubLayout.tsx`**: Modula la pantalla de inicio (Hub) de estas secciones, manejando buscador, banners principales, tabs de categoría y carruseles horizontales.
+- **`HubDetailLayout.tsx`**: Unifica la vista detallada de un elemento seleccionado (como en Canales/[canalId]). Mantiene el estilo visual del encabezado (categoría en mayúsculas pequeñas de color primario, título destacado) y el listado de sub-elementos.
+
 ## 4. Estándares de Color
 - **`--muted`**: Estandarizado para coincidir cromáticamente con el `--primary` (0.657 0.229 29.729 en OKLCH). Las clases `bg-muted` funcionarán visualmente como un tono primario pero se usan para fondos atenuados o estados deshabilitados.
 - **`--muted-foreground`**: Configurado a la mitad de su luminosidad original (50% menos brillo) para suavizar contrastes (ej. textos inactivos o descripciones secundarias).

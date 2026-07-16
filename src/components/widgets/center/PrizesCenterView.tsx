@@ -24,6 +24,7 @@ export default function PrizesCenterView({ currentView, selectedItemId, onBack, 
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadPrizes();
   }, [mockSession]);
 

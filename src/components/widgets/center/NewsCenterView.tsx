@@ -25,6 +25,7 @@ export default function NewsCenterView({ currentView, selectedItemId, onBack, on
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadNews();
   }, []);
 

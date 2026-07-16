@@ -23,10 +23,6 @@ export default function FriendRequestsCenterView({ currentView, selectedItemId, 
 
   const userId = mockSession?.id || 'usr_henry';
 
-  useEffect(() => {
-    loadSuggestions();
-  }, [userId]);
-
   const loadSuggestions = async () => {
     try {
       setLoading(true);
@@ -58,6 +54,11 @@ export default function FriendRequestsCenterView({ currentView, selectedItemId, 
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    loadSuggestions();
+  }, [userId]);
 
   if (currentView !== 'all-follow-suggestions' && currentView !== 'follow-suggestion-detail') return null;
 

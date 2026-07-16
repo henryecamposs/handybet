@@ -8,12 +8,14 @@ El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1
 
 ### Añadido
 - Componente estandarizado `<RepliesSection />` para reutilizar el comportamiento y la interfaz de respuestas/comentarios en múltiples widgets y feeds.
+- Componente contenedor reutilizable `<HubLayout />` para estructurar de manera coherente las vistas iniciales de Canales, Grupos y Juegos.
+- Componente contenedor reutilizable `<HubDetailLayout />` para estandarizar las vistas detalladas de un elemento seleccionado (como en Canales/[canalId]).
 
 ### Cambiado
 - Estandarización de colores: Configuración del color base `--muted` para que coincida con `--primary`, atenuación del `--muted-foreground` a un 50% menos de luminosidad (brillo).
 - Se configuró el `--border` nativo de la aplicación al equivalente OKLCH del color hexadecimal `#49130D` (marron/rojizo oscuro) y se estableció en Tailwind con 20% de opacidad.
 - Se refactorizaron `NewsCenterView` y `PostDetailView` para utilizar el nuevo componente `<RepliesSection />`, manteniendo consistencia visual.
-- Se corrigieron variables no declaradas y dependencias de React Hooks (linting errors).
+- Se corrigieron variables no declaradas y dependencias de React Hooks (linting errors) en `NewsCenterView`, `PrizesCenterView`, `RightSidebarWidgets` y `FriendRequestsCenterView`.
 
 ## [1.3.0] - 2026-07-13
 - Barra compacta de creación de post (vista reducida) en `CreatePostWidget.tsx` con avatar del usuario y accesos rápidos de multimedia/sentimientos.

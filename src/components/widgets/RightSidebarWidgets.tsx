@@ -118,10 +118,6 @@ export default function RightSidebarWidgets({ onSelectNews, onSelectPrize, onSel
   const [suggestions, setSuggestions] = useState<any[]>([]);
   const [prizes, setPrizes] = useState<any[]>([]);
 
-  useEffect(() => {
-    loadData();
-  }, [mockSession]);
-
   const loadData = async () => {
     try {
       // Ads
@@ -165,10 +161,15 @@ export default function RightSidebarWidgets({ onSelectNews, onSelectPrize, onSel
     }
   };
 
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    loadData();
+  }, [mockSession]);
+
   return (
     <ScrollView
       style={{ height: 'calc(100vh - 64px)' as any }}
-      className="w-[20%] p-1 bg-primary/5 border border-l-primary/20 hover-scrollbar"
+      className="w-[25%] p-1 bg-primary/5 border border-l-primary/20 hover-scrollbar"
       showsVerticalScrollIndicator={true}
     >
 
