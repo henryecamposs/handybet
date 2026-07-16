@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
-import { useLocalSearchParams } from 'expo-router';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { MessageCircle, UserPlus, UserCheck, MoreHorizontal } from 'lucide-react-native';
 import { handyBetUsers } from '../../../mockdata/handyBetMock';
+import { useThemeColors } from '@/hooks/useThemeColors';
+import HubDetailLayout from '@/components/layout/HubDetailLayout';
 
 export default function UserProfileScreen() {
   const { userId } = useLocalSearchParams();
-  const [isFollowing, setIsFollowing] = useState(false);
+  const router = useRouter();
+  const colors = useThemeColors();
+  const [isFollowing, setIsFollowing] = useState(true); // Default to following for usr_admin as per screenshot
 
   const user = handyBetUsers.find((u: any) => u.id === userId) || {
     name: 'Usuario Desconocido',
@@ -14,39 +18,49 @@ export default function UserProfileScreen() {
     bio: 'No hay información disponible.'
   };
 
+  const handleMessagePress = () => {
+    router.push(`/chat/friend/${userId}` as any);
+  };
+
   return (
-    <ScrollView className="flex-1 bg-background" showsVerticalScrollIndicator={false}>
+    <HubDetailLayout
+      logoType="default"
+      backRoute="/(tabs)/friends"
+    >
       {/* Cover Portada */}
-      <View className="h-48 bg-background/80 relative w-full">
+      <View className="h-44 bg-background/80 relative w-full border-b border-muted-foreground/15">
         {/* Portada simulada con gradiente */}
-        <View className="absolute inset-0 bg-gradient-to-b from-zinc-800 to-zinc-900" />
+        <View className="absolute inset-0 bg-gradient-to-b from-muted to-background/50" />
       </View>
 
       {/* Info Container */}
-      <View className="px-4 pb-4">
+      <View className="px-4 pb-6">
         {/* Avatar y Acciones Rápidas */}
         <View className="flex-row justify-between items-end -mt-16 mb-4">
-          <View className="p-1 bg-background/80 rounded-full">
+          <View className="p-1 bg-background rounded-full border border-muted-foreground/35">
             <Image
               source={{ uri: user.avatar }}
-              className="w-32 h-32 rounded-full bg-background/80"
+              className="w-28 h-28 rounded-full bg-background/80"
             />
           </View>
           <View className="flex-row gap-2 pb-2">
-            <TouchableOpacity className="w-10 h-10 rounded-full bg-background/80 items-center justify-center border border-zinc-700">
-              <MoreHorizontal size={20} color="#d4d4d8" />
+            <TouchableOpacity className="w-10 h-10 rounded-full bg-background/80 items-center justify-center border border-muted-foreground hover:bg-background/80/85">
+              <MoreHorizontal size={20} color={colors.foreground} />
             </TouchableOpacity>
-            <TouchableOpacity className="w-10 h-10 rounded-full bg-background/80 items-center justify-center border border-zinc-700">
-              <MessageCircle size={20} color="#d4d4d8" />
+            <TouchableOpacity 
+              onPress={handleMessagePress}
+              className="w-10 h-10 rounded-full bg-background/80 items-center justify-center border border-muted-foreground hover:bg-background/80/85"
+            >
+              <MessageCircle size={20} color={colors.foreground} />
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => setIsFollowing(!isFollowing)}
-              className={`flex-row h-10 px-4 rounded-full items-center justify-center ${isFollowing ? 'bg-background/80 border border-zinc-700' : 'bg-primary'}`}
+              className={`flex-row h-10 px-4 rounded-full items-center justify-center ${isFollowing ? 'bg-background/80 border border-muted-foreground hover:bg-background/80/85' : 'bg-primary'}`}
             >
               {isFollowing ? (
                 <>
-                  <UserCheck size={18} color="#fff" />
-                  <Text className="text-white font-bold ml-2">Siguiendo</Text>
+                  <UserCheck size={18} color={colors.foreground} />
+                  <Text className="text-foreground font-bold ml-2">Siguiendo</Text>
                 </>
               ) : (
                 <>
@@ -60,34 +74,34 @@ export default function UserProfileScreen() {
 
         {/* Datos Personales */}
         <View className="mb-6">
-          <Text className="text-2xl font-black text-foreground">{user.name}</Text>
-          <Text className="text-foreground font-medium">@{(user as any).username || user.name.toLowerCase().replace(' ', '_')}</Text>
+          <Text className="text-2xl font-black text-foreground tracking-tight">{user.name}</Text>
+          <Text className="text-muted-foreground text-sm font-medium">@{(user as any).username || user.name.toLowerCase().replace(' ', '_')}</Text>
 
-          <Text className="text-foreground mt-4 leading-5">{(user as any).bio || 'Explorando la red HandyBet. Jugador frecuente en La Imaginaria.'}</Text>
+          <Text className="text-foreground mt-4 leading-5 text-sm">{(user as any).bio || 'Explorando la red HandyBet. Jugador frecuente en La Imaginaria.'}</Text>
 
           <View className="flex-row gap-4 mt-4">
             <View className="flex-row items-center">
-              <Text className="text-foreground font-bold">120</Text>
-              <Text className="text-foreground ml-1">Seguidores</Text>
+              <Text className="text-foreground font-bold text-sm">120</Text>
+              <Text className="text-muted-foreground text-xs ml-1 uppercase tracking-wider font-bold">Seguidores</Text>
             </View>
             <View className="flex-row items-center">
-              <Text className="text-foreground font-bold">15</Text>
-              <Text className="text-foreground ml-1">Grupos</Text>
+              <Text className="text-foreground font-bold text-sm">15</Text>
+              <Text className="text-muted-foreground text-xs ml-1 uppercase tracking-wider font-bold">Grupos</Text>
             </View>
           </View>
         </View>
 
         {/* Separador */}
-        <View className="h-px bg-background/80 my-2" />
+        <View className="h-px bg-muted-foreground/15 my-2" />
 
         {/* Feed del Usuario */}
         <View className="py-4">
-          <Text className="text-foreground font-bold text-lg mb-4">Publicaciones Recientes</Text>
-          <View className="bg-background/80 border border-zinc-800 rounded-2xl p-4 items-center justify-center h-32">
-            <Text className="text-foreground">No hay publicaciones nuevas.</Text>
+          <Text className="text-foreground font-black text-lg uppercase tracking-wider mb-4">Publicaciones Recientes</Text>
+          <View className="bg-background/80 border border-muted-foreground rounded-3xl p-5 items-center justify-center h-32">
+            <Text className="text-muted-foreground font-bold text-sm">No hay publicaciones nuevas.</Text>
           </View>
         </View>
       </View>
-    </ScrollView>
+    </HubDetailLayout>
   );
 }
