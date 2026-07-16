@@ -1,0 +1,140 @@
+[
+  {
+    "id": "chat_1",
+    "type": "direct",
+    "participants": ["usr_henry", "usr_diego"],
+    "messages": [
+      { "id": "m1", "sender_id": "usr_diego", "content": "Henry, ¿ya viste los números del día? El 33 viene fuerte", "created_at": "2025-07-16T00:30:00Z" },
+      { "id": "m2", "sender_id": "usr_henry", "content": "Sí lo vi. Pedro ya tiene todo listo para los pagos de hoy", "created_at": "2025-07-16T00:32:00Z" },
+      { "id": "m3", "sender_id": "usr_diego", "content": "Perfecto. Por cierto, la nueva taquilla de Chacao arranca mañana", "created_at": "2025-07-16T00:35:00Z" },
+      { "id": "m4", "sender_id": "usr_henry", "content": "Excelente! Ya publiqué la noticia en el feed. ¿Quién la va a administrar?", "created_at": "2025-07-16T00:37:00Z" },
+      { "id": "m5", "sender_id": "usr_diego", "content": "Laura se ofreció. Tiene experiencia con la de Valencia", "created_at": "2025-07-16T00:40:00Z" },
+      { "id": "m6", "sender_id": "usr_henry", "content": "Laura es muy confiable. Aprobado 👍", "created_at": "2025-07-16T00:42:00Z" }
+    ],
+    "created_at": "2025-07-15T20:00:00Z"
+  },
+  {
+    "id": "chat_2",
+    "type": "direct",
+    "participants": ["usr_henry", "usr_joselin"],
+    "messages": [
+      { "id": "m7", "sender_id": "usr_joselin", "content": "Hola Henry! Quería agradecerte por la plataforma. Mi canal VIP está creciendo mucho 🙌", "created_at": "2025-07-15T22:00:00Z" },
+      { "id": "m8", "sender_id": "usr_henry", "content": "¡Joselin! Me alegra mucho. Tu contenido es de lo mejor que tenemos", "created_at": "2025-07-15T22:05:00Z" },
+      { "id": "m9", "sender_id": "usr_joselin", "content": "Gracias ❤️ Oye, ¿podríamos implementar regalos entre usuarios? Mis fans me lo piden mucho", "created_at": "2025-07-15T22:10:00Z" },
+      { "id": "m10", "sender_id": "usr_henry", "content": "Está en el roadmap! Lo tenemos planificado para el próximo mes", "created_at": "2025-07-15T22:12:00Z" },
+      { "id": "m11", "sender_id": "usr_joselin", "content": "Genial! Eso va a explotar las suscripciones. Cuenten conmigo para probarlo", "created_at": "2025-07-15T22:15:00Z" }
+    ],
+    "created_at": "2025-07-15T22:00:00Z"
+  },
+  {
+    "id": "chat_3",
+    "type": "direct",
+    "participants": ["usr_carlos", "usr_roberto"],
+    "messages": [
+      { "id": "m12", "sender_id": "usr_carlos", "content": "Roberto, ¿qué número recomiendas para las 3PM?", "created_at": "2025-07-16T01:00:00Z" },
+      { "id": "m13", "sender_id": "usr_roberto", "content": "Hermano, el 27-PERRO viene con fuerza. Lo he estado monitoreando 3 días", "created_at": "2025-07-16T01:02:00Z" },
+      { "id": "m14", "sender_id": "usr_carlos", "content": "¿Le meto 200 VES?", "created_at": "2025-07-16T01:03:00Z" },
+      { "id": "m15", "sender_id": "usr_roberto", "content": "Yo le puse 500. Pero recuerda, es un pronóstico, no una garantía 😅", "created_at": "2025-07-16T01:05:00Z" },
+      { "id": "m16", "sender_id": "usr_carlos", "content": "Entendido. Voy con 200 entonces. ¡Gracias crack! 🙏", "created_at": "2025-07-16T01:07:00Z" },
+      { "id": "m17", "sender_id": "usr_roberto", "content": "¡Suerte! Te aviso si cambia algo antes del sorteo", "created_at": "2025-07-16T01:10:00Z" }
+    ],
+    "created_at": "2025-07-16T01:00:00Z"
+  },
+  {
+    "id": "chat_4",
+    "type": "direct",
+    "participants": ["usr_carlos", "usr_pedro"],
+    "messages": [
+      { "id": "m18", "sender_id": "usr_carlos", "content": "Pedro, gané con el 777! ¿Ya me cayó el premio en la wallet?", "created_at": "2025-07-15T20:20:00Z" },
+      { "id": "m19", "sender_id": "usr_pedro", "content": "¡Felicidades Carlos! Déjame verificar...", "created_at": "2025-07-15T20:21:00Z" },
+      { "id": "m20", "sender_id": "usr_pedro", "content": "Listo, ya tienes los 5,000 VES acreditados. Revisa tu wallet", "created_at": "2025-07-15T20:23:00Z" },
+      { "id": "m21", "sender_id": "usr_carlos", "content": "¡Ya lo veo! Rapidísimo como siempre. Eres el mejor cajero 💪", "created_at": "2025-07-15T20:25:00Z" },
+      { "id": "m22", "sender_id": "usr_pedro", "content": "Para eso estamos hermano. ¡Sigue apostando con cabeza!", "created_at": "2025-07-15T20:27:00Z" }
+    ],
+    "created_at": "2025-07-15T20:20:00Z"
+  },
+  {
+    "id": "chat_5",
+    "type": "direct",
+    "participants": ["usr_ana", "usr_joselin"],
+    "messages": [
+      { "id": "m23", "sender_id": "usr_ana", "content": "Joselin! ¿Hacemos un live juntas esta semana? 🎥", "created_at": "2025-07-15T18:00:00Z" },
+      { "id": "m24", "sender_id": "usr_joselin", "content": "¡Me encanta la idea! ¿Qué día te funciona?", "created_at": "2025-07-15T18:10:00Z" },
+      { "id": "m25", "sender_id": "usr_ana", "content": "Viernes a las 8PM? Podríamos apostar en vivo y comentar los resultados", "created_at": "2025-07-15T18:15:00Z" },
+      { "id": "m26", "sender_id": "usr_joselin", "content": "Perfecto! Viernes 8PM. Lo anuncio en mi canal 📢", "created_at": "2025-07-15T18:20:00Z" },
+      { "id": "m27", "sender_id": "usr_ana", "content": "Dale! Yo también lo publico. ¡Va a ser épico! 🔥", "created_at": "2025-07-15T18:22:00Z" }
+    ],
+    "created_at": "2025-07-15T18:00:00Z"
+  },
+  {
+    "id": "chat_6",
+    "type": "direct",
+    "participants": ["usr_valentina", "usr_henry"],
+    "messages": [
+      { "id": "m28", "sender_id": "usr_valentina", "content": "Hola! Soy nueva en la plataforma. ¿Cómo funciona lo de los animalitos?", "created_at": "2025-07-15T13:30:00Z" },
+      { "id": "m29", "sender_id": "usr_henry", "content": "¡Bienvenida Valentina! Básicamente eliges un número del 00 al 36, cada uno representa un animal", "created_at": "2025-07-15T13:35:00Z" },
+      { "id": "m30", "sender_id": "usr_henry", "content": "Hay sorteos cada hora. Si tu número sale, ganas según el multiplicador de tu apuesta", "created_at": "2025-07-15T13:36:00Z" },
+      { "id": "m31", "sender_id": "usr_valentina", "content": "Ah ok! ¿Y cuál es el monto mínimo para apostar?", "created_at": "2025-07-15T13:38:00Z" },
+      { "id": "m32", "sender_id": "usr_henry", "content": "Desde 10 VES. Te recomiendo empezar con poco mientras aprendes 😊", "created_at": "2025-07-15T13:40:00Z" },
+      { "id": "m33", "sender_id": "usr_valentina", "content": "¡Perfecto! Voy a probar con 50 VES al león 🦁 Gracias!", "created_at": "2025-07-15T13:42:00Z" },
+      { "id": "m34", "sender_id": "usr_henry", "content": "¡Suerte! Y cualquier duda aquí estoy 👍", "created_at": "2025-07-15T13:44:00Z" }
+    ],
+    "created_at": "2025-07-15T13:30:00Z"
+  },
+  {
+    "id": "chat_7",
+    "type": "direct",
+    "participants": ["usr_isabella", "usr_henry"],
+    "messages": [
+      { "id": "m35", "sender_id": "usr_isabella", "content": "Henry, tengo un cliente nuevo que quiere pautar en la plataforma. ¿Cuáles son las tarifas actuales?", "created_at": "2025-07-15T10:00:00Z" },
+      { "id": "m36", "sender_id": "usr_henry", "content": "¡Genial! Sidebar básico $15 por 48h, Premium $50/mes con feed patrocinado", "created_at": "2025-07-15T10:05:00Z" },
+      { "id": "m37", "sender_id": "usr_isabella", "content": "Perfecto. El cliente es una casa de cambio. Quieren el premium", "created_at": "2025-07-15T10:08:00Z" },
+      { "id": "m38", "sender_id": "usr_henry", "content": "Excelente. Dile que me mande los assets y lo activamos hoy", "created_at": "2025-07-15T10:10:00Z" }
+    ],
+    "created_at": "2025-07-15T10:00:00Z"
+  },
+  {
+    "id": "chat_8",
+    "type": "direct",
+    "participants": ["usr_maria", "usr_carlos"],
+    "messages": [
+      { "id": "m39", "sender_id": "usr_maria", "content": "Carlos! Vi que ganaste 5000 con el 777 😱", "created_at": "2025-07-15T20:30:00Z" },
+      { "id": "m40", "sender_id": "usr_carlos", "content": "¡Sí! Fue increíble. Llevaba 3 días jugándole al triple", "created_at": "2025-07-15T20:32:00Z" },
+      { "id": "m41", "sender_id": "usr_maria", "content": "¿Me pasas tu estrategia? 😂 Yo siempre le apuesto al mismo número", "created_at": "2025-07-15T20:35:00Z" },
+      { "id": "m42", "sender_id": "usr_carlos", "content": "El truco es variar. No siempre el mismo. Observa los resultados de la semana y busca patrones", "created_at": "2025-07-15T20:37:00Z" },
+      { "id": "m43", "sender_id": "usr_maria", "content": "Tiene sentido. Roberto dice algo parecido. Voy a intentarlo!", "created_at": "2025-07-15T20:40:00Z" },
+      { "id": "m44", "sender_id": "usr_carlos", "content": "Roberto sabe mucho. Sigue sus pronósticos, son bastante acertados 👌", "created_at": "2025-07-15T20:42:00Z" }
+    ],
+  },
+  {
+    "id": "chat_grp_taquilla_mcy",
+    "type": "group",
+    "group_id": "grp_taquilla_maracay",
+    "participants": ["usr_diego", "usr_henry", "usr_gabriel"],
+    "messages": [
+      { "id": "mg1", "sender_id": "usr_diego", "content": "¡Bienvenidos a la nueva taquilla de Maracay!", "created_at": "2025-07-16T08:00:00Z" },
+      { "id": "mg2", "sender_id": "usr_gabriel", "content": "Excelente, listos para empezar a vender.", "created_at": "2025-07-16T08:05:00Z" }
+    ],
+    "created_at": "2025-07-16T08:00:00Z"
+  },
+  {
+    "id": "chat_grp_resultados_triple_a",
+    "type": "group",
+    "group_id": "grp_resultados_triple_a",
+    "participants": ["usr_henry", "usr_diego", "usr_roberto"],
+    "messages": [
+      { "id": "mg3", "sender_id": "usr_henry", "content": "Sorteo Triple A 1:00 PM: 123 - Letra B", "created_at": "2025-07-16T13:05:00Z" }
+    ],
+    "created_at": "2025-07-16T09:00:00Z"
+  },
+  {
+    "id": "chat_grp_pronosticos_vip",
+    "type": "group",
+    "group_id": "grp_pronosticos_vip",
+    "participants": ["usr_roberto", "usr_henry"],
+    "messages": [
+      { "id": "mg4", "sender_id": "usr_roberto", "content": "Pronóstico VIP del día: Jueguen fuerte al 45 - Caballo.", "created_at": "2025-07-16T10:00:00Z" }
+    ],
+    "created_at": "2025-07-16T10:00:00Z"
+  }
+]

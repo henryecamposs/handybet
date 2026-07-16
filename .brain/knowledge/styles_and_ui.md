@@ -7,7 +7,7 @@ HandyBet utiliza un tema semántico y responsivo basado en colores OKLCH declara
 - **Textos Secundarios:** `text-muted-foreground` (Mapeado a la variable `--muted-foreground`).
 - **Destacados de Marca (Primarios):** `text-primary` / `bg-primary` (Color principal de realce deportivo).
 - **Destacados Secundarios:** `text-secondary` / `bg-secondary` (Color secundario de acentuación).
-- **Destacados de Éxito / Destructive:** Mapeados dinámicamente a través de `text-emerald-500` o variables semánticas `--destructive`.
+- **Destacados de Éxito / Destructive:** Mapeados dinámicamente a través de `text-secondary` o variables semánticas `--destructive`.
 
 ---
 
@@ -24,14 +24,35 @@ El logotipo del sistema está centralizado en un componente reutilizable `Logo.t
 - **Regla Tipográfica:** La primera palabra ("Handy") se escribe con peso normal (`font-normal`), mientras que la segunda palabra distintiva ("Bet", "Post", "Ads", "Chat", etc.) se escribe con peso negrita (`font-bold`) para acentuar el módulo correspondiente.
 - **Tamaños admitidos:** `'xs'`, `'sm'`, `'md'`, `'lg'`, `'xl'`.
 
-### 3.2 Barra de Reacciones e Interacciones
-Las publicaciones (`PostItem.tsx`) muestran la etiqueta de sentimiento (ej: "Me siento Ganador") en la parte inferior izquierda de la tarjeta. Las reacciones (Me gusta, Comentarios, Compartir) se agrupan horizontalmente a la derecha, manteniendo la consistencia responsive.
+### 3.2 Estructura estilo Twitter/X en PostItem.tsx
+Las publicaciones (`PostItem.tsx`) se estructuran en dos columnas:
+- **Columna Izquierda (Estrecha):** Muestra el avatar del autor en la parte superior.
+- **Columna Derecha (Flexible):** Contiene el nombre del autor, username, tiempo de publicación, texto clickable (que abre el detalle en la columna central), carrusel multimedia y la barra de reacciones.
+- **Menú de Opciones (Popover):** El icono de los tres puntos ⋮ despliega un popover local absoluto directamente abajo del botón, abandonando el modal central clásico para un diseño ágil.
 
-### 3.3 Creador de Publicaciones Compacto
+### 3.3 Barra Universal de Acciones (PostActionButtons.tsx)
+Las acciones de "Me gusta", "Comentar" y "Compartir" de las publicaciones están unificadas en un componente universal `PostActionButtons.tsx` que soporta variantes según el contexto:
+- **Variante `full`**: Muestra los iconos seguidos de los verbos descriptivos completos (ej. "Me gusta"). Usada principalmente en vistas amplias o detalladas como `PostDetailView.tsx`.
+- **Variante `compact`**: Muestra los iconos y métricas condensadas (contadores o letras mínimas) junto a ellos. Ideal para el feed y layouts reducidos (`PostItem.tsx`).
+
+### 3.4 Creador de Publicaciones Compacto
 El creador de posts (`CreatePostWidget.tsx`) utiliza un patrón de barra reducida en el Feed:
-- Muestra el avatar y un campo pill con el mensaje *"¿Qué estás pensando, [Nombre]?"*.
+- Muestra el avatar y un campo pill con el mensaje *\"¿Qué estás pensando, [Nombre]?\"*.
 - Incluye iconos directos a color para Video (rojo), Foto (verde) y Sentimiento (naranja).
 - Al interactuar, abre un Modal enfocado para redactar la publicación y adjuntar archivos/estados de ánimo.
 
-### 3.4 Desplazamiento Independiente en Sidebars
-En resoluciones de escritorio, el sidebar derecho (`RightSidebarWidgets.tsx`) está restringido a una altura de `calc(100vh - 64px)` y cuenta con desplazamiento (`ScrollView`) independiente del feed central, optimizando la visualización de widgets.
+### 3.5 Desplazamiento Independiente en Layout y Sidebars
+En resoluciones de escritorio, el layout principal está limitado a `h-screen max-h-screen overflow-hidden` eliminando la scrollbar global de la ventana. Las tres columnas se desplazan independientemente mediante `ScrollView`s internos:
+- **Sidebar Izquierdo:** `LeftSidebarWidgets.tsx` con su propio scrollbar oculto.
+- **Columna Central:** `feed.tsx` o `PostDetailView.tsx` scrollable independientemente.
+- **Sidebar Derecho:** `RightSidebarWidgets.tsx` con altura de `calc(100vh - 64px)` y scroll de widgets independiente.
+
+### 3.6 Sistema Estandarizado de Respuestas (RepliesSection.tsx)
+La lógica e interfaz para comentar o responder a publicaciones y noticias se ha estandarizado en un componente centralizado `RepliesSection.tsx`. 
+- Incorpora un campo de texto *inline* con estado activo/inactivo (50% y 20% de opacidad en sus textos y botones, respectivamente).
+- Las vistas como `PostDetailView.tsx` y `NewsCenterView.tsx` delegan exclusivamente en este componente para garantizar consistencia visual en toda la aplicación.
+
+## 4. Estándares de Color
+- **`--muted`**: Estandarizado para coincidir cromáticamente con el `--primary` (0.657 0.229 29.729 en OKLCH). Las clases `bg-muted` funcionarán visualmente como un tono primario pero se usan para fondos atenuados o estados deshabilitados.
+- **`--muted-foreground`**: Configurado a la mitad de su luminosidad original (50% menos brillo) para suavizar contrastes (ej. textos inactivos o descripciones secundarias).
+- **`--border`**: Sobrescrito al color rojizo oscuro (`#49130D` o `oklch(0.277 0.083 29.660)`) globalmente. En Tailwind se expone con una transparencia base predeterminada (`border: "oklch(var(--border) / 0.2)"`), logrando bordes primarios al 20% de forma nativa.

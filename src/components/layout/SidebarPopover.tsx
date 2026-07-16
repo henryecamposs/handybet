@@ -63,9 +63,9 @@ export default function SidebarPopover({ icon, label, items, onViewAll, viewAllP
             <View className="w-9 items-center justify-center">
               {icon}
             </View>
-            <Text className="font-medium text-foreground ml-3 text-[15px]">{label}</Text>
+            <Text className="font-medium text-primary ml-3 text-[15px]">{label}</Text>
           </View>
-          <ChevronRight size={16} color={withOpacity(colors.primary, 0.5)} />
+          <ChevronRight size={16} color={colors.primary} />
         </TouchableOpacity>
       </View>
 
@@ -75,11 +75,11 @@ export default function SidebarPopover({ icon, label, items, onViewAll, viewAllP
             <View className="flex-1">
               <TouchableWithoutFeedback>
                 <View
-                  className="absolute left-[20%] w-72 bg-popover border border-primary/20 rounded-xl shadow-2xl overflow-hidden"
+                  className="absolute left-[20%] w-72 bg-popover border border-broder rounded-xl shadow-2xl overflow-hidden"
                   style={{ top: popupTop, elevation: 10, shadowColor: '#000', shadowOffset: { width: 0, height: 10 }, shadowOpacity: 0.5, shadowRadius: 20 }}
                 >
                   {/* Header */}
-                  <View className="flex-row items-center justify-between p-4 border-b border-primary/20">
+                  <View className="flex-row items-center justify-between p-4 border-b border-broder">
                     <Text className="text-foreground font-bold text-lg">{label}</Text>
                     <TouchableOpacity onPress={handleViewAll}>
                       <Text className="text-primary text-sm font-semibold hover:underline">Ver todos</Text>
@@ -97,7 +97,7 @@ export default function SidebarPopover({ icon, label, items, onViewAll, viewAllP
                         <TouchableOpacity
                           key={item.id}
                           onPress={() => handleNavigate(item.path)}
-                          className="flex-row items-center p-3 border-b border-zinc-800/50 hover:bg-background/80 transition-colors"
+                          className="flex-row items-center p-3 border-b border-border hover:bg-background/80 transition-colors"
                         >
                           {item.image ? (
                             <Image source={{ uri: item.image }} className="w-10 h-10 rounded-full mr-3 bg-background/80" />

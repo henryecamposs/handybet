@@ -10,13 +10,13 @@ export default function WalletDetailScreen() {
   // En una app real, fetchearías la billetera con el 'id'
 
   return (
-    <ScrollView className="flex-1 bg-background px-4 pt-12" showsVerticalScrollIndicator={false}>
+    <ScrollView className="flex-1 bg-background/80 px-4 pt-12" showsVerticalScrollIndicator={false}>
       {/* Header */}
       <View className="flex-row items-center justify-between mb-6">
         <TouchableOpacity onPress={() => router.back()} className="flex-row items-center gap-2">
           <Text className="text-foreground font-bold text-sm">◀ Volver</Text>
         </TouchableOpacity>
-        <TouchableOpacity className="w-10 h-10 bg-background rounded-full items-center justify-center border border-zinc-800">
+        <TouchableOpacity className="w-10 h-10 bg-background/80 rounded-full items-center justify-center border border-zinc-800">
           <Settings size={18} color="#71717a" />
         </TouchableOpacity>
       </View>
@@ -55,15 +55,15 @@ export default function WalletDetailScreen() {
 
       {/* Acciones Rápidas */}
       <View className="flex-row flex-wrap gap-4 mb-8">
-        <TouchableOpacity className="flex-1 bg-background p-4 rounded-2xl border border-zinc-800 items-center justify-center hover:bg-background/80 transition-colors">
+        <TouchableOpacity className="flex-1 bg-background/80 p-4 rounded-2xl border border-zinc-800 items-center justify-center hover:bg-background/80 transition-colors">
           <Text className="text-2xl mb-2">📊</Text>
           <Text className="text-foreground font-bold text-xs text-center">Reporte de Caja</Text>
         </TouchableOpacity>
-        <TouchableOpacity className="flex-1 bg-background p-4 rounded-2xl border border-zinc-800 items-center justify-center hover:bg-background/80 transition-colors">
+        <TouchableOpacity className="flex-1 bg-background/80 p-4 rounded-2xl border border-zinc-800 items-center justify-center hover:bg-background/80 transition-colors">
           <Text className="text-2xl mb-2">🎫</Text>
           <Text className="text-foreground font-bold text-xs text-center">Pagar Tickets</Text>
         </TouchableOpacity>
-        <TouchableOpacity className="flex-1 bg-background p-4 rounded-2xl border border-zinc-800 items-center justify-center hover:bg-background/80 transition-colors">
+        <TouchableOpacity className="flex-1 bg-background/80 p-4 rounded-2xl border border-zinc-800 items-center justify-center hover:bg-background/80 transition-colors">
           <Text className="text-2xl mb-2">🔄</Text>
           <Text className="text-foreground font-bold text-xs text-center">Sincronizar</Text>
         </TouchableOpacity>
@@ -78,7 +78,7 @@ export default function WalletDetailScreen() {
           </TouchableOpacity>
         </View>
 
-        <View className="bg-background rounded-2xl border border-zinc-800 overflow-hidden">
+        <View className="bg-background/80 rounded-2xl border border-zinc-800 overflow-hidden">
           {/* Item */}
           <View className="p-4 border-b border-zinc-800/50 flex-row justify-between items-center">
             <View className="flex-row items-center">

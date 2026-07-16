@@ -1,0 +1,72 @@
+[
+  {
+    "id": "ch_joselin",
+    "name": "Joselin La Gata VIP",
+    "type": "media_sharing",
+    "owner_id": "usr_joselin",
+    "description": "Contenido exclusivo de videos y fotos",
+    "avatar_url": "https://i.pravatar.cc/150?u=joselin_lagata",
+    "is_public": true,
+    "subscribers_count": 4500,
+    "plans": [
+      { "id": "plan_free", "name": "Gratis", "price": 0, "billing_type": "free", "benefits": ["Acceso a contenido público", "Comentarios básicos"] },
+      { "id": "plan_medium", "name": "Medio", "price": 5.99, "billing_type": "mensual", "benefits": ["Videos exclusivos", "Insignia de fan", "Chat grupal"] },
+      { "id": "plan_pro", "name": "Pro", "price": 14.99, "billing_type": "mensual", "benefits": ["Chat directo", "Videos sin censura", "Pedidos personalizados", "Contenido anticipado"] }
+    ],
+    "created_at": "2025-02-10T14:30:00Z"
+  },
+  {
+    "id": "ch_imaginaria",
+    "name": "Agencias La Imaginaria",
+    "type": "taquillas",
+    "owner_id": "usr_diego",
+    "description": "La mejor agencia de loterías y animalitos. Red de taquillas.",
+    "avatar_url": "https://i.pravatar.cc/150?u=diego_herrera",
+    "is_public": true,
+    "subscribers_count": 8200,
+    "plans": [],
+    "created_at": "2025-01-10T07:00:00Z"
+  },
+  {
+    "id": "ch_loteria_nacional",
+    "name": "Lotería Nacional Resultados",
+    "type": "loterias",
+    "owner_id": "usr_henry",
+    "description": "Canal oficial para resultados de sorteos de lotería nacional",
+    "avatar_url": "https://i.pravatar.cc/150?u=loteria",
+    "is_public": true,
+    "subscribers_count": 15000,
+    "plans": [],
+    "created_at": "2025-01-05T07:00:00Z"
+  },
+  {
+    "id": "ch_roberto_tips",
+    "name": "Roberto Pronósticos VIP",
+    "type": "pronosticadores",
+    "owner_id": "usr_roberto",
+    "description": "Pronósticos verificados con 78% de acierto",
+    "avatar_url": "https://i.pravatar.cc/150?u=roberto_lopez",
+    "is_public": true,
+    "subscribers_count": 2100,
+    "plans": [
+      { "id": "plan_roberto_basic", "name": "Básico", "price": 0, "billing_type": "free", "benefits": ["Pronóstico diario gratuito"] },
+      { "id": "plan_roberto_premium", "name": "Premium", "price": 500, "billing_type": "mensual", "benefits": ["3 pronósticos diarios", "Análisis de tendencias", "Acceso al círculo premium", "Historial verificado"] }
+    ],
+    "created_at": "2025-02-28T15:20:00Z"
+  },
+  {
+    "id": "ch_isabella_ads",
+    "name": "HandyAds - Publicidad Digital",
+    "type": "advertising",
+    "owner_id": "usr_isabella",
+    "description": "Conectamos negocios con la comunidad de HandyBet",
+    "avatar_url": "https://i.pravatar.cc/150?u=isabella_rios",
+    "is_public": true,
+    "subscribers_count": 340,
+    "plans": [
+      { "id": "plan_ads_basic", "name": "Anuncio Básico", "price": 15, "billing_type": "pay_per_action", "benefits": ["1 anuncio en sidebar", "48 horas de exposición"] },
+      { "id": "plan_ads_premium", "name": "Anuncio Premium", "price": 50, "billing_type": "mensual", "benefits": ["Anuncio destacado", "Feed patrocinado", "Métricas de rendimiento"] }
+    ],
+    "created_at": "2025-04-01T10:00:00Z"
+  }
+]

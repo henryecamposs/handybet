@@ -4,9 +4,18 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/), y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.3.0] - 2026-07-13
+## [1.4.0] - 2026-07-16
 
 ### Añadido
+- Componente estandarizado `<RepliesSection />` para reutilizar el comportamiento y la interfaz de respuestas/comentarios en múltiples widgets y feeds.
+
+### Cambiado
+- Estandarización de colores: Configuración del color base `--muted` para que coincida con `--primary`, atenuación del `--muted-foreground` a un 50% menos de luminosidad (brillo).
+- Se configuró el `--border` nativo de la aplicación al equivalente OKLCH del color hexadecimal `#49130D` (marron/rojizo oscuro) y se estableció en Tailwind con 20% de opacidad.
+- Se refactorizaron `NewsCenterView` y `PostDetailView` para utilizar el nuevo componente `<RepliesSection />`, manteniendo consistencia visual.
+- Se corrigieron variables no declaradas y dependencias de React Hooks (linting errors).
+
+## [1.3.0] - 2026-07-13
 - Barra compacta de creación de post (vista reducida) en `CreatePostWidget.tsx` con avatar del usuario y accesos rápidos de multimedia/sentimientos.
 - Modal de composición completo para crear publicaciones, desplegado al pulsar la barra compacta.
 - Botón interactivo de "Seguir/Siguiendo" en el encabezado de `PostItem.tsx` con retroalimentación visual.

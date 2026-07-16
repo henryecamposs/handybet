@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { supabase } from '../../../lib/supabaseClient';
+import { localDB } from '../../../lib/localDB';
 import { Channel, Group } from '../../../types/handyBet';
 
 export default function CanalDetailScreen() {
@@ -15,23 +15,14 @@ export default function CanalDetailScreen() {
   async function fetchCanalDetails() {
     try {
       setIsLoading(true);
-      // 1. Fetch Canal Info
-      const { data: channelData, error: channelError } = await supabase
-        .from('channels')
-        .select('*')
-        .eq('id', canalId)
-        .single();
 
-      if (channelError) throw channelError;
+      // 1. Fetch Canal Info from LocalDB
+      const channelData = await localDB.channels.getById(canalId as string);
       setChannel(channelData as Channel);
 
-      // 2. Fetch Groups of Canal
-      const { data: groupsData, error: groupsError } = await supabase
-        .from('groups')
-        .select('*')
-        .eq('channel_id', canalId);
-
-      if (groupsError) throw groupsError;
+      // 2. Fetch Groups of Canal from LocalDB
+      const allGroups = await localDB.groups.getAll();
+      const groupsData = allGroups.filter((g: any) => g.channel_id === canalId);
       setGroups(groupsData || []);
     } catch (err) {
       console.log('Error fetching channel details:', err);
@@ -58,7 +49,7 @@ export default function CanalDetailScreen() {
   };
 
   return (
-    <ScrollView className="flex-1 bg-background px-4 pt-12" showsVerticalScrollIndicator={false}>
+    <ScrollView className="flex-1 bg-background/80 px-4 pt-12" showsVerticalScrollIndicator={false}>
       {/* Header back */}
       <TouchableOpacity onPress={() => router.back()} className="flex-row items-center gap-2 mb-6">
         <Text className="text-foreground font-bold text-sm">◀ Volver a Canales</Text>
@@ -83,7 +74,7 @@ export default function CanalDetailScreen() {
           {/* Subgrupos */}
           <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-4">Salas y Subgrupos</Text>
           {groups.length === 0 ? (
-            <View className="bg-background border border-zinc-800 p-6 rounded-3xl items-center border-dashed">
+            <View className="bg-background/80 border border-zinc-800 p-6 rounded-3xl items-center border-dashed">
               <Text className="text-foreground font-bold text-sm text-center">
                 Esta empresa no cuenta con grupos habilitados aún.
               </Text>
@@ -94,7 +85,7 @@ export default function CanalDetailScreen() {
                 <TouchableOpacity
                   key={group.id}
                   onPress={() => router.push(`/chat/group/${group.id}` as any)}
-                  className="bg-background border border-zinc-800 p-5 rounded-3xl flex-row items-center gap-4 hover:bg-background/80/80 transition-colors"
+                  className="bg-background/80 border border-zinc-800 p-5 rounded-3xl flex-row items-center gap-4 hover:bg-background/80/80 transition-colors"
                 >
                   <View className="bg-background/80 w-12 h-12 rounded-xl items-center justify-center border border-zinc-700">
                     <Text className="text-xl">{getIconForType(group.type)}</Text>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { supabase } from '../../lib/supabaseClient';
+import { localDB } from '../../lib/localDB';
 import { adRegistrationSchema } from '../../schemas/handyBet';
 import { z } from 'zod';
 import { Advertisement, Transaction } from '../../types/handyBet';
@@ -32,38 +32,24 @@ export default function MonetizacionAdsScreen() {
     try {
       setIsLoading(true);
 
-      // 1. Obtener mis canales
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
-
-      const { data: channelsData } = await supabase
-          .from('channels')
-          .select('*')
-          .eq('owner_id', user.id);
-
-      setChannels(channelsData || []);
-      if (channelsData && channelsData.length > 0) {
-        setSelectedChannel(channelsData[0].id);
+      // 1. Obtener mis canales del localDB
+      const channelsData = await localDB.channels.getAll();
+      const userChannels = channelsData.filter((c: any) => c.owner_id === 'usr_henry');
+      setChannels(userChannels || []);
+      if (userChannels && userChannels.length > 0) {
+        setSelectedChannel(userChannels[0].id);
       }
 
-      // 2. Obtener anuncios
-      const { data: adsData } = await supabase
-          .from('advertisements')
-          .select('*');
+      // 2. Obtener anuncios del localDB
+      const adsData = await localDB.ads.getAll();
       setAds(adsData || []);
 
-      // 3. Obtener egresos/retiros pendientes
-      const { data: txData } = await supabase
-          .from('transactions')
-          .select('*, wallets(user_id, profiles(username))')
-          .eq('type', 'retiro')
-          .eq('status', 'pendiente');
-
-      const processedTx = (txData || []).map((t: any) => ({
-        ...t,
-        username: t.wallets?.profiles?.username || 'usuario',
-      }));
-      setPendingWithdrawals(processedTx);
+      // 3. Obtener egresos/retiros pendientes (simulados en local)
+      const txData = [
+        { id: 'tx_w1', amount: 1500.00, type: 'retiro', status: 'pendiente', reference_code: null, receipt_image_url: null, processed_by: null, wallet_id: 'w1', created_at: new Date().toISOString(), username: 'carlos_ruiz' },
+        { id: 'tx_w2', amount: 350.00, type: 'retiro', status: 'pendiente', reference_code: null, receipt_image_url: null, processed_by: null, wallet_id: 'w2', created_at: new Date().toISOString(), username: 'maria_gonzalez' }
+      ];
+      setPendingWithdrawals(txData as any);
 
     } catch (err) {
       console.log('Error fetching dashboard details:', err);
@@ -73,7 +59,6 @@ export default function MonetizacionAdsScreen() {
   }
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchDashboardData();
   }, []);
 
@@ -101,7 +86,8 @@ export default function MonetizacionAdsScreen() {
         return;
       }
 
-      const { error } = await supabase.from('advertisements').insert({
+      await localDB.ads.insert({
+        id: localDB.generateId('ad'),
         channel_id: selectedChannel,
         business_name: businessName,
         business_rif: businessRif,
@@ -111,9 +97,7 @@ export default function MonetizacionAdsScreen() {
         target_deeplink: targetDeeplink || null,
         cost_amount: parseFloat(costAmount),
         is_active: true,
-      });
-
-      if (error) throw error;
+      } as any);
 
       setAdSuccessMessage('Anuncio registrado y activado comercialmente.');
       // Limpiar Form
@@ -147,16 +131,8 @@ export default function MonetizacionAdsScreen() {
         return;
       }
 
-      const { error } = await supabase
-        .from('transactions')
-        .update({
-          status: 'aprobado',
-          reference_code: reference,
-        })
-        .eq('id', txId);
-
-      if (error) throw error;
-      fetchDashboardData();
+      setPendingWithdrawals(prev => prev.filter(t => t.id !== txId));
+      alert('Egreso bancario liquidado con éxito.');
     } catch (err: any) {
       alert(err.message || 'Error al aprobar egreso.');
     } finally {
@@ -165,7 +141,7 @@ export default function MonetizacionAdsScreen() {
   };
 
   return (
-    <ScrollView className="flex-1 bg-background p-6 md:p-12">
+    <ScrollView className="flex-1 bg-background/80 p-6 md:p-12">
       <View className="mb-8">
         <Text className="text-3xl font-black text-white tracking-tight">Monetización y Publicidad</Text>
         <Text className="text-foreground text-xs font-bold mt-1">
@@ -181,7 +157,7 @@ export default function MonetizacionAdsScreen() {
         <View className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start mb-12">
 
           {/* Registro de Anuncios */}
-          <View className="bg-background border border-zinc-850 p-8 rounded-3xl shadow-xl w-full">
+          <View className="bg-background/80 border border-zinc-850 p-8 rounded-3xl shadow-xl w-full">
             <Text className="text-white font-black text-lg mb-6">Pauta Publicitaria Comercial</Text>
 
             {validationError && (
@@ -294,7 +270,7 @@ export default function MonetizacionAdsScreen() {
           </View>
 
           {/* Egresos Pendientes / Ledger */}
-          <View className="bg-background border border-zinc-850 p-8 rounded-3xl shadow-xl w-full">
+          <View className="bg-background/80 border border-zinc-850 p-8 rounded-3xl shadow-xl w-full">
             <Text className="text-white font-black text-lg mb-6">Premios y Retiros por Liquidar</Text>
 
             {pendingWithdrawals.length === 0 ? (

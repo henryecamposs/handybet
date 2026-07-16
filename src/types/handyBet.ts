@@ -126,7 +126,7 @@ export interface Advertisement {
 }
 
 // Contratos del núcleo de red social monetizada
-export type VisibilityLevel = 'todos' | 'amigos' | 'amigos_especificos' | 'nadie' | 'amigos_de_mis_amigos' | 'amigos_de_mis_miembros';
+export type VisibilityLevel = 'todos' | 'seguidores' | 'circulo';
 export type BillingType = 'pay_per_action' | '24_hours' | 'mensual' | 'anual';
 export type MembershipStatus = 'onboarding_pending' | 'active' | 'blocked';
 export type PostType = 'regular' | 'advertisement';
@@ -182,15 +182,40 @@ export interface Post {
   media_url?: string | null;
   media_type?: 'photo' | 'video' | null;
   visibility_level: VisibilityLevel;
+  circle_id?: string | null;
   post_type: PostType;
   payment_status: PaymentStatus;
   created_at: string;
 }
 
-export interface Friendship {
-  user_id_1: string;
-  user_id_2: string;
-  status: 'pending' | 'accepted';
+export interface PostComment {
+  id: string;
+  post_id: string;
+  author_id: string;
+  author_name: string;
+  author_avatar: string;
+  content: string;
+  created_at: string;
+}
+
+
+export interface UserRelationship {
+  follower_id: string;
+  following_id: string;
+  created_at: string;
+}
+
+export interface FollowerCircle {
+  id: string;
+  owner_id: string;
+  name: string;
+  created_at: string;
+}
+
+export interface FollowerCircleMembership {
+  circle_id: string;
+  follower_id: string;
+  owner_id: string;
   created_at: string;
 }
 

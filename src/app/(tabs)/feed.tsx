@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, Image, TouchableOpacity, Linking, ActivityIndicator, TextInput, Modal } from 'react-native';
-import { supabase } from '../../lib/supabaseClient';
-import { Advertisement, VisibilityLevel } from '../../types/handyBet';
 import { socialService } from '../../services/socialService';
+import { localDB } from '../../lib/localDB';
+import { Advertisement, VisibilityLevel } from '../../types/handyBet';
 import { useHandyBetStore } from '../../store/useHandyBetStore';
+import { useToastStore } from '../../store/useToastStore';
 import { groupMonetizationService } from '../../services/groupMonetizationService';
 import Logo from '@/components/ui/Logo';
 import HandyAdsLogo from '@/components/ui/HandyAdsLogo';
 import HandyPostLogo from '@/components/ui/HandyPostLogo';
 import CreatePostWidget from '@/components/feed/CreatePostWidget';
 import PostItem from '@/components/feed/PostItem';
+import PostDetailView from '@/components/feed/PostDetailView';
 import PostMediaViewer from '@/components/feed/PostMediaViewer';
 import ShareModal from '@/components/feed/ShareModal';
 import { Heart, MessageSquare, Share2 } from 'lucide-react-native';
@@ -27,18 +29,19 @@ export default function FeedScreen() {
   const [likedPosts, setLikedPosts] = useState<number[]>([]);
   const [selectedMediaPost, setSelectedMediaPost] = useState<any | null>(null);
   const [selectedMediaIndex, setSelectedMediaIndex] = useState<number>(0);
+  const [selectedPost, setSelectedPost] = useState<any | null>(null);
 
   // Estados de compartir y notificaciones
   const [showShareModal, setShowShareModal] = useState(false);
   const [sharingPost, setSharingPost] = useState<any | null>(null);
-  const [toast, setToast] = useState<{ message: string; visible: boolean }>({ message: '', visible: false });
-
+  const { addToast } = useToastStore();
   const showToast = (message: string) => {
-    setToast({ message, visible: true });
-    // Reset timeout if called multiple times could be done, but a simple timeout is fine
-    setTimeout(() => {
-      setToast(prev => ({ ...prev, visible: false }));
-    }, 3500);
+    addToast({
+      title: message,
+      variant: 'primary',
+      position: 'bottom',
+      duration: 3500
+    });
   };
 
   const { mockSession } = useHandyBetStore();
@@ -70,13 +73,8 @@ export default function FeedScreen() {
 
   async function fetchActiveAds() {
     try {
-      const { data, error } = await supabase
-        .from('advertisements')
-        .select('*')
-        .eq('is_active', true);
-
-      if (error) throw error;
-      setAds(data || []);
+      const data = await localDB.ads.getAll();
+      setAds(data.filter((a: any) => a.is_active));
     } catch (err) {
       console.log('Error fetching advertisements:', err);
     } finally {
@@ -157,68 +155,64 @@ export default function FeedScreen() {
   };
 
   const handleShareSuccess = (destinationName: string, type: string) => {
-    showToast(`¡Publicación compartida en ${type}: ${destinationName}!`);
+    addToast({
+      title: '¡Compartido!',
+      description: `Publicación compartida en ${type}: ${destinationName}`,
+      variant: 'success',
+      position: 'bottom'
+    });
   };
 
   return (
-    <ScrollView className="flex-1 bg-background px-4 pt-4">
-      {/* Header */}
-      <View className="flex-row justify-between items-center mb-6">
-        <Logo size='sm' showImage={true} />
-      </View>
-
-      {/* Crear Publicación */}
-      <CreatePostWidget onPublish={handlePublishPost} />
-
-      {/* Feed List */}
-      {posts.map((post) => (
-        <PostItem
-          key={post.id}
-          post={post}
-          isLiked={likedPosts.includes(post)}
-          onLikeToggle={() => setLikedPosts(prev => prev.includes(post) ? prev.filter(p => p !== post) : [...prev, post])}
-          onMediaPress={(index) => {
-            setSelectedMediaPost(post);
-            setSelectedMediaIndex(index);
-          }}
-          onCommentPress={() => {
-            setSelectedMediaPost(post);
-            setSelectedMediaIndex(0);
-          }}
+    <View className="flex-1 bg-background">
+      {selectedPost ? (
+        <PostDetailView
+          post={selectedPost}
+          onBack={() => setSelectedPost(null)}
+          isLiked={likedPosts.includes(selectedPost)}
+          onLikeToggle={() => setLikedPosts(prev => prev.includes(selectedPost) ? prev.filter(p => p !== selectedPost) : [...prev, selectedPost])}
+          onMediaPress={() => { }}
           onSharePress={() => {
-            setSharingPost(post);
+            setSharingPost(selectedPost);
             setShowShareModal(true);
           }}
-          onShowToast={showToast}
         />
-      ))}
+      ) : (
+        <ScrollView className="flex-1 bg-background/80 px-4 pt-4" showsVerticalScrollIndicator={true}>
+          {/* Header */}
+          <View className="flex-row justify-between items-center mb-6">
+            <Logo size='sm' showImage={true} />
+          </View>
 
-      {/* Inyección Dinámica de Publicidad */}
-      {!isLoading && ads.length > 0 && (
-        <View className="mb-8">
-          <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-3">Publicidad Patrocinada</Text>
-          {ads.map((ad) => (
-            <TouchableOpacity
-              key={ad.id}
-              onPress={() => handleAdPress(ad.target_deeplink)}
-              className="bg-background/90 border border-zinc-850 p-4 rounded-3xl flex-row gap-4 mb-4 shadow-sm"
-            >
-              <Image source={{ uri: ad.media_url }} className="w-20 h-20 rounded-2xl border border-zinc-850" resizeMode="cover" />
-              <View className="flex-1 justify-center">
-                <Text className="text-secondary text-[10px] font-black uppercase tracking-wider">Patrocinado</Text>
-                <Text className="text-white font-black text-sm mt-0.5">{ad.business_name}</Text>
-                <Text className="text-foreground text-xs font-bold mt-1 line-clamp-2" numberOfLines={2}>
-                  {ad.ad_copy}
-                </Text>
-                <Text className="text-foreground text-[10px] font-bold mt-1.5 uppercase font-mono">RIF: {ad.business_rif}</Text>
-              </View>
-            </TouchableOpacity>
+          {/* Crear Publicación */}
+          <CreatePostWidget onPublish={handlePublishPost} />
+
+          {/* Feed List */}
+          {posts.map((post) => (
+            <PostItem
+              key={post.id}
+              post={post}
+              isLiked={likedPosts.includes(post)}
+              onLikeToggle={() => setLikedPosts(prev => prev.includes(post) ? prev.filter(p => p !== post) : [...prev, post])}
+              onMediaPress={() => {
+                setSelectedPost(post);
+              }}
+              onCommentPress={() => {
+                setSelectedPost(post);
+              }}
+              onSharePress={() => {
+                setSharingPost(post);
+                setShowShareModal(true);
+              }}
+            />
           ))}
-        </View>
-      )}
 
-      {isLoading && (
-        <ActivityIndicator size="small" color={colors.secondary} className="my-6" />
+          {/* Inyección Dinámica de Publicidad (Eliminada según solicitud) */}
+
+          {isLoading && (
+            <ActivityIndicator size="small" color={colors.secondary} className="my-6" />
+          )}
+        </ScrollView>
       )}
 
       {/* Modal de Pago Split (Pay-to-Post) */}
@@ -229,11 +223,11 @@ export default function FeedScreen() {
         onRequestClose={() => setShowPaymentModal(false)}
       >
         <View className="flex-1 bg-black/75 justify-center items-center p-6">
-          <View className="bg-background border border-zinc-800 w-full max-w-sm rounded-3xl p-6 shadow-2xl">
+          <View className="bg-background/80 border border-zinc-800 w-full max-w-sm rounded-3xl p-6 shadow-2xl">
             <Text className="text-foreground font-black text-lg mb-1">📢 Pago Requerido</Text>
             <Text className="text-foreground text-xs font-bold mb-4">Tu anuncio comercial o regla del grupo requiere activación de pago.</Text>
 
-            <View className="bg-background border border-zinc-850 p-4 rounded-2xl mb-4">
+            <View className="bg-background/80 border border-zinc-850 p-4 rounded-2xl mb-4">
               <View className="flex-row justify-between mb-2">
                 <Text className="text-foreground text-xs font-bold">Costo del Post:</Text>
                 <Text className="text-foreground text-xs font-black">$2.50 USD</Text>
@@ -255,14 +249,14 @@ export default function FeedScreen() {
                 placeholderTextColor="#71717a"
                 value={paymentRef}
                 onChangeText={setPaymentRef}
-                className="bg-background border border-zinc-800 rounded-xl px-4 py-2.5 text-white text-xs font-bold"
+                className="bg-background/80 border border-zinc-800 rounded-xl px-4 py-2.5 text-white text-xs font-bold"
               />
             </View>
 
             <View className="flex-row gap-2">
               <TouchableOpacity
                 onPress={() => setShowPaymentModal(false)}
-                className="flex-1 bg-background border border-zinc-800 py-3.5 rounded-2xl items-center"
+                className="flex-1 bg-background/80 border border-zinc-800 py-3.5 rounded-2xl items-center"
               >
                 <Text className="text-foreground font-bold text-xs">Descartar</Text>
               </TouchableOpacity>
@@ -302,18 +296,6 @@ export default function FeedScreen() {
         }}
         onShareSuccess={handleShareSuccess}
       />
-
-      {/* Toast Flotante Custom */}
-      {toast.visible && (
-        <View className="absolute bottom-20 left-4 right-4 bg-zinc-900 border border-zinc-800 px-4 py-3.5 rounded-2xl flex-row items-center justify-between shadow-2xl z-[999] animate-fade-in">
-          <Text className="text-white text-xs font-bold flex-1 pr-2">{toast.message}</Text>
-          <TouchableOpacity onPress={() => setToast({ message: '', visible: false })}>
-            <Text className="text-primary text-xs font-black uppercase tracking-wider">OK</Text>
-          </TouchableOpacity>
-        </View>
-      )}
-
-      <View className="h-16" />
-    </ScrollView>
+    </View>
   );
 }

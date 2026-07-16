@@ -1,0 +1,196 @@
+[
+  {
+    "id": "grp_taquilla_ccs",
+    "channel_id": "ch_imaginaria",
+    "name": "Taquillas Caracas",
+    "short_code": "TAQCCS",
+    "type": "apuestas",
+    "is_public": false,
+    "members": ["usr_henry", "usr_diego", "usr_pedro", "usr_carlos", "usr_maria", "usr_gabriel"],
+    "admins": ["usr_diego", "usr_pedro"],
+    "config": { "wallet_type": "mixed", "allows_recharge": true },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Al unirte aceptas las reglas de apuestas responsables. No compartir spam.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      { "id": "plan_taq_free", "name": "Miembro", "price": 0, "billing_type": "free" }
+    ],
+    "created_at": "2025-01-15T08:00:00Z"
+  },
+  {
+    "id": "grp_taquilla_val",
+    "channel_id": "ch_imaginaria",
+    "name": "Taquillas Valencia",
+    "short_code": "TAQVAL",
+    "type": "apuestas",
+    "is_public": false,
+    "members": ["usr_diego", "usr_laura", "usr_gabriel", "usr_valentina"],
+    "admins": ["usr_diego", "usr_laura"],
+    "config": { "wallet_type": "mixed", "allows_recharge": true },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas estándar de la agencia La Imaginaria. Juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      { "id": "plan_val_free", "name": "Miembro", "price": 0, "billing_type": "free" }
+    ],
+    "created_at": "2025-03-15T08:00:00Z"
+  },
+  {
+    "id": "grp_joselin_fans",
+    "channel_id": "ch_joselin",
+    "name": "Fans de Joselin",
+    "short_code": "JOSFAN",
+    "type": "compartir_media",
+    "is_public": true,
+    "members": ["usr_joselin", "usr_carlos", "usr_maria", "usr_ana", "usr_valentina", "usr_gabriel"],
+    "admins": ["usr_joselin"],
+    "config": { "media_sharing": true },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Respeta a los demás miembros. No se permite contenido ofensivo ni spam.",
+      "pay_to_post_enabled": true,
+      "pay_to_post_fee": 2.50
+    },
+    "plans": [
+      { "id": "plan_fan_free", "name": "Fan", "price": 0, "billing_type": "free" },
+      { "id": "plan_fan_vip", "name": "Fan VIP", "price": 9.99, "billing_type": "mensual" }
+    ],
+    "created_at": "2025-02-15T10:00:00Z"
+  },
+  {
+    "id": "grp_pronosticos",
+    "channel_id": "ch_roberto_tips",
+    "name": "Pronósticos Diarios",
+    "short_code": "PRODIA",
+    "type": "pronosticos",
+    "is_public": true,
+    "members": ["usr_roberto", "usr_carlos", "usr_ana", "usr_gabriel", "usr_henry"],
+    "admins": ["usr_roberto"],
+    "config": { "prediction_tracking": true },
+    "rules": {
+      "permitir_publicar_feeds": false,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Los pronósticos son meramente informativos. Juega con responsabilidad.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      { "id": "plan_pro_free", "name": "Observador", "price": 0, "billing_type": "free" },
+      { "id": "plan_pro_premium", "name": "Premium", "price": 500, "billing_type": "mensual" }
+    ],
+    "created_at": "2025-03-01T12:00:00Z"
+  },
+  {
+    "id": "grp_general",
+    "channel_id": null,
+    "name": "Comunidad HandyBet",
+    "short_code": "COMHB",
+    "type": "publicidad",
+    "is_public": true,
+    "members": ["usr_henry", "usr_joselin", "usr_carlos", "usr_maria", "usr_ana", "usr_roberto", "usr_diego", "usr_pedro", "usr_valentina", "usr_gabriel", "usr_isabella", "usr_laura"],
+    "admins": ["usr_henry"],
+    "config": {},
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": true,
+      "terms_text": "Grupo general de la comunidad. Comparte contenido relevante.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [],
+    "created_at": "2025-01-10T08:00:00Z"
+  },
+  {
+    "id": "grp_taquilla_maracay",
+    "channel_id": "ch_imaginaria",
+    "name": "Taquillas Maracay",
+    "short_code": "TAQMCY",
+    "type": "apuestas",
+    "is_public": false,
+    "members": ["usr_diego", "usr_henry", "usr_gabriel"],
+    "admins": ["usr_diego"],
+    "config": { "wallet_type": "mixed", "allows_recharge": true },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Agencia La Imaginaria Maracay. Juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      { "id": "plan_mcy_free", "name": "Miembro", "price": 0, "billing_type": "free" }
+    ],
+    "created_at": "2025-03-20T08:00:00Z"
+  },
+  {
+    "id": "grp_resultados_triple_a",
+    "channel_id": "ch_loteria_nacional",
+    "name": "Resultados Triple A",
+    "short_code": "RES-TPA",
+    "type": "resultados",
+    "is_public": true,
+    "members": ["usr_henry", "usr_diego", "usr_roberto"],
+    "admins": ["usr_henry"],
+    "config": { "read_only": true },
+    "rules": {
+      "permitir_publicar_feeds": false,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Solo se publican resultados oficiales.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [],
+    "created_at": "2025-01-06T09:00:00Z"
+  },
+  {
+    "id": "grp_resultados_animalitos",
+    "channel_id": "ch_loteria_nacional",
+    "name": "Resultados Animalitos Activos",
+    "short_code": "RES-ANI",
+    "type": "resultados",
+    "is_public": true,
+    "members": ["usr_henry", "usr_diego", "usr_roberto"],
+    "admins": ["usr_henry"],
+    "config": { "read_only": true },
+    "rules": {
+      "permitir_publicar_feeds": false,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Solo se publican resultados oficiales de granjitas y animalitos.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [],
+    "created_at": "2025-01-06T09:30:00Z"
+  },
+  {
+    "id": "grp_pronosticos_vip",
+    "channel_id": "ch_roberto_tips",
+    "name": "Pronósticos VIP Alta Certeza",
+    "short_code": "PROVIP",
+    "type": "pronosticos",
+    "is_public": false,
+    "members": ["usr_roberto", "usr_henry"],
+    "admins": ["usr_roberto"],
+    "config": { "prediction_tracking": true },
+    "rules": {
+      "permitir_publicar_feeds": false,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Pronósticos exclusivos con más del 80% de acierto. Prohibido compartir capturas.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      { "id": "plan_pro_premium_alta", "name": "Premium VIP", "price": 1000, "billing_type": "mensual" }
+    ],
+    "created_at": "2025-03-05T12:00:00Z"
+  }
+]

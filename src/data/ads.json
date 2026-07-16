@@ -1,0 +1,80 @@
+[
+  {
+    "id": "ad_1",
+    "business_name": "ElevenLabs",
+    "title": "Creación de Música Programática",
+    "description": "Genera música y voces con inteligencia artificial",
+    "image_url": "https://picsum.photos/seed/ad_eleven/400/200",
+    "domain": "elevenlabs.io",
+    "target_url": "https://elevenlabs.io",
+    "size": "large",
+    "is_active": true,
+    "cost_amount": 50.00,
+    "created_at": "2025-07-10T08:00:00Z"
+  },
+  {
+    "id": "ad_2",
+    "business_name": "Moises AI",
+    "title": "Try it with 10 free credits!",
+    "description": "Separa voces e instrumentos con IA",
+    "image_url": "https://picsum.photos/seed/ad_moises/200/200",
+    "domain": "moises.ai",
+    "target_url": "https://moises.ai",
+    "size": "small",
+    "is_active": true,
+    "cost_amount": 25.00,
+    "created_at": "2025-07-11T10:00:00Z"
+  },
+  {
+    "id": "ad_3",
+    "business_name": "TechVenezuela",
+    "title": "Hosting VPS desde $3/mes",
+    "description": "Servidores rápidos en Latinoamérica",
+    "image_url": "https://picsum.photos/seed/ad_tech/200/200",
+    "domain": "techvenezuela.com",
+    "target_url": "https://techvenezuela.com",
+    "size": "small",
+    "is_active": true,
+    "cost_amount": 15.00,
+    "created_at": "2025-07-12T14:00:00Z"
+  },
+  {
+    "id": "ad_4",
+    "business_name": "CriptoFácil",
+    "title": "Compra y vende USDT al mejor precio",
+    "description": "Exchange P2P verificado en Venezuela",
+    "image_url": "https://picsum.photos/seed/ad_cripto/400/200",
+    "domain": "criptofacil.ve",
+    "target_url": "https://criptofacil.ve",
+    "size": "large",
+    "is_active": true,
+    "cost_amount": 75.00,
+    "created_at": "2025-07-13T09:00:00Z"
+  },
+  {
+    "id": "ad_5",
+    "business_name": "DeliveryRápido",
+    "title": "Comida a domicilio en 30 min",
+    "description": "Los mejores restaurantes de Caracas",
+    "image_url": "https://picsum.photos/seed/ad_delivery/200/200",
+    "domain": "deliveryrapido.ve",
+    "target_url": "https://deliveryrapido.ve",
+    "size": "small",
+    "is_active": true,
+    "cost_amount": 20.00,
+    "created_at": "2025-07-14T11:00:00Z"
+  },
+  {
+    "id": "ad_6",
+    "business_name": "MegaApuestas",
+    "title": "Bono de bienvenida 100%",
+    "description": "Duplicamos tu primer depósito",
+    "image_url": "https://picsum.photos/seed/ad_mega/400/200",
+    "domain": "megaapuestas.com",
+    "target_url": "https://megaapuestas.com",
+    "size": "large",
+    "is_active": false,
+    "cost_amount": 100.00,
+    "created_at": "2025-07-08T08:00:00Z"
+  }
+]

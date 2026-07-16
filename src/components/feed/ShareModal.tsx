@@ -25,14 +25,14 @@ const MOCK_DATA = {
     { id: 'u2', username: '@ana_pronosticos', name: 'Ana Silva', avatar: 'https://i.pravatar.cc/150?u=2' },
     { id: 'u3', username: '@luis_tips', name: 'Luis Pérez', avatar: 'https://i.pravatar.cc/150?u=3' },
   ],
-  amigos: [
+  seguidos: [
     { id: 'f1', name: 'Pedro González', status: 'En línea', avatar: 'https://i.pravatar.cc/150?u=4' },
     { id: 'f2', name: 'María Rodríguez', status: 'Ausente', avatar: 'https://i.pravatar.cc/150?u=5' },
     { id: 'f3', name: 'Juan Pérez', status: 'En línea', avatar: 'https://i.pravatar.cc/150?u=6' },
   ],
 };
 
-type ShareTab = 'grupo' | 'canal' | 'usuario' | 'amigo';
+type ShareTab = 'grupo' | 'canal' | 'usuario' | 'seguido';
 
 export default function ShareModal({ visible, onClose, onShareSuccess }: ShareModalProps) {
   const colors = useThemeColors();
@@ -60,8 +60,8 @@ export default function ShareModal({ visible, onClose, onShareSuccess }: ShareMo
         return MOCK_DATA.canales.filter(c => c.name.toLowerCase().includes(q));
       case 'usuario':
         return MOCK_DATA.usuarios.filter(u => u.name.toLowerCase().includes(q) || u.username.toLowerCase().includes(q));
-      case 'amigo':
-        return MOCK_DATA.amigos.filter(f => f.name.toLowerCase().includes(q));
+      case 'seguido':
+        return MOCK_DATA.seguidos.filter(f => f.name.toLowerCase().includes(q));
     }
   };
 
@@ -75,7 +75,7 @@ export default function ShareModal({ visible, onClose, onShareSuccess }: ShareMo
       onRequestClose={onClose}
     >
       <View className="flex-1 bg-black/75 justify-center items-center p-4">
-        <View className="bg-background border border-zinc-800 w-full max-w-md rounded-3xl p-6 shadow-2xl relative">
+        <View className="bg-background/80 border border-zinc-800 w-full max-w-md rounded-3xl p-6 shadow-2xl relative">
           <View className="flex-row justify-between items-center mb-4">
             <Text className="text-white font-black text-xl flex-row items-center gap-2">
               <Share2 size={20} color={colors.primary} /> Compartir publicación
@@ -87,7 +87,7 @@ export default function ShareModal({ visible, onClose, onShareSuccess }: ShareMo
 
           {/* Categorías (Pestañas) en fila */}
           <View className="flex-row border-b border-zinc-850 mb-4 justify-between">
-            {(['grupo', 'canal', 'usuario', 'amigo'] as ShareTab[]).map((tab) => {
+            {(['grupo', 'canal', 'usuario', 'seguido'] as ShareTab[]).map((tab) => {
               const isActive = activeTab === tab;
               return (
                 <TouchableOpacity
@@ -97,12 +97,11 @@ export default function ShareModal({ visible, onClose, onShareSuccess }: ShareMo
                     setSelectedItem(null);
                     setSelectedName(null);
                   }}
-                  className={`pb-2.5 px-2 capitalize flex-1 items-center border-b-2 ${
-                    isActive ? 'border-primary' : 'border-transparent'
-                  }`}
+                  className={`pb-2.5 px-2 capitalize flex-1 items-center border-b-2 ${isActive ? 'border-primary' : 'border-transparent'
+                    }`}
                 >
                   <Text className={`text-xs font-bold ${isActive ? 'text-primary' : 'text-zinc-500'}`}>
-                    {tab}s
+                    {tab === 'seguido' ? 'seguidos' : `${tab}s`}
                   </Text>
                 </TouchableOpacity>
               );
@@ -136,11 +135,10 @@ export default function ShareModal({ visible, onClose, onShareSuccess }: ShareMo
                       setSelectedItem(item.id);
                       setSelectedName(item.name || item.username);
                     }}
-                    className={`flex-row items-center gap-3 p-3 rounded-2xl mb-2 border ${
-                      isSelected
-                        ? 'bg-primary/10 border-primary'
-                        : 'bg-zinc-900/50 border-zinc-850 hover:bg-zinc-900 transition-colors'
-                    }`}
+                    className={`flex-row items-center gap-3 p-3 rounded-2xl mb-2 border ${isSelected
+                      ? 'bg-primary/10 border-primary'
+                      : 'bg-zinc-900/50 border-zinc-850 hover:bg-zinc-900 transition-colors'
+                      }`}
                   >
                     {IconComponent ? (
                       <View className={`p-2.5 rounded-xl ${isSelected ? 'bg-primary/20' : 'bg-zinc-800'}`}>
@@ -180,13 +178,11 @@ export default function ShareModal({ visible, onClose, onShareSuccess }: ShareMo
             <TouchableOpacity
               onPress={handleShare}
               disabled={!selectedItem}
-              className={`flex-1 py-3 rounded-xl items-center ${
-                selectedItem ? 'bg-primary' : 'bg-zinc-800'
-              }`}
+              className={`flex-1 py-3 rounded-xl items-center ${selectedItem ? 'bg-primary' : 'bg-zinc-800'
+                }`}
             >
-              <Text className={`font-black text-xs uppercase ${
-                selectedItem ? 'text-primary-foreground' : 'text-zinc-500'
-              }`}>
+              <Text className={`font-black text-xs uppercase ${selectedItem ? 'text-primary-foreground' : 'text-zinc-500'
+                }`}>
                 Compartir
               </Text>
             </TouchableOpacity>

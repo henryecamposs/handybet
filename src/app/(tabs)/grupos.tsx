@@ -81,7 +81,7 @@ export default function GruposScreen() {
   };
 
   return (
-    <ScrollView className="flex-1 bg-background px-4 pt-12" showsVerticalScrollIndicator={false}>
+    <ScrollView className="flex-1 bg-background/80 px-4 pt-12" showsVerticalScrollIndicator={false}>
       {/* Header */}
       <View className="flex-row items-center justify-between mb-6">
         <View>
@@ -91,7 +91,7 @@ export default function GruposScreen() {
       </View>
 
       {/* Buscador */}
-      <View className="bg-background rounded-full flex-row items-center px-4 py-2 border border-zinc-800 mb-6">
+      <View className="bg-background/80 rounded-full flex-row items-center px-4 py-2 border border-zinc-800 mb-6">
         <Search size={20} color="#71717a" />
         <TextInput
           placeholder="Buscar grupos por interés..."
@@ -107,7 +107,7 @@ export default function GruposScreen() {
           {/* Botón de Crear Nuevo Grupo */}
           <TouchableOpacity
             onPress={() => router.push('/(tabs)/grupos/create' as any)}
-            className="w-32 h-36 bg-background rounded-2xl border border-dashed border-zinc-700 items-center justify-center mr-4 hover:bg-background/80/80 transition-colors"
+            className="w-32 h-36 bg-background/80 rounded-2xl border border-dashed border-zinc-700 items-center justify-center mr-4 hover:bg-background/80/80 transition-colors"
           >
             <View className="w-12 h-12 rounded-full bg-primary/20 items-center justify-center mb-2">
               <Plus size={24} color="#caee26" />
@@ -119,7 +119,7 @@ export default function GruposScreen() {
             <TouchableOpacity
               key={group.id}
               onPress={() => handleGroupClick(group)}
-              className="w-32 h-36 bg-background rounded-2xl border border-zinc-800 items-center justify-center mr-4 hover:bg-background/80/80 transition-colors"
+              className="w-32 h-36 bg-background/80 rounded-2xl border border-zinc-800 items-center justify-center mr-4 hover:bg-background/80/80 transition-colors"
             >
               <View className="w-12 h-12 rounded-full bg-background/80 items-center justify-center mb-2">
                 <Users size={20} color="#d4d4d8" />
@@ -146,7 +146,7 @@ export default function GruposScreen() {
               <TouchableOpacity
                 key={group.id}
                 onPress={() => handleGroupClick(group as any)}
-                className="w-[48%] bg-background p-4 rounded-2xl border border-zinc-800 items-center justify-center hover:bg-background/80/80 transition-colors"
+                className="w-[48%] bg-background/80 p-4 rounded-2xl border border-zinc-800 items-center justify-center hover:bg-background/80/80 transition-colors"
               >
                 <View className="w-10 h-10 rounded-full bg-background/80 items-center justify-center mb-2 border border-zinc-700">
                   <Text className="text-lg">🌍</Text>
@@ -166,7 +166,7 @@ export default function GruposScreen() {
         onRequestClose={() => setShowOnboarding(false)}
       >
         <View className="flex-1 bg-black/60 justify-center items-center p-6">
-          <View className="bg-background border border-zinc-800 w-full max-w-md rounded-3xl p-6 shadow-2xl">
+          <View className="bg-background/80 border border-zinc-800 w-full max-w-md rounded-3xl p-6 shadow-2xl">
             {loadingOnboarding && !selectedGroup ? (
               <View className="py-10 items-center">
                 <ActivityIndicator size="large" color="#caee26" />
@@ -197,7 +197,7 @@ export default function GruposScreen() {
                         placeholderTextColor="#71717a"
                         value={experience}
                         onChangeText={setExperience}
-                        className="bg-background border border-zinc-800 rounded-xl px-4 py-2.5 text-white text-xs font-bold"
+                        className="bg-background/80 border border-zinc-800 rounded-xl px-4 py-2.5 text-white text-xs font-bold"
                       />
                     </View>
 
@@ -210,7 +210,7 @@ export default function GruposScreen() {
                         placeholderTextColor="#71717a"
                         value={intentions}
                         onChangeText={setIntentions}
-                        className="bg-background border border-zinc-800 rounded-xl px-4 py-2.5 text-white text-xs font-bold"
+                        className="bg-background/80 border border-zinc-800 rounded-xl px-4 py-2.5 text-white text-xs font-bold"
                       />
                     </View>
                   </View>
@@ -226,7 +226,7 @@ export default function GruposScreen() {
                             onPress={() => setSelectedPlanId(plan.id)}
                             className={`p-3.5 rounded-2xl border flex-row justify-between items-center ${selectedPlanId === plan.id
                               ? 'bg-secondary/15 border-secondary'
-                              : 'bg-background border-zinc-800'
+                              : 'bg-background/80 border-zinc-800'
                               }`}
                           >
                             <View>
@@ -247,7 +247,7 @@ export default function GruposScreen() {
                 <View className="flex-row gap-2">
                   <TouchableOpacity
                     onPress={() => setShowOnboarding(false)}
-                    className="flex-1 bg-background border border-zinc-800 py-3.5 rounded-2xl items-center"
+                    className="flex-1 bg-background/80 border border-zinc-800 py-3.5 rounded-2xl items-center"
                   >
                     <Text className="text-foreground font-bold text-xs">Cancelar</Text>
                   </TouchableOpacity>

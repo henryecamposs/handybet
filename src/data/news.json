@@ -1,0 +1,82 @@
+[
+  {
+    "id": "news_1",
+    "title": "Nueva Taquilla Activa en Chacao",
+    "summary": "HandyBet expande su red de taquillas con una nueva ubicación en el municipio Chacao de Caracas.",
+    "content": "HandyBet se complace en anunciar la apertura de una nueva taquilla digital en el municipio Chacao, Caracas. Esta ubicación permitirá a los usuarios de la zona este de la ciudad acceder a todos los servicios de apuestas, recargas y pagos de premios de manera presencial. La taquilla estará operada por un equipo certificado y contará con atención desde las 8:00 AM hasta las 8:00 PM. Los usuarios que visiten la nueva taquilla durante la primera semana recibirán un bono del 15% en su primera recarga.",
+    "image_url": "https://picsum.photos/seed/news_chacao/600/300",
+    "category": "expansión",
+    "author_id": "usr_henry",
+    "created_at": "2025-07-16T00:00:00Z"
+  },
+  {
+    "id": "news_2",
+    "title": "¡Joselin lanza su canal VIP!",
+    "summary": "La creadora de contenido más popular de HandyBet abre su canal exclusivo con tres niveles de suscripción.",
+    "content": "Joselin 'La Gata', con más de 12,000 seguidores en la plataforma, ha lanzado oficialmente su canal VIP en HandyBet. El canal ofrece tres niveles de suscripción: Gratis (contenido público), Medio ($5.99/mes con videos exclusivos) y Pro ($14.99/mes con chat directo y contenido premium). Los primeros 100 suscriptores al plan Pro recibirán un saludo personalizado en video.",
+    "image_url": "https://picsum.photos/seed/news_joselin/600/300",
+    "category": "comunidad",
+    "author_id": "usr_joselin",
+    "created_at": "2025-07-15T18:00:00Z"
+  },
+  {
+    "id": "news_3",
+    "title": "Integración con Binance P2P disponible",
+    "summary": "Ahora puedes recargar tu wallet de HandyBet directamente desde Binance P2P. Más rápido y seguro.",
+    "content": "A partir de hoy, HandyBet permite recargas directas desde Binance P2P. Esta integración facilita las transacciones para los usuarios que operan con criptomonedas, ofreciendo tasas de cambio competitivas y confirmación instantánea. Para usar esta función, simplemente ve a tu Wallet, selecciona 'Recargar' y elige 'Binance P2P' como método de pago. Las recargas mínimas son de $5 USDT equivalentes.",
+    "image_url": "https://picsum.photos/seed/news_binance/600/300",
+    "category": "tecnología",
+    "author_id": "usr_henry",
+    "created_at": "2025-07-15T14:00:00Z"
+  },
+  {
+    "id": "news_4",
+    "title": "Récord: 50,000 usuarios registrados",
+    "summary": "HandyBet alcanza un hito histórico con más de 50,000 usuarios activos en la plataforma.",
+    "content": "HandyBet ha alcanzado un hito sin precedentes: más de 50,000 usuarios registrados en la plataforma. Este crecimiento del 300% en los últimos tres meses refleja la confianza de la comunidad venezolana en nuestra plataforma de apuestas digitales. Para celebrar, se realizarán sorteos especiales durante toda la semana con premios acumulados de hasta 100,000 VES.",
+    "image_url": "https://picsum.photos/seed/news_milestone/600/300",
+    "category": "hito",
+    "author_id": "usr_henry",
+    "created_at": "2025-07-14T20:00:00Z"
+  },
+  {
+    "id": "news_5",
+    "title": "Nuevas reglas para publicidad en grupos",
+    "summary": "Se actualizan las políticas de publicidad dentro de los grupos para mejorar la experiencia del usuario.",
+    "content": "A partir del próximo lunes, las publicaciones de tipo publicitario dentro de los grupos requerirán aprobación del administrador del grupo antes de ser visibles. Esta medida busca reducir el spam y mejorar la calidad del contenido que ven los miembros. Los anunciantes verificados podrán solicitar publicación automática contactando al equipo de soporte.",
+    "image_url": "https://picsum.photos/seed/news_rules/600/300",
+    "category": "políticas",
+    "author_id": "usr_henry",
+    "created_at": "2025-07-14T12:00:00Z"
+  },
+  {
+    "id": "news_6",
+    "title": "Torneo de pronósticos: ¡Gana 10,000 VES!",
+    "summary": "Participa en el primer torneo oficial de pronósticos de HandyBet y gana premios increíbles.",
+    "content": "HandyBet lanza su primer torneo oficial de pronósticos. Los participantes deberán predecir los resultados de 10 sorteos consecutivos. El usuario con mayor porcentaje de acierto ganará el gran premio de 10,000 VES. Las inscripciones están abiertas desde hoy hasta el viernes. El costo de inscripción es de 100 VES y el 80% se acumula en el pozo de premios.",
+    "image_url": "https://picsum.photos/seed/news_torneo/600/300",
+    "category": "eventos",
+    "author_id": "usr_diego",
+    "created_at": "2025-07-13T16:00:00Z"
+  },
+  {
+    "id": "news_7",
+    "title": "Taquillas Valencia: horario extendido",
+    "summary": "Las taquillas de Valencia amplían su horario de atención para cubrir los sorteos nocturnos.",
+    "content": "Debido a la alta demanda, las Taquillas Valencia ahora operarán en horario extendido: de 7:00 AM a 10:00 PM de lunes a sábado, y de 9:00 AM a 6:00 PM los domingos. Este cambio permite a los usuarios participar en los sorteos nocturnos que se han vuelto muy populares en las últimas semanas.",
+    "image_url": "https://picsum.photos/seed/news_valencia/600/300",
+    "category": "operaciones",
+    "author_id": "usr_laura",
+    "created_at": "2025-07-13T10:00:00Z"
+  },
+  {
+    "id": "news_8",
+    "title": "App móvil disponible para Android",
+    "summary": "Descarga la app oficial de HandyBet desde Google Play Store y lleva tus apuestas a donde quieras.",
+    "content": "¡La app móvil de HandyBet ya está disponible para dispositivos Android! Descárgala gratis desde Google Play Store y disfruta de todas las funcionalidades: apuestas en tiempo real, chat con otros usuarios, recargas instantáneas y notificaciones de resultados. La versión para iOS estará disponible próximamente.",
+    "image_url": "https://picsum.photos/seed/news_app/600/300",
+    "category": "tecnología",
+    "author_id": "usr_henry",
+    "created_at": "2025-07-12T08:00:00Z"
+  }
+]

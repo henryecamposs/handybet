@@ -99,17 +99,17 @@ export default function CreatePostWidget({ onPublish }: CreatePostWidgetProps) {
   return (
     <View className="mb-6">
       {/* Barra reducida de creación (vista por defecto) */}
-      <View className="bg-zinc-900/60 border border-zinc-800 p-3 rounded-2xl flex-row items-center justify-between shadow-sm">
+      <View className="bg-primary/20 border border-primary/5 p-2 rounded-2xl flex-row items-center justify-between shadow-sm">
         <View className="flex-row items-center flex-1 gap-3">
           <Image
             source={{ uri: mockSession?.avatar || 'https://i.pravatar.cc/150' }}
-            className="w-10 h-10 rounded-full border border-zinc-800"
+            className="w-10 h-10 rounded-full border border-primary/20"
           />
           <TouchableOpacity
             onPress={() => setShowPublishModal(true)}
-            className="flex-1 bg-zinc-800/80 border border-zinc-850 px-4 py-2.5 rounded-full justify-center"
+            className="flex-1 bg-background/80 border border-zinc-850 px-4 py-2.5 rounded-full justify-center"
           >
-            <Text className="text-zinc-400 text-xs font-semibold">
+            <Text className="text-primary text-md font-semibold">
               ¿Qué estás pensando, {userFirstName}?
             </Text>
           </TouchableOpacity>
@@ -154,7 +154,7 @@ export default function CreatePostWidget({ onPublish }: CreatePostWidgetProps) {
         onRequestClose={() => setShowPublishModal(false)}
       >
         <View className="flex-1 bg-black/80 justify-center items-center p-4">
-          <View className="bg-background border border-zinc-800 w-full max-w-xl rounded-3xl p-6 shadow-2xl relative">
+          <View className="bg-background/80 border border-zinc-800 w-full max-w-xl rounded-3xl p-6 shadow-2xl relative">
             {/* Header del Modal */}
             <View className="flex-row justify-between items-center mb-4">
               <View className="flex-row items-center gap-2">
@@ -180,7 +180,7 @@ export default function CreatePostWidget({ onPublish }: CreatePostWidgetProps) {
               numberOfLines={4}
               value={postContent}
               onChangeText={setPostContent}
-              className="bg-background border border-foreground/20 rounded-2xl px-4 py-3 text-white text-xs font-bold outline-none min-h-[80px] mb-4"
+              className="bg-background/80 border border-foreground/20 rounded-2xl px-4 py-3 text-white text-xs font-bold outline-none min-h-[80px] mb-4"
             />
 
             {/* Banner inferior de miniaturas */}
@@ -195,7 +195,7 @@ export default function CreatePostWidget({ onPublish }: CreatePostWidgetProps) {
                         setPreviewIndex(idx);
                         setShowPreviewModal(true);
                       }}
-                      className="relative w-16 h-16 rounded-xl overflow-hidden border border-zinc-700 bg-black justify-center items-center"
+                      className="relative w-16 h-16 rounded-xl overflow-hidden border border-zinc-700 bg-background/80justify-center items-center"
                     >
                       <Image source={{ uri: file.uri }} className="w-full h-full opacity-80" resizeMode="cover" />
                       {file.type === 'video' && (
@@ -258,7 +258,7 @@ export default function CreatePostWidget({ onPublish }: CreatePostWidgetProps) {
                 {/* Selector de tipo */}
                 <TouchableOpacity
                   onPress={() => setPostType(postType === 'regular' ? 'advertisement' : 'regular')}
-                  className={`px-3 py-1.5 rounded-full border flex-row items-center justify-center min-w-[100px] ${postType === 'advertisement' ? 'bg-secondary/15 border-secondary' : 'bg-background border-zinc-850'}`}
+                  className={`px-3 py-1.5 rounded-full border flex-row items-center justify-center min-w-[100px] ${postType === 'advertisement' ? 'bg-secondary/15 border-secondary' : 'bg-background/80 border-zinc-850'}`}
                 >
                   {postType === 'advertisement' ? (
                     <HandyAdsLogo size="xs" />
@@ -270,14 +270,14 @@ export default function CreatePostWidget({ onPublish }: CreatePostWidgetProps) {
                 {/* Selector de Visibilidad */}
                 <TouchableOpacity
                   onPress={() => {
-                    const levels: VisibilityLevel[] = ['todos', 'amigos', 'amigos_de_mis_amigos'];
+                    const levels: VisibilityLevel[] = ['todos', 'seguidores', 'circulo'];
                     const nextIndex = (levels.indexOf(visibility) + 1) % levels.length;
                     setVisibility(levels[nextIndex]);
                   }}
-                  className="px-3 py-1.5 rounded-full border bg-background border-zinc-850"
+                  className="px-3 py-1.5 rounded-full border bg-background/80 border-zinc-850"
                 >
                   <Text className="text-[10px] font-black uppercase text-foreground">
-                    👁️ {visibility === 'todos' ? 'Público' : visibility === 'amigos' ? 'Amigos' : 'Relacional'}
+                    👁️ {visibility === 'todos' ? 'Público' : visibility === 'seguidores' ? 'Seguidores' : 'Círculo'}
                   </Text>
                 </TouchableOpacity>
               </View>
@@ -304,7 +304,7 @@ export default function CreatePostWidget({ onPublish }: CreatePostWidgetProps) {
         onRequestClose={() => setShowUploadModal(false)}
       >
         <View className="flex-1 bg-black/75 justify-center items-center p-6">
-          <View className="bg-background border border-zinc-800 w-full max-w-md rounded-3xl p-6 shadow-2xl relative">
+          <View className="bg-background/80 border border-zinc-800 w-full max-w-md rounded-3xl p-6 shadow-2xl relative">
             <TouchableOpacity
               className="absolute top-4 right-4 bg-zinc-900 p-2 rounded-full z-10"
               onPress={() => setShowUploadModal(false)}
@@ -341,7 +341,7 @@ export default function CreatePostWidget({ onPublish }: CreatePostWidgetProps) {
         onRequestClose={() => setShowFeelingModal(false)}
       >
         <View className="flex-1 bg-black/60 justify-center items-center p-4">
-          <View className="bg-background border border-zinc-800 p-6 rounded-3xl w-full max-w-sm shadow-2xl relative">
+          <View className="bg-background/80 border border-zinc-800 p-6 rounded-3xl w-full max-w-sm shadow-2xl relative">
             <View className="flex-row justify-between items-center mb-6">
               <Text className="text-white font-black text-xl">¿Cómo te sientes?</Text>
               <TouchableOpacity onPress={() => setShowFeelingModal(false)} className="bg-zinc-900 p-2 rounded-full absolute -right-2 -top-2">
@@ -353,7 +353,7 @@ export default function CreatePostWidget({ onPublish }: CreatePostWidgetProps) {
               {FEELINGS.map((feeling, index) => (
                 <TouchableOpacity
                   key={index}
-                  className={`flex-row items-center gap-2 px-4 py-3 rounded-2xl border ${selectedFeeling?.text === feeling.text ? 'bg-zinc-800 border-zinc-700' : 'bg-background border-zinc-800'}`}
+                  className={`flex-row items-center gap-2 px-4 py-3 rounded-2xl border ${selectedFeeling?.text === feeling.text ? 'bg-zinc-800 border-zinc-700' : 'bg-background/80 border-zinc-800'}`}
                   onPress={() => {
                     setSelectedFeeling(feeling);
                     setShowFeelingModal(false);

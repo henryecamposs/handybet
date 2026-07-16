@@ -6,6 +6,8 @@ import { useHandyBetStore } from '../store/useHandyBetStore';
 import { useColorScheme } from 'nativewind';
 import '../global.css'; // Archivo CSS global para NativeWind v4
 
+import ToastContainer from '../components/ui/ToastContainer';
+
 const queryClient = new QueryClient();
 
 export default function RootLayout() {
@@ -66,11 +68,14 @@ export default function RootLayout() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="(dashboard)" options={{ headerShown: false }} />
-      </Stack>
+      <>
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="(dashboard)" options={{ headerShown: false }} />
+        </Stack>
+        <ToastContainer />
+      </>
     </QueryClientProvider>
   );
 }

@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
-import { MessageCircle, UserPlus, MoreHorizontal } from 'lucide-react-native';
+import { MessageCircle, UserPlus, UserCheck, MoreHorizontal } from 'lucide-react-native';
 import { handyBetUsers } from '../../../mockdata/handyBetMock';
 
 export default function UserProfileScreen() {
   const { userId } = useLocalSearchParams();
+  const [isFollowing, setIsFollowing] = useState(false);
 
   const user = handyBetUsers.find((u: any) => u.id === userId) || {
     name: 'Usuario Desconocido',
@@ -17,7 +18,7 @@ export default function UserProfileScreen() {
     <ScrollView className="flex-1 bg-background" showsVerticalScrollIndicator={false}>
       {/* Cover Portada */}
       <View className="h-48 bg-background/80 relative w-full">
-        {/* Aquí iría la imagen de portada. Se simula con un gradiente o color sólido */}
+        {/* Portada simulada con gradiente */}
         <View className="absolute inset-0 bg-gradient-to-b from-zinc-800 to-zinc-900" />
       </View>
 
@@ -25,7 +26,7 @@ export default function UserProfileScreen() {
       <View className="px-4 pb-4">
         {/* Avatar y Acciones Rápidas */}
         <View className="flex-row justify-between items-end -mt-16 mb-4">
-          <View className="p-1 bg-background rounded-full">
+          <View className="p-1 bg-background/80 rounded-full">
             <Image
               source={{ uri: user.avatar }}
               className="w-32 h-32 rounded-full bg-background/80"
@@ -38,9 +39,21 @@ export default function UserProfileScreen() {
             <TouchableOpacity className="w-10 h-10 rounded-full bg-background/80 items-center justify-center border border-zinc-700">
               <MessageCircle size={20} color="#d4d4d8" />
             </TouchableOpacity>
-            <TouchableOpacity className="flex-row h-10 px-4 rounded-full bg-primary items-center justify-center">
-              <UserPlus size={18} color="#000" />
-              <Text className="text-black font-bold ml-2">Amigos</Text>
+            <TouchableOpacity
+              onPress={() => setIsFollowing(!isFollowing)}
+              className={`flex-row h-10 px-4 rounded-full items-center justify-center ${isFollowing ? 'bg-background/80 border border-zinc-700' : 'bg-primary'}`}
+            >
+              {isFollowing ? (
+                <>
+                  <UserCheck size={18} color="#fff" />
+                  <Text className="text-white font-bold ml-2">Siguiendo</Text>
+                </>
+              ) : (
+                <>
+                  <UserPlus size={18} color="#000" />
+                  <Text className="text-black font-bold ml-2">Seguir</Text>
+                </>
+              )}
             </TouchableOpacity>
           </View>
         </View>
@@ -55,7 +68,7 @@ export default function UserProfileScreen() {
           <View className="flex-row gap-4 mt-4">
             <View className="flex-row items-center">
               <Text className="text-foreground font-bold">120</Text>
-              <Text className="text-foreground ml-1">Amigos</Text>
+              <Text className="text-foreground ml-1">Seguidores</Text>
             </View>
             <View className="flex-row items-center">
               <Text className="text-foreground font-bold">15</Text>
@@ -70,7 +83,7 @@ export default function UserProfileScreen() {
         {/* Feed del Usuario */}
         <View className="py-4">
           <Text className="text-foreground font-bold text-lg mb-4">Publicaciones Recientes</Text>
-          <View className="bg-background border border-zinc-800 rounded-2xl p-4 items-center justify-center h-32">
+          <View className="bg-background/80 border border-zinc-800 rounded-2xl p-4 items-center justify-center h-32">
             <Text className="text-foreground">No hay publicaciones nuevas.</Text>
           </View>
         </View>

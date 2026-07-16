@@ -12,7 +12,7 @@ export default function WalletScreen() {
   ];
 
   return (
-    <ScrollView className="flex-1 bg-background px-4 pt-12" showsVerticalScrollIndicator={false}>
+    <ScrollView className="flex-1 bg-background/80 px-4 pt-12" showsVerticalScrollIndicator={false}>
       {/* Header */}
       <View className="mb-6">
         <Text className="text-foreground font-bold text-2xl">Billeteras</Text>
@@ -26,7 +26,7 @@ export default function WalletScreen() {
           {/* Botón de Añadir Billetera */}
           <TouchableOpacity
             onPress={() => router.push('/(tabs)/wallet/create' as any)}
-            className="w-32 h-36 bg-background rounded-2xl border border-dashed border-zinc-700 items-center justify-center mr-4 hover:bg-background/80/80 transition-colors"
+            className="w-32 h-36 bg-background/80 rounded-2xl border border-dashed border-zinc-700 items-center justify-center mr-4 hover:bg-background/80/80 transition-colors"
           >
             <View className="w-12 h-12 rounded-full bg-primary/20 items-center justify-center mb-2">
               <Plus size={24} color="#caee26" />
@@ -38,7 +38,7 @@ export default function WalletScreen() {
             <TouchableOpacity
               key={index}
               onPress={() => router.push(`/(tabs)/wallet/${wallet.id}` as any)}
-              className="w-32 h-36 bg-background rounded-2xl border border-zinc-800 items-center justify-center mr-4 hover:bg-background/80/80 transition-colors px-2"
+              className="w-32 h-36 bg-background/80 rounded-2xl border border-zinc-800 items-center justify-center mr-4 hover:bg-background/80/80 transition-colors px-2"
             >
               <View className="w-12 h-12 rounded-full bg-background/80 items-center justify-center mb-2">
                 <Wallet size={20} color="#d4d4d8" />
@@ -91,7 +91,7 @@ export default function WalletScreen() {
         </View>
 
         {/* Grupo 1 */}
-        <View className="bg-background p-4 rounded-2xl border border-zinc-800 flex-row items-center justify-between mb-3 hover:bg-background/80/80 transition-colors">
+        <View className="bg-background/80 p-4 rounded-2xl border border-zinc-800 flex-row items-center justify-between mb-3 hover:bg-background/80/80 transition-colors">
           <View className="flex-row items-center">
             <View className="w-12 h-12 rounded-xl bg-background/80 items-center justify-center mr-4 border border-zinc-700">
               <Text className="text-xl">🎲</Text>
@@ -108,7 +108,7 @@ export default function WalletScreen() {
         </View>
 
         {/* Grupo 2 */}
-        <View className="bg-background p-4 rounded-2xl border border-zinc-800 flex-row items-center justify-between mb-3 hover:bg-background/80/80 transition-colors">
+        <View className="bg-background/80 p-4 rounded-2xl border border-zinc-800 flex-row items-center justify-between mb-3 hover:bg-background/80/80 transition-colors">
           <View className="flex-row items-center">
             <View className="w-12 h-12 rounded-xl bg-background/80 items-center justify-center mr-4 border border-zinc-700">
               <Text className="text-xl">🏇</Text>
@@ -134,7 +134,7 @@ export default function WalletScreen() {
           </TouchableOpacity>
         </View>
 
-        <View className="bg-background p-4 rounded-2xl border border-zinc-800 flex-row items-center justify-between hover:bg-background/80/80 transition-colors">
+        <View className="bg-background/80 p-4 rounded-2xl border border-zinc-800 flex-row items-center justify-between hover:bg-background/80/80 transition-colors">
           <View className="flex-row items-center">
             <View className="w-12 h-12 rounded-xl bg-secondary/10 items-center justify-center mr-4 border border-secondary/20">
               <Text className="text-xl">🏆</Text>
@@ -159,7 +159,7 @@ export default function WalletScreen() {
           </TouchableOpacity>
         </View>
 
-        <View className="bg-background rounded-2xl border border-zinc-800 p-4">
+        <View className="bg-background/80 rounded-2xl border border-zinc-800 p-4">
           <View className="flex-row items-center justify-between mb-4 pb-4 border-b border-zinc-800/50">
             <View className="flex-row items-center">
               <View className="w-10 h-10 rounded-full bg-secondary/10 items-center justify-center mr-3">

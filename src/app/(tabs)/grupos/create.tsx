@@ -7,7 +7,7 @@ export default function CreateGroupScreen() {
   const router = useRouter();
 
   return (
-    <ScrollView className="flex-1 bg-background px-4 pt-12" showsVerticalScrollIndicator={false}>
+    <ScrollView className="flex-1 bg-background/80 px-4 pt-12" showsVerticalScrollIndicator={false}>
       {/* Header */}
       <View className="flex-row items-center gap-2 mb-6">
         <TouchableOpacity onPress={() => router.back()} className="mr-2">
@@ -19,7 +19,7 @@ export default function CreateGroupScreen() {
         </View>
       </View>
 
-      <View className="bg-background rounded-3xl p-6 border border-zinc-800 mb-8">
+      <View className="bg-background/80 rounded-3xl p-6 border border-zinc-800 mb-8">
         {/* Avatar Upload (Simulated) */}
         <View className="items-center mb-8">
           <View className="w-24 h-24 rounded-full bg-background/80 border-2 border-dashed border-zinc-700 items-center justify-center mb-3">

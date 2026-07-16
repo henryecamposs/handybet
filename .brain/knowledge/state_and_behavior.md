@@ -20,5 +20,8 @@ React Query gestiona el estado asíncrono y las peticiones al backend (con Supab
 
 ## 3. Servicios del Backend y Supabase (`src/services/`)
 - **`supabaseClient.ts`:** Inicializa la conexión con Supabase utilizando AsyncStorage para guardar la sesión JWT de forma persistente en React Native y web (seguro contra fallas de SSR).
-- **`socialService.ts`:** Proporciona funciones asíncronas para administrar el feed relacional por capas de visibilidad y las amistades directas.
+- **`socialService.ts`:** Proporciona funciones asíncronas para administrar el feed relacional por capas de visibilidad y las amistades directas. Incluye métodos para la gestión de respuestas:
+  * `getPostComments(postId)`: Obtiene los comentarios de una publicación en orden cronológico.
+  * `createPostComment(postId, commentData)`: Agrega una nueva respuesta a una publicación.
+  * *Nota:* Implementa una capa de persistencia simulada en memoria para probar interacciones sin conexión activa de base de datos.
 - **`groupMonetizationService.ts`:** Gestiona el procesamiento de cuestionarios de onboarding y split de transacciones (90/10) entre la billetera del creador del grupo y la plataforma.

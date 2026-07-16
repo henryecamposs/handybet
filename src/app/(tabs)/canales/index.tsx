@@ -4,12 +4,13 @@ import { useRouter } from 'expo-router';
 import { channelService } from '../../../services/channelService';
 import { Channel } from '../../../types/handyBet';
 import { Search, Plus, Compass, Tv } from 'lucide-react-native';
+import { useThemeColors } from '@/hooks/useThemeColors';
 
 export default function CanalesScreen() {
   const router = useRouter();
   const [channels, setChannels] = useState<Channel[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  const colors = useThemeColors();
   // Simulamos canales del usuario (solo para demostración del UI)
   const misCanales = channels.slice(0, 1); // Prueba cambiando a [] para ver empty state
 
@@ -42,11 +43,11 @@ export default function CanalesScreen() {
       </View>
 
       {/* Buscador */}
-      <View className="bg-background rounded-full flex-row items-center px-4 py-2 border border-zinc-800 mb-6">
-        <Search size={20} color="#71717a" />
+      <View className="bg-input rounded-full flex-row items-center px-4 py-2 border border-border mb-6">
+        <Search size={20} color={colors.mutedForeground} />
         <TextInput
           placeholder="Buscar canales oficiales..."
-          placeholderTextColor="#71717a"
+          placeholderTextColor={colors.mutedForeground}
           className="flex-1 text-foreground ml-3 outline-none"
         />
       </View>
@@ -58,10 +59,10 @@ export default function CanalesScreen() {
           {/* Botón de Crear Nuevo Canal */}
           <TouchableOpacity
             onPress={() => router.push('/(tabs)/canales/create' as any)}
-            className="w-32 h-36 bg-background rounded-2xl border border-dashed border-zinc-700 items-center justify-center mr-4 hover:bg-background/80/80 transition-colors"
+            className="w-32 h-36 bg-background/80 rounded-2xl border border-dashed border-zinc-700 items-center justify-center mr-4 hover:bg-background/80/80 transition-colors"
           >
-            <View className="w-12 h-12 rounded-full bg-primary/20 items-center justify-center mb-2">
-              <Plus size={24} color="#caee26" />
+            <View className="w-12 h-12 rounded-full bg-card items-center justify-center mb-2">
+              <Plus size={24} color={colors.secondary} />
             </View>
             <Text className="text-foreground font-bold text-sm text-center">Crear Nuevo</Text>
           </TouchableOpacity>
@@ -70,7 +71,7 @@ export default function CanalesScreen() {
             <TouchableOpacity
               key={channel.id}
               onPress={() => router.push(`/(tabs)/canales/${channel.id}` as any)}
-              className="w-32 h-36 bg-background rounded-2xl border border-zinc-800 items-center justify-center mr-4 hover:bg-background/80/80 transition-colors px-2"
+              className="w-32 h-36 bg-card rounded-2xl border border-primary/20 items-center justify-center mr-4 hover:bg-background/80/80 transition-colors px-2"
             >
               <View className="w-12 h-12 rounded-full bg-background/80 items-center justify-center mb-2">
                 <Tv size={20} color="#d4d4d8" />
@@ -101,7 +102,7 @@ export default function CanalesScreen() {
               <TouchableOpacity
                 key={channel.id}
                 onPress={() => router.push(`/(tabs)/canales/${channel.id}` as any)}
-                className="bg-background border border-zinc-800 p-4 rounded-2xl flex-row justify-between items-center hover:bg-background/80/80 transition-colors"
+                className="bg-background/80 border border-zinc-800 p-4 rounded-2xl flex-row justify-between items-center hover:bg-background/80/80 transition-colors"
               >
                 <View className="flex-row items-center flex-1">
                   <View className="w-12 h-12 rounded-xl bg-background/80 items-center justify-center mr-4 border border-zinc-700">

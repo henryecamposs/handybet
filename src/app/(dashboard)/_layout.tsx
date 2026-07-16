@@ -1,14 +1,15 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Slot, useRouter, usePathname } from 'expo-router';
-import { supabase } from '../../lib/supabaseClient';
+import { useHandyBetStore } from '../../store/useHandyBetStore';
 
 export default function DashboardLayout() {
   const router = useRouter();
   const pathname = usePathname();
+  const { setMockSession } = useHandyBetStore();
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
+    setMockSession(null);
   };
 
   return (
@@ -45,7 +46,7 @@ export default function DashboardLayout() {
 
         <TouchableOpacity
           onPress={handleLogout}
-          className="bg-background border border-zinc-850 p-4 rounded-xl items-center"
+          className="bg-background/80 border border-zinc-850 p-4 rounded-xl items-center"
         >
           <Text className="text-rose-500 text-xs font-black uppercase">Cerrar Sesión</Text>
         </TouchableOpacity>

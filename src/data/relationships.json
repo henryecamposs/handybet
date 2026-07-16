@@ -1,0 +1,49 @@
+{
+  "follows": [
+    { "follower_id": "usr_henry", "following_id": "usr_joselin", "created_at": "2025-02-15T10:00:00Z" },
+    { "follower_id": "usr_henry", "following_id": "usr_diego", "created_at": "2025-01-20T08:00:00Z" },
+    { "follower_id": "usr_henry", "following_id": "usr_roberto", "created_at": "2025-03-10T12:00:00Z" },
+    { "follower_id": "usr_carlos", "following_id": "usr_henry", "created_at": "2025-03-10T11:00:00Z" },
+    { "follower_id": "usr_carlos", "following_id": "usr_joselin", "created_at": "2025-03-12T14:00:00Z" },
+    { "follower_id": "usr_carlos", "following_id": "usr_roberto", "created_at": "2025-04-01T09:00:00Z" },
+    { "follower_id": "usr_carlos", "following_id": "usr_ana", "created_at": "2025-04-15T16:00:00Z" },
+    { "follower_id": "usr_maria", "following_id": "usr_joselin", "created_at": "2025-04-02T13:00:00Z" },
+    { "follower_id": "usr_maria", "following_id": "usr_henry", "created_at": "2025-04-05T10:30:00Z" },
+    { "follower_id": "usr_maria", "following_id": "usr_carlos", "created_at": "2025-04-10T15:00:00Z" },
+    { "follower_id": "usr_ana", "following_id": "usr_joselin", "created_at": "2025-04-20T11:00:00Z" },
+    { "follower_id": "usr_ana", "following_id": "usr_henry", "created_at": "2025-04-22T09:00:00Z" },
+    { "follower_id": "usr_ana", "following_id": "usr_roberto", "created_at": "2025-05-01T14:00:00Z" },
+    { "follower_id": "usr_ana", "following_id": "usr_diego", "created_at": "2025-05-03T10:00:00Z" },
+    { "follower_id": "usr_joselin", "following_id": "usr_henry", "created_at": "2025-02-12T09:00:00Z" },
+    { "follower_id": "usr_joselin", "following_id": "usr_ana", "created_at": "2025-05-10T11:30:00Z" },
+    { "follower_id": "usr_roberto", "following_id": "usr_henry", "created_at": "2025-03-05T08:00:00Z" },
+    { "follower_id": "usr_roberto", "following_id": "usr_diego", "created_at": "2025-03-08T10:00:00Z" },
+    { "follower_id": "usr_roberto", "following_id": "usr_ana", "created_at": "2025-05-15T13:00:00Z" },
+    { "follower_id": "usr_diego", "following_id": "usr_henry", "created_at": "2025-01-18T07:00:00Z" },
+    { "follower_id": "usr_diego", "following_id": "usr_pedro", "created_at": "2025-02-01T09:00:00Z" },
+    { "follower_id": "usr_valentina", "following_id": "usr_joselin", "created_at": "2025-06-05T14:00:00Z" },
+    { "follower_id": "usr_valentina", "following_id": "usr_henry", "created_at": "2025-06-05T14:05:00Z" },
+    { "follower_id": "usr_valentina", "following_id": "usr_ana", "created_at": "2025-06-06T10:00:00Z" },
+    { "follower_id": "usr_gabriel", "following_id": "usr_roberto", "created_at": "2025-05-20T16:00:00Z" },
+    { "follower_id": "usr_gabriel", "following_id": "usr_carlos", "created_at": "2025-05-22T11:00:00Z" },
+    { "follower_id": "usr_isabella", "following_id": "usr_henry", "created_at": "2025-04-10T09:00:00Z" },
+    { "follower_id": "usr_isabella", "following_id": "usr_diego", "created_at": "2025-04-10T09:05:00Z" },
+    { "follower_id": "usr_pedro", "following_id": "usr_diego", "created_at": "2025-02-05T08:00:00Z" },
+    { "follower_id": "usr_pedro", "following_id": "usr_henry", "created_at": "2025-02-06T09:00:00Z" },
+    { "follower_id": "usr_laura", "following_id": "usr_diego", "created_at": "2025-03-20T10:00:00Z" },
+    { "follower_id": "usr_laura", "following_id": "usr_pedro", "created_at": "2025-03-20T10:05:00Z" }
+  ],
+  "circles": [
+    { "id": "crc_vip_henry", "owner_id": "usr_henry", "name": "Equipo Core", "members": ["usr_diego", "usr_pedro", "usr_joselin"], "created_at": "2025-02-01T08:00:00Z" },
+    { "id": "crc_vip_joselin", "owner_id": "usr_joselin", "name": "Fans VIP", "members": ["usr_carlos", "usr_ana", "usr_maria"], "created_at": "2025-03-01T10:00:00Z" },
+    { "id": "crc_pronosticos", "owner_id": "usr_roberto", "name": "Círculo Premium", "members": ["usr_carlos", "usr_gabriel", "usr_ana"], "created_at": "2025-04-01T12:00:00Z" }
+  ],
+  "friend_suggestions": [
+    { "id": "fs_1", "user_id": "usr_henry", "suggested_id": "usr_gabriel", "mutual_followers": 3, "reason": "Sigue a personas que tú sigues" },
+    { "id": "fs_2", "user_id": "usr_henry", "suggested_id": "usr_valentina", "mutual_followers": 2, "reason": "Nueva en la plataforma" },
+    { "id": "fs_3", "user_id": "usr_henry", "suggested_id": "usr_laura", "mutual_followers": 4, "reason": "Trabaja en Taquillas Valencia" },
+    { "id": "fs_4", "user_id": "usr_henry", "suggested_id": "usr_isabella", "mutual_followers": 2, "reason": "Publicista en la plataforma" },
+    { "id": "fs_5", "user_id": "usr_carlos", "suggested_id": "usr_gabriel", "mutual_followers": 5, "reason": "Intereses similares" },
+    { "id": "fs_6", "user_id": "usr_carlos", "suggested_id": "usr_diego", "mutual_followers": 3, "reason": "Dueño de La Imaginaria" }
+  ]
+}

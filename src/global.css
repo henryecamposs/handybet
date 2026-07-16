@@ -7,13 +7,13 @@
     --radius: 0.5rem;
     --background: 0.843 0.086 24.866;
     --foreground: 0.147 0.031 29.034;
-    --muted: 0.939 0.025 147.778;
-    --muted-foreground: 0.446 0.025 147.449;
+    --muted: 0.657 0.229 29.729;
+    --muted-foreground: 0.223 0.025 147.449;
     --popover: 0.973 0.007 23.656;
     --popover-foreground: 0.134 0.026 29.44;
     --card: 0.935 0.029 23.913;
     --card-foreground: 0.134 0.026 29.44;
-    --border: 0.927 0.007 23.654;
+    --border: 0.277 0.083 29.660;
     --input: 0.927 0.007 23.654;
     --primary: 0.657 0.229 29.729;
     --primary-light: 0.857 0.229 29.729;
@@ -40,13 +40,13 @@
     --radius: 0.5rem;
     --background: 13.948% 0.02893 34.084;
     --foreground: 0.991 0.002 23.598;
-    --muted: 0.219 0.035 146.196;
-    --muted-foreground: 0.756 0.022 147.75;
+    --muted: 0.241 0.014 24.265;
+    --muted-foreground: 0.378 0.022 147.75;
     --popover: 16.237% 0.03684 29.4;
     --popover-foreground: 1 0 180;
     --card: 16.237% 0.03684 29.4;
     --card-foreground: 1 0 180;
-    --border: 16.237% 0.03684 29.4;
+    --border: 0.277 0.083 29.660;
     --input: 0.241 0.014 24.265;
     --primary: 0.657 0.229 29.729;
     --primary-light: 0.857 0.229 29.729;
@@ -94,5 +94,28 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
+  background-color: oklch(var(--primary) / 0.8);
+}
+
+/* Hover Scrollbar for specific containers */
+.hover-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  background: transparent;
+}
+
+.hover-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.hover-scrollbar::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+.hover-scrollbar:hover::-webkit-scrollbar-thumb {
+  background-color: oklch(var(--primary) / 0.5);
+}
+
+.hover-scrollbar:hover::-webkit-scrollbar-thumb:hover {
   background-color: oklch(var(--primary) / 0.8);
 }

@@ -28,7 +28,7 @@ export default function MediaVaultGrid({
     return (
       <View
         style={{ width: cardSize, height: cardSize }}
-        className="m-2 rounded-2xl bg-background border border-zinc-800 overflow-hidden relative"
+        className="m-2 rounded-2xl bg-background/80 border border-zinc-800 overflow-hidden relative"
       >
         {/* Imagen o Miniatura con Blur */}
         <Image

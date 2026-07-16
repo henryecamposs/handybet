@@ -7,7 +7,7 @@ export default function JuegosScreen() {
   const router = useRouter();
 
   return (
-    <ScrollView className="flex-1 bg-background px-4 pt-12" showsVerticalScrollIndicator={false}>
+    <ScrollView className="flex-1 bg-background/80 px-4 pt-12" showsVerticalScrollIndicator={false}>
       {/* Header */}
       <View className="mb-6">
         <Text className="text-foreground font-bold text-2xl">Juegos y Sorteos</Text>
@@ -31,15 +31,15 @@ export default function JuegosScreen() {
 
       {/* Categorías */}
       <View className="flex-row gap-4 mb-8">
-        <TouchableOpacity className="flex-1 bg-background p-4 rounded-2xl border border-zinc-800 items-center justify-center">
+        <TouchableOpacity className="flex-1 bg-background/80 p-4 rounded-2xl border border-zinc-800 items-center justify-center">
           <Ticket size={28} color="#caee26" className="mb-2" />
           <Text className="text-foreground font-bold text-center">Taquillas</Text>
         </TouchableOpacity>
-        <TouchableOpacity className="flex-1 bg-background p-4 rounded-2xl border border-zinc-800 items-center justify-center">
+        <TouchableOpacity className="flex-1 bg-background/80 p-4 rounded-2xl border border-zinc-800 items-center justify-center">
           <Dice1 size={28} color="#caee26" className="mb-2" />
           <Text className="text-foreground font-bold text-center">Quinielas</Text>
         </TouchableOpacity>
-        <TouchableOpacity className="flex-1 bg-background p-4 rounded-2xl border border-zinc-800 items-center justify-center">
+        <TouchableOpacity className="flex-1 bg-background/80 p-4 rounded-2xl border border-zinc-800 items-center justify-center">
           <Gamepad2 size={28} color="#caee26" className="mb-2" />
           <Text className="text-foreground font-bold text-center">Minijuegos</Text>
         </TouchableOpacity>
@@ -48,7 +48,7 @@ export default function JuegosScreen() {
       {/* Próximos Sorteos */}
       <View className="mb-8">
         <Text className="text-foreground font-bold text-lg mb-4">Próximos Sorteos</Text>
-        <View className="bg-background p-4 rounded-2xl border border-zinc-800 mb-3 flex-row items-center justify-between">
+        <View className="bg-background/80 p-4 rounded-2xl border border-zinc-800 mb-3 flex-row items-center justify-between">
           <View className="flex-row items-center">
             <View className="w-12 h-12 rounded-xl bg-background/80 items-center justify-center mr-4 border border-zinc-700">
               <Text className="text-xl">🎲</Text>
@@ -63,7 +63,7 @@ export default function JuegosScreen() {
           </TouchableOpacity>
         </View>
 
-        <View className="bg-background p-4 rounded-2xl border border-zinc-800 flex-row items-center justify-between">
+        <View className="bg-background/80 p-4 rounded-2xl border border-zinc-800 flex-row items-center justify-between">
           <View className="flex-row items-center">
             <View className="w-12 h-12 rounded-xl bg-background/80 items-center justify-center mr-4 border border-zinc-700">
               <Text className="text-xl">🏇</Text>

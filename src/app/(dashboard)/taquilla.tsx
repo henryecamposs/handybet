@@ -105,7 +105,7 @@ export default function TaquillaScreen() {
 
   return (
     <HandyBetLayout title="Taquilla de Validación - Cajero">
-      <ScrollView className="flex-1 bg-background p-4 rounded-3xl">
+      <ScrollView className="flex-1 bg-background/80 p-4 rounded-3xl">
         <View className="mb-6">
           <Text className="text-2xl font-black text-white tracking-tight">Consola de Operaciones</Text>
           <Text className="text-foreground text-xs font-bold mt-1">
@@ -115,7 +115,7 @@ export default function TaquillaScreen() {
 
         {/* Buscador QR y Manual */}
         <View className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <View className="bg-background border border-zinc-850 p-6 rounded-2xl justify-between">
+          <View className="bg-background/80 border border-zinc-850 p-6 rounded-2xl justify-between">
             <View>
               <Text className="text-white font-black text-sm mb-4">Escanear Ticket QR</Text>
               <TouchableOpacity
@@ -138,7 +138,7 @@ export default function TaquillaScreen() {
                 />
                 <TouchableOpacity
                   onPress={handleManualSearch}
-                  className="bg-background border border-zinc-750 justify-center px-6 rounded-xl"
+                  className="bg-background/80 border border-zinc-750 justify-center px-6 rounded-xl"
                 >
                   <Text className="text-white font-black text-xs">BUSCAR</Text>
                 </TouchableOpacity>
@@ -190,7 +190,7 @@ export default function TaquillaScreen() {
             </View>
 
             {/* Acciones según el estado del ticket */}
-            <View className="bg-background border border-zinc-850 p-6 rounded-2xl">
+            <View className="bg-background/80 border border-zinc-850 p-6 rounded-2xl">
               <Text className="text-white font-black text-base mb-4">Acciones de Taquilla</Text>
 
               {/* CASO A: Apuesta pendiente (Se debe confirmar y debitar balance del monedero del grupo) */}
@@ -317,7 +317,7 @@ export default function TaquillaScreen() {
 
               <TouchableOpacity
                 onPress={() => setActiveTicketCode(null)}
-                className="mt-4 py-3 rounded-xl items-center bg-background border border-zinc-850"
+                className="mt-4 py-3 rounded-xl items-center bg-background/80 border border-zinc-850"
               >
                 <Text className="text-foreground font-bold text-xs uppercase">Limpiar Pantalla</Text>
               </TouchableOpacity>

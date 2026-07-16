@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
-import { supabase } from '../../../lib/supabaseClient';
+import { localDB } from '../../../lib/localDB';
 import { Advertisement } from '../../../types/handyBet';
 import HandyChatLogo from '../../../components/ui/HandyChatLogo';
 
@@ -10,19 +10,20 @@ export default function ChatInboxScreen() {
   const [adBanner, setAdBanner] = useState<Advertisement | null>(null);
   const [isLoadingAd, setIsLoadingAd] = useState(true);
 
-
-
   async function fetchBannerAd() {
     try {
-      const { data, error } = await supabase
-        .from('advertisements')
-        .select('*')
-        .eq('is_active', true)
-        .limit(1)
-        .single();
-
-      if (!error && data) {
-        setAdBanner(data as Advertisement);
+      const data = await localDB.ads.getAll();
+      const active = data.filter((a: any) => a.is_active);
+      if (active.length > 0) {
+        const ad = active[0];
+        setAdBanner({
+          id: ad.id,
+          business_name: ad.business_name,
+          ad_copy: ad.description,
+          media_url: ad.image_url,
+          target_deeplink: ad.target_url,
+          is_active: ad.is_active,
+        } as any);
       }
     } catch (err) {
       console.log('Error fetching ad banner for chat:', err);
@@ -32,7 +33,6 @@ export default function ChatInboxScreen() {
   }
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchBannerAd();
   }, []);
 
@@ -56,7 +56,7 @@ export default function ChatInboxScreen() {
   ];
 
   return (
-    <ScrollView className="flex-1 bg-background px-4 pt-12">
+    <ScrollView className="flex-1 bg-background/80 px-4 pt-12">
       <View className="mb-6">
         <HandyChatLogo />
         <Text className="text-foreground text-xs font-bold mt-1">Mensajería directa P2P con soporte y agencias.</Text>
@@ -91,7 +91,7 @@ export default function ChatInboxScreen() {
 
       {/* Inyección de AdBannerRow en el chat */}
       {!isLoadingAd && adBanner && (
-        <View className="bg-background border border-zinc-850 p-4 rounded-3xl shadow-sm mb-6 flex-row gap-4 items-center">
+        <View className="bg-background/80 border border-zinc-850 p-4 rounded-3xl shadow-sm mb-6 flex-row gap-4 items-center">
           <Image source={{ uri: adBanner.media_url }} className="w-12 h-12 rounded-2xl border border-zinc-850" />
           <View className="flex-1">
             <Text className="text-secondary text-[9px] font-black uppercase tracking-wider">Publicidad de Interés</Text>

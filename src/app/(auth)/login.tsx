@@ -61,7 +61,7 @@ export default function LoginScreen() {
   };
 
   return (
-    <View className="flex-1 bg-background justify-center items-center p-6">
+    <View className="flex-1 bg-background/80 justify-center items-center p-6">
       <View className="w-full max-w-sm bg-background/90 border border-zinc-800 p-8 rounded-3xl shadow-xl">
         <View className="mb-4">
           <Logo size="lg" layout="vertical" />
@@ -149,7 +149,7 @@ export default function LoginScreen() {
                   onPress={() => setRole('player')}
                   className={`flex-1 py-2.5 rounded-xl border items-center ${role === 'player'
                     ? 'bg-secondary/20 border-secondary'
-                    : 'bg-background border-zinc-750'
+                    : 'bg-background/80 border-zinc-750'
                     }`}
                 >
                   <Text className={`font-bold text-xs ${role === 'player' ? 'text-secondary' : 'text-foreground'}`}>
@@ -160,7 +160,7 @@ export default function LoginScreen() {
                   onPress={() => setRole('cashier')}
                   className={`flex-1 py-2.5 rounded-xl border items-center ${role === 'cashier'
                     ? 'bg-secondary/20 border-secondary'
-                    : 'bg-background border-zinc-750'
+                    : 'bg-background/80 border-zinc-750'
                     }`}
                 >
                   <Text className={`font-bold text-xs ${role === 'cashier' ? 'text-secondary' : 'text-foreground'}`}>

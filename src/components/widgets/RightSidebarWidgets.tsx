@@ -1,65 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { Trophy } from 'lucide-react-native';
 import HandyAdsLogo from '../ui/HandyAdsLogo';
+import { localDB } from '../../lib/localDB';
+import { useHandyBetStore } from '../../store/useHandyBetStore';
 
-// --- MOCK DATA ---
+// Exported for center views that still need access
+export const [mockAds, mockNews, mockFollowSuggestions, mockPrizes] = [[], [], [], []] as any;
 
-export const mockAds = [
-  {
-    id: 'ad1',
-    image: 'https://placehold.co/200x100/222/555?text=Ad+Grande',
-    title: 'Creación de Música Programática',
-    domain: 'elevenlabs.io',
-    size: 'large'
-  },
-  {
-    id: 'ad2',
-    image: 'https://placehold.co/100x100/222/555?text=Ad+Chico+1',
-    title: 'Try it with 10 free credits!',
-    domain: 'moises.ai',
-    size: 'small'
-  },
-  {
-    id: 'ad3',
-    image: 'https://placehold.co/100x100/222/555?text=Ad+Chico+2',
-    title: 'Más publicidad',
-    domain: 'sponsor.com',
-    size: 'small'
-  }
-];
-
-export const mockNews = [
-  {
-    id: 'n1',
-    title: 'Nueva Taquilla Activa en Chacao',
-    time: 'Hace 2 horas',
-  },
-  {
-    id: 'n2',
-    title: '¡Joselin lanza su canal VIP!',
-    time: 'Hace 5 horas',
-  },
-];
-
-export const mockFriendRequests = [
-  {
-    id: 'fr1',
-    name: 'Carlos Ruiz',
-    avatar: 'https://i.pravatar.cc/150?u=carlos',
-    time: '2 d',
-    mutualFriends: 12,
-  }
-];
-
-export const mockPrizes = [
-  {
-    id: 'p1',
-    title: '¡Ganador en Taquillas Caracas!',
-    description: 'Has ganado 450 VES en el sorteo 11:00 AM. Revisa tu Wallet.',
-    amount: '450 VES',
-  }
-];
 
 // --- COMPONENTS ---
 
@@ -107,30 +55,42 @@ export const NewsWidget = ({ id, title, time, onSelectNews }: { id: string, titl
   );
 };
 
-export const FriendRequestWidget = ({ name, avatar, time, mutualFriends }: { name: string, avatar: string, time: string, mutualFriends: number }) => (
-  <View className="flex-row items-center p-2 hover:bg-background/80 rounded-xl transition-colors">
-    <Image source={{ uri: avatar }} className="w-16 h-16 rounded-full mr-3" />
-    <View className="flex-1">
-      <View className="flex-row justify-between items-center">
-        <Text className="font-semibold text-foreground text-sm">{name}</Text>
-        <Text className="text-foreground text-xs">{time}</Text>
-      </View>
-      <Text className="text-foreground text-xs mb-2">{mutualFriends} amigos en común</Text>
-      <View className="flex-row gap-2">
-        <TouchableOpacity className="flex-1 bg-primary py-1.5 rounded-lg items-center">
-          <Text className="text-primary-foreground font-bold text-xs">Confirmar</Text>
-        </TouchableOpacity>
-        <TouchableOpacity className="flex-1 bg-background/80 py-1.5 rounded-lg items-center border border-zinc-800">
-          <Text className="text-foreground font-bold text-xs">Eliminar</Text>
-        </TouchableOpacity>
+export const FollowSuggestionWidget = ({ name, avatar, time, mutualFollowers, onFollow }: { name: string, avatar: string, time: string, mutualFollowers: number, onFollow?: () => void }) => {
+  const [isFollowing, setIsFollowing] = React.useState(false);
+
+  return (
+    <View className="flex-row items-center p-2 hover:bg-background/80 rounded-xl transition-colors">
+      <Image source={{ uri: avatar }} className="w-16 h-16 rounded-full mr-3" />
+      <View className="flex-1">
+        <View className="flex-row justify-between items-center">
+          <Text className="font-semibold text-foreground text-sm">{name}</Text>
+          <Text className="text-foreground text-xs">{time}</Text>
+        </View>
+        <Text className="text-foreground text-xs mb-2">{mutualFollowers} seguidores en común</Text>
+        <View className="flex-row gap-2">
+          <TouchableOpacity
+            onPress={() => {
+              setIsFollowing(!isFollowing);
+              if (onFollow) onFollow();
+            }}
+            className={`flex-1 py-1.5 rounded-lg items-center ${isFollowing ? 'bg-background/80 border border-zinc-700' : 'bg-primary'}`}
+          >
+            <Text className={`font-bold text-xs ${isFollowing ? 'text-foreground' : 'text-primary-foreground'}`}>
+              {isFollowing ? 'Siguiendo' : 'Seguir'}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity className="flex-1 bg-background/80 py-1.5 rounded-lg items-center border border-zinc-800">
+            <Text className="text-foreground font-bold text-xs">Descartar</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
-  </View>
-);
+  );
+};
 
 export const PrizeNotificationWidget = ({ id, title, description, onSelectPrize }: { id: string, title: string, description: string, onSelectPrize?: (id: string) => void }) => (
-  <TouchableOpacity 
-    className="bg-background border border-zinc-800 p-4 rounded-xl flex-row items-center gap-4 mx-2 shadow-sm hover:bg-background/80 transition-colors"
+  <TouchableOpacity
+    className="bg-background/80 border border-zinc-800 p-4 rounded-xl flex-row items-center gap-4 mx-2 shadow-sm hover:bg-background/80 transition-colors"
     onPress={() => onSelectPrize ? onSelectPrize(id) : undefined}
   >
     <View className="w-12 h-12 bg-secondary/10 rounded-full items-center justify-center">
@@ -148,25 +108,78 @@ export const Divider = () => <View className="h-[1px] bg-background/80 my-4 mx-2
 interface RightSidebarWidgetsProps {
   onSelectNews?: (id: string | null) => void;
   onSelectPrize?: (id: string | null) => void;
-  onSelectFriendRequest?: (id: string | null) => void;
+  onSelectFollowSuggestion?: (id: string | null) => void;
 }
 
-export default function RightSidebarWidgets({ onSelectNews, onSelectPrize, onSelectFriendRequest }: RightSidebarWidgetsProps) {
+export default function RightSidebarWidgets({ onSelectNews, onSelectPrize, onSelectFollowSuggestion }: RightSidebarWidgetsProps) {
+  const { mockSession } = useHandyBetStore();
+  const [ads, setAds] = useState<any[]>([]);
+  const [news, setNews] = useState<any[]>([]);
+  const [suggestions, setSuggestions] = useState<any[]>([]);
+  const [prizes, setPrizes] = useState<any[]>([]);
+
+  useEffect(() => {
+    loadData();
+  }, [mockSession]);
+
+  const loadData = async () => {
+    try {
+      // Ads
+      const allAds = await localDB.ads.getAll();
+      setAds(allAds.filter((a: any) => a.is_active));
+
+      // News
+      const allNews = await localDB.news.getAll();
+      setNews(allNews.slice(0, 4).map((n: any) => ({
+        id: n.id,
+        title: n.title,
+        time: getRelativeTime(n.created_at),
+      })));
+
+      // Friend suggestions
+      const userId = mockSession?.id || 'usr_henry';
+      const allSuggestions = await localDB.relationships.getFriendSuggestions(userId);
+      const resolvedSuggestions = await Promise.all(allSuggestions.map(async (s: any) => {
+        const user = await localDB.users.getById(s.suggested_id);
+        return {
+          id: s.id,
+          name: user?.full_name || 'Usuario',
+          avatar: user?.avatar_url || 'https://i.pravatar.cc/150',
+          time: '2 d',
+          mutualFollowers: s.mutual_followers || 0,
+        };
+      }));
+      setSuggestions(resolvedSuggestions);
+
+      // Prizes
+      const allPrizes = await localDB.prizes.getAll();
+      const userPrizes = allPrizes.filter((p: any) => p.user_id === userId);
+      setPrizes(userPrizes.map((p: any) => ({
+        id: p.id,
+        title: p.title,
+        description: p.description,
+        amount: `${p.amount} ${p.currency}`,
+      })));
+    } catch (e) {
+      console.warn('[RightSidebar] Error loading data:', e);
+    }
+  };
+
   return (
-    <ScrollView 
+    <ScrollView
       style={{ height: 'calc(100vh - 64px)' as any }}
-      className="w-[20%] p-1 bg-primary/5" 
-      showsVerticalScrollIndicator={false}
+      className="w-[20%] p-1 bg-primary/5 border border-l-primary/20 hover-scrollbar"
+      showsVerticalScrollIndicator={true}
     >
 
       {/* Contenedor 1: Publicidad */}
       <WidgetContainer title={<HandyAdsLogo size="xs" />}>
-        {mockAds.filter(a => a.size === 'large').map(ad => (
-          <AdWidget key={ad.id} image={ad.image} title={ad.title} domain={ad.domain} size={ad.size} />
+        {ads.filter(a => a.size === 'large').map(ad => (
+          <AdWidget key={ad.id} image={ad.image_url || ad.image} title={ad.title} domain={ad.domain} size={ad.size} />
         ))}
         <View className="flex-row gap-2">
-          {mockAds.filter(a => a.size === 'small').map(ad => (
-            <AdWidget key={ad.id} image={ad.image} title={ad.title} domain={ad.domain} size={ad.size} />
+          {ads.filter(a => a.size === 'small').map(ad => (
+            <AdWidget key={ad.id} image={ad.image_url || ad.image} title={ad.title} domain={ad.domain} size={ad.size} />
           ))}
         </View>
       </WidgetContainer>
@@ -182,29 +195,29 @@ export default function RightSidebarWidgets({ onSelectNews, onSelectPrize, onSel
           </TouchableOpacity>
         }
       >
-        {mockNews.map(news => (
-          <NewsWidget key={news.id} id={news.id} title={news.title} time={news.time} onSelectNews={onSelectNews} />
+        {news.map(n => (
+          <NewsWidget key={n.id} id={n.id} title={n.title} time={n.time} onSelectNews={onSelectNews} />
         ))}
       </WidgetContainer>
 
       <Divider />
 
-      {/* Contenedor 3: Solicitudes de Amistad */}
+      {/* Contenedor 3: Sugerencias de Seguimiento */}
       <WidgetContainer
-        title="Solicitudes de amistad"
+        title="Sugerencias de seguimiento"
         action={
-          <TouchableOpacity onPress={() => onSelectFriendRequest ? onSelectFriendRequest('all') : undefined}>
+          <TouchableOpacity onPress={() => onSelectFollowSuggestion ? onSelectFollowSuggestion('all') : undefined}>
             <Text className="text-primary text-sm hover:underline">Ver todo</Text>
           </TouchableOpacity>
         }
       >
-        {mockFriendRequests.map(req => (
-          <FriendRequestWidget
+        {suggestions.map(req => (
+          <FollowSuggestionWidget
             key={req.id}
             name={req.name}
             avatar={req.avatar}
             time={req.time}
-            mutualFriends={req.mutualFriends}
+            mutualFollowers={req.mutualFollowers}
           />
         ))}
       </WidgetContainer>
@@ -212,7 +225,7 @@ export default function RightSidebarWidgets({ onSelectNews, onSelectPrize, onSel
       <Divider />
 
       {/* Contenedor 4: Notificador de Premios */}
-      <WidgetContainer 
+      <WidgetContainer
         title="Premios Ganados"
         action={
           <TouchableOpacity onPress={() => onSelectPrize ? onSelectPrize('all') : undefined}>
@@ -220,11 +233,25 @@ export default function RightSidebarWidgets({ onSelectNews, onSelectPrize, onSel
           </TouchableOpacity>
         }
       >
-        {mockPrizes.map(prize => (
+        {prizes.map(prize => (
           <PrizeNotificationWidget key={prize.id} id={prize.id} title={prize.title} description={prize.description} onSelectPrize={onSelectPrize} />
         ))}
       </WidgetContainer>
 
     </ScrollView>
   );
+}
+
+function getRelativeTime(dateStr: string): string {
+  const now = new Date();
+  const date = new Date(dateStr);
+  const diffMs = now.getTime() - date.getTime();
+  const diffMins = Math.floor(diffMs / 60000);
+  if (diffMins < 1) return 'Ahora';
+  if (diffMins < 60) return `Hace ${diffMins} min`;
+  const diffHours = Math.floor(diffMins / 60);
+  if (diffHours < 24) return `Hace ${diffHours}h`;
+  const diffDays = Math.floor(diffHours / 24);
+  if (diffDays < 7) return `Hace ${diffDays}d`;
+  return date.toLocaleDateString('es', { day: 'numeric', month: 'short' });
 }

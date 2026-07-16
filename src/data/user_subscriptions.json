@@ -1,0 +1,26 @@
+[
+  {
+    "id": "sub_1",
+    "user_id": "usr_carlos",
+    "plan_id": "plan_medium",
+    "is_active": true,
+    "expires_at": "2025-08-12T14:30:00Z",
+    "created_at": "2025-07-12T14:30:00Z"
+  },
+  {
+    "id": "sub_2",
+    "user_id": "usr_ana",
+    "plan_id": "plan_pro",
+    "is_active": true,
+    "expires_at": "2025-08-15T18:00:00Z",
+    "created_at": "2025-07-15T18:00:00Z"
+  },
+  {
+    "id": "sub_3",
+    "user_id": "usr_carlos",
+    "plan_id": "plan_roberto_premium",
+    "is_active": true,
+    "expires_at": "2025-08-01T12:00:00Z",
+    "created_at": "2025-07-01T12:00:00Z"
+  }
+]

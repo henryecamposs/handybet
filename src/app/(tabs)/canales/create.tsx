@@ -7,7 +7,7 @@ export default function CreateChannelScreen() {
   const router = useRouter();
 
   return (
-    <ScrollView className="flex-1 bg-background px-4 pt-12" showsVerticalScrollIndicator={false}>
+    <ScrollView className="flex-1 bg-background/80 px-4 pt-12" showsVerticalScrollIndicator={false}>
       {/* Header */}
       <View className="flex-row items-center gap-2 mb-6">
         <TouchableOpacity onPress={() => router.back()} className="mr-2">
@@ -19,7 +19,7 @@ export default function CreateChannelScreen() {
         </View>
       </View>
 
-      <View className="bg-background rounded-3xl p-6 border border-zinc-800 mb-8">
+      <View className="bg-background/80 rounded-3xl p-6 border border-zinc-800 mb-8">
 
         <View className="bg-secondary/10 border border-secondary/30 p-4 rounded-2xl mb-6 flex-row items-start">
           <CheckCircle2 size={20} color="#10b981" className="mt-1 mr-3" />

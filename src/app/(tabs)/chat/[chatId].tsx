@@ -79,7 +79,7 @@ export default function ChatDetailScreen() {
                 key={msg.id}
                 className={`mb-4 max-w-[80%] rounded-2xl p-4 ${isMe
                   ? 'bg-secondary/10 border border-secondary/20 align-self-end ml-auto'
-                  : 'bg-background border border-zinc-850 align-self-start mr-auto'
+                  : 'bg-background/80 border border-zinc-850 align-self-start mr-auto'
                   }`}
               >
                 <Text className={`text-sm ${isMe ? 'text-secondary font-bold' : 'text-foreground'}`}>
@@ -101,7 +101,7 @@ export default function ChatDetailScreen() {
             editable={!isRecording}
             value={inputText}
             onChangeText={setInputText}
-            className="flex-1 bg-background border border-zinc-800 rounded-2xl px-4 py-3 text-white font-bold"
+            className="flex-1 bg-background/80 border border-zinc-800 rounded-2xl px-4 py-3 text-white font-bold"
           />
 
           {/* Grabadora de Voz Nativa simulada */}
@@ -109,7 +109,7 @@ export default function ChatDetailScreen() {
             onPress={handleToggleRecord}
             className={`w-12 h-12 rounded-2xl justify-center items-center ${isRecording
               ? 'bg-rose-500/20 border border-rose-500'
-              : 'bg-background border border-zinc-800'
+              : 'bg-background/80 border border-zinc-800'
               }`}
           >
             <Text className="text-white text-base">{isRecording ? '⏹' : '🎤'}</Text>
@@ -119,7 +119,7 @@ export default function ChatDetailScreen() {
           <TouchableOpacity
             onPress={handleSend}
             disabled={isRecording || !inputText.trim()}
-            className={`w-12 h-12 rounded-2xl justify-center items-center ${!inputText.trim() ? 'bg-background border border-zinc-800/40' : 'bg-secondary border border-secondary'
+            className={`w-12 h-12 rounded-2xl justify-center items-center ${!inputText.trim() ? 'bg-background/80 border border-zinc-800/40' : 'bg-secondary border border-secondary'
               }`}
           >
             <Text className={`text-base font-black ${!inputText.trim() ? 'text-foreground' : 'text-foreground'}`}>

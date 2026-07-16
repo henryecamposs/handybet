@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { supabase } from '../../../../lib/supabaseClient';
+import { localDB } from '../../../../lib/localDB';
+import { useHandyBetStore } from '../../../../store/useHandyBetStore';
 import { useGetMediaVault, useSubscribeToMediaPlan } from '../../../../hooks/useHandyBetQueries';
 import BetMatrixBuilder from '../../../../components/betting/BetMatrixBuilder';
 import QRDisplayZone from '../../../../components/betting/QRDisplayZone';
@@ -27,30 +28,24 @@ export default function GrupoDetailScreen() {
 
 
 
+  const { mockSession } = useHandyBetStore();
+
   async function fetchPlansAndSubs() {
     try {
       setIsLoadingPlans(true);
-      // 1. Obtener planes del grupo
-      const { data: plansData, error: plansError } = await supabase
-        .from('media_plans')
-        .select('*')
-        .eq('group_id', grupoId);
+      const userId = mockSession?.id || 'usr_henry';
 
-      if (plansError) throw plansError;
-      setPlans(plansData || []);
+      // 1. Obtener planes del grupo (a través de su canal)
+      const group = await localDB.groups.getById(grupoId as string);
+      if (group && group.channel_id) {
+        const channel = await localDB.channels.getById(group.channel_id);
+        setPlans(channel?.plans || []);
+      }
 
       // 2. Obtener suscripciones activas de usuario
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        const { data: subsData, error: subsError } = await supabase
-          .from('user_subscriptions')
-          .select('plan_id')
-          .eq('user_id', user.id)
-          .eq('is_active', true);
-
-        if (subsError) throw subsError;
-        setUserActiveSubs((subsData || []).map(s => s.plan_id));
-      }
+      const allSubs = await localDB.user_subscriptions.getAll();
+      const userSubs = allSubs.filter((s: any) => s.user_id === userId && s.is_active);
+      setUserActiveSubs(userSubs.map((s: any) => s.plan_id));
     } catch (err) {
       console.log('Error fetching plans/subs:', err);
     } finally {
@@ -78,32 +73,29 @@ export default function GrupoDetailScreen() {
 
   const handleBetGenerated = async (betData: any) => {
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error('Usuario no autenticado.');
+      const userId = mockSession?.id || 'usr_henry';
 
       // 1. Obtener short_code de grupo
-      const { data: groupData } = await supabase
-        .from('groups')
-        .select('short_code')
-        .eq('id', grupoId)
-        .single();
+      const group = await localDB.groups.getById(grupoId as string);
+      const prefix = group?.short_code || '0000';
 
-      const prefix = groupData?.short_code || '0000';
       // Correlativo aleatorio de 6 dígitos
       const randomSuffix = Math.floor(100000 + Math.random() * 900000).toString();
       const betCode = `${prefix}-${randomSuffix}`;
 
-      // 2. Guardar en base de datos
-      const { error } = await supabase.from('bets').insert({
+      // 2. Guardar en base de datos local
+      await localDB.bets.insert({
+        id: localDB.generateId('bet'),
         group_id: grupoId,
-        user_id: user.id,
+        user_id: userId,
         bet_code: betCode,
         bet_data: betData,
         amount: betData.totalAmount,
-        status: 'pendiente'
+        potential_prize: betData.totalAmount * 50, // Multiplicador mock de 50x
+        status: 'pendiente',
+        created_at: new Date().toISOString()
       });
 
-      if (error) throw error;
       setGeneratedBetCode(betCode);
     } catch (err: any) {
       alert(err.message || 'Error al guardar apuesta.');
@@ -111,7 +103,7 @@ export default function GrupoDetailScreen() {
   };
 
   return (
-    <ScrollView className="flex-1 bg-background px-4 pt-12">
+    <ScrollView className="flex-1 bg-background/80 px-4 pt-12">
       {/* Botón Volver */}
       <TouchableOpacity onPress={() => router.back()} className="flex-row items-center gap-2 mb-6">
         <Text className="text-foreground font-bold text-xs">◀ Salas</Text>
@@ -125,7 +117,7 @@ export default function GrupoDetailScreen() {
               <QRDisplayZone betCode={generatedBetCode} />
               <TouchableOpacity
                 onPress={() => setGeneratedBetCode(null)}
-                className="bg-background border border-zinc-800 py-3.5 rounded-2xl items-center mt-6 w-full max-w-sm mx-auto"
+                className="bg-background/80 border border-zinc-800 py-3.5 rounded-2xl items-center mt-6 w-full max-w-sm mx-auto"
               >
                 <Text className="text-white font-bold text-sm">Nueva Jugada</Text>
               </TouchableOpacity>
@@ -140,7 +132,7 @@ export default function GrupoDetailScreen() {
             <View>
               <TouchableOpacity
                 onPress={() => setShowPlansSelector(false)}
-                className="mb-4 self-start bg-background px-3 py-1.5 rounded-xl border border-zinc-800"
+                className="mb-4 self-start bg-background/80 px-3 py-1.5 rounded-xl border border-zinc-800"
               >
                 <Text className="text-foreground font-bold text-xs">◀ Ver Bóveda</Text>
               </TouchableOpacity>

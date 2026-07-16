@@ -21,7 +21,7 @@ export default function QRCameraScanner({ onScanned, onClose }: QRCameraScannerP
 
   if (!permission) {
     return (
-      <View className="flex-1 justify-center items-center bg-background p-6">
+      <View className="flex-1 justify-center items-center bg-background/80 p-6">
         <ActivityIndicator size="large" color="#10b981" />
         <Text className="text-muted-foreground font-bold mt-4 text-center">
           Solicitando permisos de cámara...
@@ -32,7 +32,7 @@ export default function QRCameraScanner({ onScanned, onClose }: QRCameraScannerP
 
   if (!permission.granted) {
     return (
-      <View className="flex-1 justify-center items-center bg-background p-6">
+      <View className="flex-1 justify-center items-center bg-background/80 p-6">
         <Text className="text-rose-500 font-black text-lg mb-4 text-center">
           Acceso a la Cámara Denegado
         </Text>
@@ -69,7 +69,7 @@ export default function QRCameraScanner({ onScanned, onClose }: QRCameraScannerP
   };
 
   return (
-    <View className="flex-1 bg-black justify-between relative">
+    <View className="flex-1 bg-background/80justify-between relative">
       {/* Cabecera */}
       <View className="absolute top-12 left-0 right-0 z-10 flex-row justify-between items-center px-6">
         <Text className="text-white font-black text-lg">Escanear Ticket</Text>
