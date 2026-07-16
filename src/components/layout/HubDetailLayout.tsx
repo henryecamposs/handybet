@@ -1,11 +1,13 @@
 import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { useRouter } from 'expo-router';
 import { useThemeColors } from '@/hooks/useThemeColors';
 
 export interface HubDetailLayoutProps {
   // Acción de regreso
   backLabel: string;
-  onBack: () => void;
+  onBack?: () => void;
+  fallbackRoute?: string;
   
   // Encabezado
   categoryText?: string;
@@ -28,6 +30,7 @@ export interface HubDetailLayoutProps {
 export default function HubDetailLayout({
   backLabel,
   onBack,
+  fallbackRoute,
   categoryText,
   title,
   listTitle,
@@ -39,11 +42,26 @@ export default function HubDetailLayout({
   children,
 }: HubDetailLayoutProps) {
   const colors = useThemeColors();
+  const router = useRouter();
+
+  const handleBack = () => {
+    if (onBack) {
+      onBack();
+    } else {
+      if (router.canGoBack()) {
+        router.back();
+      } else if (fallbackRoute) {
+        router.replace(fallbackRoute as any);
+      } else {
+        router.replace('/');
+      }
+    }
+  };
 
   return (
     <ScrollView className="flex-1 bg-background px-4 pt-12" showsVerticalScrollIndicator={false}>
       {/* Botón de regreso */}
-      <TouchableOpacity onPress={onBack} className="flex-row items-center gap-2 mb-6">
+      <TouchableOpacity onPress={handleBack} className="flex-row items-center gap-2 mb-6">
         <Text className="text-foreground font-bold text-sm">◀ {backLabel}</Text>
       </TouchableOpacity>
 

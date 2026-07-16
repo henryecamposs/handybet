@@ -72,7 +72,7 @@ export default function CanalDetailScreen() {
   return (
     <HubDetailLayout
       backLabel="Volver a Canales"
-      onBack={() => router.back()}
+      fallbackRoute="/(tabs)/canales"
       categoryText="Consorcio de Loterías"
       title={channel?.name || ''}
       listTitle="Salas y Subgrupos"
