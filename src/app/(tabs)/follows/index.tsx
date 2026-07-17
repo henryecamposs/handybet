@@ -5,7 +5,7 @@ import { handyBetUsers } from '../../../mockdata/handyBetMock';
 import { useRouter } from 'expo-router';
 import { useThemeColors } from '@/hooks/useThemeColors';
 import HubLayout from '@/components/layout/HubLayout';
-import PostItem from '../../components/feed/PostItem';
+import PostItem from '../../../components/feed/PostItem';
 import { localDB } from '../../../lib/localDB';
 
 export default function FollowsScreen() {
