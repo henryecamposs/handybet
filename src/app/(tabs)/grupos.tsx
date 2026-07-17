@@ -9,6 +9,8 @@ import { Group, GroupPlan, GroupRules } from '../../types/handyBet';
 import { useThemeColors } from '../../hooks/useThemeColors';
 import { localDB } from '../../lib/localDB';
 import { HubLayout, Carrusel, SeccionLista, PostContainer, TabContainer } from '../../components/layout/hub';
+import ListItem from '../../components/ui/ListItem';
+import IconButton from '../../components/ui/IconButton';
 
 export default function GruposScreen() {
   const router = useRouter();
@@ -106,66 +108,61 @@ export default function GruposScreen() {
     group.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const renderMyGroupCard = (group: Group) => (
-    <View
-      key={group.id}
-      className="w-36 h-44 bg-background/80  border border-border items-center justify-between p-3 mr-4 hover:bg-background/80/80 transition-colors"
-    >
-      <TouchableOpacity
-        onPress={() => handleGroupClick(group)}
-        className="items-center flex-1 justify-center w-full"
-      >
-        <View className="w-10 h-10 rounded-full bg-background/85 items-center justify-center mb-1.5 border border-border">
-          <Users size={18} color={colors.primary} />
-        </View>
-        <Text className="text-foreground font-black text-center text-xs px-1" numberOfLines={2}>
-          {group.name}
-        </Text>
-        <Text className="text-zinc-500 text-[9px] font-bold mt-0.5">
-          {group.members?.length || 0} miembros
-        </Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        onPress={() => router.push(`/feed/search?id=${group.id}&from=group` as any)}
-        className="w-full bg-primary/20 border border-border py-1.5 rounded-xs items-center"
-      >
-        <Text className="text-primary text-[9px] font-black uppercase tracking-wider">Ver Feed 📢</Text>
-      </TouchableOpacity>
-    </View>
-  );
-
-  const renderDiscoverGroupCard = (group: any) => (
-    <View
-      key={group.id}
-      className="w-[48%] bg-background/80 p-3.5  border border-border items-center justify-between min-h-[160px] mb-4"
-    >
-      <TouchableOpacity
+  const renderGroupItem = (group: any) => {
+    const isMember = misGrupos.some((g: Group) => g.id === group.id);
+    return (
+      <ListItem
+        key={group.id}
+        title={group.name}
+        subtitle={`${group.members?.length || 0} miembros`}
+        subtitleVariant="muted"
+        leftElement={
+          <View className="w-10 h-10 rounded-full bg-background/80 items-center justify-center border border-border">
+            {group.id.includes('sug') || !isMember ? <Text className="text-lg">🌍</Text> : <Users size={18} color={colors.primary} />}
+          </View>
+        }
+        rightElement={
+          <IconButton
+            label="Ver Feed"
+            onPress={() => router.push(`/feed/search?id=${group.id}&from=group` as any)}
+            variant="ghost"
+            hasBorder={true}
+            size="xs"
+            rounded="full"
+          />
+        }
         onPress={() => handleGroupClick(group as any)}
-        className="items-center flex-1 justify-center w-full mb-3"
-      >
-        <View className="w-10 h-10 rounded-full bg-background/80 items-center justify-center mb-2 border border-border">
-          <Text className="text-lg">🌍</Text>
-        </View>
-        <Text className="text-foreground font-black text-center text-xs" numberOfLines={2}>{group.name}</Text>
-        <Text className="text-zinc-500 text-[9px] font-bold mt-0.5">{group.members?.length || 0} miembros</Text>
-      </TouchableOpacity>
+        className="mb-2 bg-background/80"
+      />
+    );
+  };
 
-      <TouchableOpacity
-        onPress={() => router.push(`/feed/search?id=${group.id}&from=group` as any)}
-        className="w-full bg-primary/20 border border-border py-1.5 rounded-xs items-center"
-      >
-        <Text className="text-primary text-[9px] font-black uppercase tracking-wider">Ver Feed 📢</Text>
-      </TouchableOpacity>
+  const addGroupBar = (
+    <View className="flex-row items-center mb-6 mt-2">
+      <TextInput
+        placeholder="Unirte a un grupo por código..."
+        placeholderTextColor={colors.mutedForeground}
+        className="flex-1 bg-background/80 border border-border rounded-full px-4 h-12 text-foreground text-xs font-bold"
+      />
+      <View className="ml-2">
+        <IconButton
+          icon={Plus}
+          label="Agregar"
+          onPress={() => router.push('/(tabs)/grupos/create' as any)}
+          variant="primary"
+          size="sm"
+          rounded="full"
+        />
+      </View>
     </View>
   );
 
   const emptyState = (
-    <View className="flex-1 items-center justify-center py-20 mt-4">
+    <View className="flex-1 items-center justify-center py-20 border border-dashed border-border bg-background/50 rounded-2xl">
       <Compass size={48} color="#52525b" className="mb-4" />
-      <Text className="text-foreground font-bold text-lg text-center">Aún no has creado grupos</Text>
-      <Text className="text-foreground text-sm text-center mt-2 max-w-[250px]">
-        Crea tu propio grupo para conectar con amigos o descubre nuevas comunidades.
+      <Text className="text-foreground font-bold text-lg text-center">Aún no tienes grupos</Text>
+      <Text className="text-muted-foreground text-sm text-center mt-2 max-w-[250px]">
+        No hay grupos disponibles. Ingresa un código arriba o explora sugerencias.
       </Text>
     </View>
   );
@@ -176,42 +173,13 @@ export default function GruposScreen() {
       label: 'Mis Grupos',
       content: (
         <View className="mt-2">
-          {misGrupos.length > 0 ? (
-            <View className="flex-row flex-wrap gap-4">
-              <TouchableOpacity
-                onPress={() => router.push('/(tabs)/grupos/create' as any)}
-                className="w-[48%] h-36 bg-muted  border border-dashed border-border items-center justify-center hover:bg-background/80/80 transition-colors"
-              >
-                <View className="w-12 h-12 rounded-full bg-card items-center justify-center mb-2">
-                  <Plus size={24} color={colors.secondary} />
-                </View>
-                <Text className="text-foreground font-bold text-sm text-center">Crear Nuevo</Text>
-              </TouchableOpacity>
-              {misGrupos.map((group) => (
-                <TouchableOpacity
-                  key={group.id}
-                  onPress={() => handleGroupClick(group as any)}
-                  className="w-[48%] h-36 bg-card  border border-border items-center justify-center hover:bg-background/80/80 transition-colors px-2"
-                >
-                  <View className="w-10 h-10 rounded-full bg-background/80 items-center justify-center mb-2 border border-border">
-                    <Text className="text-lg">🌍</Text>
-                  </View>
-                  <Text className="text-foreground font-black text-center text-xs" numberOfLines={2}>{group.name}</Text>
-                  <Text className="text-zinc-500 text-[9px] font-bold mt-0.5">{group.members?.length || 0} miembros</Text>
-                </TouchableOpacity>
-              ))}
-            </View>
-          ) : (
-            <View className="flex-1">
-              <TouchableOpacity
-                onPress={() => router.push('/(tabs)/grupos/create' as any)}
-                className="w-full bg-primary p-4  items-center justify-center mb-6"
-              >
-                <Text className="text-black font-black text-xs uppercase">Crear Nuevo Grupo</Text>
-              </TouchableOpacity>
-              {emptyState}
-            </View>
-          )}
+          {addGroupBar}
+          <SeccionLista
+            items={misGrupos}
+            renderItem={renderGroupItem}
+            layout="list"
+            emptyState={emptyState}
+          />
         </View>
       ),
     },
@@ -221,8 +189,8 @@ export default function GruposScreen() {
       content: (
         <SeccionLista
           items={filteredDiscoverGroups}
-          renderItem={renderDiscoverGroupCard}
-          layout="grid"
+          renderItem={renderGroupItem}
+          layout="list"
         />
       ),
     },
