@@ -127,7 +127,7 @@ export default function GruposScreen() {
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => router.push(`/feed/search?id=${group.id}` as any)}
+        onPress={() => router.push(`/feed/search?id=${group.id}&from=group` as any)}
         className="w-full bg-primary/20 border border-primary/30 py-1.5 rounded-xl items-center"
       >
         <Text className="text-primary text-[9px] font-black uppercase tracking-wider">Ver Feed 📢</Text>
@@ -152,7 +152,7 @@ export default function GruposScreen() {
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => router.push(`/feed/search?id=${group.id}` as any)}
+        onPress={() => router.push(`/feed/search?id=${group.id}&from=group` as any)}
         className="w-full bg-primary/20 border border-primary/30 py-1.5 rounded-xl items-center"
       >
         <Text className="text-primary text-[9px] font-black uppercase tracking-wider">Ver Feed 📢</Text>
@@ -196,7 +196,7 @@ export default function GruposScreen() {
             <Text className="text-foreground font-black text-lg uppercase tracking-wider">Últimas Publicaciones</Text>
             {latestPosts[0] && (
               <TouchableOpacity
-                onPress={() => router.push(`/feed/search?id=${latestPosts[0].group_id || latestPosts[0].channel_id}` as any)}
+                onPress={() => router.push(`/feed/search?id=${latestPosts[0].group_id || latestPosts[0].channel_id}&from=group` as any)}
               >
                 <Text className="text-primary text-[10px] font-black uppercase">Ver todas</Text>
               </TouchableOpacity>
@@ -220,7 +220,7 @@ export default function GruposScreen() {
                     </View>
                     {targetId && (
                       <TouchableOpacity
-                        onPress={() => router.push(`/feed/search?id=${targetId}` as any)}
+                        onPress={() => router.push(`/feed/search?id=${targetId}&from=group` as any)}
                         className="bg-zinc-900 border border-zinc-800 px-3 py-1 rounded-full"
                       >
                         <Text className="text-white text-[9px] font-bold">Ver Sala</Text>

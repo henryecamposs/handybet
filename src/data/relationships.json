@@ -38,7 +38,7 @@
     { "id": "crc_vip_joselin", "owner_id": "usr_joselin", "name": "Fans VIP", "members": ["usr_carlos", "usr_ana", "usr_maria"], "created_at": "2025-03-01T10:00:00Z" },
     { "id": "crc_pronosticos", "owner_id": "usr_roberto", "name": "Círculo Premium", "members": ["usr_carlos", "usr_gabriel", "usr_ana"], "created_at": "2025-04-01T12:00:00Z" }
   ],
-  "friend_suggestions": [
+  "follow_suggestions": [
     { "id": "fs_1", "user_id": "usr_henry", "suggested_id": "usr_gabriel", "mutual_followers": 3, "reason": "Sigue a personas que tú sigues" },
     { "id": "fs_2", "user_id": "usr_henry", "suggested_id": "usr_valentina", "mutual_followers": 2, "reason": "Nueva en la plataforma" },
     { "id": "fs_3", "user_id": "usr_henry", "suggested_id": "usr_laura", "mutual_followers": 4, "reason": "Trabaja en Taquillas Valencia" },

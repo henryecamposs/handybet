@@ -223,7 +223,7 @@ export default function GrupoDetailScreen() {
       {group && (
         <View className="mt-8 border-t border-zinc-850 pt-6">
           <TouchableOpacity
-            onPress={() => router.push(`/feed/search?id=${group.id}` as any)}
+            onPress={() => router.push(`/feed/search?id=${group.id}&from=group` as any)}
             className="bg-primary/20 border border-primary/30 p-4 rounded-3xl items-center justify-center mb-6"
           >
             <Text className="text-primary font-black text-xs uppercase tracking-wider">Ver Feed / Publicaciones del Grupo 📢</Text>

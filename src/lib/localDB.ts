@@ -20,7 +20,7 @@ const DB_KEY = 'handybet_local_db';
 
 export interface LocalDatabase {
   users: any[];
-  relationships: { follows: any[]; circles: any[]; friend_suggestions: any[] };
+  relationships: { follows: any[]; circles: any[]; follow_suggestions: any[] };
   posts: any[];
   comments: any[];
   news: any[];
@@ -226,9 +226,9 @@ const relationshipsAccess = {
       .map((c: any) => c.id);
   },
 
-  async getFriendSuggestions(userId: string): Promise<any[]> {
+  async getFollowSuggestions(userId: string): Promise<any[]> {
     const database = await initDB();
-    return database.relationships.friend_suggestions.filter((s: any) => s.user_id === userId);
+    return database.relationships.follow_suggestions.filter((s: any) => s.user_id === userId);
   }
 };
 

@@ -132,9 +132,9 @@ export default function RightSidebarWidgets({ onSelectNews, onSelectPrize, onSel
         time: getRelativeTime(n.created_at),
       })));
 
-      // Friend suggestions
+      // Follow suggestions
       const userId = mockSession?.id || 'usr_henry';
-      const allSuggestions = await localDB.relationships.getFriendSuggestions(userId);
+      const allSuggestions = await localDB.relationships.getFollowSuggestions(userId);
       const resolvedSuggestions = await Promise.all(allSuggestions.map(async (s: any) => {
         const user = await localDB.users.getById(s.suggested_id);
         return {

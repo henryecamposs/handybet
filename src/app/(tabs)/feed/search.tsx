@@ -12,7 +12,7 @@ import PostDetailView from '../../../components/feed/PostDetailView';
 import { VisibilityLevel } from '../../../types/handyBet';
 
 export default function FeedSearchScreen() {
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id, from } = useLocalSearchParams<{ id: string, from?: string }>();
   const router = useRouter();
   const colors = useThemeColors();
   const { mockSession } = useHandyBetStore();
@@ -237,13 +237,27 @@ export default function FeedSearchScreen() {
     categoryText = 'Perfil del Creador';
   }
 
+  const handleBack = () => {
+    if (from === 'channel') {
+      router.push('/(tabs)/channels' as any);
+    } else if (from === 'group') {
+      router.push('/(tabs)/grupos' as any);
+    } else if (from === 'follow') {
+      router.push('/(tabs)/follows' as any);
+    } else if (from === 'feed') {
+      router.push('/(tabs)/feed' as any);
+    } else {
+      router.back();
+    }
+  };
+
   return (
     <View className="flex-1 bg-background">
       {/* Header Estilo Twitter */}
       <View className="flex-row items-center justify-between border-b border-primary/20 py-2.5 px-4 bg-background/85 sticky top-0 z-10">
         <View className="flex-row items-center flex-1">
           <TouchableOpacity
-            onPress={() => router.back()}
+            onPress={handleBack}
             className="mr-3 p-1 rounded-full hover:bg-zinc-800"
           >
             <ArrowLeft size={22} color={colors.foreground} />

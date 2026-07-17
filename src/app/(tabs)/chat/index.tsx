@@ -148,7 +148,7 @@ export default function ChatInboxScreen() {
 
   const handleUserActivePress = (userId: string) => {
     if (userId === 'usr_joselin') {
-      router.push('/chat/friend/usr_joselin');
+      router.push('/chat/follow/usr_joselin');
     } else {
       router.push(`/profile/${userId}`);
     }

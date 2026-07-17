@@ -231,7 +231,7 @@ export default function FeedScreen() {
             
             {!isDesktop && (
               <View className="flex-row items-center gap-3">
-                <TouchableOpacity onPress={() => router.push('/(tabs)/friends' as any)} className="p-1">
+                <TouchableOpacity onPress={() => router.push('/(tabs)/follows' as any)} className="p-1">
                   <UserCheck size={20} color="white" />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => router.push('/favorites' as any)} className="p-1">

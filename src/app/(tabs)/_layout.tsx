@@ -73,7 +73,7 @@ export default function TabsLayout() {
         <Tabs.Screen name="feed/search" options={{ href: null }} />
         
         <Tabs.Screen name="chat/[chatId]" options={{ href: null }} />
-        <Tabs.Screen name="chat/friend/[friendId]" options={{ href: null }} />
+        <Tabs.Screen name="chat/follow/[followId]" options={{ href: null }} />
         <Tabs.Screen name="chat/group/[groupId]" options={{ href: null }} />
         <Tabs.Screen name="chat/group/[groupId]/info" options={{ href: null }} />
         
@@ -92,8 +92,8 @@ export default function TabsLayout() {
         <Tabs.Screen name="favorites/index" options={{ href: null }} />
         <Tabs.Screen name="favorites/[id]" options={{ href: null }} />
         
-        <Tabs.Screen name="friends/index" options={{ href: null }} />
-        <Tabs.Screen name="friends/[id]" options={{ href: null }} />
+        <Tabs.Screen name="follows/index" options={{ href: null }} />
+        <Tabs.Screen name="follows/[id]" options={{ href: null }} />
         
         <Tabs.Screen name="games/index" options={{ href: null }} />
         <Tabs.Screen name="games/[gameId]" options={{ href: null }} />

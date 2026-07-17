@@ -43,7 +43,7 @@ export default function GuardadosScreen() {
     const targetId = item.target_id || item.id;
     switch (item.type) {
       case 'user':
-        router.push(`/friends/${targetId}` as any);
+        router.push(`/follows/${targetId}` as any);
         break;
       case 'game':
         router.push(`/games/${targetId}` as any);

@@ -45,8 +45,8 @@ export default function LeftSidebarWidgets() {
         <SidebarPopover
           icon={<Users size={24} color={colors.primary} />}
           label="Seguidos"
-          items={suggestions.following.map(f => ({ id: f.id, name: f.name, image: f.avatar, path: `/chat/friend/${f.id}` }))}
-          viewAllPath="/friends"
+          items={suggestions.following.map(f => ({ id: f.id, name: f.name, image: f.avatar, path: `/chat/follow/${f.id}` }))}
+          viewAllPath="/follows"
         />
 
         <SidebarPopover
@@ -55,7 +55,7 @@ export default function LeftSidebarWidgets() {
           items={savedItems.map((item) => {
             const targetId = item.target_id || item.id;
             let path = `/favorites/${item.id}`;
-            if (item.type === 'user') path = `/friends/${targetId}`;
+            if (item.type === 'user') path = `/follows/${targetId}`;
             else if (item.type === 'game') path = `/games/${targetId}`;
             else if (item.type === 'channel') path = `/channels/${targetId}`;
             else if (item.type === 'group') path = `/chat/group/${targetId}`;

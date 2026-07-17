@@ -119,7 +119,7 @@ export default function ChannelDetailScreen() {
       {channel && (
         <View className="mt-4 gap-4">
           <TouchableOpacity
-            onPress={() => router.push(`/feed/search?id=${channel.id}` as any)}
+            onPress={() => router.push(`/feed/search?id=${channel.id}&from=channel` as any)}
             className="bg-primary/20 border border-primary/30 p-4 rounded-3xl items-center justify-center hover:bg-primary/30 transition-colors"
           >
             <Text className="text-primary font-black text-sm uppercase tracking-wider">Ver Feed / Publicaciones del Canal 📢</Text>

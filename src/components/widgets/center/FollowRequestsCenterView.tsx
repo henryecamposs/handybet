@@ -7,13 +7,13 @@ import { socialService } from '../../../services/socialService';
 import { useHandyBetStore } from '../../../store/useHandyBetStore';
 import { useToastStore } from '../../../store/useToastStore';
 
-interface FriendRequestsCenterViewProps {
+interface FollowRequestsCenterViewProps {
   currentView: 'all-follow-suggestions' | 'follow-suggestion-detail';
   selectedItemId: string | null;
   onBack: () => void;
 }
 
-export default function FriendRequestsCenterView({ currentView, selectedItemId, onBack }: FriendRequestsCenterViewProps) {
+export default function FollowRequestsCenterView({ currentView, selectedItemId, onBack }: FollowRequestsCenterViewProps) {
   const colors = useThemeColors();
   const { mockSession } = useHandyBetStore();
   const { addToast } = useToastStore();
@@ -26,7 +26,7 @@ export default function FriendRequestsCenterView({ currentView, selectedItemId, 
   const loadSuggestions = async () => {
     try {
       setLoading(true);
-      const allSuggestions = await localDB.relationships.getFriendSuggestions(userId);
+      const allSuggestions = await localDB.relationships.getFollowSuggestions(userId);
       const resolved = await Promise.all(allSuggestions.map(async (s: any) => {
         const user = await localDB.users.getById(s.suggested_id);
         const isFollowing = await localDB.relationships.isFollowing(userId, s.suggested_id);

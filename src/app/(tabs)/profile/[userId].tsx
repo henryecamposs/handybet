@@ -19,13 +19,13 @@ export default function UserProfileScreen() {
   };
 
   const handleMessagePress = () => {
-    router.push(`/chat/friend/${userId}` as any);
+    router.push(`/chat/follow/${userId}` as any);
   };
 
   return (
     <HubDetailLayout
       logoType="default"
-      backRoute="/(tabs)/friends"
+      backRoute="/(tabs)/follows"
     >
       {/* Cover Portada */}
       <View className="h-44 bg-background/80 relative w-full border-b border-muted-foreground/15">

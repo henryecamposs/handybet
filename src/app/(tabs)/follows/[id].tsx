@@ -6,7 +6,7 @@ import { handyBetUsers } from '../../../mockdata/handyBetMock';
 import { useThemeColors } from '@/hooks/useThemeColors';
 import HubDetailLayout from '@/components/layout/HubDetailLayout';
 
-export default function FriendDetailScreen() {
+export default function FollowDetailScreen() {
   const { id } = useLocalSearchParams();
   const router = useRouter();
   const colors = useThemeColors();
@@ -19,13 +19,13 @@ export default function FriendDetailScreen() {
   };
 
   const handleMessagePress = () => {
-    router.push(`/chat/friend/${id}` as any);
+    router.push(`/chat/follow/${id}` as any);
   };
 
   return (
     <HubDetailLayout
       logoType="default"
-      backRoute="/(tabs)/friends"
+      backRoute="/(tabs)/follows"
     >
       {/* Cover Portada */}
       <View className="h-44 bg-background/80 relative w-full border-b border-muted-foreground/15">

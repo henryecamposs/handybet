@@ -6,7 +6,7 @@ import HandyBetHeader from './HandyBetHeader';
 import RightSidebarWidgets from '../widgets/RightSidebarWidgets';
 import NewsCenterView from '../widgets/center/NewsCenterView';
 import PrizesCenterView from '../widgets/center/PrizesCenterView';
-import FriendRequestsCenterView from '../widgets/center/FriendRequestsCenterView';
+import FollowRequestsCenterView from '../widgets/center/FollowRequestsCenterView';
 
 interface HandyBetLayoutProps {
   children: React.ReactNode;
@@ -77,11 +77,13 @@ export default function HandyBetLayout({ children, title }: HandyBetLayoutProps)
                 onBack={() => handleSelectPrize(null)}
                 onSelectPrize={handleSelectPrize}
               />
-              <FriendRequestsCenterView
-                currentView={currentView as any}
-                selectedItemId={selectedItemId}
-                onBack={() => handleSelectFollowSuggestion(null)}
-              />
+              {(currentView === 'all-follow-suggestions' || currentView === 'follow-suggestion-detail') && (
+                <FollowRequestsCenterView
+                  currentView={currentView}
+                  selectedItemId={selectedItemId}
+                  onBack={() => handleSelectFollowSuggestion(null)}
+                />
+              )}
             </View>
           )}
         </View>

@@ -132,7 +132,7 @@ export default function EditProfileScreen() {
   return (
     <HubDetailLayout
       logoType="default"
-      backRoute="/(tabs)/friends"
+      backRoute="/(tabs)/follows"
       onBack={() => router.back()}
       hideHeader={true}
     >
