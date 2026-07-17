@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import { ChevronRight } from 'lucide-react-native';
 import { useThemeColors } from '@/hooks/useThemeColors';
@@ -79,7 +79,7 @@ export default function SidebarPopover({ icon, label, items, onViewAll, viewAllP
         location="right"
         size="md"
       >
-        <View className="max-h-96">
+        <ScrollView className="max-h-[400px]">
           {items.length === 0 ? (
             <View className="p-4 items-center justify-center">
               <Text className="text-foreground text-sm">No hay elementos disponibles</Text>
@@ -107,7 +107,7 @@ export default function SidebarPopover({ icon, label, items, onViewAll, viewAllP
               </TouchableOpacity>
             ))
           )}
-        </View>
+        </ScrollView>
       </FloatingPopup>
     </View>
   );
