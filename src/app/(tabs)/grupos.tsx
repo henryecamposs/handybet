@@ -125,7 +125,7 @@ export default function GruposScreen() {
           {group.members?.length || 0} miembros
         </Text>
       </TouchableOpacity>
-      
+
       <TouchableOpacity
         onPress={() => router.push(`/feed/search?id=${group.id}` as any)}
         className="w-full bg-primary/20 border border-primary/30 py-1.5 rounded-xl items-center"
@@ -177,7 +177,7 @@ export default function GruposScreen() {
       searchPlaceholder="Buscar grupos por interés..."
       searchValue={searchQuery}
       onSearchChange={setSearchQuery}
-      myItemsTitle="Tus Grupos"
+      myItemsTitle="Mis Grupos"
       myItems={misGrupos}
       renderMyItem={renderMyGroupCard}
       onAddNewItem={() => router.push('/(tabs)/grupos/create' as any)}
@@ -228,7 +228,7 @@ export default function GruposScreen() {
                     )}
                   </View>
                   <Text className="text-foreground text-xs leading-relaxed" numberOfLines={3}>{post.content}</Text>
-                  
+
                   <TouchableOpacity
                     onPress={() => router.push(`/feed/${post.id}` as any)}
                     className="mt-3 flex-row items-center gap-1 self-start"
@@ -308,11 +308,10 @@ export default function GruposScreen() {
                           <TouchableOpacity
                             key={plan.id}
                             onPress={() => setSelectedPlanId(plan.id)}
-                            className={`p-3.5 rounded-2xl border flex-row justify-between items-center ${
-                              selectedPlanId === plan.id
+                            className={`p-3.5 rounded-2xl border flex-row justify-between items-center ${selectedPlanId === plan.id
                                 ? 'bg-secondary/15 border-secondary'
                                 : 'bg-background border-zinc-800'
-                            }`}
+                              }`}
                           >
                             <View>
                               <Text className="text-foreground text-xs font-black">{plan.name}</Text>
