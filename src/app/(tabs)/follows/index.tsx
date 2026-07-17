@@ -67,8 +67,7 @@ export default function FollowsScreen() {
         subtitleVariant="muted"
         avatar={user.avatar}
         onPress={() => router.push(`/follows/${user.id}` as any)}
-        hasBorderBottom={false}
-        className="p-5 border border-border"
+        className="mb-2"
         rightElement={
           <IconButton
             label={isFollowing ? 'Siguiendo' : 'Seguir'}
@@ -131,10 +130,19 @@ export default function FollowsScreen() {
       id: 'suggestions',
       label: 'Sugeridos',
       content: (
-        <SeccionLista
-          items={suggestionsToFollow}
-          renderItem={renderSuggestCard}
-        />
+        <View className="mt-2">
+          {suggestionsToFollow.length > 0 ? (
+            <View className="bg-background/80 overflow-hidden">
+              {suggestionsToFollow.map((user) => renderSuggestCard(user))}
+            </View>
+          ) : (
+            <View className="bg-background/80 border border-border border-dashed p-8 items-center justify-center">
+              <Text className="text-muted-foreground font-bold text-sm text-center">
+                No hay sugerencias en este momento.
+              </Text>
+            </View>
+          )}
+        </View>
       ),
     },
   ];
