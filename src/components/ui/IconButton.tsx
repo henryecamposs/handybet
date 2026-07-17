@@ -32,10 +32,10 @@ export default function IconButton({
   const colors = useThemeColors();
 
   const isIconOnly = !!Icon && !label;
-  
+
   let sizeClasses = '';
   let iconSize = 18;
-  
+
   if (isIconOnly) {
     if (size === 'xs') { sizeClasses = 'w-6 h-6'; iconSize = 14; }
     else if (size === 'sm') { sizeClasses = 'w-8 h-8'; iconSize = 16; }
@@ -53,26 +53,32 @@ export default function IconButton({
   let bgClass = 'bg-background/80';
   let borderClass = hasBorder ? 'border border-border' : '';
   let textIconColor = iconColor || colors.primary;
+  let textClass = 'text-primary';
   let hoverClass = 'hover:bg-primary/20';
 
   if (variant === 'destructive') {
-    textIconColor = iconColor || '#ef4444'; // colors.destructive doesn't exist in useThemeColors yet maybe? We will use literal if needed
-    hoverClass = 'hover:bg-red-500/20';
+    textIconColor = iconColor || colors.destructive;
+    textClass = 'text-destructive';
+    hoverClass = 'hover:bg-destructive/20';
   } else if (variant === 'ghost') {
     bgClass = 'bg-transparent';
-    hoverClass = 'hover:bg-zinc-800/50';
+    hoverClass = 'hover:bg-primary/20';
     textIconColor = iconColor || colors.foreground;
+    textClass = 'text-foreground';
   } else if (variant === 'muted') {
     textIconColor = iconColor || colors.mutedForeground;
-    hoverClass = 'hover:bg-zinc-800/50';
+    textClass = 'text-muted-foreground';
+    hoverClass = 'hover:bg-muted/20';
   } else if (variant === 'default') {
     textIconColor = iconColor || colors.foreground;
+    textClass = 'text-foreground';
   }
 
   if (isActive) {
     bgClass = 'bg-primary/10';
     borderClass = hasBorder ? 'border border-primary' : '';
     textIconColor = iconColor || colors.primary;
+    textClass = 'text-primary';
   }
 
   return (
@@ -84,8 +90,8 @@ export default function IconButton({
       {Icon && <Icon size={iconSize} color={textIconColor} />}
       {label && (
         <Text
-          style={{ color: textIconColor }}
-          className={`font-semibold ${Icon ? 'ml-2.5' : ''} ${size === 'xs' ? 'text-xs' : size === 'sm' ? 'text-sm' : 'text-base'}`}
+          style={iconColor ? { color: iconColor } : undefined}
+          className={`font-semibold ${Icon ? 'ml-2.5' : ''} ${size === 'xs' ? 'text-xs' : size === 'sm' ? 'text-sm' : 'text-base'} ${iconColor ? '' : textClass}`}
         >
           {label}
         </Text>
