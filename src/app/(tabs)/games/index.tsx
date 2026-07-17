@@ -14,17 +14,17 @@ export default function GamesScreen() {
     { 
       id: 'taquillas', 
       label: 'Taquillas', 
-      icon: <Ticket size={28} color={activeTab === 'taquillas' ? colors.primary : colors.secondary} /> 
+      icon: <Ticket size={28} color={activeTab === 'taquillas' ? colors.primary : colors.mutedForeground} /> 
     },
     { 
       id: 'quinielas', 
       label: 'Quinielas', 
-      icon: <Dice1 size={28} color={activeTab === 'quinielas' ? colors.primary : colors.secondary} /> 
+      icon: <Dice1 size={28} color={activeTab === 'quinielas' ? colors.primary : colors.mutedForeground} /> 
     },
     { 
       id: 'minijuegos', 
       label: 'Minijuegos', 
-      icon: <Gamepad2 size={28} color={activeTab === 'minijuegos' ? colors.primary : colors.secondary} /> 
+      icon: <Gamepad2 size={28} color={activeTab === 'minijuegos' ? colors.primary : colors.mutedForeground} /> 
     },
   ];
 

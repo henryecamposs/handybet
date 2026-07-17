@@ -348,7 +348,7 @@ export default function ChatInboxScreen() {
             <TouchableOpacity
               key={tab.id}
               onPress={() => setActiveTab(tab.id as any)}
-              className={`flex-1 flex-row items-center justify-center gap-1.5 py-3 rounded-full border transition-colors ${isSelected ? 'bg-primary/20 border-primary' : 'bg-background/80 border-muted-foreground/35'}`}
+              className={`flex-1 flex-row items-center justify-center gap-1.5 py-3 transition-colors border-b-[3px] ${isSelected ? 'border-primary' : 'border-transparent hover:bg-background/80/50'}`}
             >
               <TabIcon size={12} color={isSelected ? colors.primary : colors.foreground} />
               <Text className={`font-black text-xs ${isSelected ? 'text-primary' : 'text-foreground'}`}>

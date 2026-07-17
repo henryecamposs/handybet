@@ -125,9 +125,9 @@ export default function HubLayout({
               <TouchableOpacity
                 key={tab.id}
                 onPress={() => onTabChange?.(tab.id)}
-                className={`flex-1 p-4 rounded-2xl border items-center justify-center transition-colors ${isActive
-                  ? 'bg-primary/20 border-primary'
-                  : 'bg-background/80 border-muted-foreground'
+                className={`flex-1 py-3 items-center justify-center transition-colors border-b-[3px] ${isActive
+                  ? 'border-primary'
+                  : 'border-transparent hover:bg-background/80/50'
                   }`}
               >
                 {tab.icon}

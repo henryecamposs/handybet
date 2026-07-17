@@ -53,10 +53,9 @@ export default function HandyBetHeader() {
             <TouchableOpacity
               key={item.path}
               onPress={() => router.push(item.path as any)}
-              className={`px-10 h-full items-center justify-center border-b-[3px] ${isActive ? 'border-primary' : 'border-transparent hover:bg-background/80/50 rounded-lg mx-1 my-1 h-12'
-                }`}
+              className={`px-10 h-full items-center justify-center border-b-[3px] transition-colors ${isActive ? 'border-primary' : 'border-transparent hover:bg-background/80/50'}`}
             >
-              <IconComponent size={28} color={isActive ? colors.primary : withOpacity(colors.primary, 1)} />
+              <IconComponent size={28} color={colors.primary} />
             </TouchableOpacity>
           );
         })}
