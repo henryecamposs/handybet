@@ -56,7 +56,7 @@ export default function HandyBetHeader() {
               className={`px-10 h-full items-center justify-center border-b-[3px] ${isActive ? 'border-primary' : 'border-transparent hover:bg-background/80/50 rounded-lg mx-1 my-1 h-12'
                 }`}
             >
-              <IconComponent size={28} color={isActive ? colors.secondary : withOpacity(colors.primary, 1)} />
+              <IconComponent size={28} color={isActive ? colors.primary : withOpacity(colors.primary, 1)} />
             </TouchableOpacity>
           );
         })}
