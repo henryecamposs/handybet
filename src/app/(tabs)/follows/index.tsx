@@ -91,7 +91,7 @@ export default function FollowsScreen() {
       content: (
         <View className="mt-2">
           {filteredUsers.length > 0 ? (
-            <View className="bg-background/80 rounded-3xl border border-muted-foreground overflow-hidden">
+            <View className="bg-background/80 overflow-hidden">
               {filteredUsers.map((user, index) => (
                 <View
                   key={user.id}

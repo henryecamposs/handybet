@@ -4,7 +4,7 @@ import { useRouter } from 'expo-router';
 import { Bookmark, Compass } from 'lucide-react-native';
 import { localDB } from '../../../lib/localDB';
 import { useThemeColors } from '../../../hooks/useThemeColors';
-import HubLayout from '../../../components/layout/HubLayout';
+import { HubLayout, SeccionLista, TabContainer } from '../../../components/layout/hub';
 
 export default function GuardadosScreen() {
   const [savedItems, setSavedItems] = useState<any[]>([]);
@@ -101,6 +101,75 @@ export default function GuardadosScreen() {
     return title.toLowerCase().includes(searchQuery.toLowerCase());
   });
 
+  const tabs = [
+    {
+      id: 'all',
+      label: 'Todos',
+      content: (
+        <SeccionLista
+          items={filteredItems}
+          renderItem={renderSavedItem}
+          emptyState={emptyState}
+        />
+      ),
+    },
+    {
+      id: 'posts',
+      label: 'Publicaciones',
+      content: (
+        <SeccionLista
+          items={filteredItems.filter(item => item.type === 'post' || item.type === 'advertisement')}
+          renderItem={renderSavedItem}
+          emptyState={emptyState}
+        />
+      ),
+    },
+    {
+      id: 'groups',
+      label: 'Grupos',
+      content: (
+        <SeccionLista
+          items={filteredItems.filter(item => item.type === 'group')}
+          renderItem={renderSavedItem}
+          emptyState={emptyState}
+        />
+      ),
+    },
+    {
+      id: 'channels',
+      label: 'Canales',
+      content: (
+        <SeccionLista
+          items={filteredItems.filter(item => item.type === 'channel')}
+          renderItem={renderSavedItem}
+          emptyState={emptyState}
+        />
+      ),
+    },
+    {
+      id: 'games',
+      label: 'Juegos',
+      content: (
+        <SeccionLista
+          items={filteredItems.filter(item => item.type === 'game')}
+          renderItem={renderSavedItem}
+          emptyState={emptyState}
+        />
+      ),
+    },
+    {
+      id: 'follows',
+      label: 'Seguidos',
+      content: (
+        <SeccionLista
+          items={filteredItems.filter(item => item.type === 'user')}
+          renderItem={renderSavedItem}
+          emptyState={emptyState}
+        />
+      ),
+    },
+  ];
+
   return (
     <HubLayout
       title="Guardados"
@@ -108,12 +177,9 @@ export default function GuardadosScreen() {
       searchPlaceholder="Buscar en guardados..."
       searchValue={searchQuery}
       onSearchChange={setSearchQuery}
-      discoverTitle="Elementos Guardados"
-      discoverItems={filteredItems}
-      renderDiscoverItem={renderSavedItem}
-      emptyState={emptyState}
       showBack={true}
       isLoading={isLoading}
+      tabContainer={<TabContainer tabs={tabs} />}
     />
   );
 }
