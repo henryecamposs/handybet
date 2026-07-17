@@ -182,7 +182,7 @@ export default function MonetizacionAdsScreen() {
                   placeholderTextColor="#64748b"
                   value={businessName}
                   onChangeText={setBusinessName}
-                  className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
+                  className="bg-background/80 border border-zinc-700 rounded-xs px-4 py-3 text-white font-bold"
                 />
               </View>
 
@@ -194,7 +194,7 @@ export default function MonetizacionAdsScreen() {
                   value={businessRif}
                   onChangeText={setBusinessRif}
                   autoCapitalize="characters"
-                  className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-mono font-bold"
+                  className="bg-background/80 border border-zinc-700 rounded-xs px-4 py-3 text-white font-mono font-bold"
                 />
               </View>
 
@@ -205,7 +205,7 @@ export default function MonetizacionAdsScreen() {
                   placeholderTextColor="#64748b"
                   value={businessContact}
                   onChangeText={setBusinessContact}
-                  className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
+                  className="bg-background/80 border border-zinc-700 rounded-xs px-4 py-3 text-white font-bold"
                 />
               </View>
 
@@ -218,7 +218,7 @@ export default function MonetizacionAdsScreen() {
                   numberOfLines={3}
                   value={adCopy}
                   onChangeText={setAdCopy}
-                  className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
+                  className="bg-background/80 border border-zinc-700 rounded-xs px-4 py-3 text-white font-bold"
                 />
               </View>
 
@@ -229,7 +229,7 @@ export default function MonetizacionAdsScreen() {
                   placeholderTextColor="#64748b"
                   value={mediaUrl}
                   onChangeText={setMediaUrl}
-                  className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
+                  className="bg-background/80 border border-zinc-700 rounded-xs px-4 py-3 text-white font-bold"
                 />
               </View>
 
@@ -242,7 +242,7 @@ export default function MonetizacionAdsScreen() {
                     keyboardType="numeric"
                     value={costAmount}
                     onChangeText={setCostAmount}
-                    className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
+                    className="bg-background/80 border border-zinc-700 rounded-xs px-4 py-3 text-white font-bold"
                   />
                 </View>
                 <View>
@@ -252,7 +252,7 @@ export default function MonetizacionAdsScreen() {
                     placeholderTextColor="#64748b"
                     value={targetDeeplink}
                     onChangeText={setTargetDeeplink}
-                    className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
+                    className="bg-background/80 border border-zinc-700 rounded-xs px-4 py-3 text-white font-bold"
                   />
                 </View>
               </View>
@@ -297,7 +297,7 @@ export default function MonetizacionAdsScreen() {
                     <TouchableOpacity
                       onPress={() => handleApproveWithdrawal(tx.id)}
                       disabled={processingTxId === tx.id}
-                      className="bg-secondary px-4 py-2.5 rounded-xl border border-secondary active:scale-[0.98]"
+                      className="bg-secondary px-4 py-2.5 rounded-xs border border-secondary active:scale-[0.98]"
                     >
                       {processingTxId === tx.id ? (
                         <ActivityIndicator color="#0f172a" size="small" />

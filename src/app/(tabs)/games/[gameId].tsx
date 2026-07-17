@@ -75,7 +75,7 @@ export default function GameDetailScreen() {
                 onChangeText={setSelectedNumber}
                 placeholder="Ej. 12 o Real Madrid"
                 placeholderTextColor="#71717a"
-                className="bg-background border border-zinc-800 p-4 rounded-xl text-foreground text-sm font-semibold"
+                className="bg-background border border-zinc-800 p-4 rounded-xs text-foreground text-sm font-semibold"
               />
             </View>
 
@@ -87,13 +87,13 @@ export default function GameDetailScreen() {
                 keyboardType="numeric"
                 placeholder="Ej. 100"
                 placeholderTextColor="#71717a"
-                className="bg-background border border-zinc-800 p-4 rounded-xl text-foreground text-sm font-semibold"
+                className="bg-background border border-zinc-800 p-4 rounded-xs text-foreground text-sm font-semibold"
               />
             </View>
 
             <TouchableOpacity
               onPress={handlePlaySubmit}
-              className="bg-primary py-4 rounded-xl items-center flex-row justify-center mt-2"
+              className="bg-primary py-4 rounded-xs items-center flex-row justify-center mt-2"
             >
               <Send size={16} color="#000" className="mr-2" />
               <Text className="text-black font-bold text-sm">Enviar Jugada</Text>
@@ -112,7 +112,7 @@ export default function GameDetailScreen() {
                   position: 'top-right',
                 });
               }}
-              className="bg-primary px-8 py-3.5 rounded-xl"
+              className="bg-primary px-8 py-3.5 rounded-xs"
             >
               <Text className="text-black font-bold text-sm">Iniciar Partida</Text>
             </TouchableOpacity>

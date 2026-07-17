@@ -43,10 +43,10 @@ export default function ChannelDetailScreen() {
   }, [channelId]);
 
   const handlePublishPost = async (
-    content: string, 
-    type: 'regular' | 'advertisement', 
-    visibility: VisibilityLevel, 
-    feeling?: any, 
+    content: string,
+    type: 'regular' | 'advertisement',
+    visibility: VisibilityLevel,
+    feeling?: any,
     mediaUrls?: string[],
     targetGroupId?: string | null,
     targetChannelId?: string | null
@@ -86,7 +86,7 @@ export default function ChannelDetailScreen() {
       onPress={() => router.push(`/chat/group/${group.id}` as any)}
       className="bg-background/80 border border-zinc-800 p-5 rounded-3xl flex-row items-center gap-4 hover:bg-background/80/80 transition-colors"
     >
-      <View className="bg-background/80 w-12 h-12 rounded-xl items-center justify-center border border-zinc-700">
+      <View className="bg-background/80 w-12 h-12 rounded-xs items-center justify-center border border-zinc-700">
         <Text className="text-xl">{getIconForType(group.type)}</Text>
       </View>
       <View className="flex-1">

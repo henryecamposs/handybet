@@ -109,7 +109,7 @@ export default function ShareModal({ visible, onClose, onShareSuccess }: ShareMo
           </View>
 
           {/* Barra de Búsqueda */}
-          <View className="flex-row items-center bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 mb-4">
+          <View className="flex-row items-center bg-zinc-900 border border-zinc-800 rounded-xs px-3 py-2 mb-4">
             <Search size={16} color="#71717a" className="mr-2" />
             <TextInput
               placeholder={`Buscar ${activeTab}...`}
@@ -141,7 +141,7 @@ export default function ShareModal({ visible, onClose, onShareSuccess }: ShareMo
                       }`}
                   >
                     {IconComponent ? (
-                      <View className={`p-2.5 rounded-xl ${isSelected ? 'bg-primary/20' : 'bg-zinc-800'}`}>
+                      <View className={`p-2.5 rounded-xs ${isSelected ? 'bg-primary/20' : 'bg-zinc-800'}`}>
                         <IconComponent size={18} color={isSelected ? colors.primary : '#a1a1aa'} />
                       </View>
                     ) : (
@@ -171,14 +171,14 @@ export default function ShareModal({ visible, onClose, onShareSuccess }: ShareMo
           <View className="flex-row gap-2">
             <TouchableOpacity
               onPress={onClose}
-              className="flex-1 bg-zinc-900 border border-zinc-800 py-3 rounded-xl items-center"
+              className="flex-1 bg-zinc-900 border border-zinc-800 py-3 rounded-xs items-center"
             >
               <Text className="text-zinc-400 font-bold text-xs">Cancelar</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={handleShare}
               disabled={!selectedItem}
-              className={`flex-1 py-3 rounded-xl items-center ${selectedItem ? 'bg-primary' : 'bg-zinc-800'
+              className={`flex-1 py-3 rounded-xs items-center ${selectedItem ? 'bg-primary' : 'bg-zinc-800'
                 }`}
             >
               <Text className={`font-black text-xs uppercase ${selectedItem ? 'text-primary-foreground' : 'text-zinc-500'

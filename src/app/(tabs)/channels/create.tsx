@@ -36,7 +36,7 @@ export default function CreateChannelScreen() {
             <TextInput
               placeholder="Ej. Consorcio Loterías Unidas"
               placeholderTextColor="#52525b"
-              className="bg-background/80 text-foreground p-4 rounded-xl border border-zinc-700 font-medium"
+              className="bg-background/80 text-foreground p-4 rounded-xs border border-zinc-700 font-medium"
             />
           </View>
 
@@ -45,7 +45,7 @@ export default function CreateChannelScreen() {
             <TextInput
               placeholder="J-12345678-9"
               placeholderTextColor="#52525b"
-              className="bg-background/80 text-foreground p-4 rounded-xl border border-zinc-700 font-medium uppercase font-mono"
+              className="bg-background/80 text-foreground p-4 rounded-xs border border-zinc-700 font-medium uppercase font-mono"
             />
           </View>
 
@@ -56,13 +56,13 @@ export default function CreateChannelScreen() {
               placeholderTextColor="#52525b"
               multiline
               numberOfLines={3}
-              className="bg-background/80 text-foreground p-4 rounded-xl border border-zinc-700 font-medium"
+              className="bg-background/80 text-foreground p-4 rounded-xs border border-zinc-700 font-medium"
             />
           </View>
         </View>
 
         {/* Action Button */}
-        <TouchableOpacity className="bg-primary py-4 rounded-xl flex-row justify-center items-center">
+        <TouchableOpacity className="bg-primary py-4 rounded-xs flex-row justify-center items-center">
           <FileText size={20} color="#000" className="mr-2" />
           <Text className="text-black font-black text-lg">Enviar Solicitud</Text>
         </TouchableOpacity>

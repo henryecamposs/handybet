@@ -57,7 +57,7 @@ export default function SidebarPopover({ icon, label, items, onViewAll, viewAllP
       <View ref={buttonRef}>
         <TouchableOpacity
           onPress={handleOpen}
-          className="flex-row items-center p-2 rounded-xl hover:bg-primary/40 active:bg-primary/40 transition-colors justify-between"
+          className="flex-row items-center p-2 rounded-xs hover:bg-primary/40 active:bg-primary/40 transition-colors justify-between"
         >
           <View className="flex-row items-center">
             <View className="w-9 items-center justify-center">
@@ -79,7 +79,7 @@ export default function SidebarPopover({ icon, label, items, onViewAll, viewAllP
         location="right"
         size="md"
       >
-        <ScrollView className="max-h-[400px]">
+        <View>
           {items.length === 0 ? (
             <View className="p-4 items-center justify-center">
               <Text className="text-foreground text-sm">No hay elementos disponibles</Text>
@@ -107,7 +107,7 @@ export default function SidebarPopover({ icon, label, items, onViewAll, viewAllP
               </TouchableOpacity>
             ))
           )}
-        </ScrollView>
+        </View>
       </FloatingPopup>
     </View>
   );

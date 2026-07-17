@@ -37,7 +37,7 @@ export default function CreateGroupScreen() {
             <TextInput
               placeholder="Ej. VIP Animalitos Los Pinos"
               placeholderTextColor="#52525b"
-              className="bg-background/80 text-foreground p-4 rounded-xl border border-zinc-700 font-medium"
+              className="bg-background/80 text-foreground p-4 rounded-xs border border-zinc-700 font-medium"
             />
           </View>
 
@@ -48,7 +48,7 @@ export default function CreateGroupScreen() {
               placeholderTextColor="#52525b"
               multiline
               numberOfLines={3}
-              className="bg-background/80 text-foreground p-4 rounded-xl border border-zinc-700 font-medium"
+              className="bg-background/80 text-foreground p-4 rounded-xs border border-zinc-700 font-medium"
             />
           </View>
         </View>
@@ -69,7 +69,7 @@ export default function CreateGroupScreen() {
         </View>
 
         {/* Categoria Picker (Simulated) */}
-        <View className="mb-8 bg-background/80 p-4 rounded-xl border border-zinc-700 flex-row justify-between items-center">
+        <View className="mb-8 bg-background/80 p-4 rounded-xs border border-zinc-700 flex-row justify-between items-center">
           <View>
             <Text className="text-foreground text-xs font-bold mb-1">Categoría Principal</Text>
             <Text className="text-foreground font-medium">Apuestas & Sorteos</Text>
@@ -78,7 +78,7 @@ export default function CreateGroupScreen() {
         </View>
 
         {/* Action Button */}
-        <TouchableOpacity className="bg-primary py-4 rounded-xl flex-row justify-center items-center">
+        <TouchableOpacity className="bg-primary py-4 rounded-xs flex-row justify-center items-center">
           <Save size={20} color="#000" className="mr-2" />
           <Text className="text-black font-black text-lg">Crear Comunidad</Text>
         </TouchableOpacity>

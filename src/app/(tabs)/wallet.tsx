@@ -64,11 +64,11 @@ export default function WalletScreen() {
         <Text className="text-muted-foreground text-sm mb-8 font-medium">Saldo Global (Suma de todos los grupos)</Text>
 
         <View className="flex-row gap-4">
-          <TouchableOpacity className="flex-1 bg-primary py-3.5 rounded-xl flex-row items-center justify-center">
+          <TouchableOpacity className="flex-1 bg-primary py-3.5 rounded-xs flex-row items-center justify-center">
             <ArrowDownLeft size={18} color="#000" className="mr-2" />
             <Text className="text-black font-bold text-sm">Recargar</Text>
           </TouchableOpacity>
-          <TouchableOpacity className="flex-1 bg-background/80 py-3.5 rounded-xl flex-row items-center justify-center border border-muted-foreground">
+          <TouchableOpacity className="flex-1 bg-background/80 py-3.5 rounded-xs flex-row items-center justify-center border border-muted-foreground">
             <ArrowUpRight size={18} color={colors.foreground} className="mr-2" />
             <Text className="text-foreground font-bold text-sm">Retirar</Text>
           </TouchableOpacity>
@@ -82,7 +82,7 @@ export default function WalletScreen() {
         {/* Grupo 1 */}
         <View className="bg-background/80 p-5 rounded-3xl border border-muted-foreground flex-row items-center justify-between mb-3 hover:bg-background/80/85 transition-colors">
           <View className="flex-row items-center">
-            <View className="w-12 h-12 rounded-xl bg-background/80 items-center justify-center mr-4 border border-muted-foreground/35">
+            <View className="w-12 h-12 rounded-xs bg-background/80 items-center justify-center mr-4 border border-muted-foreground/35">
               <Text className="text-xl">🎲</Text>
             </View>
             <View>
@@ -99,7 +99,7 @@ export default function WalletScreen() {
         {/* Grupo 2 */}
         <View className="bg-background/80 p-5 rounded-3xl border border-muted-foreground flex-row items-center justify-between mb-3 hover:bg-background/80/85 transition-colors">
           <View className="flex-row items-center">
-            <View className="w-12 h-12 rounded-xl bg-background/80 items-center justify-center mr-4 border border-muted-foreground/35">
+            <View className="w-12 h-12 rounded-xs bg-background/80 items-center justify-center mr-4 border border-muted-foreground/35">
               <Text className="text-xl">🏇</Text>
             </View>
             <View>
@@ -125,7 +125,7 @@ export default function WalletScreen() {
 
         <View className="bg-background/80 p-5 rounded-3xl border border-muted-foreground flex-row items-center justify-between hover:bg-background/80/85 transition-colors">
           <View className="flex-row items-center">
-            <View className="w-12 h-12 rounded-xl bg-secondary/10 items-center justify-center mr-4 border border-secondary/35">
+            <View className="w-12 h-12 rounded-xs bg-secondary/10 items-center justify-center mr-4 border border-secondary/35">
               <Text className="text-xl">🏆</Text>
             </View>
             <View>

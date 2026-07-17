@@ -125,10 +125,10 @@ export default function GrupoDetailScreen() {
   };
 
   const handlePublishPost = async (
-    content: string, 
-    type: 'regular' | 'advertisement', 
-    visibility: VisibilityLevel, 
-    feeling?: any, 
+    content: string,
+    type: 'regular' | 'advertisement',
+    visibility: VisibilityLevel,
+    feeling?: any,
     mediaUrls?: string[],
     targetGroupId?: string | null,
     targetChannelId?: string | null
@@ -183,7 +183,7 @@ export default function GrupoDetailScreen() {
             <View>
               <TouchableOpacity
                 onPress={() => setShowPlansSelector(false)}
-                className="mb-4 self-start bg-background/80 px-3 py-1.5 rounded-xl border border-zinc-800"
+                className="mb-4 self-start bg-background/80 px-3 py-1.5 rounded-xs border border-zinc-800"
               >
                 <Text className="text-foreground font-bold text-xs">◀ Ver Bóveda</Text>
               </TouchableOpacity>

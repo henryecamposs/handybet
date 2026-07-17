@@ -11,20 +11,20 @@ export default function GamesScreen() {
   const [activeTab, setActiveTab] = useState('taquillas');
 
   const tabs = [
-    { 
-      id: 'taquillas', 
-      label: 'Taquillas', 
-      icon: <Ticket size={28} color={activeTab === 'taquillas' ? colors.primary : colors.mutedForeground} /> 
+    {
+      id: 'taquillas',
+      label: 'Taquillas',
+      icon: <Ticket size={28} color={activeTab === 'taquillas' ? colors.primary : colors.mutedForeground} />
     },
-    { 
-      id: 'quinielas', 
-      label: 'Quinielas', 
-      icon: <Dice1 size={28} color={activeTab === 'quinielas' ? colors.primary : colors.mutedForeground} /> 
+    {
+      id: 'quinielas',
+      label: 'Quinielas',
+      icon: <Dice1 size={28} color={activeTab === 'quinielas' ? colors.primary : colors.mutedForeground} />
     },
-    { 
-      id: 'minijuegos', 
-      label: 'Minijuegos', 
-      icon: <Gamepad2 size={28} color={activeTab === 'minijuegos' ? colors.primary : colors.mutedForeground} /> 
+    {
+      id: 'minijuegos',
+      label: 'Minijuegos',
+      icon: <Gamepad2 size={28} color={activeTab === 'minijuegos' ? colors.primary : colors.mutedForeground} />
     },
   ];
 
@@ -46,9 +46,9 @@ export default function GamesScreen() {
         </View>
         <Text className="text-primary font-black text-3xl mb-2">Gran Kino Imaginario</Text>
         <Text className="text-foreground font-medium mb-4">¡Gana hasta 5,000 Puntos hoy a las 8:00 PM!</Text>
-        <TouchableOpacity 
+        <TouchableOpacity
           onPress={() => router.push('/games/d1' as any)}
-          className="bg-primary px-6 py-3 rounded-xl self-start"
+          className="bg-primary px-6 py-3 rounded-xs self-start"
         >
           <Text className="text-black font-bold">Jugar Ahora</Text>
         </TouchableOpacity>
@@ -58,12 +58,12 @@ export default function GamesScreen() {
   );
 
   const renderDrawCard = (draw: typeof allDraws[0]) => (
-    <View 
-      key={draw.id} 
+    <View
+      key={draw.id}
       className="bg-background/80 p-4 rounded-2xl border border-muted-foreground flex-row items-center justify-between"
     >
       <View className="flex-row items-center">
-        <View className="w-12 h-12 rounded-xl bg-background/80 items-center justify-center mr-4 border border-zinc-700">
+        <View className="w-12 h-12 rounded-xs bg-background/80 items-center justify-center mr-4 border border-zinc-700">
           <Text className="text-xl">{draw.emoji}</Text>
         </View>
         <View>
@@ -71,7 +71,7 @@ export default function GamesScreen() {
           <Text className="text-foreground text-sm">{draw.sub}</Text>
         </View>
       </View>
-      <TouchableOpacity 
+      <TouchableOpacity
         onPress={() => router.push(`/games/${draw.id}` as any)}
         className="bg-background/80 px-4 py-2 rounded-full border border-zinc-700"
       >

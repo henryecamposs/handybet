@@ -111,7 +111,7 @@ export default function BetMatrixBuilder({ groupId, onBetGenerated }: BetMatrixB
           <TouchableOpacity
             key={lot.id}
             onPress={() => setSelectedLottery(lot.id)}
-            className={`px-4 py-2.5 rounded-xl border ${selectedLottery === lot.id
+            className={`px-4 py-2.5 rounded-xs border ${selectedLottery === lot.id
               ? 'bg-primary/20 border-primary'
               : 'bg-background/80 border-zinc-700'
               }`}
@@ -130,7 +130,7 @@ export default function BetMatrixBuilder({ groupId, onBetGenerated }: BetMatrixB
           <TouchableOpacity
             key={time}
             onPress={() => setSelectedSchedule(time)}
-            className={`px-4 py-2.5 rounded-xl border ${selectedSchedule === time
+            className={`px-4 py-2.5 rounded-xs border ${selectedSchedule === time
               ? 'bg-primary/20 border-primary'
               : 'bg-background/80 border-zinc-700'
               }`}
@@ -152,7 +152,7 @@ export default function BetMatrixBuilder({ groupId, onBetGenerated }: BetMatrixB
               setGameType(type.id);
               setSelections([]);
             }}
-            className={`px-4 py-2.5 rounded-xl border ${gameType === type.id
+            className={`px-4 py-2.5 rounded-xs border ${gameType === type.id
               ? 'bg-primary/20 border-primary'
               : 'bg-background/80 border-zinc-700'
               }`}
@@ -175,7 +175,7 @@ export default function BetMatrixBuilder({ groupId, onBetGenerated }: BetMatrixB
             value={numInput}
             onChangeText={setNumInput}
             maxLength={3}
-            className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
+            className="bg-background/80 border border-zinc-700 rounded-xs px-4 py-3 text-white font-bold"
           />
         </View>
         <View className="flex-1">
@@ -186,12 +186,12 @@ export default function BetMatrixBuilder({ groupId, onBetGenerated }: BetMatrixB
             keyboardType="numeric"
             value={multiplierInput}
             onChangeText={setMultiplierInput}
-            className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
+            className="bg-background/80 border border-zinc-700 rounded-xs px-4 py-3 text-white font-bold"
           />
         </View>
         <TouchableOpacity
           onPress={handleAddSelection}
-          className="bg-secondary justify-center items-center px-6 rounded-xl mt-6 border border-secondary"
+          className="bg-secondary justify-center items-center px-6 rounded-xs mt-6 border border-secondary"
         >
           <Text className="text-foreground font-extrabold text-sm">+</Text>
         </TouchableOpacity>
@@ -222,7 +222,7 @@ export default function BetMatrixBuilder({ groupId, onBetGenerated }: BetMatrixB
       )}
 
       {validationError && (
-        <Text className="text-rose-500 text-xs font-bold text-center mb-4 bg-rose-500/10 p-2.5 rounded-xl border border-rose-500/20">
+        <Text className="text-rose-500 text-xs font-bold text-center mb-4 bg-rose-500/10 p-2.5 rounded-xs border border-rose-500/20">
           ⚠️ {validationError}
         </Text>
       )}

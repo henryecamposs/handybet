@@ -35,7 +35,7 @@ export default function LeftSidebarWidgets() {
   return (
     <ScrollView className="w-[20%] p-4 bg-primary/5 border border-r-primary/20" showsVerticalScrollIndicator={false}>
       {/* Perfil de Usuario */}
-      <TouchableOpacity onPress={() => router.push('/(tabs)/profile')} className="flex-row items-center p-2 rounded-xl hover:bg-background/80/50 mb-2">
+      <TouchableOpacity onPress={() => router.push('/(tabs)/profile')} className="flex-row items-center p-2 rounded-xs hover:bg-background/80/50 mb-2">
         <Image source={{ uri: mockSession?.avatar || 'https://i.pravatar.cc/150' }} className="w-9 h-9 rounded-full" />
         <Text className="font-semibold text-foreground ml-3 text-[15px]">{mockSession?.name}</Text>
       </TouchableOpacity>

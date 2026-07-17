@@ -15,11 +15,10 @@ export default function WalletDetailScreen() {
 
   const renderHeaderRight = () => (
     <View className="flex-row gap-2">
-      <TouchableOpacity 
+      <TouchableOpacity
         onPress={() => setShowDisclaimer(!showDisclaimer)}
-        className={`w-9 h-9 rounded-full items-center justify-center border hover:bg-background/80/85 ${
-          showDisclaimer ? 'bg-primary/20 border-primary' : 'bg-background/80 border-muted-foreground/35'
-        }`}
+        className={`w-9 h-9 rounded-full items-center justify-center border hover:bg-background/80/85 ${showDisclaimer ? 'bg-primary/20 border-primary' : 'bg-background/80 border-muted-foreground/35'
+          }`}
       >
         <Info size={18} color={showDisclaimer ? colors.primary : colors.foreground} />
       </TouchableOpacity>
@@ -75,11 +74,11 @@ export default function WalletDetailScreen() {
           <Text className="text-muted-foreground text-xs mb-8 font-medium">Actualizado hace 2 mins</Text>
 
           <View className="flex-row gap-4">
-            <TouchableOpacity className="flex-1 bg-secondary py-3.5 rounded-xl flex-row items-center justify-center">
+            <TouchableOpacity className="flex-1 bg-secondary py-3.5 rounded-xs flex-row items-center justify-center">
               <ArrowDownLeft size={18} color="#000" className="mr-2" />
               <Text className="text-black font-bold text-sm">Depositar</Text>
             </TouchableOpacity>
-            <TouchableOpacity className="flex-1 bg-background/80 py-3.5 rounded-xl flex-row items-center justify-center border border-muted-foreground">
+            <TouchableOpacity className="flex-1 bg-background/80 py-3.5 rounded-xs flex-row items-center justify-center border border-muted-foreground">
               <ArrowUpRight size={18} color={colors.foreground} className="mr-2" />
               <Text className="text-foreground font-bold text-sm">Retirar</Text>
             </TouchableOpacity>

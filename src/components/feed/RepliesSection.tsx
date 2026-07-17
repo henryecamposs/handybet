@@ -133,17 +133,17 @@ export default function RepliesSection({ targetId, targetUsername, onCommentsCou
                         {new Date(comment.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                       </Text>
                     </View>
-                    
+
                     {/* Action Bar Superior Derecha */}
                     <View className="flex-row items-center gap-2">
-                      <TouchableOpacity 
+                      <TouchableOpacity
                         onPress={() => setLikedComments(prev => ({ ...prev, [comment.id]: !isLiked }))}
                         className="flex-row items-center gap-1.5 p-1"
                       >
                         <Logo size="xs" showText={false} style={{ opacity: isLiked ? 1 : 0.4 }} />
                         <Text className={`text-xs font-bold ${isLiked ? 'text-primary' : 'text-muted-foreground'}`}>{likeCount}</Text>
                       </TouchableOpacity>
-                      <TouchableOpacity 
+                      <TouchableOpacity
                         onPress={() => setOpenOptionsId(isOptionsOpen ? null : comment.id)}
                         className="p-1"
                       >
@@ -151,7 +151,7 @@ export default function RepliesSection({ targetId, targetUsername, onCommentsCou
                       </TouchableOpacity>
                     </View>
                   </View>
-                  
+
                   {/* Dropdown Options */}
                   {isOptionsOpen && (
                     <View className="absolute right-0 top-8 bg-background border border-primary/20 p-1.5 rounded-2xl w-48 z-50 shadow-2xl">
@@ -160,7 +160,7 @@ export default function RepliesSection({ targetId, targetUsername, onCommentsCou
                           setOpenOptionsId(null);
                           addToast({ title: "Comentario reportado", variant: 'info', position: 'bottom' });
                         }}
-                        className="flex-row items-center gap-2.5 p-2 rounded-xl hover:bg-zinc-900 transition-colors"
+                        className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-zinc-900 transition-colors"
                       >
                         <Flag size={15} color={colors.foreground} />
                         <Text className="text-foreground text-xs font-semibold">Reportar</Text>
@@ -171,23 +171,23 @@ export default function RepliesSection({ targetId, targetUsername, onCommentsCou
                           setOpenOptionsId(null);
                           addToast({ title: "Usuario bloqueado", variant: 'warning', position: 'bottom' });
                         }}
-                        className="flex-row items-center gap-2.5 p-2 rounded-xl hover:bg-zinc-900 transition-colors"
+                        className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-zinc-900 transition-colors"
                       >
                         <ShieldAlert size={15} color="#ef4444" />
                         <Text className="text-red-500 text-xs font-semibold">Bloquear</Text>
                       </TouchableOpacity>
-                      
+
                       <TouchableOpacity
                         onPress={() => {
                           setFollowingUsers(prev => ({ ...prev, [comment.author_id]: !isFollowing }));
                           setOpenOptionsId(null);
-                          addToast({ 
-                            title: isFollowing ? `Dejaste de seguir a ${comment.author_name}` : `Siguiendo a ${comment.author_name}`, 
-                            variant: isFollowing ? 'muted' : 'secondary', 
-                            position: 'bottom' 
+                          addToast({
+                            title: isFollowing ? `Dejaste de seguir a ${comment.author_name}` : `Siguiendo a ${comment.author_name}`,
+                            variant: isFollowing ? 'muted' : 'secondary',
+                            position: 'bottom'
                           });
                         }}
-                        className="flex-row items-center gap-2.5 p-2 rounded-xl hover:bg-zinc-900 transition-colors"
+                        className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-zinc-900 transition-colors"
                       >
                         {isFollowing ? (
                           <UserMinus size={15} color={colors.primary} />

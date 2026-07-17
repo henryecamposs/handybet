@@ -24,7 +24,7 @@ export default function DashboardLayout() {
           <View className="space-y-2">
             <TouchableOpacity
               onPress={() => router.push('/(dashboard)/taquilla')}
-              className={`px-4 py-3.5 rounded-xl ${pathname.includes('/taquilla') ? 'bg-secondary/10 border border-secondary/20' : 'bg-transparent'
+              className={`px-4 py-3.5 rounded-xs ${pathname.includes('/taquilla') ? 'bg-secondary/10 border border-secondary/20' : 'bg-transparent'
                 }`}
             >
               <Text className={`font-black text-xs uppercase ${pathname.includes('/taquilla') ? 'text-secondary' : 'text-foreground'}`}>
@@ -34,7 +34,7 @@ export default function DashboardLayout() {
 
             <TouchableOpacity
               onPress={() => router.push('/(dashboard)/monetizacion-ads')}
-              className={`px-4 py-3.5 rounded-xl ${pathname.includes('/monetizacion-ads') ? 'bg-secondary/10 border border-secondary/20' : 'bg-transparent'
+              className={`px-4 py-3.5 rounded-xs ${pathname.includes('/monetizacion-ads') ? 'bg-secondary/10 border border-secondary/20' : 'bg-transparent'
                 }`}
             >
               <Text className={`font-black text-xs uppercase ${pathname.includes('/monetizacion-ads') ? 'text-secondary' : 'text-foreground'}`}>
@@ -46,7 +46,7 @@ export default function DashboardLayout() {
 
         <TouchableOpacity
           onPress={handleLogout}
-          className="bg-background/80 border border-zinc-850 p-4 rounded-xl items-center"
+          className="bg-background/80 border border-zinc-850 p-4 rounded-xs items-center"
         >
           <Text className="text-rose-500 text-xs font-black uppercase">Cerrar Sesión</Text>
         </TouchableOpacity>

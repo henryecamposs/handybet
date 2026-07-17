@@ -117,10 +117,10 @@ export default function FeedScreen() {
   }
 
   async function handlePublishPost(
-    content: string, 
-    type: 'regular' | 'advertisement', 
-    visibility: VisibilityLevel, 
-    feeling?: any, 
+    content: string,
+    type: 'regular' | 'advertisement',
+    visibility: VisibilityLevel,
+    feeling?: any,
     mediaUrls?: string[],
     targetGroupId?: string | null,
     targetChannelId?: string | null
@@ -226,65 +226,65 @@ export default function FeedScreen() {
     <View className="flex-1 bg-background">
       <ScrollView ref={scrollViewRef} className="flex-1 bg-background/80 px-4 pt-4" showsVerticalScrollIndicator={false}>
         {/* Header */}
-          <View className="flex-row justify-between items-center mb-6">
-            <Logo size={isDesktop ? 'sm' : 'lg'} showImage={true} />
-            
-            {!isDesktop && (
-              <View className="flex-row items-center gap-3">
-                <TouchableOpacity onPress={() => router.push('/(tabs)/follows' as any)} className="p-1">
-                  <UserCheck size={20} color="white" />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => router.push('/favorites' as any)} className="p-1">
-                  <Bookmark size={20} color="white" />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => setShowMobileMenu(true)} className="p-1">
-                  <MoreVertical size={20} color="white" />
-                </TouchableOpacity>
-              </View>
-            )}
-          </View>
+        <View className="flex-row justify-between items-center mb-6">
+          <Logo size={isDesktop ? 'sm' : 'lg'} showImage={true} />
 
-          {/* Crear Publicación */}
-          <CreatePostWidget onPublish={handlePublishPost} />
-
-          {/* Feed List */}
-          {posts.map((post) => (
-            <View
-              key={post.id}
-              onLayout={(e) => {
-                postLayouts.current[post.id] = e.nativeEvent.layout.y;
-              }}
-            >
-              <PostItem
-                post={post}
-                isLiked={likedPosts.includes(post)}
-                onLikeToggle={() => setLikedPosts(prev => prev.includes(post) ? prev.filter(p => p !== post) : [...prev, post])}
-                isSaved={savedPosts.includes(post)}
-                onSavePress={() => {
-                  const nextVal = !savedPosts.includes(post);
-                  setSavedPosts(prev => nextVal ? [...prev, post] : prev.filter(p => p !== post));
-                  showToast(nextVal ? 'Guardado en Favoritos' : 'Eliminado de Favoritos');
-                }}
-                onMediaPress={() => {
-                  router.push(`/feed/${post.id}?from=feed` as any);
-                }}
-                onCommentPress={() => {
-                  router.push(`/feed/${post.id}?from=feed` as any);
-                }}
-                onSharePress={() => {
-                  setSharingPost(post);
-                  setShowShareModal(true);
-                }}
-              />
+          {!isDesktop && (
+            <View className="flex-row items-center gap-3">
+              <TouchableOpacity onPress={() => router.push('/(tabs)/follows' as any)} className="p-1">
+                <UserCheck size={20} color="white" />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => router.push('/favorites' as any)} className="p-1">
+                <Bookmark size={20} color="white" />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => setShowMobileMenu(true)} className="p-1">
+                <MoreVertical size={20} color="white" />
+              </TouchableOpacity>
             </View>
-          ))}
-
-          {/* Inyección Dinámica de Publicidad (Eliminada según solicitud) */}
-
-          {isLoading && (
-            <ActivityIndicator size="small" color={colors.secondary} className="my-6" />
           )}
-        </ScrollView>
+        </View>
+
+        {/* Crear Publicación */}
+        <CreatePostWidget onPublish={handlePublishPost} />
+
+        {/* Feed List */}
+        {posts.map((post) => (
+          <View
+            key={post.id}
+            onLayout={(e) => {
+              postLayouts.current[post.id] = e.nativeEvent.layout.y;
+            }}
+          >
+            <PostItem
+              post={post}
+              isLiked={likedPosts.includes(post)}
+              onLikeToggle={() => setLikedPosts(prev => prev.includes(post) ? prev.filter(p => p !== post) : [...prev, post])}
+              isSaved={savedPosts.includes(post)}
+              onSavePress={() => {
+                const nextVal = !savedPosts.includes(post);
+                setSavedPosts(prev => nextVal ? [...prev, post] : prev.filter(p => p !== post));
+                showToast(nextVal ? 'Guardado en Favoritos' : 'Eliminado de Favoritos');
+              }}
+              onMediaPress={() => {
+                router.push(`/feed/${post.id}?from=feed` as any);
+              }}
+              onCommentPress={() => {
+                router.push(`/feed/${post.id}?from=feed` as any);
+              }}
+              onSharePress={() => {
+                setSharingPost(post);
+                setShowShareModal(true);
+              }}
+            />
+          </View>
+        ))}
+
+        {/* Inyección Dinámica de Publicidad (Eliminada según solicitud) */}
+
+        {isLoading && (
+          <ActivityIndicator size="small" color={colors.secondary} className="my-6" />
+        )}
+      </ScrollView>
 
       {/* Modal de Pago Split (Pay-to-Post) */}
       <Modal
@@ -320,7 +320,7 @@ export default function FeedScreen() {
                 placeholderTextColor="#71717a"
                 value={paymentRef}
                 onChangeText={setPaymentRef}
-                className="bg-background/80 border border-zinc-800 rounded-xl px-4 py-2.5 text-white text-xs font-bold"
+                className="bg-background/80 border border-zinc-800 rounded-xs px-4 py-2.5 text-white text-xs font-bold"
               />
             </View>
 
@@ -350,13 +350,13 @@ export default function FeedScreen() {
         animationType="fade"
         onRequestClose={() => setShowMobileMenu(false)}
       >
-        <Pressable 
-          className="flex-1 bg-black/50 justify-start items-end pt-16 pr-4" 
+        <Pressable
+          className="flex-1 bg-black/50 justify-start items-end pt-16 pr-4"
           onPress={() => setShowMobileMenu(false)}
         >
           <View className="bg-background border border-zinc-800 rounded-2xl w-56 overflow-hidden shadow-xl" onStartShouldSetResponder={() => true}>
-            
-            <TouchableOpacity 
+
+            <TouchableOpacity
               className="flex-row items-center gap-3 p-3.5 border-b border-zinc-800/50 hover:bg-zinc-900"
               onPress={() => { setShowMobileMenu(false); router.push('/(tabs)/channels' as any); }}
             >
@@ -364,7 +364,7 @@ export default function FeedScreen() {
               <Text className="text-foreground font-semibold">Canales</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity 
+            <TouchableOpacity
               className="flex-row items-center gap-3 p-3.5 border-b border-zinc-800/50 hover:bg-zinc-900"
               onPress={() => { setShowMobileMenu(false); router.push('/(tabs)/games' as any); }}
             >
@@ -372,7 +372,7 @@ export default function FeedScreen() {
               <Text className="text-foreground font-semibold">Juegos</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity 
+            <TouchableOpacity
               className="flex-row items-center gap-3 p-3.5 border-b border-zinc-800/50 hover:bg-zinc-900"
               onPress={() => { setShowMobileMenu(false); router.push('/guardados' as any); }}
             >
@@ -380,7 +380,7 @@ export default function FeedScreen() {
               <Text className="text-foreground font-semibold">Favoritos</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity 
+            <TouchableOpacity
               className="flex-row items-center gap-3 p-3.5 border-b border-zinc-800/50 hover:bg-zinc-900"
               onPress={() => { setShowMobileMenu(false); router.push('/(tabs)/profile'); }}
             >
@@ -388,7 +388,7 @@ export default function FeedScreen() {
               <Text className="text-foreground font-semibold">Mi Perfil</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity 
+            <TouchableOpacity
               className="flex-row items-center gap-3 p-3.5 border-b border-zinc-800/50 hover:bg-zinc-900"
               onPress={() => { setShowMobileMenu(false); showToast('Gracias por calificar la aplicación!'); }}
             >
@@ -396,11 +396,11 @@ export default function FeedScreen() {
               <Text className="text-foreground font-semibold">Calificar App</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity 
+            <TouchableOpacity
               className="flex-row items-center gap-3 p-3.5 hover:bg-red-900/20"
-              onPress={() => { 
-                setShowMobileMenu(false); 
-                router.replace('/(auth)/login'); 
+              onPress={() => {
+                setShowMobileMenu(false);
+                router.replace('/(auth)/login');
               }}
             >
               <LogOut size={18} color="#ef4444" />

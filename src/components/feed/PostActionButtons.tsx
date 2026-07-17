@@ -35,7 +35,7 @@ export default function PostActionButtons({
     <View className={`flex-row items-center ${isCompact ? 'gap-4' : 'gap-2'}`}>
       <TouchableOpacity
         onPress={onLikeToggle}
-        className={`flex-row items-center gap-1.5 rounded-xl hover:bg-muted transition-colors px-1 py-1`}
+        className={`flex-row items-center gap-1.5 rounded-xs hover:bg-muted transition-colors px-1 py-1`}
       >
         <Logo size="xs" showText={false} style={{ opacity: isLiked ? 1 : (isCompact ? 0.3 : 0.4) }} />
         <Text className={`${isCompact ? 'text-muted-foreground' : 'text-foreground'} text-xs font-bold hover:text-secondary transition-colors`}>
@@ -45,7 +45,7 @@ export default function PostActionButtons({
 
       <TouchableOpacity
         onPress={onCommentPress}
-        className={`flex-row items-center gap-1.5 rounded-xl hover:bg-muted transition-colors px-1 py-1`}
+        className={`flex-row items-center gap-1.5 rounded-xs hover:bg-muted transition-colors px-1 py-1`}
       >
         <MessageSquare size={isCompact ? 16 : 15} color={isCompact ? colors.mutedForeground : colors.mutedForeground} />
         <Text className={`${isCompact ? 'text-muted-foreground' : 'text-foreground'} text-xs font-bold`}>
@@ -55,7 +55,7 @@ export default function PostActionButtons({
 
       <TouchableOpacity
         onPress={onSharePress}
-        className={`flex-row items-center gap-1.5 rounded-xl hover:bg-muted transition-colors px-1 py-1`}
+        className={`flex-row items-center gap-1.5 rounded-xs hover:bg-muted transition-colors px-1 py-1`}
       >
         <Share2 size={isCompact ? 16 : 15} color={isCompact ? colors.mutedForeground : colors.mutedForeground} />
         {!isDesktop ? null : (
@@ -67,7 +67,7 @@ export default function PostActionButtons({
 
       <TouchableOpacity
         onPress={onSavePress}
-        className={`flex-row items-center gap-1.5 rounded-xl hover:bg-muted transition-colors px-1 py-1`}
+        className={`flex-row items-center gap-1.5 rounded-xs hover:bg-muted transition-colors px-1 py-1`}
       >
         <Bookmark size={isCompact ? 16 : 15} color={isSaved ? colors.primary : colors.mutedForeground} fill={isSaved ? colors.primary : "transparent"} />
         {!isDesktop ? null : (

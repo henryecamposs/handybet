@@ -78,13 +78,13 @@ export default function ProfileScreen() {
             <View>
               <TouchableOpacity
                 onPress={() => router.push('/(tabs)/profile/edit' as any)}
-                className="bg-secondary/20 border border-secondary px-4 py-2 rounded-xl mb-2"
+                className="bg-secondary/20 border border-secondary px-4 py-2 rounded-xs mb-2"
               >
                 <Text className="text-secondary text-[10px] font-black uppercase">Editar</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={handleLogout}
-                className="bg-background/80 border border-zinc-850 px-4 py-2 rounded-xl"
+                className="bg-background/80 border border-zinc-850 px-4 py-2 rounded-xs"
               >
                 <Text className="text-rose-500 text-[10px] font-black uppercase">Salir</Text>
               </TouchableOpacity>

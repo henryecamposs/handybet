@@ -41,7 +41,7 @@ export default function QRCameraScanner({ onScanned, onClose }: QRCameraScannerP
         </Text>
         <TouchableOpacity
           onPress={requestPermission}
-          className="bg-secondary px-6 py-3.5 rounded-xl border border-secondary"
+          className="bg-secondary px-6 py-3.5 rounded-xs border border-secondary"
         >
           <Text className="text-secondary-foreground font-black text-sm">Conceder Permiso</Text>
         </TouchableOpacity>

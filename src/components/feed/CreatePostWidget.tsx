@@ -72,12 +72,12 @@ export default function CreatePostWidget({ onPublish, forcedTarget }: CreatePost
       const targets: { id: string, name: string, type: 'user' | 'group' | 'channel' }[] = [
         { id: 'user', name: `@${mockSession.username} (Personal)`, type: 'user' }
       ];
-      
+
       try {
         // Load channels owned by user
         const allChannels = await localDB.channels.getAll();
         const userChannels = allChannels.filter((c: any) => c.owner_id === mockSession.id);
-        
+
         for (const ch of userChannels) {
           targets.push({ id: ch.id, name: `Canal: ${ch.name}`, type: 'channel' });
         }
@@ -86,14 +86,14 @@ export default function CreatePostWidget({ onPublish, forcedTarget }: CreatePost
         const allGroups = await localDB.groups.getAll();
         const userGroupIds = userChannels.map((c: any) => c.id);
         const adminGroups = allGroups.filter((g: any) => userGroupIds.includes(g.channel_id) || g.members?.includes(mockSession.id) && mockSession.role === 'admin');
-        
+
         for (const g of adminGroups) {
           targets.push({ id: g.id, name: `Grupo: ${g.name}`, type: 'group' });
         }
       } catch (err) {
         console.log('Error loading publishing targets:', err);
       }
-      
+
       setAdminTargets(targets);
       setSelectedTarget(targets[0]);
     }
@@ -105,7 +105,7 @@ export default function CreatePostWidget({ onPublish, forcedTarget }: CreatePost
 
     setIsPublishing(true);
     const mediaUrls = selectedFiles.map(f => f.uri);
-    
+
     const targetGroupId = selectedTarget.type === 'group' ? selectedTarget.id : null;
     const targetChannelId = selectedTarget.type === 'channel' ? selectedTarget.id : null;
 
@@ -250,7 +250,7 @@ export default function CreatePostWidget({ onPublish, forcedTarget }: CreatePost
                             setSelectedTarget(target);
                             setShowTargetDropdown(false);
                           }}
-                          className={`p-2.5 rounded-xl hover:bg-zinc-900 ${selectedTarget.id === target.id ? 'bg-primary/20' : ''}`}
+                          className={`p-2.5 rounded-xs hover:bg-zinc-900 ${selectedTarget.id === target.id ? 'bg-primary/20' : ''}`}
                         >
                           <Text className={`text-xs font-bold ${selectedTarget.id === target.id ? 'text-primary' : 'text-white'}`}>{target.name}</Text>
                         </TouchableOpacity>
@@ -290,7 +290,7 @@ export default function CreatePostWidget({ onPublish, forcedTarget }: CreatePost
                         setPreviewIndex(idx);
                         setShowPreviewModal(true);
                       }}
-                      className="relative w-16 h-16 rounded-xl overflow-hidden border border-zinc-700 bg-background/80justify-center items-center"
+                      className="relative w-16 h-16 rounded-xs overflow-hidden border border-zinc-700 bg-background/80justify-center items-center"
                     >
                       <Image source={{ uri: file.uri }} className="w-full h-full opacity-80" resizeMode="cover" />
                       {file.type === 'video' && (
@@ -421,7 +421,7 @@ export default function CreatePostWidget({ onPublish, forcedTarget }: CreatePost
             />
 
             <TouchableOpacity
-              className="bg-primary w-full py-4 rounded-xl items-center"
+              className="bg-primary w-full py-4 rounded-xs items-center"
               onPress={() => setShowUploadModal(false)}
             >
               <Text className="text-primary-foreground font-black text-sm uppercase">Cancelar</Text>
@@ -462,7 +462,7 @@ export default function CreatePostWidget({ onPublish, forcedTarget }: CreatePost
 
             {selectedFeeling && (
               <TouchableOpacity
-                className="mt-6 border border-zinc-800 bg-zinc-900 py-3 rounded-xl items-center"
+                className="mt-6 border border-zinc-800 bg-zinc-900 py-3 rounded-xs items-center"
                 onPress={() => {
                   setSelectedFeeling(null);
                   setShowFeelingModal(false);

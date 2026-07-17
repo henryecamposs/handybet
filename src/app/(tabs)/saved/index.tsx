@@ -21,7 +21,7 @@ export default function SavedScreen() {
       className="bg-background/80 p-4 rounded-2xl border border-muted-foreground flex-row justify-between items-center hover:bg-background/80/80 transition-colors"
     >
       <View className="flex-row items-center flex-1">
-        <View className="w-12 h-12 rounded-xl bg-background/80 items-center justify-center mr-4 border border-zinc-700">
+        <View className="w-12 h-12 rounded-xs bg-background/80 items-center justify-center mr-4 border border-zinc-700">
           <Bookmark size={20} color={colors.foreground} />
         </View>
         <View>

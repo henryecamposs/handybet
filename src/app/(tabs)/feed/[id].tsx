@@ -18,7 +18,7 @@ export default function FeedPostDetailScreen() {
       if (found) {
         // Resolve author from DB
         const resolved = await localDB.resolvePostWithAuthor(found);
-        
+
         let authorName = resolved.author?.full_name || 'Usuario';
         let username = `@${resolved.author_id.slice(0, 8)}`;
         let avatar = resolved.author?.avatar_url || 'https://i.pravatar.cc/150';
@@ -91,7 +91,7 @@ export default function FeedPostDetailScreen() {
     return (
       <View className="flex-1 bg-background justify-center items-center p-4">
         <Text className="text-foreground text-lg text-center mb-4">La publicación no está disponible o ha sido eliminada.</Text>
-        <TouchableOpacity onPress={() => router.back()} className="px-6 py-3 bg-primary rounded-xl">
+        <TouchableOpacity onPress={() => router.back()} className="px-6 py-3 bg-primary rounded-xs">
           <Text className="text-background font-bold">Volver</Text>
         </TouchableOpacity>
       </View>
@@ -100,10 +100,10 @@ export default function FeedPostDetailScreen() {
 
   return (
     <View className="flex-1 bg-background">
-      <PostDetailView 
+      <PostDetailView
         post={post}
         isLiked={false}
-        onLikeToggle={() => {}}
+        onLikeToggle={() => { }}
         onBack={() => {
           if (from === 'feed') {
             router.replace({ pathname: '/(tabs)/feed', params: { scrollToPostId: id } });

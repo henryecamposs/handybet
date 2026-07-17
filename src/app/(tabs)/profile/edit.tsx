@@ -349,7 +349,7 @@ export default function EditProfileScreen() {
             className="flex-row items-start gap-3 mb-6"
             activeOpacity={0.8}
           >
-            <View className={`w-6 h-6 rounded-md border items-center justify-center mt-0.5 ${acceptedTerms ? 'bg-primary border-primary' : 'border-muted-foreground'}`}>
+            <View className={`w-6 h-6 rounded-xs border items-center justify-center mt-0.5 ${acceptedTerms ? 'bg-primary border-primary' : 'border-muted-foreground'}`}>
               {acceptedTerms && <Check size={14} color="#000" />}
             </View>
             <Text className="text-foreground text-sm flex-1 font-medium leading-5">
@@ -447,7 +447,7 @@ export default function EditProfileScreen() {
             <View className="flex-row gap-3 border-t border-muted-foreground/15 pt-3">
               <TouchableOpacity
                 onPress={() => setModalVisible(false)}
-                className="flex-1 bg-background/80 py-3 rounded-xl border border-muted-foreground items-center justify-center"
+                className="flex-1 bg-background/80 py-3 rounded-xs border border-muted-foreground items-center justify-center"
               >
                 <Text className="text-foreground font-bold text-sm">Cerrar</Text>
               </TouchableOpacity>
@@ -456,7 +456,7 @@ export default function EditProfileScreen() {
                   setAcceptedTerms(true);
                   setModalVisible(false);
                 }}
-                className="flex-1 bg-primary py-3 rounded-xl items-center justify-center"
+                className="flex-1 bg-primary py-3 rounded-xs items-center justify-center"
               >
                 <Text className="text-black font-bold text-sm">Aceptar</Text>
               </TouchableOpacity>

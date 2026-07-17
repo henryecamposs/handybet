@@ -43,7 +43,7 @@ export default function GuardadosDetailScreen() {
     return (
       <View className="flex-1 bg-background p-4 justify-center items-center">
         <Text className="text-foreground text-lg">Elemento no encontrado</Text>
-        <TouchableOpacity onPress={() => router.back()} className="mt-4 p-3 bg-zinc-900 rounded-xl">
+        <TouchableOpacity onPress={() => router.back()} className="mt-4 p-3 bg-zinc-900 rounded-xs">
           <Text className="text-white">Volver</Text>
         </TouchableOpacity>
       </View>

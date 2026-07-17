@@ -128,7 +128,7 @@ export default function GruposScreen() {
 
       <TouchableOpacity
         onPress={() => router.push(`/feed/search?id=${group.id}&from=group` as any)}
-        className="w-full bg-primary/20 border border-primary/30 py-1.5 rounded-xl items-center"
+        className="w-full bg-primary/20 border border-primary/30 py-1.5 rounded-xs items-center"
       >
         <Text className="text-primary text-[9px] font-black uppercase tracking-wider">Ver Feed 📢</Text>
       </TouchableOpacity>
@@ -153,7 +153,7 @@ export default function GruposScreen() {
 
       <TouchableOpacity
         onPress={() => router.push(`/feed/search?id=${group.id}&from=group` as any)}
-        className="w-full bg-primary/20 border border-primary/30 py-1.5 rounded-xl items-center"
+        className="w-full bg-primary/20 border border-primary/30 py-1.5 rounded-xs items-center"
       >
         <Text className="text-primary text-[9px] font-black uppercase tracking-wider">Ver Feed 📢</Text>
       </TouchableOpacity>
@@ -285,7 +285,7 @@ export default function GruposScreen() {
                         placeholderTextColor={colors.mutedForeground}
                         value={experience}
                         onChangeText={setExperience}
-                        className="bg-background border border-zinc-800 rounded-xl px-4 py-2.5 text-white text-xs font-bold"
+                        className="bg-background border border-zinc-800 rounded-xs px-4 py-2.5 text-white text-xs font-bold"
                       />
                     </View>
 
@@ -298,7 +298,7 @@ export default function GruposScreen() {
                         placeholderTextColor={colors.mutedForeground}
                         value={intentions}
                         onChangeText={setIntentions}
-                        className="bg-background border border-zinc-800 rounded-xl px-4 py-2.5 text-white text-xs font-bold"
+                        className="bg-background border border-zinc-800 rounded-xs px-4 py-2.5 text-white text-xs font-bold"
                       />
                     </View>
                   </View>
@@ -313,8 +313,8 @@ export default function GruposScreen() {
                             key={plan.id}
                             onPress={() => setSelectedPlanId(plan.id)}
                             className={`p-3.5 rounded-2xl border flex-row justify-between items-center ${selectedPlanId === plan.id
-                                ? 'bg-secondary/15 border-secondary'
-                                : 'bg-background border-zinc-800'
+                              ? 'bg-secondary/15 border-secondary'
+                              : 'bg-background border-zinc-800'
                               }`}
                           >
                             <View>

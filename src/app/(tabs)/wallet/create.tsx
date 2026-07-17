@@ -44,7 +44,7 @@ export default function CreateWalletScreen() {
             <TextInput
               placeholder="Ej. Taquilla Centro Piso 1"
               placeholderTextColor="#52525b"
-              className="bg-background/80 text-foreground p-4 rounded-xl border border-zinc-700 font-medium"
+              className="bg-background/80 text-foreground p-4 rounded-xs border border-zinc-700 font-medium"
             />
           </View>
 
@@ -54,7 +54,7 @@ export default function CreateWalletScreen() {
               placeholder="sk_live_XXXXXXXXXXXXXXXX"
               placeholderTextColor="#52525b"
               secureTextEntry
-              className="bg-background/80 text-foreground p-4 rounded-xl border border-zinc-700 font-medium font-mono"
+              className="bg-background/80 text-foreground p-4 rounded-xs border border-zinc-700 font-medium font-mono"
             />
           </View>
         </View>
@@ -65,7 +65,7 @@ export default function CreateWalletScreen() {
         </View>
 
         {/* Action Button */}
-        <TouchableOpacity className="bg-primary py-4 rounded-xl flex-row justify-center items-center">
+        <TouchableOpacity className="bg-primary py-4 rounded-xs flex-row justify-center items-center">
           <Link2 size={20} color="#000" className="mr-2" />
           <Text className="text-black font-black text-lg">Enlazar Taquilla</Text>
         </TouchableOpacity>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Modal, TouchableWithoutFeedback, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, Modal, TouchableWithoutFeedback, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
 
 export interface FloatingPopupProps {
   isVisible: boolean;
@@ -63,9 +63,9 @@ export default function FloatingPopup({
 
         // Prevent overflow on right side
         if (left + popupWidth > windowWidth) {
-           left = windowWidth - popupWidth - 15;
+          left = windowWidth - popupWidth - 15;
         }
-        
+
         // Prevent overflow on left side
         if (left < 0) left = 15;
 
@@ -79,7 +79,7 @@ export default function FloatingPopup({
       if (size === 'sm') popupWidth = 192;
       if (size === 'lg') popupWidth = 384;
       if (size === 'xl') popupWidth = 448;
-      
+
       setPosition({ top: 128, left: (windowWidth - popupWidth) / 2 });
       setOpacity(1);
     } else {
@@ -102,16 +102,16 @@ export default function FloatingPopup({
         <View className="flex-1">
           <TouchableWithoutFeedback>
             <View
-              className={`absolute ${sizeClass} ${bgColor} border border-border rounded-xl shadow-2xl overflow-hidden`}
-              style={{ 
-                top: position.top, 
-                left: position.left, 
+              className={`absolute ${sizeClass} ${bgColor} border border-border rounded-xs shadow-2xl overflow-hidden`}
+              style={{
+                top: position.top,
+                left: position.left,
                 opacity,
-                elevation: 10, 
-                shadowColor: '#000', 
-                shadowOffset: { width: 0, height: 10 }, 
-                shadowOpacity: 0.5, 
-                shadowRadius: 20 
+                elevation: 10,
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 10 },
+                shadowOpacity: 0.5,
+                shadowRadius: 20
               }}
             >
               {/* Header */}
@@ -127,7 +127,9 @@ export default function FloatingPopup({
               )}
 
               {/* Body */}
-              {children}
+              <ScrollView className="max-h-[300px]">
+                {children}
+              </ScrollView>
             </View>
           </TouchableWithoutFeedback>
         </View>

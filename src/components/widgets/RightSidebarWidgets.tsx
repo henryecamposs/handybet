@@ -13,7 +13,7 @@ export const [mockAds, mockNews, mockFollowSuggestions, mockPrizes] = [[], [], [
 
 export const WidgetContainer = ({ title, children, action }: { title: string | React.ReactNode, children: React.ReactNode, action?: React.ReactNode }) => (
   <View className="mb-4">
-    <View className="flex-row justify-between items-center hover:bg-background/50 p-1 rounded-xl transition-colors mb-3 px-2">
+    <View className="flex-row justify-between items-center hover:bg-background/50 p-1 rounded-xs transition-colors mb-3 px-2">
       {typeof title === 'string' ? (
         <Text className="text-xs font-semibold text-foreground">{title}</Text>
       ) : (
@@ -30,14 +30,14 @@ export const WidgetContainer = ({ title, children, action }: { title: string | R
 export const AdWidget = ({ image, title, domain, size = 'large' }: { image: string, title: string, domain: string, size?: string }) => {
   if (size === 'small') {
     return (
-      <TouchableOpacity className="flex-1 hover:bg-background/50 p-1 rounded-xl transition-colors">
+      <TouchableOpacity className="flex-1 hover:bg-background/50 p-1 rounded-xs transition-colors">
         <Image source={{ uri: image }} className="w-full aspect-square rounded-lg" resizeMode="cover" />
       </TouchableOpacity>
     );
   }
 
   return (
-    <TouchableOpacity className="hover:bg-background/50 p-1 rounded-xl transition-colors mb-2">
+    <TouchableOpacity className="hover:bg-background/50 p-1 rounded-xs transition-colors mb-2">
       <Image source={{ uri: image }} className="w-full h-24 rounded-lg" resizeMode="cover" />
     </TouchableOpacity>
   );
@@ -59,7 +59,7 @@ export const FollowSuggestionWidget = ({ name, avatar, time, mutualFollowers, on
   const [isFollowing, setIsFollowing] = React.useState(false);
 
   return (
-    <View className="flex-row items-center p-2 hover:bg-background/80 rounded-xl transition-colors">
+    <View className="flex-row items-center p-2 hover:bg-background/80 rounded-xs transition-colors">
       <Image source={{ uri: avatar }} className="w-16 h-16 rounded-full mr-3" />
       <View className="flex-1">
         <View className="flex-row justify-between items-center">
@@ -90,7 +90,7 @@ export const FollowSuggestionWidget = ({ name, avatar, time, mutualFollowers, on
 
 export const PrizeNotificationWidget = ({ id, title, description, onSelectPrize }: { id: string, title: string, description: string, onSelectPrize?: (id: string) => void }) => (
   <TouchableOpacity
-    className="bg-background/80 border border-zinc-800 p-4 rounded-xl flex-row items-center gap-4 mx-2 shadow-sm hover:bg-background/80 transition-colors"
+    className="bg-background/80 border border-zinc-800 p-4 rounded-xs flex-row items-center gap-4 mx-2 shadow-sm hover:bg-background/80 transition-colors"
     onPress={() => onSelectPrize ? onSelectPrize(id) : undefined}
   >
     <View className="w-12 h-12 bg-secondary/10 rounded-full items-center justify-center">

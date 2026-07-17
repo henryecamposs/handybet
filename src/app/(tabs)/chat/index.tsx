@@ -377,7 +377,7 @@ export default function ChatInboxScreen() {
           </View>
           <TouchableOpacity
             onPress={() => adBanner.target_deeplink && router.push(adBanner.target_deeplink as any)}
-            className="bg-background/80 border border-muted-foreground/50 px-3 py-1.5 rounded-xl"
+            className="bg-background/80 border border-muted-foreground/50 px-3 py-1.5 rounded-xs"
           >
             <Text className="text-secondary text-[9px] font-black uppercase">Visitar</Text>
           </TouchableOpacity>

@@ -120,7 +120,7 @@ export default function TaquillaScreen() {
               <Text className="text-white font-black text-sm mb-4">Escanear Ticket QR</Text>
               <TouchableOpacity
                 onPress={() => setScannerActive(true)}
-                className="bg-secondary py-4 rounded-xl items-center border border-secondary active:scale-[0.98]"
+                className="bg-secondary py-4 rounded-xs items-center border border-secondary active:scale-[0.98]"
               >
                 <Text className="text-foreground font-black text-sm">📷 ESCANEAR CÓDIGO QR</Text>
               </TouchableOpacity>
@@ -134,11 +134,11 @@ export default function TaquillaScreen() {
                   placeholderTextColor="#64748b"
                   value={manualCode}
                   onChangeText={setManualCode}
-                  className="flex-1 bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-mono font-bold"
+                  className="flex-1 bg-background/80 border border-zinc-700 rounded-xs px-4 py-3 text-white font-mono font-bold"
                 />
                 <TouchableOpacity
                   onPress={handleManualSearch}
-                  className="bg-background/80 border border-zinc-750 justify-center px-6 rounded-xl"
+                  className="bg-background/80 border border-zinc-750 justify-center px-6 rounded-xs"
                 >
                   <Text className="text-white font-black text-xs">BUSCAR</Text>
                 </TouchableOpacity>
@@ -173,7 +173,7 @@ export default function TaquillaScreen() {
 
         {/* Mensaje de Error en Búsqueda */}
         {fetchError && (
-          <View className="bg-rose-500/10 border border-rose-500/20 p-4 rounded-xl mb-6">
+          <View className="bg-rose-500/10 border border-rose-500/20 p-4 rounded-xs mb-6">
             <Text className="text-rose-500 text-xs font-bold text-center">
               ⚠️ No se pudo ubicar la jugada: {fetchError.message}
             </Text>
@@ -200,7 +200,7 @@ export default function TaquillaScreen() {
                   <View className="flex-row gap-2 mb-4">
                     <TouchableOpacity
                       onPress={() => setPaymentMethod('wallet')}
-                      className={`flex-1 py-3 rounded-xl border items-center ${paymentMethod === 'wallet' ? 'bg-primary/10 border-primary' : 'bg-background/80 border-zinc-700'
+                      className={`flex-1 py-3 rounded-xs border items-center ${paymentMethod === 'wallet' ? 'bg-primary/10 border-primary' : 'bg-background/80 border-zinc-700'
                         }`}
                     >
                       <Text className={`font-bold text-xs ${paymentMethod === 'wallet' ? 'text-primary' : 'text-foreground'}`}>
@@ -210,7 +210,7 @@ export default function TaquillaScreen() {
 
                     <TouchableOpacity
                       onPress={() => setPaymentMethod('cash_external')}
-                      className={`flex-1 py-3 rounded-xl border items-center ${paymentMethod === 'cash_external' ? 'bg-primary/10 border-primary' : 'bg-background/80 border-zinc-700'
+                      className={`flex-1 py-3 rounded-xs border items-center ${paymentMethod === 'cash_external' ? 'bg-primary/10 border-primary' : 'bg-background/80 border-zinc-700'
                         }`}
                     >
                       <Text className={`font-bold text-xs ${paymentMethod === 'cash_external' ? 'text-primary' : 'text-foreground'}`}>
@@ -227,7 +227,7 @@ export default function TaquillaScreen() {
                         placeholderTextColor="#64748b"
                         value={referenceCode}
                         onChangeText={setReferenceCode}
-                        className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
+                        className="bg-background/80 border border-zinc-700 rounded-xs px-4 py-3 text-white font-bold"
                       />
                     </View>
                   )}
@@ -235,7 +235,7 @@ export default function TaquillaScreen() {
                   <TouchableOpacity
                     onPress={handleConfirmBet}
                     disabled={confirmMutation.isPending}
-                    className="bg-primary py-4 rounded-xl items-center border border-primary-600 active:scale-[0.98]"
+                    className="bg-primary py-4 rounded-xs items-center border border-primary-600 active:scale-[0.98]"
                   >
                     {confirmMutation.isPending ? (
                       <ActivityIndicator color="#0f172a" />
@@ -255,7 +255,7 @@ export default function TaquillaScreen() {
                   <View className="flex-row gap-2 mb-4">
                     <TouchableOpacity
                       onPress={() => setPayoutMethod('wallet_credit')}
-                      className={`flex-1 py-3 rounded-xl border items-center ${payoutMethod === 'wallet_credit' ? 'bg-secondary/10 border-secondary' : 'bg-background/80 border-zinc-700'
+                      className={`flex-1 py-3 rounded-xs border items-center ${payoutMethod === 'wallet_credit' ? 'bg-secondary/10 border-secondary' : 'bg-background/80 border-zinc-700'
                         }`}
                     >
                       <Text className={`font-bold text-xs ${payoutMethod === 'wallet_credit' ? 'text-secondary' : 'text-foreground'}`}>
@@ -265,7 +265,7 @@ export default function TaquillaScreen() {
 
                     <TouchableOpacity
                       onPress={() => setPayoutMethod('pago_movil')}
-                      className={`flex-1 py-3 rounded-xl border items-center ${payoutMethod === 'pago_movil' ? 'bg-secondary/10 border-secondary' : 'bg-background/80 border-zinc-700'
+                      className={`flex-1 py-3 rounded-xs border items-center ${payoutMethod === 'pago_movil' ? 'bg-secondary/10 border-secondary' : 'bg-background/80 border-zinc-700'
                         }`}
                     >
                       <Text className={`font-bold text-xs ${payoutMethod === 'pago_movil' ? 'text-secondary' : 'text-foreground'}`}>
@@ -282,7 +282,7 @@ export default function TaquillaScreen() {
                         placeholderTextColor="#64748b"
                         value={payoutReference}
                         onChangeText={setPayoutReference}
-                        className="bg-background/80 border border-zinc-700 rounded-xl px-4 py-3 text-white font-bold"
+                        className="bg-background/80 border border-zinc-700 rounded-xs px-4 py-3 text-white font-bold"
                       />
                     </View>
                   )}
@@ -290,7 +290,7 @@ export default function TaquillaScreen() {
                   <TouchableOpacity
                     onPress={handlePayoutBet}
                     disabled={payoutMutation.isPending}
-                    className="bg-secondary py-4 rounded-xl items-center border border-secondary active:scale-[0.98]"
+                    className="bg-secondary py-4 rounded-xs items-center border border-secondary active:scale-[0.98]"
                   >
                     {payoutMutation.isPending ? (
                       <ActivityIndicator color="#0f172a" />
@@ -305,7 +305,7 @@ export default function TaquillaScreen() {
 
               {/* CASO C: Apuesta ya cobrada o expirada */}
               {(bet.status === 'confirmada' || bet.status === 'cobrada' || bet.status === 'perdedora') && (
-                <View className="bg-background/80 p-4 rounded-xl border border-zinc-700">
+                <View className="bg-background/80 p-4 rounded-xs border border-zinc-700">
                   <Text className="text-foreground text-xs font-bold text-center">
                     Esta jugada se encuentra en estado: <Text className="text-secondary uppercase font-black">{bet.status}</Text>
                   </Text>
@@ -317,7 +317,7 @@ export default function TaquillaScreen() {
 
               <TouchableOpacity
                 onPress={() => setActiveTicketCode(null)}
-                className="mt-4 py-3 rounded-xl items-center bg-background/80 border border-zinc-850"
+                className="mt-4 py-3 rounded-xs items-center bg-background/80 border border-zinc-850"
               >
                 <Text className="text-foreground font-bold text-xs uppercase">Limpiar Pantalla</Text>
               </TouchableOpacity>

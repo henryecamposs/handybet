@@ -100,7 +100,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                   setShowOptionsModal(false);
                   onSharePress?.();
                 }}
-                className="flex-row items-center gap-2.5 p-2 rounded-xl hover:bg-zinc-900 transition-colors"
+                className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-zinc-900 transition-colors"
               >
                 <Share2 size={15} color={colors.foreground} />
                 <Text className="text-foreground text-xs font-semibold">Compartir</Text>
@@ -117,7 +117,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                     position: 'bottom'
                   });
                 }}
-                className="flex-row items-center gap-2.5 p-2 rounded-xl hover:bg-zinc-900 transition-colors"
+                className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-zinc-900 transition-colors"
               >
                 <Bell size={15} color={isNotificationsEnabled ? colors.primary : colors.foreground} />
                 <Text className={`text-xs font-semibold ${isNotificationsEnabled ? 'text-primary' : 'text-foreground'}`}>
@@ -135,7 +135,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                     position: 'bottom'
                   });
                 }}
-                className="flex-row items-center gap-2.5 p-2 rounded-xl hover:bg-zinc-900 transition-colors"
+                className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-zinc-900 transition-colors"
               >
                 <EyeOff size={15} color="#ef4444" />
                 <Text className="text-red-500 text-xs font-semibold">No mostrar</Text>
@@ -205,16 +205,16 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
             <View className="absolute bottom-3 w-full items-center z-10">
               <View className="bg-black/50 backdrop-blur-md rounded-2xl px-2 py-1 shadow-lg border border-white/10">
                 <PostActionButtons
-                isLiked={isLiked}
-                likeCount={isLiked ? '1.2k' : '1.1k'}
-                commentCount="342"
-                onLikeToggle={onLikeToggle}
-                onCommentPress={onCommentPress}
-                onSharePress={onSharePress}
-                isSaved={isSaved}
-                onSavePress={onSavePress}
-                variant="compact"
-              />
+                  isLiked={isLiked}
+                  likeCount={isLiked ? '1.2k' : '1.1k'}
+                  commentCount="342"
+                  onLikeToggle={onLikeToggle}
+                  onCommentPress={onCommentPress}
+                  onSharePress={onSharePress}
+                  isSaved={isSaved}
+                  onSavePress={onSavePress}
+                  variant="compact"
+                />
               </View>
             </View>
           </View>
@@ -272,7 +272,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                 setShowOptionsModal(false);
                 onSharePress?.();
               }}
-              className="flex-row items-center gap-2.5 p-2 rounded-xl hover:bg-zinc-900 transition-colors"
+              className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-zinc-900 transition-colors"
             >
               <Share2 size={15} color={colors.foreground} />
               <Text className="text-foreground text-xs font-semibold">Compartir</Text>
@@ -289,7 +289,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                   position: 'bottom'
                 });
               }}
-              className="flex-row items-center gap-2.5 p-2 rounded-xl hover:bg-zinc-900 transition-colors"
+              className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-zinc-900 transition-colors"
             >
               <Bell size={15} color={isNotificationsEnabled ? colors.primary : colors.foreground} />
               <Text className={`text-xs font-semibold ${isNotificationsEnabled ? 'text-primary' : 'text-foreground'}`}>
@@ -307,7 +307,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                   position: 'bottom'
                 });
               }}
-              className="flex-row items-center gap-2.5 p-2 rounded-xl hover:bg-zinc-900 transition-colors"
+              className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-zinc-900 transition-colors"
             >
               <EyeOff size={15} color="#ef4444" />
               <Text className="text-red-500 text-xs font-semibold">No mostrar</Text>
@@ -346,15 +346,15 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
 
           <View className="flex-row justify-center w-full">
             <PostActionButtons
-            isLiked={isLiked}
-            likeCount={isLiked ? '1.2k' : '1.1k'}
-            commentCount="342"
-            onLikeToggle={onLikeToggle}
-            onCommentPress={onCommentPress}
-            onSharePress={onSharePress}
-            isSaved={isSaved}
-            onSavePress={onSavePress}
-            variant="compact"
+              isLiked={isLiked}
+              likeCount={isLiked ? '1.2k' : '1.1k'}
+              commentCount="342"
+              onLikeToggle={onLikeToggle}
+              onCommentPress={onCommentPress}
+              onSharePress={onSharePress}
+              isSaved={isSaved}
+              onSavePress={onSavePress}
+              variant="compact"
             />
           </View>
         </View>
