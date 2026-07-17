@@ -4,8 +4,7 @@ import { MessageCircle, UserMinus } from 'lucide-react-native';
 import { handyBetUsers } from '../../../mockdata/handyBetMock';
 import { useRouter } from 'expo-router';
 import { useThemeColors } from '@/hooks/useThemeColors';
-import HubLayout from '@/components/layout/HubLayout';
-import PostItem from '../../../components/feed/PostItem';
+import { HubLayout, Carrusel, SeccionLista, PostContainer } from '../../../components/layout/hub';
 import { localDB } from '../../../lib/localDB';
 
 export default function FollowsScreen() {
@@ -59,12 +58,12 @@ export default function FollowsScreen() {
   const renderSuggestCard = (user: typeof suggestionsToFollow[0]) => {
     const isFollowing = !!followingStates[user.id];
     return (
-      <View 
-        key={`sug-${user.id}`} 
+      <View
+        key={`sug-${user.id}`}
         className="bg-background/80 p-5 rounded-3xl border border-muted-foreground flex-row items-center justify-between"
       >
-        <TouchableOpacity 
-          onPress={() => router.push(`/follows/${user.id}` as any)} 
+        <TouchableOpacity
+          onPress={() => router.push(`/follows/${user.id}` as any)}
           className="flex-row items-center flex-1"
         >
           <Image source={{ uri: user.avatar }} className="w-12 h-12 rounded-full bg-background/80 mr-3 border border-muted-foreground/35" />
@@ -91,85 +90,24 @@ export default function FollowsScreen() {
       subtitle="Administra los perfiles que sigues y descubre nuevas cuentas."
       onSearchChange={setSearchTerm}
       searchPlaceholder="Buscar seguidos..."
-      discoverTitle="Sugeridos para ti"
-      discoverItems={suggestionsToFollow}
-      renderDiscoverItem={renderSuggestCard}
       showBack={true}
     >
-      {/* Sección de Últimas Publicaciones de Seguidos */}
-      {latestPosts.length > 0 && (
-        <View className="mb-8 mt-6">
-          <View className="flex-row justify-between items-center mb-4">
-            <Text className="text-foreground font-black text-lg uppercase tracking-wider">Últimas Publicaciones</Text>
-            {latestPosts[0] && (
-              <TouchableOpacity
-                onPress={() => router.push(`/feed/search?id=${latestPosts[0].author_id}&from=follow` as any)}
-              >
-                <Text className="text-primary text-[10px] font-black uppercase">Ver todas</Text>
-              </TouchableOpacity>
-            )}
-          </View>
-          <View className="space-y-4">
-            {latestPosts.map((rawPost) => {
-              let authorName = rawPost.author?.full_name || 'Comunidad';
-              let username = `@${rawPost.author?.username || 'usuario'}`;
-              let avatar = rawPost.author?.avatar_url || 'https://i.pravatar.cc/150';
-              if (rawPost.channel) {
-                authorName = rawPost.channel.name;
-                username = `@canal_${rawPost.channel_id?.slice(0, 8)}`;
-                avatar = 'https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?w=150&auto=format&fit=crop&q=60';
-              } else if (rawPost.group) {
-                authorName = rawPost.group.name;
-                username = `@grupo_${rawPost.group_id?.slice(0, 8)}`;
-                avatar = 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=150&auto=format&fit=crop&q=60';
-              }
-              const postForComponent = {
-                id: rawPost.id,
-                author: authorName,
-                username: username,
-                avatar: avatar,
-                time: rawPost.created_at ? new Date(rawPost.created_at).toLocaleDateString() : 'Novedad',
-                text: rawPost.content,
-                mediaType: rawPost.media_type || 'photo',
-                mediaUrls: rawPost.media_urls || (rawPost.media_url ? [rawPost.media_url] : []),
-                feeling: rawPost.feeling || null,
-                group_id: rawPost.group_id,
-                channel_id: rawPost.channel_id
-              };
-
-              return (
-                <PostItem
-                  key={postForComponent.id}
-                  post={postForComponent}
-                  isLiked={false}
-                  onLikeToggle={() => {}}
-                  onCommentPress={() => router.push(`/feed/${postForComponent.id}` as any)}
-                  onSharePress={() => {}}
-                  onSavePress={() => {}}
-                />
-              );
-            })}
-          </View>
-        </View>
-      )}
-
       {/* Cuentas que sigues */}
       <View className="mt-8">
-        <Text className="text-foreground font-black text-lg uppercase tracking-wider mb-4">
-          Cuentas que sigues ({filteredUsers.length})
+        <Text className="text-foreground font-black text-lg   tracking-wider mb-4">
+          Siguiendo ({filteredUsers.length})
         </Text>
-        
+
         {filteredUsers.length > 0 ? (
           <View className="bg-background/80 rounded-3xl border border-muted-foreground overflow-hidden">
             {filteredUsers.map((user, index) => (
-              <View 
-                key={user.id} 
-                className={`flex-row items-center justify-between p-5 ${
-                  index !== filteredUsers.length - 1 ? 'border-b border-muted-foreground/15' : ''
-                }`}
+              <View
+                key={user.id}
+                className={`flex-row items-center justify-between p-5 ${index !== filteredUsers.length - 1 ? 'border-b border-muted-foreground/15' : ''
+                  }`}
               >
-                <TouchableOpacity 
-                  onPress={() => router.push(`/follows/${user.id}` as any)} 
+                <TouchableOpacity
+                  onPress={() => router.push(`/follows/${user.id}` as any)}
                   className="flex-row items-center flex-1"
                 >
                   <Image source={{ uri: user.avatar }} className="w-10 h-10 rounded-full bg-background/80 mr-3 border border-muted-foreground/35" />
@@ -179,8 +117,8 @@ export default function FollowsScreen() {
                   </View>
                 </TouchableOpacity>
                 <View className="flex-row gap-3">
-                  <TouchableOpacity 
-                    onPress={() => router.push(`/chat/follow/${user.id}` as any)} 
+                  <TouchableOpacity
+                    onPress={() => router.push(`/chat/follow/${user.id}` as any)}
                     className="w-10 h-10 rounded-full bg-background/80 items-center justify-center border border-muted-foreground hover:bg-background/80/85"
                   >
                     <MessageCircle size={18} color={colors.foreground} />
@@ -203,6 +141,18 @@ export default function FollowsScreen() {
           </View>
         )}
       </View>
+
+      <SeccionLista
+        title="Sugeridos para ti"
+        items={suggestionsToFollow}
+        renderItem={renderSuggestCard}
+      />
+
+      <PostContainer
+        title="Últimas Publicaciones"
+        posts={latestPosts}
+        onViewAll={latestPosts[0] ? () => router.push(`/feed/search?id=${latestPosts[0].author_id}&from=follow` as any) : undefined}
+      />
     </HubLayout>
   );
 }

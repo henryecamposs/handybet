@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
-import { Users, Compass } from 'lucide-react-native';
+import { Users, Compass, MessageSquare, Plus } from 'lucide-react-native';
 import { handyBetGroups } from '../../mockdata/handyBetMock';
 import { useRouter } from 'expo-router';
 import { Modal, ActivityIndicator, ScrollView } from 'react-native';
 import { groupMonetizationService } from '../../services/groupMonetizationService';
 import { Group, GroupPlan, GroupRules } from '../../types/handyBet';
-import { useThemeColors } from '@/hooks/useThemeColors';
-import HubLayout from '@/components/layout/HubLayout';
-import PostItem from '../../components/feed/PostItem';
+import { useThemeColors } from '../../hooks/useThemeColors';
 import { localDB } from '../../lib/localDB';
+import { HubLayout, Carrusel, SeccionLista, PostContainer } from '../../components/layout/hub';
 
 export default function GruposScreen() {
   const router = useRouter();
@@ -178,74 +177,29 @@ export default function GruposScreen() {
       searchPlaceholder="Buscar grupos por interés..."
       searchValue={searchQuery}
       onSearchChange={setSearchQuery}
-      myItemsTitle="Mis Grupos"
-      myItems={misGrupos}
-      renderMyItem={renderMyGroupCard}
-      onAddNewItem={() => router.push('/(tabs)/grupos/create' as any)}
-      addNewItemLabel="Crear Nuevo"
-      discoverTitle="Descubrir Nuevos Grupos"
-      discoverItems={filteredDiscoverGroups}
-      renderDiscoverItem={renderDiscoverGroupCard}
-      discoverLayout="grid"
-      emptyState={emptyState}
       showBack={true}
     >
-      {/* Sección de Últimas Publicaciones de Grupos/Canales */}
-      {latestPosts.length > 0 && (
-        <View className="mb-8 mt-6">
-          <View className="flex-row justify-between items-center mb-4">
-            <Text className="text-foreground font-black text-lg uppercase tracking-wider">Últimas Publicaciones</Text>
-            {latestPosts[0] && (
-              <TouchableOpacity
-                onPress={() => router.push(`/feed/search?id=${latestPosts[0].group_id || latestPosts[0].channel_id}&from=group` as any)}
-              >
-                <Text className="text-primary text-[10px] font-black uppercase">Ver todas</Text>
-              </TouchableOpacity>
-            )}
-          </View>
-          <View className="space-y-4">
-            {latestPosts.map((rawPost) => {
-              let authorName = rawPost.author?.full_name || 'Comunidad';
-              let username = `@${rawPost.author?.username || 'usuario'}`;
-              let avatar = rawPost.author?.avatar_url || 'https://i.pravatar.cc/150';
-              if (rawPost.channel) {
-                authorName = rawPost.channel.name;
-                username = `@canal_${rawPost.channel_id?.slice(0, 8)}`;
-                avatar = 'https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?w=150&auto=format&fit=crop&q=60';
-              } else if (rawPost.group) {
-                authorName = rawPost.group.name;
-                username = `@grupo_${rawPost.group_id?.slice(0, 8)}`;
-                avatar = 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=150&auto=format&fit=crop&q=60';
-              }
-              const postForComponent = {
-                id: rawPost.id,
-                author: authorName,
-                username: username,
-                avatar: avatar,
-                time: rawPost.created_at ? new Date(rawPost.created_at).toLocaleDateString() : 'Novedad',
-                text: rawPost.content,
-                mediaType: rawPost.media_type || 'photo',
-                mediaUrls: rawPost.media_urls || (rawPost.media_url ? [rawPost.media_url] : []),
-                feeling: rawPost.feeling || null,
-                group_id: rawPost.group_id,
-                channel_id: rawPost.channel_id
-              };
+      <Carrusel
+        title="Mis Grupos"
+        items={misGrupos}
+        renderItem={renderMyGroupCard}
+        onAddNew={() => router.push('/(tabs)/grupos/create' as any)}
+        addNewLabel="Crear Nuevo"
+      />
 
-              return (
-                <PostItem
-                  key={postForComponent.id}
-                  post={postForComponent}
-                  isLiked={false}
-                  onLikeToggle={() => {}}
-                  onCommentPress={() => router.push(`/feed/${postForComponent.id}` as any)}
-                  onSharePress={() => {}}
-                  onSavePress={() => {}}
-                />
-              );
-            })}
-          </View>
-        </View>
-      )}
+      <SeccionLista
+        title="Descubrir Nuevos Grupos"
+        items={filteredDiscoverGroups}
+        renderItem={renderDiscoverGroupCard}
+        layout="grid"
+        emptyState={emptyState}
+      />
+
+      <PostContainer
+        title="Últimas Publicaciones"
+        posts={latestPosts}
+        onViewAll={latestPosts[0] ? () => router.push(`/feed/search?id=${latestPosts[0].group_id || latestPosts[0].channel_id}&from=group` as any) : undefined}
+      />
 
       {/* Modal de Onboarding y Selección de Plan */}
       <Modal
