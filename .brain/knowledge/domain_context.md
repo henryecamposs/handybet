@@ -24,6 +24,7 @@ HandyBet integra un motor social optimizado con comportamientos interactivos y r
 - **Sistema de Seguimiento:** Permite seguir o dejar de seguir creadores directamente desde las tarjetas de publicación.
 - **Opciones de Moderación Individual:** Los posts admiten control rápido de notificaciones y la acción de ocultar publicación ("No mostrar"). Ocultar un post genera un reemplazo temporal de la tarjeta con opción "Deshacer".
 - **Compartido Avanzado:** Permite propagar publicaciones a destinos específicos categorizados en pestañas: *Grupos*, *Canales*, *Usuarios* y *Amigos*, con filtros de búsqueda rápida.
+- **Guardados (Bookmarks):** Los usuarios pueden marcar elementos de interés (posts, sorteos, noticias) para verlos más tarde. Estos elementos se agrupan en un repositorio personal (`(tabs)/favorites/index`).
 - **Detalle de Publicaciones (Estilo Twitter):** En lugar de mostrar popups emergentes pesados, al hacer clic sobre el texto de la publicación o la imagen multimedia de la tarjeta se abre la pantalla detallada del post (`PostDetailView.tsx`) en el contenedor central principal de la pantalla, manteniendo el layout exterior y habilitando la redacción e hilado de respuestas cronológicas instantáneas.
 - **Publicidad Contextual en Comentarios:** Si el visor de comentarios (`PostMediaViewer.tsx`) se abre para una publicación sin imágenes, la columna de medios renderiza un anuncio interactivo patrocinado con llamada a la acción y enlace externo dinámico.
 
@@ -46,3 +47,16 @@ El ecosistema opera sobre un esquema físico robusto de base de datos donde la s
 - **Muro (Feed):** Consola principal de descubrimiento donde se mezclan publicaciones sociales, pronósticos y anuncios.
 - **Split de Wallet:** División de ingresos generados por los grupos para monetizar el contenido de los creadores de forma transparente.
 - **WhatsApp Handle:** Identidad social (`@whatsapp`) obligatoria en el perfil de usuario para agilizar transacciones P2P externas.
+
+---
+
+## 6. Perfil de Usuario y Preferencias
+- **Extensibilidad de Perfil:** El perfil permite definir preferencias deportivas (categorías), configurar notificaciones y vincular el handle de WhatsApp.
+- **Acuerdos de Uso:** Para garantizar la moderación y el cumplimiento normativo, los usuarios deben aceptar explícitamente el Acuerdo de Uso de la Red Social para poder modificar su perfil.
+
+---
+
+## 7. Gestión de Billeteras Virtuales y Responsabilidad
+- **Saldos Referenciales:** Las billeteras (wallets) de la aplicación son entornos **virtuales**. Los saldos mostrados son **únicamente referenciales** y funcionan como un administrador contable de operaciones (compras, apuestas, premios).
+- **Sincronización:** Para conocer un comportamiento real del saldo, el usuario debe sincronizar siempre con el grupo al que realiza los depósitos, interactuando con el administrador (ej. mediante comandos sociales como `@pagar`, `@cobrar`, `@saldo`).
+- **Cláusula de Exención de Responsabilidad:** La aplicación no es responsable de las operaciones financieras, depósitos ni de las tasas de conversión en ningún tipo de moneda. Toda transacción y resguardo de fondos recae bajo la responsabilidad de la agencia, taquilla o grupo administrativo.

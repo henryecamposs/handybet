@@ -4,6 +4,21 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/), y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0] - 2026-07-17
+
+### Añadido
+- Vista de detalle de usuario `friends/[id].tsx` para visualizar perfil de seguidores, independizándolo del componente de perfil propio.
+- Resolución enriquecida de autores de posts en el detalle del Feed mediante `localDB.resolvePostWithAuthor`.
+
+### Cambiado
+- Corrección del enrutamiento de Guardados (`favorites/index.tsx`) y el widget lateral para que los perfiles de usuarios guíen a `/friends/[id]`.
+- Refactorización de la pantalla Muro (`feed/index.tsx`) para eliminar el renderizado en línea, utilizando ahora una navegación directa a `feed/[id]`.
+- Implementación de estado de contexto (`from`) para determinar si el usuario llegó al detalle del Post desde Guardados o desde el Feed, controlando la lógica del botón de Retroceso (`router.back` vs `router.replace`).
+- Implementación de scroll automático al volver desde el detalle de publicación hacia el Feed (`scrollToPostId` con referencias de layout `y`).
+- Refinamiento del renderizado de detalles y disclaimers colapsables en la pantalla de Billetera (`wallet/[id].tsx`).
+- Integración de los componentes de logo estandarizados `HandyPayLogo` y `HandyChannelLogo` en los Hubs correspondientes.
+- Solución de falsos positivos en el Linter (React Hooks deps y ref access) en el componente `Toast.tsx`.
+
 ## [1.4.0] - 2026-07-16
 
 ### Añadido

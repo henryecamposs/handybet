@@ -13,14 +13,14 @@ const allDraws = [
   { id: 'd5', title: 'Flappy Bird Crypto', sub: 'Juega gratis', emoji: '🎮', category: 'Minijuegos', desc: 'Esquiva los obstáculos para acumular puntos canjeables.' },
 ];
 
-export default function JuegoDetailScreen() {
-  const { juegoId } = useLocalSearchParams();
+export default function GameDetailScreen() {
+  const { gameId } = useLocalSearchParams();
   const router = useRouter();
   const { addToast } = useToastStore();
   const [selectedNumber, setSelectedNumber] = useState('');
   const [amount, setAmount] = useState('');
 
-  const juego = allDraws.find((d) => d.id === juegoId) || allDraws[0];
+  const game = allDraws.find((d) => d.id === gameId) || allDraws[0];
 
   const handlePlaySubmit = () => {
     if (!amount) {
@@ -42,21 +42,21 @@ export default function JuegoDetailScreen() {
 
   return (
     <HubDetailLayout
-      backRoute="/(tabs)/juegos"
+      backRoute="/(tabs)/games"
       logoType="play"
-      categoryText={juego.category}
-      title={juego.title}
+      categoryText={game.category}
+      title={game.title}
     >
       {/* Detalle del Juego */}
       <View className="items-center mb-8">
         <View className="w-24 h-24 rounded-3xl bg-background/80 items-center justify-center mb-4 border border-zinc-700 shadow-xl relative">
-          <Text className="text-4xl">{juego.emoji}</Text>
+          <Text className="text-4xl">{game.emoji}</Text>
           <View className="absolute -bottom-2 -right-2 bg-primary w-8 h-8 rounded-full border-4 border-zinc-950 items-center justify-center">
             <Shield size={12} color="#000" />
           </View>
         </View>
-        <Text className="text-foreground text-sm text-center px-4 mb-2">{juego.desc}</Text>
-        <Text className="text-muted-foreground text-xs font-bold uppercase">{juego.sub}</Text>
+        <Text className="text-foreground text-sm text-center px-4 mb-2">{game.desc}</Text>
+        <Text className="text-muted-foreground text-xs font-bold uppercase">{game.sub}</Text>
       </View>
 
       {/* Zona de Jugada Interactiva (Premium) */}
@@ -66,7 +66,7 @@ export default function JuegoDetailScreen() {
           <Text className="text-foreground font-bold text-base">Realizar Jugada</Text>
         </View>
 
-        {juego.category !== 'Minijuegos' ? (
+        {game.category !== 'Minijuegos' ? (
           <View className="gap-4">
             <View>
               <Text className="text-foreground text-xs font-bold mb-1.5 uppercase tracking-wider">Tu Pronóstico / Número</Text>

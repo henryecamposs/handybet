@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { MessageCircle, UserMinus } from 'lucide-react-native';
-import { handyBetUsers } from '../../mockdata/handyBetMock';
+import { handyBetUsers } from '../../../mockdata/handyBetMock';
 import { useRouter } from 'expo-router';
 import { useThemeColors } from '@/hooks/useThemeColors';
 import HubLayout from '@/components/layout/HubLayout';
@@ -42,7 +42,7 @@ export default function FriendsScreen() {
         className="bg-background/80 p-5 rounded-3xl border border-muted-foreground flex-row items-center justify-between"
       >
         <TouchableOpacity 
-          onPress={() => router.push(`/profile/${user.id}` as any)} 
+          onPress={() => router.push(`/friends/${user.id}` as any)} 
           className="flex-row items-center flex-1"
         >
           <Image source={{ uri: user.avatar }} className="w-12 h-12 rounded-full bg-background/80 mr-3 border border-muted-foreground/35" />
@@ -72,6 +72,7 @@ export default function FriendsScreen() {
       discoverTitle="Sugeridos para ti"
       discoverItems={suggestionsToFollow}
       renderDiscoverItem={renderSuggestCard}
+      showBack={true}
     >
       {/* Cuentas que sigues */}
       <View className="mt-8">
@@ -89,7 +90,7 @@ export default function FriendsScreen() {
                 }`}
               >
                 <TouchableOpacity 
-                  onPress={() => router.push(`/profile/${user.id}` as any)} 
+                  onPress={() => router.push(`/friends/${user.id}` as any)} 
                   className="flex-row items-center flex-1"
                 >
                   <Image source={{ uri: user.avatar }} className="w-10 h-10 rounded-full bg-background/80 mr-3 border border-muted-foreground/35" />

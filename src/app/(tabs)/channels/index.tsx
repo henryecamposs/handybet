@@ -7,7 +7,7 @@ import { Compass, Tv } from 'lucide-react-native';
 import { useThemeColors } from '@/hooks/useThemeColors';
 import HubLayout from '@/components/layout/HubLayout';
 
-export default function CanalesScreen() {
+export default function ChannelsScreen() {
   const router = useRouter();
   const [channels, setChannels] = useState<Channel[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -15,7 +15,7 @@ export default function CanalesScreen() {
   const colors = useThemeColors();
 
   // Simulamos canales del usuario (solo para demostración del UI)
-  const misCanales = channels.slice(0, 1);
+  const myChannels = channels.slice(0, 1);
 
   async function fetchChannels() {
     try {
@@ -39,7 +39,7 @@ export default function CanalesScreen() {
   const renderMyChannelCard = (channel: Channel) => (
     <TouchableOpacity
       key={channel.id}
-      onPress={() => router.push(`/(tabs)/canales/${channel.id}` as any)}
+      onPress={() => router.push(`/(tabs)/channels/${channel.id}` as any)}
       className="w-32 h-36 bg-card rounded-2xl border border-primary/20 items-center justify-center mr-4 hover:bg-background/80/80 transition-colors px-2"
     >
       <View className="w-12 h-12 rounded-full bg-background/80 items-center justify-center mb-2">
@@ -55,7 +55,7 @@ export default function CanalesScreen() {
   const renderDiscoverChannelCard = (channel: Channel) => (
     <TouchableOpacity
       key={channel.id}
-      onPress={() => router.push(`/(tabs)/canales/${channel.id}` as any)}
+      onPress={() => router.push(`/(tabs)/channels/${channel.id}` as any)}
       className="bg-background/80 border border-muted-foreground p-4 rounded-2xl flex-row justify-between items-center hover:bg-background/80/80 transition-colors"
     >
       <View className="flex-row items-center flex-1">
@@ -95,15 +95,16 @@ export default function CanalesScreen() {
       searchValue={searchQuery}
       onSearchChange={setSearchQuery}
       myItemsTitle="Mis Canales"
-      myItems={misCanales}
+      myItems={myChannels}
       renderMyItem={renderMyChannelCard}
-      onAddNewItem={() => router.push('/(tabs)/canales/create' as any)}
+      onAddNewItem={() => router.push('/(tabs)/channels/create' as any)}
       addNewItemLabel="Crear Nuevo"
       discoverTitle="Directorio de Canales"
       discoverItems={filteredDiscoverChannels}
       renderDiscoverItem={renderDiscoverChannelCard}
       isLoading={isLoading}
       emptyState={emptyState}
+      showBack={true}
     />
   );
 }

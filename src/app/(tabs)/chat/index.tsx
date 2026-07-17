@@ -218,7 +218,7 @@ export default function ChatInboxScreen() {
             {channelChats.map((chat) => (
               <TouchableOpacity
                 key={chat.id}
-                onPress={() => router.push(`/canales/${chat.id}` as any)}
+                onPress={() => router.push(`/channels/${chat.id}` as any)}
                 className="bg-background/80 border border-muted-foreground/35 p-4 rounded-3xl flex-row items-center gap-4 shadow-sm"
               >
                 <Image source={{ uri: chat.avatar }} className="w-12 h-12 rounded-full border border-muted-foreground/20 bg-background" />
@@ -300,8 +300,8 @@ export default function ChatInboxScreen() {
   return (
     <HubDetailLayout
       logoType="chat"
-      backRoute="/(tabs)/feed"
-      onBack={() => router.back()}
+      backRoute="/"
+      onBack={() => router.push('/')}
     >
       {/* 1. Usuarios Activos (Tag e Indicador) */}
       <View className="mb-6">
@@ -348,7 +348,7 @@ export default function ChatInboxScreen() {
             <TouchableOpacity
               key={tab.id}
               onPress={() => setActiveTab(tab.id as any)}
-              className={`flex-1 flex-row items-center justify-center gap-1.5 py-3 rounded-full border transition-colors ${isSelected ? 'bg-secondary/20 border-secondary' : 'bg-background/80 border-muted-foreground/35'}`}
+              className={`flex-1 flex-row items-center justify-center gap-1.5 py-3 rounded-full border transition-colors ${isSelected ? 'bg-primary/20 border-primary' : 'bg-background/80 border-muted-foreground/35'}`}
             >
               <TabIcon size={12} color={isSelected ? colors.primary : colors.foreground} />
               <Text className={`font-black text-xs ${isSelected ? 'text-primary' : 'text-foreground'}`}>

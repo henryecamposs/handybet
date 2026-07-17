@@ -6,11 +6,25 @@ import { useHandyBetStore } from '../../store/useHandyBetStore';
 import { useThemeColors, withOpacity } from '../../hooks/useThemeColors';
 import SidebarPopover from '../layout/SidebarPopover';
 import { handyBetGroups, handyBetChannels, handyBetUsers } from '../../mockdata/handyBetMock';
+import { localDB } from '../../lib/localDB';
 
 export default function LeftSidebarWidgets() {
   const router = useRouter();
   const { mockSession } = useHandyBetStore();
   const colors = useThemeColors();
+  const [savedItems, setSavedItems] = React.useState<any[]>([]);
+
+  React.useEffect(() => {
+    const loadSavedItems = async () => {
+      try {
+        const items = await localDB.saved_items.getAll();
+        setSavedItems(items);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    loadSavedItems();
+  }, []);
 
   const suggestions = {
     groups: handyBetGroups.map(g => ({ id: g.id, name: g.name, type: g.type, members: g.members.length * 123 })),
@@ -38,7 +52,22 @@ export default function LeftSidebarWidgets() {
         <SidebarPopover
           icon={<Bookmark size={24} color={colors.primary} />}
           label="Guardado"
-          items={[]}
+          items={savedItems.map((item) => {
+            const targetId = item.target_id || item.id;
+            let path = `/favorites/${item.id}`;
+            if (item.type === 'user') path = `/friends/${targetId}`;
+            else if (item.type === 'game') path = `/games/${targetId}`;
+            else if (item.type === 'channel') path = `/channels/${targetId}`;
+            else if (item.type === 'group') path = `/chat/group/${targetId}`;
+            else if (item.type === 'post' || item.type === 'advertisement') path = `/feed/${targetId}?from=favorites`;
+            return {
+              id: item.id,
+              name: item.title || item.name || 'Elemento Guardado',
+              subtitle: item.type === 'user' ? 'Usuario' : item.type === 'game' ? 'Juego' : item.type === 'channel' ? 'Canal' : item.type === 'group' ? 'Grupo' : 'Publicación',
+              path
+            };
+          })}
+          viewAllPath="/favorites"
         />
         <SidebarPopover
           icon={<Users size={24} color={colors.primary} />}
@@ -49,21 +78,26 @@ export default function LeftSidebarWidgets() {
         <SidebarPopover
           icon={<Tv size={24} color={colors.primary} />}
           label="Canales"
-          items={suggestions.channels.map(c => ({ id: c.id, name: c.name, subtitle: c.description, path: `/canales/${c.id}` }))}
-          viewAllPath="/canales"
+          items={suggestions.channels.map(c => ({ id: c.id, name: c.name, subtitle: c.description, path: `/channels/${c.id}` }))}
+          viewAllPath="/channels"
         />
         <SidebarPopover
           icon={<Wallet size={24} color={colors.primary} />}
           label="Billeteras"
           items={[
-            { id: '1', name: 'Taquilla Principal', subtitle: 'La Imaginaria', path: '/(dashboard)/taquilla' }
+            { id: 'wallet_1', name: 'Taquilla Principal', subtitle: 'La Imaginaria', path: '/wallet/wallet_1' }
           ]}
           viewAllPath="/wallet"
         />
         <SidebarPopover
           icon={<Gamepad2 size={24} color={colors.primary} />}
           label="Juegos"
-          items={[]}
+          items={[
+            { id: 'd1', name: 'Animalitos VIP', subtitle: 'Taquillas', path: '/games/d1' },
+            { id: 'd2', name: 'Carreras 5y6', subtitle: 'Taquillas', path: '/games/d2' },
+            { id: 'd3', name: 'Quiniela Champions', subtitle: 'Quinielas', path: '/games/d3' }
+          ]}
+          viewAllPath="/games"
         />
       </View>
     </ScrollView>

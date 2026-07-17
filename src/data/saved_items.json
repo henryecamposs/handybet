@@ -1,0 +1,37 @@
+[
+  {
+    "id": "saved_1",
+    "type": "post",
+    "title": "Gran jugada en la final",
+    "target_id": "post_1",
+    "created_at": "2023-10-25T10:00:00Z"
+  },
+  {
+    "id": "saved_2",
+    "type": "user",
+    "title": "Juan Pérez",
+    "target_id": "usr_henry",
+    "created_at": "2023-10-26T14:30:00Z"
+  },
+  {
+    "id": "saved_3",
+    "type": "group",
+    "title": "Apuestas de Fútbol VIP",
+    "target_id": "grp_taquilla_ccs",
+    "created_at": "2023-10-27T09:15:00Z"
+  },
+  {
+    "id": "saved_4",
+    "type": "channel",
+    "title": "Análisis Deportivo Pro",
+    "target_id": "ch_joselin",
+    "created_at": "2023-10-28T18:45:00Z"
+  },
+  {
+    "id": "saved_5",
+    "type": "game",
+    "title": "Ruleta Europea",
+    "target_id": "d1",
+    "created_at": "2023-10-29T21:00:00Z"
+  }
+]

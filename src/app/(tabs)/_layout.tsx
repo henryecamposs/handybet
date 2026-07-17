@@ -89,16 +89,27 @@ export default function TabsLayout() {
         <Tabs.Screen name="wallet/[id]" options={{ href: null }} />
         
         <Tabs.Screen name="profile/edit" options={{ href: null }} />
-        <Tabs.Screen name="profile/[userId]" options={{ href: null }} />
         
-        <Tabs.Screen name="canales/index" options={{ href: null }} />
-        <Tabs.Screen name="canales/[canalId]" options={{ href: null }} />
-        <Tabs.Screen name="canales/create" options={{ href: null }} />
-        <Tabs.Screen name="canales/grupo/[grupoId]" options={{ href: null }} />
+        <Tabs.Screen name="channels/index" options={{ href: null }} />
+        <Tabs.Screen name="channels/[channelId]" options={{ href: null }} />
+        <Tabs.Screen name="channels/create" options={{ href: null }} />
+        <Tabs.Screen name="channels/grupo/[grupoId]" options={{ href: null }} />
         
-        <Tabs.Screen name="friends" options={{ href: null }} />
-        <Tabs.Screen name="juegos/index" options={{ href: null }} />
-        <Tabs.Screen name="juegos/[juegoId]" options={{ href: null }} />
+        <Tabs.Screen name="favorites/index" options={{ href: null }} />
+        <Tabs.Screen name="favorites/[id]" options={{ href: null }} />
+        
+        <Tabs.Screen name="friends/index" options={{ href: null }} />
+        <Tabs.Screen name="friends/[id]" options={{ href: null }} />
+        
+        <Tabs.Screen name="games/index" options={{ href: null }} />
+        <Tabs.Screen name="games/[gameId]" options={{ href: null }} />
+        <Tabs.Screen name="feed/[id]" options={{ href: null }} />
+        
+        <Tabs.Screen name="saved/index" options={{ href: null }} />
+        <Tabs.Screen name="saved/[savedId]" options={{ href: null }} />
+
+        <Tabs.Screen name="guardados/index" options={{ href: null }} />
+        <Tabs.Screen name="guardados/[id]" options={{ href: null }} />
       </Tabs>
     </HandyBetLayout>
   );

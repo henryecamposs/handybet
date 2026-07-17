@@ -6,8 +6,8 @@ import { Channel, Group } from '../../../types/handyBet';
 import { useThemeColors } from '@/hooks/useThemeColors';
 import HubDetailLayout from '@/components/layout/HubDetailLayout';
 
-export default function CanalDetailScreen() {
-  const { canalId } = useLocalSearchParams();
+export default function ChannelDetailScreen() {
+  const { channelId } = useLocalSearchParams();
   const router = useRouter();
   const colors = useThemeColors();
 
@@ -15,14 +15,14 @@ export default function CanalDetailScreen() {
   const [groups, setGroups] = useState<Group[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  async function fetchCanalDetails() {
+  async function fetchChannelDetails() {
     try {
       setIsLoading(true);
-      const channelData = await localDB.channels.getById(canalId as string);
+      const channelData = await localDB.channels.getById(channelId as string);
       setChannel(channelData as Channel);
 
       const allGroups = await localDB.groups.getAll();
-      const groupsData = allGroups.filter((g: any) => g.channel_id === canalId);
+      const groupsData = allGroups.filter((g: any) => g.channel_id === channelId);
       setGroups(groupsData || []);
     } catch (err) {
       console.log('Error fetching channel details:', err);
@@ -32,11 +32,11 @@ export default function CanalDetailScreen() {
   }
 
   useEffect(() => {
-    if (canalId) {
+    if (channelId) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      fetchCanalDetails();
+      fetchChannelDetails();
     }
-  }, [canalId]);
+  }, [channelId]);
 
   const getIconForType = (type: string) => {
     switch (type) {
@@ -71,8 +71,8 @@ export default function CanalDetailScreen() {
 
   return (
     <HubDetailLayout
-      backRoute="/(tabs)/canales"
-      logoType="news"
+      backRoute="/(tabs)/channels"
+      logoType="channels"
       categoryText="Consorcio de Loterías"
       title={channel?.name || ''}
       listTitle="Salas y Subgrupos"

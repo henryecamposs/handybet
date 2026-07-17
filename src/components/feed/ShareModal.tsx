@@ -15,7 +15,7 @@ const MOCK_DATA = {
     { id: 'g2', name: 'HandyBet Oficial Chat', members: '5,800 miembros', icon: Users },
     { id: 'g3', name: 'Pronósticos Liga Europea', members: '840 miembros', icon: Users },
   ],
-  canales: [
+  channels: [
     { id: 'c1', name: 'Canal de Datos Fijos', subscribers: '12,500 suscriptores', icon: Tv },
     { id: 'c2', name: 'Premium Tipster Club', subscribers: '3,200 suscriptores', icon: Tv },
     { id: 'c3', name: 'Noticias Deportivas', subscribers: '24,000 suscriptores', icon: Tv },
@@ -32,7 +32,7 @@ const MOCK_DATA = {
   ],
 };
 
-type ShareTab = 'grupo' | 'canal' | 'usuario' | 'seguido';
+type ShareTab = 'grupo' | 'channel' | 'usuario' | 'seguido';
 
 export default function ShareModal({ visible, onClose, onShareSuccess }: ShareModalProps) {
   const colors = useThemeColors();
@@ -56,8 +56,8 @@ export default function ShareModal({ visible, onClose, onShareSuccess }: ShareMo
     switch (activeTab) {
       case 'grupo':
         return MOCK_DATA.grupos.filter(g => g.name.toLowerCase().includes(q));
-      case 'canal':
-        return MOCK_DATA.canales.filter(c => c.name.toLowerCase().includes(q));
+      case 'channel':
+        return MOCK_DATA.channels.filter(c => c.name.toLowerCase().includes(q));
       case 'usuario':
         return MOCK_DATA.usuarios.filter(u => u.name.toLowerCase().includes(q) || u.username.toLowerCase().includes(q));
       case 'seguido':
@@ -87,7 +87,7 @@ export default function ShareModal({ visible, onClose, onShareSuccess }: ShareMo
 
           {/* Categorías (Pestañas) en fila */}
           <View className="flex-row border-b border-zinc-850 mb-4 justify-between">
-            {(['grupo', 'canal', 'usuario', 'seguido'] as ShareTab[]).map((tab) => {
+            {(['grupo', 'channel', 'usuario', 'seguido'] as ShareTab[]).map((tab) => {
               const isActive = activeTab === tab;
               return (
                 <TouchableOpacity

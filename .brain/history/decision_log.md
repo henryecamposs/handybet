@@ -28,3 +28,20 @@
   * Reestructuramos la tarjeta `PostItem.tsx` a dos columnas (avatar izquierda, contenido derecha) y convertimos su menú ⋮ en un popover local absoluto.
   * Solucionamos las barras de scroll redundantes forzando `h-screen max-h-screen overflow-hidden` en `HandyBetLayout.tsx` en escritorio, permitiendo scrollbars fluidos e independientes por columna.
   * Modularizamos la cabecera del layout a [HandyBetHeader.tsx](file:///c:/Users/DELL/Documents/dPana%20Projects/frontends/handy-app/src/components/layout/HandyBetHeader.tsx) y el panel izquierdo a [LeftSidebarWidgets.tsx](file:///c:/Users/DELL/Documents/dPana%20Projects/frontends/handy-app/src/components/widgets/LeftSidebarWidgets.tsx).
+
+## Hito 6: Refactorización de Perfil, Bandeja de Chat y Navegación en Hubs
+- **Fecha:** 2026-07-17
+- **Contexto:** Se necesitaba mejorar la organización de los chats privados vs grupos, añadir campos extendidos en el perfil de usuario y unificar la navegación (botones Back) en todos los directorios.
+- **Decisión:**
+  * Rediseñamos el `HandyChat` usando un sistema de pestañas (Directos, Grupos, Canales, Menciones) y un carrusel de usuarios activos.
+  * Extendimos `HubLayout.tsx` para soportar un botón universal de retorno al lado de los títulos principales, aplicándolo a todas las vistas de lista.
+  * Agregamos los campos de configuración, suscripciones y check de términos de uso en `profile/edit.tsx` (desvinculando el Header estricto).
+  * Introdujimos la funcionalidad y rutas ocultas para la sección de "Guardados" (`saved`).
+
+## Hito 7: Unificación de Rutas, Idioma de Código e Integración en Hub
+- **Fecha:** 2026-07-17
+- **Contexto:** Las secciones de Guardados, Canales y Juegos estaban mal anidadas o presentaban disparidad en el código entre variables en español y rutas. Adicionalmente, el diseño debía cargar dentro del contenedor central de la app persistiendo las barras laterales.
+- **Decisión:** 
+  * Movimos las rutas de `favorites`, `channels` y `games` de vuelta a la carpeta `(tabs)` y las ocultamos de la barra inferior con `href: null` en `_layout.tsx`, asegurando la renderización en la columna central.
+  * Renombramos variables, tipos y directorios (`canales` -> `channels`, `juegos` -> `games`) para mantener un estándar de código en inglés, conservando únicamente las etiquetas visuales (UI) en español.
+  * Implementamos búsqueda nativa del `HubLayout` en la sección de Guardados y poblamos los listados rápidos en el menú lateral izquierdo (`LeftSidebarWidgets.tsx`).

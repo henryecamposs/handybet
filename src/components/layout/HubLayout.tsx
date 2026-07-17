@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity, ActivityIndicator, TextInput } from 'react-native';
-import { Search, Plus } from 'lucide-react-native';
+import { Search, Plus, ArrowLeft } from 'lucide-react-native';
 import { useThemeColors } from '@/hooks/useThemeColors';
+import { useRouter } from 'expo-router';
 
 export interface HubLayoutTab {
   id: string;
@@ -12,37 +13,39 @@ export interface HubLayoutTab {
 export interface HubLayoutProps {
   title: string;
   subtitle: string;
-  
+  showBack?: boolean;
+  onBack?: () => void;
+
   // Hero Banner (opcional)
   heroBanner?: React.ReactNode;
-  
+
   // Buscador (opcional)
   searchPlaceholder?: string;
   searchValue?: string;
   onSearchChange?: (text: string) => void;
-  
+
   // Categorías / Tabs (opcional)
   tabs?: HubLayoutTab[];
   activeTabId?: string;
   onTabChange?: (id: string) => void;
-  
+
   // Sección horizontal "Mis Ítems" (opcional)
   myItemsTitle?: string;
   myItems?: any[];
   renderMyItem?: (item: any, index: number) => React.ReactNode;
   onAddNewItem?: () => void;
   addNewItemLabel?: string;
-  
+
   // Sección principal de descubrimiento
   discoverTitle?: string;
   discoverItems?: any[];
   renderDiscoverItem?: (item: any, index: number) => React.ReactNode;
   discoverLayout?: 'list' | 'grid'; // Grid de 2 columnas o lista
-  
+
   // Estados de carga y vacío
   isLoading?: boolean;
   emptyState?: React.ReactNode;
-  
+
   // Hijos para inyección de modales o componentes adicionales
   children?: React.ReactNode;
 }
@@ -50,6 +53,8 @@ export interface HubLayoutProps {
 export default function HubLayout({
   title,
   subtitle,
+  showBack,
+  onBack,
   heroBanner,
   searchPlaceholder = 'Buscar...',
   searchValue,
@@ -71,16 +76,27 @@ export default function HubLayout({
   children,
 }: HubLayoutProps) {
   const colors = useThemeColors();
+  const router = useRouter();
 
   // Determinamos si hay "Mis Ítems" o si mostramos el botón de agregar
   const hasMyItemsSection = myItemsTitle && (myItems.length > 0 || onAddNewItem);
 
   return (
-    <ScrollView className="flex-1 bg-background px-4 pt-12" showsVerticalScrollIndicator={false}>
+    <ScrollView className="flex-1 bg-background px-4 pt-2" showsVerticalScrollIndicator={false}>
       {/* Header */}
-      <View className="mb-6">
-        <Text className="text-foreground font-bold text-2xl">{title}</Text>
-        <Text className="text-foreground text-sm mt-1">{subtitle}</Text>
+      <View className="mb-6 flex-row items-center">
+        {(showBack || onBack) && (
+          <TouchableOpacity
+            onPress={() => onBack ? onBack() : router.push('/')}
+            className="mr-3 p-2 rounded-full bg-background/80 hover:bg-primary/20 transition-colors border border-muted-foreground/35"
+          >
+            <ArrowLeft size={22} color={colors.foreground} />
+          </TouchableOpacity>
+        )}
+        <View className="flex-1">
+          <Text className="text-foreground font-bold text-2xl">{title}</Text>
+          <Text className="text-foreground text-sm mt-1">{subtitle}</Text>
+        </View>
       </View>
 
       {/* Hero Banner */}
@@ -109,11 +125,10 @@ export default function HubLayout({
               <TouchableOpacity
                 key={tab.id}
                 onPress={() => onTabChange?.(tab.id)}
-                className={`flex-1 p-4 rounded-2xl border items-center justify-center transition-colors ${
-                  isActive
-                    ? 'bg-primary/20 border-primary'
-                    : 'bg-background/80 border-muted-foreground'
-                }`}
+                className={`flex-1 p-4 rounded-2xl border items-center justify-center transition-colors ${isActive
+                  ? 'bg-primary/20 border-primary'
+                  : 'bg-background/80 border-muted-foreground'
+                  }`}
               >
                 {tab.icon}
                 <Text className={`font-bold text-center mt-2 text-sm ${isActive ? 'text-primary' : 'text-foreground'}`}>
@@ -164,7 +179,7 @@ export default function HubLayout({
             {discoverTitle && (
               <Text className="text-foreground font-bold text-lg mb-4">{discoverTitle}</Text>
             )}
-            
+
             {discoverLayout === 'grid' ? (
               <View className="flex-row flex-wrap gap-4">
                 {discoverItems.map((item, index) => renderDiscoverItem?.(item, index))}

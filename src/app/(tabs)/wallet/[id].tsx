@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { ArrowUpRight, ArrowDownLeft, Store, History, Settings } from 'lucide-react-native';
+import { ArrowUpRight, ArrowDownLeft, Store, History, Settings, Info } from 'lucide-react-native';
 import { useThemeColors } from '@/hooks/useThemeColors';
 import HubDetailLayout from '@/components/layout/HubDetailLayout';
 
@@ -9,22 +9,49 @@ export default function WalletDetailScreen() {
   const { id } = useLocalSearchParams();
   const router = useRouter();
   const colors = useThemeColors();
+  const [showDisclaimer, setShowDisclaimer] = useState(true);
 
   // En una app real, fetchearías la billetera con el 'id'
 
   const renderHeaderRight = () => (
-    <TouchableOpacity className="w-9 h-9 bg-background/80 rounded-full items-center justify-center border border-muted-foreground/35 hover:bg-background/80/85">
-      <Settings size={18} color={colors.foreground} />
-    </TouchableOpacity>
+    <View className="flex-row gap-2">
+      <TouchableOpacity 
+        onPress={() => setShowDisclaimer(!showDisclaimer)}
+        className={`w-9 h-9 rounded-full items-center justify-center border hover:bg-background/80/85 ${
+          showDisclaimer ? 'bg-primary/20 border-primary' : 'bg-background/80 border-muted-foreground/35'
+        }`}
+      >
+        <Info size={18} color={showDisclaimer ? colors.primary : colors.foreground} />
+      </TouchableOpacity>
+      <TouchableOpacity className="w-9 h-9 bg-background/80 rounded-full items-center justify-center border border-muted-foreground/35 hover:bg-background/80/85">
+        <Settings size={18} color={colors.foreground} />
+      </TouchableOpacity>
+    </View>
   );
 
   return (
     <HubDetailLayout
-      logoType="default"
+      logoType="wallet"
       backRoute="/(tabs)/wallet"
       headerRight={renderHeaderRight()}
     >
       <View className="px-4 pt-6">
+        {/* Aviso de Billetera Virtual (Disclaimer) */}
+        {showDisclaimer && (
+          <View className="bg-zinc-900/80 border border-amber-500/50 p-4 rounded-2xl mb-6">
+            <View className="flex-row items-center mb-3">
+              <Info size={18} color="#f59e0b" className="mr-2" />
+              <Text className="text-amber-500 font-bold text-sm uppercase tracking-wider">Aviso Legal de Billetera Virtual</Text>
+            </View>
+            <Text className="text-foreground text-xs leading-relaxed mb-3 text-justify">
+              Las billeteras en HandyBet son estrictamente <Text className="font-bold">virtuales</Text> y los saldos aquí mostrados son de carácter puramente referencial. Para asegurar un comportamiento correcto y un saldo real, debes sincronizar siempre tus operaciones con el administrador del grupo donde realizas depósitos, utilizando comandos como <Text className="font-mono font-bold text-primary">@pagar</Text>, <Text className="font-mono font-bold text-primary">@cobrar</Text> o <Text className="font-mono font-bold text-primary">@saldo</Text>, y esperando las respuestas de confirmación de dicho administrador.
+            </Text>
+            <Text className="text-foreground text-xs leading-relaxed text-justify opacity-90">
+              <Text className="font-bold">Cláusula de Responsabilidad:</Text> La aplicación no es responsable, bajo ninguna circunstancia, de las operaciones realizadas en cualquier tipo de moneda real, transferencias bancarias o acuerdos entre terceros. La billetera funciona exclusivamente como un administrador de registro interno para las operaciones realizadas en compras, apuestas, premios y otras actividades recreativas dentro de la plataforma.
+            </Text>
+          </View>
+        )}
+
         {/* Tarjeta Principal */}
         <View className="bg-gradient-to-br from-secondary/15 to-background rounded-3xl p-5 border border-secondary/35 mb-8 relative overflow-hidden">
           <View className="absolute -top-10 -right-10 w-40 h-40 bg-secondary/10 rounded-full blur-3xl" />

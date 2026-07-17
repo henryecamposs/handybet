@@ -36,6 +36,7 @@ export default function WalletScreen() {
       renderMyItem={renderMyWalletItem}
       onAddNewItem={() => router.push('/(tabs)/wallet/create' as any)}
       addNewItemLabel="Crear/Añadir"
+      showBack={true}
     >
       {/* Si no tiene billeteras creadas */}
       {misBilleteras.length === 0 && (

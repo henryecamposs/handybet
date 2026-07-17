@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView, Image, TouchableOpacity, Linking, ActivityIndicator, TextInput, Modal } from 'react-native';
-import { socialService } from '../../services/socialService';
-import { localDB } from '../../lib/localDB';
-import { Advertisement, VisibilityLevel } from '../../types/handyBet';
-import { useHandyBetStore } from '../../store/useHandyBetStore';
-import { useToastStore } from '../../store/useToastStore';
-import { groupMonetizationService } from '../../services/groupMonetizationService';
+import { View, Text, ScrollView, Image, TouchableOpacity, Linking, ActivityIndicator, TextInput, Modal, Pressable } from 'react-native';
+import { useRouter, useLocalSearchParams } from 'expo-router';
+import { socialService } from '../../../services/socialService';
+import { localDB } from '../../../lib/localDB';
+import { Advertisement, VisibilityLevel } from '../../../types/handyBet';
+import { useHandyBetStore } from '../../../store/useHandyBetStore';
+import { useToastStore } from '../../../store/useToastStore';
+import { groupMonetizationService } from '../../../services/groupMonetizationService';
 import Logo from '@/components/ui/Logo';
 import HandyAdsLogo from '@/components/ui/HandyAdsLogo';
 import HandyPostLogo from '@/components/ui/HandyPostLogo';
@@ -14,23 +15,29 @@ import PostItem from '@/components/feed/PostItem';
 import PostDetailView from '@/components/feed/PostDetailView';
 import PostMediaViewer from '@/components/feed/PostMediaViewer';
 import ShareModal from '@/components/feed/ShareModal';
-import { Heart, MessageSquare, Share2 } from 'lucide-react-native';
+import { Heart, MessageSquare, Share2, MoreVertical, LogOut, Star, User, Tv, Gamepad2, Bookmark, UserCheck, Users } from 'lucide-react-native';
 import { useThemeColors, withOpacity } from '@/hooks/useThemeColors';
+import { useDevicePlatform } from '@/hooks/useDevicePlatform';
 
 export default function FeedScreen() {
   const [posts, setPosts] = useState<any[]>([]);
   const [ads, setAds] = useState<Advertisement[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { isDesktop } = useDevicePlatform();
+  const router = useRouter();
+  const { scrollToPostId } = useLocalSearchParams();
+  const scrollViewRef = React.useRef<ScrollView>(null);
+  const postLayouts = React.useRef<Record<string, number>>({});
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   // Estados de la nueva publicación
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [paymentRef, setPaymentRef] = useState('');
   const [pendingPostId, setPendingPostId] = useState<string | null>(null);
-  const [likedPosts, setLikedPosts] = useState<number[]>([]);
+  const [likedPosts, setLikedPosts] = useState<any[]>([]);
+  const [savedPosts, setSavedPosts] = useState<any[]>([]);
   const [selectedMediaPost, setSelectedMediaPost] = useState<any | null>(null);
   const [selectedMediaIndex, setSelectedMediaIndex] = useState<number>(0);
-  const [selectedPost, setSelectedPost] = useState<any | null>(null);
-
   // Estados de compartir y notificaciones
   const [showShareModal, setShowShareModal] = useState(false);
   const [sharingPost, setSharingPost] = useState<any | null>(null);
@@ -50,6 +57,15 @@ export default function FeedScreen() {
     fetchActiveAds();
     fetchPosts();
   }, []);
+
+  useEffect(() => {
+    if (scrollToPostId && posts.length > 0 && postLayouts.current[scrollToPostId as string] !== undefined) {
+      const yOffset = postLayouts.current[scrollToPostId as string];
+      setTimeout(() => {
+        scrollViewRef.current?.scrollTo({ y: yOffset, animated: true });
+      }, 100);
+    }
+  }, [scrollToPostId, posts]);
 
   async function fetchPosts() {
     try {
@@ -165,23 +181,24 @@ export default function FeedScreen() {
 
   return (
     <View className="flex-1 bg-background">
-      {selectedPost ? (
-        <PostDetailView
-          post={selectedPost}
-          onBack={() => setSelectedPost(null)}
-          isLiked={likedPosts.includes(selectedPost)}
-          onLikeToggle={() => setLikedPosts(prev => prev.includes(selectedPost) ? prev.filter(p => p !== selectedPost) : [...prev, selectedPost])}
-          onMediaPress={() => { }}
-          onSharePress={() => {
-            setSharingPost(selectedPost);
-            setShowShareModal(true);
-          }}
-        />
-      ) : (
-        <ScrollView className="flex-1 bg-background/80 px-4 pt-4" showsVerticalScrollIndicator={true}>
-          {/* Header */}
+      <ScrollView ref={scrollViewRef} className="flex-1 bg-background/80 px-4 pt-4" showsVerticalScrollIndicator={false}>
+        {/* Header */}
           <View className="flex-row justify-between items-center mb-6">
-            <Logo size='sm' showImage={true} />
+            <Logo size={isDesktop ? 'sm' : 'lg'} showImage={true} />
+            
+            {!isDesktop && (
+              <View className="flex-row items-center gap-3">
+                <TouchableOpacity onPress={() => router.push('/(tabs)/friends' as any)} className="p-1">
+                  <UserCheck size={20} color="white" />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => router.push('/favorites' as any)} className="p-1">
+                  <Bookmark size={20} color="white" />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => setShowMobileMenu(true)} className="p-1">
+                  <MoreVertical size={20} color="white" />
+                </TouchableOpacity>
+              </View>
+            )}
           </View>
 
           {/* Crear Publicación */}
@@ -189,22 +206,34 @@ export default function FeedScreen() {
 
           {/* Feed List */}
           {posts.map((post) => (
-            <PostItem
+            <View
               key={post.id}
-              post={post}
-              isLiked={likedPosts.includes(post)}
-              onLikeToggle={() => setLikedPosts(prev => prev.includes(post) ? prev.filter(p => p !== post) : [...prev, post])}
-              onMediaPress={() => {
-                setSelectedPost(post);
+              onLayout={(e) => {
+                postLayouts.current[post.id] = e.nativeEvent.layout.y;
               }}
-              onCommentPress={() => {
-                setSelectedPost(post);
-              }}
-              onSharePress={() => {
-                setSharingPost(post);
-                setShowShareModal(true);
-              }}
-            />
+            >
+              <PostItem
+                post={post}
+                isLiked={likedPosts.includes(post)}
+                onLikeToggle={() => setLikedPosts(prev => prev.includes(post) ? prev.filter(p => p !== post) : [...prev, post])}
+                isSaved={savedPosts.includes(post)}
+                onSavePress={() => {
+                  const nextVal = !savedPosts.includes(post);
+                  setSavedPosts(prev => nextVal ? [...prev, post] : prev.filter(p => p !== post));
+                  showToast(nextVal ? 'Guardado en Favoritos' : 'Eliminado de Favoritos');
+                }}
+                onMediaPress={() => {
+                  router.push(`/feed/${post.id}?from=feed` as any);
+                }}
+                onCommentPress={() => {
+                  router.push(`/feed/${post.id}?from=feed` as any);
+                }}
+                onSharePress={() => {
+                  setSharingPost(post);
+                  setShowShareModal(true);
+                }}
+              />
+            </View>
           ))}
 
           {/* Inyección Dinámica de Publicidad (Eliminada según solicitud) */}
@@ -213,7 +242,6 @@ export default function FeedScreen() {
             <ActivityIndicator size="small" color={colors.secondary} className="my-6" />
           )}
         </ScrollView>
-      )}
 
       {/* Modal de Pago Split (Pay-to-Post) */}
       <Modal
@@ -270,6 +298,73 @@ export default function FeedScreen() {
             </View>
           </View>
         </View>
+      </Modal>
+
+      {/* Modal Menú Móvil */}
+      <Modal
+        visible={showMobileMenu}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={() => setShowMobileMenu(false)}
+      >
+        <Pressable 
+          className="flex-1 bg-black/50 justify-start items-end pt-16 pr-4" 
+          onPress={() => setShowMobileMenu(false)}
+        >
+          <View className="bg-background border border-zinc-800 rounded-2xl w-56 overflow-hidden shadow-xl" onStartShouldSetResponder={() => true}>
+            
+            <TouchableOpacity 
+              className="flex-row items-center gap-3 p-3.5 border-b border-zinc-800/50 hover:bg-zinc-900"
+              onPress={() => { setShowMobileMenu(false); router.push('/(tabs)/channels' as any); }}
+            >
+              <Tv size={18} color="white" />
+              <Text className="text-foreground font-semibold">Canales</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+              className="flex-row items-center gap-3 p-3.5 border-b border-zinc-800/50 hover:bg-zinc-900"
+              onPress={() => { setShowMobileMenu(false); router.push('/(tabs)/games' as any); }}
+            >
+              <Gamepad2 size={18} color="white" />
+              <Text className="text-foreground font-semibold">Juegos</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+              className="flex-row items-center gap-3 p-3.5 border-b border-zinc-800/50 hover:bg-zinc-900"
+              onPress={() => { setShowMobileMenu(false); router.push('/guardados' as any); }}
+            >
+              <Bookmark size={18} color="white" />
+              <Text className="text-foreground font-semibold">Favoritos</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+              className="flex-row items-center gap-3 p-3.5 border-b border-zinc-800/50 hover:bg-zinc-900"
+              onPress={() => { setShowMobileMenu(false); router.push('/(tabs)/profile'); }}
+            >
+              <User size={18} color="white" />
+              <Text className="text-foreground font-semibold">Mi Perfil</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+              className="flex-row items-center gap-3 p-3.5 border-b border-zinc-800/50 hover:bg-zinc-900"
+              onPress={() => { setShowMobileMenu(false); showToast('Gracias por calificar la aplicación!'); }}
+            >
+              <Star size={18} color="white" />
+              <Text className="text-foreground font-semibold">Calificar App</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+              className="flex-row items-center gap-3 p-3.5 hover:bg-red-900/20"
+              onPress={() => { 
+                setShowMobileMenu(false); 
+                router.replace('/(auth)/login'); 
+              }}
+            >
+              <LogOut size={18} color="#ef4444" />
+              <Text className="text-red-500 font-semibold">Cerrar Sesión</Text>
+            </TouchableOpacity>
+          </View>
+        </Pressable>
       </Modal>
 
       <PostMediaViewer

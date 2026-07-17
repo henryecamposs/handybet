@@ -147,6 +147,7 @@ export default function GruposScreen() {
       renderDiscoverItem={renderDiscoverGroupCard}
       discoverLayout="grid"
       emptyState={emptyState}
+      showBack={true}
     >
       {/* Modal de Onboarding y Selección de Plan */}
       <Modal

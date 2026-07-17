@@ -53,9 +53,12 @@ La lógica e interfaz para comentar o responder a publicaciones y noticias se ha
 - Las vistas como `PostDetailView.tsx` y `NewsCenterView.tsx` delegan exclusivamente en este componente para garantizar consistencia visual en toda la aplicación.
 
 ### 3.7 Contenedores Genéricos de Hub y Detalle
-Para unificar el look and feel de las secciones de Canales, Grupos y Juegos, se crearon dos layouts contenedores reutilizables:
-- **`HubLayout.tsx`**: Modula la pantalla de inicio (Hub) de estas secciones, manejando buscador, banners principales, tabs de categoría y carruseles horizontales.
-- **`HubDetailLayout.tsx`**: Unifica la vista detallada de un elemento seleccionado (como en Canales/[canalId]). Mantiene el estilo visual del encabezado (categoría en mayúsculas pequeñas de color primario, título destacado) y el listado de sub-elementos.
+Para unificar el look and feel de las secciones de Canales, Grupos, Billeteras, Seguidos, Juegos y Guardados, se crearon dos layouts contenedores reutilizables:
+- **`HubLayout.tsx`**: Modula la pantalla de inicio (Hub) de estas secciones, manejando buscador (ej. implementado en `favorites/index.tsx`), banners principales, tabs de categoría, carruseles horizontales y botones nativos de retroceso (`showBack`).
+- **`HubDetailLayout.tsx`**: Unifica la vista detallada de un elemento seleccionado (como en Canales/[canalId] o Chat). Mantiene el estilo visual del encabezado (categoría en mayúsculas pequeñas de color primario, título destacado) y el listado de sub-elementos. Soporta ocultar la cabecera sticky (`hideHeader`) para vistas de edición especiales.
+
+### 3.8 Chat Tabular y Conexión Activa
+La bandeja de chat (`HandyChat`) fue rediseñada para usar un sistema de pestañas segmentadas (Directos, Grupos, Canales, Menciones) para filtrar conversaciones, acompañada de un carrusel de contactos "Online" con indicadores de conexión (badge verde) en tiempo real.
 
 ## 4. Estándares de Color
 - **`--muted`**: Estandarizado para coincidir cromáticamente con el `--primary` (0.657 0.229 29.729 en OKLCH). Las clases `bg-muted` funcionarán visualmente como un tono primario pero se usan para fondos atenuados o estados deshabilitados.

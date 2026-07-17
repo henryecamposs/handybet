@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { View, Image, TouchableOpacity, ScrollView, Dimensions, NativeSyntheticEvent, NativeScrollEvent, Text } from 'react-native';
 import { ChevronLeft, ChevronRight, Play } from 'lucide-react-native';
+import { useDevicePlatform } from '../../hooks/useDevicePlatform';
 
 interface PostMediaCarouselProps {
   mediaUrls: string[];
@@ -25,6 +26,7 @@ export default function PostMediaCarousel({
 
   const screenWidth = Dimensions.get('window').width;
   const initialWidth = screenWidth - 80; // approximate width based on layout
+  const { isDesktop } = useDevicePlatform();
   const widthToUse = layoutWidth > 0 ? layoutWidth : initialWidth;
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
@@ -94,7 +96,7 @@ export default function PostMediaCarousel({
           </ScrollView>
 
           {/* Botones de desplazamiento (Desktop/Web style) */}
-          {mediaUrls.length > 1 && (
+          {mediaUrls.length > 1 && isDesktop && (
             <>
               <TouchableOpacity
                 onPress={handlePrev}

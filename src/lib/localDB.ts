@@ -14,6 +14,7 @@ import seedPrizes from '../data/prizes.json';
 import seedBets from '../data/bets.json';
 import seedMediaVault from '../data/media_vault.json';
 import seedUserSubscriptions from '../data/user_subscriptions.json';
+import seedSavedItems from '../data/saved_items.json';
 
 const DB_KEY = 'handybet_local_db';
 
@@ -31,6 +32,7 @@ export interface LocalDatabase {
   bets: any[];
   media_vault: any[];
   user_subscriptions: any[];
+  saved_items: any[];
   _initialized: boolean;
 }
 
@@ -50,6 +52,10 @@ async function initDB(): Promise<LocalDatabase> {
     if (stored) {
       db = JSON.parse(stored);
       if (db && db._initialized) {
+        if (!db.saved_items) {
+          db.saved_items = seedSavedItems as any[];
+          await AsyncStorage.setItem(DB_KEY, JSON.stringify(db));
+        }
         return db;
       }
     }
@@ -72,6 +78,7 @@ async function initDB(): Promise<LocalDatabase> {
     bets: seedBets as any[],
     media_vault: seedMediaVault as any[],
     user_subscriptions: seedUserSubscriptions as any[],
+    saved_items: seedSavedItems as any[],
     _initialized: true,
   };
 
@@ -338,6 +345,7 @@ export const localDB = {
   bets: createCollection<any>('bets'),
   media_vault: createCollection<any>('media_vault'),
   user_subscriptions: createCollection<any>('user_subscriptions'),
+  saved_items: createCollection<any>('saved_items'),
 
   // Specialized
   relationships: relationshipsAccess,

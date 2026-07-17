@@ -15,6 +15,8 @@ interface PostDetailViewProps {
   onLikeToggle: () => void;
   onMediaPress?: (index: number) => void;
   onSharePress?: () => void;
+  isSaved?: boolean;
+  onSavePress?: () => void;
 }
 
 export default function PostDetailView({
@@ -23,12 +25,20 @@ export default function PostDetailView({
   isLiked,
   onLikeToggle,
   onMediaPress,
-  onSharePress
+  onSharePress,
+  isSaved,
+  onSavePress
 }: PostDetailViewProps) {
   const { addToast } = useToastStore();
   const colors = useThemeColors();
   const [isFollowing, setIsFollowing] = useState(false);
   const [commentsCount, setCommentsCount] = useState(0);
+
+  const formatCount = (num: number) => {
+    if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+    if (num >= 1000) return (num / 1000).toFixed(1) + 'k';
+    return num.toString();
+  };
 
   return (
     <View className="flex-1 bg-background">
@@ -105,22 +115,16 @@ export default function PostDetailView({
         </View>
 
         {/* Métricas / Stats de Interacción y Botones de Acción (Estilo Twitter Combinado) */}
-        <View className="flex-row justify-between items-center py-2.5 border-b border-zinc-800/80 gap-2">
-          {/* Métricas a la izquierda */}
-          <View className="flex-row gap-4 items-center">
-            <Text className="text-zinc-400 text-xs font-bold">
-              <Text className="text-white font-black">{commentsCount}</Text> Respuestas
-            </Text>
-            <Text className="text-zinc-400 text-xs font-bold">
-              <Text className="text-white font-black">{isLiked ? '1,201' : '1,200'}</Text> Likes
-            </Text>
-          </View>
-
-          {/* Botones de Acción a la derecha */}
+        <View className="flex-row justify-center items-center py-2.5 border-b border-zinc-800/80">
           <PostActionButtons
             isLiked={isLiked}
+            likeCount={isLiked ? formatCount(1201) : formatCount(1200)}
+            commentCount={formatCount(commentsCount)}
             onLikeToggle={onLikeToggle}
             onSharePress={onSharePress}
+            isSaved={isSaved}
+            onSavePress={onSavePress}
+            variant="compact"
           />
         </View>
 

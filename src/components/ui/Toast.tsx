@@ -1,12 +1,27 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, Image, Animated } from 'react-native';
 import { CheckCircle2, AlertTriangle, Info, XCircle, X } from 'lucide-react-native';
 import { ToastData, useToastStore } from '../../store/useToastStore';
 
 export default function Toast({ id, title, description, variant = 'default', size = 'md', avatar, action, duration = 3500 }: ToastData) {
   const { removeToast } = useToastStore();
-  const fadeAnim = useRef(new Animated.Value(0)).current;
-  const slideAnim = useRef(new Animated.Value(20)).current;
+  const [fadeAnim] = useState(() => new Animated.Value(0));
+  const [slideAnim] = useState(() => new Animated.Value(20));
+
+  const closeToast = React.useCallback(() => {
+    Animated.parallel([
+      Animated.timing(fadeAnim, {
+        toValue: 0,
+        duration: 200,
+        useNativeDriver: true,
+      }),
+      Animated.timing(slideAnim, {
+        toValue: -20,
+        duration: 200,
+        useNativeDriver: true,
+      })
+    ]).start(() => removeToast(id));
+  }, [fadeAnim, slideAnim, id, removeToast]);
 
   useEffect(() => {
     Animated.parallel([
@@ -34,21 +49,6 @@ export default function Toast({ id, title, description, variant = 'default', siz
       if (timeoutId) clearTimeout(timeoutId);
     };
   }, []);
-
-  const closeToast = () => {
-    Animated.parallel([
-      Animated.timing(fadeAnim, {
-        toValue: 0,
-        duration: 200,
-        useNativeDriver: true,
-      }),
-      Animated.timing(slideAnim, {
-        toValue: -20,
-        duration: 200,
-        useNativeDriver: true,
-      })
-    ]).start(() => removeToast(id));
-  };
 
   const getVariantStyles = () => {
     switch (variant) {

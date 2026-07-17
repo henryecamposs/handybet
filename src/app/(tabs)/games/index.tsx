@@ -5,7 +5,7 @@ import { useRouter } from 'expo-router';
 import { useThemeColors } from '@/hooks/useThemeColors';
 import HubLayout from '@/components/layout/HubLayout';
 
-export default function JuegosScreen() {
+export default function GamesScreen() {
   const colors = useThemeColors();
   const router = useRouter();
   const [activeTab, setActiveTab] = useState('taquillas');
@@ -47,7 +47,7 @@ export default function JuegosScreen() {
         <Text className="text-primary font-black text-3xl mb-2">Gran Kino Imaginario</Text>
         <Text className="text-foreground font-medium mb-4">¡Gana hasta 5,000 Puntos hoy a las 8:00 PM!</Text>
         <TouchableOpacity 
-          onPress={() => router.push('/juegos/d1' as any)}
+          onPress={() => router.push('/games/d1' as any)}
           className="bg-primary px-6 py-3 rounded-xl self-start"
         >
           <Text className="text-black font-bold">Jugar Ahora</Text>
@@ -72,7 +72,7 @@ export default function JuegosScreen() {
         </View>
       </View>
       <TouchableOpacity 
-        onPress={() => router.push(`/juegos/${draw.id}` as any)}
+        onPress={() => router.push(`/games/${draw.id}` as any)}
         className="bg-background/80 px-4 py-2 rounded-full border border-zinc-700"
       >
         <Text className="text-foreground font-bold text-xs">Jugar</Text>
@@ -91,6 +91,7 @@ export default function JuegosScreen() {
       discoverTitle="Próximos Sorteos"
       discoverItems={filteredDraws}
       renderDiscoverItem={renderDrawCard}
+      showBack={true}
     />
   );
 }

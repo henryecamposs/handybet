@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, TextInput, Image, Switch, Modal, ScrollView, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Camera, Save, Lock, X, Check } from 'lucide-react-native';
+import { Camera, Save, Lock, X, Check, ArrowLeft } from 'lucide-react-native';
 import { useThemeColors } from '@/hooks/useThemeColors';
 import HubDetailLayout from '@/components/layout/HubDetailLayout';
 import { handyBetUsers } from '../../../mockdata/handyBetMock';
@@ -30,7 +30,7 @@ export default function EditProfileScreen() {
   const [birthDate, setBirthDate] = useState(currentUser.birthDate || '');
   const [country, setCountry] = useState(currentUser.location?.country || '');
   const [stateName, setStateName] = useState(currentUser.location?.state || '');
-  
+
   const [favoriteCategories, setFavoriteCategories] = useState<string[]>(
     currentUser.preferences?.favoriteCategories || []
   );
@@ -134,17 +134,23 @@ export default function EditProfileScreen() {
       logoType="default"
       backRoute="/(tabs)/friends"
       onBack={() => router.back()}
+      hideHeader={true}
     >
-      <View className="px-4 pt-6">
-        <View className="mb-6">
-          <Text className="text-foreground font-black text-2xl tracking-tight">Editar Perfil</Text>
-          <Text className="text-muted-foreground text-sm mt-1 font-medium">Personaliza tu perfil y configura tus preferencias de juego.</Text>
+      <View className="px-4 pt-1">
+        <View className="mb-6 flex-row items-center">
+          <TouchableOpacity onPress={() => router.back()} className="mr-3 p-2 rounded-full bg-background/80 hover:bg-primary/20 transition-colors border border-muted-foreground/35">
+            <ArrowLeft size={22} color={colors.foreground} />
+          </TouchableOpacity>
+          <View className="flex-1">
+            <Text className="text-foreground font-black text-2xl tracking-tight">Editar Perfil</Text>
+            <Text className="text-muted-foreground text-sm mt-1 font-medium">Personaliza tu perfil y configura tus preferencias de juego.</Text>
+          </View>
         </View>
 
         {/* Sección 1: Información Básica */}
         <View className="bg-background/80 rounded-3xl p-5 border border-muted-foreground mb-6">
           <Text className="text-foreground font-black text-sm uppercase tracking-wider mb-5 border-b border-muted-foreground/15 pb-2">Información Básica</Text>
-          
+
           <View className="items-center mb-6 relative">
             <View className="p-1 bg-background rounded-full border border-muted-foreground/35">
               <Image
@@ -201,7 +207,7 @@ export default function EditProfileScreen() {
         {/* Sección 2: Información Personal & Ubicación */}
         <View className="bg-background/80 rounded-3xl p-5 border border-muted-foreground mb-6">
           <Text className="text-foreground font-black text-sm uppercase tracking-wider mb-5 border-b border-muted-foreground/15 pb-2">Información Personal & Ubicación</Text>
-          
+
           <View className="space-y-4">
             <View>
               <Text className="text-foreground font-bold text-xs uppercase mb-2 tracking-wider">Correo Electrónico</Text>
@@ -284,7 +290,7 @@ export default function EditProfileScreen() {
         <View className="bg-background/80 rounded-3xl p-5 border border-muted-foreground mb-6">
           <Text className="text-foreground font-black text-sm uppercase tracking-wider mb-2 border-b border-muted-foreground/15 pb-2">Preferencias Deportivas y de Juego</Text>
           <Text className="text-muted-foreground text-xs font-medium mb-4">Selecciona tus áreas de interés favoritas para personalizar tu feed:</Text>
-          
+
           <View className="flex-row flex-wrap gap-2">
             {AVAILABLE_CATEGORIES.map((category) => {
               const isSelected = favoriteCategories.includes(category);
@@ -306,7 +312,7 @@ export default function EditProfileScreen() {
         {/* Sección 4: Notificaciones y Suscripciones */}
         <View className="bg-background/80 rounded-3xl p-5 border border-muted-foreground mb-6">
           <Text className="text-foreground font-black text-sm uppercase tracking-wider mb-5 border-b border-muted-foreground/15 pb-2">Configuración de Comunicaciones</Text>
-          
+
           <View className="space-y-4">
             <View className="flex-row items-center justify-between">
               <View className="flex-1 pr-4">
@@ -338,8 +344,8 @@ export default function EditProfileScreen() {
 
         {/* Sección 5: Aceptación Legal y Botón Guardar */}
         <View className="bg-background/80 rounded-3xl p-5 border border-muted-foreground mb-8">
-          <TouchableOpacity 
-            onPress={() => setAcceptedTerms(!acceptedTerms)} 
+          <TouchableOpacity
+            onPress={() => setAcceptedTerms(!acceptedTerms)}
             className="flex-row items-start gap-3 mb-6"
             activeOpacity={0.8}
           >
@@ -348,8 +354,8 @@ export default function EditProfileScreen() {
             </View>
             <Text className="text-foreground text-sm flex-1 font-medium leading-5">
               Declaro que he leído y acepto el{' '}
-              <Text 
-                onPress={() => setModalVisible(true)} 
+              <Text
+                onPress={() => setModalVisible(true)}
                 className="text-primary font-bold underline"
               >
                 Acuerdo de Uso de la Red Social HandyBet
@@ -357,7 +363,7 @@ export default function EditProfileScreen() {
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity 
+          <TouchableOpacity
             onPress={handleSave}
             disabled={!acceptedTerms}
             className={`py-3.5 rounded-2xl flex-row justify-center items-center transition-colors ${acceptedTerms ? 'bg-primary' : 'bg-muted border border-muted-foreground/20'}`}
