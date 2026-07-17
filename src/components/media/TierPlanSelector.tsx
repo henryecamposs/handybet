@@ -31,7 +31,7 @@ export default function TierPlanSelector({
   };
 
   return (
-    <View className="bg-background/80 p-6  border border-zinc-800 shadow-xl w-full max-w-4xl mx-auto my-4">
+    <View className="bg-background/80 p-6  border border-border shadow-xl w-full max-w-4xl mx-auto my-4">
       <View className="items-center mb-6">
         <Text className="text-2xl font-black text-white tracking-tight">Membresías de Contenido</Text>
         <Text className="text-foreground text-xs font-bold text-center mt-1.5 leading-relaxed max-w-md">
@@ -59,7 +59,7 @@ export default function TierPlanSelector({
               key={plan.id}
               className={`w-72 p-6  border ${isHandyBet
                 ? 'bg-secondary/10 border-secondary/80 shadow-md shadow-secondary/5'
-                : 'bg-background/80 border-zinc-800'
+                : 'bg-background/80 border-border'
                 } flex flex-col justify-between`}
             >
               <View>
@@ -84,7 +84,7 @@ export default function TierPlanSelector({
                 </View>
 
                 {/* Beneficios */}
-                <View className="border-t border-zinc-800/80 pt-4 space-y-2 mb-6">
+                <View className="border-t border-border/80 pt-4 space-y-2 mb-6">
                   <View className="flex-row items-center gap-2">
                     <Text className="text-secondary text-sm">✓</Text>
                     <Text className="text-foreground text-xs font-bold">

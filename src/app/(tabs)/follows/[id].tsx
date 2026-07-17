@@ -28,7 +28,7 @@ export default function FollowDetailScreen() {
       backRoute="/(tabs)/follows"
     >
       {/* Cover Portada */}
-      <View className="h-44 bg-background/80 relative w-full border-b border-border/15">
+      <View className="h-44 bg-background/80 relative w-full border-b border-border ">
         {/* Portada simulada con gradiente */}
         <View className="absolute inset-0 bg-gradient-to-b from-muted to-background/50" />
       </View>
@@ -37,25 +37,25 @@ export default function FollowDetailScreen() {
       <View className="px-4 pb-6">
         {/* Avatar y Acciones Rápidas */}
         <View className="flex-row justify-between items-end -mt-16 mb-4">
-          <View className="p-1 bg-background rounded-full border border-border/35">
+          <View className="p-1 bg-background rounded-full border border-border">
             <Image
               source={{ uri: user.avatar }}
               className="w-28 h-28 rounded-full bg-background/80"
             />
           </View>
           <View className="flex-row gap-2 pb-2">
-            <TouchableOpacity className="w-10 h-10 rounded-full bg-background/80 items-center justify-center border border-border hover:bg-background/80/85">
+            <TouchableOpacity className="w-10 h-10 rounded-full bg-background/80 items-center justify-center border border-border hover:bg-background/80">
               <MoreHorizontal size={20} color={colors.foreground} />
             </TouchableOpacity>
             <TouchableOpacity
               onPress={handleMessagePress}
-              className="w-10 h-10 rounded-full bg-background/80 items-center justify-center border border-border hover:bg-background/80/85"
+              className="w-10 h-10 rounded-full bg-background/80 items-center justify-center border border-border hover:bg-background/80"
             >
               <MessageCircle size={20} color={colors.foreground} />
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => setIsFollowing(!isFollowing)}
-              className={`flex-row h-10 px-4 rounded-full items-center justify-center ${isFollowing ? 'bg-background/80 border border-border hover:bg-background/80/85' : 'bg-primary'}`}
+              className={`flex-row h-10 px-4 rounded-full items-center justify-center ${isFollowing ? 'bg-background/80 border border-border hover:bg-background/80' : 'bg-primary'}`}
             >
               {isFollowing ? (
                 <>

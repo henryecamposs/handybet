@@ -168,7 +168,7 @@ export default function GrupoDetailScreen() {
               <QRDisplayZone betCode={generatedBetCode} />
               <TouchableOpacity
                 onPress={() => setGeneratedBetCode(null)}
-                className="bg-background/80 border border-zinc-800 py-3.5  items-center mt-6 w-full max-w-sm mx-auto"
+                className="bg-background/80 border border-border py-3.5  items-center mt-6 w-full max-w-sm mx-auto"
               >
                 <Text className="text-white font-bold text-sm">Nueva Jugada</Text>
               </TouchableOpacity>
@@ -183,7 +183,7 @@ export default function GrupoDetailScreen() {
             <View>
               <TouchableOpacity
                 onPress={() => setShowPlansSelector(false)}
-                className="mb-4 self-start bg-background/80 px-3 py-1.5 rounded-xs border border-zinc-800"
+                className="mb-4 self-start bg-background/80 px-3 py-1.5 rounded-xs border border-border"
               >
                 <Text className="text-foreground font-bold text-xs">◀ Ver Bóveda</Text>
               </TouchableOpacity>
@@ -221,7 +221,7 @@ export default function GrupoDetailScreen() {
       )}
 
       {group && (
-        <View className="mt-8 border-t border-zinc-850 pt-6">
+        <View className="mt-8 border-t border-border pt-6">
           <TouchableOpacity
             onPress={() => router.push(`/feed/search?id=${group.id}&from=group` as any)}
             className="bg-primary/20 border border-border p-4  items-center justify-center mb-6"

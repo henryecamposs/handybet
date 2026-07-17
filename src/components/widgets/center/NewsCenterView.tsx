@@ -55,12 +55,12 @@ export default function NewsCenterView({ currentView, selectedItemId, onBack, on
             {news.map((n) => (
               <TouchableOpacity
                 key={n.id}
-                className="py-4 border-b border-zinc-800/80 hover:bg-zinc-900/50 transition-colors"
+                className="py-4 border-b border-border/80 hover:bg-zinc-900/50 transition-colors"
                 onPress={() => onSelectNews(n.id)}
               >
                 <Text className="text-lg font-bold text-foreground mb-1">{n.title}</Text>
                 <Text className="text-muted-foreground text-sm mb-3">{n.summary || n.time}</Text>
-                <View className="flex-row items-center border-t border-zinc-800/30 pt-3">
+                <View className="flex-row items-center border-t border-border/30 pt-3">
                   <PostActionButtons
                     isLiked={false}
                     likeCount="120"
@@ -87,7 +87,7 @@ export default function NewsCenterView({ currentView, selectedItemId, onBack, on
             </Text>
 
             {/* Métricas / Stats de Interacción y Botones de Acción */}
-            <View className="flex-row justify-between items-center py-2.5 border-b border-t border-zinc-800/80 gap-2 mb-2">
+            <View className="flex-row justify-between items-center py-2.5 border-b border-t border-border/80 gap-2 mb-2">
               <View className="flex-row gap-4 items-center">
                 <Text className="text-zinc-400 text-xs font-bold">
                   <Text className="text-white font-black">{commentsCount}</Text> Respuestas

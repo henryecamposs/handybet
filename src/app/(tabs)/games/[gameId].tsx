@@ -60,7 +60,7 @@ export default function GameDetailScreen() {
       </View>
 
       {/* Zona de Jugada Interactiva (Premium) */}
-      <View className="bg-background/80 p-6  border border-zinc-800 mb-8">
+      <View className="bg-background/80 p-6  border border-border mb-8">
         <View className="flex-row items-center gap-2 mb-4">
           <Sparkles size={18} color="#caee26" />
           <Text className="text-foreground font-bold text-base">Realizar Jugada</Text>
@@ -75,7 +75,7 @@ export default function GameDetailScreen() {
                 onChangeText={setSelectedNumber}
                 placeholder="Ej. 12 o Real Madrid"
                 placeholderTextColor="#71717a"
-                className="bg-background border border-zinc-800 p-4 rounded-xs text-foreground text-sm font-semibold"
+                className="bg-background border border-border p-4 rounded-xs text-foreground text-sm font-semibold"
               />
             </View>
 
@@ -87,7 +87,7 @@ export default function GameDetailScreen() {
                 keyboardType="numeric"
                 placeholder="Ej. 100"
                 placeholderTextColor="#71717a"
-                className="bg-background border border-zinc-800 p-4 rounded-xs text-foreground text-sm font-semibold"
+                className="bg-background border border-border p-4 rounded-xs text-foreground text-sm font-semibold"
               />
             </View>
 

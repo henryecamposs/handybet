@@ -17,12 +17,12 @@ export default function WalletDetailScreen() {
     <View className="flex-row gap-2">
       <TouchableOpacity
         onPress={() => setShowDisclaimer(!showDisclaimer)}
-        className={`w-9 h-9 rounded-full items-center justify-center border hover:bg-background/80/85 ${showDisclaimer ? 'bg-primary/20 border-primary' : 'bg-background/80 border-border/35'
+        className={`w-9 h-9 rounded-full items-center justify-center border hover:bg-background/80 ${showDisclaimer ? 'bg-primary/20 border-primary' : 'bg-background/80 border-border'
           }`}
       >
         <Info size={18} color={showDisclaimer ? colors.primary : colors.foreground} />
       </TouchableOpacity>
-      <TouchableOpacity className="w-9 h-9 bg-background/80 rounded-full items-center justify-center border border-border/35 hover:bg-background/80/85">
+      <TouchableOpacity className="w-9 h-9 bg-background/80 rounded-full items-center justify-center border border-border hover:bg-background/80">
         <Settings size={18} color={colors.foreground} />
       </TouchableOpacity>
     </View>
@@ -87,15 +87,15 @@ export default function WalletDetailScreen() {
 
         {/* Acciones Rápidas */}
         <View className="flex-row flex-wrap gap-4 mb-8">
-          <TouchableOpacity className="flex-1 bg-background/80 p-5  border border-border items-center justify-center hover:bg-background/80/85 transition-colors">
+          <TouchableOpacity className="flex-1 bg-background/80 p-5  border border-border items-center justify-center hover:bg-background/80 transition-colors">
             <Text className="text-2xl mb-2">📊</Text>
             <Text className="text-foreground font-bold text-xs text-center">Reporte de Caja</Text>
           </TouchableOpacity>
-          <TouchableOpacity className="flex-1 bg-background/80 p-5  border border-border items-center justify-center hover:bg-background/80/85 transition-colors">
+          <TouchableOpacity className="flex-1 bg-background/80 p-5  border border-border items-center justify-center hover:bg-background/80 transition-colors">
             <Text className="text-2xl mb-2">🎫</Text>
             <Text className="text-foreground font-bold text-xs text-center">Pagar Tickets</Text>
           </TouchableOpacity>
-          <TouchableOpacity className="flex-1 bg-background/80 p-5  border border-border items-center justify-center hover:bg-background/80/85 transition-colors">
+          <TouchableOpacity className="flex-1 bg-background/80 p-5  border border-border items-center justify-center hover:bg-background/80 transition-colors">
             <Text className="text-2xl mb-2">🔄</Text>
             <Text className="text-foreground font-bold text-xs text-center">Sincronizar</Text>
           </TouchableOpacity>
@@ -112,7 +112,7 @@ export default function WalletDetailScreen() {
 
           <View className="bg-background/80  border border-border overflow-hidden">
             {/* Item */}
-            <View className="p-5 border-b border-border/15 flex-row justify-between items-center">
+            <View className="p-5 border-b border-border  flex-row justify-between items-center">
               <View className="flex-row items-center">
                 <View className="w-10 h-10 rounded-full bg-secondary/10 items-center justify-center mr-3 border border-secondary/10">
                   <ArrowDownLeft size={16} color="#10b981" />

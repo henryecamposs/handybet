@@ -40,7 +40,7 @@ export default function GroupChatScreen() {
   return (
     <View className="flex-1 bg-background">
       {/* Header del Chat */}
-      <View className="h-16 border-b border-zinc-800 flex-row items-center px-4 bg-background/50">
+      <View className="h-16 border-b border-border flex-row items-center px-4 bg-background/50">
         <TouchableOpacity
           className="mr-3"
           onPress={() => router.replace('/(tabs)/grupos' as any)}
@@ -92,7 +92,7 @@ export default function GroupChatScreen() {
 
       {/* Input de Mensaje */}
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-        <View className="border-t border-zinc-800 p-4 bg-background/50 flex-row items-center">
+        <View className="border-t border-border p-4 bg-background/50 flex-row items-center">
           <TouchableOpacity className="p-2">
             <Smile size={24} color="#71717a" />
           </TouchableOpacity>

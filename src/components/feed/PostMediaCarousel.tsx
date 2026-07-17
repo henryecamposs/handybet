@@ -68,7 +68,7 @@ export default function PostMediaCarousel({
           showsHorizontalScrollIndicator={false}
           onMomentumScrollEnd={handleScroll}
           scrollEventThrottle={16}
-          className="w-full  overflow-hidden border border-zinc-800 bg-black"
+          className="w-full  overflow-hidden border border-border bg-black"
         >
           {mediaUrls.map((url, index) => (
             <TouchableOpacity

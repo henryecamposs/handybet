@@ -98,7 +98,7 @@ export default function HubLayout({
         {(showBack || onBack) && (
           <TouchableOpacity
             onPress={() => onBack ? onBack() : router.push('/')}
-            className="mr-3 p-2 rounded-full bg-background/80 hover:bg-primary/20 transition-colors border border-border/35"
+            className="mr-3 p-2 rounded-full bg-background/80 hover:bg-primary/20 transition-colors border border-border"
           >
             <ArrowLeft size={22} color={colors.foreground} />
           </TouchableOpacity>

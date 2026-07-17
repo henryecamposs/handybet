@@ -100,7 +100,7 @@ export default function PostDetailView({
 
         {/* Sentimiento */}
         {post.feeling && (
-          <View className="flex-row items-center gap-2 bg-zinc-900 border border-zinc-800 self-start px-3 py-1.5 rounded-full mb-4">
+          <View className="flex-row items-center gap-2 bg-zinc-900 border border-border self-start px-3 py-1.5 rounded-full mb-4">
             <Text className="text-foreground text-xs font-semibold">
               Me siento <Text style={{ color: post.feeling.color }}>{post.feeling.text}</Text>
             </Text>
@@ -108,14 +108,14 @@ export default function PostDetailView({
         )}
 
         {/* Timestamp */}
-        <View className="py-3 border-b border-zinc-800/80">
+        <View className="py-3 border-b border-border/80">
           <Text className="text-zinc-500 text-xs font-semibold">
             {post.time} · {new Date().toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' })}
           </Text>
         </View>
 
         {/* Métricas / Stats de Interacción y Botones de Acción (Estilo Twitter Combinado) */}
-        <View className="flex-row justify-center items-center py-2.5 border-b border-zinc-800/80">
+        <View className="flex-row justify-center items-center py-2.5 border-b border-border/80">
           <PostActionButtons
             isLiked={isLiked}
             likeCount={isLiked ? formatCount(1201) : formatCount(1200)}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { MessageCircle, UserMinus } from 'lucide-react-native';
+import IconButton from '@/components/ui/IconButton';
 import { handyBetUsers } from '../../../mockdata/handyBetMock';
 import { useRouter } from 'expo-router';
 import { useThemeColors } from '@/hooks/useThemeColors';
@@ -66,7 +67,7 @@ export default function FollowsScreen() {
           onPress={() => router.push(`/follows/${user.id}` as any)}
           className="flex-row items-center flex-1"
         >
-          <Image source={{ uri: user.avatar }} className="w-12 h-12 rounded-full bg-background/80 mr-3 border border-border/35" />
+          <Image source={{ uri: user.avatar }} className="w-12 h-12 rounded-full bg-background/80 mr-3 border border-border" />
           <View>
             <Text className="text-foreground font-bold text-base">{user.name}</Text>
             <Text className="text-muted-foreground text-xs">{user.mutualFollowers} seguidores en común</Text>
@@ -95,32 +96,29 @@ export default function FollowsScreen() {
               {filteredUsers.map((user, index) => (
                 <View
                   key={user.id}
-                  className={`flex-row items-center justify-between p-5 ${index !== filteredUsers.length - 1 ? 'border-b border-border/15' : ''
-                    }`}
+                  className="flex-row items-center justify-between px-2 pb-4  mb-4 border-b border-border"
                 >
                   <TouchableOpacity
                     onPress={() => router.push(`/follows/${user.id}` as any)}
                     className="flex-row items-center flex-1"
                   >
-                    <Image source={{ uri: user.avatar }} className="w-10 h-10 rounded-full bg-background/80 mr-3 border border-border/35" />
+                    <Image source={{ uri: user.avatar }} className="w-10 h-10 rounded-full bg-background/80 mr-3 border border-border" />
                     <View>
                       <Text className="text-foreground font-bold text-base">{user.name}</Text>
                       <Text className="text-secondary text-xs font-semibold">Siguiendo</Text>
                     </View>
                   </TouchableOpacity>
                   <View className="flex-row gap-3">
-                    <TouchableOpacity
+                    <IconButton
+                      icon={MessageCircle}
                       onPress={() => router.push(`/chat/follow/${user.id}` as any)}
-                      className="w-10 h-10 rounded-full bg-background/80 items-center justify-center border border-border hover:bg-background/80/85"
-                    >
-                      <MessageCircle size={18} color={colors.foreground} />
-                    </TouchableOpacity>
-                    <TouchableOpacity
+                      variant="default"
+                    />
+                    <IconButton
+                      icon={UserMinus}
                       onPress={() => toggleFollow(user.id)}
-                      className="w-10 h-10 rounded-full bg-background/80 items-center justify-center border border-border hover:bg-background/80/85"
-                    >
-                      <UserMinus size={18} color="#ef4444" />
-                    </TouchableOpacity>
+                      variant="destructive"
+                    />
                   </View>
                 </View>
               ))}

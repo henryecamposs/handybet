@@ -84,7 +84,7 @@ export default function ChannelDetailScreen() {
     <TouchableOpacity
       key={group.id}
       onPress={() => router.push(`/chat/group/${group.id}` as any)}
-      className="bg-background/80 border border-zinc-800 p-5  flex-row items-center gap-4 hover:bg-background/80/80 transition-colors"
+      className="bg-background/80 border border-border p-5  flex-row items-center gap-4 hover:bg-background/80/80 transition-colors"
     >
       <View className="bg-background/80 w-12 h-12 rounded-xs items-center justify-center border border-border">
         <Text className="text-xl">{getIconForType(group.type)}</Text>
@@ -126,7 +126,7 @@ export default function ChannelDetailScreen() {
           </TouchableOpacity>
 
           {isAdmin && (
-            <View className="mt-2 border-t border-zinc-800 pt-6">
+            <View className="mt-2 border-t border-border pt-6">
               <Text className="text-white font-black text-sm uppercase tracking-wider mb-4">Publicar en el Canal</Text>
               <CreatePostWidget
                 onPublish={handlePublishPost}

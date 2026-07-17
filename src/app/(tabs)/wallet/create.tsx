@@ -19,7 +19,7 @@ export default function CreateWalletScreen() {
         </View>
       </View>
 
-      <View className="bg-background/80  p-6 border border-zinc-800 mb-8">
+      <View className="bg-background/80  p-6 border border-border mb-8">
 
         {/* Tipo de Billetera */}
         <Text className="text-foreground font-bold text-xs uppercase mb-4">Tipo de Conexión</Text>

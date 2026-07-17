@@ -121,7 +121,7 @@ export default function RepliesSection({ targetId, targetUsername, onCommentsCou
             const likeCount = baseLikes + (isLiked ? 1 : 0);
 
             return (
-              <View key={comment.id} className="flex-row gap-3 mb-4 border-b border-zinc-800/50 pb-4 px-1 relative z-10">
+              <View key={comment.id} className="flex-row gap-3 mb-4 border-b border-border/50 pb-4 px-1 relative z-10">
                 <Image source={{ uri: comment.author_avatar }} className="w-10 h-10 rounded-full" />
                 <View className="flex-1">
                   <View className="flex-row items-center justify-between mb-1">

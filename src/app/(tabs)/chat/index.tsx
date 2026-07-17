@@ -163,7 +163,7 @@ export default function ChatInboxScreen() {
               <TouchableOpacity
                 key={chat.id}
                 onPress={() => router.push(`/chat/${chat.id}` as any)}
-                className="bg-background/80 border border-border/35 p-4  flex-row items-center gap-4 shadow-sm"
+                className="bg-background/80 border border-border p-4  flex-row items-center gap-4 shadow-sm"
               >
                 <Image source={{ uri: chat.avatar }} className="w-12 h-12 rounded-full border border-border/20 bg-background" />
                 <View className="flex-1">
@@ -191,7 +191,7 @@ export default function ChatInboxScreen() {
               <TouchableOpacity
                 key={chat.id}
                 onPress={() => router.push(`/chat/group/${chat.id}` as any)}
-                className="bg-background/80 border border-border/35 p-4  flex-row items-center gap-4 shadow-sm"
+                className="bg-background/80 border border-border p-4  flex-row items-center gap-4 shadow-sm"
               >
                 <Image source={{ uri: chat.avatar }} className="w-12 h-12 rounded-full border border-border/20 bg-background" />
                 <View className="flex-1">
@@ -219,7 +219,7 @@ export default function ChatInboxScreen() {
               <TouchableOpacity
                 key={chat.id}
                 onPress={() => router.push(`/channels/${chat.id}` as any)}
-                className="bg-background/80 border border-border/35 p-4  flex-row items-center gap-4 shadow-sm"
+                className="bg-background/80 border border-border p-4  flex-row items-center gap-4 shadow-sm"
               >
                 <Image source={{ uri: chat.avatar }} className="w-12 h-12 rounded-full border border-border/20 bg-background" />
                 <View className="flex-1">
@@ -246,7 +246,7 @@ export default function ChatInboxScreen() {
             {mentionPosts.map((post) => (
               <View
                 key={post.id}
-                className="bg-background/80 border border-border/35 p-4  shadow-sm"
+                className="bg-background/80 border border-border p-4  shadow-sm"
               >
                 {/* Cabecera del post */}
                 <View className="flex-row items-center gap-3 mb-3">
@@ -277,7 +277,7 @@ export default function ChatInboxScreen() {
                 )}
 
                 {/* Acciones del Post */}
-                <View className="flex-row items-center gap-6 border-t border-border/10 pt-3">
+                <View className="flex-row items-center gap-6 border-t border-border  pt-3">
                   <TouchableOpacity className="flex-row items-center gap-1.5">
                     <Heart size={14} color={colors.mutedForeground} />
                     <Text className="text-muted-foreground text-xs font-semibold">{post.likes}</Text>
@@ -366,7 +366,7 @@ export default function ChatInboxScreen() {
 
       {/* Inyección de Publicidad AdBanner */}
       {!isLoadingAd && adBanner && (
-        <View className="bg-background/80 border border-border/35 p-4  shadow-sm mb-6 flex-row gap-4 items-center">
+        <View className="bg-background/80 border border-border p-4  shadow-sm mb-6 flex-row gap-4 items-center">
           <Image source={{ uri: adBanner.media_url }} className="w-12 h-12  border border-border/20" />
           <View className="flex-1">
             <Text className="text-secondary text-[9px] font-black uppercase tracking-wider">Publicidad de Interés</Text>

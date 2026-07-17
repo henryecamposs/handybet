@@ -116,7 +116,7 @@ export default function FollowRequestsCenterView({ currentView, selectedItemId, 
             {suggestions.map(req => {
               const isFollowing = !!followedStates[req.id];
               return (
-                <View key={req.id} className="py-4 flex-row items-center gap-4 border-b border-zinc-800/80 hover:bg-zinc-900/50 transition-colors">
+                <View key={req.id} className="py-4 flex-row items-center gap-4 border-b border-border/80 hover:bg-zinc-900/50 transition-colors">
                   <Image source={{ uri: req.avatar }} className="w-16 h-16 rounded-full border border-border" />
                   <View className="flex-1">
                     <View className="flex-row justify-between items-center mb-1">

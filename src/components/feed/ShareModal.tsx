@@ -75,7 +75,7 @@ export default function ShareModal({ visible, onClose, onShareSuccess }: ShareMo
       onRequestClose={onClose}
     >
       <View className="flex-1 bg-black/75 justify-center items-center p-4">
-        <View className="bg-background/80 border border-zinc-800 w-full max-w-md  p-6 shadow-2xl relative">
+        <View className="bg-background/80 border border-border w-full max-w-md  p-6 shadow-2xl relative">
           <View className="flex-row justify-between items-center mb-4">
             <Text className="text-white font-black text-xl flex-row items-center gap-2">
               <Share2 size={20} color={colors.primary} /> Compartir publicación
@@ -86,7 +86,7 @@ export default function ShareModal({ visible, onClose, onShareSuccess }: ShareMo
           </View>
 
           {/* Categorías (Pestañas) en fila */}
-          <View className="flex-row border-b border-zinc-850 mb-4 justify-between">
+          <View className="flex-row border-b border-border mb-4 justify-between">
             {(['grupo', 'channel', 'usuario', 'seguido'] as ShareTab[]).map((tab) => {
               const isActive = activeTab === tab;
               return (
@@ -109,7 +109,7 @@ export default function ShareModal({ visible, onClose, onShareSuccess }: ShareMo
           </View>
 
           {/* Barra de Búsqueda */}
-          <View className="flex-row items-center bg-zinc-900 border border-zinc-800 rounded-xs px-3 py-2 mb-4">
+          <View className="flex-row items-center bg-zinc-900 border border-border rounded-xs px-3 py-2 mb-4">
             <Search size={16} color="#71717a" className="mr-2" />
             <TextInput
               placeholder={`Buscar ${activeTab}...`}
@@ -137,7 +137,7 @@ export default function ShareModal({ visible, onClose, onShareSuccess }: ShareMo
                     }}
                     className={`flex-row items-center gap-3 p-3  mb-2 border ${isSelected
                       ? 'bg-primary/10 border-primary'
-                      : 'bg-zinc-900/50 border-zinc-850 hover:bg-zinc-900 transition-colors'
+                      : 'bg-zinc-900/50 border-border hover:bg-zinc-900 transition-colors'
                       }`}
                   >
                     {IconComponent ? (
@@ -145,7 +145,7 @@ export default function ShareModal({ visible, onClose, onShareSuccess }: ShareMo
                         <IconComponent size={18} color={isSelected ? colors.primary : '#a1a1aa'} />
                       </View>
                     ) : (
-                      <Image source={{ uri: item.avatar }} className="w-10 h-10 rounded-full border border-zinc-800" />
+                      <Image source={{ uri: item.avatar }} className="w-10 h-10 rounded-full border border-border" />
                     )}
 
                     <View className="flex-1">
@@ -171,7 +171,7 @@ export default function ShareModal({ visible, onClose, onShareSuccess }: ShareMo
           <View className="flex-row gap-2">
             <TouchableOpacity
               onPress={onClose}
-              className="flex-1 bg-zinc-900 border border-zinc-800 py-3 rounded-xs items-center"
+              className="flex-1 bg-zinc-900 border border-border py-3 rounded-xs items-center"
             >
               <Text className="text-zinc-400 font-bold text-xs">Cancelar</Text>
             </TouchableOpacity>

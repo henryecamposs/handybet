@@ -100,7 +100,7 @@ export default function QRCameraScanner({ onScanned, onClose }: QRCameraScannerP
             <View className="absolute -bottom-1 -left-1 w-6 h-6 border-b-4 border-l-4 border-secondary rounded-bl-xl" />
             <View className="absolute -bottom-1 -right-1 w-6 h-6 border-b-4 border-r-4 border-secondary rounded-br-xl" />
           </View>
-          <Text className="text-white text-xs font-bold mt-6 bg-background/80 px-4 py-2 rounded-full border border-zinc-800">
+          <Text className="text-white text-xs font-bold mt-6 bg-background/80 px-4 py-2 rounded-full border border-border">
             Alinea el código QR dentro del recuadro
           </Text>
         </View>

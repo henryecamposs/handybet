@@ -18,9 +18,9 @@ export default function WalletScreen() {
     <TouchableOpacity
       key={wallet.id || index}
       onPress={() => router.push(`/(tabs)/wallet/${wallet.id}` as any)}
-      className="w-32 h-36 bg-background/80  border border-border items-center justify-center mr-4 hover:bg-background/80/85 transition-colors px-2"
+      className="w-32 h-36 bg-background/80  border border-border items-center justify-center mr-4 hover:bg-background/80 transition-colors px-2"
     >
-      <View className="w-12 h-12 rounded-full bg-background/80 items-center justify-center mb-2 border border-border/35">
+      <View className="w-12 h-12 rounded-full bg-background/80 items-center justify-center mb-2 border border-border">
         <Wallet size={20} color={colors.foreground} />
       </View>
       <Text className="text-foreground font-bold text-center text-sm px-1" numberOfLines={2}>{wallet.name}</Text>
@@ -80,9 +80,9 @@ export default function WalletScreen() {
         <Text className="text-foreground font-black text-lg uppercase tracking-wider mb-4">Saldos por Grupos</Text>
 
         {/* Grupo 1 */}
-        <View className="bg-background/80 p-5  border border-border flex-row items-center justify-between mb-3 hover:bg-background/80/85 transition-colors">
+        <View className="bg-background/80 p-5  border border-border flex-row items-center justify-between mb-3 hover:bg-background/80 transition-colors">
           <View className="flex-row items-center">
-            <View className="w-12 h-12 rounded-xs bg-background/80 items-center justify-center mr-4 border border-border/35">
+            <View className="w-12 h-12 rounded-xs bg-background/80 items-center justify-center mr-4 border border-border">
               <Text className="text-xl">🎲</Text>
             </View>
             <View>
@@ -97,9 +97,9 @@ export default function WalletScreen() {
         </View>
 
         {/* Grupo 2 */}
-        <View className="bg-background/80 p-5  border border-border flex-row items-center justify-between mb-3 hover:bg-background/80/85 transition-colors">
+        <View className="bg-background/80 p-5  border border-border flex-row items-center justify-between mb-3 hover:bg-background/80 transition-colors">
           <View className="flex-row items-center">
-            <View className="w-12 h-12 rounded-xs bg-background/80 items-center justify-center mr-4 border border-border/35">
+            <View className="w-12 h-12 rounded-xs bg-background/80 items-center justify-center mr-4 border border-border">
               <Text className="text-xl">🏇</Text>
             </View>
             <View>
@@ -123,7 +123,7 @@ export default function WalletScreen() {
           </TouchableOpacity>
         </View>
 
-        <View className="bg-background/80 p-5  border border-border flex-row items-center justify-between hover:bg-background/80/85 transition-colors">
+        <View className="bg-background/80 p-5  border border-border flex-row items-center justify-between hover:bg-background/80 transition-colors">
           <View className="flex-row items-center">
             <View className="w-12 h-12 rounded-xs bg-secondary/10 items-center justify-center mr-4 border border-secondary/35">
               <Text className="text-xl">🏆</Text>
@@ -149,7 +149,7 @@ export default function WalletScreen() {
         </View>
 
         <View className="bg-background/80  border border-border p-5">
-          <View className="flex-row items-center justify-between mb-4 pb-4 border-b border-border/15">
+          <View className="flex-row items-center justify-between mb-4 pb-4 border-b border-border ">
             <View className="flex-row items-center">
               <View className="w-10 h-10 rounded-full bg-secondary/10 items-center justify-center mr-3 border border-secondary/10">
                 <ArrowDownLeft size={16} color="#10b981" />

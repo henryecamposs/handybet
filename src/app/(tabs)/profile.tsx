@@ -69,7 +69,7 @@ export default function ProfileScreen() {
       ) : (
         <View>
           {/* Tarjeta Perfil */}
-          <View className="bg-card border border-zinc-850 p-6  mb-6 shadow-md flex-row justify-between items-center">
+          <View className="bg-card border border-border p-6  mb-6 shadow-md flex-row justify-between items-center">
             <View>
               <Text className="text-[10px] font-black text-secondary uppercase tracking-widest">Perfil de Usuario</Text>
               <Text className="text-xl font-black text-white mt-1">@{profile?.username || 'usuario'}</Text>
@@ -84,7 +84,7 @@ export default function ProfileScreen() {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={handleLogout}
-                className="bg-background/80 border border-zinc-850 px-4 py-2 rounded-xs"
+                className="bg-background/80 border border-border px-4 py-2 rounded-xs"
               >
                 <Text className="text-rose-500 text-[10px] font-black uppercase">Salir</Text>
               </TouchableOpacity>
@@ -94,7 +94,7 @@ export default function ProfileScreen() {
           {/* Wallets Aisladas */}
           <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-4">Multi-Wallets (Balances)</Text>
           {wallets.length === 0 ? (
-            <View className="bg-card border border-zinc-850 p-5  mb-6">
+            <View className="bg-card border border-border p-5  mb-6">
               <Text className="text-foreground font-bold text-xs text-center">
                 Aún no posees balances o wallets registradas.
               </Text>
@@ -104,7 +104,7 @@ export default function ProfileScreen() {
               {wallets.map((wallet) => (
                 <View
                   key={wallet.id}
-                  className="bg-background/90 border border-zinc-850 p-5  flex-row justify-between items-center shadow-sm"
+                  className="bg-background/90 border border-border p-5  flex-row justify-between items-center shadow-sm"
                 >
                   <Text className="text-foreground font-bold text-sm">{wallet.groupName}</Text>
                   <Text className="text-secondary font-black text-lg font-mono">
@@ -118,7 +118,7 @@ export default function ProfileScreen() {
           {/* Ledger de Transacciones */}
           <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-4">Historial Contable (Ledger)</Text>
           {transactions.length === 0 ? (
-            <View className="bg-card border border-zinc-850 p-6 ">
+            <View className="bg-card border border-border p-6 ">
               <Text className="text-foreground font-bold text-xs text-center">
                 No se registran movimientos contables en tu cuenta.
               </Text>
@@ -130,7 +130,7 @@ export default function ProfileScreen() {
                 return (
                   <View
                     key={tx.id}
-                    className="bg-card border border-zinc-850 p-4  flex-row justify-between items-center shadow-sm"
+                    className="bg-card border border-border p-4  flex-row justify-between items-center shadow-sm"
                   >
                     <View>
                       <Text className="text-white font-black text-xs uppercase tracking-wide">

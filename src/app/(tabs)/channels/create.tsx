@@ -19,7 +19,7 @@ export default function CreateChannelScreen() {
         </View>
       </View>
 
-      <View className="bg-background/80  p-6 border border-zinc-800 mb-8">
+      <View className="bg-background/80  p-6 border border-border mb-8">
 
         <View className="bg-secondary/10 border border-secondary/30 p-4  mb-6 flex-row items-start">
           <CheckCircle2 size={20} color="#10b981" className="mt-1 mr-3" />

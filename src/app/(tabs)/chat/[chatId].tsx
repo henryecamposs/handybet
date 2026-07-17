@@ -57,7 +57,7 @@ export default function ChatDetailScreen() {
     >
       <View className="flex-1 pt-12">
         {/* Cabecera del Chat */}
-        <View className="flex-row items-center justify-between px-6 pb-4 border-b border-zinc-900">
+        <View className="flex-row items-center justify-between px-6 pb-4 border-b border-border">
           <View className="flex-row items-center gap-3">
             <TouchableOpacity onPress={() => router.back()} className="p-1">
               <Text className="text-white text-base">◀</Text>
@@ -79,7 +79,7 @@ export default function ChatDetailScreen() {
                 key={msg.id}
                 className={`mb-4 max-w-[80%]  p-4 ${isMe
                   ? 'bg-secondary/10 border border-secondary/20 align-self-end ml-auto'
-                  : 'bg-background/80 border border-zinc-850 align-self-start mr-auto'
+                  : 'bg-background/80 border border-border align-self-start mr-auto'
                   }`}
               >
                 <Text className={`text-sm ${isMe ? 'text-secondary font-bold' : 'text-foreground'}`}>
@@ -94,14 +94,14 @@ export default function ChatDetailScreen() {
         </ScrollView>
 
         {/* Caja de Entrada */}
-        <View className="p-4 border-t border-zinc-900 flex-row items-center gap-2 bg-background/40">
+        <View className="p-4 border-t border-border flex-row items-center gap-2 bg-background/40">
           <TextInput
             placeholder={isRecording ? 'Grabando audio...' : 'Escribe tu mensaje...'}
             placeholderTextColor="#64748b"
             editable={!isRecording}
             value={inputText}
             onChangeText={setInputText}
-            className="flex-1 bg-background/80 border border-zinc-800  px-4 py-3 text-white font-bold"
+            className="flex-1 bg-background/80 border border-border  px-4 py-3 text-white font-bold"
           />
 
           {/* Grabadora de Voz Nativa simulada */}
@@ -109,7 +109,7 @@ export default function ChatDetailScreen() {
             onPress={handleToggleRecord}
             className={`w-12 h-12  justify-center items-center ${isRecording
               ? 'bg-rose-500/20 border border-rose-500'
-              : 'bg-background/80 border border-zinc-800'
+              : 'bg-background/80 border border-border'
               }`}
           >
             <Text className="text-white text-base">{isRecording ? '⏹' : '🎤'}</Text>
@@ -119,7 +119,7 @@ export default function ChatDetailScreen() {
           <TouchableOpacity
             onPress={handleSend}
             disabled={isRecording || !inputText.trim()}
-            className={`w-12 h-12  justify-center items-center ${!inputText.trim() ? 'bg-background/80 border border-zinc-800/40' : 'bg-secondary border border-secondary'
+            className={`w-12 h-12  justify-center items-center ${!inputText.trim() ? 'bg-background/80 border border-border/40' : 'bg-secondary border border-secondary'
               }`}
           >
             <Text className={`text-base font-black ${!inputText.trim() ? 'text-foreground' : 'text-foreground'}`}>

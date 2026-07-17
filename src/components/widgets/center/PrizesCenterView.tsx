@@ -54,7 +54,7 @@ export default function PrizesCenterView({ currentView, selectedItemId, onBack, 
             {prizes.map((prize) => (
               <TouchableOpacity
                 key={prize.id}
-                className="py-4 flex-row items-center gap-4 border-b border-zinc-800/80 hover:bg-zinc-900/50 transition-colors"
+                className="py-4 flex-row items-center gap-4 border-b border-border/80 hover:bg-zinc-900/50 transition-colors"
                 onPress={() => onSelectPrize(prize.id)}
               >
                 <View className="w-12 h-12 bg-secondary/10 rounded-full items-center justify-center">

@@ -74,7 +74,7 @@ export default function HandyBetHeader() {
         </TouchableOpacity>
         <TouchableOpacity className="w-10 h-10 rounded-full bg-background/80/80 items-center justify-center hover:bg-background/80 transition-colors border border-border/50 relative">
           <Bell size={20} color="#d4d4d8" />
-          <View className="absolute -top-1 -right-1 w-4 h-4 bg-primary rounded-full border-2 border-zinc-900 items-center justify-center">
+          <View className="absolute -top-1 -right-1 w-4 h-4 bg-primary rounded-full border-2 border-border items-center justify-center">
             <Text className="text-[9px] font-black text-black">2</Text>
           </View>
         </TouchableOpacity>

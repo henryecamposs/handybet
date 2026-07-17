@@ -115,7 +115,7 @@ export default function TaquillaScreen() {
 
         {/* Buscador QR y Manual */}
         <View className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <View className="bg-background/80 border border-zinc-850 p-6  justify-between">
+          <View className="bg-background/80 border border-border p-6  justify-between">
             <View>
               <Text className="text-white font-black text-sm mb-4">Escanear Ticket QR</Text>
               <TouchableOpacity
@@ -126,7 +126,7 @@ export default function TaquillaScreen() {
               </TouchableOpacity>
             </View>
 
-            <View className="border-t border-zinc-800 pt-6 mt-6">
+            <View className="border-t border-border pt-6 mt-6">
               <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-2">Ingresar Código Manual</Text>
               <View className="flex-row gap-2">
                 <TextInput
@@ -138,7 +138,7 @@ export default function TaquillaScreen() {
                 />
                 <TouchableOpacity
                   onPress={handleManualSearch}
-                  className="bg-background/80 border border-zinc-750 justify-center px-6 rounded-xs"
+                  className="bg-background/80 border border-border justify-center px-6 rounded-xs"
                 >
                   <Text className="text-white font-black text-xs">BUSCAR</Text>
                 </TouchableOpacity>
@@ -190,7 +190,7 @@ export default function TaquillaScreen() {
             </View>
 
             {/* Acciones según el estado del ticket */}
-            <View className="bg-background/80 border border-zinc-850 p-6 ">
+            <View className="bg-background/80 border border-border p-6 ">
               <Text className="text-white font-black text-base mb-4">Acciones de Taquilla</Text>
 
               {/* CASO A: Apuesta pendiente (Se debe confirmar y debitar balance del monedero del grupo) */}
@@ -317,7 +317,7 @@ export default function TaquillaScreen() {
 
               <TouchableOpacity
                 onPress={() => setActiveTicketCode(null)}
-                className="mt-4 py-3 rounded-xs items-center bg-background/80 border border-zinc-850"
+                className="mt-4 py-3 rounded-xs items-center bg-background/80 border border-border"
               >
                 <Text className="text-foreground font-bold text-xs uppercase">Limpiar Pantalla</Text>
               </TouchableOpacity>

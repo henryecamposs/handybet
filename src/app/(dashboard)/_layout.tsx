@@ -15,7 +15,7 @@ export default function DashboardLayout() {
   return (
     <View className="flex-1 flex-row bg-background">
       {/* Sidebar para Taquilla / Escritorio */}
-      <View className="w-64 border-r border-zinc-900 bg-background/40 p-6 justify-between hidden md:flex">
+      <View className="w-64 border-r border-border bg-background/40 p-6 justify-between hidden md:flex">
         <View>
           <Text className="text-xl font-black text-white tracking-widest mb-8">
             HANDYBET TAQUILLA
@@ -46,7 +46,7 @@ export default function DashboardLayout() {
 
         <TouchableOpacity
           onPress={handleLogout}
-          className="bg-background/80 border border-zinc-850 p-4 rounded-xs items-center"
+          className="bg-background/80 border border-border p-4 rounded-xs items-center"
         >
           <Text className="text-rose-500 text-xs font-black uppercase">Cerrar Sesión</Text>
         </TouchableOpacity>

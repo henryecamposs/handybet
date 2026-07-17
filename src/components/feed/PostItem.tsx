@@ -3,6 +3,7 @@ import { View, Text, Image, TouchableOpacity, ScrollView, Modal } from 'react-na
 import { MessageSquare, Share2, Bell, EyeOff, X, Trash2 } from 'lucide-react-native';
 import Logo from '../ui/Logo';
 import FloatingPopup from '../ui/FloatingPopup';
+import IconButton from '../ui/IconButton';
 import { useThemeColors, withOpacity } from '../../hooks/useThemeColors';
 import PostActionButtons from './PostActionButtons';
 import PostMediaCarousel from './PostMediaCarousel';
@@ -70,7 +71,8 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
             </View>
           </View>
           <View className="flex-row items-center gap-2">
-            <TouchableOpacity
+            <IconButton
+              label={isFollowing ? 'Siguiendo' : 'Seguir'}
               onPress={() => {
                 const nextVal = !isFollowing;
                 setIsFollowing(nextVal);
@@ -80,16 +82,11 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                   position: 'top-right'
                 });
               }}
-              className={`border px-2.5 py-1 rounded-full ${isFollowing
-                ? 'border-border bg-transparent'
-                : 'border-primary bg-primary/5'
-                }`}
-            >
-              <Text className={`text-[10px] font-normal ${isFollowing ? 'text-muted-foreground' : 'text-primary'
-                }`}>
-                {isFollowing ? 'Siguiendo' : 'Seguir'}
-              </Text>
-            </TouchableOpacity>
+              size="xs"
+              variant={isFollowing ? 'muted' : 'primary'}
+              isActive={!isFollowing}
+              hasBorder={true}
+            />
             <TouchableOpacity ref={optionsButtonRef} onPress={() => setShowOptionsModal(!showOptionsModal)}>
               <Text className="text-primary font-black text-xl px-1">⋮</Text>
             </TouchableOpacity>
@@ -105,18 +102,22 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
             bgColor="bg-background"
           >
             <View className="p-1.5 w-40">
-              <TouchableOpacity
+              <IconButton
+                icon={Share2}
+                label="Compartir"
                 onPress={() => {
                   setShowOptionsModal(false);
                   onSharePress?.();
                 }}
-                className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-primary/20 transition-colors"
-              >
-                <Share2 size={15} color={colors.foreground} />
-                <Text className="text-foreground text-xs font-semibold">Compartir</Text>
-              </TouchableOpacity>
+                size="xs"
+                variant="ghost"
+                hasBorder={false}
+                className="w-full justify-start"
+              />
 
-              <TouchableOpacity
+              <IconButton
+                icon={Bell}
+                label={isNotificationsEnabled ? 'Notif. Activas' : 'Notificar'}
                 onPress={() => {
                   const nextVal = !isNotificationsEnabled;
                   setIsNotificationsEnabled(nextVal);
@@ -127,15 +128,16 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                     position: 'bottom'
                   });
                 }}
-                className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-primary/20 transition-colors"
-              >
-                <Bell size={15} color={isNotificationsEnabled ? colors.primary : colors.foreground} />
-                <Text className={`text-xs font-semibold ${isNotificationsEnabled ? 'text-primary' : 'text-foreground'}`}>
-                  {isNotificationsEnabled ? 'Notif. Activas' : 'Notificar'}
-                </Text>
-              </TouchableOpacity>
+                size="xs"
+                variant="ghost"
+                hasBorder={false}
+                iconColor={isNotificationsEnabled ? colors.primary : colors.foreground}
+                className="w-full justify-start"
+              />
 
-              <TouchableOpacity
+              <IconButton
+                icon={EyeOff}
+                label="No mostrar"
                 onPress={() => {
                   setIsHidden(true);
                   setShowOptionsModal(false);
@@ -145,31 +147,36 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                     position: 'bottom'
                   });
                 }}
-                className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-primary/20 transition-colors"
-              >
-                <EyeOff size={15} color="#ef4444" />
-                <Text className="text-red-500 text-xs font-semibold">No mostrar</Text>
-              </TouchableOpacity>
+                size="xs"
+                variant="ghost"
+                hasBorder={false}
+                iconColor="#ef4444"
+                className="w-full justify-start"
+              />
 
-              <TouchableOpacity
-                onPress={() => {
-                  setShowOptionsModal(false);
-                  if (onDeletePress) {
-                    onDeletePress();
-                  } else {
-                    setIsHidden(true);
-                    addToast({
-                      title: "Publicación eliminada",
-                      variant: 'destructive',
-                      position: 'bottom'
-                    });
-                  }
-                }}
-                className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-primary/20 transition-colors mt-1 border-t border-zinc-800/50 pt-2"
-              >
-                <Trash2 size={15} color="#ef4444" />
-                <Text className="text-red-500 text-xs font-semibold">Eliminar</Text>
-              </TouchableOpacity>
+              <View className="mt-1 border-t border-border/50 pt-1">
+                <IconButton
+                  icon={Trash2}
+                  label="Eliminar"
+                  onPress={() => {
+                    setShowOptionsModal(false);
+                    if (onDeletePress) {
+                      onDeletePress();
+                    } else {
+                      setIsHidden(true);
+                      addToast({
+                        title: "Publicación eliminada",
+                        variant: 'destructive',
+                        position: 'bottom'
+                      });
+                    }
+                  }}
+                  size="xs"
+                  variant="destructive"
+                  hasBorder={false}
+                  className="w-full justify-start"
+                />
+              </View>
             </View>
           </FloatingPopup>
         </View>
@@ -193,10 +200,10 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
         </TouchableOpacity>
 
         {/* Sentimiento y Barra de Acciones (si no hay media) */}
-        <View className="flex-row items-center justify-between border-zinc-800/50 py-1 my-1 px-1">
+        <View className="flex-row items-center justify-between border-border/50 py-1 my-1 px-1">
           <View className="flex-1">
             {post.feeling && (
-              <View className="flex-row items-center gap-1.5 bg-background/80 border border-zinc-800 px-2.5 py-1 rounded-full self-start">
+              <View className="flex-row items-center gap-1.5 bg-background/80 border border-border px-2.5 py-1 rounded-full self-start">
                 {post.feeling.icon && React.createElement(post.feeling.icon, { size: 12, color: post.feeling.color })}
                 <Text className="text-muted-foreground text-[10px] font-bold">
                   <Text style={{ color: post.feeling.color }}>{post.feeling.text}</Text>
@@ -268,7 +275,8 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
             <Text className="text-muted-foreground text-xs font-semibold">{post.username} • {post.time}</Text>
           </View>
           <View className="flex-row items-center gap-2">
-            <TouchableOpacity
+            <IconButton
+              label={isFollowing ? 'Siguiendo' : 'Seguir'}
               onPress={() => {
                 const nextVal = !isFollowing;
                 setIsFollowing(nextVal);
@@ -278,16 +286,11 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                   position: 'top-right'
                 });
               }}
-              className={`border px-2.5 py-1 rounded-full ${isFollowing
-                ? 'border-border bg-transparent'
-                : 'border-primary bg-primary/5'
-                }`}
-            >
-              <Text className={`text-[10px] font-normal ${isFollowing ? 'text-muted-foreground' : 'text-primary'
-                }`}>
-                {isFollowing ? 'Siguiendo' : 'Seguir'}
-              </Text>
-            </TouchableOpacity>
+              size="xs"
+              variant={isFollowing ? 'muted' : 'primary'}
+              isActive={!isFollowing}
+              hasBorder={true}
+            />
             <TouchableOpacity ref={optionsButtonRef} onPress={() => setShowOptionsModal(!showOptionsModal)}>
               <Text className="text-primary font-black text-xl px-1">⋮</Text>
             </TouchableOpacity>
@@ -304,18 +307,22 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
           bgColor="bg-background"
         >
           <View className="p-1.5 w-40">
-            <TouchableOpacity
+            <IconButton
+              icon={Share2}
+              label="Compartir"
               onPress={() => {
                 setShowOptionsModal(false);
                 onSharePress?.();
               }}
-              className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-primary/20 transition-colors"
-            >
-              <Share2 size={15} color={colors.foreground} />
-              <Text className="text-foreground text-xs font-semibold">Compartir</Text>
-            </TouchableOpacity>
+              size="xs"
+              variant="ghost"
+              hasBorder={false}
+              className="w-full justify-start"
+            />
 
-            <TouchableOpacity
+            <IconButton
+              icon={Bell}
+              label={isNotificationsEnabled ? 'Notif. Activas' : 'Notificar'}
               onPress={() => {
                 const nextVal = !isNotificationsEnabled;
                 setIsNotificationsEnabled(nextVal);
@@ -326,15 +333,16 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                   position: 'bottom'
                 });
               }}
-              className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-primary/20 transition-colors"
-            >
-              <Bell size={15} color={isNotificationsEnabled ? colors.primary : colors.foreground} />
-              <Text className={`text-xs font-semibold ${isNotificationsEnabled ? 'text-primary' : 'text-foreground'}`}>
-                {isNotificationsEnabled ? 'Notif. Activas' : 'Notificar'}
-              </Text>
-            </TouchableOpacity>
+              size="xs"
+              variant="ghost"
+              hasBorder={false}
+              iconColor={isNotificationsEnabled ? colors.primary : colors.foreground}
+              className="w-full justify-start"
+            />
 
-            <TouchableOpacity
+            <IconButton
+              icon={EyeOff}
+              label="No mostrar"
               onPress={() => {
                 setIsHidden(true);
                 setShowOptionsModal(false);
@@ -344,31 +352,36 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                   position: 'bottom'
                 });
               }}
-              className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-primary/20 transition-colors"
-            >
-              <EyeOff size={15} color="#ef4444" />
-              <Text className="text-red-500 text-xs font-semibold">No mostrar</Text>
-            </TouchableOpacity>
+              size="xs"
+              variant="ghost"
+              hasBorder={false}
+              iconColor="#ef4444"
+              className="w-full justify-start"
+            />
 
-            <TouchableOpacity
-              onPress={() => {
-                setShowOptionsModal(false);
-                if (onDeletePress) {
-                  onDeletePress();
-                } else {
-                  setIsHidden(true);
-                  addToast({
-                    title: "Publicación eliminada",
-                    variant: 'destructive',
-                    position: 'bottom'
-                  });
-                }
-              }}
-              className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-primary/20 transition-colors mt-1 border-t border-zinc-800/50 pt-2"
-            >
-              <Trash2 size={15} color="#ef4444" />
-              <Text className="text-red-500 text-xs font-semibold">Eliminar</Text>
-            </TouchableOpacity>
+            <View className="mt-1 border-t border-border/50 pt-1">
+              <IconButton
+                icon={Trash2}
+                label="Eliminar"
+                onPress={() => {
+                  setShowOptionsModal(false);
+                  if (onDeletePress) {
+                    onDeletePress();
+                  } else {
+                    setIsHidden(true);
+                    addToast({
+                      title: "Publicación eliminada",
+                      variant: 'destructive',
+                      position: 'bottom'
+                    });
+                  }
+                }}
+                size="xs"
+                variant="destructive"
+                hasBorder={false}
+                className="w-full justify-start"
+              />
+            </View>
           </View>
         </FloatingPopup>
 
@@ -391,9 +404,9 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
         )}
 
         {/* Reacciones y Sentimiento Inferior */}
-        <View className="items-center mt-3 border-t border-zinc-800/50 pt-3 w-full">
+        <View className="items-center mt-3 border-t border-border/50 pt-3 w-full">
           {post.feeling && (
-            <View className="flex-row items-center gap-2 bg-background/80 border border-zinc-800 self-start px-3 py-1.5 rounded-full mb-3">
+            <View className="flex-row items-center gap-2 bg-background/80 border border-border self-start px-3 py-1.5 rounded-full mb-3">
               {post.feeling.icon && React.createElement(post.feeling.icon, { size: 14, color: post.feeling.color })}
               <Text className="text-muted-foreground text-xs font-semibold">
                 Me siento <Text style={{ color: post.feeling.color }}>{post.feeling.text}</Text>

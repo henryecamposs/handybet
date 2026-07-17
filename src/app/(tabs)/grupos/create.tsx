@@ -19,7 +19,7 @@ export default function CreateGroupScreen() {
         </View>
       </View>
 
-      <View className="bg-background/80  p-6 border border-zinc-800 mb-8">
+      <View className="bg-background/80  p-6 border border-border mb-8">
         {/* Avatar Upload (Simulated) */}
         <View className="items-center mb-8">
           <View className="w-24 h-24 rounded-full bg-background/80 border-2 border-dashed border-border items-center justify-center mb-3">

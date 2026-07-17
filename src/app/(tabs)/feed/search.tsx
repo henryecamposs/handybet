@@ -284,7 +284,7 @@ export default function FeedSearchScreen() {
 
         {/* Listado de posts */}
         {posts.length === 0 ? (
-          <View className="py-20 items-center justify-center border border-dashed border-zinc-800  bg-primary/5">
+          <View className="py-20 items-center justify-center border border-dashed border-border  bg-primary/5">
             <Text className="text-foreground font-black text-md">Sin Publicaciones</Text>
             <Text className="text-zinc-500 text-xs mt-1.5 text-center px-6">
               Este {entityType === 'channel' ? 'canal' : 'grupo'} aún no registra publicaciones en su feed.

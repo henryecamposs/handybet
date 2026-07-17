@@ -115,7 +115,7 @@ export default function GruposScreen() {
         onPress={() => handleGroupClick(group)}
         className="items-center flex-1 justify-center w-full"
       >
-        <View className="w-10 h-10 rounded-full bg-background/85 items-center justify-center mb-1.5 border border-zinc-800">
+        <View className="w-10 h-10 rounded-full bg-background/85 items-center justify-center mb-1.5 border border-border">
           <Users size={18} color={colors.primary} />
         </View>
         <Text className="text-foreground font-black text-center text-xs px-1" numberOfLines={2}>
@@ -254,7 +254,7 @@ export default function GruposScreen() {
         onRequestClose={() => setShowOnboarding(false)}
       >
         <View className="flex-1 bg-black/60 justify-center items-center p-6">
-          <View className="bg-background border border-zinc-800 w-full max-w-md  p-6 shadow-2xl">
+          <View className="bg-background border border-border w-full max-w-md  p-6 shadow-2xl">
             {loadingOnboarding && !selectedGroup ? (
               <View className="py-10 items-center">
                 <ActivityIndicator size="large" color={colors.secondary} />
@@ -268,7 +268,7 @@ export default function GruposScreen() {
                 <ScrollView className="max-h-[380px] mb-6" showsVerticalScrollIndicator={false}>
                   {/* Términos y Aviso Legal */}
                   {rules?.terms_text && (
-                    <View className="bg-background/50 border border-zinc-850 p-4  mb-4">
+                    <View className="bg-background/50 border border-border p-4  mb-4">
                       <Text className="text-foreground font-bold text-xs mb-1.5 uppercase tracking-wider">Aviso Legal y Términos</Text>
                       <Text className="text-foreground text-[11px] leading-4">{rules.terms_text}</Text>
                     </View>
@@ -285,7 +285,7 @@ export default function GruposScreen() {
                         placeholderTextColor={colors.mutedForeground}
                         value={experience}
                         onChangeText={setExperience}
-                        className="bg-background border border-zinc-800 rounded-xs px-4 py-2.5 text-white text-xs font-bold"
+                        className="bg-background border border-border rounded-xs px-4 py-2.5 text-white text-xs font-bold"
                       />
                     </View>
 
@@ -298,7 +298,7 @@ export default function GruposScreen() {
                         placeholderTextColor={colors.mutedForeground}
                         value={intentions}
                         onChangeText={setIntentions}
-                        className="bg-background border border-zinc-800 rounded-xs px-4 py-2.5 text-white text-xs font-bold"
+                        className="bg-background border border-border rounded-xs px-4 py-2.5 text-white text-xs font-bold"
                       />
                     </View>
                   </View>
@@ -314,7 +314,7 @@ export default function GruposScreen() {
                             onPress={() => setSelectedPlanId(plan.id)}
                             className={`p-3.5  border flex-row justify-between items-center ${selectedPlanId === plan.id
                               ? 'bg-secondary/15 border-secondary'
-                              : 'bg-background border-zinc-800'
+                              : 'bg-background border-border'
                               }`}
                           >
                             <View>
@@ -335,7 +335,7 @@ export default function GruposScreen() {
                 <View className="flex-row gap-2">
                   <TouchableOpacity
                     onPress={() => setShowOnboarding(false)}
-                    className="flex-1 bg-background border border-zinc-800 py-3.5  items-center"
+                    className="flex-1 bg-background border border-border py-3.5  items-center"
                   >
                     <Text className="text-foreground font-bold text-xs">Cancelar</Text>
                   </TouchableOpacity>

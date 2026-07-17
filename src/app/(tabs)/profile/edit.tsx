@@ -138,7 +138,7 @@ export default function EditProfileScreen() {
     >
       <View className="px-4 pt-1">
         <View className="mb-6 flex-row items-center">
-          <TouchableOpacity onPress={() => router.back()} className="mr-3 p-2 rounded-full bg-background/80 hover:bg-primary/20 transition-colors border border-border/35">
+          <TouchableOpacity onPress={() => router.back()} className="mr-3 p-2 rounded-full bg-background/80 hover:bg-primary/20 transition-colors border border-border">
             <ArrowLeft size={22} color={colors.foreground} />
           </TouchableOpacity>
           <View className="flex-1">
@@ -149,10 +149,10 @@ export default function EditProfileScreen() {
 
         {/* Sección 1: Información Básica */}
         <View className="bg-background/80  p-5 border border-border mb-6">
-          <Text className="text-foreground font-black text-sm uppercase tracking-wider mb-5 border-b border-border/15 pb-2">Información Básica</Text>
+          <Text className="text-foreground font-black text-sm uppercase tracking-wider mb-5 border-b border-border  pb-2">Información Básica</Text>
 
           <View className="items-center mb-6 relative">
-            <View className="p-1 bg-background rounded-full border border-border/35">
+            <View className="p-1 bg-background rounded-full border border-border">
               <Image
                 source={{ uri: currentUser.avatar }}
                 className="w-24 h-24 rounded-full bg-background/80"
@@ -182,7 +182,7 @@ export default function EditProfileScreen() {
                   value={currentUser.username}
                   placeholderTextColor={colors.mutedForeground}
                   editable={false}
-                  className="bg-background/30 text-muted-foreground p-3.5  border border-border/35 font-semibold text-sm w-full pr-12"
+                  className="bg-background/30 text-muted-foreground p-3.5  border border-border font-semibold text-sm w-full pr-12"
                 />
                 <Lock size={16} color={colors.mutedForeground} className="absolute right-4" />
               </View>
@@ -206,7 +206,7 @@ export default function EditProfileScreen() {
 
         {/* Sección 2: Información Personal & Ubicación */}
         <View className="bg-background/80  p-5 border border-border mb-6">
-          <Text className="text-foreground font-black text-sm uppercase tracking-wider mb-5 border-b border-border/15 pb-2">Información Personal & Ubicación</Text>
+          <Text className="text-foreground font-black text-sm uppercase tracking-wider mb-5 border-b border-border  pb-2">Información Personal & Ubicación</Text>
 
           <View className="space-y-4">
             <View>
@@ -288,7 +288,7 @@ export default function EditProfileScreen() {
 
         {/* Sección 3: Categorías de Interés */}
         <View className="bg-background/80  p-5 border border-border mb-6">
-          <Text className="text-foreground font-black text-sm uppercase tracking-wider mb-2 border-b border-border/15 pb-2">Preferencias Deportivas y de Juego</Text>
+          <Text className="text-foreground font-black text-sm uppercase tracking-wider mb-2 border-b border-border  pb-2">Preferencias Deportivas y de Juego</Text>
           <Text className="text-muted-foreground text-xs font-medium mb-4">Selecciona tus áreas de interés favoritas para personalizar tu feed:</Text>
 
           <View className="flex-row flex-wrap gap-2">
@@ -311,7 +311,7 @@ export default function EditProfileScreen() {
 
         {/* Sección 4: Notificaciones y Suscripciones */}
         <View className="bg-background/80  p-5 border border-border mb-6">
-          <Text className="text-foreground font-black text-sm uppercase tracking-wider mb-5 border-b border-border/15 pb-2">Configuración de Comunicaciones</Text>
+          <Text className="text-foreground font-black text-sm uppercase tracking-wider mb-5 border-b border-border  pb-2">Configuración de Comunicaciones</Text>
 
           <View className="space-y-4">
             <View className="flex-row items-center justify-between">
@@ -327,7 +327,7 @@ export default function EditProfileScreen() {
               />
             </View>
 
-            <View className="flex-row items-center justify-between border-t border-border/15 pt-4">
+            <View className="flex-row items-center justify-between border-t border-border  pt-4">
               <View className="flex-1 pr-4">
                 <Text className="text-foreground font-bold text-sm">Notificaciones Activas</Text>
                 <Text className="text-muted-foreground text-xs mt-0.5 font-medium">Recibe alertas push sobre sorteos iniciados, respuestas en chats e información de taquilla.</Text>
@@ -384,7 +384,7 @@ export default function EditProfileScreen() {
         <View className="flex-1 bg-black/60 justify-center items-center p-4">
           <View className="bg-background border border-border  w-full max-h-[85%] p-5 shadow-2xl">
             {/* Header del Modal */}
-            <View className="flex-row items-center justify-between border-b border-border/15 pb-3">
+            <View className="flex-row items-center justify-between border-b border-border  pb-3">
               <Text className="text-foreground font-black text-base uppercase tracking-wider">Acuerdo de Uso</Text>
               <TouchableOpacity onPress={() => setModalVisible(false)} className="p-1 rounded-full hover:bg-muted">
                 <X size={20} color={colors.foreground} />
@@ -444,7 +444,7 @@ export default function EditProfileScreen() {
             </ScrollView>
 
             {/* Footer de Acciones del Modal */}
-            <View className="flex-row gap-3 border-t border-border/15 pt-3">
+            <View className="flex-row gap-3 border-t border-border  pt-3">
               <TouchableOpacity
                 onPress={() => setModalVisible(false)}
                 className="flex-1 bg-background/80 py-3 rounded-xs border border-border items-center justify-center"

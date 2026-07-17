@@ -99,7 +99,7 @@ export default function BetMatrixBuilder({ groupId, onBetGenerated }: BetMatrixB
   };
 
   return (
-    <ScrollView className="bg-background/90 p-6  border border-zinc-800 shadow-xl max-w-lg w-full mx-auto my-4">
+    <ScrollView className="bg-background/90 p-6  border border-border shadow-xl max-w-lg w-full mx-auto my-4">
       <Text className="text-2xl font-black text-white mb-6 text-center tracking-tight">
         Confeccionar Jugada
       </Text>
@@ -199,10 +199,10 @@ export default function BetMatrixBuilder({ groupId, onBetGenerated }: BetMatrixB
 
       {/* Lista de Selecciones */}
       {selections.length > 0 && (
-        <View className="bg-background/60 p-4  border border-zinc-800 mb-4">
+        <View className="bg-background/60 p-4  border border-border mb-4">
           <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-2">Líneas Jugadas</Text>
           {selections.map((sel, idx) => (
-            <View key={idx} className="flex-row justify-between items-center py-2 border-b border-zinc-800/80">
+            <View key={idx} className="flex-row justify-between items-center py-2 border-b border-border/80">
               <Text className="text-foreground font-bold">
                 {gameType.toUpperCase()} - <Text className="text-secondary text-base">{sel.number}</Text>
               </Text>

@@ -58,8 +58,8 @@ export default function Toast({ id, title, description, variant = 'default', siz
       case 'warning': return 'bg-orange-600 border-orange-500';
       case 'success': return 'bg-green-600 border-green-500';
       case 'info': return 'bg-blue-600 border-blue-500';
-      case 'muted': return 'bg-zinc-900 border-zinc-800';
-      default: return 'bg-zinc-900 border-zinc-800';
+      case 'muted': return 'bg-zinc-900 border-border';
+      default: return 'bg-zinc-900 border-border';
     }
   };
 

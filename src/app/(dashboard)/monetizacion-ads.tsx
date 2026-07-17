@@ -159,7 +159,7 @@ export default function MonetizacionAdsScreen() {
         <View className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start mb-12">
 
           {/* Registro de Anuncios */}
-          <View className="bg-background/80 border border-zinc-850 p-8  shadow-xl w-full">
+          <View className="bg-background/80 border border-border p-8  shadow-xl w-full">
             <Text className="text-white font-black text-lg mb-6">Pauta Publicitaria Comercial</Text>
 
             {validationError && (
@@ -272,7 +272,7 @@ export default function MonetizacionAdsScreen() {
           </View>
 
           {/* Egresos Pendientes / Ledger */}
-          <View className="bg-background/80 border border-zinc-850 p-8  shadow-xl w-full">
+          <View className="bg-background/80 border border-border p-8  shadow-xl w-full">
             <Text className="text-white font-black text-lg mb-6">Premios y Retiros por Liquidar</Text>
 
             {pendingWithdrawals.length === 0 ? (
@@ -286,7 +286,7 @@ export default function MonetizacionAdsScreen() {
                 {pendingWithdrawals.map((tx) => (
                   <View
                     key={tx.id}
-                    className="bg-background/60 border border-zinc-850 p-5  flex-row justify-between items-center shadow-sm"
+                    className="bg-background/60 border border-border p-5  flex-row justify-between items-center shadow-sm"
                   >
                     <View>
                       <Text className="text-white font-black text-sm">@{tx.username}</Text>

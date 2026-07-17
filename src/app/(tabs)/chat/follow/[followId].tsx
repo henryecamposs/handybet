@@ -28,14 +28,14 @@ export default function FollowChatScreen() {
             className="flex-row items-center"
             onPress={() => router.push(`/profile/${followId}` as any)}
           >
-            <Image source={{ uri: followUser.avatar }} className="w-10 h-10 rounded-full bg-background/80 mr-3 border border-border/35" />
+            <Image source={{ uri: followUser.avatar }} className="w-10 h-10 rounded-full bg-background/80 mr-3 border border-border" />
             <View>
               <Text className="text-foreground font-bold text-base">{followUser.name}</Text>
               <Text className="text-secondary text-xs font-semibold">En línea</Text>
             </View>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity className="w-9 h-9 bg-background/80 rounded-full items-center justify-center border border-border/35 hover:bg-background/80/85">
+        <TouchableOpacity className="w-9 h-9 bg-background/80 rounded-full items-center justify-center border border-border hover:bg-background/80">
           <Info size={18} color={colors.foreground} />
         </TouchableOpacity>
       </View>
@@ -44,8 +44,8 @@ export default function FollowChatScreen() {
       <ScrollView className="flex-1 px-4 py-4">
         {/* Mensaje Recibido */}
         <View className="flex-row items-end mb-4 max-w-[85%]">
-          <Image source={{ uri: followUser.avatar }} className="w-8 h-8 rounded-full mr-2 border border-border/15" />
-          <View className="bg-background/80  rounded-bl-sm p-3 border border-border/15">
+          <Image source={{ uri: followUser.avatar }} className="w-8 h-8 rounded-full mr-2 border border-border " />
+          <View className="bg-background/80  rounded-bl-sm p-3 border border-border ">
             <Text className="text-foreground text-[15px]">¡Hola! ¿Cómo vas con las apuestas de hoy?</Text>
             <Text className="text-muted-foreground text-[10px] self-end mt-1">10:42 AM</Text>
           </View>
@@ -66,7 +66,7 @@ export default function FollowChatScreen() {
           <TouchableOpacity className="p-2 mr-1">
             <ImageIcon size={22} color={colors.primary} />
           </TouchableOpacity>
-          <View className="flex-1 bg-background/80 rounded-full flex-row items-center px-4 py-1.5 border border-border/35 mr-2">
+          <View className="flex-1 bg-background/80 rounded-full flex-row items-center px-4 py-1.5 border border-border mr-2">
             <TextInput
               className="flex-1 text-foreground text-[15px] max-h-24 pt-2 pb-2"
               placeholder={`Escríbele a ${followUser.name.split(' ')[0]}...`}

@@ -79,7 +79,7 @@ export const FollowSuggestionWidget = ({ name, avatar, time, mutualFollowers, on
               {isFollowing ? 'Siguiendo' : 'Seguir'}
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity className="flex-1 bg-background/80 py-1.5 rounded-lg items-center border border-zinc-800">
+          <TouchableOpacity className="flex-1 bg-background/80 py-1.5 rounded-lg items-center border border-border">
             <Text className="text-foreground font-bold text-xs">Descartar</Text>
           </TouchableOpacity>
         </View>
@@ -90,7 +90,7 @@ export const FollowSuggestionWidget = ({ name, avatar, time, mutualFollowers, on
 
 export const PrizeNotificationWidget = ({ id, title, description, onSelectPrize }: { id: string, title: string, description: string, onSelectPrize?: (id: string) => void }) => (
   <TouchableOpacity
-    className="bg-background/80 border border-zinc-800 p-4 rounded-xs flex-row items-center gap-4 mx-2 shadow-sm hover:bg-background/80 transition-colors"
+    className="bg-background/80 border border-border p-4 rounded-xs flex-row items-center gap-4 mx-2 shadow-sm hover:bg-background/80 transition-colors"
     onPress={() => onSelectPrize ? onSelectPrize(id) : undefined}
   >
     <View className="w-12 h-12 bg-secondary/10 rounded-full items-center justify-center">

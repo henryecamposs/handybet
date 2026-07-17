@@ -8,7 +8,7 @@ interface QRDisplayZoneProps {
 
 export default function QRDisplayZone({ betCode }: QRDisplayZoneProps) {
   return (
-    <View className="bg-background/90 p-8  border border-zinc-800 shadow-xl items-center max-w-sm w-full mx-auto my-4">
+    <View className="bg-background/90 p-8  border border-border shadow-xl items-center max-w-sm w-full mx-auto my-4">
       <Text className="text-sm font-black text-foreground uppercase tracking-widest mb-4">
         Ticket de Apuesta
       </Text>
