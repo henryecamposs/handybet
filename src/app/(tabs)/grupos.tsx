@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { Users, Compass } from 'lucide-react-native';
 import { handyBetGroups } from '../../mockdata/handyBetMock';
@@ -8,6 +8,7 @@ import { groupMonetizationService } from '../../services/groupMonetizationServic
 import { Group, GroupPlan, GroupRules } from '../../types/handyBet';
 import { useThemeColors } from '@/hooks/useThemeColors';
 import HubLayout from '@/components/layout/HubLayout';
+import { localDB } from '../../lib/localDB';
 
 export default function GruposScreen() {
   const router = useRouter();
@@ -20,6 +21,23 @@ export default function GruposScreen() {
   const [loadingOnboarding, setLoadingOnboarding] = useState(false);
   const [plans, setPlans] = useState<GroupPlan[]>([]);
   const [rules, setRules] = useState<GroupRules | null>(null);
+  const [latestPosts, setLatestPosts] = useState<any[]>([]);
+
+  useEffect(() => {
+    async function fetchLatestPosts() {
+      try {
+        const allPosts = await localDB.posts.getAll();
+        const groupOrChannelPosts = allPosts.filter((p: any) => p.group_id || p.channel_id);
+        groupOrChannelPosts.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+        const top5 = groupOrChannelPosts.slice(0, 5);
+        const resolved = await Promise.all(top5.map(p => localDB.resolvePostWithAuthor(p)));
+        setLatestPosts(resolved);
+      } catch (err) {
+        console.log('Error loading latest posts in groups hub:', err);
+      }
+    }
+    fetchLatestPosts();
+  }, []);
 
   // Estado de respuestas del cuestionario
   const [experience, setExperience] = useState('');
@@ -89,35 +107,57 @@ export default function GruposScreen() {
   );
 
   const renderMyGroupCard = (group: Group) => (
-    <TouchableOpacity
+    <View
       key={group.id}
-      onPress={() => handleGroupClick(group)}
-      className="w-32 h-36 bg-background/80 rounded-2xl border border-muted-foreground items-center justify-center mr-4 hover:bg-background/80/80 transition-colors"
+      className="w-36 h-44 bg-background/80 rounded-3xl border border-muted-foreground items-center justify-between p-3 mr-4 hover:bg-background/80/80 transition-colors"
     >
-      <View className="w-12 h-12 rounded-full bg-background/80 items-center justify-center mb-2">
-        <Users size={20} color={colors.mutedForeground} />
-      </View>
-      <Text className="text-foreground font-bold text-center text-sm px-2" numberOfLines={2}>
-        {group.name}
-      </Text>
-      <Text className="text-foreground text-[10px] mt-1">
-        {group.members?.length || 0} miembros
-      </Text>
-    </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => handleGroupClick(group)}
+        className="items-center flex-1 justify-center w-full"
+      >
+        <View className="w-10 h-10 rounded-full bg-background/85 items-center justify-center mb-1.5 border border-zinc-800">
+          <Users size={18} color={colors.primary} />
+        </View>
+        <Text className="text-foreground font-black text-center text-xs px-1" numberOfLines={2}>
+          {group.name}
+        </Text>
+        <Text className="text-zinc-500 text-[9px] font-bold mt-0.5">
+          {group.members?.length || 0} miembros
+        </Text>
+      </TouchableOpacity>
+      
+      <TouchableOpacity
+        onPress={() => router.push(`/feed/search?id=${group.id}` as any)}
+        className="w-full bg-primary/20 border border-primary/30 py-1.5 rounded-xl items-center"
+      >
+        <Text className="text-primary text-[9px] font-black uppercase tracking-wider">Ver Feed 📢</Text>
+      </TouchableOpacity>
+    </View>
   );
 
   const renderDiscoverGroupCard = (group: any) => (
-    <TouchableOpacity
+    <View
       key={group.id}
-      onPress={() => handleGroupClick(group as any)}
-      className="w-[48%] bg-background/80 p-4 rounded-2xl border border-muted-foreground items-center justify-center hover:bg-background/80/80 transition-colors"
+      className="w-[48%] bg-background/80 p-3.5 rounded-3xl border border-muted-foreground items-center justify-between min-h-[160px] mb-4"
     >
-      <View className="w-10 h-10 rounded-full bg-background/80 items-center justify-center mb-2 border border-zinc-700">
-        <Text className="text-lg">🌍</Text>
-      </View>
-      <Text className="text-foreground font-bold text-center mb-1 text-sm">{group.name}</Text>
-      <Text className="text-foreground text-[10px]">{group.members?.length || 0} miembros</Text>
-    </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => handleGroupClick(group as any)}
+        className="items-center flex-1 justify-center w-full mb-3"
+      >
+        <View className="w-10 h-10 rounded-full bg-background/80 items-center justify-center mb-2 border border-zinc-700">
+          <Text className="text-lg">🌍</Text>
+        </View>
+        <Text className="text-foreground font-black text-center text-xs" numberOfLines={2}>{group.name}</Text>
+        <Text className="text-zinc-500 text-[9px] font-bold mt-0.5">{group.members?.length || 0} miembros</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        onPress={() => router.push(`/feed/search?id=${group.id}` as any)}
+        className="w-full bg-primary/20 border border-primary/30 py-1.5 rounded-xl items-center"
+      >
+        <Text className="text-primary text-[9px] font-black uppercase tracking-wider">Ver Feed 📢</Text>
+      </TouchableOpacity>
+    </View>
   );
 
   const emptyState = (
@@ -149,6 +189,59 @@ export default function GruposScreen() {
       emptyState={emptyState}
       showBack={true}
     >
+      {/* Sección de Últimas Publicaciones de Grupos/Canales */}
+      {latestPosts.length > 0 && (
+        <View className="mb-8 mt-6">
+          <View className="flex-row justify-between items-center mb-4">
+            <Text className="text-foreground font-black text-lg uppercase tracking-wider">Últimas Publicaciones</Text>
+            {latestPosts[0] && (
+              <TouchableOpacity
+                onPress={() => router.push(`/feed/search?id=${latestPosts[0].group_id || latestPosts[0].channel_id}` as any)}
+              >
+                <Text className="text-primary text-[10px] font-black uppercase">Ver todas</Text>
+              </TouchableOpacity>
+            )}
+          </View>
+          <View className="space-y-4">
+            {latestPosts.map((post) => {
+              const authorName = post.channel?.name || post.group?.name || post.author?.full_name || 'Comunidad';
+              const targetId = post.group_id || post.channel_id;
+              return (
+                <View key={post.id} className="bg-primary/5 border border-primary/10 p-4 rounded-3xl mb-4">
+                  <View className="flex-row justify-between items-center mb-2">
+                    <View className="flex-row items-center gap-2">
+                      <View className="bg-background/85 w-8 h-8 rounded-full items-center justify-center border border-zinc-800">
+                        <Text className="text-sm">{post.channel_id ? '📢' : '👥'}</Text>
+                      </View>
+                      <View>
+                        <Text className="text-white font-black text-xs leading-tight">{authorName}</Text>
+                        <Text className="text-zinc-500 text-[9px] font-bold uppercase">{post.created_at ? new Date(post.created_at).toLocaleDateString() : 'Novedad'}</Text>
+                      </View>
+                    </View>
+                    {targetId && (
+                      <TouchableOpacity
+                        onPress={() => router.push(`/feed/search?id=${targetId}` as any)}
+                        className="bg-zinc-900 border border-zinc-800 px-3 py-1 rounded-full"
+                      >
+                        <Text className="text-white text-[9px] font-bold">Ver Sala</Text>
+                      </TouchableOpacity>
+                    )}
+                  </View>
+                  <Text className="text-foreground text-xs leading-relaxed" numberOfLines={3}>{post.content}</Text>
+                  
+                  <TouchableOpacity
+                    onPress={() => router.push(`/feed/${post.id}` as any)}
+                    className="mt-3 flex-row items-center gap-1 self-start"
+                  >
+                    <Text className="text-primary text-[10px] font-black uppercase">Detalles & Comentarios →</Text>
+                  </TouchableOpacity>
+                </View>
+              );
+            })}
+          </View>
+        </View>
+      )}
+
       {/* Modal de Onboarding y Selección de Plan */}
       <Modal
         visible={showOnboarding}

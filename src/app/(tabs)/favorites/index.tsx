@@ -13,11 +13,7 @@ export default function GuardadosScreen() {
   const router = useRouter();
   const colors = useThemeColors();
 
-  useEffect(() => {
-    loadSavedItems();
-  }, []);
-
-  const loadSavedItems = async () => {
+  const loadSavedItems = React.useCallback(async () => {
     try {
       const items = await localDB.saved_items.getAll();
       setSavedItems(items);
@@ -26,7 +22,12 @@ export default function GuardadosScreen() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    loadSavedItems();
+  }, [loadSavedItems]);
 
   const getTypeName = (type: string) => {
     switch (type) {

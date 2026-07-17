@@ -1,21 +1,21 @@
 import React from 'react';
 import { View, Text, StyleProp, ViewStyle, TextStyle } from 'react-native';
 
-export type HandyChannelLogoSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type HandyRoomLogoSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
-interface HandyChannelLogoProps {
-  size?: HandyChannelLogoSize;
+interface HandyRoomLogoProps {
+  size?: HandyRoomLogoSize;
   style?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
   className?: string;
 }
 
-export default function HandyChannelLogo({
+export default function HandyRoomLogo({
   size = 'md',
   style,
   textStyle,
   className = ''
-}: HandyChannelLogoProps) {
+}: HandyRoomLogoProps) {
 
   const getTextSize = () => {
     switch (size) {
@@ -34,7 +34,7 @@ export default function HandyChannelLogo({
         className={`${getTextSize()} font-normal text-white tracking-tight`}
         style={textStyle}
       >
-        Handy<Text className="text-secondary font-bold">Channel</Text>
+        Handy<Text className="text-secondary font-bold">Room</Text>
       </Text>
     </View>
   );

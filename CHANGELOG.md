@@ -4,6 +4,19 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/), y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] - 2026-07-17
+
+### Añadido
+- Nueva pantalla de feed de búsqueda `/feed/search?id=` para visualizar el muro particular de un Canal, un Grupo de Chat o un Usuario con soporte in-situ para publicación de posts de admins.
+- Sección de "Últimas Publicaciones" en el Hub de Grupos (`grupos.tsx`) mostrando las últimas 5 novedades y un botón directo para acceder a la sala de feed correspondiente.
+- Integración del widget de creación y publicación de posts (`CreatePostWidget`) directamente en las vistas detalladas de Canales (`channels/[channelId].tsx`) y Grupos (`channels/grupo/[grupoId].tsx`) para dueños/administradores.
+
+### Cambiado
+- Eliminación de la pestaña "profile" en la barra principal de tabs (`src/app/(tabs)/_layout.tsx`) ocultando la pestaña del layout principal mientras mantiene el registro de la ruta interna.
+- Rebranding de la marca HandyChannel: Se eliminó el logo antiguo y se creó el componente estandarizado `HandyRoomLogo.tsx` reflejando "HandyRoom".
+- Soporte en `socialService.createPost` y en la interfaz de usuario de creación de posts para que los administradores elijan si publican de forma personal o en representación del grupo o canal que gestionan.
+- Ajuste de hoisting y dependencias de React Hooks (ESLint) en `PostMediaCarousel.tsx`, `RepliesSection.tsx`, `friends/index.tsx` (eliminando Math.random para pureza), `favorites/index.tsx`, `favorites/[id].tsx`, `feed/[id].tsx`, y `feed/search.tsx`.
+
 ## [1.5.0] - 2026-07-17
 
 ### Añadido

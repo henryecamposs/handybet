@@ -294,6 +294,7 @@ async function resolvePostWithAuthor(post: any): Promise<any> {
   const database = await initDB();
   const author = database.users.find((u: any) => u.id === post.author_id);
   const group = post.group_id ? database.groups.find((g: any) => g.id === post.group_id) : null;
+  const channel = post.channel_id ? database.channels.find((c: any) => c.id === post.channel_id) : null;
 
   return {
     ...post,
@@ -303,6 +304,7 @@ async function resolvePostWithAuthor(post: any): Promise<any> {
       avatar_url: author.avatar_url,
     } : { id: post.author_id, full_name: 'Usuario', avatar_url: null },
     group: group ? { id: group.id, name: group.name } : null,
+    channel: channel ? { id: channel.id, name: channel.name } : null,
   };
 }
 

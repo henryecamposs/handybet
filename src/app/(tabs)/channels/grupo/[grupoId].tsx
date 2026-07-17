@@ -8,7 +8,9 @@ import BetMatrixBuilder from '../../../../components/betting/BetMatrixBuilder';
 import QRDisplayZone from '../../../../components/betting/QRDisplayZone';
 import MediaVaultGrid from '../../../../components/media/MediaVaultGrid';
 import TierPlanSelector from '../../../../components/media/TierPlanSelector';
-import { MediaPlan } from '../../../../types/handyBet';
+import { MediaPlan, VisibilityLevel } from '../../../../types/handyBet';
+import CreatePostWidget from '../../../../components/feed/CreatePostWidget';
+import { socialService } from '../../../../services/socialService';
 
 export default function GrupoDetailScreen() {
   const { grupoId, type } = useLocalSearchParams<{ grupoId: string; type: string }>();
@@ -26,9 +28,29 @@ export default function GrupoDetailScreen() {
   const { data: mediaItems = [], isLoading: isLoadingMedia } = useGetMediaVault(grupoId || '');
   const subscribeMutation = useSubscribeToMediaPlan();
 
-
-
   const { mockSession } = useHandyBetStore();
+  const [group, setGroup] = useState<any>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  async function loadGroupData() {
+    if (!grupoId) return;
+    try {
+      const g = await localDB.groups.getById(grupoId as string);
+      setGroup(g);
+      if (g && mockSession) {
+        const channel = await localDB.channels.getById(g.channel_id);
+        setIsAdmin(channel?.owner_id === mockSession.id || mockSession.role === 'admin');
+      }
+    } catch (e) {
+      console.log('Error loading group data:', e);
+    }
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      loadGroupData();
+    }, 0);
+  }, [grupoId, mockSession]);
 
   async function fetchPlansAndSubs() {
     try {
@@ -102,6 +124,35 @@ export default function GrupoDetailScreen() {
     }
   };
 
+  const handlePublishPost = async (
+    content: string, 
+    type: 'regular' | 'advertisement', 
+    visibility: VisibilityLevel, 
+    feeling?: any, 
+    mediaUrls?: string[],
+    targetGroupId?: string | null,
+    targetChannelId?: string | null
+  ): Promise<boolean> => {
+    if (!content.trim() && (!mediaUrls || mediaUrls.length === 0)) return false;
+    try {
+      await socialService.createPost({
+        author_id: mockSession?.id || 'usr_player1',
+        group_id: grupoId as string,
+        channel_id: null,
+        content: content,
+        visibility_level: visibility,
+        post_type: type,
+        payment_status: 'none_required'
+      });
+      alert('¡Publicación creada exitosamente en el grupo!');
+      loadGroupData();
+      return true;
+    } catch (e) {
+      console.error(e);
+      return false;
+    }
+  };
+
   return (
     <ScrollView className="flex-1 bg-background/80 px-4 pt-12">
       {/* Botón Volver */}
@@ -168,6 +219,32 @@ export default function GrupoDetailScreen() {
           </Text>
         </View>
       )}
+
+      {group && (
+        <View className="mt-8 border-t border-zinc-850 pt-6">
+          <TouchableOpacity
+            onPress={() => router.push(`/feed/search?id=${group.id}` as any)}
+            className="bg-primary/20 border border-primary/30 p-4 rounded-3xl items-center justify-center mb-6"
+          >
+            <Text className="text-primary font-black text-xs uppercase tracking-wider">Ver Feed / Publicaciones del Grupo 📢</Text>
+          </TouchableOpacity>
+
+          {isAdmin && (
+            <View className="mb-4">
+              <Text className="text-white font-black text-xs uppercase tracking-wider mb-3">Publicar en el Grupo</Text>
+              <CreatePostWidget
+                onPublish={handlePublishPost}
+                forcedTarget={{
+                  id: group.id,
+                  name: group.name,
+                  type: 'group'
+                }}
+              />
+            </View>
+          )}
+        </View>
+      )}
+
       <View className="h-16" />
     </ScrollView>
   );

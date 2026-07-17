@@ -25,13 +25,7 @@ export default function RepliesSection({ targetId, targetUsername, onCommentsCou
   const { addToast } = useToastStore();
   const colors = useThemeColors();
 
-  useEffect(() => {
-    if (targetId) {
-      loadComments(targetId);
-    }
-  }, [targetId]);
-
-  const loadComments = async (id: string) => {
+  const loadComments = React.useCallback(async (id: string) => {
     setLoadingComments(true);
     try {
       const allComments = await localDB.comments.getAll();
@@ -43,7 +37,14 @@ export default function RepliesSection({ targetId, targetUsername, onCommentsCou
     } finally {
       setLoadingComments(false);
     }
-  };
+  }, [onCommentsCountChange]);
+
+  useEffect(() => {
+    if (targetId) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      loadComments(targetId);
+    }
+  }, [targetId, loadComments]);
 
   const handleSendComment = async () => {
     if (!newComment.trim() || !targetId) return;

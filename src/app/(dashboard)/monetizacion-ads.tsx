@@ -59,7 +59,9 @@ export default function MonetizacionAdsScreen() {
   }
 
   useEffect(() => {
-    fetchDashboardData();
+    setTimeout(() => {
+      fetchDashboardData();
+    }, 0);
   }, []);
 
   const handleRegisterAd = async () => {

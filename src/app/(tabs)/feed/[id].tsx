@@ -12,26 +12,39 @@ export default function FeedPostDetailScreen() {
   const [post, setPost] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    loadPost();
-  }, [id]);
-
-  const loadPost = async () => {
+  const loadPost = React.useCallback(async () => {
     try {
       let found = await localDB.posts.getById(id as string);
       if (found) {
         // Resolve author from DB
         const resolved = await localDB.resolvePostWithAuthor(found);
+        
+        let authorName = resolved.author?.full_name || 'Usuario';
+        let username = `@${resolved.author_id.slice(0, 8)}`;
+        let avatar = resolved.author?.avatar_url || 'https://i.pravatar.cc/150';
+
+        if (resolved.channel) {
+          authorName = resolved.channel.name;
+          username = `@canal_${resolved.channel.id.slice(0, 8)}`;
+          avatar = 'https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?w=150&auto=format&fit=crop&q=60';
+        } else if (resolved.group) {
+          authorName = resolved.group.name;
+          username = `@grupo_${resolved.group.id.slice(0, 8)}`;
+          avatar = 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=150&auto=format&fit=crop&q=60';
+        }
+
         const mappedPost = {
           id: resolved.id,
-          author: resolved.author?.full_name || 'Usuario',
-          username: `@${resolved.author_id.slice(0, 8)}`,
-          avatar: resolved.author?.avatar_url || 'https://i.pravatar.cc/150',
+          author: authorName,
+          username: username,
+          avatar: avatar,
           time: resolved.created_at ? new Date(resolved.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'Hace un momento',
           text: resolved.content,
           mediaType: resolved.media_type || 'photo',
           mediaUrls: resolved.media_urls || (resolved.media_url ? [resolved.media_url] : []),
-          feeling: (resolved as any).feeling || null
+          feeling: (resolved as any).feeling || null,
+          group_id: resolved.group_id,
+          channel_id: resolved.channel_id
         };
         setPost(mappedPost);
       } else {
@@ -59,7 +72,12 @@ export default function FeedPostDetailScreen() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    loadPost();
+  }, [id, loadPost]);
 
   if (isLoading) {
     return (

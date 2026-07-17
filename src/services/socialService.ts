@@ -61,6 +61,7 @@ export const socialService = {
     // Filter by visibility
     const visiblePosts = allPosts.filter((post: any) => {
       if (post.author_id === userId) return true;
+      if (post.channel_id) return true; // Canales públicos aparecen en feed
       if (post.visibility_level === 'todos') return true;
       if (post.post_type === 'advertisement' && post.payment_status === 'pagado') return true;
       if (post.group_id && memberGroups.includes(post.group_id)) return true;

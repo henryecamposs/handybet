@@ -67,17 +67,11 @@ export default function TabsLayout() {
             ),
           }}
         />
-        <Tabs.Screen
-          name="profile"
-          options={{
-            title: 'Menú',
-            tabBarIcon: ({ color }) => (
-              <Text style={{ color, fontSize: 20 }}>⚙️</Text>
-            ),
-          }}
-        />
 
         {/* Ocultar todas las sub-rutas secundarias del TabBar para que no aparezcan como botones */}
+        <Tabs.Screen name="profile" options={{ href: null }} />
+        <Tabs.Screen name="feed/search" options={{ href: null }} />
+        
         <Tabs.Screen name="chat/[chatId]" options={{ href: null }} />
         <Tabs.Screen name="chat/friend/[friendId]" options={{ href: null }} />
         <Tabs.Screen name="chat/group/[groupId]" options={{ href: null }} />

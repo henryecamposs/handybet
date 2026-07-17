@@ -21,12 +21,12 @@ export default function PostMediaCarousel({
   const [layoutWidth, setLayoutWidth] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollViewRef = useRef<ScrollView>(null);
+  const { isDesktop } = useDevicePlatform();
 
   if (!mediaUrls || mediaUrls.length === 0) return null;
 
   const screenWidth = Dimensions.get('window').width;
   const initialWidth = screenWidth - 80; // approximate width based on layout
-  const { isDesktop } = useDevicePlatform();
   const widthToUse = layoutWidth > 0 ? layoutWidth : initialWidth;
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {

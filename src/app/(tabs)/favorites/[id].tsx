@@ -13,13 +13,7 @@ export default function GuardadosDetailScreen() {
   const router = useRouter();
   const colors = useThemeColors();
 
-  useEffect(() => {
-    if (id) {
-      loadItem();
-    }
-  }, [id]);
-
-  const loadItem = async () => {
+  const loadItem = React.useCallback(async () => {
     try {
       const savedItem = await localDB.saved_items.getById(id as string);
       setItem(savedItem);
@@ -28,7 +22,14 @@ export default function GuardadosDetailScreen() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    if (id) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      loadItem();
+    }
+  }, [id, loadItem]);
 
   if (isLoading) {
     return (

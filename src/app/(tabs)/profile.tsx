@@ -51,7 +51,9 @@ export default function ProfileScreen() {
   }
 
   useEffect(() => {
-    fetchProfileData();
+    setTimeout(() => {
+      fetchProfileData();
+    }, 0);
   }, [mockSession]);
 
   async function handleLogout() {

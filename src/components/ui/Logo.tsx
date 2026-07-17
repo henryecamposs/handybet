@@ -27,7 +27,7 @@ export default function Logo({
     switch (size) {
       case 'xs': return { width: 24, height: 24 };
       case 'sm': return { width: 32, height: 32 };
-      case 'lg': return { width: 70, height: 70 };
+      case 'lg': return { width: 64, height: 64 };
       case 'xl': return { width: 100, height: 100 };
       case 'md':
       default: return { width: 48, height: 48 };

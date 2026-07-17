@@ -29,7 +29,9 @@ export default function ChannelsScreen() {
   }
 
   useEffect(() => {
-    fetchChannels();
+    setTimeout(() => {
+      fetchChannels();
+    }, 0);
   }, []);
 
   const filteredDiscoverChannels = channels.slice(1).filter(c =>

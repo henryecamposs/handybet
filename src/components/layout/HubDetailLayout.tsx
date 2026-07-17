@@ -8,7 +8,7 @@ import HandyNewsLogo from '@/components/ui/HandyNewsLogo';
 import HandyChatLogo from '@/components/ui/HandyChatLogo';
 import HandyPlayLogo from '@/components/ui/HandyPlayLogo';
 import HandyShowLogo from '@/components/ui/HandyShowLogo';
-import HandyChannelLogo from '@/components/ui/HandyChannelLogo';
+import HandyRoomLogo from '@/components/ui/HandyRoomLogo';
 import HandyPayLogo from '@/components/ui/HandyPayLogo';
 import Logo from '@/components/ui/Logo';
 
@@ -79,7 +79,7 @@ export default function HubDetailLayout({
       case 'channel':
       case 'canal':
       case 'canales':
-        return <HandyChannelLogo size="md" />;
+        return <HandyRoomLogo size="md" />;
       case 'favorite':
       case 'favorites':
       case 'guardados':

@@ -31,7 +31,7 @@ export default function FriendsScreen() {
   // Solicitudes del viejo modelo se transforman en sugerencias recomendadas
   const suggestionsToFollow = handyBetUsers.slice(0, 3).map(u => ({
     ...u,
-    mutualFollowers: Math.floor(Math.random() * 15) + 2
+    mutualFollowers: (u.name.length * 3) % 12 + 2
   }));
 
   const renderSuggestCard = (user: typeof suggestionsToFollow[0]) => {

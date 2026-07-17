@@ -8,6 +8,7 @@ import { useThemeColors, withOpacity } from '../../hooks/useThemeColors';
 import { Image as ImageIcon, Video, Smile, Heart, Flame, Frown, Meh, UploadCloud, X, Trophy, TrendingUp, Target, Dices, Brain, Clover, Trash2, ChevronLeft, ChevronRight } from 'lucide-react-native';
 import { ScrollView, Image } from 'react-native';
 import { useHandyBetStore } from '../../store/useHandyBetStore';
+import { localDB } from '../../lib/localDB';
 
 const FEELINGS = [
   { icon: Smile, color: '#fbbf24', text: 'Feliz' },
@@ -24,10 +25,19 @@ const FEELINGS = [
 ];
 
 interface CreatePostWidgetProps {
-  onPublish: (content: string, type: 'regular' | 'advertisement', visibility: VisibilityLevel, feeling?: any, mediaUrls?: string[]) => Promise<boolean>;
+  onPublish: (
+    content: string,
+    type: 'regular' | 'advertisement',
+    visibility: VisibilityLevel,
+    feeling?: any,
+    mediaUrls?: string[],
+    targetGroupId?: string | null,
+    targetChannelId?: string | null
+  ) => Promise<boolean>;
+  forcedTarget?: { id: string, name: string, type: 'group' | 'channel' };
 }
 
-export default function CreatePostWidget({ onPublish }: CreatePostWidgetProps) {
+export default function CreatePostWidget({ onPublish, forcedTarget }: CreatePostWidgetProps) {
   const [postContent, setPostContent] = useState('');
   const [postType, setPostType] = useState<'regular' | 'advertisement'>('regular');
   const [visibility, setVisibility] = useState<VisibilityLevel>('todos');
@@ -43,18 +53,63 @@ export default function CreatePostWidget({ onPublish }: CreatePostWidgetProps) {
   const [previewIndex, setPreviewIndex] = useState(0);
   const [showPublishModal, setShowPublishModal] = useState(false);
 
+  const [adminTargets, setAdminTargets] = useState<{ id: string, name: string, type: 'user' | 'group' | 'channel' }[]>([]);
+  const [selectedTarget, setSelectedTarget] = useState<{ id: string, name: string, type: 'user' | 'group' | 'channel' }>({ id: 'user', name: 'Mi Muro (Personal)', type: 'user' });
+  const [showTargetDropdown, setShowTargetDropdown] = useState(false);
+
   const { mockSession } = useHandyBetStore();
   const colors = useThemeColors();
 
   const userFirstName = mockSession?.name ? mockSession.name.split(' ')[0] : 'Henry';
 
+  React.useEffect(() => {
+    async function loadTargets() {
+      if (forcedTarget) {
+        setSelectedTarget({ id: forcedTarget.id, name: forcedTarget.name, type: forcedTarget.type });
+        return;
+      }
+      if (!mockSession) return;
+      const targets: { id: string, name: string, type: 'user' | 'group' | 'channel' }[] = [
+        { id: 'user', name: `@${mockSession.username} (Personal)`, type: 'user' }
+      ];
+      
+      try {
+        // Load channels owned by user
+        const allChannels = await localDB.channels.getAll();
+        const userChannels = allChannels.filter((c: any) => c.owner_id === mockSession.id);
+        
+        for (const ch of userChannels) {
+          targets.push({ id: ch.id, name: `Canal: ${ch.name}`, type: 'channel' });
+        }
+
+        // Load groups belonging to those channels or where user is an admin
+        const allGroups = await localDB.groups.getAll();
+        const userGroupIds = userChannels.map((c: any) => c.id);
+        const adminGroups = allGroups.filter((g: any) => userGroupIds.includes(g.channel_id) || g.members?.includes(mockSession.id) && mockSession.role === 'admin');
+        
+        for (const g of adminGroups) {
+          targets.push({ id: g.id, name: `Grupo: ${g.name}`, type: 'group' });
+        }
+      } catch (err) {
+        console.log('Error loading publishing targets:', err);
+      }
+      
+      setAdminTargets(targets);
+      setSelectedTarget(targets[0]);
+    }
+    loadTargets();
+  }, [mockSession, forcedTarget]);
+
   const handlePublish = async () => {
     if ((!postContent.trim() && selectedFiles.length === 0) || isPublishing) return;
 
     setIsPublishing(true);
-    // Pasamos el sentimiento actual y los archivos seleccionados
     const mediaUrls = selectedFiles.map(f => f.uri);
-    const success = await onPublish(postContent, postType, visibility, selectedFeeling, mediaUrls);
+    
+    const targetGroupId = selectedTarget.type === 'group' ? selectedTarget.id : null;
+    const targetChannelId = selectedTarget.type === 'channel' ? selectedTarget.id : null;
+
+    const success = await onPublish(postContent, postType, visibility, selectedFeeling, mediaUrls, targetGroupId, targetChannelId);
     setIsPublishing(false);
 
     if (success) {
@@ -172,6 +227,46 @@ export default function CreatePostWidget({ onPublish }: CreatePostWidgetProps) {
                 <X size={18} color="#fff" />
               </TouchableOpacity>
             </View>
+
+            {/* Selector de Target (dropdown) o Forced Target */}
+            {!forcedTarget && adminTargets.length > 1 && (
+              <View className="mb-4 relative z-50">
+                <Text className="text-zinc-400 text-[10px] font-black uppercase mb-1.5">Publicar en nombre de:</Text>
+                <TouchableOpacity
+                  onPress={() => setShowTargetDropdown(!showTargetDropdown)}
+                  className="bg-zinc-900 border border-zinc-800 px-4 py-2.5 rounded-2xl flex-row justify-between items-center"
+                >
+                  <Text className="text-white text-xs font-bold">{selectedTarget.name}</Text>
+                  <Text className="text-primary text-[10px] font-black">{showTargetDropdown ? '▲' : '▼'}</Text>
+                </TouchableOpacity>
+
+                {showTargetDropdown && (
+                  <View className="absolute top-14 left-0 right-0 bg-zinc-950 border border-zinc-800 rounded-2xl p-1.5 z-50 shadow-2xl">
+                    <ScrollView className="max-h-[160px]" nestedScrollEnabled={true}>
+                      {adminTargets.map((target) => (
+                        <TouchableOpacity
+                          key={target.id}
+                          onPress={() => {
+                            setSelectedTarget(target);
+                            setShowTargetDropdown(false);
+                          }}
+                          className={`p-2.5 rounded-xl hover:bg-zinc-900 ${selectedTarget.id === target.id ? 'bg-primary/20' : ''}`}
+                        >
+                          <Text className={`text-xs font-bold ${selectedTarget.id === target.id ? 'text-primary' : 'text-white'}`}>{target.name}</Text>
+                        </TouchableOpacity>
+                      ))}
+                    </ScrollView>
+                  </View>
+                )}
+              </View>
+            )}
+
+            {forcedTarget && (
+              <View className="bg-primary/10 border border-primary/20 px-4 py-2 rounded-2xl mb-4">
+                <Text className="text-primary text-[10px] font-black uppercase">Publicando como:</Text>
+                <Text className="text-white text-xs font-bold mt-0.5">{forcedTarget.name}</Text>
+              </View>
+            )}
 
             <TextInput
               placeholder="¿Qué estás pensando?"

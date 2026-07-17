@@ -19,8 +19,8 @@ El feed de publicaciones se compila dinámicamente mediante consultas estructura
 ---
 
 ## 3. Interacciones Sociales y Flujos Avanzados
-
-HandyBet integra un motor social optimizado con comportamientos interactivos y retroalimentación mediante Toasts flotantes:
+- **Publicación Multicanal:** Los administradores de canales y grupos pueden crear publicaciones asignadas a sus respectivos consorcios/salas. Estas publicaciones aparecen de forma inmediata en el feed principal y en el feed exclusivo del grupo/canal. Al redactar el post, los administradores eligen si publican a título personal o bajo la identidad y marca del canal o grupo.
+- **Visualización de Feed de Canal o Grupo (Feed Search):** Mediante la ruta `/feed/search?id=`, los usuarios pueden visualizar la cartelera completa de posts oficiales y comunitarios de un canal o grupo. Si el usuario logueado posee permisos administrativos en esa entidad, se le habilita in-situ la creación de posts pre-configurados para ese destino.
 - **Sistema de Seguimiento:** Permite seguir o dejar de seguir creadores directamente desde las tarjetas de publicación.
 - **Opciones de Moderación Individual:** Los posts admiten control rápido de notificaciones y la acción de ocultar publicación ("No mostrar"). Ocultar un post genera un reemplazo temporal de la tarjeta con opción "Deshacer".
 - **Compartido Avanzado:** Permite propagar publicaciones a destinos específicos categorizados en pestañas: *Grupos*, *Canales*, *Usuarios* y *Amigos*, con filtros de búsqueda rápida.

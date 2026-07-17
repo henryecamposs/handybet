@@ -178,6 +178,11 @@ export interface Post {
     id: string;
     name: string;
   } | null;
+  channel_id?: string | null;
+  channel?: {
+    id: string;
+    name: string;
+  } | null;
   content: string;
   media_url?: string | null;
   media_type?: 'photo' | 'video' | null;

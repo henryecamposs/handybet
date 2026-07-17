@@ -13,11 +13,7 @@ export default function GroupChatScreen() {
   const [messages, setMessages] = useState<any[]>([]);
   const user = useHandyBetStore((state) => state.mockSession);
 
-  React.useEffect(() => {
-    loadData();
-  }, [groupId]);
-
-  const loadData = async () => {
+  const loadData = React.useCallback(async () => {
     const groupData = await localDB.groups.getById(groupId as string);
     if (groupData) setGroup(groupData);
 
@@ -34,7 +30,12 @@ export default function GroupChatScreen() {
       );
       setMessages(populated);
     }
-  };
+  }, [groupId]);
+
+  React.useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    loadData();
+  }, [groupId, loadData]);
 
   return (
     <View className="flex-1 bg-background">

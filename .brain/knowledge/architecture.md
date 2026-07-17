@@ -39,8 +39,9 @@ yastaa-app/
 La aplicación utiliza un esquema de enrutamiento basado en **Expo Router** optimizado para web y móvil:
 - **Persistent Layout (`HandyBetLayout.tsx`):** Un layout responsive en 3 columnas (Sidebar Izquierdo 20%, Contenedor Central 60%, Panel Publicidad/Widgets Derecho 20%) que persiste en la versión web/escritorio con scroll propio e independiente por columnas. Para mayor modularidad y limpieza del código:
   * El navbar superior está modularizado en [HandyBetHeader.tsx](file:///c:/Users/DELL/Documents/dPana%20Projects/frontends/handy-app/src/components/layout/HandyBetHeader.tsx).
-  * La barra lateral izquierda está modularizada en [LeftSidebarWidgets.tsx](file:///c:/Users/DELL/Documents/dPana%20Projects/frontends/handy-app/src/components/widgets/LeftSidebarWidgets.tsx).
-- **Pestañas Unificadas (5 Tabs):** Para evitar botones o pestañas fantasma en la barra de navegación móvil, el archivo `(tabs)/_layout.tsx` declara de forma explícita cada sub-ruta secundaria (como `channels/create`, `wallet/[id]`, `favorites/index`, `games/index`, etc.) con la propiedad `options={{ href: null }}`. Esto asegura que la navegación persista dentro de los paneles laterales en la web, pero no cree botones en el móvil.
+  * La barra lateral izquierda está modularizado en [LeftSidebarWidgets.tsx](file:///c:/Users/DELL/Documents/dPana%20Projects/frontends/handy-app/src/components/widgets/LeftSidebarWidgets.tsx).
+- **Pestañas Unificadas (5 Tabs):** Para evitar botones o pestañas fantasma en la barra de navegación móvil, el archivo `(tabs)/_layout.tsx` declara de forma explícita cada sub-ruta secundaria (como `channels/create`, `wallet/[id]`, `favorites/index`, `games/index`, `feed/search`, etc.) con la propiedad `options={{ href: null }}`. Esto asegura que la navegación persista dentro de los paneles laterales en la web, pero no cree botones en el móvil.
+- **Ruta de Búsqueda y Feed Filtrado (`feed/search`):** Permite renderizar el muro dinámico de posts filtrados por un `id` query param (pudiendo corresponder a un canal, grupo o usuario). También asume la visualización como vista unitaria (`PostDetailView`) de posts o anuncios particulares.
 
 ---
 

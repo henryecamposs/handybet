@@ -70,17 +70,35 @@ export default function FeedScreen() {
   async function fetchPosts() {
     try {
       const data = await socialService.getFeedPosts(mockSession?.id || 'usr_player1');
-      const mapped = data.map((p) => ({
-        id: p.id,
-        author: p.author?.full_name || 'Usuario',
-        username: `@${p.author_id.slice(0, 8)}`,
-        avatar: p.author?.avatar_url || 'https://i.pravatar.cc/150',
-        time: p.created_at ? new Date(p.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'Hace un momento',
-        text: p.content,
-        mediaType: p.media_type || 'photo',
-        mediaUrls: (p as any).media_urls || (p.media_url ? [p.media_url] : []), // Soportar múltiples imágenes
-        feeling: (p as any).feeling || null // Si el backend lo guardara
-      }));
+      const mapped = data.map((p) => {
+        let authorName = p.author?.full_name || 'Usuario';
+        let username = `@${p.author_id.slice(0, 8)}`;
+        let avatar = p.author?.avatar_url || 'https://i.pravatar.cc/150';
+
+        if (p.channel) {
+          authorName = p.channel.name;
+          username = `@canal_${p.channel.id.slice(0, 8)}`;
+          avatar = 'https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?w=150&auto=format&fit=crop&q=60';
+        } else if (p.group) {
+          authorName = p.group.name;
+          username = `@grupo_${p.group.id.slice(0, 8)}`;
+          avatar = 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=150&auto=format&fit=crop&q=60';
+        }
+
+        return {
+          id: p.id,
+          author: authorName,
+          username: username,
+          avatar: avatar,
+          time: p.created_at ? new Date(p.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'Hace un momento',
+          text: p.content,
+          mediaType: p.media_type || 'photo',
+          mediaUrls: (p as any).media_urls || (p.media_url ? [p.media_url] : []),
+          feeling: (p as any).feeling || null,
+          group_id: p.group_id,
+          channel_id: p.channel_id
+        };
+      });
       setPosts(mapped);
     } catch (err) {
       console.log('Error fetching posts', err);
@@ -98,13 +116,22 @@ export default function FeedScreen() {
     }
   }
 
-  async function handlePublishPost(content: string, type: 'regular' | 'advertisement', visibility: VisibilityLevel, feeling?: any, mediaUrls?: string[]): Promise<boolean> {
+  async function handlePublishPost(
+    content: string, 
+    type: 'regular' | 'advertisement', 
+    visibility: VisibilityLevel, 
+    feeling?: any, 
+    mediaUrls?: string[],
+    targetGroupId?: string | null,
+    targetChannelId?: string | null
+  ): Promise<boolean> {
     if ((!content.trim() && (!mediaUrls || mediaUrls.length === 0))) return false;
     const isAd = type === 'advertisement';
     try {
       const newPost = await socialService.createPost({
         author_id: mockSession?.id || 'usr_player1',
-        group_id: null,
+        group_id: targetGroupId || null,
+        channel_id: targetChannelId || null,
         content: content,
         visibility_level: visibility,
         post_type: type,
@@ -115,17 +142,33 @@ export default function FeedScreen() {
         setPendingPostId(newPost.id);
         setShowPaymentModal(true);
       } else {
-        // Simulamos que el nuevo post tiene el sentimiento y se agrega localmente
+        // Resolve target name
+        let authorName = 'Usuario';
+        let username = '@usr_play';
+        let avatar = 'https://i.pravatar.cc/150';
+
+        if (newPost.channel) {
+          authorName = newPost.channel.name;
+          username = `@canal_${newPost.channel_id?.slice(0, 8)}`;
+          avatar = 'https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?w=150&auto=format&fit=crop&q=60';
+        } else if (newPost.group) {
+          authorName = newPost.group.name;
+          username = `@grupo_${newPost.group_id?.slice(0, 8)}`;
+          avatar = 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=150&auto=format&fit=crop&q=60';
+        }
+
         const mockNewPost = {
           id: newPost.id,
-          author: 'Usuario',
-          username: '@usr_play',
-          avatar: 'https://i.pravatar.cc/150',
+          author: authorName,
+          username: username,
+          avatar: avatar,
           time: 'Ahora mismo',
           text: content,
           mediaType: mediaUrls && mediaUrls.length > 0 && mediaUrls[0].includes('video') ? 'video' : 'photo',
           mediaUrls: mediaUrls || [],
-          feeling: feeling
+          feeling: feeling,
+          group_id: targetGroupId,
+          channel_id: targetChannelId
         };
         setPosts(prev => [mockNewPost, ...prev]);
       }
