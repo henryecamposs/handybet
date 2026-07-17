@@ -54,11 +54,14 @@ La lógica e interfaz para comentar o responder a publicaciones y noticias se ha
 
 ### 3.7 Contenedores Genéricos de Hub y Detalle
 Para unificar el look and feel de las secciones de Canales, Grupos, Billeteras, Seguidos, Juegos y Guardados, se crearon dos layouts contenedores reutilizables:
-- **`HubLayout.tsx`**: Modula la pantalla de inicio (Hub) de estas secciones, manejando buscador (ej. implementado en `favorites/index.tsx`), banners principales, tabs de categoría, carruseles horizontales y botones nativos de retroceso (`showBack`).
+- **`HubLayout.tsx`**: Modula la pantalla de inicio (Hub) de estas secciones. Se ha actualizado para ser totalmente modular y extensible mediante propiedades que aceptan secciones renderizadas (`heroBanner`, `carrusel`, `tabContainer`, `seccionLista`, `postContainer`), facilitando la composición libre y declarativa del contenido.
 - **`HubDetailLayout.tsx`**: Unifica la vista detallada de un elemento seleccionado (como en Canales/[canalId] o Chat). Mantiene el estilo visual del encabezado (categoría en mayúsculas pequeñas de color primario, título destacado) y el listado de sub-elementos. Soporta ocultar la cabecera sticky (`hideHeader`) para vistas de edición especiales.
 
 ### 3.8 Chat Tabular y Conexión Activa
 La bandeja de chat (`HandyChat`) fue rediseñada para usar un sistema de pestañas segmentadas (Directos, Grupos, Canales, Menciones) para filtrar conversaciones, acompañada de un carrusel de contactos "Online" con indicadores de conexión (badge verde) en tiempo real.
+
+### 3.9 Pestañas en Hubs (Tabs de Navegación Local)
+Los hubs de Canales, Grupos y Seguidos implementan un sistema de pestañas locales con el componente `<TabContainer>` para alternar limpiamente entre contenidos paralelos (ej: Mis Canales vs Canales Sugeridos, o Siguiendo vs Sugeridos). De esta manera, se centralizan las acciones de descubrimiento y de consumo directo en un mismo espacio dinámico.
 
 ## 4. Estándares de Color
 - **`--muted`**: Estandarizado para coincidir cromáticamente con el `--primary` (0.657 0.229 29.729 en OKLCH). Las clases `bg-muted` funcionarán visualmente como un tono primario pero se usan para fondos atenuados o estados deshabilitados.

@@ -4,6 +4,21 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/), y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] - 2026-07-17
+
+### Añadido
+- Subcomponentes modulares para `HubLayout` en la carpeta `src/components/layout/hub`: `HeroBanner.tsx`, `Carrusel.tsx`, `SeccionLista.tsx`, `TabContainer.tsx` y `PostContainer.tsx`.
+- Pestañas internas en las vistas de Canales, Grupos y Seguidos para separar y organizar contenidos (ej: Mis Canales vs Canales Sugeridos).
+
+### Cambiado
+- Refactorización de las vistas de Canales, Grupos y Seguidos para utilizar los subcomponentes compostados (`TabContainer`, `SeccionLista`, `PostContainer`) en lugar de código inline.
+- Estandarización de los estados de íconos activos en el menú superior (`HandyBetHeader.tsx`) utilizando `pathname.startsWith` para resolver la omisión de grupos de rutas (`(tabs)`).
+- Unificación visual del renderizado de posts en Canales, Grupos y Seguidos a través del componente común `PostItem`, vinculando el click a la ruta `/feed/[id]`.
+
+### Corregido
+- Corrección de la ruta de importación de `PostItem` en la vista de seguidos (`follows/index.tsx`) para Metro bundler.
+- Solución de sintaxis duplicada de bloques `return` generados durante la inyección de código de los hubs de canales y grupos.
+
 ## [1.6.0] - 2026-07-17
 
 ### Añadido

@@ -24,6 +24,8 @@ yastaa-app/
 │   │   └── (tabs)/        # Barra de navegación principal (5 pestañas)
 │   ├── assets/            # Logo y recursos multimedia de la aplicación
 │   ├── components/        # Componentes comunes de diseño y UI (Logo, Layouts)
+│   │   └── layout/        # Layouts y cabeceras
+│   │       └── hub/       # Secciones modulares de HubLayout (Carrusel, SeccionLista)
 │   ├── hooks/             # Custom Hooks (Queries, Platform detection)
 │   ├── lib/               # Clientes y librerías externas (Supabase Client)
 │   ├── mockdata/          # Semillas y datos de prueba para desarrollo
@@ -53,3 +55,4 @@ La aplicación utiliza un esquema de enrutamiento basado en **Expo Router** opti
 - **`PostActionButtons.tsx`:** Barra universal de acciones (Me gusta, Comentar, Compartir) reutilizable. Permite variantes según su contexto de uso (iconos completos o compactos).
 - **`PostMediaViewer.tsx`:** Visor de comentarios. Implementa lógica de fallback publicitario contextual (`HandyAds`) cuando la publicación no tiene elementos multimedia.
 - **`ShareModal.tsx`:** Modal de compartido avanzado segmentado en pestañas (Grupo, Canal, Usuario, Amigo) con buscador interactivo.
+- **`src/components/layout/hub/`**: Contiene los subcomponentes modulares (`Carrusel`, `SeccionLista`, `TabContainer`, `PostContainer`, `HeroBanner`) para ensamblar de forma declarativa las páginas de los hubs de manera reutilizable.
