@@ -4,7 +4,7 @@ import { MessageCircle, UserMinus } from 'lucide-react-native';
 import { handyBetUsers } from '../../../mockdata/handyBetMock';
 import { useRouter } from 'expo-router';
 import { useThemeColors } from '@/hooks/useThemeColors';
-import { HubLayout, Carrusel, SeccionLista, PostContainer } from '../../../components/layout/hub';
+import { HubLayout, Carrusel, SeccionLista, PostContainer, TabContainer } from '../../../components/layout/hub';
 import { localDB } from '../../../lib/localDB';
 
 export default function FollowsScreen() {
@@ -84,6 +84,69 @@ export default function FollowsScreen() {
     );
   };
 
+  const tabs = [
+    {
+      id: 'following',
+      label: `Siguiendo (${filteredUsers.length})`,
+      content: (
+        <View className="mt-2">
+          {filteredUsers.length > 0 ? (
+            <View className="bg-background/80 rounded-3xl border border-muted-foreground overflow-hidden">
+              {filteredUsers.map((user, index) => (
+                <View
+                  key={user.id}
+                  className={`flex-row items-center justify-between p-5 ${index !== filteredUsers.length - 1 ? 'border-b border-muted-foreground/15' : ''
+                    }`}
+                >
+                  <TouchableOpacity
+                    onPress={() => router.push(`/follows/${user.id}` as any)}
+                    className="flex-row items-center flex-1"
+                  >
+                    <Image source={{ uri: user.avatar }} className="w-10 h-10 rounded-full bg-background/80 mr-3 border border-muted-foreground/35" />
+                    <View>
+                      <Text className="text-foreground font-bold text-base">{user.name}</Text>
+                      <Text className="text-secondary text-xs font-semibold">Siguiendo</Text>
+                    </View>
+                  </TouchableOpacity>
+                  <View className="flex-row gap-3">
+                    <TouchableOpacity
+                      onPress={() => router.push(`/chat/follow/${user.id}` as any)}
+                      className="w-10 h-10 rounded-full bg-background/80 items-center justify-center border border-muted-foreground hover:bg-background/80/85"
+                    >
+                      <MessageCircle size={18} color={colors.foreground} />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => toggleFollow(user.id)}
+                      className="w-10 h-10 rounded-full bg-background/80 items-center justify-center border border-muted-foreground hover:bg-background/80/85"
+                    >
+                      <UserMinus size={18} color="#ef4444" />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              ))}
+            </View>
+          ) : (
+            <View className="bg-background/80 border border-muted-foreground border-dashed rounded-3xl p-8 items-center justify-center">
+              <Text className="text-muted-foreground font-bold text-sm text-center">
+                No sigues a ninguna cuenta que coincida con tu búsqueda.
+              </Text>
+            </View>
+          )}
+        </View>
+      ),
+    },
+    {
+      id: 'suggestions',
+      label: 'Sugeridos',
+      content: (
+        <SeccionLista
+          items={suggestionsToFollow}
+          renderItem={renderSuggestCard}
+        />
+      ),
+    },
+  ];
+
   return (
     <HubLayout
       title="Seguidos"
@@ -91,68 +154,14 @@ export default function FollowsScreen() {
       onSearchChange={setSearchTerm}
       searchPlaceholder="Buscar seguidos..."
       showBack={true}
-    >
-      {/* Cuentas que sigues */}
-      <View className="mt-8">
-        <Text className="text-foreground font-black text-lg   tracking-wider mb-4">
-          Siguiendo ({filteredUsers.length})
-        </Text>
-
-        {filteredUsers.length > 0 ? (
-          <View className="bg-background/80 rounded-3xl border border-muted-foreground overflow-hidden">
-            {filteredUsers.map((user, index) => (
-              <View
-                key={user.id}
-                className={`flex-row items-center justify-between p-5 ${index !== filteredUsers.length - 1 ? 'border-b border-muted-foreground/15' : ''
-                  }`}
-              >
-                <TouchableOpacity
-                  onPress={() => router.push(`/follows/${user.id}` as any)}
-                  className="flex-row items-center flex-1"
-                >
-                  <Image source={{ uri: user.avatar }} className="w-10 h-10 rounded-full bg-background/80 mr-3 border border-muted-foreground/35" />
-                  <View>
-                    <Text className="text-foreground font-bold text-base">{user.name}</Text>
-                    <Text className="text-secondary text-xs font-semibold">Siguiendo</Text>
-                  </View>
-                </TouchableOpacity>
-                <View className="flex-row gap-3">
-                  <TouchableOpacity
-                    onPress={() => router.push(`/chat/follow/${user.id}` as any)}
-                    className="w-10 h-10 rounded-full bg-background/80 items-center justify-center border border-muted-foreground hover:bg-background/80/85"
-                  >
-                    <MessageCircle size={18} color={colors.foreground} />
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={() => toggleFollow(user.id)}
-                    className="w-10 h-10 rounded-full bg-background/80 items-center justify-center border border-muted-foreground hover:bg-background/80/85"
-                  >
-                    <UserMinus size={18} color="#ef4444" />
-                  </TouchableOpacity>
-                </View>
-              </View>
-            ))}
-          </View>
-        ) : (
-          <View className="bg-background/80 border border-muted-foreground border-dashed rounded-3xl p-8 items-center justify-center">
-            <Text className="text-muted-foreground font-bold text-sm text-center">
-              No sigues a ninguna cuenta que coincida con tu búsqueda.
-            </Text>
-          </View>
-        )}
-      </View>
-
-      <SeccionLista
-        title="Sugeridos para ti"
-        items={suggestionsToFollow}
-        renderItem={renderSuggestCard}
-      />
-
-      <PostContainer
-        title="Últimas Publicaciones"
-        posts={latestPosts}
-        onViewAll={latestPosts[0] ? () => router.push(`/feed/search?id=${latestPosts[0].author_id}&from=follow` as any) : undefined}
-      />
-    </HubLayout>
+      tabContainer={<TabContainer tabs={tabs} />}
+      postContainer={
+        <PostContainer
+          title="Últimas Publicaciones"
+          posts={latestPosts}
+          onViewAll={latestPosts[0] ? () => router.push(`/feed/search?id=${latestPosts[0].author_id}&from=follow` as any) : undefined}
+        />
+      }
+    />
   );
 }

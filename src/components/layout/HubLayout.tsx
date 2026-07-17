@@ -46,6 +46,12 @@ export interface HubLayoutProps {
   isLoading?: boolean;
   emptyState?: React.ReactNode;
 
+  // Secciones Modulares (Nuevas)
+  carrusel?: React.ReactNode;
+  tabContainer?: React.ReactNode;
+  seccionLista?: React.ReactNode;
+  postContainer?: React.ReactNode;
+
   // Hijos para inyección de modales o componentes adicionales
   children?: React.ReactNode;
 }
@@ -73,6 +79,10 @@ export default function HubLayout({
   discoverLayout = 'list',
   isLoading = false,
   emptyState,
+  carrusel,
+  tabContainer,
+  seccionLista,
+  postContainer,
   children,
 }: HubLayoutProps) {
   const colors = useThemeColors();
@@ -140,7 +150,16 @@ export default function HubLayout({
         </View>
       )}
 
-      {/* Carrusel de Mis Ítems */}
+      {/* Carrusel Modular */}
+      {carrusel}
+
+      {/* Tab Container Modular */}
+      {tabContainer}
+
+      {/* Seccion Lista Modular */}
+      {seccionLista}
+
+      {/* Carrusel de Mis Ítems (Legacy) */}
       {hasMyItemsSection && (
         <View className="mb-8">
           <Text className="text-foreground font-bold text-lg mb-4">{myItemsTitle}</Text>
@@ -164,12 +183,12 @@ export default function HubLayout({
         </View>
       )}
 
-      {/* Sección Principal / Descubrimiento */}
+      {/* Sección Principal / Descubrimiento (Legacy) */}
       {isLoading ? (
         <View className="flex-1 justify-center items-center py-20">
           <ActivityIndicator size="large" color={colors.secondary} />
         </View>
-      ) : discoverItems.length === 0 && myItems.length === 0 ? (
+      ) : discoverItems.length === 0 && myItems.length === 0 && !carrusel && !tabContainer && !seccionLista ? (
         // Si no hay nada, mostrar empty state
         emptyState
       ) : (
@@ -192,6 +211,9 @@ export default function HubLayout({
           </View>
         )
       )}
+
+      {/* Post Container Modular */}
+      {postContainer}
 
       {/* Hijos (modales, etc.) */}
       {children}

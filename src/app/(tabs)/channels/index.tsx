@@ -3,10 +3,10 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { channelService } from '../../../services/channelService';
 import { Channel } from '../../../types/handyBet';
-import { Compass, Tv } from 'lucide-react-native';
+import { Compass, Tv, Plus } from 'lucide-react-native';
 import { useThemeColors } from '../../../hooks/useThemeColors';
 import { localDB } from '../../../lib/localDB';
-import { HubLayout, Carrusel, SeccionLista, PostContainer } from '../../../components/layout/hub';
+import { HubLayout, Carrusel, SeccionLista, PostContainer, TabContainer } from '../../../components/layout/hub';
 
 export default function ChannelsScreen() {
   const router = useRouter();
@@ -105,6 +105,65 @@ export default function ChannelsScreen() {
     </View>
   );
 
+  const tabs = [
+    {
+      id: 'my-channels',
+      label: 'Mis Canales',
+      content: (
+        <View className="mt-2">
+          {myChannels.length > 0 ? (
+            <View className="flex-row flex-wrap gap-4">
+              <TouchableOpacity
+                onPress={() => router.push('/(tabs)/channels/create' as any)}
+                className="w-[48%] h-36 bg-muted rounded-2xl border border-dashed border-muted-foreground items-center justify-center hover:bg-background/80/80 transition-colors"
+              >
+                <View className="w-12 h-12 rounded-full bg-card items-center justify-center mb-2">
+                  <Plus size={24} color={colors.secondary} />
+                </View>
+                <Text className="text-foreground font-bold text-sm text-center">Crear Nuevo</Text>
+              </TouchableOpacity>
+              {myChannels.map((channel) => (
+                <TouchableOpacity
+                  key={channel.id}
+                  onPress={() => router.push(`/(tabs)/channels/${channel.id}` as any)}
+                  className="w-[48%] h-36 bg-card rounded-2xl border border-primary/20 items-center justify-center hover:bg-background/80/80 transition-colors px-2"
+                >
+                  <View className="w-12 h-12 rounded-full bg-background/80 items-center justify-center mb-2">
+                    <Tv size={20} color={colors.mutedForeground} />
+                  </View>
+                  <Text className="text-foreground font-bold text-center text-sm px-1" numberOfLines={2}>
+                    {channel.name}
+                  </Text>
+                  <Text className="text-secondary text-[10px] mt-1 font-bold">Oficial</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          ) : (
+            <View className="flex-1">
+              <TouchableOpacity
+                onPress={() => router.push('/(tabs)/channels/create' as any)}
+                className="w-full bg-primary p-4 rounded-3xl items-center justify-center mb-6"
+              >
+                <Text className="text-black font-black text-xs uppercase">Crear Nuevo Canal</Text>
+              </TouchableOpacity>
+              {emptyState}
+            </View>
+          )}
+        </View>
+      ),
+    },
+    {
+      id: 'discover',
+      label: 'Canales Sugeridos',
+      content: (
+        <SeccionLista
+          items={filteredDiscoverChannels}
+          renderItem={renderDiscoverChannelCard}
+        />
+      ),
+    },
+  ];
+
   return (
     <HubLayout
       title="Canales"
@@ -114,28 +173,15 @@ export default function ChannelsScreen() {
       onSearchChange={setSearchQuery}
       showBack={true}
       isLoading={isLoading}
-    >
-      <Carrusel
-        title="Mis Canales"
-        items={myChannels}
-        renderItem={renderMyChannelCard}
-        onAddNew={() => router.push('/(tabs)/channels/create' as any)}
-        addNewLabel="Crear Nuevo"
-      />
-
-      <SeccionLista
-        title="Directorio de Canales"
-        items={filteredDiscoverChannels}
-        renderItem={renderDiscoverChannelCard}
-        emptyState={emptyState}
-      />
-
-      <PostContainer
-        title="Últimas Publicaciones"
-        posts={latestPosts}
-        onViewAll={latestPosts[0] ? () => router.push(`/feed/search?id=${latestPosts[0].group_id || latestPosts[0].channel_id}&from=channel` as any) : undefined}
-      />
-    </HubLayout>
+      tabContainer={<TabContainer tabs={tabs} />}
+      postContainer={
+        <PostContainer
+          title="Últimas Publicaciones"
+          posts={latestPosts}
+          onViewAll={latestPosts[0] ? () => router.push(`/feed/search?id=${latestPosts[0].group_id || latestPosts[0].channel_id}&from=channel` as any) : undefined}
+        />
+      }
+    />
   );
 }
 

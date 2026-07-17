@@ -8,7 +8,7 @@ import { groupMonetizationService } from '../../services/groupMonetizationServic
 import { Group, GroupPlan, GroupRules } from '../../types/handyBet';
 import { useThemeColors } from '../../hooks/useThemeColors';
 import { localDB } from '../../lib/localDB';
-import { HubLayout, Carrusel, SeccionLista, PostContainer } from '../../components/layout/hub';
+import { HubLayout, Carrusel, SeccionLista, PostContainer, TabContainer } from '../../components/layout/hub';
 
 export default function GruposScreen() {
   const router = useRouter();
@@ -170,6 +170,64 @@ export default function GruposScreen() {
     </View>
   );
 
+  const tabs = [
+    {
+      id: 'my-groups',
+      label: 'Mis Grupos',
+      content: (
+        <View className="mt-2">
+          {misGrupos.length > 0 ? (
+            <View className="flex-row flex-wrap gap-4">
+              <TouchableOpacity
+                onPress={() => router.push('/(tabs)/grupos/create' as any)}
+                className="w-[48%] h-36 bg-muted rounded-2xl border border-dashed border-muted-foreground items-center justify-center hover:bg-background/80/80 transition-colors"
+              >
+                <View className="w-12 h-12 rounded-full bg-card items-center justify-center mb-2">
+                  <Plus size={24} color={colors.secondary} />
+                </View>
+                <Text className="text-foreground font-bold text-sm text-center">Crear Nuevo</Text>
+              </TouchableOpacity>
+              {misGrupos.map((group) => (
+                <TouchableOpacity
+                  key={group.id}
+                  onPress={() => handleGroupClick(group as any)}
+                  className="w-[48%] h-36 bg-card rounded-2xl border border-primary/20 items-center justify-center hover:bg-background/80/80 transition-colors px-2"
+                >
+                  <View className="w-10 h-10 rounded-full bg-background/80 items-center justify-center mb-2 border border-zinc-700">
+                    <Text className="text-lg">🌍</Text>
+                  </View>
+                  <Text className="text-foreground font-black text-center text-xs" numberOfLines={2}>{group.name}</Text>
+                  <Text className="text-zinc-500 text-[9px] font-bold mt-0.5">{group.members?.length || 0} miembros</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          ) : (
+            <View className="flex-1">
+              <TouchableOpacity
+                onPress={() => router.push('/(tabs)/grupos/create' as any)}
+                className="w-full bg-primary p-4 rounded-3xl items-center justify-center mb-6"
+              >
+                <Text className="text-black font-black text-xs uppercase">Crear Nuevo Grupo</Text>
+              </TouchableOpacity>
+              {emptyState}
+            </View>
+          )}
+        </View>
+      ),
+    },
+    {
+      id: 'discover',
+      label: 'Grupos Sugeridos',
+      content: (
+        <SeccionLista
+          items={filteredDiscoverGroups}
+          renderItem={renderDiscoverGroupCard}
+          layout="grid"
+        />
+      ),
+    },
+  ];
+
   return (
     <HubLayout
       title="Grupos"
@@ -178,28 +236,15 @@ export default function GruposScreen() {
       searchValue={searchQuery}
       onSearchChange={setSearchQuery}
       showBack={true}
+      tabContainer={<TabContainer tabs={tabs} />}
+      postContainer={
+        <PostContainer
+          title="Últimas Publicaciones"
+          posts={latestPosts}
+          onViewAll={latestPosts[0] ? () => router.push(`/feed/search?id=${latestPosts[0].group_id || latestPosts[0].channel_id}&from=group` as any) : undefined}
+        />
+      }
     >
-      <Carrusel
-        title="Mis Grupos"
-        items={misGrupos}
-        renderItem={renderMyGroupCard}
-        onAddNew={() => router.push('/(tabs)/grupos/create' as any)}
-        addNewLabel="Crear Nuevo"
-      />
-
-      <SeccionLista
-        title="Descubrir Nuevos Grupos"
-        items={filteredDiscoverGroups}
-        renderItem={renderDiscoverGroupCard}
-        layout="grid"
-        emptyState={emptyState}
-      />
-
-      <PostContainer
-        title="Últimas Publicaciones"
-        posts={latestPosts}
-        onViewAll={latestPosts[0] ? () => router.push(`/feed/search?id=${latestPosts[0].group_id || latestPosts[0].channel_id}&from=group` as any) : undefined}
-      />
 
       {/* Modal de Onboarding y Selección de Plan */}
       <Modal
