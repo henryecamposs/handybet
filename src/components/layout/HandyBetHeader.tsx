@@ -55,7 +55,7 @@ export default function HandyBetHeader() {
               onPress={() => router.push(item.path as any)}
               className={`px-10 h-full items-center justify-center border-b-[3px] transition-colors ${isActive ? 'border-primary' : 'border-transparent hover:bg-background/50'}`}
             >
-              <IconComponent size={28} color={colors.primary} />
+              <IconComponent size={28} color={isActive ? colors.primary : colors.mutedForeground} />
             </TouchableOpacity>
           );
         })}
