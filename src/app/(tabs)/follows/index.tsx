@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { MessageCircle, UserMinus } from 'lucide-react-native';
 import IconButton from '@/components/ui/IconButton';
+import ListItem from '@/components/ui/ListItem';
 import { handyBetUsers } from '../../../mockdata/handyBetMock';
 import { useRouter } from 'expo-router';
 import { useThemeColors } from '@/hooks/useThemeColors';
@@ -59,29 +60,26 @@ export default function FollowsScreen() {
   const renderSuggestCard = (user: typeof suggestionsToFollow[0]) => {
     const isFollowing = !!followingStates[user.id];
     return (
-      <View
+      <ListItem
         key={`sug-${user.id}`}
-        className="bg-background/80 p-5  border border-border flex-row items-center justify-between"
-      >
-        <TouchableOpacity
-          onPress={() => router.push(`/follows/${user.id}` as any)}
-          className="flex-row items-center flex-1"
-        >
-          <Image source={{ uri: user.avatar }} className="w-12 h-12 rounded-full bg-background/80 mr-3 border border-border" />
-          <View>
-            <Text className="text-foreground font-bold text-base">{user.name}</Text>
-            <Text className="text-muted-foreground text-xs">{user.mutualFollowers} seguidores en común</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => toggleFollow(user.id)}
-          className={`px-5 py-2.5 rounded-full ${isFollowing ? 'bg-background/80 border border-border' : 'bg-primary'}`}
-        >
-          <Text className={`font-bold text-xs ${isFollowing ? 'text-foreground' : 'text-black'}`}>
-            {isFollowing ? 'Siguiendo' : 'Seguir'}
-          </Text>
-        </TouchableOpacity>
-      </View>
+        title={user.name}
+        subtitle={`${user.mutualFollowers} seguidores en común`}
+        subtitleVariant="muted"
+        avatar={user.avatar}
+        onPress={() => router.push(`/follows/${user.id}` as any)}
+        hasBorderBottom={false}
+        className="p-5 border border-border"
+        rightElement={
+          <IconButton
+            label={isFollowing ? 'Siguiendo' : 'Seguir'}
+            onPress={() => toggleFollow(user.id)}
+            variant={isFollowing ? 'muted' : 'primary'}
+            isActive={!isFollowing}
+            hasBorder={true}
+            rounded="full"
+          />
+        }
+      />
     );
   };
 
@@ -94,33 +92,29 @@ export default function FollowsScreen() {
           {filteredUsers.length > 0 ? (
             <View className="bg-background/80 overflow-hidden">
               {filteredUsers.map((user, index) => (
-                <View
+                <ListItem
                   key={user.id}
-                  className="flex-row items-center justify-between px-2 pb-4  mb-4 border-b border-border"
-                >
-                  <TouchableOpacity
-                    onPress={() => router.push(`/follows/${user.id}` as any)}
-                    className="flex-row items-center flex-1"
-                  >
-                    <Image source={{ uri: user.avatar }} className="w-10 h-10 rounded-full bg-background/80 mr-3 border border-border" />
-                    <View>
-                      <Text className="text-foreground font-bold text-base">{user.name}</Text>
-                      <Text className="text-secondary text-xs font-semibold">Siguiendo</Text>
-                    </View>
-                  </TouchableOpacity>
-                  <View className="flex-row gap-3">
-                    <IconButton
-                      icon={MessageCircle}
-                      onPress={() => router.push(`/chat/follow/${user.id}` as any)}
-                      variant="default"
-                    />
-                    <IconButton
-                      icon={UserMinus}
-                      onPress={() => toggleFollow(user.id)}
-                      variant="destructive"
-                    />
-                  </View>
-                </View>
+                  title={user.name}
+                  subtitle="Siguiendo"
+                  subtitleVariant="secondary"
+                  avatar={user.avatar}
+                  onPress={() => router.push(`/follows/${user.id}` as any)}
+                  className="mb-2"
+                  rightElement={
+                    <>
+                      <IconButton
+                        icon={MessageCircle}
+                        onPress={() => router.push(`/chat/follow/${user.id}` as any)}
+                        variant="default"
+                      />
+                      <IconButton
+                        icon={UserMinus}
+                        onPress={() => toggleFollow(user.id)}
+                        variant="destructive"
+                      />
+                    </>
+                  }
+                />
               ))}
             </View>
           ) : (

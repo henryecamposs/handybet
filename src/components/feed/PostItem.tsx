@@ -151,7 +151,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                 size="xs"
                 variant="ghost"
                 hasBorder={false}
-                iconColor="#ef4444"
+                iconColor={colors.destructive}
                 className="w-full justify-start"
               />
 
