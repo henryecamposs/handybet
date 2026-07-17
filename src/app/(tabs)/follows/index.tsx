@@ -5,6 +5,7 @@ import { handyBetUsers } from '../../../mockdata/handyBetMock';
 import { useRouter } from 'expo-router';
 import { useThemeColors } from '@/hooks/useThemeColors';
 import HubLayout from '@/components/layout/HubLayout';
+import PostItem from '../../components/feed/PostItem';
 import { localDB } from '../../../lib/localDB';
 
 export default function FollowsScreen() {
@@ -109,37 +110,43 @@ export default function FollowsScreen() {
             )}
           </View>
           <View className="space-y-4">
-            {latestPosts.map((post) => {
-              const authorName = post.author?.full_name || 'Comunidad';
-              const targetId = post.author_id;
+            {latestPosts.map((rawPost) => {
+              let authorName = rawPost.author?.full_name || 'Comunidad';
+              let username = `@${rawPost.author?.username || 'usuario'}`;
+              let avatar = rawPost.author?.avatar_url || 'https://i.pravatar.cc/150';
+              if (rawPost.channel) {
+                authorName = rawPost.channel.name;
+                username = `@canal_${rawPost.channel_id?.slice(0, 8)}`;
+                avatar = 'https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?w=150&auto=format&fit=crop&q=60';
+              } else if (rawPost.group) {
+                authorName = rawPost.group.name;
+                username = `@grupo_${rawPost.group_id?.slice(0, 8)}`;
+                avatar = 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=150&auto=format&fit=crop&q=60';
+              }
+              const postForComponent = {
+                id: rawPost.id,
+                author: authorName,
+                username: username,
+                avatar: avatar,
+                time: rawPost.created_at ? new Date(rawPost.created_at).toLocaleDateString() : 'Novedad',
+                text: rawPost.content,
+                mediaType: rawPost.media_type || 'photo',
+                mediaUrls: rawPost.media_urls || (rawPost.media_url ? [rawPost.media_url] : []),
+                feeling: rawPost.feeling || null,
+                group_id: rawPost.group_id,
+                channel_id: rawPost.channel_id
+              };
+
               return (
-                <View key={post.id} className="bg-primary/5 border border-primary/10 p-4 rounded-3xl mb-4">
-                  <View className="flex-row justify-between items-center mb-2">
-                    <View className="flex-row items-center gap-2">
-                      <Image source={{ uri: post.author?.avatar_url || 'https://i.pravatar.cc/150' }} className="w-8 h-8 rounded-full bg-background/80 border border-zinc-800" />
-                      <View>
-                        <Text className="text-white font-black text-xs leading-tight">{authorName}</Text>
-                        <Text className="text-zinc-500 text-[9px] font-bold uppercase">{post.created_at ? new Date(post.created_at).toLocaleDateString() : 'Novedad'}</Text>
-                      </View>
-                    </View>
-                    {targetId && (
-                      <TouchableOpacity
-                        onPress={() => router.push(`/feed/search?id=${targetId}&from=follow` as any)}
-                        className="bg-zinc-900 border border-zinc-800 px-3 py-1 rounded-full"
-                      >
-                        <Text className="text-white text-[9px] font-bold">Ver Perfil</Text>
-                      </TouchableOpacity>
-                    )}
-                  </View>
-                  <Text className="text-foreground text-xs leading-relaxed" numberOfLines={3}>{post.content}</Text>
-                  
-                  <TouchableOpacity
-                    onPress={() => router.push(`/feed/${post.id}` as any)}
-                    className="mt-3 flex-row items-center gap-1 self-start"
-                  >
-                    <Text className="text-primary text-[10px] font-black uppercase">Detalles & Comentarios →</Text>
-                  </TouchableOpacity>
-                </View>
+                <PostItem
+                  key={postForComponent.id}
+                  post={postForComponent}
+                  isLiked={false}
+                  onLikeToggle={() => {}}
+                  onCommentPress={() => router.push(`/feed/${postForComponent.id}` as any)}
+                  onSharePress={() => {}}
+                  onSavePress={() => {}}
+                />
               );
             })}
           </View>

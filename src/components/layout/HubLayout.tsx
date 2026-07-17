@@ -127,7 +127,7 @@ export default function HubLayout({
                 onPress={() => onTabChange?.(tab.id)}
                 className={`flex-1 py-3 items-center justify-center transition-colors border-b-[3px] ${isActive
                   ? 'border-primary'
-                  : 'border-transparent hover:bg-background/80/50'
+                  : 'border-transparent hover:bg-background/50'
                   }`}
               >
                 {tab.icon}

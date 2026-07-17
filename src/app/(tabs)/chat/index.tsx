@@ -19,7 +19,7 @@ const ACTIVE_USERS = [
 export default function ChatInboxScreen() {
   const router = useRouter();
   const colors = useThemeColors();
-  
+
   const [activeTab, setActiveTab] = useState<'direct' | 'group' | 'channel' | 'mention'>('direct');
   const [adBanner, setAdBanner] = useState<Advertisement | null>(null);
   const [isLoadingAd, setIsLoadingAd] = useState(true);
@@ -348,7 +348,7 @@ export default function ChatInboxScreen() {
             <TouchableOpacity
               key={tab.id}
               onPress={() => setActiveTab(tab.id as any)}
-              className={`flex-1 flex-row items-center justify-center gap-1.5 py-3 transition-colors border-b-[3px] ${isSelected ? 'border-primary' : 'border-transparent hover:bg-background/80/50'}`}
+              className={`flex-1 flex-row items-center justify-center gap-1.5 py-3 transition-colors border-b-[3px] ${isSelected ? 'border-primary' : 'border-transparent hover:bg-background/50'}`}
             >
               <TabIcon size={12} color={isSelected ? colors.primary : colors.foreground} />
               <Text className={`font-black text-xs ${isSelected ? 'text-primary' : 'text-foreground'}`}>
