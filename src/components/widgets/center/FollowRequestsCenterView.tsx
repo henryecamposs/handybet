@@ -97,7 +97,7 @@ export default function FollowRequestsCenterView({ currentView, selectedItemId, 
   return (
     <View className="flex-1 bg-background">
       {/* Header estilo Backend */}
-      <View className="flex-row items-center border-b border-primary/20 py-2 px-4 bg-background/80 sticky top-0 z-10">
+      <View className="flex-row items-center border-b border-border py-2 px-4 bg-background/80 sticky top-0 z-10">
         <TouchableOpacity onPress={onBack} className="mr-3 p-1 rounded-full hover:bg-primary/20">
           <ArrowLeft size={22} color={colors.foreground} />
         </TouchableOpacity>
@@ -117,7 +117,7 @@ export default function FollowRequestsCenterView({ currentView, selectedItemId, 
               const isFollowing = !!followedStates[req.id];
               return (
                 <View key={req.id} className="py-4 flex-row items-center gap-4 border-b border-zinc-800/80 hover:bg-zinc-900/50 transition-colors">
-                  <Image source={{ uri: req.avatar }} className="w-16 h-16 rounded-full border border-primary/20" />
+                  <Image source={{ uri: req.avatar }} className="w-16 h-16 rounded-full border border-border" />
                   <View className="flex-1">
                     <View className="flex-row justify-between items-center mb-1">
                       <Text className="font-semibold text-foreground text-lg">{req.name}</Text>
@@ -128,13 +128,13 @@ export default function FollowRequestsCenterView({ currentView, selectedItemId, 
                     <View className="flex-row gap-2 max-w-[250px]">
                       <TouchableOpacity
                         onPress={() => toggleFollow(req)}
-                        className={`flex-1 py-2 rounded-lg items-center ${isFollowing ? 'bg-background/80 border border-zinc-700' : 'bg-primary'}`}
+                        className={`flex-1 py-2 rounded-lg items-center ${isFollowing ? 'bg-background/80 border border-border' : 'bg-primary'}`}
                       >
                         <Text className={`font-bold text-sm ${isFollowing ? 'text-foreground' : 'text-primary-foreground'}`}>
                           {isFollowing ? 'Siguiendo' : 'Seguir'}
                         </Text>
                       </TouchableOpacity>
-                      <TouchableOpacity className="flex-1 bg-background/80 py-2 rounded-lg items-center border border-zinc-700">
+                      <TouchableOpacity className="flex-1 bg-background/80 py-2 rounded-lg items-center border border-border">
                         <Text className="text-foreground font-bold text-sm">Descartar</Text>
                       </TouchableOpacity>
                     </View>
@@ -150,7 +150,7 @@ export default function FollowRequestsCenterView({ currentView, selectedItemId, 
             const isFollowing = !!followedStates[req.id];
             return (
               <View className="py-8 flex-col items-center max-w-2xl mx-auto w-full">
-                <Image source={{ uri: req.avatar }} className="w-24 h-24 rounded-full border-2 border-primary/20 mb-4" />
+                <Image source={{ uri: req.avatar }} className="w-24 h-24 rounded-full border-2 border-border mb-4" />
                 <View className="items-center">
                   <Text className="font-bold text-foreground text-2xl mb-1">{req.name}</Text>
                   <Text className="text-secondary text-md mb-2">{req.mutualFollowers} seguidores en común</Text>
@@ -158,13 +158,13 @@ export default function FollowRequestsCenterView({ currentView, selectedItemId, 
                   <View className="flex-row gap-3">
                     <TouchableOpacity
                       onPress={() => toggleFollow(req)}
-                      className={`flex-1 py-3 rounded-lg items-center ${isFollowing ? 'bg-background/80 border border-zinc-700' : 'bg-primary'}`}
+                      className={`flex-1 py-3 rounded-lg items-center ${isFollowing ? 'bg-background/80 border border-border' : 'bg-primary'}`}
                     >
                       <Text className={`font-bold text-md ${isFollowing ? 'text-foreground' : 'text-primary-foreground'}`}>
                         {isFollowing ? 'Siguiendo' : 'Seguir Cuenta'}
                       </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity className="flex-1 bg-background/80 py-3 rounded-lg items-center border border-zinc-700">
+                    <TouchableOpacity className="flex-1 bg-background/80 py-3 rounded-lg items-center border border-border">
                       <Text className="text-foreground font-bold text-md">Descartar</Text>
                     </TouchableOpacity>
                   </View>

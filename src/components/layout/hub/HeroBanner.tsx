@@ -13,7 +13,7 @@ export default function HeroBanner({ title, subtitle, imageUri, children }: Hero
     return (
       <ImageBackground
         source={{ uri: imageUri }}
-        className="w-full h-40 rounded-3xl overflow-hidden justify-end p-4 mb-6"
+        className="w-full h-40  overflow-hidden justify-end p-4 mb-6"
       >
         <View className="absolute inset-0 bg-black/40" />
         <Text className="text-white font-black text-xl z-10">{title}</Text>
@@ -24,7 +24,7 @@ export default function HeroBanner({ title, subtitle, imageUri, children }: Hero
   }
 
   return (
-    <View className="w-full bg-primary/5 border border-primary/20 p-6 rounded-3xl mb-6">
+    <View className="w-full bg-primary/5 border border-border p-6  mb-6">
       <Text className="text-foreground font-black text-xl">{title}</Text>
       {subtitle && <Text className="text-muted-foreground text-xs font-medium mt-1">{subtitle}</Text>}
       {children}

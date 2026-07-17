@@ -56,7 +56,7 @@ export default function FeedSearchScreen() {
         setEntityType('channel');
         const channelData = await localDB.channels.getById(id);
         setEntity(channelData);
-        
+
         // Is admin?
         if (channelData && mockSession) {
           setIsAdmin(channelData.owner_id === mockSession.id);
@@ -67,7 +67,7 @@ export default function FeedSearchScreen() {
         const filtered = allPosts.filter((p: any) => p.channel_id === id);
         // Sort descending by date
         filtered.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
-        
+
         const resolved = await Promise.all(filtered.map(p => localDB.resolvePostWithAuthor(p)));
         setPosts(resolved);
       } else if (id.startsWith('grp_')) {
@@ -254,7 +254,7 @@ export default function FeedSearchScreen() {
   return (
     <View className="flex-1 bg-background">
       {/* Header Estilo Twitter */}
-      <View className="flex-row items-center justify-between border-b border-primary/20 py-2.5 px-4 bg-background/85 sticky top-0 z-10">
+      <View className="flex-row items-center justify-between border-b border-border py-2.5 px-4 bg-background/85 sticky top-0 z-10">
         <View className="flex-row items-center flex-1">
           <TouchableOpacity
             onPress={handleBack}
@@ -284,7 +284,7 @@ export default function FeedSearchScreen() {
 
         {/* Listado de posts */}
         {posts.length === 0 ? (
-          <View className="py-20 items-center justify-center border border-dashed border-zinc-800 rounded-3xl bg-primary/5">
+          <View className="py-20 items-center justify-center border border-dashed border-zinc-800  bg-primary/5">
             <Text className="text-foreground font-black text-md">Sin Publicaciones</Text>
             <Text className="text-zinc-500 text-xs mt-1.5 text-center px-6">
               Este {entityType === 'channel' ? 'canal' : 'grupo'} aún no registra publicaciones en su feed.

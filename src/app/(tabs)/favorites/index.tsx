@@ -67,10 +67,10 @@ export default function GuardadosScreen() {
     <TouchableOpacity
       key={item.id}
       onPress={() => handleItemPress(item)}
-      className="bg-background/80 p-4 rounded-2xl border border-muted-foreground flex-row justify-between items-center hover:bg-background/80/80 transition-colors mb-3"
+      className="bg-background/80 p-1 mb-1 pb-2 border-b border-border flex-row justify-between items-center hover:bg-background/80/80 transition-colors mb-3"
     >
       <View className="flex-row items-center flex-1">
-        <View className="w-12 h-12 rounded-xs bg-background/80 items-center justify-center mr-4 border border-zinc-700">
+        <View className="w-12 h-12  bg-background/80 items-center justify-center mr-4 ">
           <Bookmark size={20} color={colors.foreground} />
         </View>
         <View>

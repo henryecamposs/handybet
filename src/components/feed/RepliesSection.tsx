@@ -75,7 +75,7 @@ export default function RepliesSection({ targetId, targetUsername, onCommentsCou
   return (
     <View>
       {/* Input para responder estilo Twitter */}
-      <View className="flex-row items-start gap-3 py-4 border-b border-primary/20">
+      <View className="flex-row items-start gap-3 py-4 border-b border-border">
         <Image source={{ uri: mockSession?.avatar || 'https://i.pravatar.cc/150' }} className="w-10 h-10 rounded-full" />
         <View className="flex-1">
           <TextInput
@@ -154,7 +154,7 @@ export default function RepliesSection({ targetId, targetUsername, onCommentsCou
 
                   {/* Dropdown Options */}
                   {isOptionsOpen && (
-                    <View className="absolute right-0 top-8 bg-background border border-primary/20 p-1.5 rounded-2xl w-48 z-50 shadow-2xl">
+                    <View className="absolute right-0 top-8 bg-background border border-border p-1.5  w-48 z-50 shadow-2xl">
                       <TouchableOpacity
                         onPress={() => {
                           setOpenOptionsId(null);

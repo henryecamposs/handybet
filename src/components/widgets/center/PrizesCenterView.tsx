@@ -34,7 +34,7 @@ export default function PrizesCenterView({ currentView, selectedItemId, onBack, 
   return (
     <View className="flex-1 bg-background">
       {/* Header estilo Backend */}
-      <View className="flex-row items-center border-b border-primary/20 py-2 px-4 bg-background/80 sticky top-0 z-10">
+      <View className="flex-row items-center border-b border-border py-2 px-4 bg-background/80 sticky top-0 z-10">
         <TouchableOpacity onPress={onBack} className="mr-3 p-1 rounded-full hover:bg-primary/20">
           <ArrowLeft size={22} color={colors.foreground} />
         </TouchableOpacity>

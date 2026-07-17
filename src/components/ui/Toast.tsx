@@ -53,7 +53,7 @@ export default function Toast({ id, title, description, variant = 'default', siz
   const getVariantStyles = () => {
     switch (variant) {
       case 'primary': return 'bg-primary border-primary';
-      case 'secondary': return 'bg-zinc-800 border-zinc-700';
+      case 'secondary': return 'bg-zinc-800 border-border';
       case 'danger': return 'bg-red-600 border-red-500';
       case 'warning': return 'bg-orange-600 border-orange-500';
       case 'success': return 'bg-green-600 border-green-500';
@@ -109,7 +109,7 @@ export default function Toast({ id, title, description, variant = 'default', siz
         transform: [{ translateY: slideAnim }],
         minWidth: getMinWidth(),
       }}
-      className={`border rounded-2xl flex-row items-center shadow-2xl mb-2 pointer-events-auto ${getVariantStyles()} ${getSizePadding()}`}
+      className={`border  flex-row items-center shadow-2xl mb-2 pointer-events-auto ${getVariantStyles()} ${getSizePadding()}`}
     >
       {/* Avatar o Icono */}
       {avatar ? (

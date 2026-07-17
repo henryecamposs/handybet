@@ -27,9 +27,9 @@ export default function FileDropzone({ onFilesSelected, type, maxFiles = 5 }: Fi
   };
 
   return (
-    <TouchableOpacity 
+    <TouchableOpacity
       onPress={handlePress}
-      className="bg-zinc-900 border-2 border-dashed border-zinc-700 rounded-2xl h-48 justify-center items-center mb-6 hover:border-primary transition-colors"
+      className="bg-zinc-900 border-2 border-dashed border-border  h-48 justify-center items-center mb-6 hover:border-primary transition-colors"
     >
       <UploadCloud size={48} color={colors.primary} className="mb-4" />
       <Text className="text-white font-bold mb-1">Toca para abrir la galería</Text>

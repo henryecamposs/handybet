@@ -43,7 +43,7 @@ export default function PostDetailView({
   return (
     <View className="flex-1 bg-background">
       {/* Header estilo Twitter */}
-      <View className="flex-row items-center border-b border-primary/20 py-2 px-4 bg-background/80 sticky top-0 z-10">
+      <View className="flex-row items-center border-b border-border py-2 px-4 bg-background/80 sticky top-0 z-10">
         <TouchableOpacity onPress={onBack} className="mr-2 p-1 rounded-full hover:bg-primary">
           <ArrowLeft size={22} color={colors.foreground} />
         </TouchableOpacity>
@@ -54,7 +54,7 @@ export default function PostDetailView({
         {/* Perfil del Autor */}
         <View className="flex-row items-center justify-between mb-2">
           <View className="flex-row items-center gap-2">
-            <Image source={{ uri: post.avatar }} className="w-12 h-12 rounded-full border-2 border-primary/20" />
+            <Image source={{ uri: post.avatar }} className="w-12 h-12 rounded-full border-2 border-border" />
             <View>
               <Text className="text-white font-black text-base leading-tight">{post.author}</Text>
               <Text className="text-muted-foreground text-xs font-semibold">{post.username}</Text>
@@ -71,7 +71,7 @@ export default function PostDetailView({
               });
             }}
             className={`border px-2.5 py-1 rounded-full ${isFollowing
-              ? 'border-muted-foreground bg-transparent'
+              ? 'border-border bg-transparent'
               : 'border-primary bg-primary/5'
               }`}
           >

@@ -21,7 +21,7 @@ export default function Carrusel({ title, items, renderItem, onAddNew, addNewLab
         {onAddNew && (
           <TouchableOpacity
             onPress={onAddNew}
-            className="w-32 h-36 bg-muted rounded-2xl border border-dashed border-muted-foreground items-center justify-center mr-4 hover:bg-background/80/80 transition-colors"
+            className="w-32 h-36 bg-muted  border border-dashed border-border items-center justify-center mr-4 hover:bg-background/80/80 transition-colors"
           >
             <View className="w-12 h-12 rounded-full bg-card items-center justify-center mb-2">
               <Plus size={24} color={colors.secondary} />

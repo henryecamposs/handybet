@@ -17,23 +17,23 @@ export interface HubDetailLayoutProps {
   backRoute: string;
   onBack?: () => void;
   logoType?: 'chat' | 'news' | 'play' | 'post' | 'channel' | 'channels' | 'canal' | 'canales' | 'guardados' | 'guardado' | 'favorite' | 'favorites' | 'wallet' | 'default';
-  
+
   // Encabezado
   categoryText?: string;
   title?: string;
   headerRight?: React.ReactNode;
   hideHeader?: boolean;
-  
+
   // Listado (Opcional)
   listTitle?: string;
   items?: any[];
   renderItem?: (item: any, index: number) => React.ReactNode;
-  
+
   // Estados de carga y vacío
   isLoading?: boolean;
   emptyLabel?: string;
   notFoundLabel?: string;
-  
+
   // Inyección de elementos adicionales
   children?: React.ReactNode;
 }
@@ -97,7 +97,7 @@ export default function HubDetailLayout({
     <View className="flex-1 bg-background">
       {/* Header estilo Twitter (Imagen 2) */}
       {!hideHeader && (
-        <View className="flex-row items-center justify-between border-b border-primary/20 py-2 px-4 bg-background/85 sticky top-0 z-10">
+        <View className="flex-row items-center justify-between border-b border-border py-2 px-4 bg-background/85 sticky top-0 z-10">
           <View className="flex-row items-center">
             <TouchableOpacity onPress={handleBack} className="mr-2 p-2 rounded-full hover:bg-primary/20 transition-colors">
               <ArrowLeft size={22} color={colors.foreground} />
@@ -137,7 +137,7 @@ export default function HubDetailLayout({
             )}
 
             {listTitle && items.length === 0 ? (
-              <View className="bg-background/80 border border-muted-foreground p-6 rounded-3xl items-center border-dashed">
+              <View className="bg-background/80 border border-border p-6  items-center border-dashed">
                 <Text className="text-foreground font-bold text-sm text-center">
                   {emptyLabel}
                 </Text>

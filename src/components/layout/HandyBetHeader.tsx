@@ -30,11 +30,11 @@ export default function HandyBetHeader() {
   ];
 
   return (
-    <View className="h-16 bg-background/80 border-b border-primary/20 flex-row items-center justify-between px-4 z-50 shadow-sm">
+    <View className="h-16 bg-background/80 border-b border-border flex-row items-center justify-between px-4 z-50 shadow-sm">
       {/* Izquierda: Logo y Buscador */}
       <View className="flex-row items-center pr-4">
         <Logo size="sm" layout="horizontal" style={{ marginRight: 16 }} />
-        <View className="bg-primary/5 rounded-full flex-row items-center px-4 h-10 flex-1 max-w-[280px] border border-zinc-700/50">
+        <View className="bg-primary/5 rounded-full flex-row items-center px-4 h-10 flex-1 max-w-[280px] border border-border/50">
           <Search size={18} color={colors.mutedForeground} className="mr-2" />
           <TextInput
             placeholder="Buscar en HandyBet..."
@@ -65,20 +65,20 @@ export default function HandyBetHeader() {
       <View className="flex-row items-center justify-end w-[25%] gap-3">
         <TouchableOpacity
           onPress={handleToggleTheme}
-          className="w-10 h-10 rounded-full bg-background/80/80 items-center justify-center hover:bg-background/80 transition-colors border border-zinc-700/50"
+          className="w-10 h-10 rounded-full bg-background/80/80 items-center justify-center hover:bg-background/80 transition-colors border border-border/50"
         >
           {colorScheme === 'dark' ? <Moon size={20} color="#d4d4d8" /> : <Sun size={20} color="#52525b" />}
         </TouchableOpacity>
-        <TouchableOpacity className="w-10 h-10 rounded-full bg-background/80/80 items-center justify-center hover:bg-background/80 transition-colors border border-zinc-700/50">
+        <TouchableOpacity className="w-10 h-10 rounded-full bg-background/80/80 items-center justify-center hover:bg-background/80 transition-colors border border-border/50">
           <MessageCircle size={20} color="#d4d4d8" />
         </TouchableOpacity>
-        <TouchableOpacity className="w-10 h-10 rounded-full bg-background/80/80 items-center justify-center hover:bg-background/80 transition-colors border border-zinc-700/50 relative">
+        <TouchableOpacity className="w-10 h-10 rounded-full bg-background/80/80 items-center justify-center hover:bg-background/80 transition-colors border border-border/50 relative">
           <Bell size={20} color="#d4d4d8" />
           <View className="absolute -top-1 -right-1 w-4 h-4 bg-primary rounded-full border-2 border-zinc-900 items-center justify-center">
             <Text className="text-[9px] font-black text-black">2</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => router.push('/(tabs)/profile')} className="ml-2 flex-row items-center hover:bg-background/80/50 p-1 rounded-full transition-colors border border-transparent hover:border-zinc-700/50 pr-3">
+        <TouchableOpacity onPress={() => router.push('/(tabs)/profile')} className="ml-2 flex-row items-center hover:bg-background/80/50 p-1 rounded-full transition-colors border border-transparent hover:border-border/50 pr-3">
           <Image
             source={{ uri: mockSession?.avatar || 'https://i.pravatar.cc/150' }}
             className="w-9 h-9 rounded-full bg-background/80 border border-zinc-600"

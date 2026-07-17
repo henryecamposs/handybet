@@ -73,7 +73,7 @@ export const FollowSuggestionWidget = ({ name, avatar, time, mutualFollowers, on
               setIsFollowing(!isFollowing);
               if (onFollow) onFollow();
             }}
-            className={`flex-1 py-1.5 rounded-lg items-center ${isFollowing ? 'bg-background/80 border border-zinc-700' : 'bg-primary'}`}
+            className={`flex-1 py-1.5 rounded-lg items-center ${isFollowing ? 'bg-background/80 border border-border' : 'bg-primary'}`}
           >
             <Text className={`font-bold text-xs ${isFollowing ? 'text-foreground' : 'text-primary-foreground'}`}>
               {isFollowing ? 'Siguiendo' : 'Seguir'}

@@ -39,7 +39,7 @@ export default function GamesScreen() {
   const filteredDraws = allDraws.filter(draw => draw.category === activeTab);
 
   const heroBanner = (
-    <View className="bg-primary/20 rounded-2xl p-6 border border-primary/30 relative overflow-hidden">
+    <View className="bg-primary/20  p-6 border border-border relative overflow-hidden">
       <View className="z-10">
         <View className="bg-primary px-3 py-1 rounded-full self-start mb-3">
           <Text className="text-black font-bold text-xs uppercase">Sorteo Activo</Text>
@@ -60,10 +60,10 @@ export default function GamesScreen() {
   const renderDrawCard = (draw: typeof allDraws[0]) => (
     <View
       key={draw.id}
-      className="bg-background/80 p-4 rounded-2xl border border-muted-foreground flex-row items-center justify-between"
+      className="bg-background/80 p-4  border border-border flex-row items-center justify-between"
     >
       <View className="flex-row items-center">
-        <View className="w-12 h-12 rounded-xs bg-background/80 items-center justify-center mr-4 border border-zinc-700">
+        <View className="w-12 h-12 rounded-xs bg-background/80 items-center justify-center mr-4 border border-border">
           <Text className="text-xl">{draw.emoji}</Text>
         </View>
         <View>
@@ -73,7 +73,7 @@ export default function GamesScreen() {
       </View>
       <TouchableOpacity
         onPress={() => router.push(`/games/${draw.id}` as any)}
-        className="bg-background/80 px-4 py-2 rounded-full border border-zinc-700"
+        className="bg-background/80 px-4 py-2 rounded-full border border-border"
       >
         <Text className="text-foreground font-bold text-xs">Jugar</Text>
       </TouchableOpacity>

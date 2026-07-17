@@ -75,7 +75,7 @@ export default function ShareModal({ visible, onClose, onShareSuccess }: ShareMo
       onRequestClose={onClose}
     >
       <View className="flex-1 bg-black/75 justify-center items-center p-4">
-        <View className="bg-background/80 border border-zinc-800 w-full max-w-md rounded-3xl p-6 shadow-2xl relative">
+        <View className="bg-background/80 border border-zinc-800 w-full max-w-md  p-6 shadow-2xl relative">
           <View className="flex-row justify-between items-center mb-4">
             <Text className="text-white font-black text-xl flex-row items-center gap-2">
               <Share2 size={20} color={colors.primary} /> Compartir publicación
@@ -135,7 +135,7 @@ export default function ShareModal({ visible, onClose, onShareSuccess }: ShareMo
                       setSelectedItem(item.id);
                       setSelectedName(item.name || item.username);
                     }}
-                    className={`flex-row items-center gap-3 p-3 rounded-2xl mb-2 border ${isSelected
+                    className={`flex-row items-center gap-3 p-3  mb-2 border ${isSelected
                       ? 'bg-primary/10 border-primary'
                       : 'bg-zinc-900/50 border-zinc-850 hover:bg-zinc-900 transition-colors'
                       }`}
@@ -158,7 +158,7 @@ export default function ShareModal({ visible, onClose, onShareSuccess }: ShareMo
                       </Text>
                     </View>
 
-                    <View className={`w-4 h-4 rounded-full border items-center justify-center ${isSelected ? 'border-primary bg-primary' : 'border-zinc-700'}`}>
+                    <View className={`w-4 h-4 rounded-full border items-center justify-center ${isSelected ? 'border-primary bg-primary' : 'border-border'}`}>
                       {isSelected && <View className="w-1.5 h-1.5 rounded-full bg-black" />}
                     </View>
                   </TouchableOpacity>

@@ -99,7 +99,7 @@ export default function BetMatrixBuilder({ groupId, onBetGenerated }: BetMatrixB
   };
 
   return (
-    <ScrollView className="bg-background/90 p-6 rounded-3xl border border-zinc-800 shadow-xl max-w-lg w-full mx-auto my-4">
+    <ScrollView className="bg-background/90 p-6  border border-zinc-800 shadow-xl max-w-lg w-full mx-auto my-4">
       <Text className="text-2xl font-black text-white mb-6 text-center tracking-tight">
         Confeccionar Jugada
       </Text>
@@ -113,7 +113,7 @@ export default function BetMatrixBuilder({ groupId, onBetGenerated }: BetMatrixB
             onPress={() => setSelectedLottery(lot.id)}
             className={`px-4 py-2.5 rounded-xs border ${selectedLottery === lot.id
               ? 'bg-primary/20 border-primary'
-              : 'bg-background/80 border-zinc-700'
+              : 'bg-background/80 border-border'
               }`}
           >
             <Text className={`font-bold text-sm ${selectedLottery === lot.id ? 'text-primary' : 'text-foreground'}`}>
@@ -132,7 +132,7 @@ export default function BetMatrixBuilder({ groupId, onBetGenerated }: BetMatrixB
             onPress={() => setSelectedSchedule(time)}
             className={`px-4 py-2.5 rounded-xs border ${selectedSchedule === time
               ? 'bg-primary/20 border-primary'
-              : 'bg-background/80 border-zinc-700'
+              : 'bg-background/80 border-border'
               }`}
           >
             <Text className={`font-bold text-sm ${selectedSchedule === time ? 'text-primary' : 'text-foreground'}`}>
@@ -154,7 +154,7 @@ export default function BetMatrixBuilder({ groupId, onBetGenerated }: BetMatrixB
             }}
             className={`px-4 py-2.5 rounded-xs border ${gameType === type.id
               ? 'bg-primary/20 border-primary'
-              : 'bg-background/80 border-zinc-700'
+              : 'bg-background/80 border-border'
               }`}
           >
             <Text className={`font-bold text-sm ${gameType === type.id ? 'text-primary' : 'text-foreground'}`}>
@@ -175,7 +175,7 @@ export default function BetMatrixBuilder({ groupId, onBetGenerated }: BetMatrixB
             value={numInput}
             onChangeText={setNumInput}
             maxLength={3}
-            className="bg-background/80 border border-zinc-700 rounded-xs px-4 py-3 text-white font-bold"
+            className="bg-background/80 border border-border rounded-xs px-4 py-3 text-white font-bold"
           />
         </View>
         <View className="flex-1">
@@ -186,7 +186,7 @@ export default function BetMatrixBuilder({ groupId, onBetGenerated }: BetMatrixB
             keyboardType="numeric"
             value={multiplierInput}
             onChangeText={setMultiplierInput}
-            className="bg-background/80 border border-zinc-700 rounded-xs px-4 py-3 text-white font-bold"
+            className="bg-background/80 border border-border rounded-xs px-4 py-3 text-white font-bold"
           />
         </View>
         <TouchableOpacity
@@ -199,7 +199,7 @@ export default function BetMatrixBuilder({ groupId, onBetGenerated }: BetMatrixB
 
       {/* Lista de Selecciones */}
       {selections.length > 0 && (
-        <View className="bg-background/60 p-4 rounded-2xl border border-zinc-800 mb-4">
+        <View className="bg-background/60 p-4  border border-zinc-800 mb-4">
           <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-2">Líneas Jugadas</Text>
           {selections.map((sel, idx) => (
             <View key={idx} className="flex-row justify-between items-center py-2 border-b border-zinc-800/80">
@@ -231,7 +231,7 @@ export default function BetMatrixBuilder({ groupId, onBetGenerated }: BetMatrixB
       <TouchableOpacity
         onPress={handleGenerateBet}
         disabled={isSubmitting || selections.length === 0}
-        className={`w-full py-4 rounded-2xl flex-row justify-center items-center ${selections.length === 0
+        className={`w-full py-4  flex-row justify-center items-center ${selections.length === 0
           ? 'bg-background/80'
           : 'bg-primary active:scale-[0.98]'
           }`}

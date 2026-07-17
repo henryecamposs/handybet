@@ -138,7 +138,7 @@ export default function EditProfileScreen() {
     >
       <View className="px-4 pt-1">
         <View className="mb-6 flex-row items-center">
-          <TouchableOpacity onPress={() => router.back()} className="mr-3 p-2 rounded-full bg-background/80 hover:bg-primary/20 transition-colors border border-muted-foreground/35">
+          <TouchableOpacity onPress={() => router.back()} className="mr-3 p-2 rounded-full bg-background/80 hover:bg-primary/20 transition-colors border border-border/35">
             <ArrowLeft size={22} color={colors.foreground} />
           </TouchableOpacity>
           <View className="flex-1">
@@ -148,11 +148,11 @@ export default function EditProfileScreen() {
         </View>
 
         {/* Sección 1: Información Básica */}
-        <View className="bg-background/80 rounded-3xl p-5 border border-muted-foreground mb-6">
-          <Text className="text-foreground font-black text-sm uppercase tracking-wider mb-5 border-b border-muted-foreground/15 pb-2">Información Básica</Text>
+        <View className="bg-background/80  p-5 border border-border mb-6">
+          <Text className="text-foreground font-black text-sm uppercase tracking-wider mb-5 border-b border-border/15 pb-2">Información Básica</Text>
 
           <View className="items-center mb-6 relative">
-            <View className="p-1 bg-background rounded-full border border-muted-foreground/35">
+            <View className="p-1 bg-background rounded-full border border-border/35">
               <Image
                 source={{ uri: currentUser.avatar }}
                 className="w-24 h-24 rounded-full bg-background/80"
@@ -171,7 +171,7 @@ export default function EditProfileScreen() {
                 onChangeText={setName}
                 placeholder="Nombre para mostrar"
                 placeholderTextColor={colors.mutedForeground}
-                className="bg-background/80 text-foreground p-3.5 rounded-2xl border border-muted-foreground font-semibold text-sm"
+                className="bg-background/80 text-foreground p-3.5  border border-border font-semibold text-sm"
               />
             </View>
 
@@ -182,7 +182,7 @@ export default function EditProfileScreen() {
                   value={currentUser.username}
                   placeholderTextColor={colors.mutedForeground}
                   editable={false}
-                  className="bg-background/30 text-muted-foreground p-3.5 rounded-2xl border border-muted-foreground/35 font-semibold text-sm w-full pr-12"
+                  className="bg-background/30 text-muted-foreground p-3.5  border border-border/35 font-semibold text-sm w-full pr-12"
                 />
                 <Lock size={16} color={colors.mutedForeground} className="absolute right-4" />
               </View>
@@ -198,15 +198,15 @@ export default function EditProfileScreen() {
                 placeholderTextColor={colors.mutedForeground}
                 multiline
                 numberOfLines={3}
-                className="bg-background/80 text-foreground p-3.5 rounded-2xl border border-muted-foreground font-semibold text-sm"
+                className="bg-background/80 text-foreground p-3.5  border border-border font-semibold text-sm"
               />
             </View>
           </View>
         </View>
 
         {/* Sección 2: Información Personal & Ubicación */}
-        <View className="bg-background/80 rounded-3xl p-5 border border-muted-foreground mb-6">
-          <Text className="text-foreground font-black text-sm uppercase tracking-wider mb-5 border-b border-muted-foreground/15 pb-2">Información Personal & Ubicación</Text>
+        <View className="bg-background/80  p-5 border border-border mb-6">
+          <Text className="text-foreground font-black text-sm uppercase tracking-wider mb-5 border-b border-border/15 pb-2">Información Personal & Ubicación</Text>
 
           <View className="space-y-4">
             <View>
@@ -221,7 +221,7 @@ export default function EditProfileScreen() {
                 placeholderTextColor={colors.mutedForeground}
                 keyboardType="email-address"
                 autoCapitalize="none"
-                className={`bg-background/80 text-foreground p-3.5 rounded-2xl border font-semibold text-sm ${errors.email ? 'border-red-500' : 'border-muted-foreground'}`}
+                className={`bg-background/80 text-foreground p-3.5  border font-semibold text-sm ${errors.email ? 'border-red-500' : 'border-border'}`}
               />
               {errors.email && <Text className="text-red-500 text-[10px] mt-1 font-semibold">{errors.email}</Text>}
             </View>
@@ -237,7 +237,7 @@ export default function EditProfileScreen() {
                 placeholder="+584121234567"
                 placeholderTextColor={colors.mutedForeground}
                 keyboardType="phone-pad"
-                className={`bg-background/80 text-foreground p-3.5 rounded-2xl border font-semibold text-sm ${errors.whatsapp ? 'border-red-500' : 'border-muted-foreground'}`}
+                className={`bg-background/80 text-foreground p-3.5  border font-semibold text-sm ${errors.whatsapp ? 'border-red-500' : 'border-border'}`}
               />
               {errors.whatsapp && <Text className="text-red-500 text-[10px] mt-1 font-semibold">{errors.whatsapp}</Text>}
             </View>
@@ -252,7 +252,7 @@ export default function EditProfileScreen() {
                 }}
                 placeholder="YYYY-MM-DD"
                 placeholderTextColor={colors.mutedForeground}
-                className={`bg-background/80 text-foreground p-3.5 rounded-2xl border font-semibold text-sm ${errors.birthDate ? 'border-red-500' : 'border-muted-foreground'}`}
+                className={`bg-background/80 text-foreground p-3.5  border font-semibold text-sm ${errors.birthDate ? 'border-red-500' : 'border-border'}`}
               />
               {errors.birthDate ? (
                 <Text className="text-red-500 text-[10px] mt-1 font-semibold">{errors.birthDate}</Text>
@@ -269,7 +269,7 @@ export default function EditProfileScreen() {
                   onChangeText={setCountry}
                   placeholder="Venezuela"
                   placeholderTextColor={colors.mutedForeground}
-                  className="bg-background/80 text-foreground p-3.5 rounded-2xl border border-muted-foreground font-semibold text-sm"
+                  className="bg-background/80 text-foreground p-3.5  border border-border font-semibold text-sm"
                 />
               </View>
               <View className="flex-1">
@@ -279,7 +279,7 @@ export default function EditProfileScreen() {
                   onChangeText={setStateName}
                   placeholder="Miranda"
                   placeholderTextColor={colors.mutedForeground}
-                  className="bg-background/80 text-foreground p-3.5 rounded-2xl border border-muted-foreground font-semibold text-sm"
+                  className="bg-background/80 text-foreground p-3.5  border border-border font-semibold text-sm"
                 />
               </View>
             </View>
@@ -287,8 +287,8 @@ export default function EditProfileScreen() {
         </View>
 
         {/* Sección 3: Categorías de Interés */}
-        <View className="bg-background/80 rounded-3xl p-5 border border-muted-foreground mb-6">
-          <Text className="text-foreground font-black text-sm uppercase tracking-wider mb-2 border-b border-muted-foreground/15 pb-2">Preferencias Deportivas y de Juego</Text>
+        <View className="bg-background/80  p-5 border border-border mb-6">
+          <Text className="text-foreground font-black text-sm uppercase tracking-wider mb-2 border-b border-border/15 pb-2">Preferencias Deportivas y de Juego</Text>
           <Text className="text-muted-foreground text-xs font-medium mb-4">Selecciona tus áreas de interés favoritas para personalizar tu feed:</Text>
 
           <View className="flex-row flex-wrap gap-2">
@@ -298,7 +298,7 @@ export default function EditProfileScreen() {
                 <TouchableOpacity
                   key={category}
                   onPress={() => toggleCategory(category)}
-                  className={`px-4 py-2.5 rounded-full border transition-colors ${isSelected ? 'bg-secondary/20 border-secondary' : 'bg-background/80 border-muted-foreground/50'}`}
+                  className={`px-4 py-2.5 rounded-full border transition-colors ${isSelected ? 'bg-secondary/20 border-secondary' : 'bg-background/80 border-border/50'}`}
                 >
                   <Text className={`font-bold text-xs ${isSelected ? 'text-primary' : 'text-foreground'}`}>
                     {category}
@@ -310,8 +310,8 @@ export default function EditProfileScreen() {
         </View>
 
         {/* Sección 4: Notificaciones y Suscripciones */}
-        <View className="bg-background/80 rounded-3xl p-5 border border-muted-foreground mb-6">
-          <Text className="text-foreground font-black text-sm uppercase tracking-wider mb-5 border-b border-muted-foreground/15 pb-2">Configuración de Comunicaciones</Text>
+        <View className="bg-background/80  p-5 border border-border mb-6">
+          <Text className="text-foreground font-black text-sm uppercase tracking-wider mb-5 border-b border-border/15 pb-2">Configuración de Comunicaciones</Text>
 
           <View className="space-y-4">
             <View className="flex-row items-center justify-between">
@@ -327,7 +327,7 @@ export default function EditProfileScreen() {
               />
             </View>
 
-            <View className="flex-row items-center justify-between border-t border-muted-foreground/15 pt-4">
+            <View className="flex-row items-center justify-between border-t border-border/15 pt-4">
               <View className="flex-1 pr-4">
                 <Text className="text-foreground font-bold text-sm">Notificaciones Activas</Text>
                 <Text className="text-muted-foreground text-xs mt-0.5 font-medium">Recibe alertas push sobre sorteos iniciados, respuestas en chats e información de taquilla.</Text>
@@ -343,13 +343,13 @@ export default function EditProfileScreen() {
         </View>
 
         {/* Sección 5: Aceptación Legal y Botón Guardar */}
-        <View className="bg-background/80 rounded-3xl p-5 border border-muted-foreground mb-8">
+        <View className="bg-background/80  p-5 border border-border mb-8">
           <TouchableOpacity
             onPress={() => setAcceptedTerms(!acceptedTerms)}
             className="flex-row items-start gap-3 mb-6"
             activeOpacity={0.8}
           >
-            <View className={`w-6 h-6 rounded-xs border items-center justify-center mt-0.5 ${acceptedTerms ? 'bg-primary border-primary' : 'border-muted-foreground'}`}>
+            <View className={`w-6 h-6 rounded-xs border items-center justify-center mt-0.5 ${acceptedTerms ? 'bg-primary border-primary' : 'border-border'}`}>
               {acceptedTerms && <Check size={14} color="#000" />}
             </View>
             <Text className="text-foreground text-sm flex-1 font-medium leading-5">
@@ -366,7 +366,7 @@ export default function EditProfileScreen() {
           <TouchableOpacity
             onPress={handleSave}
             disabled={!acceptedTerms}
-            className={`py-3.5 rounded-2xl flex-row justify-center items-center transition-colors ${acceptedTerms ? 'bg-primary' : 'bg-muted border border-muted-foreground/20'}`}
+            className={`py-3.5  flex-row justify-center items-center transition-colors ${acceptedTerms ? 'bg-primary' : 'bg-muted border border-border/20'}`}
           >
             <Save size={20} color={acceptedTerms ? colors.primaryForeground : colors.mutedForeground} className="mr-2" />
             <Text className={`font-black text-base ${acceptedTerms ? 'text-primary-foreground' : 'text-muted-foreground'}`}>Guardar Cambios</Text>
@@ -382,9 +382,9 @@ export default function EditProfileScreen() {
         onRequestClose={() => setModalVisible(false)}
       >
         <View className="flex-1 bg-black/60 justify-center items-center p-4">
-          <View className="bg-background border border-muted-foreground rounded-3xl w-full max-h-[85%] p-5 shadow-2xl">
+          <View className="bg-background border border-border  w-full max-h-[85%] p-5 shadow-2xl">
             {/* Header del Modal */}
-            <View className="flex-row items-center justify-between border-b border-muted-foreground/15 pb-3">
+            <View className="flex-row items-center justify-between border-b border-border/15 pb-3">
               <Text className="text-foreground font-black text-base uppercase tracking-wider">Acuerdo de Uso</Text>
               <TouchableOpacity onPress={() => setModalVisible(false)} className="p-1 rounded-full hover:bg-muted">
                 <X size={20} color={colors.foreground} />
@@ -444,10 +444,10 @@ export default function EditProfileScreen() {
             </ScrollView>
 
             {/* Footer de Acciones del Modal */}
-            <View className="flex-row gap-3 border-t border-muted-foreground/15 pt-3">
+            <View className="flex-row gap-3 border-t border-border/15 pt-3">
               <TouchableOpacity
                 onPress={() => setModalVisible(false)}
-                className="flex-1 bg-background/80 py-3 rounded-xs border border-muted-foreground items-center justify-center"
+                className="flex-1 bg-background/80 py-3 rounded-xs border border-border items-center justify-center"
               >
                 <Text className="text-foreground font-bold text-sm">Cerrar</Text>
               </TouchableOpacity>

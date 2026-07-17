@@ -18,10 +18,10 @@ export default function SavedScreen() {
     <TouchableOpacity
       key={item.id}
       onPress={() => router.push(`/(tabs)/saved/${item.id}` as any)}
-      className="bg-background/80 p-4 rounded-2xl border border-muted-foreground flex-row justify-between items-center hover:bg-background/80/80 transition-colors"
+      className="bg-background/80 p-4  border border-border flex-row justify-between items-center hover:bg-background/80/80 transition-colors"
     >
       <View className="flex-row items-center flex-1">
-        <View className="w-12 h-12 rounded-xs bg-background/80 items-center justify-center mr-4 border border-zinc-700">
+        <View className="w-12 h-12 rounded-xs bg-background/80 items-center justify-center mr-4 border border-border">
           <Bookmark size={20} color={colors.foreground} />
         </View>
         <View>

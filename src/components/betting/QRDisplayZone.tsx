@@ -8,13 +8,13 @@ interface QRDisplayZoneProps {
 
 export default function QRDisplayZone({ betCode }: QRDisplayZoneProps) {
   return (
-    <View className="bg-background/90 p-8 rounded-3xl border border-zinc-800 shadow-xl items-center max-w-sm w-full mx-auto my-4">
+    <View className="bg-background/90 p-8  border border-zinc-800 shadow-xl items-center max-w-sm w-full mx-auto my-4">
       <Text className="text-sm font-black text-foreground uppercase tracking-widest mb-4">
         Ticket de Apuesta
       </Text>
 
       {/* Contenedor del QR */}
-      <View className="p-4 bg-white rounded-2xl shadow-inner mb-6 border border-zinc-700">
+      <View className="p-4 bg-white  shadow-inner mb-6 border border-border">
         <QRCode
           value={betCode}
           size={180}

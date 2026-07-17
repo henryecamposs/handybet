@@ -11,7 +11,7 @@ export interface SeccionListaProps<T> {
   emptyState?: React.ReactNode;
 }
 
-export default function SeccionLista({
+export default function SeccionList({
   title,
   items,
   renderItem,
@@ -34,14 +34,14 @@ export default function SeccionLista({
   }
 
   return (
-    <View className="mb-8 mt-4">
+    <View className="mb-8 mt-2">
       {title && <Text className="text-foreground font-black text-lg mb-4">{title}</Text>}
       {layout === 'grid' ? (
-        <View className="flex-row flex-wrap gap-4">
+        <View className="flex-row flex-wrap gap-2">
           {items.map((item, index) => renderItem(item, index))}
         </View>
       ) : (
-        <View className="gap-3">
+        <View className="gap-2">
           {items.map((item, index) => renderItem(item, index))}
         </View>
       )}

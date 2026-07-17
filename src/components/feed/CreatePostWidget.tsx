@@ -154,11 +154,11 @@ export default function CreatePostWidget({ onPublish, forcedTarget }: CreatePost
   return (
     <View className="mb-6">
       {/* Barra reducida de creación (vista por defecto) */}
-      <View className="bg-primary/20 border border-primary/5 p-2 rounded-2xl flex-row items-center justify-between shadow-sm">
+      <View className="bg-primary/20 border border-primary/5 p-2  flex-row items-center justify-between shadow-sm">
         <View className="flex-row items-center flex-1 gap-3">
           <Image
             source={{ uri: mockSession?.avatar || 'https://i.pravatar.cc/150' }}
-            className="w-10 h-10 rounded-full border border-primary/20"
+            className="w-10 h-10 rounded-full border border-border"
           />
           <TouchableOpacity
             onPress={() => setShowPublishModal(true)}
@@ -209,7 +209,7 @@ export default function CreatePostWidget({ onPublish, forcedTarget }: CreatePost
         onRequestClose={() => setShowPublishModal(false)}
       >
         <View className="flex-1 bg-black/80 justify-center items-center p-4">
-          <View className="bg-background/80 border border-zinc-800 w-full max-w-xl rounded-3xl p-6 shadow-2xl relative">
+          <View className="bg-background/80 border border-zinc-800 w-full max-w-xl  p-6 shadow-2xl relative">
             {/* Header del Modal */}
             <View className="flex-row justify-between items-center mb-4">
               <View className="flex-row items-center gap-2">
@@ -234,14 +234,14 @@ export default function CreatePostWidget({ onPublish, forcedTarget }: CreatePost
                 <Text className="text-zinc-400 text-[10px] font-black uppercase mb-1.5">Publicar en nombre de:</Text>
                 <TouchableOpacity
                   onPress={() => setShowTargetDropdown(!showTargetDropdown)}
-                  className="bg-zinc-900 border border-zinc-800 px-4 py-2.5 rounded-2xl flex-row justify-between items-center"
+                  className="bg-zinc-900 border border-zinc-800 px-4 py-2.5  flex-row justify-between items-center"
                 >
                   <Text className="text-white text-xs font-bold">{selectedTarget.name}</Text>
                   <Text className="text-primary text-[10px] font-black">{showTargetDropdown ? '▲' : '▼'}</Text>
                 </TouchableOpacity>
 
                 {showTargetDropdown && (
-                  <View className="absolute top-14 left-0 right-0 bg-zinc-950 border border-zinc-800 rounded-2xl p-1.5 z-50 shadow-2xl">
+                  <View className="absolute top-14 left-0 right-0 bg-zinc-950 border border-zinc-800  p-1.5 z-50 shadow-2xl">
                     <ScrollView className="max-h-[160px]" nestedScrollEnabled={true}>
                       {adminTargets.map((target) => (
                         <TouchableOpacity
@@ -262,7 +262,7 @@ export default function CreatePostWidget({ onPublish, forcedTarget }: CreatePost
             )}
 
             {forcedTarget && (
-              <View className="bg-primary/10 border border-primary/20 px-4 py-2 rounded-2xl mb-4">
+              <View className="bg-primary/10 border border-border px-4 py-2  mb-4">
                 <Text className="text-primary text-[10px] font-black uppercase">Publicando como:</Text>
                 <Text className="text-white text-xs font-bold mt-0.5">{forcedTarget.name}</Text>
               </View>
@@ -275,7 +275,7 @@ export default function CreatePostWidget({ onPublish, forcedTarget }: CreatePost
               numberOfLines={4}
               value={postContent}
               onChangeText={setPostContent}
-              className="bg-background/80 border border-foreground/20 rounded-2xl px-4 py-3 text-white text-xs font-bold outline-none min-h-[80px] mb-4"
+              className="bg-background/80 border border-foreground/20  px-4 py-3 text-white text-xs font-bold outline-none min-h-[80px] mb-4"
             />
 
             {/* Banner inferior de miniaturas */}
@@ -290,7 +290,7 @@ export default function CreatePostWidget({ onPublish, forcedTarget }: CreatePost
                         setPreviewIndex(idx);
                         setShowPreviewModal(true);
                       }}
-                      className="relative w-16 h-16 rounded-xs overflow-hidden border border-zinc-700 bg-background/80justify-center items-center"
+                      className="relative w-16 h-16 rounded-xs overflow-hidden border border-border bg-background/80justify-center items-center"
                     >
                       <Image source={{ uri: file.uri }} className="w-full h-full opacity-80" resizeMode="cover" />
                       {file.type === 'video' && (
@@ -399,7 +399,7 @@ export default function CreatePostWidget({ onPublish, forcedTarget }: CreatePost
         onRequestClose={() => setShowUploadModal(false)}
       >
         <View className="flex-1 bg-black/75 justify-center items-center p-6">
-          <View className="bg-background/80 border border-zinc-800 w-full max-w-md rounded-3xl p-6 shadow-2xl relative">
+          <View className="bg-background/80 border border-zinc-800 w-full max-w-md  p-6 shadow-2xl relative">
             <TouchableOpacity
               className="absolute top-4 right-4 bg-zinc-900 p-2 rounded-full z-10"
               onPress={() => setShowUploadModal(false)}
@@ -436,7 +436,7 @@ export default function CreatePostWidget({ onPublish, forcedTarget }: CreatePost
         onRequestClose={() => setShowFeelingModal(false)}
       >
         <View className="flex-1 bg-black/60 justify-center items-center p-4">
-          <View className="bg-background/80 border border-zinc-800 p-6 rounded-3xl w-full max-w-sm shadow-2xl relative">
+          <View className="bg-background/80 border border-zinc-800 p-6  w-full max-w-sm shadow-2xl relative">
             <View className="flex-row justify-between items-center mb-6">
               <Text className="text-white font-black text-xl">¿Cómo te sientes?</Text>
               <TouchableOpacity onPress={() => setShowFeelingModal(false)} className="bg-zinc-900 p-2 rounded-full absolute -right-2 -top-2">
@@ -448,7 +448,7 @@ export default function CreatePostWidget({ onPublish, forcedTarget }: CreatePost
               {FEELINGS.map((feeling, index) => (
                 <TouchableOpacity
                   key={index}
-                  className={`flex-row items-center gap-2 px-4 py-3 rounded-2xl border ${selectedFeeling?.text === feeling.text ? 'bg-zinc-800 border-zinc-700' : 'bg-background/80 border-zinc-800'}`}
+                  className={`flex-row items-center gap-2 px-4 py-3  border ${selectedFeeling?.text === feeling.text ? 'bg-zinc-800 border-border' : 'bg-background/80 border-zinc-800'}`}
                   onPress={() => {
                     setSelectedFeeling(feeling);
                     setShowFeelingModal(false);

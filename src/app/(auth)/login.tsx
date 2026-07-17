@@ -62,7 +62,7 @@ export default function LoginScreen() {
 
   return (
     <View className="flex-1 bg-background/80 justify-center items-center p-6">
-      <View className="w-full max-w-sm bg-background/90 border border-zinc-800 p-8 rounded-3xl shadow-xl">
+      <View className="w-full max-w-sm bg-background/90 border border-zinc-800 p-8  shadow-xl">
         <View className="mb-4">
           <Logo size="lg" layout="vertical" />
         </View>
@@ -86,7 +86,7 @@ export default function LoginScreen() {
               value={username}
               onChangeText={setUsername}
               autoCapitalize="none"
-              className="bg-primary/5 border border-primary/20 rounded-xs px-4 py-3 text-white font-bold"
+              className="bg-primary/5 border border-border rounded-xs px-4 py-3 text-white font-bold"
             />
           </View>
 
@@ -99,7 +99,7 @@ export default function LoginScreen() {
               value={password}
               onChangeText={setPassword}
               autoCapitalize="none"
-              className="bg-primary/5 border border-primary/20 rounded-xs px-4 py-3 text-white font-bold"
+              className="bg-primary/5 border border-border rounded-xs px-4 py-3 text-white font-bold"
             />
           </View>
 
@@ -112,7 +112,7 @@ export default function LoginScreen() {
                   placeholderTextColor="#64748b"
                   value={fullName}
                   onChangeText={setFullName}
-                  className="bg-background/80 border border-zinc-700 rounded-xs px-4 py-3 text-white font-bold"
+                  className="bg-background/80 border border-border rounded-xs px-4 py-3 text-white font-bold"
                 />
               </View>
               <View>
@@ -123,7 +123,7 @@ export default function LoginScreen() {
                   value={phoneWhatsapp}
                   onChangeText={setPhoneWhatsapp}
                   keyboardType="phone-pad"
-                  className="bg-background/80 border border-zinc-700 rounded-xs px-4 py-3 text-white font-bold"
+                  className="bg-background/80 border border-border rounded-xs px-4 py-3 text-white font-bold"
                 />
               </View>
               <View>
@@ -134,7 +134,7 @@ export default function LoginScreen() {
                   value={whatsappHandle}
                   onChangeText={setWhatsappHandle}
                   autoCapitalize="none"
-                  className="bg-background/80 border border-zinc-700 rounded-xs px-4 py-3 text-white font-bold"
+                  className="bg-background/80 border border-border rounded-xs px-4 py-3 text-white font-bold"
                 />
               </View>
             </>
@@ -176,7 +176,7 @@ export default function LoginScreen() {
         <TouchableOpacity
           onPress={handleSubmit}
           disabled={isLoading}
-          className="bg-primary py-3.5 rounded-2xl items-center border  mt-6 active:scale-[0.98]"
+          className="bg-primary py-3.5  items-center border  mt-6 active:scale-[0.98]"
         >
           {isLoading ? (
             <ActivityIndicator color="#0f172a" />

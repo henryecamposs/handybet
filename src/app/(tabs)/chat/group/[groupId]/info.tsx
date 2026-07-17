@@ -19,7 +19,7 @@ export default function GroupInfoScreen() {
     >
       {/* Info Principal */}
       <View className="items-center mb-8">
-        <View className="w-24 h-24 rounded-3xl bg-background/80 items-center justify-center mb-4 border border-zinc-700 shadow-xl relative">
+        <View className="w-24 h-24  bg-background/80 items-center justify-center mb-4 border border-border shadow-xl relative">
           <Text className="text-4xl">🎲</Text>
           <View className="absolute -bottom-2 -right-2 bg-primary w-8 h-8 rounded-full border-4 border-zinc-950 items-center justify-center">
             <Shield size={12} color="#000" />
@@ -30,12 +30,12 @@ export default function GroupInfoScreen() {
 
       {/* Estadísticas / Propiedades */}
       <View className="flex-row gap-4 mb-8">
-        <View className="flex-1 bg-background/80 p-4 rounded-2xl border border-zinc-800 items-center">
+        <View className="flex-1 bg-background/80 p-4  border border-zinc-800 items-center">
           <Users size={20} color="#caee26" className="mb-1" />
           <Text className="text-foreground font-bold text-lg">{group.members.length}</Text>
           <Text className="text-foreground text-[10px] uppercase">Miembros</Text>
         </View>
-        <View className="flex-1 bg-background/80 p-4 rounded-2xl border border-zinc-800 items-center">
+        <View className="flex-1 bg-background/80 p-4  border border-zinc-800 items-center">
           <Info size={20} color="#caee26" className="mb-1" />
           <Text className="text-foreground font-bold text-lg">{group.id.slice(0, 6).toUpperCase()}</Text>
           <Text className="text-foreground text-[10px] uppercase">Código</Text>
@@ -43,7 +43,7 @@ export default function GroupInfoScreen() {
       </View>
 
       {/* Configuraciones de Usuario */}
-      <View className="bg-background/80 rounded-3xl border border-zinc-800 overflow-hidden mb-8">
+      <View className="bg-background/80  border border-zinc-800 overflow-hidden mb-8">
         <TouchableOpacity className="p-4 border-b border-zinc-800/50 flex-row items-center justify-between">
           <View className="flex-row items-center">
             <View className="w-10 h-10 rounded-full bg-background/80 items-center justify-center mr-3">
@@ -79,7 +79,7 @@ export default function GroupInfoScreen() {
       </View>
 
       {/* Acciones Peligrosas */}
-      <TouchableOpacity className="bg-rose-500/10 border border-rose-500/30 p-4 rounded-2xl flex-row items-center justify-center mb-16">
+      <TouchableOpacity className="bg-rose-500/10 border border-rose-500/30 p-4  flex-row items-center justify-center mb-16">
         <LogOut size={18} color="#ef4444" className="mr-2" />
         <Text className="text-rose-500 font-bold">Salir del Grupo</Text>
       </TouchableOpacity>

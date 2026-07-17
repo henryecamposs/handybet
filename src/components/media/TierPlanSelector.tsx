@@ -31,7 +31,7 @@ export default function TierPlanSelector({
   };
 
   return (
-    <View className="bg-background/80 p-6 rounded-3xl border border-zinc-800 shadow-xl w-full max-w-4xl mx-auto my-4">
+    <View className="bg-background/80 p-6  border border-zinc-800 shadow-xl w-full max-w-4xl mx-auto my-4">
       <View className="items-center mb-6">
         <Text className="text-2xl font-black text-white tracking-tight">Membresías de Contenido</Text>
         <Text className="text-foreground text-xs font-bold text-center mt-1.5 leading-relaxed max-w-md">
@@ -40,7 +40,7 @@ export default function TierPlanSelector({
       </View>
 
       {errorMessage && (
-        <View className="bg-rose-500/10 border border-rose-500/20 p-4 rounded-2xl mb-6">
+        <View className="bg-rose-500/10 border border-rose-500/20 p-4  mb-6">
           <Text className="text-rose-500 text-xs font-bold text-center">⚠️ {errorMessage}</Text>
         </View>
       )}
@@ -57,7 +57,7 @@ export default function TierPlanSelector({
           return (
             <View
               key={plan.id}
-              className={`w-72 p-6 rounded-3xl border ${isHandyBet
+              className={`w-72 p-6  border ${isHandyBet
                 ? 'bg-secondary/10 border-secondary/80 shadow-md shadow-secondary/5'
                 : 'bg-background/80 border-zinc-800'
                 } flex flex-col justify-between`}
@@ -112,8 +112,8 @@ export default function TierPlanSelector({
               <TouchableOpacity
                 onPress={() => handlePurchase(plan.id)}
                 disabled={isActive || isProcessing}
-                className={`w-full py-3.5 rounded-2xl flex-row justify-center items-center ${isActive
-                  ? 'bg-background/80 border border-zinc-700'
+                className={`w-full py-3.5  flex-row justify-center items-center ${isActive
+                  ? 'bg-background/80 border border-border'
                   : isHandyBet
                     ? 'bg-secondary active:scale-[0.98]'
                     : 'bg-background/80 hover:bg-background/80 active:scale-[0.98]'

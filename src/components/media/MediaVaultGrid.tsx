@@ -28,7 +28,7 @@ export default function MediaVaultGrid({
     return (
       <View
         style={{ width: cardSize, height: cardSize }}
-        className="m-2 rounded-2xl bg-background/80 border border-zinc-800 overflow-hidden relative"
+        className="m-2  bg-background/80 border border-zinc-800 overflow-hidden relative"
       >
         {/* Imagen o Miniatura con Blur */}
         <Image
@@ -49,7 +49,7 @@ export default function MediaVaultGrid({
         {/* Overlay de Bloqueo */}
         {!hasAccess && (
           <View className="absolute inset-0 bg-background/40 justify-center items-center p-3">
-            <View className="bg-background/90 border border-zinc-700/80 p-3.5 rounded-2xl items-center shadow-lg backdrop-blur-md">
+            <View className="bg-background/90 border border-border/80 p-3.5  items-center shadow-lg backdrop-blur-md">
               <Text className="text-xl mb-1">🔒</Text>
               <Text className="text-white text-[10px] font-black text-center uppercase tracking-wider mb-2">
                 Contenido Premium

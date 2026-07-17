@@ -84,9 +84,9 @@ export default function ChannelDetailScreen() {
     <TouchableOpacity
       key={group.id}
       onPress={() => router.push(`/chat/group/${group.id}` as any)}
-      className="bg-background/80 border border-zinc-800 p-5 rounded-3xl flex-row items-center gap-4 hover:bg-background/80/80 transition-colors"
+      className="bg-background/80 border border-zinc-800 p-5  flex-row items-center gap-4 hover:bg-background/80/80 transition-colors"
     >
-      <View className="bg-background/80 w-12 h-12 rounded-xs items-center justify-center border border-zinc-700">
+      <View className="bg-background/80 w-12 h-12 rounded-xs items-center justify-center border border-border">
         <Text className="text-xl">{getIconForType(group.type)}</Text>
       </View>
       <View className="flex-1">
@@ -95,7 +95,7 @@ export default function ChannelDetailScreen() {
           Código: <Text className="font-mono text-primary">{group.short_code}</Text> • Sala de {group.type}
         </Text>
       </View>
-      <View className="w-8 h-8 rounded-full bg-background/80 items-center justify-center border border-zinc-700">
+      <View className="w-8 h-8 rounded-full bg-background/80 items-center justify-center border border-border">
         <Text className="text-foreground font-bold text-xs">▶</Text>
       </View>
     </TouchableOpacity>
@@ -120,7 +120,7 @@ export default function ChannelDetailScreen() {
         <View className="mt-4 gap-4">
           <TouchableOpacity
             onPress={() => router.push(`/feed/search?id=${channel.id}&from=channel` as any)}
-            className="bg-primary/20 border border-primary/30 p-4 rounded-3xl items-center justify-center hover:bg-primary/30 transition-colors"
+            className="bg-primary/20 border border-border p-4  items-center justify-center hover:bg-primary/30 transition-colors"
           >
             <Text className="text-primary font-black text-sm uppercase tracking-wider">Ver Feed / Publicaciones del Canal 📢</Text>
           </TouchableOpacity>

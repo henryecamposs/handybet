@@ -294,11 +294,11 @@ export default function FeedScreen() {
         onRequestClose={() => setShowPaymentModal(false)}
       >
         <View className="flex-1 bg-black/75 justify-center items-center p-6">
-          <View className="bg-background/80 border border-zinc-800 w-full max-w-sm rounded-3xl p-6 shadow-2xl">
+          <View className="bg-background/80 border border-zinc-800 w-full max-w-sm  p-6 shadow-2xl">
             <Text className="text-foreground font-black text-lg mb-1">📢 Pago Requerido</Text>
             <Text className="text-foreground text-xs font-bold mb-4">Tu anuncio comercial o regla del grupo requiere activación de pago.</Text>
 
-            <View className="bg-background/80 border border-zinc-850 p-4 rounded-2xl mb-4">
+            <View className="bg-background/80 border border-zinc-850 p-4  mb-4">
               <View className="flex-row justify-between mb-2">
                 <Text className="text-foreground text-xs font-bold">Costo del Post:</Text>
                 <Text className="text-foreground text-xs font-black">$2.50 USD</Text>
@@ -327,14 +327,14 @@ export default function FeedScreen() {
             <View className="flex-row gap-2">
               <TouchableOpacity
                 onPress={() => setShowPaymentModal(false)}
-                className="flex-1 bg-background/80 border border-zinc-800 py-3.5 rounded-2xl items-center"
+                className="flex-1 bg-background/80 border border-zinc-800 py-3.5  items-center"
               >
                 <Text className="text-foreground font-bold text-xs">Descartar</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={handleConfirmPayment}
                 disabled={!paymentRef.trim()}
-                className="flex-1 bg-primary py-3.5 rounded-2xl items-center"
+                className="flex-1 bg-primary py-3.5  items-center"
               >
                 <Text className="text-foreground font-black text-xs uppercase">Confirmar Pago</Text>
               </TouchableOpacity>
@@ -354,7 +354,7 @@ export default function FeedScreen() {
           className="flex-1 bg-black/50 justify-start items-end pt-16 pr-4"
           onPress={() => setShowMobileMenu(false)}
         >
-          <View className="bg-background border border-zinc-800 rounded-2xl w-56 overflow-hidden shadow-xl" onStartShouldSetResponder={() => true}>
+          <View className="bg-background border border-zinc-800  w-56 overflow-hidden shadow-xl" onStartShouldSetResponder={() => true}>
 
             <TouchableOpacity
               className="flex-row items-center gap-3 p-3.5 border-b border-zinc-800/50 hover:bg-zinc-900"

@@ -168,7 +168,7 @@ export default function GrupoDetailScreen() {
               <QRDisplayZone betCode={generatedBetCode} />
               <TouchableOpacity
                 onPress={() => setGeneratedBetCode(null)}
-                className="bg-background/80 border border-zinc-800 py-3.5 rounded-2xl items-center mt-6 w-full max-w-sm mx-auto"
+                className="bg-background/80 border border-zinc-800 py-3.5  items-center mt-6 w-full max-w-sm mx-auto"
               >
                 <Text className="text-white font-bold text-sm">Nueva Jugada</Text>
               </TouchableOpacity>
@@ -224,7 +224,7 @@ export default function GrupoDetailScreen() {
         <View className="mt-8 border-t border-zinc-850 pt-6">
           <TouchableOpacity
             onPress={() => router.push(`/feed/search?id=${group.id}&from=group` as any)}
-            className="bg-primary/20 border border-primary/30 p-4 rounded-3xl items-center justify-center mb-6"
+            className="bg-primary/20 border border-border p-4  items-center justify-center mb-6"
           >
             <Text className="text-primary font-black text-xs uppercase tracking-wider">Ver Feed / Publicaciones del Grupo 📢</Text>
           </TouchableOpacity>

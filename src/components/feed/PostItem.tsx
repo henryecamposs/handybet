@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, ScrollView, Modal } from 'react-native';
-import { MessageSquare, Share2, Bell, EyeOff, X } from 'lucide-react-native';
+import { MessageSquare, Share2, Bell, EyeOff, X, Trash2 } from 'lucide-react-native';
 import Logo from '../ui/Logo';
 import { useThemeColors, withOpacity } from '../../hooks/useThemeColors';
 import PostActionButtons from './PostActionButtons';
@@ -17,9 +17,10 @@ interface PostItemProps {
   onSharePress?: () => void;
   isSaved?: boolean;
   onSavePress?: () => void;
+  onDeletePress?: () => void;
 }
 
-export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, onCommentPress, onSharePress, isSaved, onSavePress }: PostItemProps) {
+export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, onCommentPress, onSharePress, isSaved, onSavePress, onDeletePress }: PostItemProps) {
   const { addToast } = useToastStore();
   const [layoutWidth, setLayoutWidth] = useState(0);
   const [showOptionsModal, setShowOptionsModal] = useState(false);
@@ -33,14 +34,14 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
 
   if (isHidden) {
     return (
-      <View className="bg-zinc-900/40 border border-zinc-800 p-5 rounded-3xl mb-6 flex-row items-center justify-between shadow-sm">
+      <View className="bg-zinc-900/40 border border-border p-5  mb-6 flex-row items-center justify-between shadow-sm">
         <Text className="text-zinc-400 text-xs font-bold">Publicación oculta de {post.author}</Text>
         <TouchableOpacity
           onPress={() => {
             setIsHidden(false);
             addToast({ title: "Publicación restaurada", variant: "success", position: "bottom" });
           }}
-          className="bg-primary/20 px-3.5 py-1.5 rounded-full border border-primary/30"
+          className="bg-primary/20 px-3.5 py-1.5 rounded-full border border-border"
         >
           <Text className="text-primary text-[10px] font-black uppercase">Deshacer</Text>
         </TouchableOpacity>
@@ -56,11 +57,11 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
     const displayText = isLongText && !expanded ? `${postText.slice(0, limit)}...` : postText;
 
     return (
-      <View className="bg-primary/5 border border-primary/20 p-4 rounded-3xl mb-6 shadow-md flex-col">
+      <View className="bg-primary/5 border border-border p-4  mb-6 shadow-md flex-col">
         {/* Header: Mostrar avatar de usuario y nombre, seguir y el icono con popup */}
         <View className="flex-row items-center justify-between mb-3 relative z-50">
           <View className="flex-row items-center gap-3">
-            <Image source={{ uri: post.avatar }} className="w-10 h-10 rounded-full border-2 border-primary/20" />
+            <Image source={{ uri: post.avatar }} className="w-10 h-10 rounded-full border-2 border-border" />
             <View>
               <Text className="text-foreground font-black text-sm">{post.author}</Text>
               <Text className="text-muted-foreground text-[10px] font-medium">{post.time}</Text>
@@ -78,7 +79,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                 });
               }}
               className={`border px-2.5 py-1 rounded-full ${isFollowing
-                ? 'border-muted-foreground bg-transparent'
+                ? 'border-border bg-transparent'
                 : 'border-primary bg-primary/5'
                 }`}
             >
@@ -94,7 +95,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
 
           {/* Menú desplegable local en movil */}
           {showOptionsModal && (
-            <View className="absolute right-0 top-10 bg-background border border-primary/20 p-1.5 rounded-2xl w-40 z-50 shadow-2xl">
+            <View className="absolute right-0 top-10 bg-background border border-border p-1.5  w-40 z-50 shadow-2xl">
               <TouchableOpacity
                 onPress={() => {
                   setShowOptionsModal(false);
@@ -139,6 +140,26 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
               >
                 <EyeOff size={15} color="#ef4444" />
                 <Text className="text-red-500 text-xs font-semibold">No mostrar</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={() => {
+                  setShowOptionsModal(false);
+                  if (onDeletePress) {
+                    onDeletePress();
+                  } else {
+                    setIsHidden(true);
+                    addToast({
+                      title: "Publicación eliminada",
+                      variant: 'destructive',
+                      position: 'bottom'
+                    });
+                  }
+                }}
+                className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-zinc-900 transition-colors mt-1 border-t border-zinc-800/50 pt-2"
+              >
+                <Trash2 size={15} color="#ef4444" />
+                <Text className="text-red-500 text-xs font-semibold">Eliminar</Text>
               </TouchableOpacity>
             </View>
           )}
@@ -193,7 +214,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
 
         {/* Media content expandido en alto y ancho */}
         {hasMedia && (
-          <View className="w-full rounded-2xl overflow-hidden mt-1 relative">
+          <View className="w-full  overflow-hidden mt-1 relative">
             <PostMediaCarousel
               mediaUrls={post.mediaUrls}
               mediaType={post.mediaType}
@@ -203,7 +224,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
             />
             {/* Action Bar Overlay sobre el contenido multimedia centrado horizontalmente */}
             <View className="absolute bottom-3 w-full items-center z-10">
-              <View className="bg-black/50 backdrop-blur-md rounded-2xl px-2 py-1 shadow-lg border border-white/10">
+              <View className="bg-black/50 backdrop-blur-md  px-2 py-1 shadow-lg border border-white/10">
                 <PostActionButtons
                   isLiked={isLiked}
                   likeCount={isLiked ? '1.2k' : '1.1k'}
@@ -223,10 +244,10 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
     );
   }
   return (
-    <View className="bg-primary/5 border border-primary/20 p-2 rounded-3xl mb-6 shadow-md flex-row gap-2">
+    <View className="bg-primary/5 border border-border p-2  mb-6 shadow-md flex-row gap-2">
       {/* Columna Izquierda: Foto de Perfil */}
       <View className="items-center">
-        <Image source={{ uri: post.avatar }} className="w-12 h-12 rounded-full border-2 border-primary/20" />
+        <Image source={{ uri: post.avatar }} className="w-12 h-12 rounded-full border-2 border-border" />
       </View>
 
       {/* Columna Derecha: Todo el resto del contenido */}
@@ -249,7 +270,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                 });
               }}
               className={`border px-2.5 py-1 rounded-full ${isFollowing
-                ? 'border-muted-foreground bg-transparent'
+                ? 'border-border bg-transparent'
                 : 'border-primary bg-primary/5'
                 }`}
             >
@@ -266,13 +287,13 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
 
         {/* Menú desplegable local (estilo Popover desde el icono) */}
         {showOptionsModal && (
-          <View className="absolute right-0 top-8 bg-background border border-primary/20 p-1.5 rounded-2xl w-40 z-50 shadow-2xl">
+          <View className="absolute right-0 top-8 bg-background border border-border p-1.5  w-40 z-50 shadow-2xl">
             <TouchableOpacity
               onPress={() => {
                 setShowOptionsModal(false);
                 onSharePress?.();
               }}
-              className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-zinc-900 transition-colors"
+              className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-primary/20 transition-colors"
             >
               <Share2 size={15} color={colors.foreground} />
               <Text className="text-foreground text-xs font-semibold">Compartir</Text>
@@ -289,7 +310,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                   position: 'bottom'
                 });
               }}
-              className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-zinc-900 transition-colors"
+              className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-primary/20 transition-colors"
             >
               <Bell size={15} color={isNotificationsEnabled ? colors.primary : colors.foreground} />
               <Text className={`text-xs font-semibold ${isNotificationsEnabled ? 'text-primary' : 'text-foreground'}`}>
@@ -311,6 +332,26 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
             >
               <EyeOff size={15} color="#ef4444" />
               <Text className="text-red-500 text-xs font-semibold">No mostrar</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => {
+                setShowOptionsModal(false);
+                if (onDeletePress) {
+                  onDeletePress();
+                } else {
+                  setIsHidden(true);
+                  addToast({
+                    title: "Publicación eliminada",
+                    variant: 'destructive',
+                    position: 'bottom'
+                  });
+                }
+              }}
+              className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-zinc-900 transition-colors mt-1 border-t border-zinc-800/50 pt-2"
+            >
+              <Trash2 size={15} color="#ef4444" />
+              <Text className="text-red-500 text-xs font-semibold">Eliminar</Text>
             </TouchableOpacity>
           </View>
         )}

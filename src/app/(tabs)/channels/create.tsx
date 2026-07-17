@@ -19,9 +19,9 @@ export default function CreateChannelScreen() {
         </View>
       </View>
 
-      <View className="bg-background/80 rounded-3xl p-6 border border-zinc-800 mb-8">
+      <View className="bg-background/80  p-6 border border-zinc-800 mb-8">
 
-        <View className="bg-secondary/10 border border-secondary/30 p-4 rounded-2xl mb-6 flex-row items-start">
+        <View className="bg-secondary/10 border border-secondary/30 p-4  mb-6 flex-row items-start">
           <CheckCircle2 size={20} color="#10b981" className="mt-1 mr-3" />
           <View className="flex-1">
             <Text className="text-secondary font-bold mb-1">Verificación de Canal</Text>
@@ -36,7 +36,7 @@ export default function CreateChannelScreen() {
             <TextInput
               placeholder="Ej. Consorcio Loterías Unidas"
               placeholderTextColor="#52525b"
-              className="bg-background/80 text-foreground p-4 rounded-xs border border-zinc-700 font-medium"
+              className="bg-background/80 text-foreground p-4 rounded-xs border border-border font-medium"
             />
           </View>
 
@@ -45,7 +45,7 @@ export default function CreateChannelScreen() {
             <TextInput
               placeholder="J-12345678-9"
               placeholderTextColor="#52525b"
-              className="bg-background/80 text-foreground p-4 rounded-xs border border-zinc-700 font-medium uppercase font-mono"
+              className="bg-background/80 text-foreground p-4 rounded-xs border border-border font-medium uppercase font-mono"
             />
           </View>
 
@@ -56,7 +56,7 @@ export default function CreateChannelScreen() {
               placeholderTextColor="#52525b"
               multiline
               numberOfLines={3}
-              className="bg-background/80 text-foreground p-4 rounded-xs border border-zinc-700 font-medium"
+              className="bg-background/80 text-foreground p-4 rounded-xs border border-border font-medium"
             />
           </View>
         </View>

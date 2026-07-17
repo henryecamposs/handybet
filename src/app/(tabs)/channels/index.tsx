@@ -58,7 +58,7 @@ export default function ChannelsScreen() {
     <TouchableOpacity
       key={channel.id}
       onPress={() => router.push(`/(tabs)/channels/${channel.id}` as any)}
-      className="w-32 h-36 bg-card rounded-2xl border border-primary/20 items-center justify-center mr-4 hover:bg-background/80/80 transition-colors px-2"
+      className="w-32 h-36 bg-card  border border-border items-center justify-center mr-4 hover:bg-background/80/80 transition-colors px-2"
     >
       <View className="w-12 h-12 rounded-full bg-background/80 items-center justify-center mb-2">
         <Tv size={20} color={colors.mutedForeground} />
@@ -74,10 +74,10 @@ export default function ChannelsScreen() {
     <TouchableOpacity
       key={channel.id}
       onPress={() => router.push(`/(tabs)/channels/${channel.id}` as any)}
-      className="bg-background/80 border border-muted-foreground p-4 rounded-2xl flex-row justify-between items-center hover:bg-background/80/80 transition-colors"
+      className="bg-background/80 border border-border p-4  flex-row justify-between items-center hover:bg-background/80/80 transition-colors"
     >
       <View className="flex-row items-center flex-1">
-        <View className="w-12 h-12 rounded-xs bg-background/80 items-center justify-center mr-4 border border-muted-foreground">
+        <View className="w-12 h-12 rounded-xs bg-background/80 items-center justify-center mr-4 border border-border">
           <Tv size={20} color={colors.foreground} />
         </View>
         <View className="flex-1">
@@ -89,7 +89,7 @@ export default function ChannelsScreen() {
           </Text>
         </View>
       </View>
-      <View className="w-8 h-8 rounded-full bg-background/80 items-center justify-center border border-zinc-700 ml-2">
+      <View className="w-8 h-8 rounded-full bg-background/80 items-center justify-center border border-border ml-2">
         <Text className="text-foreground font-bold text-xs">▶</Text>
       </View>
     </TouchableOpacity>
@@ -115,7 +115,7 @@ export default function ChannelsScreen() {
             <View className="flex-row flex-wrap gap-4">
               <TouchableOpacity
                 onPress={() => router.push('/(tabs)/channels/create' as any)}
-                className="w-[48%] h-36 bg-muted rounded-2xl border border-dashed border-muted-foreground items-center justify-center hover:bg-background/80/80 transition-colors"
+                className="w-[48%] h-36 bg-muted  border border-dashed border-border items-center justify-center hover:bg-background/80/80 transition-colors"
               >
                 <View className="w-12 h-12 rounded-full bg-card items-center justify-center mb-2">
                   <Plus size={24} color={colors.secondary} />
@@ -126,7 +126,7 @@ export default function ChannelsScreen() {
                 <TouchableOpacity
                   key={channel.id}
                   onPress={() => router.push(`/(tabs)/channels/${channel.id}` as any)}
-                  className="w-[48%] h-36 bg-card rounded-2xl border border-primary/20 items-center justify-center hover:bg-background/80/80 transition-colors px-2"
+                  className="w-[48%] h-36 bg-card  border border-border items-center justify-center hover:bg-background/80/80 transition-colors px-2"
                 >
                   <View className="w-12 h-12 rounded-full bg-background/80 items-center justify-center mb-2">
                     <Tv size={20} color={colors.mutedForeground} />
@@ -142,7 +142,7 @@ export default function ChannelsScreen() {
             <View className="flex-1">
               <TouchableOpacity
                 onPress={() => router.push('/(tabs)/channels/create' as any)}
-                className="w-full bg-primary p-4 rounded-3xl items-center justify-center mb-6"
+                className="w-full bg-primary p-4  items-center justify-center mb-6"
               >
                 <Text className="text-black font-black text-xs uppercase">Crear Nuevo Canal</Text>
               </TouchableOpacity>

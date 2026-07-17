@@ -98,7 +98,7 @@ export default function HubLayout({
         {(showBack || onBack) && (
           <TouchableOpacity
             onPress={() => onBack ? onBack() : router.push('/')}
-            className="mr-3 p-2 rounded-full bg-background/80 hover:bg-primary/20 transition-colors border border-muted-foreground/35"
+            className="mr-3 p-2 rounded-full bg-background/80 hover:bg-primary/20 transition-colors border border-border/35"
           >
             <ArrowLeft size={22} color={colors.foreground} />
           </TouchableOpacity>
@@ -114,7 +114,7 @@ export default function HubLayout({
 
       {/* Buscador */}
       {onSearchChange && (
-        <View className="bg-input rounded-full flex-row items-center px-4 py-2 border border-muted-foreground mb-6">
+        <View className="bg-input rounded-full flex-row items-center px-4 py-2 border border-border mb-6">
           <Search size={20} color={colors.mutedForeground} />
           <TextInput
             placeholder={searchPlaceholder}
@@ -168,7 +168,7 @@ export default function HubLayout({
             {onAddNewItem && (
               <TouchableOpacity
                 onPress={onAddNewItem}
-                className="w-32 h-36 bg-muted rounded-2xl border border-dashed border-muted-foreground items-center justify-center mr-4 hover:bg-background/80/80 transition-colors"
+                className="w-32 h-36 bg-muted  border border-dashed border-border items-center justify-center mr-4 hover:bg-background/80/80 transition-colors"
               >
                 <View className="w-12 h-12 rounded-full bg-card items-center justify-center mb-2">
                   <Plus size={24} color={colors.secondary} />

@@ -21,7 +21,7 @@ export default function FileDropzone({ onFilesSelected, type, maxFiles = 5 }: Fi
     }));
     onFilesSelected(mapped);
   }, [onFilesSelected]);
-  
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: type === 'photo' ? { 'image/*': [] } : type === 'video' ? { 'video/*': [] } : { 'image/*': [], 'video/*': [] },
@@ -29,9 +29,9 @@ export default function FileDropzone({ onFilesSelected, type, maxFiles = 5 }: Fi
   });
 
   return (
-    <View 
-      {...getRootProps() as any} 
-      className={`bg-zinc-900 border-2 border-dashed rounded-2xl h-48 justify-center items-center mb-6 transition-colors cursor-pointer outline-none ${isDragActive ? 'border-primary bg-primary/10' : 'border-zinc-700 hover:border-primary'}`}
+    <View
+      {...getRootProps() as any}
+      className={`bg-zinc-900 border-2 border-dashed  h-48 justify-center items-center mb-6 transition-colors cursor-pointer outline-none ${isDragActive ? 'border-primary bg-primary/10' : 'border-border hover:border-primary'}`}
     >
       <input {...getInputProps() as any} />
       <UploadCloud size={48} color={isDragActive ? '#fff' : colors.primary} className="mb-4" />

@@ -76,7 +76,7 @@ export default function QRCameraScanner({ onScanned, onClose }: QRCameraScannerP
         {onClose && (
           <TouchableOpacity
             onPress={onClose}
-            className="bg-background/60 p-2.5 rounded-full border border-zinc-700"
+            className="bg-background/60 p-2.5 rounded-full border border-border"
           >
             <Text className="text-white font-bold text-xs px-2">Cerrar</Text>
           </TouchableOpacity>
@@ -93,7 +93,7 @@ export default function QRCameraScanner({ onScanned, onClose }: QRCameraScannerP
       >
         {/* Retícula de Enfoque */}
         <View className="flex-1 justify-center items-center">
-          <View className="w-64 h-64 border-2 border-secondary rounded-3xl relative">
+          <View className="w-64 h-64 border-2 border-secondary  relative">
             {/* Esquinas decorativas */}
             <View className="absolute -top-1 -left-1 w-6 h-6 border-t-4 border-l-4 border-secondary rounded-tl-xl" />
             <View className="absolute -top-1 -right-1 w-6 h-6 border-t-4 border-r-4 border-secondary rounded-tr-xl" />
@@ -109,7 +109,7 @@ export default function QRCameraScanner({ onScanned, onClose }: QRCameraScannerP
       {/* Footer */}
       {scanned && (
         <View className="absolute bottom-10 left-0 right-0 z-10 items-center px-6">
-          <View className="bg-secondary/90 p-4 rounded-2xl border border-secondary w-full max-w-xs flex-row justify-center items-center gap-2">
+          <View className="bg-secondary/90 p-4  border border-secondary w-full max-w-xs flex-row justify-center items-center gap-2">
             <ActivityIndicator color="#0f172a" />
             <Text className="text-secondary-foreground font-black text-sm">Procesando código...</Text>
           </View>

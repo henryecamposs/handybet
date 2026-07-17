@@ -19,10 +19,10 @@ export default function CreateGroupScreen() {
         </View>
       </View>
 
-      <View className="bg-background/80 rounded-3xl p-6 border border-zinc-800 mb-8">
+      <View className="bg-background/80  p-6 border border-zinc-800 mb-8">
         {/* Avatar Upload (Simulated) */}
         <View className="items-center mb-8">
-          <View className="w-24 h-24 rounded-full bg-background/80 border-2 border-dashed border-zinc-700 items-center justify-center mb-3">
+          <View className="w-24 h-24 rounded-full bg-background/80 border-2 border-dashed border-border items-center justify-center mb-3">
             <Users size={32} color="#71717a" />
           </View>
           <TouchableOpacity>
@@ -37,7 +37,7 @@ export default function CreateGroupScreen() {
             <TextInput
               placeholder="Ej. VIP Animalitos Los Pinos"
               placeholderTextColor="#52525b"
-              className="bg-background/80 text-foreground p-4 rounded-xs border border-zinc-700 font-medium"
+              className="bg-background/80 text-foreground p-4 rounded-xs border border-border font-medium"
             />
           </View>
 
@@ -48,7 +48,7 @@ export default function CreateGroupScreen() {
               placeholderTextColor="#52525b"
               multiline
               numberOfLines={3}
-              className="bg-background/80 text-foreground p-4 rounded-xs border border-zinc-700 font-medium"
+              className="bg-background/80 text-foreground p-4 rounded-xs border border-border font-medium"
             />
           </View>
         </View>
@@ -56,12 +56,12 @@ export default function CreateGroupScreen() {
         {/* Configuraciones */}
         <Text className="text-foreground font-bold text-xs uppercase mb-4">Privacidad y Categoría</Text>
         <View className="flex-row gap-4 mb-8">
-          <TouchableOpacity className="flex-1 bg-primary/20 border border-primary p-4 rounded-2xl items-center">
+          <TouchableOpacity className="flex-1 bg-primary/20 border border-primary p-4  items-center">
             <Shield size={24} color="#caee26" className="mb-2" />
             <Text className="text-primary font-bold">Privado</Text>
             <Text className="text-foreground text-[10px] text-center mt-1">Solo por invitación</Text>
           </TouchableOpacity>
-          <TouchableOpacity className="flex-1 bg-background/80 border border-zinc-700 p-4 rounded-2xl items-center opacity-70">
+          <TouchableOpacity className="flex-1 bg-background/80 border border-border p-4  items-center opacity-70">
             <Users size={24} color="#71717a" className="mb-2" />
             <Text className="text-foreground font-bold">Público</Text>
             <Text className="text-foreground text-[10px] text-center mt-1">Cualquiera se une</Text>
@@ -69,7 +69,7 @@ export default function CreateGroupScreen() {
         </View>
 
         {/* Categoria Picker (Simulated) */}
-        <View className="mb-8 bg-background/80 p-4 rounded-xs border border-zinc-700 flex-row justify-between items-center">
+        <View className="mb-8 bg-background/80 p-4 rounded-xs border border-border flex-row justify-between items-center">
           <View>
             <Text className="text-foreground text-xs font-bold mb-1">Categoría Principal</Text>
             <Text className="text-foreground font-medium">Apuestas & Sorteos</Text>

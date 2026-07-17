@@ -163,9 +163,9 @@ export default function ChatInboxScreen() {
               <TouchableOpacity
                 key={chat.id}
                 onPress={() => router.push(`/chat/${chat.id}` as any)}
-                className="bg-background/80 border border-muted-foreground/35 p-4 rounded-3xl flex-row items-center gap-4 shadow-sm"
+                className="bg-background/80 border border-border/35 p-4  flex-row items-center gap-4 shadow-sm"
               >
-                <Image source={{ uri: chat.avatar }} className="w-12 h-12 rounded-full border border-muted-foreground/20 bg-background" />
+                <Image source={{ uri: chat.avatar }} className="w-12 h-12 rounded-full border border-border/20 bg-background" />
                 <View className="flex-1">
                   <View className="flex-row justify-between items-center">
                     <Text className="text-foreground font-black text-sm">{chat.name}</Text>
@@ -191,9 +191,9 @@ export default function ChatInboxScreen() {
               <TouchableOpacity
                 key={chat.id}
                 onPress={() => router.push(`/chat/group/${chat.id}` as any)}
-                className="bg-background/80 border border-muted-foreground/35 p-4 rounded-3xl flex-row items-center gap-4 shadow-sm"
+                className="bg-background/80 border border-border/35 p-4  flex-row items-center gap-4 shadow-sm"
               >
-                <Image source={{ uri: chat.avatar }} className="w-12 h-12 rounded-full border border-muted-foreground/20 bg-background" />
+                <Image source={{ uri: chat.avatar }} className="w-12 h-12 rounded-full border border-border/20 bg-background" />
                 <View className="flex-1">
                   <View className="flex-row justify-between items-center">
                     <Text className="text-foreground font-black text-sm">{chat.name}</Text>
@@ -219,9 +219,9 @@ export default function ChatInboxScreen() {
               <TouchableOpacity
                 key={chat.id}
                 onPress={() => router.push(`/channels/${chat.id}` as any)}
-                className="bg-background/80 border border-muted-foreground/35 p-4 rounded-3xl flex-row items-center gap-4 shadow-sm"
+                className="bg-background/80 border border-border/35 p-4  flex-row items-center gap-4 shadow-sm"
               >
-                <Image source={{ uri: chat.avatar }} className="w-12 h-12 rounded-full border border-muted-foreground/20 bg-background" />
+                <Image source={{ uri: chat.avatar }} className="w-12 h-12 rounded-full border border-border/20 bg-background" />
                 <View className="flex-1">
                   <View className="flex-row justify-between items-center">
                     <Text className="text-foreground font-black text-sm">{chat.name}</Text>
@@ -246,11 +246,11 @@ export default function ChatInboxScreen() {
             {mentionPosts.map((post) => (
               <View
                 key={post.id}
-                className="bg-background/80 border border-muted-foreground/35 p-4 rounded-3xl shadow-sm"
+                className="bg-background/80 border border-border/35 p-4  shadow-sm"
               >
                 {/* Cabecera del post */}
                 <View className="flex-row items-center gap-3 mb-3">
-                  <Image source={{ uri: post.authorAvatar }} className="w-10 h-10 rounded-full border border-muted-foreground/20" />
+                  <Image source={{ uri: post.authorAvatar }} className="w-10 h-10 rounded-full border border-border/20" />
                   <View className="flex-1">
                     <Text className="text-foreground font-black text-sm">{post.authorName}</Text>
                     <Text className="text-muted-foreground text-xs">@{post.authorUsername}</Text>
@@ -273,11 +273,11 @@ export default function ChatInboxScreen() {
 
                 {/* Imagen del post */}
                 {post.mediaUrl && (
-                  <Image source={{ uri: post.mediaUrl }} className="w-full h-40 rounded-2xl mb-3 bg-muted border border-muted-foreground/20" />
+                  <Image source={{ uri: post.mediaUrl }} className="w-full h-40  mb-3 bg-muted border border-border/20" />
                 )}
 
                 {/* Acciones del Post */}
-                <View className="flex-row items-center gap-6 border-t border-muted-foreground/10 pt-3">
+                <View className="flex-row items-center gap-6 border-t border-border/10 pt-3">
                   <TouchableOpacity className="flex-row items-center gap-1.5">
                     <Heart size={14} color={colors.mutedForeground} />
                     <Text className="text-muted-foreground text-xs font-semibold">{post.likes}</Text>
@@ -366,8 +366,8 @@ export default function ChatInboxScreen() {
 
       {/* Inyección de Publicidad AdBanner */}
       {!isLoadingAd && adBanner && (
-        <View className="bg-background/80 border border-muted-foreground/35 p-4 rounded-3xl shadow-sm mb-6 flex-row gap-4 items-center">
-          <Image source={{ uri: adBanner.media_url }} className="w-12 h-12 rounded-2xl border border-muted-foreground/20" />
+        <View className="bg-background/80 border border-border/35 p-4  shadow-sm mb-6 flex-row gap-4 items-center">
+          <Image source={{ uri: adBanner.media_url }} className="w-12 h-12  border border-border/20" />
           <View className="flex-1">
             <Text className="text-secondary text-[9px] font-black uppercase tracking-wider">Publicidad de Interés</Text>
             <Text className="text-foreground font-black text-xs mt-0.5">{adBanner.business_name}</Text>
@@ -377,7 +377,7 @@ export default function ChatInboxScreen() {
           </View>
           <TouchableOpacity
             onPress={() => adBanner.target_deeplink && router.push(adBanner.target_deeplink as any)}
-            className="bg-background/80 border border-muted-foreground/50 px-3 py-1.5 rounded-xs"
+            className="bg-background/80 border border-border/50 px-3 py-1.5 rounded-xs"
           >
             <Text className="text-secondary text-[9px] font-black uppercase">Visitar</Text>
           </TouchableOpacity>

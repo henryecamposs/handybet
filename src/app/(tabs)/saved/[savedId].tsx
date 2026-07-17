@@ -15,7 +15,7 @@ export default function SavedDetailScreen() {
       backRoute="/(tabs)/saved"
       onBack={() => router.back()}
     >
-      <View className="bg-background/80 p-6 rounded-3xl border border-muted-foreground mt-4">
+      <View className="bg-background/80 p-6  border border-border mt-4">
         <Text className="text-foreground text-sm leading-6">
           Aquí se muestra el contenido del elemento guardado con ID: {savedId}.
           Puedes integrar esto con los posts, noticias o cualquier otra entidad específica del backend.

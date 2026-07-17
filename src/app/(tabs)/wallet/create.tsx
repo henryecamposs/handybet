@@ -19,16 +19,16 @@ export default function CreateWalletScreen() {
         </View>
       </View>
 
-      <View className="bg-background/80 rounded-3xl p-6 border border-zinc-800 mb-8">
+      <View className="bg-background/80  p-6 border border-zinc-800 mb-8">
 
         {/* Tipo de Billetera */}
         <Text className="text-foreground font-bold text-xs uppercase mb-4">Tipo de Conexión</Text>
         <View className="flex-row gap-4 mb-8">
-          <TouchableOpacity className="flex-1 bg-background/80 border border-zinc-700 p-4 rounded-2xl items-center opacity-70">
+          <TouchableOpacity className="flex-1 bg-background/80 border border-border p-4  items-center opacity-70">
             <Wallet size={24} color="#71717a" className="mb-2" />
             <Text className="text-foreground font-bold text-center">Billetera Personal</Text>
           </TouchableOpacity>
-          <TouchableOpacity className="flex-1 bg-primary/20 border border-primary p-4 rounded-2xl items-center">
+          <TouchableOpacity className="flex-1 bg-primary/20 border border-primary p-4  items-center">
             <Store size={24} color="#caee26" className="mb-2" />
             <Text className="text-primary font-bold text-center">API Taquilla</Text>
             <View className="absolute -top-2 -right-2 bg-primary px-2 py-0.5 rounded-full">
@@ -44,7 +44,7 @@ export default function CreateWalletScreen() {
             <TextInput
               placeholder="Ej. Taquilla Centro Piso 1"
               placeholderTextColor="#52525b"
-              className="bg-background/80 text-foreground p-4 rounded-xs border border-zinc-700 font-medium"
+              className="bg-background/80 text-foreground p-4 rounded-xs border border-border font-medium"
             />
           </View>
 
@@ -54,12 +54,12 @@ export default function CreateWalletScreen() {
               placeholder="sk_live_XXXXXXXXXXXXXXXX"
               placeholderTextColor="#52525b"
               secureTextEntry
-              className="bg-background/80 text-foreground p-4 rounded-xs border border-zinc-700 font-medium font-mono"
+              className="bg-background/80 text-foreground p-4 rounded-xs border border-border font-medium font-mono"
             />
           </View>
         </View>
 
-        <View className="bg-amber-500/10 border border-amber-500/30 p-4 rounded-2xl mb-8 flex-row items-center">
+        <View className="bg-amber-500/10 border border-amber-500/30 p-4  mb-8 flex-row items-center">
           <ShieldAlert size={20} color="#f59e0b" className="mr-3" />
           <Text className="text-amber-400/80 text-xs flex-1">Nunca compartas tu API Key. Esto dará acceso a los retiros automáticos de tu programa de terceros.</Text>
         </View>

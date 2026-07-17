@@ -159,17 +159,17 @@ export default function MonetizacionAdsScreen() {
         <View className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start mb-12">
 
           {/* Registro de Anuncios */}
-          <View className="bg-background/80 border border-zinc-850 p-8 rounded-3xl shadow-xl w-full">
+          <View className="bg-background/80 border border-zinc-850 p-8  shadow-xl w-full">
             <Text className="text-white font-black text-lg mb-6">Pauta Publicitaria Comercial</Text>
 
             {validationError && (
-              <View className="bg-rose-500/10 border border-rose-500/20 p-4 rounded-2xl mb-4">
+              <View className="bg-rose-500/10 border border-rose-500/20 p-4  mb-4">
                 <Text className="text-rose-500 text-xs font-bold text-center">⚠️ {validationError}</Text>
               </View>
             )}
 
             {adSuccessMessage && (
-              <View className="bg-secondary/10 border border-secondary/20 p-4 rounded-2xl mb-4">
+              <View className="bg-secondary/10 border border-secondary/20 p-4  mb-4">
                 <Text className="text-secondary text-xs font-bold text-center">✓ {adSuccessMessage}</Text>
               </View>
             )}
@@ -182,7 +182,7 @@ export default function MonetizacionAdsScreen() {
                   placeholderTextColor="#64748b"
                   value={businessName}
                   onChangeText={setBusinessName}
-                  className="bg-background/80 border border-zinc-700 rounded-xs px-4 py-3 text-white font-bold"
+                  className="bg-background/80 border border-border rounded-xs px-4 py-3 text-white font-bold"
                 />
               </View>
 
@@ -194,7 +194,7 @@ export default function MonetizacionAdsScreen() {
                   value={businessRif}
                   onChangeText={setBusinessRif}
                   autoCapitalize="characters"
-                  className="bg-background/80 border border-zinc-700 rounded-xs px-4 py-3 text-white font-mono font-bold"
+                  className="bg-background/80 border border-border rounded-xs px-4 py-3 text-white font-mono font-bold"
                 />
               </View>
 
@@ -205,7 +205,7 @@ export default function MonetizacionAdsScreen() {
                   placeholderTextColor="#64748b"
                   value={businessContact}
                   onChangeText={setBusinessContact}
-                  className="bg-background/80 border border-zinc-700 rounded-xs px-4 py-3 text-white font-bold"
+                  className="bg-background/80 border border-border rounded-xs px-4 py-3 text-white font-bold"
                 />
               </View>
 
@@ -218,7 +218,7 @@ export default function MonetizacionAdsScreen() {
                   numberOfLines={3}
                   value={adCopy}
                   onChangeText={setAdCopy}
-                  className="bg-background/80 border border-zinc-700 rounded-xs px-4 py-3 text-white font-bold"
+                  className="bg-background/80 border border-border rounded-xs px-4 py-3 text-white font-bold"
                 />
               </View>
 
@@ -229,7 +229,7 @@ export default function MonetizacionAdsScreen() {
                   placeholderTextColor="#64748b"
                   value={mediaUrl}
                   onChangeText={setMediaUrl}
-                  className="bg-background/80 border border-zinc-700 rounded-xs px-4 py-3 text-white font-bold"
+                  className="bg-background/80 border border-border rounded-xs px-4 py-3 text-white font-bold"
                 />
               </View>
 
@@ -242,7 +242,7 @@ export default function MonetizacionAdsScreen() {
                     keyboardType="numeric"
                     value={costAmount}
                     onChangeText={setCostAmount}
-                    className="bg-background/80 border border-zinc-700 rounded-xs px-4 py-3 text-white font-bold"
+                    className="bg-background/80 border border-border rounded-xs px-4 py-3 text-white font-bold"
                   />
                 </View>
                 <View>
@@ -252,7 +252,7 @@ export default function MonetizacionAdsScreen() {
                     placeholderTextColor="#64748b"
                     value={targetDeeplink}
                     onChangeText={setTargetDeeplink}
-                    className="bg-background/80 border border-zinc-700 rounded-xs px-4 py-3 text-white font-bold"
+                    className="bg-background/80 border border-border rounded-xs px-4 py-3 text-white font-bold"
                   />
                 </View>
               </View>
@@ -261,7 +261,7 @@ export default function MonetizacionAdsScreen() {
             <TouchableOpacity
               onPress={handleRegisterAd}
               disabled={isSubmittingAd}
-              className="bg-secondary py-4 rounded-2xl items-center border border-secondary mt-6 active:scale-[0.98]"
+              className="bg-secondary py-4  items-center border border-secondary mt-6 active:scale-[0.98]"
             >
               {isSubmittingAd ? (
                 <ActivityIndicator color="#0f172a" />
@@ -272,7 +272,7 @@ export default function MonetizacionAdsScreen() {
           </View>
 
           {/* Egresos Pendientes / Ledger */}
-          <View className="bg-background/80 border border-zinc-850 p-8 rounded-3xl shadow-xl w-full">
+          <View className="bg-background/80 border border-zinc-850 p-8  shadow-xl w-full">
             <Text className="text-white font-black text-lg mb-6">Premios y Retiros por Liquidar</Text>
 
             {pendingWithdrawals.length === 0 ? (
@@ -286,7 +286,7 @@ export default function MonetizacionAdsScreen() {
                 {pendingWithdrawals.map((tx) => (
                   <View
                     key={tx.id}
-                    className="bg-background/60 border border-zinc-850 p-5 rounded-2xl flex-row justify-between items-center shadow-sm"
+                    className="bg-background/60 border border-zinc-850 p-5  flex-row justify-between items-center shadow-sm"
                   >
                     <View>
                       <Text className="text-white font-black text-sm">@{tx.username}</Text>

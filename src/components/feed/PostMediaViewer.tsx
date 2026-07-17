@@ -70,7 +70,7 @@ export default function PostMediaViewer({ post, visible, initialIndex = 0, onClo
           />
         ) : (
           <View className="w-full h-full justify-center items-center px-8 bg-background/80">
-            <View className="bg-primary/5 border border-primary/20 p-8 rounded-3xl w-full max-w-md items-center shadow-2xl relative overflow-hidden">
+            <View className="bg-primary/5 border border-border p-8  w-full max-w-md items-center shadow-2xl relative overflow-hidden">
               <View className="absolute -right-20 -top-20 w-48 h-48 bg-primary/5 rounded-full blur-3xl" />
               <View className="absolute -left-20 -bottom-20 w-48 h-48 bg-secondary/5 rounded-full blur-3xl" />
 
@@ -84,7 +84,7 @@ export default function PostMediaViewer({ post, visible, initialIndex = 0, onClo
 
               <TouchableOpacity
                 onPress={() => Linking.openURL('https://handybet-promo.com').catch(err => console.log(err))}
-                className="bg-primary w-full py-3.5 rounded-2xl flex-row justify-center items-center gap-2 hover:opacity-90"
+                className="bg-primary w-full py-3.5  flex-row justify-center items-center gap-2 hover:opacity-90"
               >
                 <Text className="text-primary-foreground font-black text-sm uppercase">Reclamar Bono</Text>
                 <ExternalLink size={16} color="#000" />

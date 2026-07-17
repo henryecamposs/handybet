@@ -49,7 +49,7 @@ export default function GameDetailScreen() {
     >
       {/* Detalle del Juego */}
       <View className="items-center mb-8">
-        <View className="w-24 h-24 rounded-3xl bg-background/80 items-center justify-center mb-4 border border-zinc-700 shadow-xl relative">
+        <View className="w-24 h-24  bg-background/80 items-center justify-center mb-4 border border-border shadow-xl relative">
           <Text className="text-4xl">{game.emoji}</Text>
           <View className="absolute -bottom-2 -right-2 bg-primary w-8 h-8 rounded-full border-4 border-zinc-950 items-center justify-center">
             <Shield size={12} color="#000" />
@@ -60,7 +60,7 @@ export default function GameDetailScreen() {
       </View>
 
       {/* Zona de Jugada Interactiva (Premium) */}
-      <View className="bg-background/80 p-6 rounded-3xl border border-zinc-800 mb-8">
+      <View className="bg-background/80 p-6  border border-zinc-800 mb-8">
         <View className="flex-row items-center gap-2 mb-4">
           <Sparkles size={18} color="#caee26" />
           <Text className="text-foreground font-bold text-base">Realizar Jugada</Text>

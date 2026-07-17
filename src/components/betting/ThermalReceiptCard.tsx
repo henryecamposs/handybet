@@ -12,7 +12,7 @@ export default function ThermalReceiptCard({ bet }: ThermalReceiptCardProps) {
   });
 
   return (
-    <View className="bg-neutral-50 p-6 rounded-2xl shadow-lg border border-neutral-200/80 max-w-sm w-full mx-auto my-4 relative overflow-hidden">
+    <View className="bg-neutral-50 p-6  shadow-lg border border-neutral-200/80 max-w-sm w-full mx-auto my-4 relative overflow-hidden">
       {/* Líneas simuladas de corte en los bordes superior/inferior */}
       <View className="absolute top-0 left-0 right-0 h-1.5 flex-row justify-around">
         {Array.from({ length: 20 }).map((_, i) => (

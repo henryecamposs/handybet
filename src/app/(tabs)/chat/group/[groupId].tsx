@@ -19,7 +19,7 @@ export default function GroupChatScreen() {
 
     const allChats = await localDB.chats.getAll();
     const chatData = allChats.find((c: any) => c.type === 'group' && c.group_id === groupId);
-    
+
     if (chatData) {
       // populate with users
       const populated = await Promise.all(
@@ -41,13 +41,13 @@ export default function GroupChatScreen() {
     <View className="flex-1 bg-background">
       {/* Header del Chat */}
       <View className="h-16 border-b border-zinc-800 flex-row items-center px-4 bg-background/50">
-        <TouchableOpacity 
-          className="mr-3" 
+        <TouchableOpacity
+          className="mr-3"
           onPress={() => router.replace('/(tabs)/grupos' as any)}
         >
           <ArrowLeft size={24} color="#fff" />
         </TouchableOpacity>
-        
+
         <View className="w-10 h-10 rounded-full bg-background/80 items-center justify-center mr-3">
           <Text className="text-xl">🏢</Text>
         </View>
@@ -56,7 +56,7 @@ export default function GroupChatScreen() {
           <Text className="text-foreground text-xs">{group.members.length} miembros</Text>
         </View>
         <TouchableOpacity
-          className="w-10 h-10 bg-background/80 rounded-full items-center justify-center border border-zinc-700 ml-2"
+          className="w-10 h-10 bg-background/80 rounded-full items-center justify-center border border-border ml-2"
           onPress={() => router.push(`/(tabs)/chat/group/${groupId}/info` as any)}
         >
           <Info size={18} color="#71717a" />
@@ -78,7 +78,7 @@ export default function GroupChatScreen() {
                   )}
                 </View>
               )}
-              <View className={`${isMe ? 'bg-primary rounded-tr-sm' : 'bg-background/80 rounded-tl-sm'} rounded-2xl p-3 max-w-[80%]`}>
+              <View className={`${isMe ? 'bg-primary rounded-tr-sm' : 'bg-background/80 rounded-tl-sm'}  p-3 max-w-[80%]`}>
                 {!isMe && <Text className="text-primary text-[10px] font-bold mb-1">{msg.sender_name}</Text>}
                 <Text className={isMe ? 'text-black font-medium' : 'text-foreground'}>{msg.content}</Text>
                 <Text className={`${isMe ? 'text-black/50' : 'text-muted-foreground'} text-[10px] mt-1 text-right`}>
@@ -99,7 +99,7 @@ export default function GroupChatScreen() {
           <TouchableOpacity className="p-2">
             <ImageIcon size={24} color="#71717a" />
           </TouchableOpacity>
-          <View className="flex-1 bg-background/80/80 rounded-full flex-row items-center px-4 min-h-[40px] mx-2 border border-zinc-700/50">
+          <View className="flex-1 bg-background/80/80 rounded-full flex-row items-center px-4 min-h-[40px] mx-2 border border-border/50">
             <TextInput
               className="flex-1 text-foreground outline-none"
               placeholder="Escribe un mensaje..."
