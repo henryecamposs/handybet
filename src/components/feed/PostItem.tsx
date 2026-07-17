@@ -83,6 +83,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                 });
               }}
               size="xs"
+              rounded="full"
               variant={isFollowing ? 'muted' : 'primary'}
               isActive={!isFollowing}
               hasBorder={true}
@@ -287,6 +288,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                 });
               }}
               size="xs"
+              rounded="full"
               variant={isFollowing ? 'muted' : 'primary'}
               isActive={!isFollowing}
               hasBorder={true}

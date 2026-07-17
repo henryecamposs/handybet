@@ -11,6 +11,7 @@ export interface IconButtonProps {
   isActive?: boolean;
   hasBorder?: boolean;
   iconColor?: string;
+  rounded?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'full';
   className?: string;
   style?: ViewStyle;
 }
@@ -24,6 +25,7 @@ export default function IconButton({
   isActive = false,
   hasBorder = true,
   iconColor,
+  rounded,
   className = '',
   style
 }: IconButtonProps) {
@@ -35,16 +37,18 @@ export default function IconButton({
   let iconSize = 18;
   
   if (isIconOnly) {
-    if (size === 'xs') { sizeClasses = 'w-6 h-6 rounded-full'; iconSize = 14; }
-    else if (size === 'sm') { sizeClasses = 'w-8 h-8 rounded-full'; iconSize = 16; }
-    else if (size === 'md') { sizeClasses = 'w-10 h-10 rounded-full'; iconSize = 18; }
-    else if (size === 'lg') { sizeClasses = 'w-12 h-12 rounded-full'; iconSize = 24; }
+    if (size === 'xs') { sizeClasses = 'w-6 h-6'; iconSize = 14; }
+    else if (size === 'sm') { sizeClasses = 'w-8 h-8'; iconSize = 16; }
+    else if (size === 'md') { sizeClasses = 'w-10 h-10'; iconSize = 18; }
+    else if (size === 'lg') { sizeClasses = 'w-12 h-12'; iconSize = 24; }
   } else {
-    if (size === 'xs') { sizeClasses = 'px-2 py-1.5 rounded-xs'; iconSize = 14; }
-    else if (size === 'sm') { sizeClasses = 'px-3 py-2 rounded-full'; iconSize = 16; }
-    else if (size === 'md') { sizeClasses = 'px-4 py-2 rounded-full'; iconSize = 18; }
-    else if (size === 'lg') { sizeClasses = 'px-6 py-3 rounded-full'; iconSize = 24; }
+    if (size === 'xs') { sizeClasses = 'px-2 py-1.5'; iconSize = 14; }
+    else if (size === 'sm') { sizeClasses = 'px-3 py-2'; iconSize = 16; }
+    else if (size === 'md') { sizeClasses = 'px-4 py-2'; iconSize = 18; }
+    else if (size === 'lg') { sizeClasses = 'px-6 py-3'; iconSize = 24; }
   }
+
+  const roundedClass = rounded ? `rounded-${rounded}` : (isIconOnly ? 'rounded-full' : (size === 'xs' ? 'rounded-xs' : 'rounded-full'));
 
   let bgClass = 'bg-background/80';
   let borderClass = hasBorder ? 'border border-border' : '';
@@ -75,7 +79,7 @@ export default function IconButton({
     <TouchableOpacity
       onPress={onPress}
       style={style}
-      className={`flex-row items-center justify-center transition-colors ${bgClass} ${borderClass} ${hoverClass} ${sizeClasses} ${className}`}
+      className={`flex-row items-center justify-center transition-colors ${bgClass} ${borderClass} ${hoverClass} ${sizeClasses} ${roundedClass} ${className}`}
     >
       {Icon && <Icon size={iconSize} color={textIconColor} />}
       {label && (
