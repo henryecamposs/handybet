@@ -5,6 +5,8 @@ import { Bookmark, Compass } from 'lucide-react-native';
 import { localDB } from '../../../lib/localDB';
 import { useThemeColors } from '../../../hooks/useThemeColors';
 import { HubLayout, SeccionLista, TabContainer } from '../../../components/layout/hub';
+import ListItem from '@/components/ui/ListItem';
+import IconButton from '@/components/ui/IconButton';
 
 export default function GuardadosScreen() {
   const [savedItems, setSavedItems] = useState<any[]>([]);
@@ -64,26 +66,30 @@ export default function GuardadosScreen() {
   };
 
   const renderSavedItem = (item: any) => (
-    <TouchableOpacity
+    <ListItem
       key={item.id}
+      title={item.title || item.name || 'Elemento Guardado'}
+      subtitle={getTypeName(item.type)?.toUpperCase()}
+      subtitleVariant="muted"
+      leftElement={
+        <View className="w-10 h-10 items-center justify-center rounded-full border border-border bg-background/80">
+          <Bookmark size={18} color={colors.foreground} />
+        </View>
+      }
+      rightElement={
+        <IconButton
+          icon={Bookmark}
+          onPress={() => handleItemPress(item)}
+          variant="ghost"
+          hasBorder={false}
+          size="sm"
+          rounded="full"
+          iconColor={colors.primary}
+        />
+      }
       onPress={() => handleItemPress(item)}
-      className="bg-background/80 p-1 mb-1 pb-2 border-b border-border flex-row justify-between items-center hover:bg-background/80/80 transition-colors mb-3"
-    >
-      <View className="flex-row items-center flex-1">
-        <View className="w-12 h-12  bg-background/80 items-center justify-center mr-4 ">
-          <Bookmark size={20} color={colors.foreground} />
-        </View>
-        <View>
-          <Text className="text-foreground font-bold text-base" numberOfLines={1}>
-            {item.title || item.name || 'Elemento Guardado'}
-          </Text>
-          <Text className="text-muted-foreground text-xs font-bold mt-1 uppercase">
-            {getTypeName(item.type)}
-          </Text>
-        </View>
-      </View>
-      <Bookmark size={18} color={colors.primary} fill={colors.primary} />
-    </TouchableOpacity>
+      className="mb-2 bg-background/80"
+    />
   );
 
   const emptyState = (

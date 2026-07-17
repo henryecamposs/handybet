@@ -75,6 +75,7 @@ export default function FollowsScreen() {
             variant={isFollowing ? 'muted' : 'primary'}
             isActive={!isFollowing}
             hasBorder={true}
+            size='xs'
             rounded="full"
           />
         }
