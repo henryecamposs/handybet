@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, Text, Image, TouchableOpacity, ScrollView, Modal } from 'react-native';
 import { MessageSquare, Share2, Bell, EyeOff, X, Trash2 } from 'lucide-react-native';
 import Logo from '../ui/Logo';
+import FloatingPopup from '../ui/FloatingPopup';
 import { useThemeColors, withOpacity } from '../../hooks/useThemeColors';
 import PostActionButtons from './PostActionButtons';
 import PostMediaCarousel from './PostMediaCarousel';
@@ -24,6 +25,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
   const { addToast } = useToastStore();
   const [layoutWidth, setLayoutWidth] = useState(0);
   const [showOptionsModal, setShowOptionsModal] = useState(false);
+  const optionsButtonRef = useRef<View>(null);
   const [isFollowing, setIsFollowing] = useState(false);
   const [isNotificationsEnabled, setIsNotificationsEnabled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
@@ -34,7 +36,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
 
   if (isHidden) {
     return (
-      <View className="bg-zinc-900/40 border border-border p-5  mb-6 flex-row items-center justify-between shadow-sm">
+      <View className="bg-muted border border-border p-5  mb-6 flex-row items-center justify-between shadow-sm">
         <Text className="text-zinc-400 text-xs font-bold">Publicación oculta de {post.author}</Text>
         <TouchableOpacity
           onPress={() => {
@@ -57,7 +59,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
     const displayText = isLongText && !expanded ? `${postText.slice(0, limit)}...` : postText;
 
     return (
-      <View className="bg-primary/5 border border-border p-4  mb-6 shadow-md flex-col">
+      <View className="bg-background border border-border p-4  mb-6 shadow-md flex-col">
         {/* Header: Mostrar avatar de usuario y nombre, seguir y el icono con popup */}
         <View className="flex-row items-center justify-between mb-3 relative z-50">
           <View className="flex-row items-center gap-3">
@@ -88,20 +90,27 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                 {isFollowing ? 'Siguiendo' : 'Seguir'}
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => setShowOptionsModal(!showOptionsModal)}>
+            <TouchableOpacity ref={optionsButtonRef} onPress={() => setShowOptionsModal(!showOptionsModal)}>
               <Text className="text-primary font-black text-xl px-1">⋮</Text>
             </TouchableOpacity>
           </View>
 
           {/* Menú desplegable local en movil */}
-          {showOptionsModal && (
-            <View className="absolute right-0 top-10 bg-background border border-border p-1.5  w-40 z-50 shadow-2xl">
+          <FloatingPopup
+            isVisible={showOptionsModal}
+            onClose={() => setShowOptionsModal(false)}
+            anchorRef={optionsButtonRef}
+            location="bottom"
+            size="sm"
+            bgColor="bg-background"
+          >
+            <View className="p-1.5 w-40">
               <TouchableOpacity
                 onPress={() => {
                   setShowOptionsModal(false);
                   onSharePress?.();
                 }}
-                className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-zinc-900 transition-colors"
+                className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-primary/20 transition-colors"
               >
                 <Share2 size={15} color={colors.foreground} />
                 <Text className="text-foreground text-xs font-semibold">Compartir</Text>
@@ -118,7 +127,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                     position: 'bottom'
                   });
                 }}
-                className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-zinc-900 transition-colors"
+                className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-primary/20 transition-colors"
               >
                 <Bell size={15} color={isNotificationsEnabled ? colors.primary : colors.foreground} />
                 <Text className={`text-xs font-semibold ${isNotificationsEnabled ? 'text-primary' : 'text-foreground'}`}>
@@ -136,7 +145,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                     position: 'bottom'
                   });
                 }}
-                className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-zinc-900 transition-colors"
+                className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-primary/20 transition-colors"
               >
                 <EyeOff size={15} color="#ef4444" />
                 <Text className="text-red-500 text-xs font-semibold">No mostrar</Text>
@@ -156,13 +165,13 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                     });
                   }
                 }}
-                className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-zinc-900 transition-colors mt-1 border-t border-zinc-800/50 pt-2"
+                className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-primary/20 transition-colors mt-1 border-t border-zinc-800/50 pt-2"
               >
                 <Trash2 size={15} color="#ef4444" />
                 <Text className="text-red-500 text-xs font-semibold">Eliminar</Text>
               </TouchableOpacity>
             </View>
-          )}
+          </FloatingPopup>
         </View>
 
         {/* Texto con límite de líneas y botón Ver más */}
@@ -279,15 +288,22 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                 {isFollowing ? 'Siguiendo' : 'Seguir'}
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => setShowOptionsModal(!showOptionsModal)}>
+            <TouchableOpacity ref={optionsButtonRef} onPress={() => setShowOptionsModal(!showOptionsModal)}>
               <Text className="text-primary font-black text-xl px-1">⋮</Text>
             </TouchableOpacity>
           </View>
         </View>
 
         {/* Menú desplegable local (estilo Popover desde el icono) */}
-        {showOptionsModal && (
-          <View className="absolute right-0 top-8 bg-background border border-border p-1.5  w-40 z-50 shadow-2xl">
+        <FloatingPopup
+          isVisible={showOptionsModal}
+          onClose={() => setShowOptionsModal(false)}
+          anchorRef={optionsButtonRef}
+          location="bottom"
+          size="sm"
+          bgColor="bg-background"
+        >
+          <View className="p-1.5 w-40">
             <TouchableOpacity
               onPress={() => {
                 setShowOptionsModal(false);
@@ -328,7 +344,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                   position: 'bottom'
                 });
               }}
-              className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-zinc-900 transition-colors"
+              className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-primary/20 transition-colors"
             >
               <EyeOff size={15} color="#ef4444" />
               <Text className="text-red-500 text-xs font-semibold">No mostrar</Text>
@@ -348,13 +364,13 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                   });
                 }
               }}
-              className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-zinc-900 transition-colors mt-1 border-t border-zinc-800/50 pt-2"
+              className="flex-row items-center gap-2.5 p-2 rounded-xs hover:bg-primary/20 transition-colors mt-1 border-t border-zinc-800/50 pt-2"
             >
               <Trash2 size={15} color="#ef4444" />
               <Text className="text-red-500 text-xs font-semibold">Eliminar</Text>
             </TouchableOpacity>
           </View>
-        )}
+        </FloatingPopup>
 
         {/* Texto clickable */}
         <TouchableOpacity activeOpacity={0.8} onPress={onCommentPress} className="mb-1">
