@@ -5,8 +5,21 @@ export const handyBetUsers = [
     password: 'admin', // En un entorno real esto estaría hasheado
     name: 'Administrador HandyBet',
     avatar: 'https://i.pravatar.cc/150?u=admin',
-    preferences: ['apuestas', 'publicidad', 'videos'],
+    bio: 'Explorando la red HandyBet. Jugador frecuente en La Imaginaria.',
     wallet_balance: 5000.00,
+    email: 'admin@handybet.com',
+    whatsapp: '+584121234567',
+    birthDate: '1995-05-15',
+    location: {
+      country: 'Venezuela',
+      state: 'Distrito Capital'
+    },
+    preferences: {
+      favoriteCategories: ['Deportes ⚽', 'Loterías & Animalitos 🎲'],
+      receiveNewsletter: true,
+      receiveNotifications: true,
+      acceptedTerms: false
+    }
   },
   {
     id: 'usr_joselin',
@@ -14,8 +27,21 @@ export const handyBetUsers = [
     password: 'password123',
     name: 'Joselin La Gata',
     avatar: 'https://i.pravatar.cc/150?u=joselin',
-    preferences: ['videos', 'media'],
+    bio: 'Creadora de contenido VIP y entusiasta del hipismo.',
     wallet_balance: 1200.50,
+    email: 'joselin@handybet.com',
+    whatsapp: '+584149876543',
+    birthDate: '2000-10-25',
+    location: {
+      country: 'Venezuela',
+      state: 'Miranda'
+    },
+    preferences: {
+      favoriteCategories: ['Hipismo 🏇', 'Casino 🎰'],
+      receiveNewsletter: false,
+      receiveNotifications: true,
+      acceptedTerms: true
+    }
   }
 ];
 
