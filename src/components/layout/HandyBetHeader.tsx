@@ -23,10 +23,10 @@ export default function HandyBetHeader() {
   };
 
   const navigationItems = [
-    { label: 'Inicio', path: '/(tabs)/feed', icon: Home },
-    { label: 'Canales', path: '/(tabs)/channels', icon: Tv },
-    { label: 'Guardados', path: '/favorites', icon: Bookmark },
-    { label: 'Juegos', path: '/(tabs)/games', icon: Gamepad2 },
+    { label: 'Inicio', path: '/(tabs)/feed', match: '/feed', icon: Home },
+    { label: 'Canales', path: '/(tabs)/channels', match: '/channels', icon: Tv },
+    { label: 'Guardados', path: '/favorites', match: '/favorites', icon: Bookmark },
+    { label: 'Juegos', path: '/(tabs)/games', match: '/games', icon: Gamepad2 },
   ];
 
   return (
@@ -47,13 +47,13 @@ export default function HandyBetHeader() {
       {/* Centro: Menú principal (Tabs superiores) */}
       <View className="flex-row items-center justify-center h-full gap-2">
         {navigationItems.map((item) => {
-          const isActive = pathname === item.path;
+          const isActive = pathname.startsWith(item.match);
           const IconComponent = item.icon;
           return (
             <TouchableOpacity
               key={item.path}
               onPress={() => router.push(item.path as any)}
-              className={`px-10 h-full items-center justify-center border-b-[3px] transition-colors ${isActive ? 'border-primary' : 'border-transparent hover:bg-background/80/50'}`}
+              className={`px-10 h-full items-center justify-center border-b-[3px] transition-colors ${isActive ? 'border-primary' : 'border-transparent hover:bg-background/50'}`}
             >
               <IconComponent size={28} color={colors.primary} />
             </TouchableOpacity>
