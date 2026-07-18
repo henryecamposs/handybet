@@ -11,6 +11,7 @@ import { localDB } from '../../lib/localDB';
 import { HubLayout, Carrusel, SeccionLista, PostContainer, TabContainer } from '../../components/layout/hub';
 import ListItem from '../../components/ui/ListItem';
 import IconButton from '../../components/ui/IconButton';
+import EmptyState from '../../components/ui/EmptyState';
 
 export default function GruposScreen() {
   const router = useRouter();
@@ -166,23 +167,21 @@ export default function GruposScreen() {
   };
 
   const emptyState = (
-    <View className="flex-1 items-center justify-center min-h-[40vh] border border-dashed border-border bg-background/50 rounded-2xl p-6 mt-2">
-      <Compass size={48} color="#52525b" className="mb-4" />
-      <Text className="text-foreground font-bold text-lg text-center">Aún no tienes grupos</Text>
-      <Text className="text-muted-foreground text-sm text-center mt-2 max-w-[250px]">
-        No hay grupos disponibles. Explora sugerencias o crea el tuyo.
-      </Text>
-    </View>
+    <EmptyState
+      icon={Compass}
+      title="Aún no tienes grupos"
+      description="No hay grupos disponibles. Explora sugerencias o crea el tuyo."
+      variant="dashed"
+    />
   );
 
   const emptyStateDiscover = (
-    <View className="flex-1 items-center justify-center min-h-[40vh] border border-dashed border-border bg-background/50 rounded-2xl p-6 mt-2">
-      <Compass size={48} color="#52525b" className="mb-4" />
-      <Text className="text-foreground font-bold text-lg text-center">No hay sugerencias</Text>
-      <Text className="text-muted-foreground text-sm text-center mt-2 max-w-[250px]">
-        No tenemos nuevas sugerencias por ahora. Vuelve más tarde.
-      </Text>
-    </View>
+    <EmptyState
+      icon={Compass}
+      title="No hay sugerencias"
+      description="No tenemos nuevas sugerencias por ahora. Vuelve más tarde."
+      variant="dashed"
+    />
   );
 
   const tabs = [
