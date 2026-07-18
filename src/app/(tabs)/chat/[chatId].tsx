@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, Platform } from 'react-native';
-import { ImageIcon } from 'lucide-react-native';
+import { ImageIcon, X } from 'lucide-react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import MessageContainer from '../../../components/chat/MessageContainer';
 import { MessageProps } from '../../../components/chat/MessageItem';
@@ -56,25 +56,28 @@ export default function ChatDetailScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       className="flex-1 bg-background"
     >
-      <View className="flex-1 pt-12">
+      <View className="flex-1 pt-2">
         {/* Cabecera del Chat */}
-        <View className="flex-row items-center justify-between px-6 pb-4 border-b border-border">
-          <View className="flex-row items-center gap-3">
-            <TouchableOpacity onPress={() => router.back()} className="p-1">
-              <Text className="text-foreground text-base font-black">◀</Text>
-            </TouchableOpacity>
+        <View className="flex-row items-center justify-between px-6 pb-2 border-b border-border">
+          <TouchableOpacity 
+            className="flex-row items-center gap-3 flex-1"
+            onPress={() => router.push(`/(tabs)/follows/${chatId}` as any)}
+          >
             <Image source={{ uri: 'https://placehold.co/100' }} className="w-10 h-10 rounded-full border border-border/50 shadow-sm" />
-          </View>
-          
-          <View className="items-end">
-            <Text className="text-foreground font-black text-sm">Soporte La Imaginaria</Text>
-            <Text className="text-secondary text-[10px] font-bold uppercase tracking-wider">En línea</Text>
-          </View>
+            <View>
+              <Text className="text-foreground font-black text-sm">Soporte La Imaginaria</Text>
+              <Text className="text-secondary text-[10px] font-bold uppercase tracking-wider">En línea</Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => router.push('/(tabs)/chat')} className="p-2 rounded-full bg-background/80 hover:bg-muted/50 transition-colors">
+            <X size={20} color="#64748b" />
+          </TouchableOpacity>
         </View>
 
         {/* Mensajes */}
-        <MessageContainer 
-          messages={messages} 
+        <MessageContainer
+          messages={messages}
           onDelete={(id) => setMessages(messages.filter(m => m.id !== id))}
         />
 

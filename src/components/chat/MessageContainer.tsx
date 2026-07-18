@@ -13,17 +13,17 @@ export default function MessageContainer({ messages, onDelete, onReply, onCopy }
   const scrollViewRef = useRef<ScrollView>(null);
 
   return (
-    <ScrollView 
+    <ScrollView
       ref={scrollViewRef}
-      className="flex-1 p-4" 
+      className="flex-1 p-2"
       contentContainerStyle={{ paddingBottom: 16 }}
       onContentSizeChange={() => scrollViewRef.current?.scrollToEnd({ animated: true })}
     >
       <View className="flex-1 justify-end">
         {messages.map((msg) => (
-          <MessageItem 
-            key={msg.id} 
-            msg={msg} 
+          <MessageItem
+            key={msg.id}
+            msg={msg}
             onDelete={onDelete}
             onReply={onReply}
             onCopy={onCopy}

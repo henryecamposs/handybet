@@ -30,7 +30,7 @@ export default function MessageItem({ msg, onDelete, onReply, onCopy }: MessageI
       onMouseEnter={() => Platform.OS === 'web' && setIsHovered(true)}
       // @ts-ignore
       onMouseLeave={() => Platform.OS === 'web' && setIsHovered(false)}
-      className={`mb-4 w-3/4 p-1 transition-colors rounded-2xl flex-row ${isHovered ? 'bg-muted/50' : ''} ${isMe ? 'ml-auto justify-end' : 'mr-auto justify-start'}`}
+      className={`mb-2 w-3/4 p-4 transition-colors rounded-xl flex-row ${isHovered ? 'bg-muted/50' : ''} ${isMe ? 'ml-auto justify-end' : 'mr-auto justify-start'}`}
     >
       {/* Floating Action Icons on Hover */}
       {isHovered && isMe && (
@@ -63,7 +63,7 @@ export default function MessageItem({ msg, onDelete, onReply, onCopy }: MessageI
 
       {/* Message Content Card */}
       <View
-        className={`w-full p-4 border border-border/50 rounded-2xl shadow-xs  ${isMe ? 'bg-secondary/10 border-secondary/20' : 'bg-background/80'
+        className={`w-full p-4 border border-border/50 rounded-xl shadow-sm  ${isMe ? 'bg-secondary/10 border-secondary/20' : 'bg-background/80'
           }`}
       >
         {msg.mediaUrl && (
