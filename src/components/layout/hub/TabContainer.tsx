@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 
 export interface TabItem {
   id: string;
-  label: string;
+  label: React.ReactNode | ((isActive: boolean) => React.ReactNode) | string;
   icon?: React.ReactNode;
   content: React.ReactNode;
 }
@@ -33,9 +33,15 @@ export default function TabContainer({ tabs, defaultTabId }: TabContainerProps) 
               }`}
             >
               {tab.icon}
-              <Text className={`font-black text-center mt-2 text-xs uppercase tracking-wider ${isActive ? 'text-primary' : 'text-foreground'}`}>
-                {tab.label}
-              </Text>
+              {typeof tab.label === 'string' ? (
+                <Text className={`font-black text-center mt-2 text-xs uppercase tracking-wider ${isActive ? 'text-primary' : 'text-foreground'}`}>
+                  {tab.label}
+                </Text>
+              ) : typeof tab.label === 'function' ? (
+                tab.label(isActive)
+              ) : (
+                tab.label
+              )}
             </TouchableOpacity>
           );
         })}

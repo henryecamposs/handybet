@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
-import { Users, Compass, MessageSquare, Plus } from 'lucide-react-native';
+import { Users, Compass, MessageSquare, Plus, Trash2, LayoutList } from 'lucide-react-native';
 import { handyBetGroups } from '../../mockdata/handyBetMock';
 import { useRouter } from 'expo-router';
 import { Modal, ActivityIndicator, ScrollView } from 'react-native';
@@ -122,40 +122,48 @@ export default function GruposScreen() {
           </View>
         }
         rightElement={
-          <IconButton
-            label="Ver Feed"
-            onPress={() => router.push(`/feed/search?id=${group.id}&from=group` as any)}
-            variant="ghost"
-            hasBorder={true}
-            size="xs"
-            rounded="full"
-          />
+          isMember ? (
+            <View className="flex-row gap-2 items-center">
+              <IconButton
+                icon={LayoutList}
+                onPress={() => router.push(`/feed/search?id=${group.id}&from=group` as any)}
+                variant="default"
+                size="xs"
+                rounded="full"
+              />
+              <IconButton
+                icon={MessageSquare}
+                onPress={() => router.push(`/chat/group/${group.id}` as any)}
+                variant="primary"
+                size="xs"
+                rounded="full"
+              />
+              <IconButton
+                icon={Trash2}
+                onPress={() => {
+                  setMisGrupos(misGrupos.filter((g) => g.id !== group.id));
+                }}
+                variant="destructive"
+                size="xs"
+                rounded="full"
+              />
+            </View>
+          ) : (
+            <IconButton
+              label="Ver Feed"
+              onPress={() => router.push(`/feed/search?id=${group.id}&from=group` as any)}
+              variant="ghost"
+              hasBorder={true}
+              size="xs"
+              rounded="full"
+            />
+          )
         }
         onPress={() => handleGroupClick(group as any)}
         className="mb-2 bg-background/80"
       />
     );
   };
-
-  const addGroupBar = (
-    <View className="flex-row items-center mb-6 mt-2">
-      <TextInput
-        placeholder="Unirte a un grupo por código..."
-        placeholderTextColor={colors.mutedForeground}
-        className="flex-1 bg-background/80 border border-border rounded-full px-4 h-12 text-foreground text-xs font-bold"
-      />
-      <View className="ml-2">
-        <IconButton
-          icon={Plus}
-          label="Agregar"
-          onPress={() => router.push('/(tabs)/grupos/create' as any)}
-          variant="primary"
-          size="sm"
-          rounded="full"
-        />
-      </View>
-    </View>
-  );
 
   const emptyState = (
     <View className="flex-1 items-center justify-center py-20 border border-dashed border-border bg-background/50 rounded-2xl">
@@ -170,10 +178,25 @@ export default function GruposScreen() {
   const tabs = [
     {
       id: 'my-groups',
-      label: 'Mis Grupos',
+      label: ((isActive: boolean) => (
+        <View className="flex-row items-center justify-center mt-2">
+          <Text className={`font-black text-center text-xs uppercase tracking-wider ${isActive ? 'text-primary' : 'text-foreground'}`}>
+            Mis Grupos
+          </Text>
+          <View className="-my-2 ml-1">
+            <IconButton
+              icon={Plus}
+              onPress={() => router.push('/(tabs)/grupos/create' as any)}
+              variant={isActive ? 'primary' : 'ghost'}
+              hasBorder={false}
+              size="xs"
+              rounded="full"
+            />
+          </View>
+        </View>
+      )),
       content: (
         <View className="mt-2">
-          {addGroupBar}
           <SeccionLista
             items={misGrupos}
             renderItem={renderGroupItem}
