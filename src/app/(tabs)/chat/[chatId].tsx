@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, Platform } from 'react-native';
+import { ImageIcon } from 'lucide-react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-
+import MessageContainer from '../../../components/chat/MessageContainer';
+import { MessageProps } from '../../../components/chat/MessageItem';
 export default function ChatDetailScreen() {
   const { chatId } = useLocalSearchParams();
   const router = useRouter();
-  const [messages, setMessages] = useState([
+  const [messages, setMessages] = useState<MessageProps[]>([
     {
       id: 1,
       sender: 'them',
@@ -25,7 +27,7 @@ export default function ChatDetailScreen() {
   const handleSend = () => {
     if (!inputText.trim()) return;
 
-    const newMsg = {
+    const newMsg: MessageProps = {
       id: messages.length + 1,
       sender: 'me',
       text: inputText.trim(),
@@ -39,8 +41,7 @@ export default function ChatDetailScreen() {
   const handleToggleRecord = () => {
     setIsRecording(!isRecording);
     if (isRecording) {
-      // Registrar nota de voz simulada
-      const newMsg = {
+      const newMsg: MessageProps = {
         id: messages.length + 1,
         sender: 'me',
         text: '🎤 Nota de voz (0:08)',
@@ -71,45 +72,34 @@ export default function ChatDetailScreen() {
         </View>
 
         {/* Mensajes */}
-        <ScrollView className="flex-1 p-4" contentContainerStyle={{ paddingBottom: 16 }}>
-          {messages.map((msg) => {
-            const isMe = msg.sender === 'me';
-            return (
-              <View
-                key={msg.id}
-                className={`mb-4 max-w-[80%]  p-4 ${isMe
-                  ? 'bg-secondary/10 border border-secondary/20 align-self-end ml-auto'
-                  : 'bg-background/80 border border-border align-self-start mr-auto'
-                  }`}
-              >
-                <Text className={`text-sm ${isMe ? 'text-secondary font-bold' : 'text-foreground'}`}>
-                  {msg.text}
-                </Text>
-                <Text className="text-[9px] text-foreground font-bold text-right mt-1.5 uppercase font-mono">
-                  {msg.time}
-                </Text>
-              </View>
-            );
-          })}
-        </ScrollView>
+        <MessageContainer 
+          messages={messages} 
+          onDelete={(id) => setMessages(messages.filter(m => m.id !== id))}
+        />
 
         {/* Caja de Entrada */}
         <View className="p-4 border-t border-border flex-row items-center gap-2 bg-background/40">
+          <TouchableOpacity
+            className="w-12 h-12 justify-center items-center bg-background/80 border border-border rounded-none hover:bg-muted/50 transition-colors"
+          >
+            <ImageIcon size={20} color="#64748b" />
+          </TouchableOpacity>
+
           <TextInput
             placeholder={isRecording ? 'Grabando audio...' : 'Escribe tu mensaje...'}
             placeholderTextColor="#64748b"
             editable={!isRecording}
             value={inputText}
             onChangeText={setInputText}
-            className="flex-1 bg-background/80 border border-border  px-4 py-3 text-white font-bold"
+            className="flex-1 bg-background/80 border border-border px-4 py-3 text-white font-bold rounded-none outline-none"
           />
 
           {/* Grabadora de Voz Nativa simulada */}
           <TouchableOpacity
             onPress={handleToggleRecord}
-            className={`w-12 h-12  justify-center items-center ${isRecording
+            className={`w-12 h-12 justify-center items-center rounded-none transition-colors ${isRecording
               ? 'bg-rose-500/20 border border-rose-500'
-              : 'bg-background/80 border border-border'
+              : 'bg-background/80 border border-border hover:bg-muted/50'
               }`}
           >
             <Text className="text-white text-base">{isRecording ? '⏹' : '🎤'}</Text>
