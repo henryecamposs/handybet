@@ -160,43 +160,42 @@ export default function WalletScreen() {
       title="Billeteras"
       subtitle="Gestiona tus fondos y taquillas."
       showBack={true}
+      heroBanner={
+        <View className="bg-card p-8 mb-4 border-b border-border items-center">
+          <View className="w-16 h-16 rounded-full bg-primary/10 items-center justify-center mb-4 border border-primary/20">
+            <Wallet size={32} color={colors.primary} />
+          </View>
+          <Text className="text-muted-foreground font-bold text-xs uppercase tracking-widest mb-2">Balance Global</Text>
+          <Text className="text-foreground font-black text-5xl mb-2 text-center">
+            1,240.50 <Text className="text-primary text-3xl font-bold">Bs</Text>
+          </Text>
+          <Text className="text-muted-foreground text-xs mb-8 text-center max-w-[200px]">Suma de todos tus fondos disponibles.</Text>
+
+          <View className="flex-row gap-4 w-full max-w-[300px] justify-center">
+            <View className="flex-1">
+              <IconButton
+                icon={ArrowDownLeft}
+                label="Recargar"
+                onPress={() => {}}
+                variant="primary"
+                rounded="full"
+              />
+            </View>
+            <View className="flex-1">
+              <IconButton
+                icon={ArrowUpRight}
+                label="Retirar"
+                onPress={() => {}}
+                variant="default"
+                hasBorder={true}
+                rounded="full"
+              />
+            </View>
+          </View>
+        </View>
+      }
       tabContainer={<TabContainer tabs={tabs} />}
-    >
-      {/* Hero Banner de Balance */}
-      <View className="bg-card p-8 mb-4 border-b border-border items-center">
-        <View className="w-16 h-16 rounded-full bg-primary/10 items-center justify-center mb-4 border border-primary/20">
-          <Wallet size={32} color={colors.primary} />
-        </View>
-        <Text className="text-muted-foreground font-bold text-xs uppercase tracking-widest mb-2">Balance Global</Text>
-        <Text className="text-foreground font-black text-5xl mb-2 text-center">
-          1,240.50 <Text className="text-primary text-3xl font-bold">Bs</Text>
-        </Text>
-        <Text className="text-muted-foreground text-xs mb-8 text-center max-w-[200px]">Suma de todos tus fondos disponibles.</Text>
-
-        <View className="flex-row gap-4 w-full max-w-[300px] justify-center">
-          <View className="flex-1">
-            <IconButton
-              icon={ArrowDownLeft}
-              label="Recargar"
-              onPress={() => {}}
-              variant="primary"
-              rounded="full"
-            />
-          </View>
-          <View className="flex-1">
-            <IconButton
-              icon={ArrowUpRight}
-              label="Retirar"
-              onPress={() => {}}
-              variant="default"
-              hasBorder={true}
-              rounded="full"
-            />
-          </View>
-        </View>
-      </View>
-
-    </HubLayout>
+    />
   );
 }
 
