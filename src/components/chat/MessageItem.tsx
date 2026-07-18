@@ -21,6 +21,10 @@ interface MessageItemProps {
 
 export default function MessageItem({ msg, onDelete, onReply, onCopy }: MessageItemProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const [showEmojis, setShowEmojis] = useState(false);
+  const [reaction, setReaction] = useState<string | null>(null);
+
+  const emojis = ['👍', '❤️', '😂', '😮', '😢'];
   const isMe = msg.sender === 'me';
   const colors = useThemeColors();
 
@@ -30,21 +34,31 @@ export default function MessageItem({ msg, onDelete, onReply, onCopy }: MessageI
       onMouseEnter={() => Platform.OS === 'web' && setIsHovered(true)}
       // @ts-ignore
       onMouseLeave={() => Platform.OS === 'web' && setIsHovered(false)}
-      className={`mb-2 w-3/4 p-4 transition-colors rounded-xl flex-row ${isHovered ? 'bg-muted/50' : ''} ${isMe ? 'ml-auto justify-end' : 'mr-auto justify-start'}`}
+      className={`w-3/4 p-3 transition-colors rounded-xl flex-row ${isHovered ? 'bg-muted/50' : ''} ${isMe ? 'ml-auto justify-end' : 'mr-auto justify-start'}`}
     >
       {/* Floating Action Icons on Hover */}
       {isHovered && isMe && (
-        <View className="flex-row items-center justify-center gap-1 mr-3 opacity-80 h-full">
-          <IconButton icon={Smile} onPress={() => {}} variant="ghost" rounded="full" iconColor={colors.mutedForeground} size="xs" hasBorder={false} />
+        <View className="flex-row items-center justify-center gap-1 mr-1 opacity-80 h-full">
+          <IconButton icon={Smile} onPress={() => setShowEmojis(!showEmojis)} variant="ghost" rounded="full" iconColor={colors.mutedForeground} size="xs" hasBorder={false} />
           <IconButton icon={Reply} onPress={() => onReply?.(msg.id)} variant="ghost" rounded="full" iconColor={colors.mutedForeground} size="xs" hasBorder={false} />
           <IconButton icon={Copy} onPress={() => onCopy?.(msg.text)} variant="ghost" rounded="full" iconColor={colors.mutedForeground} size="xs" hasBorder={false} />
           <IconButton icon={Trash2} onPress={() => onDelete?.(msg.id)} variant="ghost" rounded="full" iconColor={colors.destructive} size="xs" hasBorder={false} />
+          
+          {showEmojis && (
+            <View className="absolute -top-10 left-0 bg-popover border border-border px-2 py-1 flex-row gap-2 shadow-sm rounded-full z-50">
+              {emojis.map(e => (
+                <TouchableOpacity key={e} onPress={() => { setReaction(e); setShowEmojis(false); }}>
+                  <Text className="text-base">{e}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          )}
         </View>
       )}
 
       {/* Message Content Card */}
       <View
-        className={`w-full p-4 border border-border/50 rounded-xl shadow-sm  ${isMe ? 'bg-secondary/10 border-secondary/20' : 'bg-background/80'
+        className={`w-full p-2 border border-border/50 rounded-xl shadow-sm  ${isMe ? 'bg-primary/10 border-primary/20' : 'bg-background/80'
           }`}
       >
         {msg.mediaUrl && (
@@ -54,21 +68,38 @@ export default function MessageItem({ msg, onDelete, onReply, onCopy }: MessageI
             resizeMode="cover"
           />
         )}
-        <Text className={`text-sm leading-5 font-medium ${isMe ? 'text-secondary' : 'text-foreground'}`}>
+        <Text className={`text-sm leading-5 font-medium ${isMe ? 'text-primary' : 'text-foreground'}`}>
           {msg.text}
         </Text>
-        <Text className={`text-[9px] font-bold text-right mt-2 uppercase font-mono ${isMe ? 'text-secondary/70' : 'text-muted-foreground'}`}>
+        <Text className={`text-[9px] font-bold text-right mt-2 uppercase font-mono ${isMe ? 'text-primary/70' : 'text-muted-foreground'}`}>
           {msg.time}
         </Text>
+        
+        {/* Reaction */}
+        {reaction && (
+          <View className={`absolute -bottom-3 ${isMe ? '-left-3' : '-right-3'} bg-background border border-border/50 rounded-full w-6 h-6 items-center justify-center`}>
+            <Text className="text-xs">{reaction}</Text>
+          </View>
+        )}
       </View>
 
       {/* Floating Action Icons on Hover for 'Them' */}
       {isHovered && !isMe && (
         <View className="flex-row items-center justify-center gap-1 ml-3 opacity-80 h-full">
-          <IconButton icon={Smile} onPress={() => {}} variant="ghost" rounded="full" iconColor={colors.mutedForeground} size="xs" hasBorder={false} />
+          <IconButton icon={Smile} onPress={() => setShowEmojis(!showEmojis)} variant="ghost" rounded="full" iconColor={colors.mutedForeground} size="xs" hasBorder={false} />
           <IconButton icon={Reply} onPress={() => onReply?.(msg.id)} variant="ghost" rounded="full" iconColor={colors.mutedForeground} size="xs" hasBorder={false} />
           <IconButton icon={Copy} onPress={() => onCopy?.(msg.text)} variant="ghost" rounded="full" iconColor={colors.mutedForeground} size="xs" hasBorder={false} />
           <IconButton icon={Trash2} onPress={() => onDelete?.(msg.id)} variant="ghost" rounded="full" iconColor={colors.destructive} size="xs" hasBorder={false} />
+
+          {showEmojis && (
+            <View className="absolute -top-10 left-0 bg-popover border border-border px-2 py-1 flex-row gap-2 shadow-sm rounded-full z-50">
+              {emojis.map(e => (
+                <TouchableOpacity key={e} onPress={() => { setReaction(e); setShowEmojis(false); }}>
+                  <Text className="text-base">{e}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          )}
         </View>
       )}
     </View>

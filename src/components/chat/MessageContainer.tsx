@@ -15,7 +15,7 @@ export default function MessageContainer({ messages, onDelete, onReply, onCopy }
   return (
     <ScrollView
       ref={scrollViewRef}
-      className="flex-1 p-2"
+      className="flex-1 p-1"
       contentContainerStyle={{ paddingBottom: 16 }}
       onContentSizeChange={() => scrollViewRef.current?.scrollToEnd({ animated: true })}
     >
