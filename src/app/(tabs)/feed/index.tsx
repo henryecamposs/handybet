@@ -75,16 +75,6 @@ export default function FeedScreen() {
         let username = `@${p.author_id.slice(0, 8)}`;
         let avatar = p.author?.avatar_url || 'https://i.pravatar.cc/150';
 
-        if (p.channel) {
-          authorName = p.channel.name;
-          username = `@canal_${p.channel.id.slice(0, 8)}`;
-          avatar = 'https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?w=150&auto=format&fit=crop&q=60';
-        } else if (p.group) {
-          authorName = p.group.name;
-          username = `@grupo_${p.group.id.slice(0, 8)}`;
-          avatar = 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=150&auto=format&fit=crop&q=60';
-        }
-
         return {
           id: p.id,
           author: authorName,
@@ -146,16 +136,6 @@ export default function FeedScreen() {
         let authorName = 'Usuario';
         let username = '@usr_play';
         let avatar = 'https://i.pravatar.cc/150';
-
-        if (newPost.channel) {
-          authorName = newPost.channel.name;
-          username = `@canal_${newPost.channel_id?.slice(0, 8)}`;
-          avatar = 'https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?w=150&auto=format&fit=crop&q=60';
-        } else if (newPost.group) {
-          authorName = newPost.group.name;
-          username = `@grupo_${newPost.group_id?.slice(0, 8)}`;
-          avatar = 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=150&auto=format&fit=crop&q=60';
-        }
 
         const mockNewPost = {
           id: newPost.id,

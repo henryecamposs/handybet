@@ -168,12 +168,20 @@ export default function FeedSearchScreen() {
     targetChannelId?: string | null
   ): Promise<boolean> => {
     if (!content.trim() && (!mediaUrls || mediaUrls.length === 0)) return false;
+    let finalContent = content;
+    if (id && entity) {
+      const tag = `@${entity.name.replace(/\s+/g, '')}`;
+      if (!finalContent.includes(tag)) {
+        finalContent = `${finalContent} ${tag}`;
+      }
+    }
+
     try {
       const newPost = await socialService.createPost({
         author_id: mockSession?.id || 'usr_player1',
         group_id: targetGroupId || null,
         channel_id: targetChannelId || null,
-        content: content,
+        content: finalContent,
         visibility_level: visibility,
         post_type: type,
         payment_status: 'none_required'
@@ -313,13 +321,13 @@ export default function FeedSearchScreen() {
 
       <ScrollView className="flex-1 px-4 pt-4" showsVerticalScrollIndicator={false}>
         {/* Editor de publicaciones (CreatePostWidget) */}
-        {(entityType === 'channel' || entityType === 'group') && (
+        {id && entity && (
           <CreatePostWidget
             onPublish={handlePublishPost}
             forcedTarget={{
               id: entity.id,
               name: entity.name,
-              type: entityType
+              type: entityType as any
             }}
           />
         )}
@@ -331,10 +339,10 @@ export default function FeedSearchScreen() {
             <View style={{ height: 100 }} className="flex-row items-center justify-center border border-dashed border-border bg-primary/5 rounded-xl px-4 mb-6">
               <Compass size={24} color={colors.primary} className="mr-3" />
               <View className="flex-1">
-                <Text className="text-white font-black text-sm">
+                <Text className="text-foreground font-black text-sm">
                   Sin publicaciones para este {entityType === 'channel' ? 'canal' : entityType === 'group' ? 'grupo' : 'usuario'}
                 </Text>
-                <Text className="text-zinc-500 text-xs mt-0.5" numberOfLines={2}>
+                <Text className="text-muted-foreground text-xs mt-0.5" numberOfLines={2}>
                   Aún no se registran publicaciones en su feed.
                 </Text>
               </View>
