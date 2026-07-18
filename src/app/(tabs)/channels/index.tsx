@@ -3,10 +3,13 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { channelService } from '../../../services/channelService';
 import { Channel } from '../../../types/handyBet';
-import { Compass, Tv, Plus } from 'lucide-react-native';
+import { Compass, Tv, Plus, LayoutList, LogOut } from 'lucide-react-native';
 import { useThemeColors } from '../../../hooks/useThemeColors';
 import { localDB } from '../../../lib/localDB';
 import { HubLayout, Carrusel, SeccionLista, PostContainer, TabContainer } from '../../../components/layout/hub';
+import ListItem from '../../../components/ui/ListItem';
+import IconButton from '../../../components/ui/IconButton';
+import EmptyState from '../../../components/ui/EmptyState';
 
 export default function ChannelsScreen() {
   const router = useRouter();
@@ -54,111 +57,114 @@ export default function ChannelsScreen() {
     c.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const renderMyChannelCard = (channel: Channel) => (
-    <TouchableOpacity
-      key={channel.id}
-      onPress={() => router.push(`/(tabs)/channels/${channel.id}` as any)}
-      className="w-32 h-36 bg-card  border border-border items-center justify-center mr-4 hover:bg-background/80/80 transition-colors px-2"
-    >
-      <View className="w-12 h-12 rounded-full bg-background/80 items-center justify-center mb-2">
-        <Tv size={20} color={colors.mutedForeground} />
-      </View>
-      <Text className="text-foreground font-bold text-center text-sm px-1" numberOfLines={2}>
-        {channel.name}
-      </Text>
-      <Text className="text-secondary text-[10px] mt-1 font-bold">Oficial</Text>
-    </TouchableOpacity>
-  );
-
-  const renderDiscoverChannelCard = (channel: Channel) => (
-    <TouchableOpacity
-      key={channel.id}
-      onPress={() => router.push(`/(tabs)/channels/${channel.id}` as any)}
-      className="bg-background/80 border border-border p-4  flex-row justify-between items-center hover:bg-background/80/80 transition-colors"
-    >
-      <View className="flex-row items-center flex-1">
-        <View className="w-12 h-12 rounded-xs bg-background/80 items-center justify-center mr-4 border border-border">
-          <Tv size={20} color={colors.foreground} />
-        </View>
-        <View className="flex-1">
-          <Text className="text-foreground font-bold text-base" numberOfLines={1}>
-            {channel.name}
-          </Text>
-          <Text className="text-foreground text-xs mt-1" numberOfLines={1}>
-            Empresa de Apuestas Aliada
-          </Text>
-        </View>
-      </View>
-      <View className="w-8 h-8 rounded-full bg-background/80 items-center justify-center border border-border ml-2">
-        <Text className="text-foreground font-bold text-xs">▶</Text>
-      </View>
-    </TouchableOpacity>
-  );
+  const renderChannelItem = (channel: any) => {
+    const isMember = myChannels.some((c: Channel) => c.id === channel.id);
+    return (
+      <ListItem
+        key={channel.id}
+        title={channel.name}
+        subtitle="Empresa de Apuestas Aliada"
+        subtitleVariant="muted"
+        leftElement={
+          <View className="w-10 h-10 rounded-full bg-background/80 items-center justify-center border border-border">
+            <Tv size={18} color={isMember ? colors.primary : colors.mutedForeground} />
+          </View>
+        }
+        rightElement={
+          isMember ? (
+            <View className="flex-row gap-2 items-center">
+              <IconButton
+                icon={LayoutList}
+                onPress={() => router.push(`/(tabs)/channels/${channel.id}` as any)}
+                variant="default"
+                size="xs"
+                rounded="full"
+                hasBorder={true}
+              />
+              <IconButton
+                icon={LogOut}
+                onPress={() => {}}
+                variant="destructive"
+                size="xs"
+                rounded="full"
+                hasBorder={true}
+              />
+            </View>
+          ) : (
+            <IconButton
+              label="Ver Feed"
+              onPress={() => router.push(`/(tabs)/channels/${channel.id}` as any)}
+              variant="ghost"
+              hasBorder={true}
+              size="xs"
+              rounded="full"
+            />
+          )
+        }
+        onPress={() => router.push(`/(tabs)/channels/${channel.id}` as any)}
+        className="mb-2 bg-background/80"
+      />
+    );
+  };
 
   const emptyState = (
-    <View className="flex-1 items-center justify-center py-20 mt-4">
-      <Compass size={48} color="#52525b" className="mb-4" />
-      <Text className="text-foreground font-bold text-lg text-center">Aún no has creado canales</Text>
-      <Text className="text-foreground text-sm text-center mt-2 max-w-[250px]">
-        Crea tu propio canal oficial para organizar a tus usuarios y ofrecer servicios de apuestas.
-      </Text>
-    </View>
+    <EmptyState
+      icon={Compass}
+      title="Aún no tienes canales"
+      description="Crea tu propio canal oficial o explora el directorio."
+      variant="dashed"
+    />
+  );
+
+  const emptyStateDiscover = (
+    <EmptyState
+      icon={Compass}
+      title="No hay sugerencias"
+      description="No tenemos nuevos canales por ahora. Vuelve más tarde."
+      variant="dashed"
+    />
   );
 
   const tabs = [
     {
       id: 'my-channels',
-      label: 'Mis Canales',
+      label: ((isActive: boolean) => (
+        <View className="flex-row items-center justify-center mt-2">
+          <Text className={`font-black text-center text-xs uppercase tracking-wider ${isActive ? 'text-primary' : 'text-foreground'}`}>
+            Mis Canales ({myChannels.length})
+          </Text>
+          <View className="-my-2 ml-1">
+            <IconButton
+              icon={Plus}
+              onPress={() => router.push('/(tabs)/channels/create' as any)}
+              variant={isActive ? 'primary' : 'ghost'}
+              hasBorder={false}
+              size="lg"
+              rounded="full"
+            />
+          </View>
+        </View>
+      )),
       content: (
         <View className="mt-2">
-          {myChannels.length > 0 ? (
-            <View className="flex-row flex-wrap gap-4">
-              <TouchableOpacity
-                onPress={() => router.push('/(tabs)/channels/create' as any)}
-                className="w-[48%] h-36 bg-muted  border border-dashed border-border items-center justify-center hover:bg-background/80/80 transition-colors"
-              >
-                <View className="w-12 h-12 rounded-full bg-card items-center justify-center mb-2">
-                  <Plus size={24} color={colors.secondary} />
-                </View>
-                <Text className="text-foreground font-bold text-sm text-center">Crear Nuevo</Text>
-              </TouchableOpacity>
-              {myChannels.map((channel) => (
-                <TouchableOpacity
-                  key={channel.id}
-                  onPress={() => router.push(`/(tabs)/channels/${channel.id}` as any)}
-                  className="w-[48%] h-36 bg-card  border border-border items-center justify-center hover:bg-background/80/80 transition-colors px-2"
-                >
-                  <View className="w-12 h-12 rounded-full bg-background/80 items-center justify-center mb-2">
-                    <Tv size={20} color={colors.mutedForeground} />
-                  </View>
-                  <Text className="text-foreground font-bold text-center text-sm px-1" numberOfLines={2}>
-                    {channel.name}
-                  </Text>
-                  <Text className="text-secondary text-[10px] mt-1 font-bold">Oficial</Text>
-                </TouchableOpacity>
-              ))}
-            </View>
-          ) : (
-            <View className="flex-1">
-              <TouchableOpacity
-                onPress={() => router.push('/(tabs)/channels/create' as any)}
-                className="w-full bg-primary p-4  items-center justify-center mb-6"
-              >
-                <Text className="text-black font-black text-xs uppercase">Crear Nuevo Canal</Text>
-              </TouchableOpacity>
-              {emptyState}
-            </View>
-          )}
+          <SeccionLista
+            items={myChannels}
+            renderItem={renderChannelItem}
+            layout="list"
+            emptyState={emptyState}
+          />
         </View>
       ),
     },
     {
       id: 'discover',
-      label: 'Canales Sugeridos',
+      label: `Canales Sugeridos (${filteredDiscoverChannels.length})`,
       content: (
         <SeccionLista
           items={filteredDiscoverChannels}
-          renderItem={renderDiscoverChannelCard}
+          renderItem={renderChannelItem}
+          layout="list"
+          emptyState={emptyStateDiscover}
         />
       ),
     },
