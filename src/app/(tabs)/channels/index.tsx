@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { channelService } from '../../../services/channelService';
 import { Channel } from '../../../types/handyBet';
-import { Compass, Tv, Plus, LayoutList, LogOut, Bookmark, UserPlus } from 'lucide-react-native';
+import { Compass, Tv, Plus, LayoutList, LogOut, Bookmark, UserPlus, Users } from 'lucide-react-native';
 import { useThemeColors } from '../../../hooks/useThemeColors';
 import { localDB } from '../../../lib/localDB';
 import { HubLayout, Carrusel, SeccionLista, PostContainer, TabContainer } from '../../../components/layout/hub';
@@ -116,7 +116,14 @@ export default function ChannelsScreen() {
           ) : (
             <View className="flex-row gap-2 items-center">
               <IconButton
-                icon={LayoutList}
+                icon={Users}
+                onPress={() => router.push(`/(tabs)/channels/${channel.id}` as any)}
+                variant="ghost"
+                rounded="full"
+                hasBorder={true}
+              />
+              <IconButton
+                icon={Tv}
                 onPress={() => router.push(`/(tabs)/channels/${channel.id}` as any)}
                 variant="ghost"
                 rounded="full"

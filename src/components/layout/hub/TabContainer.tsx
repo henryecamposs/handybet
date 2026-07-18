@@ -62,7 +62,7 @@ function TabItemComponent({ tab, isActive, onPress }: { tab: TabItem; isActive: 
       onMouseEnter={() => Platform.OS === 'web' && setIsHovered(true)}
       // @ts-ignore - Web only
       onMouseLeave={() => Platform.OS === 'web' && setIsHovered(false)}
-      className={`flex-1 py-3 items-center justify-center transition-colors border-b-[3px] ${bgClass} ${borderClass}`}
+      className={`flex-1 py-1 items-center justify-center transition-colors border-b-[3px] ${bgClass} ${borderClass}`}
     >
       {tab.icon}
       {typeof tab.label === 'string' ? (
