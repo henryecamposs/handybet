@@ -89,8 +89,11 @@ export default function MessageItem({ msg, onDelete, onReply, onCopy }: MessageI
 
         {/* Reaction */}
         {reaction && (
-          <View className={`absolute -bottom-3 ${isMe ? '-right-3' : '-left-3'} bg-background border border-border/50 rounded-full w-6 h-6 items-center justify-center`}>
-            <Text className="text-xs">{reaction}</Text>
+          <View 
+            className={`absolute -bottom-4 right-2 bg-background border border-border rounded-full px-1.5 py-0.5 flex-row items-center justify-center shadow-sm`}
+            style={{ zIndex: 50, elevation: 5 }}
+          >
+            <Text className="text-sm">{reaction}</Text>
           </View>
         )}
       </View>
