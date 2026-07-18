@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, Image, TextInput, Platform } from 'react-native';
+import React, { useState } from 'react';
 import { useRouter, usePathname } from 'expo-router';
 import { Search, MessageCircle, Bell, Sun, Moon, Home, Tv, Bookmark, Gamepad2 } from 'lucide-react-native';
 import { useColorScheme } from 'nativewind';
@@ -48,36 +48,37 @@ export default function HandyBetHeader() {
       <View className="flex-row items-center justify-center h-full gap-2">
         {navigationItems.map((item) => {
           const isActive = pathname.startsWith(item.match);
-          const IconComponent = item.icon;
           return (
-            <TouchableOpacity
+            <HeaderTab
               key={item.path}
+              item={item}
+              isActive={isActive}
               onPress={() => router.push(item.path as any)}
-              className={`px-10 h-full items-center justify-center border-b-[3px] transition-colors ${isActive ? 'border-primary' : 'border-transparent hover:bg-background/50'}`}
-            >
-              <IconComponent size={28} color={isActive ? colors.primary : colors.mutedForeground} />
-            </TouchableOpacity>
+              colors={colors}
+            />
           );
         })}
       </View>
 
       {/* Derecha: Acciones y Perfil */}
       <View className="flex-row items-center justify-end w-[25%] gap-3">
-        <TouchableOpacity
+        <HeaderAction
+          icon={colorScheme === 'dark' ? Moon : Sun}
           onPress={handleToggleTheme}
-          className="w-10 h-10 rounded-full bg-background/80/80 items-center justify-center hover:bg-background/80 transition-colors border border-border/50"
+          colors={colors}
+        />
+        <HeaderAction
+          icon={MessageCircle}
+          colors={colors}
+        />
+        <HeaderAction
+          icon={Bell}
+          colors={colors}
         >
-          {colorScheme === 'dark' ? <Moon size={20} color="#d4d4d8" /> : <Sun size={20} color="#52525b" />}
-        </TouchableOpacity>
-        <TouchableOpacity className="w-10 h-10 rounded-full bg-background/80/80 items-center justify-center hover:bg-background/80 transition-colors border border-border/50">
-          <MessageCircle size={20} color="#d4d4d8" />
-        </TouchableOpacity>
-        <TouchableOpacity className="w-10 h-10 rounded-full bg-background/80/80 items-center justify-center hover:bg-background/80 transition-colors border border-border/50 relative">
-          <Bell size={20} color="#d4d4d8" />
           <View className="absolute -top-1 -right-1 w-4 h-4 bg-primary rounded-full border-2 border-border items-center justify-center">
             <Text className="text-[9px] font-black text-black">2</Text>
           </View>
-        </TouchableOpacity>
+        </HeaderAction>
         <TouchableOpacity onPress={() => router.push('/(tabs)/profile')} className="ml-2 flex-row items-center hover:bg-background/80/50 p-1 rounded-full transition-colors border border-transparent hover:border-border/50 pr-3">
           <Image
             source={{ uri: mockSession?.avatar || 'https://i.pravatar.cc/150' }}
@@ -87,5 +88,41 @@ export default function HandyBetHeader() {
         </TouchableOpacity>
       </View>
     </View>
+  );
+}
+
+function HeaderTab({ item, isActive, onPress, colors }: { item: any, isActive: boolean, onPress: () => void, colors: any }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const IconComponent = item.icon;
+  
+  const iconColor = isActive ? colors.primary : (isHovered ? colors.secondary : colors.mutedForeground);
+  
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      onMouseEnter={() => Platform.OS === 'web' && setIsHovered(true)}
+      onMouseLeave={() => Platform.OS === 'web' && setIsHovered(false)}
+      className={`px-10 h-full items-center justify-center border-b-[3px] transition-colors ${isActive ? 'border-primary' : (isHovered ? 'border-secondary bg-background/50' : 'border-transparent hover:bg-background/50')}`}
+    >
+      <IconComponent size={28} color={iconColor} />
+    </TouchableOpacity>
+  );
+}
+
+function HeaderAction({ icon: Icon, onPress, colors, children }: { icon: any, onPress?: () => void, colors: any, children?: React.ReactNode }) {
+  const [isHovered, setIsHovered] = useState(false);
+  
+  const iconColor = isHovered ? colors.secondary : colors.mutedForeground;
+  
+  return (
+    <TouchableOpacity 
+      onPress={onPress}
+      onMouseEnter={() => Platform.OS === 'web' && setIsHovered(true)}
+      onMouseLeave={() => Platform.OS === 'web' && setIsHovered(false)}
+      className={`w-10 h-10 rounded-full items-center justify-center transition-colors border border-border/50 ${isHovered ? 'bg-background/80' : 'bg-background/80/80'}`}
+    >
+      <Icon size={20} color={iconColor} />
+      {children}
+    </TouchableOpacity>
   );
 }
