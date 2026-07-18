@@ -147,11 +147,11 @@ export default function GruposScreen() {
                 hasBorder={true}
               />
               <IconButton
-                icon={LogOut}
+                label="Siguiendo"
                 onPress={() => {
                   setMisGrupos(misGrupos.filter((g) => g.id !== group.id));
                 }}
-                variant="destructive"
+                variant="ghost"
                 rounded="full"
                 hasBorder={true}
               />
