@@ -100,7 +100,9 @@ function HeaderTab({ item, isActive, onPress, colors }: { item: any, isActive: b
   return (
     <TouchableOpacity
       onPress={onPress}
+      // @ts-ignore
       onMouseEnter={() => Platform.OS === 'web' && setIsHovered(true)}
+      // @ts-ignore
       onMouseLeave={() => Platform.OS === 'web' && setIsHovered(false)}
       className={`px-10 h-full items-center justify-center border-b-[3px] transition-colors ${isActive ? 'border-primary' : (isHovered ? 'border-secondary bg-background/50' : 'border-transparent hover:bg-background/50')}`}
     >
@@ -117,7 +119,9 @@ function HeaderAction({ icon: Icon, onPress, colors, children }: { icon: any, on
   return (
     <TouchableOpacity
       onPress={onPress}
+      // @ts-ignore
       onMouseEnter={() => Platform.OS === 'web' && setIsHovered(true)}
+      // @ts-ignore
       onMouseLeave={() => Platform.OS === 'web' && setIsHovered(false)}
       className={`w-10 h-10 rounded-full items-center justify-center transition-colors ${isHovered ? 'bg-muted border border-secondary' : 'bg-background'}`}
     >

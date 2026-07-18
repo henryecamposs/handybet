@@ -154,7 +154,7 @@ export default function CreatePostWidget({ onPublish, forcedTarget }: CreatePost
   return (
     <View className="mb-6">
       {/* Barra reducida de creación (vista por defecto) */}
-      <View className="bg-primary/20 border border-primary/5 p-2  flex-row items-center justify-between shadow-sm">
+      <View className="bg-primary/20 border border-primary/5 p-2 rounded-full flex-row items-center justify-between shadow-sm">
         <View className="flex-row items-center flex-1 gap-3">
           <Image
             source={{ uri: mockSession?.avatar || 'https://i.pravatar.cc/150' }}
@@ -328,7 +328,7 @@ export default function CreatePostWidget({ onPublish, forcedTarget }: CreatePost
                   setShowUploadModal(true);
                 }}
               >
-                <Video size={18} color="#f43f5e" />
+                <Video size={18} color={colors.destructive} />
                 <Text className="text-foreground text-xs font-bold">Video</Text>
               </TouchableOpacity>
               <TouchableOpacity

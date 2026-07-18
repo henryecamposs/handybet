@@ -72,7 +72,7 @@ export default function SidebarPopover({ icon, label, items, onViewAll, viewAllP
       <FloatingPopup
         isVisible={isVisible}
         onClose={handleClose}
-        anchorRef={buttonRef}
+        anchorRef={buttonRef as React.RefObject<View>}
         title={label}
         titleRightLabel="Ver todos"
         onTitleRightPress={handleViewAll}

@@ -42,7 +42,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
         <TouchableOpacity
           onPress={() => {
             setIsHidden(false);
-            addToast({ title: "Publicación restaurada", variant: "success", position: "bottom" });
+            addToast({ title: 'Este anuncio ya no está disponible', variant: 'success', position: "bottom" });
           }}
           className="bg-primary/20 px-3.5 py-1.5 rounded-full border border-border"
         >
@@ -97,7 +97,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
           <FloatingPopup
             isVisible={showOptionsModal}
             onClose={() => setShowOptionsModal(false)}
-            anchorRef={optionsButtonRef}
+            anchorRef={optionsButtonRef as React.RefObject<View>}
             location="bottom"
             size="sm"
             bgColor="bg-background"
@@ -166,8 +166,8 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                     } else {
                       setIsHidden(true);
                       addToast({
-                        title: "Publicación eliminada",
-                        variant: 'destructive',
+                        title: "Anuncio eliminado",
+                        variant: 'danger',
                         position: 'bottom'
                       });
                     }
@@ -303,7 +303,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
         <FloatingPopup
           isVisible={showOptionsModal}
           onClose={() => setShowOptionsModal(false)}
-          anchorRef={optionsButtonRef}
+          anchorRef={optionsButtonRef as React.RefObject<View>}
           location="bottom"
           size="sm"
           bgColor="bg-background"
@@ -373,7 +373,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                     setIsHidden(true);
                     addToast({
                       title: "Publicación eliminada",
-                      variant: 'destructive',
+                      variant: 'danger',
                       position: 'bottom'
                     });
                   }

@@ -60,7 +60,7 @@ export default function ListItem({
 
   const containerClasses = `flex-row items-center justify-between px-2 py-3 hover:bg-primary/5 transition-colors ${hasBorderBottom ? 'border-b border-border' : ''} ${bgClass} ${className}`;
 
-  const InnerContent = () => (
+  const innerJSX = (
     <View className="flex-row items-center flex-1">
       {leftElement ? (
         <View className="mr-3">
@@ -91,7 +91,7 @@ export default function ListItem({
         className={containerClasses}
         style={style}
       >
-        <InnerContent />
+        {innerJSX}
         {rightElement && (
           <View className="flex-row gap-2 ml-2">
             {rightElement}
@@ -103,7 +103,7 @@ export default function ListItem({
 
   return (
     <View className={containerClasses} style={style}>
-      <InnerContent />
+      {innerJSX}
       {rightElement && (
         <View className="flex-row gap-2 ml-2">
           {rightElement}

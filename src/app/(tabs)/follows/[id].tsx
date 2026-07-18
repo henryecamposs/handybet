@@ -41,7 +41,7 @@ export default function FollowDetailScreen() {
     localDB.posts.getAll().then((allPosts) => {
       setUserPosts(allPosts.filter((post: any) => post.author?.username === user.username));
     });
-    
+
     if (mockSession?.id) {
       socialService.getSuggestedUsers(mockSession.id).then(users => {
         setSuggestedUsers(users);
@@ -58,11 +58,11 @@ export default function FollowDetailScreen() {
 
   const renderSuggestedActions = () => (
     <View className="flex-row items-center gap-1">
-      <IconButton icon={Eye} variant="ghost" rounded="full" onPress={() => {}} />
-      <IconButton icon={MessageCircle} variant="ghost" rounded="full" onPress={() => {}} />
-      <IconButton icon={Bookmark} variant="ghost" rounded="full" onPress={() => {}} />
+      <IconButton icon={LayoutList} variant="ghost" rounded="full" onPress={() => { }} />
+      <IconButton icon={MessageCircle} variant="ghost" rounded="full" onPress={() => { }} />
+      <IconButton icon={Bookmark} variant="ghost" rounded="full" onPress={() => { }} />
       <View className="ml-1">
-        <IconButton icon={UserPlus} label="Seguir" variant="primary" rounded="full" onPress={() => {}} />
+        <IconButton icon={UserPlus} label="Seguir" variant="primary" rounded="full" onPress={() => { }} />
       </View>
     </View>
   );
@@ -169,11 +169,11 @@ export default function FollowDetailScreen() {
         <View>
           <EmptyState title="No sigues a nadie aún." icon={User} variant="dashed" />
           <View className="mt-6">
-            <SeccionLista 
+            <SeccionLista
               title="Sugerencias para seguir"
               items={suggestedUsers}
               renderItem={(u, index) => (
-                <ListItem 
+                <ListItem
                   key={u.id || index}
                   title={u.name}
                   subtitle={`@${u.username}`}
@@ -193,11 +193,11 @@ export default function FollowDetailScreen() {
         <View>
           <EmptyState title="No perteneces a ningún grupo." icon={Users} variant="dashed" />
           <View className="mt-6">
-            <SeccionLista 
+            <SeccionLista
               title="Grupos sugeridos"
               items={suggestedGroups}
               renderItem={(g, index) => (
-                <ListItem 
+                <ListItem
                   key={g.id || index}
                   title={g.name}
                   subtitle={`${g.members?.length || 0} miembros`}

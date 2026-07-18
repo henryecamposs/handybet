@@ -91,7 +91,9 @@ export default function IconButton({
   return (
     <TouchableOpacity
       onPress={onPress}
+      // @ts-ignore - Web only
       onMouseEnter={() => Platform.OS === 'web' && setIsHovered(true)}
+      // @ts-ignore - Web only
       onMouseLeave={() => Platform.OS === 'web' && setIsHovered(false)}
       style={style}
       className={`flex-row items-center justify-center transition-colors ${bgClass} ${borderClass} ${sizeClasses} ${roundedClass} ${className}`}

@@ -60,7 +60,9 @@ export default function PostActionButton({
   return (
     <TouchableOpacity
       onPress={onPress}
+      // @ts-ignore
       onMouseEnter={handleMouseEnter}
+      // @ts-ignore
       onMouseLeave={handleMouseLeave}
       className={`flex-row items-center gap-1.5 rounded-full transition-colors ${pxClass} ${isHovered ? 'bg-muted' : ''}`}
     >

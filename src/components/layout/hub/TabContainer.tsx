@@ -58,7 +58,9 @@ function TabItemComponent({ tab, isActive, onPress }: { tab: TabItem; isActive: 
   return (
     <TouchableOpacity
       onPress={onPress}
+      // @ts-ignore - Web only
       onMouseEnter={() => Platform.OS === 'web' && setIsHovered(true)}
+      // @ts-ignore - Web only
       onMouseLeave={() => Platform.OS === 'web' && setIsHovered(false)}
       className={`flex-1 py-3 items-center justify-center transition-colors border-b-[3px] ${bgClass} ${borderClass}`}
     >
