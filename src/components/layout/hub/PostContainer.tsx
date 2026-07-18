@@ -23,11 +23,11 @@ export default function PostContainer({
 
   return (
     <View className="mb-8 mt-6">
-      <View className="flex-row justify-between items-center mb-4">
-        <Text className="text-foreground font-black text-lg uppercase tracking-wider">{title}</Text>
+      <View className="flex-row justify-between bg-muted items-center mb-4 p-2">
+        <Text className="text-foreground font-semibold text-lig uppercase tracking-wider  ">{title}</Text>
         {onViewAll && (
           <TouchableOpacity onPress={onViewAll}>
-            <Text className="text-primary text-[10px] font-black uppercase">{viewAllLabel}</Text>
+            <Text className="text-muted-foreground text-xs font-bold  hover:text-secondary">{viewAllLabel}</Text>
           </TouchableOpacity>
         )}
       </View>
@@ -66,8 +66,8 @@ export default function PostContainer({
               isLiked={false}
               onLikeToggle={() => onLikeToggle?.(rawPost.id)}
               onCommentPress={() => onCommentPress?.(rawPost.id)}
-              onSharePress={() => {}}
-              onSavePress={() => {}}
+              onSharePress={() => { }}
+              onSavePress={() => { }}
             />
           );
         })}

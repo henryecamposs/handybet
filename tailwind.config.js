@@ -47,6 +47,7 @@ module.exports = {
           foreground: "oklch(var(--destructive-foreground) / <alpha-value>)",
         },
         border: "oklch(var(--border) / <alpha-value>)",
+        "border-muted": "oklch(var(--border-muted) / <alpha-value>)",
         input: "oklch(var(--input) / <alpha-value>)",
         ring: "oklch(var(--ring) / <alpha-value>)",
       },
