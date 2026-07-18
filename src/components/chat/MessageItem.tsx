@@ -10,6 +10,11 @@ export interface MessageProps {
   text: string;
   time: string;
   mediaUrl?: string;
+  replyTo?: {
+    id: string | number;
+    text: string;
+    sender: 'me' | 'them';
+  };
 }
 
 interface MessageItemProps {
@@ -37,7 +42,7 @@ export default function MessageItem({ msg, onDelete, onReply, onCopy }: MessageI
       className={`w-3/4 p-3 transition-colors rounded-xl flex-row ${isHovered ? 'bg-muted/50' : ''} ${isMe ? 'ml-auto justify-end' : 'mr-auto justify-start'}`}
     >
       {/* Floating Action Icons on Hover */}
-      {isHovered && isMe && (
+      {(isHovered || showEmojis) && isMe && (
         <View className="flex-row items-center justify-center gap-1 mr-1 opacity-80 h-full">
           <IconButton icon={Smile} onPress={() => setShowEmojis(!showEmojis)} variant="ghost" rounded="full" iconColor={colors.mutedForeground} size="xs" hasBorder={false} />
           <IconButton icon={Reply} onPress={() => onReply?.(msg.id)} variant="ghost" rounded="full" iconColor={colors.mutedForeground} size="xs" hasBorder={false} />
@@ -61,6 +66,13 @@ export default function MessageItem({ msg, onDelete, onReply, onCopy }: MessageI
         className={`w-full p-2 border border-border/50 rounded-xl shadow-sm  ${isMe ? 'bg-primary/10 border-primary/20' : 'bg-background/80'
           }`}
       >
+        {msg.replyTo && (
+          <View className="mb-2 pl-2 border-l-4 border-primary bg-background/30 py-1 px-2 rounded-r-md">
+            <Text className="text-xs font-bold text-primary">{msg.replyTo.sender === 'me' ? 'Tú' : 'Soporte La Imaginaria'}</Text>
+            <Text className="text-xs text-muted-foreground" numberOfLines={1}>{msg.replyTo.text}</Text>
+          </View>
+        )}
+
         {msg.mediaUrl && (
           <Image
             source={{ uri: msg.mediaUrl }}
@@ -84,7 +96,7 @@ export default function MessageItem({ msg, onDelete, onReply, onCopy }: MessageI
       </View>
 
       {/* Floating Action Icons on Hover for 'Them' */}
-      {isHovered && !isMe && (
+      {(isHovered || showEmojis) && !isMe && (
         <View className="flex-row items-center justify-center gap-1 ml-3 opacity-80 h-full">
           <IconButton icon={Smile} onPress={() => setShowEmojis(!showEmojis)} variant="ghost" rounded="full" iconColor={colors.mutedForeground} size="xs" hasBorder={false} />
           <IconButton icon={Reply} onPress={() => onReply?.(msg.id)} variant="ghost" rounded="full" iconColor={colors.mutedForeground} size="xs" hasBorder={false} />

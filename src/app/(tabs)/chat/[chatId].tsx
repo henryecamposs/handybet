@@ -55,6 +55,11 @@ export default function ChatDetailScreen() {
       sender: 'me',
       text: inputText.trim(),
       time: new Date().toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit', hour12: true }),
+      replyTo: replyingTo ? {
+        id: replyingTo.id,
+        text: replyingTo.text,
+        sender: replyingTo.sender,
+      } : undefined,
     };
 
     setMessages([...messages, newMsg]);
