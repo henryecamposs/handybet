@@ -134,7 +134,7 @@ export default function GruposScreen() {
               />
               <IconButton
                 icon={MessageCircle}
-                onPress={() => router.push(`/chat/group/${group.id}` as any)}
+                onPress={() => router.push(`/chat/${group.id}?fromType=group` as any)}
                 variant="default"
                 rounded="full"
                 hasBorder={true}

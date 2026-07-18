@@ -104,7 +104,7 @@ export default function FollowsScreen() {
                     <>
                       <IconButton
                         icon={MessageCircle}
-                        onPress={() => router.push(`/chat/follow/${user.id}` as any)}
+                        onPress={() => router.push(`/chat/${user.id}?fromType=user` as any)}
                         variant="default"
                       />
                       <IconButton

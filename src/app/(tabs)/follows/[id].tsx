@@ -41,7 +41,7 @@ const SuggestedItemActions = ({ item, type, router }: { item: any; type: 'user' 
   };
 
   const handleChat = () => {
-    router.push(`/chat/${type === 'user' ? 'direct' : 'group'}/${item.id}` as any);
+    router.push(`/chat/${item.id}?fromType=${type === 'user' ? 'user' : 'group'}` as any);
   };
 
   const handleViewPosts = () => {
@@ -90,7 +90,7 @@ export default function FollowDetailScreen() {
   };
 
   const handleMessagePress = () => {
-    router.push(`/chat/follow/${id}` as any);
+    router.push(`/chat/${id}?fromType=user` as any);
   };
 
   const [userPosts, setUserPosts] = React.useState<any[]>([]);
