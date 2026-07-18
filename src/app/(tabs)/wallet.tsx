@@ -45,15 +45,14 @@ export default function WalletScreen() {
           </View>
           <IconButton
             icon={MessageCircle}
-            onPress={() => {}}
+            onPress={() => { }}
             variant="ghost"
-            size="xs"
             rounded="full"
             hasBorder={true}
           />
         </View>
       }
-      onPress={() => {}}
+      onPress={() => { }}
       className="mb-2 bg-background/80"
     />
   );
@@ -74,14 +73,13 @@ export default function WalletScreen() {
           <Text className="text-primary font-bold text-lg">{item.amount}</Text>
           <IconButton
             label="Cobrar"
-            onPress={() => {}}
+            onPress={() => { }}
             variant="secondary"
-            size="xs"
             rounded="full"
           />
         </View>
       }
-      onPress={() => {}}
+      onPress={() => { }}
       className="mb-2 bg-background/80"
     />
   );
@@ -109,7 +107,7 @@ export default function WalletScreen() {
           {item.type === 'in' && (
             <IconButton
               icon={Eye}
-              onPress={() => {}}
+              onPress={() => { }}
               variant="ghost"
               size="xs"
               rounded="full"
@@ -118,7 +116,7 @@ export default function WalletScreen() {
           )}
         </View>
       }
-      onPress={() => {}}
+      onPress={() => { }}
       className="mb-2 bg-background/80"
     />
   );
@@ -198,7 +196,7 @@ export default function WalletScreen() {
               <IconButton
                 icon={ArrowDownLeft}
                 label="Recargar"
-                onPress={() => {}}
+                onPress={() => { }}
                 variant="primary"
                 rounded="full"
               />
@@ -207,7 +205,7 @@ export default function WalletScreen() {
               <IconButton
                 icon={ArrowUpRight}
                 label="Retirar"
-                onPress={() => {}}
+                onPress={() => { }}
                 variant="default"
                 hasBorder={true}
                 rounded="full"

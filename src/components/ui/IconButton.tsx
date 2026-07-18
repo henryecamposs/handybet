@@ -7,7 +7,7 @@ export interface IconButtonProps {
   label?: string;
   onPress: () => void;
   size?: 'xs' | 'sm' | 'md' | 'lg';
-  variant?: 'primary' | 'destructive' | 'ghost' | 'muted' | 'default';
+  variant?: 'primary' | 'secondary' | 'destructive' | 'ghost' | 'muted' | 'default';
   isActive?: boolean;
   hasBorder?: boolean;
   iconColor?: string;
@@ -60,6 +60,10 @@ export default function IconButton({
     textIconColor = iconColor || colors.destructive;
     textClass = 'text-destructive';
     hoverClass = 'hover:bg-destructive/20';
+  } else if (variant === 'secondary') {
+    textIconColor = iconColor || colors.secondary;
+    textClass = 'text-secondary';
+    hoverClass = 'hover:bg-secondary/20';
   } else if (variant === 'ghost') {
     bgClass = 'bg-transparent';
     hoverClass = 'hover:bg-primary/20';
