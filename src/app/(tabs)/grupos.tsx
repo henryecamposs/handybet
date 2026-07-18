@@ -166,11 +166,21 @@ export default function GruposScreen() {
   };
 
   const emptyState = (
-    <View className="flex-1 items-center justify-center py-20 border border-dashed border-border bg-background/50 rounded-2xl">
+    <View className="flex-1 items-center justify-center min-h-[40vh] border border-dashed border-border bg-background/50 rounded-2xl p-6 mt-2">
       <Compass size={48} color="#52525b" className="mb-4" />
       <Text className="text-foreground font-bold text-lg text-center">Aún no tienes grupos</Text>
       <Text className="text-muted-foreground text-sm text-center mt-2 max-w-[250px]">
-        No hay grupos disponibles. Ingresa un código arriba o explora sugerencias.
+        No hay grupos disponibles. Explora sugerencias o crea el tuyo.
+      </Text>
+    </View>
+  );
+
+  const emptyStateDiscover = (
+    <View className="flex-1 items-center justify-center min-h-[40vh] border border-dashed border-border bg-background/50 rounded-2xl p-6 mt-2">
+      <Compass size={48} color="#52525b" className="mb-4" />
+      <Text className="text-foreground font-bold text-lg text-center">No hay sugerencias</Text>
+      <Text className="text-muted-foreground text-sm text-center mt-2 max-w-[250px]">
+        No tenemos nuevas sugerencias por ahora. Vuelve más tarde.
       </Text>
     </View>
   );
@@ -181,7 +191,7 @@ export default function GruposScreen() {
       label: ((isActive: boolean) => (
         <View className="flex-row items-center justify-center mt-2">
           <Text className={`font-black text-center text-xs uppercase tracking-wider ${isActive ? 'text-primary' : 'text-foreground'}`}>
-            Mis Grupos
+            Mis Grupos ({misGrupos.length})
           </Text>
           <View className="-my-2 ml-1">
             <IconButton
@@ -189,7 +199,7 @@ export default function GruposScreen() {
               onPress={() => router.push('/(tabs)/grupos/create' as any)}
               variant={isActive ? 'primary' : 'ghost'}
               hasBorder={false}
-              size="xs"
+              size="md"
               rounded="full"
             />
           </View>
@@ -208,12 +218,13 @@ export default function GruposScreen() {
     },
     {
       id: 'discover',
-      label: 'Grupos Sugeridos',
+      label: `Grupos Sugeridos (${filteredDiscoverGroups.length})`,
       content: (
         <SeccionLista
           items={filteredDiscoverGroups}
           renderItem={renderGroupItem}
           layout="list"
+          emptyState={emptyStateDiscover}
         />
       ),
     },
