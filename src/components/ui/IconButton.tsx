@@ -75,6 +75,8 @@ export default function IconButton({
     textClass = 'text-foreground';
   }
 
+  let overrideStyle: any = iconColor ? { color: iconColor } : undefined;
+
   if (isActive) {
     bgClass = 'bg-primary/10';
     borderClass = hasBorder ? 'border border-primary' : '';
@@ -84,8 +86,14 @@ export default function IconButton({
 
   if (isHovered && !isActive) {
     bgClass = 'bg-muted';
-    textIconColor = iconColor || colors.secondary;
-    textClass = 'text-secondary';
+    if (variant === 'ghost' || variant === 'secondary') {
+      textIconColor = colors.secondary;
+      textClass = 'text-secondary';
+      overrideStyle = undefined;
+    } else {
+      textIconColor = iconColor || colors.secondary;
+      textClass = 'text-secondary';
+    }
   }
 
   return (
@@ -101,8 +109,8 @@ export default function IconButton({
       {Icon && <Icon size={iconSize} color={textIconColor} />}
       {label && (
         <Text
-          style={iconColor ? { color: iconColor } : undefined}
-          className={`font-semibold ${Icon ? 'ml-2.5' : ''} ${size === 'xs' ? 'text-xs' : size === 'sm' ? 'text-sm' : 'text-base'} ${iconColor ? '' : textClass}`}
+          style={overrideStyle}
+          className={`font-semibold ${Icon ? 'ml-2.5' : ''} ${size === 'xs' ? 'text-xs' : size === 'sm' ? 'text-sm' : 'text-base'} ${overrideStyle ? '' : textClass}`}
         >
           {label}
         </Text>
