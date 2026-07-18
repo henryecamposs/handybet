@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { MessageCircle, UserPlus, UserCheck, MoreHorizontal, Info, Image as ImageIcon, Users, LayoutList } from 'lucide-react-native';
-import { handyBetUsers, mockPosts } from '../../../mockdata/handyBetMock';
+import { handyBetUsers } from '../../../mockdata/handyBetMock';
+import { localDB } from '../../../lib/localDB';
 import { useThemeColors } from '@/hooks/useThemeColors';
 import HubDetailLayout from '@/components/layout/HubDetailLayout';
 import { TabContainer } from '@/components/layout/hub';
@@ -27,7 +28,13 @@ export default function FollowDetailScreen() {
     router.push(`/chat/follow/${id}` as any);
   };
 
-  const userPosts = mockPosts.filter((post) => post.author?.username === user.username) || [];
+  const [userPosts, setUserPosts] = React.useState<any[]>([]);
+  
+  React.useEffect(() => {
+    localDB.posts.getAll().then((allPosts) => {
+      setUserPosts(allPosts.filter((post: any) => post.author?.username === user.username));
+    });
+  }, [user.username]);
 
   const heroBanner = (
     <View className="mb-6">
