@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
-import { Users, Compass, MessageSquare, Plus, Trash2, LayoutList, MessageCircle, LucideUserMinus2, LogOut } from 'lucide-react-native';
+import { Users, Compass, MessageSquare, Plus, Trash2, LayoutList, MessageCircle, LucideUserMinus2, LogOut, InfoIcon } from 'lucide-react-native';
 import { handyBetGroups } from '../../mockdata/handyBetMock';
 import { useRouter } from 'expo-router';
 import { Modal, ActivityIndicator, ScrollView } from 'react-native';
@@ -125,6 +125,13 @@ export default function GruposScreen() {
         rightElement={
           isMember ? (
             <View className="flex-row gap-2 items-center">
+              <IconButton
+                icon={InfoIcon}
+                onPress={() => router.push(`/channels/groups?id=${group.id}&from=groups` as any)}
+                variant="default"
+                rounded="full"
+                hasBorder={true}
+              />
               <IconButton
                 icon={LayoutList}
                 onPress={() => router.push(`/feed/search?id=${group.id}&from=group` as any)}

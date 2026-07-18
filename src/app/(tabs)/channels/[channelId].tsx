@@ -93,6 +93,14 @@ export default function ChannelDetailScreen() {
     });
   };
 
+  const handleFollowGroup = (groupName: string, isFollowing: boolean) => {
+    addToast({
+      title: isFollowing ? 'Dejaste de seguir' : 'Siguiendo grupo',
+      description: isFollowing ? `Ya no sigues a ${groupName}` : `Ahora sigues a ${groupName}`,
+      variant: isFollowing ? 'muted' : 'success'
+    });
+  };
+
   const renderGroupItem = (group: Group) => (
     <ListItem
       key={group.id}
@@ -124,6 +132,13 @@ export default function ChannelDetailScreen() {
             icon={Bookmark}
             onPress={() => handleSaveGroup(group.name)}
             variant="ghost"
+            rounded="full"
+            hasBorder={true}
+          />
+          <IconButton
+            label="Seguir"
+            onPress={() => handleFollowGroup(group.name, false)}
+            variant="primary"
             rounded="full"
             hasBorder={true}
           />
