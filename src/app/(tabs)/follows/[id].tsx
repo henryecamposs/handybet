@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { MessageCircle, UserPlus, UserCheck, MoreHorizontal, Info, Image as ImageIcon, Users, LayoutList, User } from 'lucide-react-native';
+import { MessageCircle, UserPlus, UserCheck, MoreHorizontal, Info, Image as ImageIcon, Users, LayoutList, User, Bookmark, Eye } from 'lucide-react-native';
 import { handyBetUsers } from '../../../mockdata/handyBetMock';
 import { localDB } from '../../../lib/localDB';
+import { socialService } from '../../../services/socialService';
 import { useThemeColors } from '@/hooks/useThemeColors';
+import { useHandyBetStore } from '../../../store/useHandyBetStore';
 import HubDetailLayout from '@/components/layout/HubDetailLayout';
 import { TabContainer, SeccionLista } from '@/components/layout/hub';
 import PostContainer from '@/components/layout/hub/PostContainer';
@@ -33,18 +35,37 @@ export default function FollowDetailScreen() {
   const [userPosts, setUserPosts] = React.useState<any[]>([]);
   const [suggestedUsers, setSuggestedUsers] = React.useState<any[]>([]);
   const [suggestedGroups, setSuggestedGroups] = React.useState<any[]>([]);
+  const { mockSession } = useHandyBetStore();
 
   React.useEffect(() => {
     localDB.posts.getAll().then((allPosts) => {
       setUserPosts(allPosts.filter((post: any) => post.author?.username === user.username));
     });
-    localDB.users.getAll().then(users => {
-      setSuggestedUsers(users.filter((u: any) => u.username !== user.username).slice(0, 5));
-    });
-    localDB.groups.getAll().then(groups => {
-      setSuggestedGroups(groups.slice(0, 5));
-    });
-  }, [user.username]);
+    
+    if (mockSession?.id) {
+      socialService.getSuggestedUsers(mockSession.id).then(users => {
+        setSuggestedUsers(users);
+      });
+      socialService.getSuggestedGroups(mockSession.id).then(groups => {
+        setSuggestedGroups(groups);
+      });
+    } else {
+      // Fallback si no hay sesión
+      localDB.users.getAll().then(users => setSuggestedUsers(users.slice(0, 5)));
+      localDB.groups.getAll().then(groups => setSuggestedGroups(groups.slice(0, 5)));
+    }
+  }, [user.username, mockSession?.id]);
+
+  const renderSuggestedActions = () => (
+    <View className="flex-row items-center gap-1">
+      <IconButton icon={Eye} variant="ghost" rounded="full" onPress={() => {}} />
+      <IconButton icon={MessageCircle} variant="ghost" rounded="full" onPress={() => {}} />
+      <IconButton icon={Bookmark} variant="ghost" rounded="full" onPress={() => {}} />
+      <View className="ml-1">
+        <IconButton icon={UserPlus} label="Seguir" variant="primary" rounded="full" onPress={() => {}} />
+      </View>
+    </View>
+  );
 
   const heroBanner = (
     <View className="mb-6">
@@ -157,9 +178,7 @@ export default function FollowDetailScreen() {
                   title={u.name}
                   subtitle={`@${u.username}`}
                   avatar={u.avatar}
-                  rightElement={
-                    <IconButton icon={UserPlus} variant="primary" rounded="full" onPress={() => {}} />
-                  }
+                  rightElement={renderSuggestedActions()}
                 />
               )}
             />
@@ -183,9 +202,7 @@ export default function FollowDetailScreen() {
                   title={g.name}
                   subtitle={`${g.members?.length || 0} miembros`}
                   avatar={g.image || 'https://via.placeholder.com/150'}
-                  rightElement={
-                    <IconButton icon={UserPlus} variant="primary" rounded="full" onPress={() => {}} />
-                  }
+                  rightElement={renderSuggestedActions()}
                 />
               )}
             />

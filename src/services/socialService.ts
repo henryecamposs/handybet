@@ -145,5 +145,21 @@ export const socialService = {
       u.full_name?.toLowerCase().includes(lower) ||
       u.username?.toLowerCase().includes(lower)
     );
+  },
+
+  // Suggested Users
+  async getSuggestedUsers(userId: string): Promise<any[]> {
+    const allUsers = await localDB.users.getAll();
+    const following = await localDB.relationships.getFollowing(userId);
+    const followingIds = following.map((f: any) => f.following_id);
+    // Return random/first 5 users not followed by user
+    return allUsers.filter((u: any) => u.id !== userId && !followingIds.includes(u.id)).slice(0, 5);
+  },
+
+  // Suggested Groups
+  async getSuggestedGroups(userId: string): Promise<any[]> {
+    const allGroups = await localDB.groups.getAll();
+    // Return random/first 5 groups user is not a member of
+    return allGroups.filter((g: any) => !g.members?.includes(userId)).slice(0, 5);
   }
 };
