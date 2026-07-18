@@ -14,6 +14,67 @@ import IconButton from '@/components/ui/IconButton';
 import EmptyState from '@/components/ui/EmptyState';
 import ListItem from '@/components/ui/ListItem';
 import CreatePostWidget from '@/components/feed/CreatePostWidget';
+import { useToastStore } from '@/store/useToastStore';
+
+const SuggestedItemActions = ({ item, type, router }: { item: any; type: 'user' | 'group'; router: any }) => {
+  const [isSaved, setIsSaved] = useState(false);
+  const [isFollowing, setIsFollowing] = useState(false);
+  const colors = useThemeColors();
+  const { addToast } = useToastStore();
+
+  const handleSave = () => {
+    setIsSaved(!isSaved);
+    addToast({
+      title: isSaved ? 'Eliminado de guardados' : 'Agregado a guardados',
+      variant: isSaved ? 'muted' : 'success',
+      position: 'bottom'
+    });
+  };
+
+  const handleFollow = () => {
+    setIsFollowing(!isFollowing);
+    addToast({
+      title: isFollowing ? 'Dejaste de seguir' : 'Siguiendo',
+      variant: isFollowing ? 'muted' : 'success',
+      position: 'bottom'
+    });
+  };
+
+  const handleChat = () => {
+    router.push(`/chat/${type === 'user' ? 'direct' : 'group'}/${item.id}` as any);
+  };
+
+  const handleViewPosts = () => {
+    if (type === 'user') {
+      router.push(`/(tabs)/follows/${item.id}` as any);
+    } else {
+      router.push(`/(tabs)/grupos` as any); // fallback to groups
+    }
+  };
+
+  return (
+    <View className="flex-row items-center gap-1">
+      <IconButton icon={LayoutList} variant="ghost" rounded="full" onPress={handleViewPosts} />
+      <IconButton icon={MessageCircle} variant="ghost" rounded="full" onPress={handleChat} />
+      <IconButton 
+        icon={Bookmark} 
+        variant="ghost" 
+        rounded="full" 
+        onPress={handleSave} 
+      />
+      <View className="ml-1">
+        <IconButton 
+          icon={isFollowing ? UserCheck : UserPlus} 
+          label={isFollowing ? "Siguiendo" : "Seguir"} 
+          variant={isFollowing ? "ghost" : "primary"} 
+          rounded="full" 
+          onPress={handleFollow} 
+          hasBorder={true}
+        />
+      </View>
+    </View>
+  );
+};
 
 export default function FollowDetailScreen() {
   const { id } = useLocalSearchParams();
@@ -56,16 +117,7 @@ export default function FollowDetailScreen() {
     }
   }, [user.username, mockSession?.id]);
 
-  const renderSuggestedActions = () => (
-    <View className="flex-row items-center gap-1">
-      <IconButton icon={LayoutList} variant="ghost" rounded="full" onPress={() => { }} />
-      <IconButton icon={MessageCircle} variant="ghost" rounded="full" onPress={() => { }} />
-      <IconButton icon={Bookmark} variant="ghost" rounded="full" onPress={() => { }} />
-      <View className="ml-1">
-        <IconButton icon={UserPlus} label="Seguir" variant="primary" rounded="full" onPress={() => { }} />
-      </View>
-    </View>
-  );
+  // Eliminar viejo renderSuggestedActions
 
   const heroBanner = (
     <View className="mb-6">
@@ -178,7 +230,7 @@ export default function FollowDetailScreen() {
                   title={u.name}
                   subtitle={`@${u.username}`}
                   avatar={u.avatar}
-                  rightElement={renderSuggestedActions()}
+                  rightElement={<SuggestedItemActions item={u} type="user" router={router} />}
                 />
               )}
             />
@@ -202,7 +254,7 @@ export default function FollowDetailScreen() {
                   title={g.name}
                   subtitle={`${g.members?.length || 0} miembros`}
                   avatar={g.image || 'https://via.placeholder.com/150'}
-                  rightElement={renderSuggestedActions()}
+                  rightElement={<SuggestedItemActions item={g} type="group" router={router} />}
                 />
               )}
             />

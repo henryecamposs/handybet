@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
-import { MessageSquare, Users, Volume2, AtSign, Heart, MessageCircle, Share2 } from 'lucide-react-native';
+import { MessageSquare, Users, Volume2, AtSign, Heart, MessageCircle, Share2, LayoutList, ChevronRight } from 'lucide-react-native';
 import { useThemeColors } from '@/hooks/useThemeColors';
 import HubDetailLayout from '@/components/layout/HubDetailLayout';
+import { TabContainer } from '@/components/layout/hub';
+import ListItem from '@/components/ui/ListItem';
+import IconButton from '@/components/ui/IconButton';
 import { localDB } from '../../../lib/localDB';
 import { Advertisement } from '../../../types/handyBet';
 
@@ -154,148 +157,149 @@ export default function ChatInboxScreen() {
     }
   };
 
-  const renderTabContent = () => {
-    switch (activeTab) {
-      case 'direct':
-        return (
-          <View className="gap-3.5">
-            {directChats.map((chat) => (
-              <TouchableOpacity
-                key={chat.id}
-                onPress={() => router.push(`/chat/${chat.id}` as any)}
-                className="bg-background/80 border border-border p-4  flex-row items-center gap-4 shadow-sm"
-              >
-                <Image source={{ uri: chat.avatar }} className="w-12 h-12 rounded-full border border-border/20 bg-background" />
+  const tabs = [
+    {
+      id: 'direct',
+      label: 'Directos',
+      icon: <MessageSquare size={14} color={activeTab === 'direct' ? colors.primary : colors.foreground} />,
+      content: (
+        <View className="gap-0 border border-border bg-background/50">
+          {directChats.map((chat) => (
+            <ListItem
+              key={chat.id}
+              avatar={chat.avatar}
+              title={chat.name}
+              subtitle={chat.lastMessage}
+              hasBorderBottom={true}
+              onPress={() => router.push(`/chat/${chat.id}` as any)}
+              rightElement={
+                <View className="items-end gap-1">
+                  <Text className="text-muted-foreground text-[10px] font-bold">{chat.time}</Text>
+                  {chat.unreadCount > 0 && (
+                    <View className="bg-secondary w-5 h-5 rounded-full items-center justify-center border border-secondary">
+                      <Text className="text-black text-[9px] font-black">{chat.unreadCount}</Text>
+                    </View>
+                  )}
+                </View>
+              }
+            />
+          ))}
+        </View>
+      )
+    },
+    {
+      id: 'group',
+      label: 'Grupos',
+      icon: <Users size={14} color={activeTab === 'group' ? colors.primary : colors.foreground} />,
+      content: (
+        <View className="gap-0 border border-border bg-background/50">
+          {groupChats.map((chat) => (
+            <ListItem
+              key={chat.id}
+              avatar={chat.avatar}
+              title={chat.name}
+              subtitle={chat.lastMessage}
+              hasBorderBottom={true}
+              onPress={() => router.push(`/chat/group/${chat.id}` as any)}
+              rightElement={
+                <View className="items-end gap-1">
+                  <Text className="text-muted-foreground text-[10px] font-bold">{chat.time}</Text>
+                  {chat.unreadCount > 0 && (
+                    <View className="bg-secondary w-5 h-5 rounded-full items-center justify-center border border-secondary">
+                      <Text className="text-black text-[9px] font-black">{chat.unreadCount}</Text>
+                    </View>
+                  )}
+                </View>
+              }
+            />
+          ))}
+        </View>
+      )
+    },
+    {
+      id: 'channel',
+      label: 'Canales',
+      icon: <Volume2 size={14} color={activeTab === 'channel' ? colors.primary : colors.foreground} />,
+      content: (
+        <View className="gap-0 border border-border bg-background/50">
+          {channelChats.map((chat) => (
+            <ListItem
+              key={chat.id}
+              avatar={chat.avatar}
+              title={chat.name}
+              subtitle={chat.lastMessage}
+              hasBorderBottom={true}
+              onPress={() => router.push(`/channels/${chat.id}` as any)}
+              rightElement={
+                <View className="items-end gap-1">
+                  <Text className="text-muted-foreground text-[10px] font-bold">{chat.time}</Text>
+                  {chat.unreadCount > 0 && (
+                    <View className="bg-secondary w-5 h-5 rounded-full items-center justify-center border border-secondary">
+                      <Text className="text-black text-[9px] font-black">{chat.unreadCount}</Text>
+                    </View>
+                  )}
+                </View>
+              }
+            />
+          ))}
+        </View>
+      )
+    },
+    {
+      id: 'mention',
+      label: 'Menciones',
+      icon: <AtSign size={14} color={activeTab === 'mention' ? colors.primary : colors.foreground} />,
+      content: (
+        <View className="gap-4">
+          {mentionPosts.map((post) => (
+            <View
+              key={post.id}
+              className="bg-background/80 border border-border p-4 shadow-sm"
+            >
+              <View className="flex-row items-center gap-3 mb-3">
+                <Image source={{ uri: post.authorAvatar }} className="w-10 h-10 rounded-full border border-border/20" />
                 <View className="flex-1">
-                  <View className="flex-row justify-between items-center">
-                    <Text className="text-foreground font-black text-sm">{chat.name}</Text>
-                    <Text className="text-muted-foreground text-[10px] font-bold">{chat.time}</Text>
-                  </View>
-                  <Text className="text-muted-foreground text-xs font-semibold mt-1" numberOfLines={1}>
-                    {chat.lastMessage}
-                  </Text>
+                  <Text className="text-foreground font-black text-sm">{post.authorName}</Text>
+                  <Text className="text-muted-foreground text-xs">@{post.authorUsername}</Text>
                 </View>
-                {chat.unreadCount > 0 && (
-                  <View className="bg-secondary w-5 h-5 rounded-full items-center justify-center border border-secondary">
-                    <Text className="text-black text-[9px] font-black">{chat.unreadCount}</Text>
-                  </View>
-                )}
-              </TouchableOpacity>
-            ))}
-          </View>
-        );
-      case 'group':
-        return (
-          <View className="gap-3.5">
-            {groupChats.map((chat) => (
-              <TouchableOpacity
-                key={chat.id}
-                onPress={() => router.push(`/chat/group/${chat.id}` as any)}
-                className="bg-background/80 border border-border p-4  flex-row items-center gap-4 shadow-sm"
-              >
-                <Image source={{ uri: chat.avatar }} className="w-12 h-12 rounded-full border border-border/20 bg-background" />
-                <View className="flex-1">
-                  <View className="flex-row justify-between items-center">
-                    <Text className="text-foreground font-black text-sm">{chat.name}</Text>
-                    <Text className="text-muted-foreground text-[10px] font-bold">{chat.time}</Text>
-                  </View>
-                  <Text className="text-muted-foreground text-xs font-semibold mt-1" numberOfLines={1}>
-                    {chat.lastMessage}
-                  </Text>
-                </View>
-                {chat.unreadCount > 0 && (
-                  <View className="bg-secondary w-5 h-5 rounded-full items-center justify-center border border-secondary">
-                    <Text className="text-black text-[9px] font-black">{chat.unreadCount}</Text>
-                  </View>
-                )}
-              </TouchableOpacity>
-            ))}
-          </View>
-        );
-      case 'channel':
-        return (
-          <View className="gap-3.5">
-            {channelChats.map((chat) => (
-              <TouchableOpacity
-                key={chat.id}
-                onPress={() => router.push(`/channels/${chat.id}` as any)}
-                className="bg-background/80 border border-border p-4  flex-row items-center gap-4 shadow-sm"
-              >
-                <Image source={{ uri: chat.avatar }} className="w-12 h-12 rounded-full border border-border/20 bg-background" />
-                <View className="flex-1">
-                  <View className="flex-row justify-between items-center">
-                    <Text className="text-foreground font-black text-sm">{chat.name}</Text>
-                    <Text className="text-muted-foreground text-[10px] font-bold">{chat.time}</Text>
-                  </View>
-                  <Text className="text-muted-foreground text-xs font-semibold mt-1" numberOfLines={1}>
-                    {chat.lastMessage}
-                  </Text>
-                </View>
-                {chat.unreadCount > 0 && (
-                  <View className="bg-secondary w-5 h-5 rounded-full items-center justify-center border border-secondary">
-                    <Text className="text-black text-[9px] font-black">{chat.unreadCount}</Text>
-                  </View>
-                )}
-              </TouchableOpacity>
-            ))}
-          </View>
-        );
-      case 'mention':
-        return (
-          <View className="gap-4">
-            {mentionPosts.map((post) => (
-              <View
-                key={post.id}
-                className="bg-background/80 border border-border p-4  shadow-sm"
-              >
-                {/* Cabecera del post */}
-                <View className="flex-row items-center gap-3 mb-3">
-                  <Image source={{ uri: post.authorAvatar }} className="w-10 h-10 rounded-full border border-border/20" />
-                  <View className="flex-1">
-                    <Text className="text-foreground font-black text-sm">{post.authorName}</Text>
-                    <Text className="text-muted-foreground text-xs">@{post.authorUsername}</Text>
-                  </View>
-                  <Text className="text-muted-foreground text-[10px] font-bold">{post.time}</Text>
-                </View>
-
-                {/* Contenido con formateo de menciones y hashtags */}
-                <Text className="text-foreground text-sm font-medium leading-5 mb-3 text-justify">
-                  {post.content.split(' ').map((word, idx) => {
-                    if (word.startsWith('@admin')) {
-                      return <Text key={idx} className="text-primary font-bold">{word} </Text>;
-                    }
-                    if (word.startsWith('#')) {
-                      return <Text key={idx} className="text-secondary font-bold">{word} </Text>;
-                    }
-                    return word + ' ';
-                  })}
-                </Text>
-
-                {/* Imagen del post */}
-                {post.mediaUrl && (
-                  <Image source={{ uri: post.mediaUrl }} className="w-full h-40  mb-3 bg-muted border border-border/20" />
-                )}
-
-                {/* Acciones del Post */}
-                <View className="flex-row items-center gap-6 border-t border-border  pt-3">
-                  <TouchableOpacity className="flex-row items-center gap-1.5">
-                    <Heart size={14} color={colors.mutedForeground} />
-                    <Text className="text-muted-foreground text-xs font-semibold">{post.likes}</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity className="flex-row items-center gap-1.5">
-                    <MessageCircle size={14} color={colors.mutedForeground} />
-                    <Text className="text-muted-foreground text-xs font-semibold">{post.replies}</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity className="flex-row items-center gap-1.5 ml-auto">
-                    <Share2 size={14} color={colors.mutedForeground} />
-                  </TouchableOpacity>
-                </View>
+                <Text className="text-muted-foreground text-[10px] font-bold">{post.time}</Text>
               </View>
-            ))}
-          </View>
-        );
+
+              <Text className="text-foreground text-sm font-medium leading-5 mb-3 text-justify">
+                {post.content.split(' ').map((word, idx) => {
+                  if (word.startsWith('@admin')) {
+                    return <Text key={idx} className="text-primary font-bold">{word} </Text>;
+                  }
+                  if (word.startsWith('#')) {
+                    return <Text key={idx} className="text-secondary font-bold">{word} </Text>;
+                  }
+                  return word + ' ';
+                })}
+              </Text>
+
+              {post.mediaUrl && (
+                <Image source={{ uri: post.mediaUrl }} className="w-full h-40 mb-3 bg-muted border border-border/20" />
+              )}
+
+              <View className="flex-row items-center gap-6 border-t border-border pt-3">
+                <TouchableOpacity className="flex-row items-center gap-1.5">
+                  <Heart size={14} color={colors.mutedForeground} />
+                  <Text className="text-muted-foreground text-xs font-semibold">{post.likes}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity className="flex-row items-center gap-1.5">
+                  <MessageCircle size={14} color={colors.mutedForeground} />
+                  <Text className="text-muted-foreground text-xs font-semibold">{post.replies}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity className="flex-row items-center gap-1.5 ml-auto">
+                  <Share2 size={14} color={colors.mutedForeground} />
+                </TouchableOpacity>
+              </View>
+            </View>
+          ))}
+        </View>
+      )
     }
-  };
+  ];
 
   return (
     <HubDetailLayout
@@ -334,34 +338,8 @@ export default function ChatInboxScreen() {
         </ScrollView>
       </View>
 
-      {/* Selector de Pestañas */}
-      <View className="flex-row gap-2 mb-6">
-        {[
-          { id: 'direct', label: 'Directos', icon: MessageSquare },
-          { id: 'group', label: 'Grupos', icon: Users },
-          { id: 'channel', label: 'Canales', icon: Volume2 },
-          { id: 'mention', label: 'Menciones', icon: AtSign }
-        ].map((tab) => {
-          const isSelected = activeTab === tab.id;
-          const TabIcon = tab.icon;
-          return (
-            <TouchableOpacity
-              key={tab.id}
-              onPress={() => setActiveTab(tab.id as any)}
-              className={`flex-1 flex-row items-center justify-center gap-1.5 py-3 transition-colors border-b-[3px] ${isSelected ? 'border-primary' : 'border-transparent hover:bg-background/50'}`}
-            >
-              <TabIcon size={12} color={isSelected ? colors.primary : colors.foreground} />
-              <Text className={`font-black text-xs ${isSelected ? 'text-primary' : 'text-foreground'}`}>
-                {tab.label}
-              </Text>
-            </TouchableOpacity>
-          );
-        })}
-      </View>
-
-      {/* Contenido Activo */}
-      <View className="mb-6">
-        {renderTabContent()}
+      <View className="mb-6 flex-1 h-full">
+        <TabContainer tabs={tabs} defaultTabId="direct" />
       </View>
 
       {/* Inyección de Publicidad AdBanner */}
