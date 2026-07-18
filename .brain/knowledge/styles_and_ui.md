@@ -14,6 +14,7 @@ HandyBet utiliza un tema semántico y responsivo basado en colores OKLCH declara
 ## 2. Tipografía y Micro-animaciones
 - **Tipografía:** Se priorizan fuentes del sistema con pesos fuertes (`font-black` y `font-bold`) para títulos y etiquetas uppercase de menor tamaño para dar un aire deportivo y de alta fidelidad.
 - **Transiciones:** Hover sutiles en botones y tarjetas en web con escalados discretos (`active:scale-[0.98]`) y transiciones de color de fondo (`transition-colors`).
+- **Botones Dinámicos:** Componentes como `IconButton` y los `Tabs` gestionan su estado de `hover` internamente mediante `useState` y eventos `onMouseEnter`/`onMouseLeave`, garantizando compatibilidad web paritaria en NativeWind, mutando el color de texto e íconos dinámicamente al color `secondary`.
 
 ---
 
@@ -61,7 +62,7 @@ Para unificar el look and feel de las secciones de Canales, Grupos, Billeteras, 
 La bandeja de chat (`HandyChat`) fue rediseñada para usar un sistema de pestañas segmentadas (Directos, Grupos, Canales, Menciones) para filtrar conversaciones, acompañada de un carrusel de contactos "Online" con indicadores de conexión (badge verde) en tiempo real.
 
 ### 3.9 Pestañas en Hubs (Tabs de Navegación Local)
-Los hubs de Canales, Grupos y Seguidos implementan un sistema de pestañas locales con el componente `<TabContainer>` para alternar limpiamente entre contenidos paralelos (ej: Mis Canales vs Canales Sugeridos, o Siguiendo vs Sugeridos). De esta manera, se centralizan las acciones de descubrimiento y de consumo directo en un mismo espacio dinámico.
+Los hubs de Canales, Grupos y Seguidos implementan un sistema de pestañas locales con el componente `<TabContainer>` para alternar limpiamente entre contenidos paralelos (ej: Mis Canales vs Canales Sugeridos, o Siguiendo vs Sugeridos, Perfiles de Usuario). De esta manera, se centralizan las acciones de descubrimiento y de consumo directo en un mismo espacio dinámico. El `TabContainer` maneja automáticamente su estado visual de hover, pintando de fondo `bg-background` y texto `text-secondary` la pestaña sobre la que se pasa el mouse.
 
 ## 4. Estándares de Color
 - **`--muted`**: Estandarizado para coincidir cromáticamente con el `--primary` (0.657 0.229 29.729 en OKLCH). Las clases `bg-muted` funcionarán visualmente como un tono primario pero se usan para fondos atenuados o estados deshabilitados.

@@ -45,3 +45,12 @@
   * Movimos las rutas de `favorites`, `channels` y `games` de vuelta a la carpeta `(tabs)` y las ocultamos de la barra inferior con `href: null` en `_layout.tsx`, asegurando la renderización en la columna central.
   * Renombramos variables, tipos y directorios (`canales` -> `channels`, `juegos` -> `games`) para mantener un estándar de código en inglés, conservando únicamente las etiquetas visuales (UI) en español.
   * Implementamos búsqueda nativa del `HubLayout` en la sección de Guardados y poblamos los listados rápidos en el menú lateral izquierdo (`LeftSidebarWidgets.tsx`).
+
+## Hito 8: Refactorización de Perfil (Follows/Id) y Estandarización de Hover States
+- **Fecha:** 2026-07-18
+- **Contexto:** La vista de perfil carecía de la estructura en pestañas y el Hero Banner requeridos por la nueva UI, además de presentar inconsistencias en los estados de hover en los componentes interactivos (Tabs, IconButtons).
+- **Decisión:**
+  * Empleamos el `HubDetailLayout` en conjunto con `TabContainer` en `FollowDetailScreen` para renderizar el Hero Banner (foto de portada, avatar, métricas) y pestañas modulares (Publicaciones, Información, Fotos, Seguidos, Grupos).
+  * Refactorizamos `TabContainer` e `IconButton` utilizando eventos nativos (`onMouseEnter`/`onMouseLeave`) y `useState` para lograr compatibilidad web 100% precisa en los efectos hover (cambios a colores `bg-muted` y `text-secondary`).
+  * Desacoplamos la carga de datos del perfil mediante nuevos métodos en `socialService` (`getSuggestedUsers`, `getSuggestedGroups`), integrando íconos estandarizados en listas vacías con `SeccionLista` y `EmptyState`.
+

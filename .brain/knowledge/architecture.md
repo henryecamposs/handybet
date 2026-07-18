@@ -51,7 +51,7 @@ La aplicación utiliza un esquema de enrutamiento basado en **Expo Router** opti
 - **`CreatePostWidget.tsx`:** Widget compacto que expande un Modal completo para adjuntar contenido y metadatos de apuestas.
 - **`PostItem.tsx`:** Tarjeta de publicación con avatar en columna izquierda y contenido en columna derecha (estilo Twitter). Soporta click interactivo para ver detalles y menú popover absoluto ⋮ local.
 - **`PostDetailView.tsx`:** Vista detallada de una publicación que se renderiza mediante enrutamiento directo en el contenedor central (`feed/[id]`). Soporta retroceso inteligente con anclaje visual (Scroll To Post) al retornar al Muro.
-- **`UserProfileScreen` vs `FriendDetailScreen`:** El usuario gestiona su perfil y preferencias en `profile/[id]`, mientras que el detalle y acciones (como interactuar) hacia sus seguidores/amigos se carga de forma independiente en `friends/[id]`.
+- **`FollowDetailScreen` (Perfil de Usuario):** El perfil dinámico (`follows/[id]`) utiliza `HubDetailLayout` junto a `TabContainer` para unificar la navegación interna (Publicaciones, Información, Fotos, Seguidos, Grupos) y carga datos mediante el `socialService` para desacoplar el origen de datos.
 - **`PostActionButtons.tsx`:** Barra universal de acciones (Me gusta, Comentar, Compartir) reutilizable. Permite variantes según su contexto de uso (iconos completos o compactos).
 - **`PostMediaViewer.tsx`:** Visor de comentarios. Implementa lógica de fallback publicitario contextual (`HandyAds`) cuando la publicación no tiene elementos multimedia.
 - **`ShareModal.tsx`:** Modal de compartido avanzado segmentado en pestañas (Grupo, Canal, Usuario, Amigo) con buscador interactivo.
