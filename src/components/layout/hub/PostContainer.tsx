@@ -23,7 +23,7 @@ export default function PostContainer({
 
   return (
     <View className="mb-8 mt-6">
-      <View className="flex-row justify-between bg-muted items-center mb-4 p-2">
+      <View className="flex-row justify-between bg-muted border-b border-border-muted items-center mb-4 p-2">
         <Text className="text-foreground font-semibold text-lig uppercase tracking-wider  ">{title}</Text>
         {onViewAll && (
           <TouchableOpacity onPress={onViewAll}>

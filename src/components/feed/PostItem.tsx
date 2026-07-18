@@ -37,8 +37,8 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
 
   if (isHidden) {
     return (
-      <View className="bg-muted border border-border p-5  mb-1 flex-row items-center justify-between shadow-sm">
-        <Text className="text-zinc-400 text-xs font-bold">Publicación oculta de {post.author}</Text>
+      <View className="bg-muted border-b border-border-muted p-5  mb-1 flex-row items-center justify-between shadow-sm">
+        <Text className="text-muted-foreground text-xs font-bold">Publicación oculta de {post.author}</Text>
         <TouchableOpacity
           onPress={() => {
             setIsHidden(false);

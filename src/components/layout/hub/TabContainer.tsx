@@ -47,7 +47,7 @@ export default function TabContainer({ tabs, defaultTabId }: TabContainerProps) 
       </View>
 
       {/* Contenido de la pestaña activa */}
-      <View className="flex-1 pb-4 border-b border-muted">
+      <View className="flex-1 pb-4 border-b-[3px] border-border-muted">
         {activeTab?.content}
       </View>
     </View>

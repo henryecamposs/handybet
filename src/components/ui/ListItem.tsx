@@ -8,13 +8,13 @@ export interface ListItemProps {
   titleVariant?: TextVariant;
   subtitle?: string;
   subtitleVariant?: TextVariant;
-  
+
   avatar?: string;
   leftElement?: React.ReactNode;
   rightElement?: React.ReactNode;
-  
+
   onPress?: () => void;
-  
+
   hasBorderBottom?: boolean;
   bgClass?: string;
   className?: string;
@@ -30,12 +30,12 @@ export default function ListItem({
   leftElement,
   rightElement,
   onPress,
-  hasBorderBottom = true,
+  hasBorderBottom = false,
   bgClass = 'bg-transparent',
   className = '',
   style
 }: ListItemProps) {
-  
+
   const getVariantClass = (variant: TextVariant) => {
     if (variant === 'muted') return 'text-muted-foreground';
     if (variant === 'primary') return 'text-primary';
@@ -54,7 +54,7 @@ export default function ListItem({
 
   const titleClass = getVariantClass(titleVariant);
   const titleStyle = getVariantStyle(titleVariant);
-  
+
   const subtitleClass = getVariantClass(subtitleVariant);
   const subtitleStyle = getVariantStyle(subtitleVariant);
 
@@ -69,7 +69,7 @@ export default function ListItem({
       ) : avatar ? (
         <Image source={{ uri: avatar }} className="w-10 h-10 rounded-full bg-background/80 mr-3 border border-border" />
       ) : null}
-      
+
       <View className="flex-1 justify-center">
         <Text style={titleStyle} className={`font-bold text-base ${titleClass}`} numberOfLines={1}>
           {title}
@@ -85,10 +85,10 @@ export default function ListItem({
 
   if (onPress) {
     return (
-      <TouchableOpacity 
-        onPress={onPress} 
+      <TouchableOpacity
+        onPress={onPress}
         activeOpacity={0.7}
-        className={containerClasses} 
+        className={containerClasses}
         style={style}
       >
         <InnerContent />

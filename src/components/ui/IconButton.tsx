@@ -1,5 +1,5 @@
-import React from 'react';
-import { TouchableOpacity, Text, ViewStyle } from 'react-native';
+import React, { useState } from 'react';
+import { TouchableOpacity, Text, ViewStyle, Platform } from 'react-native';
 import { useThemeColors } from '../../hooks/useThemeColors';
 
 export interface IconButtonProps {
@@ -31,6 +31,8 @@ export default function IconButton({
 }: IconButtonProps) {
   const colors = useThemeColors();
 
+  const [isHovered, setIsHovered] = useState(false);
+
   const isIconOnly = !!Icon && !label;
 
   let sizeClasses = '';
@@ -54,25 +56,20 @@ export default function IconButton({
   let borderClass = hasBorder ? 'border border-border' : '';
   let textIconColor = iconColor || colors.primary;
   let textClass = 'text-primary';
-  let hoverClass = 'hover:bg-primary/20';
 
   if (variant === 'destructive') {
     textIconColor = iconColor || colors.destructive;
     textClass = 'text-destructive';
-    hoverClass = 'hover:bg-destructive/20';
   } else if (variant === 'secondary') {
     textIconColor = iconColor || colors.secondary;
     textClass = 'text-secondary';
-    hoverClass = 'hover:bg-secondary/20';
   } else if (variant === 'ghost') {
     bgClass = 'bg-transparent';
-    hoverClass = 'hover:bg-primary/20';
     textIconColor = iconColor || colors.foreground;
     textClass = 'text-foreground';
   } else if (variant === 'muted') {
     textIconColor = iconColor || colors.mutedForeground;
     textClass = 'text-muted-foreground';
-    hoverClass = 'hover:bg-muted/20';
   } else if (variant === 'default') {
     textIconColor = iconColor || colors.foreground;
     textClass = 'text-foreground';
@@ -85,11 +82,19 @@ export default function IconButton({
     textClass = 'text-primary';
   }
 
+  if (isHovered && !isActive) {
+    bgClass = 'bg-muted';
+    textIconColor = iconColor || colors.secondary;
+    textClass = 'text-secondary';
+  }
+
   return (
     <TouchableOpacity
       onPress={onPress}
+      onMouseEnter={() => Platform.OS === 'web' && setIsHovered(true)}
+      onMouseLeave={() => Platform.OS === 'web' && setIsHovered(false)}
       style={style}
-      className={`flex-row items-center justify-center transition-colors ${bgClass} ${borderClass} ${hoverClass} ${sizeClasses} ${roundedClass} ${className}`}
+      className={`flex-row items-center justify-center transition-colors ${bgClass} ${borderClass} ${sizeClasses} ${roundedClass} ${className}`}
     >
       {Icon && <Icon size={iconSize} color={textIconColor} />}
       {label && (
