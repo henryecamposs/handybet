@@ -331,9 +331,11 @@ export default function FeedSearchScreen() {
             <View style={{ height: 100 }} className="flex-row items-center justify-center border border-dashed border-border bg-primary/5 rounded-xl px-4 mb-6">
               <Compass size={24} color={colors.primary} className="mr-3" />
               <View className="flex-1">
-                <Text className="text-white font-black text-sm">Sin Publicaciones</Text>
+                <Text className="text-white font-black text-sm">
+                  Sin publicaciones para este {entityType === 'channel' ? 'canal' : entityType === 'group' ? 'grupo' : 'usuario'}
+                </Text>
                 <Text className="text-zinc-500 text-xs mt-0.5" numberOfLines={2}>
-                  Este {entityType === 'channel' ? 'canal' : entityType === 'group' ? 'grupo' : 'usuario'} aún no registra publicaciones en su feed.
+                  Aún no se registran publicaciones en su feed.
                 </Text>
               </View>
             </View>
@@ -346,16 +348,6 @@ export default function FeedSearchScreen() {
                   let authorName = p.author?.full_name || 'Usuario';
                   let username = `@${p.author_id.slice(0, 8)}`;
                   let avatar = p.author?.avatar_url || 'https://i.pravatar.cc/150';
-
-                  if (p.channel) {
-                    authorName = p.channel.name;
-                    username = `@canal_${p.channel.id.slice(0, 8)}`;
-                    avatar = 'https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?w=150&auto=format&fit=crop&q=60';
-                  } else if (p.group) {
-                    authorName = p.group.name;
-                    username = `@grupo_${p.group.id.slice(0, 8)}`;
-                    avatar = 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=150&auto=format&fit=crop&q=60';
-                  }
 
                   const mappedPost = {
                     id: p.id,
@@ -389,16 +381,6 @@ export default function FeedSearchScreen() {
             let authorName = p.author?.full_name || 'Usuario';
             let username = `@${p.author_id.slice(0, 8)}`;
             let avatar = p.author?.avatar_url || 'https://i.pravatar.cc/150';
-
-            if (p.channel) {
-              authorName = p.channel.name;
-              username = `@canal_${p.channel.id.slice(0, 8)}`;
-              avatar = 'https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?w=150&auto=format&fit=crop&q=60';
-            } else if (p.group) {
-              authorName = p.group.name;
-              username = `@grupo_${p.group.id.slice(0, 8)}`;
-              avatar = 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=150&auto=format&fit=crop&q=60';
-            }
 
             const mappedPost = {
               id: p.id,
