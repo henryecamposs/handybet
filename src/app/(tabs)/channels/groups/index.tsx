@@ -12,8 +12,13 @@ import { MediaPlan, VisibilityLevel } from '../../../../types/handyBet';
 import CreatePostWidget from '../../../../components/feed/CreatePostWidget';
 import { socialService } from '../../../../services/socialService';
 import { useThemeColors } from '../../../../hooks/useThemeColors';
+import { MessageCircle, ArrowLeft, Bookmark, LayoutList, Users, Info, MoreHorizontal, UserCheck, UserPlus, Tv } from 'lucide-react-native';
+import HubDetailLayout from '../../../../components/layout/HubDetailLayout';
+import { TabContainer } from '../../../../components/layout/hub';
+import PostContainer from '../../../../components/layout/hub/PostContainer';
+import EmptyState from '../../../../components/ui/EmptyState';
+import { useToastStore } from '../../../../store/useToastStore';
 import IconButton from '../../../../components/ui/IconButton';
-import { MessageCircle, ArrowLeft } from 'lucide-react-native';
 
 export default function GrupoDetailScreen() {
   const { id, from } = useLocalSearchParams<{ id: string; from: string }>();
@@ -32,10 +37,13 @@ export default function GrupoDetailScreen() {
   const { data: mediaItems = [], isLoading: isLoadingMedia } = useGetMediaVault(id || '');
   const subscribeMutation = useSubscribeToMediaPlan();
 
-  const { mockSession } = useHandyBetStore();
   const [group, setGroup] = useState<any>(null);
   const [groupType, setGroupType] = useState<string>('apuestas');
   const [isAdmin, setIsAdmin] = useState(false);
+  const [groupPosts, setGroupPosts] = useState<any[]>([]);
+  const [isFollowing, setIsFollowing] = useState(true);
+  const { addToast } = useToastStore();
+  const { mockSession } = useHandyBetStore();
 
   async function loadGroupData() {
     if (!id) return;
@@ -49,6 +57,11 @@ export default function GrupoDetailScreen() {
           setIsAdmin(channel?.owner_id === mockSession.id || mockSession.role === 'admin');
         }
       }
+      const allPosts = await localDB.posts.getAll();
+      const filtered = allPosts.filter((p: any) => p.group_id === id);
+      filtered.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+      const resolved = await Promise.all(filtered.map(p => localDB.resolvePostWithAuthor(p)));
+      setGroupPosts(resolved);
     } catch (e) {
       console.log('Error loading group data:', e);
     }
@@ -163,123 +176,180 @@ export default function GrupoDetailScreen() {
     router.push(`/chat/${id}?from=${from}` as any);
   };
 
-  return (
-    <ScrollView className="flex-1 bg-background/80 px-4 pt-12">
-      {/* Header Fila con Volver y Chat */}
-      <View className="flex-row items-center justify-between mb-6">
-        <TouchableOpacity onPress={handleBack} className="flex-row items-center gap-2">
-          <ArrowLeft size={18} color={colors.foreground} />
-          <Text className="text-foreground font-bold text-xs">Volver</Text>
-        </TouchableOpacity>
-
-        {group && (
-          <IconButton 
-            icon={MessageCircle} 
-            label="Chat de Grupo"
-            onPress={handleChatPress} 
-            variant="primary" 
-            rounded="full" 
-          />
-        )}
+  const heroBanner = group && (
+    <View className="mb-6">
+      {/* Cover Portada */}
+      <View className="h-44 bg-background/80 relative w-full border-b border-border-muted ">
+        <View className="absolute inset-0 bg-gradient-to-b from-primary/10 to-background/50" />
       </View>
 
-      {group && (
-        <View className="mb-6">
-          <Text className="text-[10px] font-black text-primary uppercase tracking-widest">
-            {groupType === 'apuestas' ? 'Sala de Apuestas' : 'Sala de Multimedia'}
-          </Text>
-          <Text className="text-3xl font-black text-foreground tracking-tight mt-1">
-            {group.name}
-          </Text>
+      {/* Avatar y Acciones Rápidas */}
+      <View className="px-4 flex-row justify-between items-end -mt-16 mb-4">
+        <View className="p-1 bg-background rounded-full border border-border-muted">
+          <View className="w-28 h-28 rounded-full bg-background/80 items-center justify-center border border-border">
+            <Users size={48} color={colors.primary} />
+          </View>
         </View>
-      )}
+        <View className="flex-row gap-2 pb-2">
+          <IconButton
+            icon={MessageCircle}
+            onPress={handleChatPress}
+            variant="ghost"
+            rounded="full"
+            hasBorder={true}
+          />
+          <IconButton
+            icon={isFollowing ? UserCheck : UserPlus}
+            label={isFollowing ? "Siguiendo" : "Seguir"}
+            onPress={() => {
+              setIsFollowing(!isFollowing);
+              addToast({
+                title: isFollowing ? 'Dejaste de seguir el grupo' : 'Siguiendo grupo',
+                variant: isFollowing ? 'muted' : 'success'
+              });
+            }}
+            variant={isFollowing ? "ghost" : "primary"}
+            rounded="full"
+            hasBorder={true}
+          />
+        </View>
+      </View>
 
-      {/* Switch de Renderizado */}
-      {groupType === 'apuestas' ? (
-        <View className="pb-8">
-          {generatedBetCode ? (
-            <View>
-              <QRDisplayZone betCode={generatedBetCode} />
-              <TouchableOpacity
-                onPress={() => setGeneratedBetCode(null)}
-                className="bg-background/80 border border-border py-3.5 items-center mt-6 w-full max-w-sm mx-auto"
-              >
-                <Text className="text-white font-bold text-sm">Nueva Jugada</Text>
-              </TouchableOpacity>
-            </View>
-          ) : (
-            <BetMatrixBuilder groupId={id || ''} onBetGenerated={handleBetGenerated} />
-          )}
+      {/* Datos del Grupo */}
+      <View className="px-4">
+        <Text className="text-2xl font-black text-foreground tracking-tight">{group.name}</Text>
+        <Text className="text-muted-foreground text-sm font-medium">@{group.short_code || group.name.toLowerCase().replace(' ', '_')}</Text>
+
+        <Text className="text-foreground mt-4 leading-5 text-sm">Grupo y sala de {groupType === 'apuestas' ? 'apuestas oficiales' : 'contenido multimedia'}. Comparte jugadas e información con la comunidad.</Text>
+
+        <View className="flex-row gap-4 mt-4">
+          <View className="flex-row items-center">
+            <Text className="text-foreground font-black text-sm">{group.members?.length || 0}</Text>
+            <Text className="text-muted-foreground text-xs ml-1 font-bold uppercase tracking-wider">Miembros</Text>
+          </View>
         </View>
-      ) : groupType === 'compartir_media' ? (
-        <View className="pb-8">
-          {showPlansSelector ? (
-            <View>
-              <TouchableOpacity
-                onPress={() => setShowPlansSelector(false)}
-                className="mb-4 self-start bg-background/80 px-3 py-1.5 rounded-xs border border-border"
-              >
-                <Text className="text-foreground font-bold text-xs">◀ Ver Bóveda</Text>
-              </TouchableOpacity>
-              <TierPlanSelector
-                plans={plans}
-                userActiveSubscriptions={userActiveSubs}
-                onPurchasePlan={handlePurchasePlan}
-              />
-            </View>
-          ) : (
-            <View>
-              {isLoadingMedia ? (
-                <View className="py-20 justify-center items-center">
-                  <ActivityIndicator size="large" color="#10b981" />
+      </View>
+    </View>
+  );
+
+  const tabs = [
+    {
+      id: 'tool',
+      label: groupType === 'apuestas' ? 'Apuestas' : 'Multimedia',
+      content: (
+        <View className="mt-2">
+          {groupType === 'apuestas' ? (
+            <View className="pb-8">
+              {generatedBetCode ? (
+                <View>
+                  <QRDisplayZone betCode={generatedBetCode} />
+                  <TouchableOpacity
+                    onPress={() => setGeneratedBetCode(null)}
+                    className="bg-background/80 border border-border py-3.5 items-center mt-6 w-full max-w-sm mx-auto"
+                  >
+                    <Text className="text-white font-bold text-sm">Nueva Jugada</Text>
+                  </TouchableOpacity>
                 </View>
               ) : (
-                <MediaVaultGrid
-                  groupId={id || ''}
-                  mediaItems={mediaItems}
-                  userSubscriptions={userActiveSubs}
-                  onSelectPlan={(planId) => {
-                    setShowPlansSelector(true);
-                  }}
-                />
+                <BetMatrixBuilder groupId={id || ''} onBetGenerated={handleBetGenerated} />
+              )}
+            </View>
+          ) : (
+            <View className="pb-8">
+              {showPlansSelector ? (
+                <View>
+                  <TouchableOpacity
+                    onPress={() => setShowPlansSelector(false)}
+                    className="mb-4 self-start bg-background/80 px-3 py-1.5 rounded-xs border border-border"
+                  >
+                    <Text className="text-foreground font-bold text-xs">◀ Ver Bóveda</Text>
+                  </TouchableOpacity>
+                  <TierPlanSelector
+                    plans={plans}
+                    userActiveSubscriptions={userActiveSubs}
+                    onPurchasePlan={handlePurchasePlan}
+                  />
+                </View>
+              ) : (
+                <View>
+                  {isLoadingMedia ? (
+                    <View className="py-20 justify-center items-center">
+                      <ActivityIndicator size="large" color="#10b981" />
+                    </View>
+                  ) : (
+                    <MediaVaultGrid
+                      groupId={id || ''}
+                      mediaItems={mediaItems}
+                      userSubscriptions={userActiveSubs}
+                      onSelectPlan={(planId) => {
+                        setShowPlansSelector(true);
+                      }}
+                    />
+                  )}
+                </View>
               )}
             </View>
           )}
         </View>
-      ) : (
-        <View className="py-20 justify-center items-center">
-          <Text className="text-rose-500 font-bold text-center">
-            Este tipo de grupo ({groupType}) no cuenta con una interfaz configurada.
-          </Text>
-        </View>
-      )}
-
-      {group && (
-        <View className="mt-8 border-t border-border pt-6">
-          <TouchableOpacity
-            onPress={() => router.push(`/feed/search?id=${group.id}&from=group` as any)}
-            className="bg-primary/20 border border-border p-4 items-center justify-center mb-6"
-          >
-            <Text className="text-primary font-black text-xs uppercase tracking-wider">Ver Feed / Publicaciones del Grupo 📢</Text>
-          </TouchableOpacity>
-
+      )
+    },
+    {
+      id: 'posts',
+      label: 'Publicaciones',
+      content: (
+        <View className="mt-2">
           {isAdmin && (
             <View className="mb-4">
-              <Text className="text-white font-black text-xs uppercase tracking-wider mb-3">Publicar en el Grupo</Text>
               <CreatePostWidget
                 onPublish={handlePublishPost}
                 forcedTarget={{
-                  id: group.id,
-                  name: group.name,
+                  id: group?.id || '',
+                  name: group?.name || '',
                   type: 'group'
                 }}
               />
             </View>
           )}
+          {groupPosts.length > 0 ? (
+            <PostContainer
+              title="Publicaciones Recientes"
+              posts={groupPosts}
+            />
+          ) : (
+            <EmptyState title="No hay publicaciones en este grupo." icon={LayoutList} variant="dashed" />
+          )}
+        </View>
+      )
+    },
+    {
+      id: 'info',
+      label: 'Información',
+      content: (
+        <View className="mt-2 p-4 bg-background/40 border border-border rounded-xl">
+          <Text className="text-white font-black text-sm uppercase tracking-wider mb-2">Reglas del Grupo</Text>
+          <Text className="text-zinc-400 text-xs leading-5">
+            1. Respete a los demás miembros de la comunidad.{"\n"}
+            2. Comparta contenido verificado sobre pronósticos y jugadas.{"\n"}
+            3. No se permite spam ni publicidad no autorizada.{"\n"}
+            4. El juego de azar es responsabilidad de cada miembro.
+          </Text>
+        </View>
+      )
+    }
+  ];
+
+  return (
+    <HubDetailLayout
+      backRoute={from === 'channel' && group?.channel_id ? `/channels/${group.channel_id}` : '/(tabs)/grupos'}
+      logoType="default"
+      notFoundLabel="Grupo no encontrado."
+    >
+      {heroBanner}
+      {group && (
+        <View className="px-4">
+          <TabContainer tabs={tabs} defaultTabId="tool" />
         </View>
       )}
-
-      <View className="h-16" />
-    </ScrollView>
+    </HubDetailLayout>
   );
 }

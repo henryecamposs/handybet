@@ -10,8 +10,11 @@ import { useHandyBetStore } from '../../../store/useHandyBetStore';
 import { socialService } from '../../../services/socialService';
 import ListItem from '@/components/ui/ListItem';
 import IconButton from '@/components/ui/IconButton';
-import { MessageCircle, Bookmark, LayoutList, Tv } from 'lucide-react-native';
+import { MessageCircle, Bookmark, LayoutList, Tv, Users, Info, MoreHorizontal } from 'lucide-react-native';
 import { useToastStore } from '@/store/useToastStore';
+import { TabContainer, SeccionLista } from '@/components/layout/hub';
+import PostContainer from '@/components/layout/hub/PostContainer';
+import EmptyState from '@/components/ui/EmptyState';
 
 export default function ChannelDetailScreen() {
   const { channelId } = useLocalSearchParams();
@@ -21,6 +24,7 @@ export default function ChannelDetailScreen() {
 
   const [channel, setChannel] = useState<Channel | null>(null);
   const [groups, setGroups] = useState<Group[]>([]);
+  const [channelPosts, setChannelPosts] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const { addToast } = useToastStore();
 
@@ -33,6 +37,12 @@ export default function ChannelDetailScreen() {
       const allGroups = await localDB.groups.getAll();
       const groupsData = allGroups.filter((g: any) => g.channel_id === channelId);
       setGroups(groupsData || []);
+
+      const allPosts = await localDB.posts.getAll();
+      const filteredPosts = allPosts.filter((p: any) => p.channel_id === channelId);
+      filteredPosts.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+      const resolvedPosts = await Promise.all(filteredPosts.map(p => localDB.resolvePostWithAuthor(p)));
+      setChannelPosts(resolvedPosts);
     } catch (err) {
       console.log('Error fetching channel details:', err);
     } finally {
@@ -83,6 +93,14 @@ export default function ChannelDetailScreen() {
       case 'compartir_media': return '🔒';
       default: return '⚡';
     }
+  };
+
+  const handleSaveChannel = (channelName: string) => {
+    addToast({
+      title: 'Canal guardado',
+      description: `${channelName} se ha agregado a tus favoritos.`,
+      variant: 'success'
+    });
   };
 
   const handleSaveGroup = (groupName: string) => {
@@ -149,7 +167,95 @@ export default function ChannelDetailScreen() {
     />
   );
 
-  const isAdmin = channel && mockSession && channel.owner_id === mockSession.id;
+  const isAdmin = channel && mockSession && (channel.owner_id === mockSession.id || mockSession.role === 'admin');
+
+  const heroBanner = channel && (
+    <View className="mb-6">
+      {/* Cover Portada */}
+      <View className="h-44 bg-background/80 relative w-full border-b border-border-muted ">
+        <View className="absolute inset-0 bg-gradient-to-b from-primary/10 to-background/50" />
+      </View>
+
+      {/* Avatar y Acciones Rápidas */}
+      <View className="px-4 flex-row justify-between items-end -mt-16 mb-4">
+        <View className="p-1 bg-background rounded-full border border-border-muted">
+          <View className="w-28 h-28 rounded-full bg-background/80 items-center justify-center border border-border">
+            <Tv size={48} color={colors.primary} />
+          </View>
+        </View>
+        <View className="flex-row gap-2 pb-2">
+          <IconButton
+            icon={Bookmark}
+            onPress={() => handleSaveChannel(channel.name)}
+            variant="ghost"
+            rounded="full"
+            hasBorder={true}
+          />
+        </View>
+      </View>
+
+      {/* Datos del Canal */}
+      <View className="px-4">
+        <Text className="text-2xl font-black text-foreground tracking-tight">{channel.name}</Text>
+        <Text className="text-muted-foreground text-sm font-medium">Canal Oficial</Text>
+
+        <Text className="text-foreground mt-4 leading-5 text-sm">Empresa de apuestas aliada. Accede a nuestras salas y subgrupos oficiales.</Text>
+
+        <View className="flex-row gap-4 mt-4">
+          <View className="flex-row items-center">
+            <Text className="text-foreground font-black text-sm">{groups.length}</Text>
+            <Text className="text-muted-foreground text-xs ml-1 font-bold uppercase tracking-wider">Salas / Grupos</Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  );
+
+  const tabs = [
+    {
+      id: 'posts',
+      label: 'Publicaciones',
+      content: (
+        <View className="mt-2">
+          {isAdmin && (
+            <View className="mb-4">
+              <CreatePostWidget
+                onPublish={handlePublishPost}
+                forcedTarget={{
+                  id: channel?.id || '',
+                  name: channel?.name || '',
+                  type: 'channel'
+                }}
+              />
+            </View>
+          )}
+          {channelPosts.length > 0 ? (
+            <PostContainer
+              title="Publicaciones Recientes"
+              posts={channelPosts}
+            />
+          ) : (
+            <EmptyState title="No hay publicaciones en este canal." icon={LayoutList} variant="dashed" />
+          )}
+        </View>
+      )
+    },
+    {
+      id: 'groups',
+      label: 'Grupos / Salas',
+      content: (
+        <View className="mt-2">
+          {groups.length === 0 ? (
+            <EmptyState title="Esta empresa no cuenta con grupos habilitados aún." icon={Users} variant="dashed" />
+          ) : (
+            <View className="gap-2">
+              {groups.map((group) => renderGroupItem(group))}
+            </View>
+          )}
+        </View>
+      )
+    }
+  ];
 
   return (
     <HubDetailLayout
@@ -158,69 +264,10 @@ export default function ChannelDetailScreen() {
       isLoading={isLoading}
       notFoundLabel="Empresa no encontrada."
     >
+      {heroBanner}
       {channel && (
-        <View className="mt-4 gap-6">
-          {/* Hero Banner del Canal */}
-          <View className="border border-border rounded-xl overflow-hidden bg-background/40">
-            {/* Portada Cover */}
-            <View className="h-28 bg-gradient-to-r from-primary/10 to-secondary/10 relative">
-              <View className="absolute top-2 right-2 bg-background/85 px-2 py-1 rounded-full border border-border">
-                <Text className="text-[10px] font-black text-primary uppercase tracking-widest">
-                  Consorcio de Loterías
-                </Text>
-              </View>
-            </View>
-            
-            {/* Info del Canal */}
-            <View className="p-4 flex-row items-center gap-4 border-t border-border/50">
-              <View className="w-16 h-16 rounded-full bg-background/80 border border-border items-center justify-center -mt-10 shadow-sm">
-                <Tv size={28} color={colors.primary} />
-              </View>
-              <View className="flex-1">
-                <Text className="text-2xl font-black text-foreground tracking-tight">{channel.name}</Text>
-                <Text className="text-xs text-muted-foreground mt-0.5">Canal de Apuestas Oficial</Text>
-              </View>
-            </View>
-          </View>
-
-          {/* Listado de Salas y Subgrupos */}
-          <View>
-            <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-4">
-              Salas y Subgrupos
-            </Text>
-            {groups.length === 0 ? (
-              <View className="bg-background/80 border border-border p-6 items-center border-dashed rounded-xl">
-                <Text className="text-foreground font-bold text-sm text-center">
-                  Esta empresa no cuenta con grupos habilitados aún.
-                </Text>
-              </View>
-            ) : (
-              <View className="gap-2">
-                {groups.map((group) => renderGroupItem(group))}
-              </View>
-            )}
-          </View>
-
-          <TouchableOpacity
-            onPress={() => router.push(`/feed/search?id=${channel.id}&from=channel` as any)}
-            className="bg-primary/20 border border-border p-4  items-center justify-center hover:bg-primary/30 transition-colors"
-          >
-            <Text className="text-primary font-black text-sm uppercase tracking-wider">Ver Feed / Publicaciones del Canal 📢</Text>
-          </TouchableOpacity>
-
-          {isAdmin && (
-            <View className="mt-2 border-t border-border pt-6">
-              <Text className="text-white font-black text-sm uppercase tracking-wider mb-4">Publicar en el Canal</Text>
-              <CreatePostWidget
-                onPublish={handlePublishPost}
-                forcedTarget={{
-                  id: channel.id,
-                  name: channel.name,
-                  type: 'channel'
-                }}
-              />
-            </View>
-          )}
+        <View className="px-4">
+          <TabContainer tabs={tabs} defaultTabId="posts" />
         </View>
       )}
     </HubDetailLayout>
