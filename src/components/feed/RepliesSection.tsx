@@ -75,16 +75,16 @@ export default function RepliesSection({ targetId, targetUsername, onCommentsCou
   return (
     <View>
       {/* Input para responder estilo Twitter */}
-      <View className="flex-row items-start gap-3 py-4 border-b border-border">
+      <View className="flex-row items-start gap-3 rounded-3xl mt-2 p-4 bg-muted border-b border-border">
         <Image source={{ uri: mockSession?.avatar || 'https://i.pravatar.cc/150' }} className="w-10 h-10 rounded-full" />
         <View className="flex-1">
           <TextInput
             value={newComment}
             onChangeText={setNewComment}
             placeholder={`Responder a ${targetUsername}...`}
-            placeholderTextColor="#71717a"
+            placeholderTextColor={colors.mutedForeground}
             multiline
-            className="text-white bg-primary/5 text-sm py-1.5 outline-none min-h-[44px]"
+            className="text-white bg-primary/5 text-sm p-1.5 outline-none min-h-[44px]"
           />
           <View className="flex-row justify-end items-center mt-2">
             <TouchableOpacity

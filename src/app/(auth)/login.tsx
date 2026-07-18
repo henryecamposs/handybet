@@ -176,7 +176,7 @@ export default function LoginScreen() {
         <TouchableOpacity
           onPress={handleSubmit}
           disabled={isLoading}
-          className="bg-primary py-3.5  items-center border  mt-6 active:scale-[0.98]"
+          className="bg-primary py-3.5 rounded-full items-center border  mt-6 active:scale-[0.98]"
         >
           {isLoading ? (
             <ActivityIndicator color="#0f172a" />
