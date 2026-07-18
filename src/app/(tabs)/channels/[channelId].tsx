@@ -10,7 +10,8 @@ import { useHandyBetStore } from '../../../store/useHandyBetStore';
 import { socialService } from '../../../services/socialService';
 import ListItem from '@/components/ui/ListItem';
 import IconButton from '@/components/ui/IconButton';
-import { LayoutList, MessageCircle, UserPlus, Megaphone } from 'lucide-react-native';
+import { MessageCircle, Bookmark, LayoutList, Tv } from 'lucide-react-native';
+import { useToastStore } from '@/store/useToastStore';
 
 export default function ChannelDetailScreen() {
   const { channelId } = useLocalSearchParams();
@@ -21,6 +22,7 @@ export default function ChannelDetailScreen() {
   const [channel, setChannel] = useState<Channel | null>(null);
   const [groups, setGroups] = useState<Group[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { addToast } = useToastStore();
 
   async function fetchChannelDetails() {
     try {
@@ -83,12 +85,20 @@ export default function ChannelDetailScreen() {
     }
   };
 
+  const handleSaveGroup = (groupName: string) => {
+    addToast({
+      title: 'Grupo guardado',
+      description: `${groupName} se ha agregado a tus favoritos.`,
+      variant: 'success'
+    });
+  };
+
   const renderGroupItem = (group: Group) => (
     <ListItem
       key={group.id}
       title={group.name}
-      subtitle={`CÓDIGO: ${group.short_code} • SALA DE ${group.type.toUpperCase()}`}
-      subtitleVariant="primary"
+      subtitle={`Código: ${group.short_code} • Sala de ${group.type}`}
+      subtitleVariant="secondary"
       leftElement={
         <View className="w-10 h-10 rounded-full bg-background/80 items-center justify-center border border-border">
           <Text className="text-lg">{getIconForType(group.type)}</Text>
@@ -99,28 +109,28 @@ export default function ChannelDetailScreen() {
           <IconButton
             icon={LayoutList}
             onPress={() => router.push(`/feed/search?id=${group.id}&from=group` as any)}
-            variant="default"
+            variant="ghost"
             rounded="full"
             hasBorder={true}
           />
           <IconButton
             icon={MessageCircle}
             onPress={() => router.push(`/chat/${group.id}?fromType=group` as any)}
-            variant="default"
+            variant="ghost"
             rounded="full"
             hasBorder={true}
           />
           <IconButton
-            icon={UserPlus}
-            onPress={() => { /* lógica de unirse */ }}
-            variant="primary"
+            icon={Bookmark}
+            onPress={() => handleSaveGroup(group.name)}
+            variant="ghost"
             rounded="full"
-            hasBorder={false}
+            hasBorder={true}
           />
         </View>
       }
-      onPress={() => router.push(`/chat/${group.id}?fromType=group` as any)}
-      hasBorderBottom={true}
+      onPress={() => router.push(`/channels/groups?id=${group.id}&from=channel` as any)}
+      className="mb-2 bg-background/80"
     />
   );
 
@@ -130,17 +140,52 @@ export default function ChannelDetailScreen() {
     <HubDetailLayout
       backRoute="/(tabs)/channels"
       logoType="channels"
-      categoryText="Consorcio de Loterías"
-      title={channel?.name || ''}
-      listTitle="Salas y Subgrupos"
-      items={groups}
-      renderItem={renderGroupItem}
       isLoading={isLoading}
-      emptyLabel="Esta empresa no cuenta con grupos habilitados aún."
       notFoundLabel="Empresa no encontrada."
     >
       {channel && (
-        <View className="mt-4 gap-4">
+        <View className="mt-4 gap-6">
+          {/* Hero Banner del Canal */}
+          <View className="border border-border rounded-xl overflow-hidden bg-background/40">
+            {/* Portada Cover */}
+            <View className="h-28 bg-gradient-to-r from-primary/10 to-secondary/10 relative">
+              <View className="absolute top-2 right-2 bg-background/85 px-2 py-1 rounded-full border border-border">
+                <Text className="text-[10px] font-black text-primary uppercase tracking-widest">
+                  Consorcio de Loterías
+                </Text>
+              </View>
+            </View>
+            
+            {/* Info del Canal */}
+            <View className="p-4 flex-row items-center gap-4 border-t border-border/50">
+              <View className="w-16 h-16 rounded-full bg-background/80 border border-border items-center justify-center -mt-10 shadow-sm">
+                <Tv size={28} color={colors.primary} />
+              </View>
+              <View className="flex-1">
+                <Text className="text-2xl font-black text-foreground tracking-tight">{channel.name}</Text>
+                <Text className="text-xs text-muted-foreground mt-0.5">Canal de Apuestas Oficial</Text>
+              </View>
+            </View>
+          </View>
+
+          {/* Listado de Salas y Subgrupos */}
+          <View>
+            <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-4">
+              Salas y Subgrupos
+            </Text>
+            {groups.length === 0 ? (
+              <View className="bg-background/80 border border-border p-6 items-center border-dashed rounded-xl">
+                <Text className="text-foreground font-bold text-sm text-center">
+                  Esta empresa no cuenta con grupos habilitados aún.
+                </Text>
+              </View>
+            ) : (
+              <View className="gap-2">
+                {groups.map((group) => renderGroupItem(group))}
+              </View>
+            )}
+          </View>
+
           <TouchableOpacity
             onPress={() => router.push(`/feed/search?id=${channel.id}&from=channel` as any)}
             className="bg-primary/20 border border-border p-4  items-center justify-center hover:bg-primary/30 transition-colors"

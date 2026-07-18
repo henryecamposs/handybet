@@ -10,6 +10,7 @@ import { HubLayout, Carrusel, SeccionLista, PostContainer, TabContainer } from '
 import ListItem from '../../../components/ui/ListItem';
 import IconButton from '../../../components/ui/IconButton';
 import EmptyState from '../../../components/ui/EmptyState';
+import { useToastStore } from '@/store/useToastStore';
 
 export default function ChannelsScreen() {
   const router = useRouter();
@@ -18,6 +19,23 @@ export default function ChannelsScreen() {
   const [searchQuery, setSearchQuery] = useState('');
   const colors = useThemeColors();
   const [latestPosts, setLatestPosts] = useState<any[]>([]);
+  const { addToast } = useToastStore();
+
+  const handleSave = (channelName: string) => {
+    addToast({
+      title: 'Canal guardado',
+      description: `${channelName} se ha agregado a tus favoritos.`,
+      variant: 'success'
+    });
+  };
+
+  const handleFollow = (channelName: string, isFollowing: boolean) => {
+    addToast({
+      title: isFollowing ? 'Dejaste de seguir' : 'Siguiendo canal',
+      description: isFollowing ? `Ya no sigues a ${channelName}` : `Ahora sigues a ${channelName}`,
+      variant: isFollowing ? 'muted' : 'success'
+    });
+  };
 
   // Simulamos canales del usuario (solo para demostración del UI)
   const myChannels = channels.slice(0, 1);
@@ -81,9 +99,16 @@ export default function ChannelsScreen() {
                 hasBorder={true}
               />
               <IconButton
-                icon={LogOut}
-                onPress={() => { }}
-                variant="destructive"
+                icon={Bookmark}
+                onPress={() => handleSave(channel.name)}
+                variant="ghost"
+                rounded="full"
+                hasBorder={true}
+              />
+              <IconButton
+                label="Siguiendo"
+                onPress={() => handleFollow(channel.name, true)}
+                variant="ghost"
                 rounded="full"
                 hasBorder={true}
               />
@@ -99,14 +124,14 @@ export default function ChannelsScreen() {
               />
               <IconButton
                 icon={Bookmark}
-                onPress={() => {}}
+                onPress={() => handleSave(channel.name)}
                 variant="ghost"
                 rounded="full"
                 hasBorder={true}
               />
               <IconButton
                 label="Seguir"
-                onPress={() => {}}
+                onPress={() => handleFollow(channel.name, false)}
                 variant="primary"
                 rounded="full"
                 hasBorder={true}
