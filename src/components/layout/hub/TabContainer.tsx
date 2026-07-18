@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Platform } from 'react-native';
 
 export interface TabItem {
   id: string;
@@ -25,23 +25,12 @@ export default function TabContainer({ tabs, defaultTabId }: TabContainerProps) 
         {tabs.map((tab) => {
           const isActive = activeTabId === tab.id;
           return (
-            <TouchableOpacity
+            <TabItemComponent
               key={tab.id}
+              tab={tab}
+              isActive={isActive}
               onPress={() => setActiveTabId(tab.id)}
-              className={`flex-1 py-3 items-center justify-center transition-colors border-b-[3px] ${isActive ? 'border-primary' : 'border-transparent hover:bg-background/50'
-                }`}
-            >
-              {tab.icon}
-              {typeof tab.label === 'string' ? (
-                <Text className={`font-black text-center mt-2 text-xs uppercase tracking-wider ${isActive ? 'text-primary' : 'text-foreground'}`}>
-                  {tab.label}
-                </Text>
-              ) : typeof tab.label === 'function' ? (
-                tab.label(isActive)
-              ) : (
-                tab.label
-              )}
-            </TouchableOpacity>
+            />
           );
         })}
       </View>
@@ -53,3 +42,37 @@ export default function TabContainer({ tabs, defaultTabId }: TabContainerProps) 
     </View>
   );
 }
+
+function TabItemComponent({ tab, isActive, onPress }: { tab: TabItem; isActive: boolean; onPress: () => void }) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  let bgClass = isActive ? 'bg-background' : 'bg-muted';
+  let textClass = isActive ? 'text-primary' : 'text-muted-foreground';
+  let borderClass = isActive ? 'border-primary' : 'border-transparent';
+
+  if (isHovered && !isActive) {
+    bgClass = 'bg-background';
+    textClass = 'text-secondary';
+  }
+
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      onMouseEnter={() => Platform.OS === 'web' && setIsHovered(true)}
+      onMouseLeave={() => Platform.OS === 'web' && setIsHovered(false)}
+      className={`flex-1 py-3 items-center justify-center transition-colors border-b-[3px] ${bgClass} ${borderClass}`}
+    >
+      {tab.icon}
+      {typeof tab.label === 'string' ? (
+        <Text className={`font-black text-center mt-2 text-xs uppercase tracking-wider transition-colors ${textClass}`}>
+          {tab.label}
+        </Text>
+      ) : typeof tab.label === 'function' ? (
+        tab.label(isActive)
+      ) : (
+        tab.label
+      )}
+    </TouchableOpacity>
+  );
+}
+
