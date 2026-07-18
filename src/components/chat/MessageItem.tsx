@@ -48,7 +48,7 @@ export default function MessageItem({ msg, onDelete, onReply, onCopy }: MessageI
           <IconButton icon={Reply} onPress={() => onReply?.(msg.id)} variant="ghost" rounded="full" iconColor={colors.mutedForeground} size="xs" hasBorder={false} />
           <IconButton icon={Copy} onPress={() => onCopy?.(msg.text)} variant="ghost" rounded="full" iconColor={colors.mutedForeground} size="xs" hasBorder={false} />
           <IconButton icon={Trash2} onPress={() => onDelete?.(msg.id)} variant="ghost" rounded="full" iconColor={colors.destructive} size="xs" hasBorder={false} />
-          
+
           {showEmojis && (
             <View className="absolute -top-10 left-0 bg-popover border border-border px-2 py-1 flex-row gap-2 shadow-sm rounded-full z-50">
               {emojis.map(e => (
@@ -83,13 +83,13 @@ export default function MessageItem({ msg, onDelete, onReply, onCopy }: MessageI
         <Text className={`text-sm leading-5 font-medium ${isMe ? 'text-primary' : 'text-foreground'}`}>
           {msg.text}
         </Text>
-        <Text className={`text-[9px] font-bold text-right mt-2 uppercase font-mono ${isMe ? 'text-primary/70' : 'text-muted-foreground'}`}>
+        <Text className={`text-[9px] font-bold text-right mt-2 uppercase font-mono ${isMe ? 'text-muted-foreground' : 'text-muted-foreground'}`}>
           {msg.time}
         </Text>
-        
+
         {/* Reaction */}
         {reaction && (
-          <View className={`absolute -bottom-3 ${isMe ? '-left-3' : '-right-3'} bg-background border border-border/50 rounded-full w-6 h-6 items-center justify-center`}>
+          <View className={`absolute -bottom-3 ${isMe ? '-right-3' : '-left-3'} bg-background border border-border/50 rounded-full w-6 h-6 items-center justify-center`}>
             <Text className="text-xs">{reaction}</Text>
           </View>
         )}
