@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { MessageCircle, UserPlus, UserCheck, MoreHorizontal, Info, Image as ImageIcon, Users, LayoutList } from 'lucide-react-native';
+import { MessageCircle, UserPlus, UserCheck, MoreHorizontal, Info, Image as ImageIcon, Users, LayoutList, User } from 'lucide-react-native';
 import { handyBetUsers } from '../../../mockdata/handyBetMock';
 import { localDB } from '../../../lib/localDB';
 import { useThemeColors } from '@/hooks/useThemeColors';
 import HubDetailLayout from '@/components/layout/HubDetailLayout';
-import { TabContainer } from '@/components/layout/hub';
+import { TabContainer, SeccionLista } from '@/components/layout/hub';
 import PostContainer from '@/components/layout/hub/PostContainer';
 import IconButton from '@/components/ui/IconButton';
 import EmptyState from '@/components/ui/EmptyState';
+import ListItem from '@/components/ui/ListItem';
+import CreatePostWidget from '@/components/feed/CreatePostWidget';
 
 export default function FollowDetailScreen() {
   const { id } = useLocalSearchParams();
@@ -29,10 +31,18 @@ export default function FollowDetailScreen() {
   };
 
   const [userPosts, setUserPosts] = React.useState<any[]>([]);
-  
+  const [suggestedUsers, setSuggestedUsers] = React.useState<any[]>([]);
+  const [suggestedGroups, setSuggestedGroups] = React.useState<any[]>([]);
+
   React.useEffect(() => {
     localDB.posts.getAll().then((allPosts) => {
       setUserPosts(allPosts.filter((post: any) => post.author?.username === user.username));
+    });
+    localDB.users.getAll().then(users => {
+      setSuggestedUsers(users.filter((u: any) => u.username !== user.username).slice(0, 5));
+    });
+    localDB.groups.getAll().then(groups => {
+      setSuggestedGroups(groups.slice(0, 5));
     });
   }, [user.username]);
 
@@ -55,7 +65,7 @@ export default function FollowDetailScreen() {
         <View className="flex-row gap-2 pb-2">
           <IconButton
             icon={MoreHorizontal}
-            onPress={() => {}}
+            onPress={() => { }}
             variant="ghost"
             rounded="full"
             hasBorder={true}
@@ -105,15 +115,17 @@ export default function FollowDetailScreen() {
       label: 'Publicaciones',
       content: (
         <View className="mt-2">
+          <View className="mb-4">
+            <CreatePostWidget onPublish={async () => true} />
+          </View>
           {userPosts.length > 0 ? (
-            <PostContainer 
+            <PostContainer
               title="Publicaciones Recientes"
               posts={userPosts}
             />
           ) : (
             <View>
-              <Text className="text-foreground font-black text-lg uppercase tracking-wider mb-2">Publicaciones Recientes</Text>
-              <EmptyState title="No hay publicaciones nuevas." variant="solid" className="min-h-[120px]" />
+              <EmptyState title="No hay publicaciones nuevas." icon={LayoutList} variant="dashed" />
             </View>
           )}
         </View>
@@ -132,12 +144,54 @@ export default function FollowDetailScreen() {
     {
       id: 'following',
       label: 'Seguidos',
-      content: <EmptyState title="No sigues a nadie aún." icon={Users} variant="dashed" />
+      content: (
+        <View>
+          <EmptyState title="No sigues a nadie aún." icon={User} variant="dashed" />
+          <View className="mt-6">
+            <SeccionLista 
+              title="Sugerencias para seguir"
+              items={suggestedUsers}
+              renderItem={(u, index) => (
+                <ListItem 
+                  key={u.id || index}
+                  title={u.name}
+                  subtitle={`@${u.username}`}
+                  avatar={u.avatar}
+                  rightElement={
+                    <IconButton icon={UserPlus} variant="primary" rounded="full" onPress={() => {}} />
+                  }
+                />
+              )}
+            />
+          </View>
+        </View>
+      )
     },
     {
       id: 'groups',
       label: 'Grupos',
-      content: <EmptyState title="No perteneces a ningún grupo." icon={LayoutList} variant="dashed" />
+      content: (
+        <View>
+          <EmptyState title="No perteneces a ningún grupo." icon={Users} variant="dashed" />
+          <View className="mt-6">
+            <SeccionLista 
+              title="Grupos sugeridos"
+              items={suggestedGroups}
+              renderItem={(g, index) => (
+                <ListItem 
+                  key={g.id || index}
+                  title={g.name}
+                  subtitle={`${g.members?.length || 0} miembros`}
+                  avatar={g.image || 'https://via.placeholder.com/150'}
+                  rightElement={
+                    <IconButton icon={UserPlus} variant="primary" rounded="full" onPress={() => {}} />
+                  }
+                />
+              )}
+            />
+          </View>
+        </View>
+      )
     }
   ];
 
@@ -147,7 +201,7 @@ export default function FollowDetailScreen() {
       backRoute="/(tabs)/follows"
     >
       {heroBanner}
-      
+
       <View className="px-4">
         <TabContainer tabs={tabs} defaultTabId="posts" />
       </View>
