@@ -1,54 +1,169 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
-import { Wallet, ArrowUpRight, ArrowDownLeft, Plus, History } from 'lucide-react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { Wallet, ArrowUpRight, ArrowDownLeft } from 'lucide-react-native';
 import { useRouter } from 'expo-router';
 import { useThemeColors } from '@/hooks/useThemeColors';
-import HubLayout from '@/components/layout/HubLayout';
+import { HubLayout, SeccionLista, TabContainer } from '@/components/layout/hub';
+import ListItem from '@/components/ui/ListItem';
+import IconButton from '@/components/ui/IconButton';
+import EmptyState from '@/components/ui/EmptyState';
 
 export default function WalletScreen() {
   const router = useRouter();
   const colors = useThemeColors();
 
-  // Simulamos billeteras creadas por el usuario
-  const misBilleteras: any[] = [
-    { id: 'wallet_1', name: 'Mi Taquilla' }
+  const cargosPorGrupo = [
+    { id: '1', title: 'Animalitos VIP', subtitle: 'Apuestas y Sorteos', icon: '🎲', amount: '50.00 Bs', status: 'Disp. para jugar', statusColor: 'text-muted-foreground' },
+    { id: '2', title: 'Carreras 5y6', subtitle: 'Hipismo', icon: '🏇', amount: '120.50 Bs', status: 'Pendiente: 30.00 Bs', statusColor: 'text-amber-500' }
   ];
 
-  const renderMyWalletItem = (wallet: any, index: number) => (
-    <TouchableOpacity
-      key={wallet.id || index}
-      onPress={() => router.push(`/(tabs)/wallet/${wallet.id}` as any)}
-      className="w-32 h-36 bg-background/80  border border-border items-center justify-center mr-4 hover:bg-background/80 transition-colors px-2"
-    >
-      <View className="w-12 h-12 rounded-full bg-background/80 items-center justify-center mb-2 border border-border">
-        <Wallet size={20} color={colors.foreground} />
-      </View>
-      <Text className="text-foreground font-bold text-center text-sm px-1" numberOfLines={2}>{wallet.name}</Text>
-    </TouchableOpacity>
+  const premiosPorCobrar = [
+    { id: '1', title: 'La Imaginaria (API)', subtitle: 'Premios acumulados', icon: '🏆', amount: '1,070.00 Bs', status: '' }
+  ];
+
+  const movimientosRecientes = [
+    { id: '1', title: 'Recarga Exitosa', subtitle: 'Hoy, 10:20 AM', type: 'in', amount: '+100.00 Bs' },
+    { id: '2', title: 'Pago Sorteo Animalitos', subtitle: 'Ayer, 3:45 PM (Grupo: Animalitos VIP)', type: 'out', amount: '-50.00 Bs' }
+  ];
+
+  const renderCargoItem = (item: any) => (
+    <ListItem
+      key={item.id}
+      title={item.title}
+      subtitle={item.subtitle}
+      subtitleVariant="muted"
+      leftElement={
+        <View className="w-10 h-10 rounded-full bg-background/80 items-center justify-center border border-border">
+          <Text className="text-lg">{item.icon}</Text>
+        </View>
+      }
+      rightElement={
+        <View className="items-end">
+          <Text className="text-secondary font-bold text-base">{item.amount}</Text>
+          <Text className={`${item.statusColor} text-[9px] uppercase font-bold tracking-wider mt-0.5`}>{item.status}</Text>
+        </View>
+      }
+      onPress={() => {}}
+      className="mb-2 bg-background/80"
+    />
   );
+
+  const renderPremioItem = (item: any) => (
+    <ListItem
+      key={item.id}
+      title={item.title}
+      subtitle={item.subtitle}
+      subtitleVariant="muted"
+      leftElement={
+        <View className="w-10 h-10 rounded-full bg-secondary/10 items-center justify-center border border-secondary/35">
+          <Text className="text-lg">{item.icon}</Text>
+        </View>
+      }
+      rightElement={
+        <View className="flex-row items-center gap-3">
+          <Text className="text-primary font-bold text-lg">{item.amount}</Text>
+          <IconButton
+            icon={ArrowUpRight}
+            onPress={() => {}}
+            variant="primary"
+            size="xs"
+            rounded="full"
+          />
+        </View>
+      }
+      onPress={() => {}}
+      className="mb-2 bg-background/80"
+    />
+  );
+
+  const renderMovimientoItem = (item: any) => (
+    <ListItem
+      key={item.id}
+      title={item.title}
+      subtitle={item.subtitle}
+      subtitleVariant="muted"
+      leftElement={
+        <View className={`w-10 h-10 rounded-full items-center justify-center border ${item.type === 'in' ? 'bg-secondary/10 border-secondary/10' : 'bg-destructive/10 border-destructive/10'}`}>
+          {item.type === 'in' ? (
+            <ArrowDownLeft size={16} color={colors.secondary} />
+          ) : (
+            <ArrowUpRight size={16} color={colors.destructive} />
+          )}
+        </View>
+      }
+      rightElement={
+        <Text className={`${item.type === 'in' ? 'text-secondary' : 'text-foreground'} font-bold text-base`}>
+          {item.amount}
+        </Text>
+      }
+      onPress={() => {}}
+      className="mb-2 bg-background/80"
+    />
+  );
+
+  const emptyState = (
+    <EmptyState
+      icon={Wallet}
+      title="Sin registros"
+      description="Aún no hay actividad en esta sección."
+      variant="dashed"
+    />
+  );
+
+  const tabs = [
+    {
+      id: 'cargos',
+      label: 'Cargos por Grupo',
+      content: (
+        <View className="mt-2">
+          <SeccionLista
+            items={cargosPorGrupo}
+            renderItem={renderCargoItem}
+            layout="list"
+            emptyState={emptyState}
+          />
+        </View>
+      )
+    },
+    {
+      id: 'premios',
+      label: 'Premios por Cobrar',
+      content: (
+        <View className="mt-2">
+          <SeccionLista
+            items={premiosPorCobrar}
+            renderItem={renderPremioItem}
+            layout="list"
+            emptyState={emptyState}
+          />
+        </View>
+      )
+    },
+    {
+      id: 'movimientos',
+      label: 'Historial',
+      content: (
+        <View className="mt-2">
+          <SeccionLista
+            items={movimientosRecientes}
+            renderItem={renderMovimientoItem}
+            layout="list"
+            emptyState={emptyState}
+          />
+        </View>
+      )
+    }
+  ];
 
   return (
     <HubLayout
       title="Billeteras"
       subtitle="Gestiona tus fondos y taquillas."
-      myItemsTitle="Tus Billeteras"
-      myItems={misBilleteras}
-      renderMyItem={renderMyWalletItem}
-      onAddNewItem={() => router.push('/(tabs)/wallet/create' as any)}
-      addNewItemLabel="Crear/Añadir"
       showBack={true}
+      tabContainer={<TabContainer tabs={tabs} />}
     >
-      {/* Si no tiene billeteras creadas */}
-      {misBilleteras.length === 0 && (
-        <View className="items-center justify-center py-8 mb-8 border border-border  border-dashed">
-          <Wallet size={48} color={colors.mutedForeground} className="mb-4" />
-          <Text className="text-foreground font-bold text-lg text-center">Aún no has creado billeteras</Text>
-          <Text className="text-muted-foreground text-sm text-center mt-2 max-w-[250px]">Crea o enlaza tu primera taquilla/billetera para comenzar a jugar.</Text>
-        </View>
-      )}
-
       {/* Tarjeta Principal de Balance */}
-      <View className="bg-background/80  p-6 border border-border mb-8 relative overflow-hidden">
+      <View className="bg-background/80  p-6 border border-border mb-6 mt-2 relative overflow-hidden">
         <View className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
 
         <View className="flex-row items-center mb-6">
@@ -75,107 +190,6 @@ export default function WalletScreen() {
         </View>
       </View>
 
-      {/* Saldos por Grupos */}
-      <View className="mb-8">
-        <Text className="text-foreground font-black text-lg uppercase tracking-wider mb-4">Saldos por Grupos</Text>
-
-        {/* Grupo 1 */}
-        <View className="bg-background/80 p-5  border border-border flex-row items-center justify-between mb-3 hover:bg-background/80 transition-colors">
-          <View className="flex-row items-center">
-            <View className="w-12 h-12 rounded-xs bg-background/80 items-center justify-center mr-4 border border-border">
-              <Text className="text-xl">🎲</Text>
-            </View>
-            <View>
-              <Text className="text-foreground font-bold text-base">Animalitos VIP</Text>
-              <Text className="text-muted-foreground text-xs mt-0.5">Apuestas y Sorteos</Text>
-            </View>
-          </View>
-          <View className="items-end">
-            <Text className="text-secondary font-bold text-lg">50.00 Bs</Text>
-            <Text className="text-muted-foreground text-[10px] uppercase font-bold tracking-wider mt-1">Disp. para jugar</Text>
-          </View>
-        </View>
-
-        {/* Grupo 2 */}
-        <View className="bg-background/80 p-5  border border-border flex-row items-center justify-between mb-3 hover:bg-background/80 transition-colors">
-          <View className="flex-row items-center">
-            <View className="w-12 h-12 rounded-xs bg-background/80 items-center justify-center mr-4 border border-border">
-              <Text className="text-xl">🏇</Text>
-            </View>
-            <View>
-              <Text className="text-foreground font-bold text-base">Carreras 5y6</Text>
-              <Text className="text-muted-foreground text-xs mt-0.5">Hipismo</Text>
-            </View>
-          </View>
-          <View className="items-end">
-            <Text className="text-secondary font-bold text-lg">120.50 Bs</Text>
-            <Text className="text-amber-500 text-[10px] uppercase font-bold tracking-wider mt-1">Pendiente: 30.00 Bs</Text>
-          </View>
-        </View>
-      </View>
-
-      {/* Saldo de Premios (API Taquillas) */}
-      <View className="mb-8">
-        <View className="flex-row items-center justify-between mb-4">
-          <Text className="text-foreground font-black text-lg uppercase tracking-wider">Premios por Cobrar</Text>
-          <TouchableOpacity>
-            <Text className="text-primary font-bold text-xs uppercase tracking-wider">Retirar todo</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View className="bg-background/80 p-5  border border-border flex-row items-center justify-between hover:bg-background/80 transition-colors">
-          <View className="flex-row items-center">
-            <View className="w-12 h-12 rounded-xs bg-secondary/10 items-center justify-center mr-4 border border-secondary/35">
-              <Text className="text-xl">🏆</Text>
-            </View>
-            <View>
-              <Text className="text-foreground font-bold text-base">La Imaginaria (API)</Text>
-              <Text className="text-muted-foreground text-xs mt-0.5">Premios acumulados</Text>
-            </View>
-          </View>
-          <View className="items-end">
-            <Text className="text-primary font-bold text-xl">1,070.00 Bs</Text>
-          </View>
-        </View>
-      </View>
-
-      {/* Historial Reciente */}
-      <View className="mb-8">
-        <View className="flex-row items-center justify-between mb-4">
-          <Text className="text-foreground font-black text-lg uppercase tracking-wider">Movimientos Recientes</Text>
-          <TouchableOpacity>
-            <History size={18} color={colors.mutedForeground} />
-          </TouchableOpacity>
-        </View>
-
-        <View className="bg-background/80  border border-border p-5">
-          <View className="flex-row items-center justify-between mb-4 pb-4 border-b border-border ">
-            <View className="flex-row items-center">
-              <View className="w-10 h-10 rounded-full bg-secondary/10 items-center justify-center mr-3 border border-secondary/10">
-                <ArrowDownLeft size={16} color="#10b981" />
-              </View>
-              <View>
-                <Text className="text-foreground font-bold text-sm">Recarga Exitosa</Text>
-                <Text className="text-muted-foreground text-xs mt-0.5">Hoy, 10:20 AM</Text>
-              </View>
-            </View>
-            <Text className="text-secondary font-bold text-base">+100.00 Bs</Text>
-          </View>
-
-          <View className="flex-row items-center justify-between">
-            <View className="flex-row items-center">
-              <View className="w-10 h-10 rounded-full bg-red-500/10 items-center justify-center mr-3 border border-red-500/10">
-                <ArrowUpRight size={16} color="#ef4444" />
-              </View>
-              <View>
-                <Text className="text-foreground font-bold text-sm">Pago Sorteo Animalitos</Text>
-                <Text className="text-muted-foreground text-xs mt-0.5">Ayer, 3:45 PM (Grupo: Animalitos VIP)</Text>
-              </View>
-            </View>
-            <Text className="text-foreground font-bold text-base">-50.00 Bs</Text>
-          </View>
-        </View>
-      </View>
     </HubLayout>
   );
 }
