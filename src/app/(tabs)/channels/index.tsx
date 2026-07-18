@@ -105,7 +105,7 @@ export default function ChannelsScreen() {
                 hasBorder={true}
               />
               <IconButton
-                icon={UserPlus}
+                label="Seguir"
                 onPress={() => {}}
                 variant="primary"
                 rounded="full"
