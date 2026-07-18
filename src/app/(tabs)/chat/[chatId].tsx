@@ -73,12 +73,12 @@ export default function ChatDetailScreen() {
             </View>
           </TouchableOpacity>
 
-          <IconButton 
-            icon={X} 
-            onPress={() => router.push('/(tabs)/chat')} 
-            variant="ghost" 
-            rounded="full" 
-            iconColor={colors.mutedForeground} 
+          <IconButton
+            icon={X}
+            onPress={() => router.push('/(tabs)/chat')}
+            variant="ghost"
+            rounded="full"
+            iconColor={colors.mutedForeground}
             hasBorder={false}
           />
         </View>
@@ -93,10 +93,11 @@ export default function ChatDetailScreen() {
         <View className="p-2 border-t border-border flex-row items-center gap-1 bg-background/40">
           <IconButton
             icon={ImageIcon}
-            onPress={() => {}}
+            onPress={() => { }}
             variant="ghost"
-            rounded="none"
+            rounded='full'
             iconColor={colors.mutedForeground}
+            hasBorder={false}
           />
 
           <TextInput
@@ -113,8 +114,9 @@ export default function ChatDetailScreen() {
             icon={isRecording ? Square : Mic}
             onPress={handleToggleRecord}
             variant={isRecording ? 'destructive' : 'ghost'}
-            rounded="none"
+            rounded='full'
             iconColor={isRecording ? 'white' : colors.mutedForeground}
+            hasBorder={false}
           />
 
           {/* Botón de Enviar */}
@@ -122,8 +124,9 @@ export default function ChatDetailScreen() {
             icon={Send}
             onPress={handleSend}
             variant={!inputText.trim() ? 'ghost' : 'primary'}
-            rounded="none"
-            iconColor={!inputText.trim() ? colors.mutedForeground : colors.background}
+            rounded="full"
+            iconColor={!inputText.trim() ? colors.mutedForeground : colors.primary}
+            hasBorder={false}
           />
         </View>
       </View>
