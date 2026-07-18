@@ -162,31 +162,37 @@ export default function WalletScreen() {
       showBack={true}
       tabContainer={<TabContainer tabs={tabs} />}
     >
-      {/* Tarjeta Principal de Balance */}
-      <View className="bg-background/80  p-6 border border-border mb-6 mt-2 relative overflow-hidden">
-        <View className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
-
-        <View className="flex-row items-center mb-6">
-          <View className="w-10 h-10 rounded-full bg-primary/20 items-center justify-center mr-3 border border-primary/35">
-            <Wallet size={20} color={colors.primary} />
-          </View>
-          <Text className="text-foreground font-medium text-base">Balance Total</Text>
+      {/* Hero Banner de Balance */}
+      <View className="bg-card p-8 mb-4 border-b border-border items-center">
+        <View className="w-16 h-16 rounded-full bg-primary/10 items-center justify-center mb-4 border border-primary/20">
+          <Wallet size={32} color={colors.primary} />
         </View>
-
-        <Text className="text-foreground font-black text-4xl mb-1">
-          1,240.50 <Text className="text-primary text-2xl font-bold">Bs</Text>
+        <Text className="text-muted-foreground font-bold text-xs uppercase tracking-widest mb-2">Balance Global</Text>
+        <Text className="text-foreground font-black text-5xl mb-2 text-center">
+          1,240.50 <Text className="text-primary text-3xl font-bold">Bs</Text>
         </Text>
-        <Text className="text-muted-foreground text-sm mb-8 font-medium">Saldo Global (Suma de todos los grupos)</Text>
+        <Text className="text-muted-foreground text-xs mb-8 text-center max-w-[200px]">Suma de todos tus fondos disponibles.</Text>
 
-        <View className="flex-row gap-4">
-          <TouchableOpacity className="flex-1 bg-primary py-3.5 rounded-xs flex-row items-center justify-center">
-            <ArrowDownLeft size={18} color="#000" className="mr-2" />
-            <Text className="text-black font-bold text-sm">Recargar</Text>
-          </TouchableOpacity>
-          <TouchableOpacity className="flex-1 bg-background/80 py-3.5 rounded-xs flex-row items-center justify-center border border-border">
-            <ArrowUpRight size={18} color={colors.foreground} className="mr-2" />
-            <Text className="text-foreground font-bold text-sm">Retirar</Text>
-          </TouchableOpacity>
+        <View className="flex-row gap-4 w-full max-w-[300px] justify-center">
+          <View className="flex-1">
+            <IconButton
+              icon={ArrowDownLeft}
+              label="Recargar"
+              onPress={() => {}}
+              variant="primary"
+              rounded="full"
+            />
+          </View>
+          <View className="flex-1">
+            <IconButton
+              icon={ArrowUpRight}
+              label="Retirar"
+              onPress={() => {}}
+              variant="default"
+              hasBorder={true}
+              rounded="full"
+            />
+          </View>
         </View>
       </View>
 
