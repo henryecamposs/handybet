@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { Wallet, ArrowUpRight, ArrowDownLeft } from 'lucide-react-native';
+import { Wallet, ArrowUpRight, ArrowDownLeft, Eye, MessageCircle } from 'lucide-react-native';
 import { useRouter } from 'expo-router';
 import { useThemeColors } from '@/hooks/useThemeColors';
 import { HubLayout, SeccionLista, TabContainer } from '@/components/layout/hub';
@@ -38,9 +38,19 @@ export default function WalletScreen() {
         </View>
       }
       rightElement={
-        <View className="items-end">
-          <Text className="text-secondary font-bold text-base">{item.amount}</Text>
-          <Text className={`${item.statusColor} text-[9px] uppercase font-bold tracking-wider mt-0.5`}>{item.status}</Text>
+        <View className="flex-row items-center gap-3">
+          <View className="items-end">
+            <Text className="text-secondary font-bold text-base">{item.amount}</Text>
+            <Text className={`${item.statusColor} text-[9px] uppercase font-bold tracking-wider mt-0.5`}>{item.status}</Text>
+          </View>
+          <IconButton
+            icon={MessageCircle}
+            onPress={() => {}}
+            variant="ghost"
+            size="xs"
+            rounded="full"
+            hasBorder={true}
+          />
         </View>
       }
       onPress={() => {}}
@@ -63,9 +73,9 @@ export default function WalletScreen() {
         <View className="flex-row items-center gap-3">
           <Text className="text-primary font-bold text-lg">{item.amount}</Text>
           <IconButton
-            icon={ArrowUpRight}
+            label="Cobrar"
             onPress={() => {}}
-            variant="primary"
+            variant="secondary"
             size="xs"
             rounded="full"
           />
@@ -92,9 +102,21 @@ export default function WalletScreen() {
         </View>
       }
       rightElement={
-        <Text className={`${item.type === 'in' ? 'text-secondary' : 'text-foreground'} font-bold text-base`}>
-          {item.amount}
-        </Text>
+        <View className="flex-row items-center gap-3">
+          <Text className={`${item.type === 'in' ? 'text-secondary' : 'text-foreground'} font-bold text-base`}>
+            {item.amount}
+          </Text>
+          {item.type === 'in' && (
+            <IconButton
+              icon={Eye}
+              onPress={() => {}}
+              variant="ghost"
+              size="xs"
+              rounded="full"
+              hasBorder={true}
+            />
+          )}
+        </View>
       }
       onPress={() => {}}
       className="mb-2 bg-background/80"
