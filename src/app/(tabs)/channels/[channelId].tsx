@@ -8,6 +8,9 @@ import HubDetailLayout from '@/components/layout/HubDetailLayout';
 import CreatePostWidget from '@/components/feed/CreatePostWidget';
 import { useHandyBetStore } from '../../../store/useHandyBetStore';
 import { socialService } from '../../../services/socialService';
+import ListItem from '@/components/ui/ListItem';
+import IconButton from '@/components/ui/IconButton';
+import { LayoutList, MessageCircle, UserPlus, Megaphone } from 'lucide-react-native';
 
 export default function ChannelDetailScreen() {
   const { channelId } = useLocalSearchParams();
@@ -81,24 +84,44 @@ export default function ChannelDetailScreen() {
   };
 
   const renderGroupItem = (group: Group) => (
-    <TouchableOpacity
+    <ListItem
       key={group.id}
+      title={group.name}
+      subtitle={`CÓDIGO: ${group.short_code} • SALA DE ${group.type.toUpperCase()}`}
+      subtitleVariant="primary"
+      leftElement={
+        <View className="w-10 h-10 rounded-full bg-background/80 items-center justify-center border border-border">
+          <Text className="text-lg">{getIconForType(group.type)}</Text>
+        </View>
+      }
+      rightElement={
+        <View className="flex-row gap-2 items-center">
+          <IconButton
+            icon={LayoutList}
+            onPress={() => router.push(`/feed/search?id=${group.id}&from=group` as any)}
+            variant="default"
+            rounded="full"
+            hasBorder={true}
+          />
+          <IconButton
+            icon={MessageCircle}
+            onPress={() => router.push(`/chat/${group.id}?fromType=group` as any)}
+            variant="default"
+            rounded="full"
+            hasBorder={true}
+          />
+          <IconButton
+            icon={UserPlus}
+            onPress={() => { /* lógica de unirse */ }}
+            variant="primary"
+            rounded="full"
+            hasBorder={false}
+          />
+        </View>
+      }
       onPress={() => router.push(`/chat/${group.id}?fromType=group` as any)}
-      className="bg-background/80 border border-border p-5  flex-row items-center gap-4 hover:bg-background/80/80 transition-colors"
-    >
-      <View className="bg-background/80 w-12 h-12 rounded-xs items-center justify-center border border-border">
-        <Text className="text-xl">{getIconForType(group.type)}</Text>
-      </View>
-      <View className="flex-1">
-        <Text className="text-foreground font-bold text-base">{group.name}</Text>
-        <Text className="text-foreground text-[10px] font-bold uppercase tracking-wider mt-1">
-          Código: <Text className="font-mono text-primary">{group.short_code}</Text> • Sala de {group.type}
-        </Text>
-      </View>
-      <View className="w-8 h-8 rounded-full bg-background/80 items-center justify-center border border-border">
-        <Text className="text-foreground font-bold text-xs">▶</Text>
-      </View>
-    </TouchableOpacity>
+      hasBorderBottom={true}
+    />
   );
 
   const isAdmin = channel && mockSession && channel.owner_id === mockSession.id;
