@@ -21,7 +21,7 @@ export default function TabContainer({ tabs, defaultTabId }: TabContainerProps) 
   return (
     <View className="flex-1">
       {/* Selector de pestañas */}
-      <View className="flex-row gap-4 mb-6 br">
+      <View className="flex-row mb-6 br">
         {tabs.map((tab) => {
           const isActive = activeTabId === tab.id;
           return (
@@ -48,7 +48,7 @@ function TabItemComponent({ tab, isActive, onPress }: { tab: TabItem; isActive: 
 
   let bgClass = isActive ? 'bg-background' : 'bg-muted';
   let textClass = isActive ? 'text-primary' : 'text-muted-foreground';
-  let borderClass = isActive ? 'border-primary' : 'border-transparent';
+  let borderClass = isActive ? 'border-primary' : 'border-b-[1px] border-border-muted';
 
   if (isHovered && !isActive) {
     bgClass = 'bg-background';

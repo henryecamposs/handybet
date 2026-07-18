@@ -30,11 +30,11 @@ export default function HandyBetHeader() {
   ];
 
   return (
-    <View className="h-16 bg-background/80 border-b border-border flex-row items-center justify-between px-4 z-50 shadow-sm">
+    <View className="h-16 bg-background border-b border-border flex-row items-center justify-between px-4 z-50 shadow-sm">
       {/* Izquierda: Logo y Buscador */}
       <View className="flex-row items-center pr-4">
         <Logo size="sm" layout="horizontal" style={{ marginRight: 16 }} />
-        <View className="bg-primary/5 rounded-full flex-row items-center px-4 h-10 flex-1 max-w-[280px] border border-border/50">
+        <View className="bg-input rounded-full flex-row items-center px-4 h-10 flex-1 max-w-[280px] border border-border-muted">
           <Search size={18} color={colors.mutedForeground} className="mr-2" />
           <TextInput
             placeholder="Buscar en HandyBet..."
@@ -94,9 +94,9 @@ export default function HandyBetHeader() {
 function HeaderTab({ item, isActive, onPress, colors }: { item: any, isActive: boolean, onPress: () => void, colors: any }) {
   const [isHovered, setIsHovered] = useState(false);
   const IconComponent = item.icon;
-  
+
   const iconColor = isActive ? colors.primary : (isHovered ? colors.secondary : colors.mutedForeground);
-  
+
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -111,15 +111,15 @@ function HeaderTab({ item, isActive, onPress, colors }: { item: any, isActive: b
 
 function HeaderAction({ icon: Icon, onPress, colors, children }: { icon: any, onPress?: () => void, colors: any, children?: React.ReactNode }) {
   const [isHovered, setIsHovered] = useState(false);
-  
+
   const iconColor = isHovered ? colors.secondary : colors.mutedForeground;
-  
+
   return (
-    <TouchableOpacity 
+    <TouchableOpacity
       onPress={onPress}
       onMouseEnter={() => Platform.OS === 'web' && setIsHovered(true)}
       onMouseLeave={() => Platform.OS === 'web' && setIsHovered(false)}
-      className={`w-10 h-10 rounded-full items-center justify-center transition-colors border border-border/50 ${isHovered ? 'bg-background/80' : 'bg-background/80/80'}`}
+      className={`w-10 h-10 rounded-full items-center justify-center transition-colors ${isHovered ? 'bg-muted border border-secondary' : 'bg-background'}`}
     >
       <Icon size={20} color={iconColor} />
       {children}

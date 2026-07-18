@@ -94,18 +94,18 @@ export default function HubLayout({
   return (
     <ScrollView className="flex-1 bg-background px-4 pt-2" showsVerticalScrollIndicator={false}>
       {/* Header */}
-      <View className="mb-6 flex-row items-center">
+      <View className="mb-4 flex-row items-center">
         {(showBack || onBack) && (
           <TouchableOpacity
             onPress={() => onBack ? onBack() : router.push('/')}
-            className="mr-3 p-2 rounded-full bg-background/80 hover:bg-primary/20 transition-colors border border-border"
+            className="mr-3 p-1 rounded-full  hover:bg-muted transition-colors"
           >
             <ArrowLeft size={22} color={colors.foreground} />
           </TouchableOpacity>
         )}
-        <View className="flex-1">
+        <View className="flex-1 flex-row justify-between items-center">
           <Text className="text-foreground font-bold text-2xl">{title}</Text>
-          <Text className="text-foreground text-sm mt-1">{subtitle}</Text>
+          <Text className="text-muted-foreground hidden md:flex text-sm mt-1">{subtitle}</Text>
         </View>
       </View>
 
@@ -114,7 +114,7 @@ export default function HubLayout({
 
       {/* Buscador */}
       {onSearchChange && (
-        <View className="bg-input rounded-full flex-row items-center px-4 py-2 border border-border mb-6">
+        <View className="bg-input rounded-full flex-row items-center px-4 py-2 border border-border mb-6  w-1/2">
           <Search size={20} color={colors.mutedForeground} />
           <TextInput
             placeholder={searchPlaceholder}
