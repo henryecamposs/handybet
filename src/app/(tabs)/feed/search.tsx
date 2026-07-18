@@ -312,8 +312,8 @@ export default function FeedSearchScreen() {
       </View>
 
       <ScrollView className="flex-1 px-4 pt-4" showsVerticalScrollIndicator={false}>
-        {/* Editor de publicaciones (CreatePostWidget) para administradores */}
-        {isAdmin && (entityType === 'channel' || entityType === 'group') && (
+        {/* Editor de publicaciones (CreatePostWidget) */}
+        {(entityType === 'channel' || entityType === 'group') && (
           <CreatePostWidget
             onPublish={handlePublishPost}
             forcedTarget={{
