@@ -4,6 +4,7 @@ import { MessageSquare, Share2, Bookmark } from 'lucide-react-native';
 import Logo from '../ui/Logo';
 import { useThemeColors, withOpacity } from '@/hooks/useThemeColors';
 import { useDevicePlatform } from '@/hooks/useDevicePlatform';
+import PostActionButton from './PostActionButton';
 
 interface PostActionButtonsProps {
   isLiked: boolean;
@@ -32,50 +33,35 @@ export default function PostActionButtons({
   const colors = useThemeColors();
   const { isDesktop } = useDevicePlatform();
   return (
-    <View className={`flex-row items-center ${isCompact ? 'gap-4' : 'gap-2'}`}>
-      <TouchableOpacity
+    <View className={`flex-row items-center ${isCompact ? 'gap-4' : 'gap-1'}`}>
+      <PostActionButton
+        icon={Logo}
+        isLogo={true}
+        label={isCompact ? likeCount : (!isDesktop ? '' : 'Me gusta')}
         onPress={onLikeToggle}
-        className={`flex-row items-center gap-1.5 rounded-xs hover:bg-muted transition-colors px-1 py-1`}
-      >
-        <Logo size="xs" showText={false} style={{ opacity: isLiked ? 1 : (isCompact ? 0.3 : 0.4) }} />
-        <Text className={`${isCompact ? 'text-muted-foreground' : 'text-foreground'} text-xs font-bold hover:text-secondary transition-colors`}>
-          {isCompact ? likeCount : (!isDesktop ? '' : 'Me gusta')}
-        </Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
+        isCompact={isCompact}
+        isActive={isLiked}
+      />
+      <PostActionButton
+        icon={MessageSquare}
+        label={isCompact ? commentCount : (!isDesktop ? '' : 'Comentar')}
         onPress={onCommentPress}
-        className={`flex-row items-center gap-1.5 rounded-xs hover:bg-muted transition-colors px-1 py-1`}
-      >
-        <MessageSquare size={isCompact ? 16 : 15} color={isCompact ? colors.mutedForeground : colors.mutedForeground} />
-        <Text className={`${isCompact ? 'text-muted-foreground' : 'text-foreground'} text-xs font-bold`}>
-          {isCompact ? commentCount : (!isDesktop ? '' : 'Comentar')}
-        </Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
+        isCompact={isCompact}
+      />
+      <PostActionButton
+        icon={Share2}
+        label={!isDesktop ? undefined : 'Compartir'}
         onPress={onSharePress}
-        className={`flex-row items-center gap-1.5 rounded-xs hover:bg-muted transition-colors px-1 py-1`}
-      >
-        <Share2 size={isCompact ? 16 : 15} color={isCompact ? colors.mutedForeground : colors.mutedForeground} />
-        {!isDesktop ? null : (
-          <Text className={`${isCompact ? 'text-muted-foreground' : 'text-foreground'} text-xs font-bold`}>
-            Compartir
-          </Text>
-        )}
-      </TouchableOpacity>
-
-      <TouchableOpacity
+        isCompact={isCompact}
+      />
+      <PostActionButton
+        icon={Bookmark}
+        label={!isDesktop ? undefined : 'Guardar'}
         onPress={onSavePress}
-        className={`flex-row items-center gap-1.5 rounded-xs hover:bg-muted transition-colors px-1 py-1`}
-      >
-        <Bookmark size={isCompact ? 16 : 15} color={isSaved ? colors.primary : colors.mutedForeground} fill={isSaved ? colors.primary : "transparent"} />
-        {!isDesktop ? null : (
-          <Text className={`${isCompact ? 'text-muted-foreground' : 'text-foreground'} text-xs font-bold`}>
-            Guardar
-          </Text>
-        )}
-      </TouchableOpacity>
+        isCompact={isCompact}
+        isActive={isSaved}
+        fill={isSaved ? colors.primary : "transparent"}
+      />
     </View>
   );
 }

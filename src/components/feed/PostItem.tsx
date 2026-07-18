@@ -37,7 +37,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
 
   if (isHidden) {
     return (
-      <View className="bg-muted border border-border p-5  mb-6 flex-row items-center justify-between shadow-sm">
+      <View className="bg-muted border border-border p-5  mb-1 flex-row items-center justify-between shadow-sm">
         <Text className="text-zinc-400 text-xs font-bold">Publicación oculta de {post.author}</Text>
         <TouchableOpacity
           onPress={() => {
@@ -261,7 +261,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
     );
   }
   return (
-    <View className="bg-primary/5 border border-border p-2  mb-6 shadow-md flex-row gap-2">
+    <View className="bg-background border-b border-border p-2  mb-4 shadow-md flex-row gap-2">
       {/* Columna Izquierda: Foto de Perfil */}
       <View className="items-center">
         <Image source={{ uri: post.avatar }} className="w-12 h-12 rounded-full border-2 border-border" />
@@ -406,7 +406,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
         )}
 
         {/* Reacciones y Sentimiento Inferior */}
-        <View className="items-center mt-3 border-t border-border/50 pt-3 w-full">
+        <View className="items-center mt-3 pt-3 w-full">
           {post.feeling && (
             <View className="flex-row items-center gap-2 bg-background/80 border border-border self-start px-3 py-1.5 rounded-full mb-3">
               {post.feeling.icon && React.createElement(post.feeling.icon, { size: 14, color: post.feeling.color })}

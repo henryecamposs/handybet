@@ -21,16 +21,15 @@ export default function TabContainer({ tabs, defaultTabId }: TabContainerProps) 
   return (
     <View className="flex-1">
       {/* Selector de pestañas */}
-      <View className="flex-row gap-4 mb-6">
+      <View className="flex-row gap-4 mb-6 br">
         {tabs.map((tab) => {
           const isActive = activeTabId === tab.id;
           return (
             <TouchableOpacity
               key={tab.id}
               onPress={() => setActiveTabId(tab.id)}
-              className={`flex-1 py-3 items-center justify-center transition-colors border-b-[3px] ${
-                isActive ? 'border-primary' : 'border-transparent hover:bg-background/50'
-              }`}
+              className={`flex-1 py-3 items-center justify-center transition-colors border-b-[3px] ${isActive ? 'border-primary' : 'border-transparent hover:bg-background/50'
+                }`}
             >
               {tab.icon}
               {typeof tab.label === 'string' ? (
@@ -48,7 +47,7 @@ export default function TabContainer({ tabs, defaultTabId }: TabContainerProps) 
       </View>
 
       {/* Contenido de la pestaña activa */}
-      <View className="flex-1">
+      <View className="flex-1 pb-4 border-b border-muted">
         {activeTab?.content}
       </View>
     </View>

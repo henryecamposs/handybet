@@ -34,7 +34,7 @@ export default function SeccionList({
   }
 
   return (
-    <View className="mb-8 mt-2">
+    <View className="mb-4 mt-2">
       {title && <Text className="text-foreground font-black text-lg mb-4">{title}</Text>}
       {layout === 'grid' ? (
         <View className="flex-row flex-wrap gap-2">
