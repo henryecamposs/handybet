@@ -109,7 +109,6 @@ export default function WalletScreen() {
               icon={Eye}
               onPress={() => { }}
               variant="ghost"
-              size="xs"
               rounded="full"
               hasBorder={true}
             />
