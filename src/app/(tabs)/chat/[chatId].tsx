@@ -61,13 +61,14 @@ export default function ChatDetailScreen() {
         <View className="flex-row items-center justify-between px-6 pb-4 border-b border-border">
           <View className="flex-row items-center gap-3">
             <TouchableOpacity onPress={() => router.back()} className="p-1">
-              <Text className="text-white text-base">◀</Text>
+              <Text className="text-foreground text-base font-black">◀</Text>
             </TouchableOpacity>
-            <Image source={{ uri: 'https://placehold.co/100' }} className="w-9 h-9 rounded-full border border-border" />
-            <View>
-              <Text className="text-white font-black text-sm">Soporte La Imaginaria</Text>
-              <Text className="text-secondary text-[9px] font-black uppercase tracking-wider">En línea</Text>
-            </View>
+            <Image source={{ uri: 'https://placehold.co/100' }} className="w-10 h-10 rounded-full border border-border/50 shadow-sm" />
+          </View>
+          
+          <View className="items-end">
+            <Text className="text-foreground font-black text-sm">Soporte La Imaginaria</Text>
+            <Text className="text-secondary text-[10px] font-bold uppercase tracking-wider">En línea</Text>
           </View>
         </View>
 
