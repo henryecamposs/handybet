@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
-import { Users, Compass, MessageSquare, Plus, Trash2, LayoutList, MessageCircle, LucideUserMinus2 } from 'lucide-react-native';
+import { Users, Compass, MessageSquare, Plus, Trash2, LayoutList, MessageCircle, LucideUserMinus2, LogOut } from 'lucide-react-native';
 import { handyBetGroups } from '../../mockdata/handyBetMock';
 import { useRouter } from 'expo-router';
 import { Modal, ActivityIndicator, ScrollView } from 'react-native';
@@ -140,7 +140,7 @@ export default function GruposScreen() {
                 hasBorder={true}
               />
               <IconButton
-                icon={LucideUserMinus2}
+                icon={LogOut}
                 onPress={() => {
                   setMisGrupos(misGrupos.filter((g) => g.id !== group.id));
                 }}

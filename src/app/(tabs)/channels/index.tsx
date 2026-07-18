@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { channelService } from '../../../services/channelService';
 import { Channel } from '../../../types/handyBet';
-import { Compass, Tv, Plus, LayoutList, LogOut } from 'lucide-react-native';
+import { Compass, Tv, Plus, LayoutList, LogOut, Bookmark, UserPlus } from 'lucide-react-native';
 import { useThemeColors } from '../../../hooks/useThemeColors';
 import { localDB } from '../../../lib/localDB';
 import { HubLayout, Carrusel, SeccionLista, PostContainer, TabContainer } from '../../../components/layout/hub';
@@ -77,28 +77,41 @@ export default function ChannelsScreen() {
                 icon={LayoutList}
                 onPress={() => router.push(`/(tabs)/channels/${channel.id}` as any)}
                 variant="default"
-                size="xs"
                 rounded="full"
                 hasBorder={true}
               />
               <IconButton
                 icon={LogOut}
-                onPress={() => {}}
+                onPress={() => { }}
                 variant="destructive"
-                size="xs"
                 rounded="full"
                 hasBorder={true}
               />
             </View>
           ) : (
-            <IconButton
-              label="Ver Feed"
-              onPress={() => router.push(`/(tabs)/channels/${channel.id}` as any)}
-              variant="ghost"
-              hasBorder={true}
-              size="xs"
-              rounded="full"
-            />
+            <View className="flex-row gap-2 items-center">
+              <IconButton
+                icon={LayoutList}
+                onPress={() => router.push(`/(tabs)/channels/${channel.id}` as any)}
+                variant="ghost"
+                rounded="full"
+                hasBorder={true}
+              />
+              <IconButton
+                icon={Bookmark}
+                onPress={() => {}}
+                variant="ghost"
+                rounded="full"
+                hasBorder={true}
+              />
+              <IconButton
+                icon={UserPlus}
+                onPress={() => {}}
+                variant="primary"
+                rounded="full"
+                hasBorder={true}
+              />
+            </View>
           )
         }
         onPress={() => router.push(`/(tabs)/channels/${channel.id}` as any)}
