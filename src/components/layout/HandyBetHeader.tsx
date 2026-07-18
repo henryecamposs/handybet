@@ -1,11 +1,24 @@
-import { View, Text, TouchableOpacity, Image, TextInput, Platform } from 'react-native';
-import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, Image, TextInput, Platform, ScrollView } from 'react-native';
+import React, { useState, useRef } from 'react';
 import { useRouter, usePathname } from 'expo-router';
 import { Search, MessageCircle, Bell, Sun, Moon, Home, Tv, Bookmark, Gamepad2 } from 'lucide-react-native';
 import { useColorScheme } from 'nativewind';
 import { useHandyBetStore } from '../../store/useHandyBetStore';
 import { useThemeColors, withOpacity } from '../../hooks/useThemeColors';
 import Logo from '../ui/Logo';
+import FloatingPopup from '../ui/FloatingPopup';
+
+const POPUP_CHATS = [
+  { id: '1', name: 'Soporte La Imaginaria', msg: 'Su recarga por Pago Móvil...', unread: true, avatar: 'https://api.dicebear.com/7.x/identicon/png?seed=imaginaria&backgroundColor=b6e3f4' },
+  { id: '2', name: 'Joselin La Gata VIP', msg: '🔥 ¡Chicos, ya están disponibles...', unread: true, avatar: 'https://i.pravatar.cc/150?u=joselin' },
+  { id: '3', name: 'Pronosticador Oficial', msg: 'Revisa los triples calientes...', unread: false, avatar: 'https://api.dicebear.com/7.x/identicon/png?seed=pronosticos&backgroundColor=caee26' },
+];
+
+const POPUP_NOTIFS = [
+  { id: '1', text: 'Diego Pérez comenzó a seguirte.', unread: true, time: 'Hace 5 min' },
+  { id: '2', text: 'La Imaginaria Anuncios publicó una actualización.', unread: true, time: 'Hace 1 hora' },
+  { id: '3', text: 'Carlos Gómez le dio me gusta a tu post.', unread: false, time: 'Hace 3 horas' },
+];
 
 export default function HandyBetHeader() {
   const router = useRouter();
@@ -13,6 +26,11 @@ export default function HandyBetHeader() {
   const { mockSession } = useHandyBetStore();
   const { colorScheme, toggleColorScheme } = useColorScheme();
   const colors = useThemeColors();
+
+  const [showChatPopup, setShowChatPopup] = useState(false);
+  const [showNotifPopup, setShowNotifPopup] = useState(false);
+  const chatAnchorRef = useRef<View>(null);
+  const notifAnchorRef = useRef<View>(null);
 
   const handleToggleTheme = () => {
     try {
@@ -67,18 +85,82 @@ export default function HandyBetHeader() {
           onPress={handleToggleTheme}
           colors={colors}
         />
-        <HeaderAction
-          icon={MessageCircle}
-          colors={colors}
-        />
-        <HeaderAction
-          icon={Bell}
-          colors={colors}
+        <View ref={chatAnchorRef}>
+          <HeaderAction
+            icon={MessageCircle}
+            colors={colors}
+            onPress={() => setShowChatPopup(!showChatPopup)}
+          />
+        </View>
+
+        <FloatingPopup
+          isVisible={showChatPopup}
+          onClose={() => setShowChatPopup(false)}
+          anchorRef={chatAnchorRef as React.RefObject<View>}
+          location="bottom"
+          size="md"
         >
-          <View className="absolute -top-1 -right-1 w-4 h-4 bg-primary rounded-full border-2 border-border items-center justify-center">
-            <Text className="text-[9px] font-black text-black">2</Text>
+          <View className="flex-row items-center p-3 border-b border-border gap-2">
+            <Image source={{ uri: mockSession?.avatar || 'https://i.pravatar.cc/150' }} className="w-8 h-8 rounded-full border border-border" />
+            <Text className="text-foreground font-black text-sm flex-1">Mensajes</Text>
+            <TouchableOpacity onPress={() => { setShowChatPopup(false); router.push('/(tabs)/chat'); }}>
+              <Text className="text-primary font-black text-xs uppercase">Ver Todos</Text>
+            </TouchableOpacity>
           </View>
-        </HeaderAction>
+          <ScrollView className="max-h-64">
+            {POPUP_CHATS.map(chat => (
+              <TouchableOpacity key={chat.id} className="p-3 border-b border-border flex-row items-center gap-3 bg-background/80 hover:bg-muted" onPress={() => { setShowChatPopup(false); router.push(`/chat/${chat.id}` as any); }}>
+                <Image source={{ uri: chat.avatar }} className="w-10 h-10 rounded-full border border-border" />
+                <View className="flex-1">
+                  <Text className={`text-sm ${chat.unread ? 'text-foreground font-black' : 'text-muted-foreground font-normal'}`}>{chat.name}</Text>
+                  <Text className={`text-xs mt-0.5 ${chat.unread ? 'text-foreground font-bold' : 'text-muted-foreground font-normal'}`} numberOfLines={1}>{chat.msg}</Text>
+                </View>
+                {chat.unread && (
+                  <View className="w-2 h-2 rounded-full bg-secondary" />
+                )}
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </FloatingPopup>
+
+        <View ref={notifAnchorRef}>
+          <HeaderAction
+            icon={Bell}
+            colors={colors}
+            onPress={() => setShowNotifPopup(!showNotifPopup)}
+          >
+            <View className="absolute -top-1 -right-1 w-4 h-4 bg-primary rounded-full border-2 border-border items-center justify-center">
+              <Text className="text-[9px] font-black text-black">2</Text>
+            </View>
+          </HeaderAction>
+        </View>
+
+        <FloatingPopup
+          isVisible={showNotifPopup}
+          onClose={() => setShowNotifPopup(false)}
+          anchorRef={notifAnchorRef as React.RefObject<View>}
+          location="bottom"
+          size="md"
+        >
+          <View className="flex-row items-center p-3 border-b border-border gap-2">
+            <Image source={{ uri: mockSession?.avatar || 'https://i.pravatar.cc/150' }} className="w-8 h-8 rounded-full border border-border" />
+            <Text className="text-foreground font-black text-sm flex-1">Notificaciones</Text>
+            <TouchableOpacity onPress={() => { setShowNotifPopup(false); router.push('/(tabs)/notifications'); }}>
+              <Text className="text-primary font-black text-xs uppercase">Ver Todas</Text>
+            </TouchableOpacity>
+          </View>
+          <ScrollView className="max-h-64">
+            {POPUP_NOTIFS.map(notif => (
+              <TouchableOpacity key={notif.id} className="p-3 border-b border-border flex-row items-start gap-3 bg-background/80 hover:bg-muted" onPress={() => setShowNotifPopup(false)}>
+                <View className="mt-1 w-2 h-2 rounded-full bg-secondary opacity-0" style={{ opacity: notif.unread ? 1 : 0 }} />
+                <View className="flex-1">
+                  <Text className={`text-sm ${notif.unread ? 'text-foreground font-black' : 'text-muted-foreground font-normal'}`}>{notif.text}</Text>
+                  <Text className="text-muted-foreground text-[10px] mt-1 font-bold">{notif.time}</Text>
+                </View>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </FloatingPopup>
         <TouchableOpacity onPress={() => router.push('/(tabs)/profile')} className="ml-2 flex-row items-center hover:bg-background/80/50 p-1 rounded-full transition-colors border border-transparent hover:border-border/50 pr-3">
           <Image
             source={{ uri: mockSession?.avatar || 'https://i.pravatar.cc/150' }}
@@ -111,13 +193,14 @@ function HeaderTab({ item, isActive, onPress, colors }: { item: any, isActive: b
   );
 }
 
-function HeaderAction({ icon: Icon, onPress, colors, children }: { icon: any, onPress?: () => void, colors: any, children?: React.ReactNode }) {
+const HeaderAction = React.forwardRef(({ icon: Icon, onPress, colors, children }: { icon: any, onPress?: () => void, colors: any, children?: React.ReactNode }, ref: any) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const iconColor = isHovered ? colors.secondary : colors.mutedForeground;
 
   return (
     <TouchableOpacity
+      ref={ref}
       onPress={onPress}
       // @ts-ignore
       onMouseEnter={() => Platform.OS === 'web' && setIsHovered(true)}
@@ -129,4 +212,4 @@ function HeaderAction({ icon: Icon, onPress, colors, children }: { icon: any, on
       {children}
     </TouchableOpacity>
   );
-}
+});
