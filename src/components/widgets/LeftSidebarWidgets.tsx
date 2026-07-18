@@ -55,10 +55,10 @@ export default function LeftSidebarWidgets() {
           items={savedItems.map((item) => {
             const targetId = item.target_id || item.id;
             let path = `/favorites/${item.id}`;
-            if (item.type === 'user') path = `/follows/${targetId}`;
+            if (item.type === 'user') path = `/chat/${targetId}?fromType=user`;
             else if (item.type === 'game') path = `/games/${targetId}`;
             else if (item.type === 'channel') path = `/channels/${targetId}`;
-            else if (item.type === 'group') path = `/chat/group/${targetId}`;
+            else if (item.type === 'group') path = `/chat/${targetId}?fromType=group`;
             else if (item.type === 'post' || item.type === 'advertisement') path = `/feed/${targetId}?from=favorites`;
             return {
               id: item.id,
@@ -72,7 +72,7 @@ export default function LeftSidebarWidgets() {
         <SidebarPopover
           icon={<Users size={24} color={colors.primary} />}
           label="Grupos"
-          items={suggestions.groups.map(g => ({ id: g.id, name: g.name, subtitle: `${g.members} miembros`, path: `/chat/group/${g.id}` }))}
+          items={suggestions.groups.map(g => ({ id: g.id, name: g.name, subtitle: `${g.members} miembros`, path: `/chat/${g.id}?fromType=group` }))}
           viewAllPath="/grupos"
         />
         <SidebarPopover

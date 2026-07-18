@@ -51,7 +51,7 @@ export default function GruposScreen() {
   const handleGroupClick = async (group: Group) => {
     // Si ya es miembro, ir directo al chat
     if (misGrupos.some((g: Group) => g.id === group.id)) {
-      router.push(`/chat/group/${group.id}` as any);
+      router.push(`/chat/${group.id}?fromType=group` as any);
       return;
     }
 
@@ -97,7 +97,7 @@ export default function GruposScreen() {
       setIntentions('');
 
       // Navegar a la sala de chat del grupo
-      router.push(`/chat/group/${selectedGroup.id}` as any);
+      router.push(`/chat/${selectedGroup.id}?fromType=group` as any);
     } catch (e) {
       console.error(e);
     } finally {

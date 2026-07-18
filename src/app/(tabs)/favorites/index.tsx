@@ -54,7 +54,7 @@ export default function GuardadosScreen() {
         router.push(`/channels/${targetId}` as any);
         break;
       case 'group':
-        router.push(`/chat/group/${targetId}` as any);
+        router.push(`/chat/${targetId}?fromType=group` as any);
         break;
       case 'advertisement':
       case 'post':

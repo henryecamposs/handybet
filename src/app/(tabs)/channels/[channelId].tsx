@@ -83,7 +83,7 @@ export default function ChannelDetailScreen() {
   const renderGroupItem = (group: Group) => (
     <TouchableOpacity
       key={group.id}
-      onPress={() => router.push(`/chat/group/${group.id}` as any)}
+      onPress={() => router.push(`/chat/${group.id}?fromType=group` as any)}
       className="bg-background/80 border border-border p-5  flex-row items-center gap-4 hover:bg-background/80/80 transition-colors"
     >
       <View className="bg-background/80 w-12 h-12 rounded-xs items-center justify-center border border-border">
