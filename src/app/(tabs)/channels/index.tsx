@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { channelService } from '../../../services/channelService';
 import { Channel } from '../../../types/handyBet';
-import { Compass, Tv, Plus, LayoutList, LogOut, Bookmark, UserPlus, Users, InfoIcon, EyeOff } from 'lucide-react-native';
+import { Compass, Megaphone, Plus, LayoutList, LogOut, Bookmark, UserPlus, Users, InfoIcon, EyeOff } from 'lucide-react-native';
 import { useThemeColors } from '../../../hooks/useThemeColors';
 import { localDB } from '../../../lib/localDB';
 import { HubLayout, Carrusel, SeccionLista, PostContainer, TabContainer } from '../../../components/layout/hub';
@@ -81,7 +81,7 @@ export default function ChannelsScreen() {
         subtitleVariant="muted"
         leftElement={
           <View className="w-10 h-10 rounded-full bg-background/80 items-center justify-center border border-border">
-            <Tv size={18} color={colors.primary} />
+            <Megaphone size={18} color={colors.primary} />
           </View>
         }
         rightElement={

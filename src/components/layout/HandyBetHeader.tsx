@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, Image, TextInput, Platform, ScrollView } from 'react-native';
 import React, { useState, useRef } from 'react';
 import { useRouter, usePathname } from 'expo-router';
-import { Search, MessageCircle, Bell, Sun, Moon, Home, Tv, Bookmark, Gamepad2 } from 'lucide-react-native';
+import { Search, MessageCircle, Bell, Sun, Moon, Home, Megaphone, Bookmark, Gamepad2 } from 'lucide-react-native';
 import { useColorScheme } from 'nativewind';
 import { useHandyBetStore } from '../../store/useHandyBetStore';
 import { useThemeColors, withOpacity } from '../../hooks/useThemeColors';
@@ -42,7 +42,7 @@ export default function HandyBetHeader() {
 
   const navigationItems = [
     { label: 'Inicio', path: '/(tabs)/feed', match: '/feed', icon: Home },
-    { label: 'Canales', path: '/(tabs)/channels', match: '/channels', icon: Tv },
+    { label: 'Canales', path: '/(tabs)/channels', match: '/channels', icon: Megaphone },
     { label: 'Guardados', path: '/favorites', match: '/favorites', icon: Bookmark },
     { label: 'Juegos', path: '/(tabs)/games', match: '/games', icon: Gamepad2 },
   ];

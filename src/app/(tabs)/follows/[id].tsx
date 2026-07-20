@@ -56,19 +56,19 @@ const SuggestedItemActions = ({ item, type, router }: { item: any; type: 'user' 
     <View className="flex-row items-center gap-1">
       <IconButton icon={LayoutList} variant="ghost" rounded="full" onPress={handleViewPosts} />
       <IconButton icon={MessageCircle} variant="ghost" rounded="full" onPress={handleChat} />
-      <IconButton 
-        icon={Bookmark} 
-        variant="ghost" 
-        rounded="full" 
-        onPress={handleSave} 
+      <IconButton
+        icon={Bookmark}
+        variant="ghost"
+        rounded="full"
+        onPress={handleSave}
       />
       <View className="ml-1">
-        <IconButton 
-          icon={isFollowing ? UserCheck : UserPlus} 
-          label={isFollowing ? "Siguiendo" : "Seguir"} 
-          variant={isFollowing ? "ghost" : "primary"} 
-          rounded="full" 
-          onPress={handleFollow} 
+        <IconButton
+          icon={isFollowing ? UserCheck : UserPlus}
+          label={isFollowing ? "Siguiendo" : "Seguir"}
+          variant={isFollowing ? "ghost" : "primary"}
+          rounded="full"
+          onPress={handleFollow}
           hasBorder={true}
         />
       </View>
@@ -216,7 +216,7 @@ export default function FollowDetailScreen() {
     },
     {
       id: 'following',
-      label: 'Seguidos',
+      label: 'Miembros',
       content: (
         <View>
           <EmptyState title="No sigues a nadie aún." icon={User} variant="dashed" />

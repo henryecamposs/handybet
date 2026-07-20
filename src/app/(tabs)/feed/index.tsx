@@ -15,7 +15,7 @@ import PostItem from '@/components/feed/PostItem';
 import PostDetailView from '@/components/feed/PostDetailView';
 import PostMediaViewer from '@/components/feed/PostMediaViewer';
 import ShareModal from '@/components/feed/ShareModal';
-import { Heart, MessageSquare, Share2, MoreVertical, LogOut, Star, User, Tv, Gamepad2, Bookmark, UserCheck, Users } from 'lucide-react-native';
+import { Heart, MessageSquare, Share2, MoreVertical, LogOut, Star, User, Megaphone, Gamepad2, Bookmark, UserCheck, Users } from 'lucide-react-native';
 import { useThemeColors, withOpacity } from '@/hooks/useThemeColors';
 import { useDevicePlatform } from '@/hooks/useDevicePlatform';
 
@@ -340,7 +340,7 @@ export default function FeedScreen() {
               className="flex-row items-center gap-3 p-3.5 border-b border-border/50 hover:bg-zinc-900"
               onPress={() => { setShowMobileMenu(false); router.push('/(tabs)/channels' as any); }}
             >
-              <Tv size={18} color="white" />
+              <Megaphone size={18} color="white" />
               <Text className="text-foreground font-semibold">Canales</Text>
             </TouchableOpacity>
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Tv, CheckCircle2, FileText } from 'lucide-react-native';
+import { Megaphone, CheckCircle2, FileText } from 'lucide-react-native';
 
 export default function CreateChannelScreen() {
   const router = useRouter();

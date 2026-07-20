@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
-import { Trophy } from 'lucide-react-native';
+import { Trophy, Newspaper, Users, Info } from 'lucide-react-native';
+import EmptyState from '../ui/EmptyState';
 import HandyAdsLogo from '../ui/HandyAdsLogo';
 import { localDB } from '../../lib/localDB';
 import { useHandyBetStore } from '../../store/useHandyBetStore';
@@ -12,8 +13,8 @@ export const [mockAds, mockNews, mockFollowSuggestions, mockPrizes] = [[], [], [
 // --- COMPONENTS ---
 
 export const WidgetContainer = ({ title, children, action }: { title: string | React.ReactNode, children: React.ReactNode, action?: React.ReactNode }) => (
-  <View className="mb-4">
-    <View className="flex-row justify-between items-center hover:bg-background/50 p-1 rounded-xs transition-colors mb-3 px-2">
+  <View className="mb-4 bg-card border border-border rounded-xl">
+    <View className="bg-muted rounded-t-xl flex-row justify-between items-center  p-1 rounded-xs transition-colors mb-3 px-2">
       {typeof title === 'string' ? (
         <Text className="text-xs font-semibold text-foreground">{title}</Text>
       ) : (
@@ -21,7 +22,7 @@ export const WidgetContainer = ({ title, children, action }: { title: string | R
       )}
       {action && action}
     </View>
-    <View className="bg-transparent space-y-2">
+    <View className="bg-transparent space-y-2 p-1">
       {children}
     </View>
   </View>
@@ -103,7 +104,7 @@ export const PrizeNotificationWidget = ({ id, title, description, onSelectPrize 
   </TouchableOpacity>
 );
 
-export const Divider = () => <View className="h-[1px] bg-background/80 my-4 mx-2" />;
+export const Divider = () => <View className="h-[1px] bg-border my-4" />;
 
 interface RightSidebarWidgetsProps {
   onSelectNews?: (id: string | null) => void;
@@ -175,17 +176,23 @@ export default function RightSidebarWidgets({ onSelectNews, onSelectPrize, onSel
 
       {/* Contenedor 1: Publicidad */}
       <WidgetContainer title={<HandyAdsLogo size="xs" />}>
-        {ads.filter(a => a.size === 'large').map(ad => (
-          <AdWidget key={ad.id} image={ad.image_url || ad.image} title={ad.title} domain={ad.domain} size={ad.size} />
-        ))}
-        <View className="flex-row gap-2">
-          {ads.filter(a => a.size === 'small').map(ad => (
-            <AdWidget key={ad.id} image={ad.image_url || ad.image} title={ad.title} domain={ad.domain} size={ad.size} />
-          ))}
-        </View>
+        {ads.length === 0 ? (
+          <EmptyState title="No hay anuncios disponibles." icon={Info} variant="dashed" />
+        ) : (
+          <>
+            {ads.filter(a => a.size === 'large').map(ad => (
+              <AdWidget key={ad.id} image={ad.image_url || ad.image} title={ad.title} domain={ad.domain} size={ad.size} />
+            ))}
+            <View className="flex-row gap-2">
+              {ads.filter(a => a.size === 'small').map(ad => (
+                <AdWidget key={ad.id} image={ad.image_url || ad.image} title={ad.title} domain={ad.domain} size={ad.size} />
+              ))}
+            </View>
+          </>
+        )}
       </WidgetContainer>
 
-      <Divider />
+      {/* <Divider /> */}
 
       {/* Contenedor 2: Noticias */}
       <WidgetContainer
@@ -196,12 +203,16 @@ export default function RightSidebarWidgets({ onSelectNews, onSelectPrize, onSel
           </TouchableOpacity>
         }
       >
-        {news.map(n => (
-          <NewsWidget key={n.id} id={n.id} title={n.title} time={n.time} onSelectNews={onSelectNews} />
-        ))}
+        {news.length === 0 ? (
+          <EmptyState title="No hay noticias destacadas." icon={Newspaper} variant="dashed" />
+        ) : (
+          news.map(n => (
+            <NewsWidget key={n.id} id={n.id} title={n.title} time={n.time} onSelectNews={onSelectNews} />
+          ))
+        )}
       </WidgetContainer>
 
-      <Divider />
+      {/* <Divider /> */}
 
       {/* Contenedor 3: Sugerencias de Seguimiento */}
       <WidgetContainer
@@ -212,18 +223,22 @@ export default function RightSidebarWidgets({ onSelectNews, onSelectPrize, onSel
           </TouchableOpacity>
         }
       >
-        {suggestions.map(req => (
-          <FollowSuggestionWidget
-            key={req.id}
-            name={req.name}
-            avatar={req.avatar}
-            time={req.time}
-            mutualFollowers={req.mutualFollowers}
-          />
-        ))}
+        {suggestions.length === 0 ? (
+          <EmptyState title="No hay sugerencias por el momento." icon={Users} variant="dashed" />
+        ) : (
+          suggestions.map(req => (
+            <FollowSuggestionWidget
+              key={req.id}
+              name={req.name}
+              avatar={req.avatar}
+              time={req.time}
+              mutualFollowers={req.mutualFollowers}
+            />
+          ))
+        )}
       </WidgetContainer>
 
-      <Divider />
+      {/* <Divider /> */}
 
       {/* Contenedor 4: Notificador de Premios */}
       <WidgetContainer
@@ -234,9 +249,13 @@ export default function RightSidebarWidgets({ onSelectNews, onSelectPrize, onSel
           </TouchableOpacity>
         }
       >
-        {prizes.map(prize => (
-          <PrizeNotificationWidget key={prize.id} id={prize.id} title={prize.title} description={prize.description} onSelectPrize={onSelectPrize} />
-        ))}
+        {prizes.length === 0 ? (
+          <EmptyState title="No has ganado premios recientemente." icon={Trophy} variant="dashed" />
+        ) : (
+          prizes.map(prize => (
+            <PrizeNotificationWidget key={prize.id} id={prize.id} title={prize.title} description={prize.description} onSelectPrize={onSelectPrize} />
+          ))
+        )}
       </WidgetContainer>
 
     </ScrollView>

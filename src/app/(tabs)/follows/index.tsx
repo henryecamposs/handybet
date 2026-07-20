@@ -150,7 +150,7 @@ export default function FollowsScreen() {
 
   return (
     <HubLayout
-      title="Seguidos"
+      title="Miembros"
       subtitle="Administra los perfiles que sigues y descubre nuevas cuentas."
       onSearchChange={setSearchTerm}
       searchPlaceholder="Buscar seguidos..."

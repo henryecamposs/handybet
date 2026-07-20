@@ -165,7 +165,7 @@ export default function GuardadosScreen() {
     },
     {
       id: 'follows',
-      label: 'Seguidos',
+      label: 'Miembros',
       content: (
         <SeccionLista
           items={filteredItems.filter(item => item.type === 'user')}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Modal, TouchableOpacity, ScrollView, TextInput, Image } from 'react-native';
-import { X, Users, Tv, User, UserCheck, Search, Share2 } from 'lucide-react-native';
+import { X, Users, Megaphone, User, UserCheck, Search, Share2 } from 'lucide-react-native';
 import { useThemeColors } from '../../hooks/useThemeColors';
 
 interface ShareModalProps {
@@ -16,9 +16,9 @@ const MOCK_DATA = {
     { id: 'g3', name: 'Pronósticos Liga Europea', members: '840 miembros', icon: Users },
   ],
   channels: [
-    { id: 'c1', name: 'Canal de Datos Fijos', subscribers: '12,500 suscriptores', icon: Tv },
-    { id: 'c2', name: 'Premium Tipster Club', subscribers: '3,200 suscriptores', icon: Tv },
-    { id: 'c3', name: 'Noticias Deportivas', subscribers: '24,000 suscriptores', icon: Tv },
+    { id: 'c1', name: 'Canal de Datos Fijos', subscribers: '12,500 suscriptores', icon: Megaphone },
+    { id: 'c2', name: 'Premium Tipster Club', subscribers: '3,200 suscriptores', icon: Megaphone },
+    { id: 'c3', name: 'Noticias Deportivas', subscribers: '24,000 suscriptores', icon: Megaphone },
   ],
   usuarios: [
     { id: 'u1', username: '@carlos_bets', name: 'Carlos Mendoza', avatar: 'https://i.pravatar.cc/150?u=1' },

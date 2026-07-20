@@ -10,7 +10,7 @@ import { useHandyBetStore } from '../../../store/useHandyBetStore';
 import { socialService } from '../../../services/socialService';
 import ListItem from '@/components/ui/ListItem';
 import IconButton from '@/components/ui/IconButton';
-import { MessageCircle, Bookmark, LayoutList, Tv, Users, Info, MoreHorizontal } from 'lucide-react-native';
+import { MessageCircle, Bookmark, LayoutList, Users, Info, MoreHorizontal, Megaphone } from 'lucide-react-native';
 import { useToastStore } from '@/store/useToastStore';
 import { TabContainer, SeccionLista } from '@/components/layout/hub';
 import PostContainer from '@/components/layout/hub/PostContainer';
@@ -180,7 +180,7 @@ export default function ChannelDetailScreen() {
       <View className="px-4 flex-row justify-between items-end -mt-16 mb-4">
         <View className="p-1 bg-background rounded-full border border-border-muted">
           <View className="w-28 h-28 rounded-full bg-background/80 items-center justify-center border border-border">
-            <Tv size={48} color={colors.primary} />
+            <Megaphone size={48} color={colors.primary} />
           </View>
         </View>
         <View className="flex-row gap-2 pb-2">

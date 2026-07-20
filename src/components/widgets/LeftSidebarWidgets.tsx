@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, TouchableOpacity, View, Image, Text } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Users, Bookmark, Tv, Wallet, Gamepad2 } from 'lucide-react-native';
+import { Users, Bookmark, Megaphone, Wallet, Gamepad2 } from 'lucide-react-native';
 import { useHandyBetStore } from '../../store/useHandyBetStore';
 import { useThemeColors, withOpacity } from '../../hooks/useThemeColors';
 import SidebarPopover from '../layout/SidebarPopover';
@@ -44,7 +44,7 @@ export default function LeftSidebarWidgets() {
       <View className="space-y-1">
         <SidebarPopover
           icon={<Users size={24} color={colors.primary} />}
-          label="Seguidos"
+          label="Miembros"
           items={suggestions.following.map(f => ({ id: f.id, name: f.name, image: f.avatar, path: `/chat/follow/${f.id}` }))}
           viewAllPath="/follows"
         />
@@ -70,16 +70,16 @@ export default function LeftSidebarWidgets() {
           viewAllPath="/favorites"
         />
         <SidebarPopover
+          icon={<Megaphone size={24} color={colors.primary} />}
+          label="Canales"
+          items={suggestions.channels.map(c => ({ id: c.id, name: c.name, subtitle: c.description, path: `/channels/${c.id}` }))}
+          viewAllPath="/channels"
+        />
+        <SidebarPopover
           icon={<Users size={24} color={colors.primary} />}
           label="Grupos"
           items={suggestions.groups.map(g => ({ id: g.id, name: g.name, subtitle: `${g.members} miembros`, path: `/chat/${g.id}?fromType=group` }))}
           viewAllPath="/grupos"
-        />
-        <SidebarPopover
-          icon={<Tv size={24} color={colors.primary} />}
-          label="Canales"
-          items={suggestions.channels.map(c => ({ id: c.id, name: c.name, subtitle: c.description, path: `/channels/${c.id}` }))}
-          viewAllPath="/channels"
         />
         <SidebarPopover
           icon={<Wallet size={24} color={colors.primary} />}

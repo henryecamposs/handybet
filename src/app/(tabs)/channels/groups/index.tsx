@@ -12,7 +12,7 @@ import { MediaPlan, VisibilityLevel } from '../../../../types/handyBet';
 import CreatePostWidget from '../../../../components/feed/CreatePostWidget';
 import { socialService } from '../../../../services/socialService';
 import { useThemeColors } from '../../../../hooks/useThemeColors';
-import { MessageCircle, ArrowLeft, Bookmark, LayoutList, Users, Info, MoreHorizontal, UserCheck, UserPlus, Tv } from 'lucide-react-native';
+import { MessageCircle, ArrowLeft, Bookmark, LayoutList, Users, Info, MoreHorizontal, UserCheck, UserPlus, Megaphone } from 'lucide-react-native';
 import HubDetailLayout from '../../../../components/layout/HubDetailLayout';
 import { TabContainer } from '../../../../components/layout/hub';
 import PostContainer from '../../../../components/layout/hub/PostContainer';
