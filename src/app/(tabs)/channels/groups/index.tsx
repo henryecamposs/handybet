@@ -28,7 +28,7 @@ export default function GrupoDetailScreen() {
   const { id, from } = useLocalSearchParams<{ id: string; from: string }>();
   const router = useRouter();
   const colors = useThemeColors();
-  const { handleBack, handleFollowToggle, handleChat } = useHubUtilities();
+  const { handleBack, handleFollowToggle, handleChat, handleSaveToggle, handleViewPosts } = useHubUtilities();
 
   // Estados de Apuesta
   const [generatedBetCode, setGeneratedBetCode] = useState<string | null>(null);
@@ -346,10 +346,10 @@ export default function GrupoDetailScreen() {
                         <Text className="text-primary text-[10px] uppercase font-bold">Admin</Text>
                       </View>
                     )}
-                    <IconButton icon={LayoutList} onPress={() => {}} variant="ghost" size="xs" hasBorder={false} />
+                    <IconButton icon={LayoutList} onPress={() => handleViewPosts(member.id, 'user')} variant="ghost" size="xs" hasBorder={false} />
                     <IconButton icon={MessageCircle} onPress={() => handleChat(member.id, 'user')} variant="ghost" size="xs" hasBorder={false} />
-                    <IconButton icon={Bookmark} onPress={() => {}} variant="ghost" size="xs" hasBorder={false} />
-                    <IconButton icon={UserPlus} onPress={() => {}} variant="ghost" size="xs" hasBorder={false} />
+                    <IconButton icon={Bookmark} onPress={() => handleSaveToggle(false, 'user', member.username)} variant="ghost" size="xs" hasBorder={false} />
+                    <IconButton icon={UserPlus} onPress={() => handleFollowToggle(false, 'user')} variant="ghost" size="xs" hasBorder={false} />
                   </View>
                 }
                 onPress={() => router.push(`/follows/${member.id}` as any)}
