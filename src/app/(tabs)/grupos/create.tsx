@@ -28,21 +28,21 @@ export default function CreateGroupScreen() {
   const [walletType, setWalletType] = useState<'mixed' | 'direct_pay' | 'credit'>('mixed');
   const [allowsRecharge, setAllowsRecharge] = useState(true);
 
-  // Bots Configuration
+  // Bots Configuration (desactivados por defecto)
   const [bots, setBots] = useState<BotConfig[]>([
     {
       id: 'bot_ai',
       type: 'bot_ai_assistant',
       name: 'Asistente IA de Consultas',
       description: 'Responde preguntas frecuentes del grupo usando inteligencia artificial.',
-      is_enabled: true,
+      is_enabled: false,
     },
     {
       id: 'bot_lottery',
       type: 'bot_lottery',
       name: 'Bot de Loterías & Jugadas',
       description: 'Conecta con la base de datos de loterías para verificar boletos y ganadores.',
-      is_enabled: true,
+      is_enabled: false,
     },
     {
       id: 'bot_sales',
@@ -56,7 +56,7 @@ export default function CreateGroupScreen() {
       type: 'bot_welcome',
       name: 'Bot de Bienvenida & Reglas',
       description: 'Envía las normas y da la bienvenida automáticamente a los nuevos miembros.',
-      is_enabled: true,
+      is_enabled: false,
     },
   ]);
 

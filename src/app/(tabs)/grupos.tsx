@@ -235,7 +235,7 @@ export default function GruposScreen() {
           label="Crear Grupo"
           onPress={() => router.push('/(tabs)/grupos/create' as any)}
           variant="primary"
-          size="xl"
+          size="sm"
           hasBorder={true}
         />
       }

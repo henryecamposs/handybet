@@ -154,7 +154,7 @@ export default function ChannelsScreen() {
           label="Crear Canal"
           onPress={() => router.push('/(tabs)/channels/create' as any)}
           variant="primary"
-          size="xl"
+          size="sm"
           hasBorder={true}
         />
       }
