@@ -78,7 +78,7 @@ export default function ChannelsScreen() {
       <ListItem
         key={channel.id}
         title={channel.name}
-        subtitle={`${Math.floor(Math.random() * 10) + 1} grupos • ${Math.floor(Math.random() * 1000) + 100} miembros totales`}
+        subtitle={`${(channel.name.length % 5) + 2} grupos • ${(channel.name.length * 15) + 100} miembros totales`}
         subtitleVariant="muted"
         leftElement={
           <View className="w-10 h-10 rounded-full bg-background/80 items-center justify-center border border-border">

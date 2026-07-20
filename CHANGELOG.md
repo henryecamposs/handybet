@@ -10,11 +10,15 @@ El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1
 - Estados vacíos (`EmptyState`) amigables y consistentes para los contenedores de la barra lateral derecha (`RightSidebarWidgets`) cuando no existen anuncios, noticias, premios o sugerencias, mejorando drásticamente el UX en escenarios sin contenido.
 - Botones en línea de retroceso (`ArrowLeft`) con soporte nativo de router en las vistas de detalle para navegar de vuelta en el historial fácilmente.
 - Mecanismo de auto-etiquetado inteligente en el publicador del Feed de búsqueda: Al intentar publicar en un canal o grupo a través de la búsqueda con id, se añade el handle correspondiente automáticamente.
+- Se agregó el componente `HubCover` a manera de Hero Banner en el tope del directorio de canales.
+- Ahora los ítems de canales muestran estadísticas reales/mock de Grupos y Miembros Totales.
 
 ### Cambiado
 - Ocultamiento inteligente de la barra superior global (`HandyBetHeader`) en pantallas de Detalles (Canales, Grupos y Perfil de Usuario) apoyándose en enrutamiento para maximizar el área de uso de los Hero Banners.
 - Reorganización manual en el Layout (`LeftSidebarWidgets`) y reemplazo de iconos estándar por Megáfonos (`Megaphone`) para el área de Canales, distinguiéndolo más de la sección "Grupos" que utiliza usuarios/salas.
 - Modificación del esquema de color `--card` en Tailwind para mejor contraste oscuro en la UI del sidebar derecho.
+- Los popovers de atajos de la barra lateral izquierda ahora enlazan correctamente a los perfiles, canales y grupos en vez de abrir inmediatamente un chat de manera forzada.
+- Removidos los parámetros huérfanos `from` y `fromType` de las URL al depender enteramente de la pila de historial en `useAppNavigation`.
 
 ### Corregido
 - Eliminada la sobrescritura accidental del Nombre de Autor que impedía que publicaciones elaboradas desde una sala se mostraran correctamente bajo la identidad real del usuario (Henry).

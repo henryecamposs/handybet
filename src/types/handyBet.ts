@@ -18,8 +18,6 @@ export interface Channel {
   id: string;
   name: string;
   owner_id: string;
-  avatar?: string;
-  cover?: string;
   created_at: string;
 }
 

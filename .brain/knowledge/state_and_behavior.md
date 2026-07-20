@@ -6,6 +6,11 @@ La tienda global Zustand de la aplicación centraliza estados de la interfaz y a
 - `isScannerActive` y `activeTicketCode`: Controla la visualización del visor de cámara QR y el ticket actualmente seleccionado para confirmación de apuestas.
 - **Acciones:** `setMockSession`, `setScannerActive`, `setActiveTicketCode`.
 
+### 1.1 Navegación e Historial (`src/store/useNavigationStore.ts`)
+- Mantiene una pila de historial de navegación (`historyStack`) basada en las rutas previas.
+- Resuelve problemas nativos del `expo-router` donde `router.back()` pierde contexto direccional.
+- Se gestiona exclusivamente a través del hook `useAppNavigation` que proporciona `navigateTo`, `goBack` y `replaceRoute`.
+
 ---
 
 ## 2. Estado del Servidor con React Query (`src/hooks/useHandyBetQueries.ts`)

@@ -57,9 +57,7 @@ export const handyBetChannels = [
       { id: 'plan_free', name: 'Gratis', price: 0, benefits: ['Acceso a contenido público', 'Comentarios básicos'] },
       { id: 'plan_medium', name: 'Medio', price: 5.99, benefits: ['Videos exclusivos', 'Insignia de fan'] },
       { id: 'plan_pro', name: 'Pro', price: 14.99, benefits: ['Chat directo', 'Videos sin censura', 'Pedidos personalizados'] },
-    ],
-    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150',
-    cover: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=800'
+    ]
   },
   {
     id: 'ch_imaginaria',
@@ -68,9 +66,7 @@ export const handyBetChannels = [
     owner_id: 'usr_admin',
     description: 'La mejor agencia de loterías y animalitos de Venezuela',
     is_public: true,
-    plans: [], // Sin planes de suscripción, ganan por apuestas
-    avatar: 'https://images.unsplash.com/photo-1518133910546-b6c2fb7d79e3?auto=format&fit=crop&q=80&w=150',
-    cover: 'https://images.unsplash.com/photo-1596443686812-2f45229eebc3?auto=format&fit=crop&q=80&w=800'
+    plans: [] // Sin planes de suscripción, ganan por apuestas
   }
 ];
 

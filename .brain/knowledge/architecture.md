@@ -44,6 +44,7 @@ La aplicación utiliza un esquema de enrutamiento basado en **Expo Router** opti
   * La barra lateral izquierda está modularizado en [LeftSidebarWidgets.tsx](file:///c:/Users/DELL/Documents/dPana%20Projects/frontends/handy-app/src/components/widgets/LeftSidebarWidgets.tsx).
 - **Pestañas Unificadas (5 Tabs):** Para evitar botones o pestañas fantasma en la barra de navegación móvil, el archivo `(tabs)/_layout.tsx` declara de forma explícita cada sub-ruta secundaria (como `channels/create`, `wallet/[id]`, `favorites/index`, `games/index`, `feed/search`, etc.) con la propiedad `options={{ href: null }}`. Esto asegura que la navegación persista dentro de los paneles laterales en la web, pero no cree botones en el móvil.
 - **Ruta de Búsqueda y Feed Filtrado (`feed/search`):** Permite renderizar el muro dinámico de posts filtrados por un `id` query param (pudiendo corresponder a un canal, grupo o usuario). También asume la visualización como vista unitaria (`PostDetailView`) de posts o anuncios particulares.
+- **Historial de Navegación Inteligente (`useAppNavigation`):** Se evita el uso directo de `router.back()` y URLs con query params sucios (como `?fromType`) en favor de una pila de historial guardada en Zustand, permitiendo que la navegación profunda retroceda a la pantalla anterior real en lugar de simplemente subir en el stack nativo, vital para unificar el historial en un entorno Layout con Drawer/Sidebar.
 
 ---
 
