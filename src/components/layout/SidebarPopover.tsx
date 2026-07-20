@@ -56,17 +56,21 @@ export default function SidebarPopover({ icon, label, items, onViewAll, viewAllP
 
   return (
     <View className="relative z-50">
-      <View ref={buttonRef}>
+      <View ref={buttonRef} className="flex-row items-center justify-between p-2 rounded-xs hover:bg-primary/40 active:bg-primary/40 transition-colors">
+        <TouchableOpacity
+          onPress={handleViewAll}
+          className="flex-row items-center flex-1"
+        >
+          <View className="w-9 items-center justify-center">
+            {icon}
+          </View>
+          <Text className="font-medium text-primary ml-3 text-[15px]">{label}</Text>
+        </TouchableOpacity>
+
         <TouchableOpacity
           onPress={handleOpen}
-          className="flex-row items-center p-2 rounded-xs hover:bg-primary/40 active:bg-primary/40 transition-colors justify-between"
+          className="p-1 rounded-full hover:bg-primary/20"
         >
-          <View className="flex-row items-center">
-            <View className="w-9 items-center justify-center">
-              {icon}
-            </View>
-            <Text className="font-medium text-primary ml-3 text-[15px]">{label}</Text>
-          </View>
           <ChevronRight size={16} color={colors.primary} />
         </TouchableOpacity>
       </View>

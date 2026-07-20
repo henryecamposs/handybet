@@ -17,7 +17,6 @@ export default function CreateChannelScreen() {
   const { mockSession } = useHandyBetStore();
 
   const [name, setName] = useState('');
-  const [rif, setRif] = useState('');
   const [description, setDescription] = useState('');
   const [visibility, setVisibility] = useState<'public' | 'private'>('public');
   const [is18Plus, setIs18Plus] = useState(false);
@@ -115,7 +114,7 @@ export default function CreateChannelScreen() {
         {/* Sección 1: Datos Básicos */}
         <View className="gap-4">
           <Text className="text-foreground font-bold text-sm uppercase tracking-wider text-primary">1. Datos Principales</Text>
-          
+
           <View>
             <Text className="text-foreground font-bold text-xs uppercase mb-2">Nombre del Canal / Empresa *</Text>
             <TextInput
@@ -124,17 +123,6 @@ export default function CreateChannelScreen() {
               placeholder="Ej. Consorcio Loterías Unidas"
               placeholderTextColor={colors.mutedForeground}
               className="bg-background text-foreground p-4 rounded-xl border border-border font-medium"
-            />
-          </View>
-
-          <View>
-            <Text className="text-foreground font-bold text-xs uppercase mb-2">Registro Fiscal / RIF (Opcional)</Text>
-            <TextInput
-              value={rif}
-              onChangeText={setRif}
-              placeholder="J-12345678-9"
-              placeholderTextColor={colors.mutedForeground}
-              className="bg-background text-foreground p-4 rounded-xl border border-border font-mono uppercase font-medium"
             />
           </View>
 
@@ -160,9 +148,8 @@ export default function CreateChannelScreen() {
           <View className="flex-row gap-3">
             <TouchableOpacity
               onPress={() => setVisibility('public')}
-              className={`flex-1 p-4 rounded-xl border flex-col items-center gap-2 ${
-                visibility === 'public' ? 'bg-primary/10 border-primary' : 'bg-background border-border'
-              }`}
+              className={`flex-1 p-4 rounded-xl border flex-col items-center gap-2 ${visibility === 'public' ? 'bg-primary/10 border-primary' : 'bg-background border-border'
+                }`}
             >
               <Globe size={24} color={visibility === 'public' ? colors.primary : colors.mutedForeground} />
               <Text className={`font-bold text-xs ${visibility === 'public' ? 'text-primary' : 'text-foreground'}`}>Público</Text>
@@ -171,9 +158,8 @@ export default function CreateChannelScreen() {
 
             <TouchableOpacity
               onPress={() => setVisibility('private')}
-              className={`flex-1 p-4 rounded-xl border flex-col items-center gap-2 ${
-                visibility === 'private' ? 'bg-primary/10 border-primary' : 'bg-background border-border'
-              }`}
+              className={`flex-1 p-4 rounded-xl border flex-col items-center gap-2 ${visibility === 'private' ? 'bg-primary/10 border-primary' : 'bg-background border-border'
+                }`}
             >
               <Lock size={24} color={visibility === 'private' ? colors.primary : colors.mutedForeground} />
               <Text className={`font-bold text-xs ${visibility === 'private' ? 'text-primary' : 'text-foreground'}`}>Privado</Text>
@@ -203,7 +189,7 @@ export default function CreateChannelScreen() {
         <View className="gap-3 pt-4 border-t border-border/60">
           <Text className="text-foreground font-bold text-sm uppercase tracking-wider text-primary">3. Audiencia Objetivo (Target)</Text>
           <Text className="text-muted-foreground text-xs mb-2">Selecciona a quién va dirigido tu canal:</Text>
-          
+
           <View className="flex-row flex-wrap gap-2">
             {targetOptions.map((tgt) => {
               const isSelected = selectedTargets.includes(tgt.id);
@@ -212,9 +198,8 @@ export default function CreateChannelScreen() {
                 <TouchableOpacity
                   key={tgt.id}
                   onPress={() => toggleTarget(tgt.id)}
-                  className={`w-[48%] p-3 rounded-xl border flex-row items-center gap-2.5 ${
-                    isSelected ? 'bg-primary/20 border-primary' : 'bg-background border-border'
-                  }`}
+                  className={`w-[48%] p-3 rounded-xl border flex-row items-center gap-2.5 ${isSelected ? 'bg-primary/20 border-primary' : 'bg-background border-border'
+                    }`}
                 >
                   <IconComp size={18} color={isSelected ? colors.primary : colors.mutedForeground} />
                   <View className="flex-1">
@@ -229,7 +214,7 @@ export default function CreateChannelScreen() {
 
         {/* Sección 4: Chips de Intereses */}
         <View className="pt-4 border-t border-border/60">
-          <Text className="text-foreground font-bold text-sm uppercase tracking-wider text-primary mb-3">4. Intereses & Etiquetas del Canal</Text>
+          <Text className="text-foreground font-bold text-sm uppercase tracking-wider text-primary mb-3">4. Intereses del Canal</Text>
           <InterestChipsSelector
             selectedInterests={interests}
             onChange={setInterests}

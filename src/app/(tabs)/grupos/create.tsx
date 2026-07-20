@@ -23,7 +23,7 @@ export default function CreateGroupScreen() {
   const [selectedChannelId, setSelectedChannelId] = useState<string | null>(null);
   const [channelsList, setChannelsList] = useState<any[]>([]);
   const [tags, setTags] = useState<string[]>(['Pronósticos', 'Apuestas Deportivas']);
-  
+
   // Wallet Settings
   const [walletType, setWalletType] = useState<'mixed' | 'direct_pay' | 'credit'>('mixed');
   const [allowsRecharge, setAllowsRecharge] = useState(true);
@@ -157,9 +157,8 @@ export default function CreateGroupScreen() {
             <ScrollView horizontal showsHorizontalScrollIndicator={false} className="flex-row gap-2">
               <TouchableOpacity
                 onPress={() => setSelectedChannelId(null)}
-                className={`px-4 py-2.5 rounded-xl border ${
-                  selectedChannelId === null ? 'bg-primary/20 border-primary' : 'bg-background border-border'
-                }`}
+                className={`px-4 py-2.5 rounded-xl border ${selectedChannelId === null ? 'bg-primary/20 border-primary' : 'bg-background border-border'
+                  }`}
               >
                 <Text className={`text-xs font-bold ${selectedChannelId === null ? 'text-primary' : 'text-foreground'}`}>
                   Grupo Autónomo / Independiente
@@ -169,9 +168,8 @@ export default function CreateGroupScreen() {
                 <TouchableOpacity
                   key={chn.id}
                   onPress={() => setSelectedChannelId(chn.id)}
-                  className={`px-4 py-2.5 rounded-xl border ${
-                    selectedChannelId === chn.id ? 'bg-primary/20 border-primary' : 'bg-background border-border'
-                  }`}
+                  className={`px-4 py-2.5 rounded-xl border ${selectedChannelId === chn.id ? 'bg-primary/20 border-primary' : 'bg-background border-border'
+                    }`}
                 >
                   <Text className={`text-xs font-bold ${selectedChannelId === chn.id ? 'text-primary' : 'text-foreground'}`}>
                     📢 {chn.name}
@@ -239,7 +237,7 @@ export default function CreateGroupScreen() {
 
         {/* 2. Temas & Chips de Interés */}
         <View className="pt-4 border-t border-border/60">
-          <Text className="text-foreground font-bold text-sm uppercase tracking-wider text-primary mb-3">2. Temas & Tags del Grupo</Text>
+          <Text className="text-foreground font-bold text-sm uppercase tracking-wider text-primary mb-3">2. Temas del Grupo</Text>
           <InterestChipsSelector
             selectedInterests={tags}
             onChange={setTags}
@@ -264,9 +262,8 @@ export default function CreateGroupScreen() {
             {bots.map((bot) => (
               <View
                 key={bot.id}
-                className={`p-4 rounded-xl border flex-row items-center justify-between ${
-                  bot.is_enabled ? 'bg-primary/10 border-primary/60' : 'bg-background border-border'
-                }`}
+                className={`p-4 rounded-xl border flex-row items-center justify-between ${bot.is_enabled ? 'bg-primary/10 border-primary/60' : 'bg-background border-border'
+                  }`}
               >
                 <View className="flex-row items-center gap-3 flex-1 pr-3">
                   <View className={`w-10 h-10 rounded-full items-center justify-center ${bot.is_enabled ? 'bg-primary' : 'bg-muted'}`}>
