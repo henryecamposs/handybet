@@ -196,23 +196,7 @@ export default function GruposScreen() {
   const tabs = [
     {
       id: 'my-groups',
-      label: ((isActive: boolean) => (
-        <View className="flex-row items-center justify-center mt-2">
-          <Text className={`font-black text-center text-xs uppercase tracking-wider ${isActive ? 'text-primary' : 'text-foreground'}`}>
-            Mis Grupos ({misGrupos.length})
-          </Text>
-          <View className="-my-2 ml-1">
-            <IconButton
-              icon={Plus}
-              onPress={() => router.push('/(tabs)/grupos/create' as any)}
-              variant={isActive ? 'primary' : 'ghost'}
-              hasBorder={false}
-              size="md"
-              rounded="full"
-            />
-          </View>
-        </View>
-      )),
+      label: `Mis Grupos (${misGrupos.length})`,
       content: (
         <View className="mt-2">
           <SeccionLista
@@ -245,6 +229,16 @@ export default function GruposScreen() {
       searchPlaceholder="Buscar grupos por interés..."
       searchValue={searchQuery}
       onSearchChange={setSearchQuery}
+      actionButton={
+        <IconButton
+          icon={Plus}
+          label="Crear Grupo"
+          onPress={() => router.push('/(tabs)/grupos/create' as any)}
+          variant="primary"
+          size="xl"
+          hasBorder={true}
+        />
+      }
       showBack={true}
       tabContainer={<TabContainer tabs={tabs} />}
       postContainer={

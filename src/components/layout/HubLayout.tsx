@@ -23,6 +23,7 @@ export interface HubLayoutProps {
   searchPlaceholder?: string;
   searchValue?: string;
   onSearchChange?: (text: string) => void;
+  actionButton?: React.ReactNode;
 
   // Categorías / Tabs (opcional)
   tabs?: HubLayoutTab[];
@@ -65,6 +66,7 @@ export default function HubLayout({
   searchPlaceholder = 'Buscar...',
   searchValue,
   onSearchChange,
+  actionButton,
   tabs,
   activeTabId,
   onTabChange,
@@ -112,17 +114,22 @@ export default function HubLayout({
       {/* Hero Banner */}
       {heroBanner && <View className="mb-8">{heroBanner}</View>}
 
-      {/* Buscador */}
-      {onSearchChange && (
-        <View className="bg-input rounded-full flex-row items-center px-4 py-2 border border-border mb-6  w-1/2">
-          <Search size={20} color={colors.mutedForeground} />
-          <TextInput
-            placeholder={searchPlaceholder}
-            placeholderTextColor={colors.mutedForeground}
-            value={searchValue}
-            onChangeText={onSearchChange}
-            className="flex-1 text-foreground ml-3 outline-none"
-          />
+      {/* Buscador & Acción */}
+      {(onSearchChange || actionButton) && (
+        <View className="flex-row items-center justify-between gap-4 mb-6">
+          {onSearchChange && (
+            <View className="bg-input rounded-full flex-row items-center px-4 py-2 border border-border flex-1 max-w-lg">
+              <Search size={20} color={colors.mutedForeground} />
+              <TextInput
+                placeholder={searchPlaceholder}
+                placeholderTextColor={colors.mutedForeground}
+                value={searchValue}
+                onChangeText={onSearchChange}
+                className="flex-1 text-foreground ml-3 outline-none"
+              />
+            </View>
+          )}
+          {actionButton}
         </View>
       )}
 

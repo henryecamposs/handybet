@@ -6,7 +6,7 @@ export interface IconButtonProps {
   icon?: any;
   label?: string;
   onPress: () => void;
-  size?: 'xs' | 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   variant?: 'primary' | 'secondary' | 'destructive' | 'ghost' | 'muted' | 'default';
   isActive?: boolean;
   hasBorder?: boolean;
@@ -43,11 +43,13 @@ export default function IconButton({
     else if (size === 'sm') { sizeClasses = 'w-8 h-8'; iconSize = 16; }
     else if (size === 'md') { sizeClasses = 'w-10 h-10'; iconSize = 18; }
     else if (size === 'lg') { sizeClasses = 'w-12 h-12'; iconSize = 24; }
+    else if (size === 'xl') { sizeClasses = 'w-14 h-14'; iconSize = 28; }
   } else {
     if (size === 'xs') { sizeClasses = 'px-2 py-1.5'; iconSize = 14; }
     else if (size === 'sm') { sizeClasses = 'px-3 py-1'; iconSize = 16; }
     else if (size === 'md') { sizeClasses = 'px-4 py-2'; iconSize = 18; }
     else if (size === 'lg') { sizeClasses = 'px-6 py-3'; iconSize = 24; }
+    else if (size === 'xl') { sizeClasses = 'px-7 py-3.5'; iconSize = 28; }
   }
 
   const roundedClass = rounded ? `rounded-${rounded}` : (isIconOnly ? 'rounded-full' : (size === 'xs' ? 'rounded-xs' : 'rounded-full'));
@@ -110,7 +112,7 @@ export default function IconButton({
       {label && (
         <Text
           style={overrideStyle}
-          className={`font-semibold ${Icon ? 'ml-2.5' : ''} ${size === 'xs' ? 'text-xs' : size === 'sm' ? 'text-sm' : 'text-base'} ${overrideStyle ? '' : textClass}`}
+          className={`font-semibold ${Icon ? 'ml-2.5' : ''} ${size === 'xs' ? 'text-xs' : size === 'sm' ? 'text-sm' : size === 'xl' ? 'text-lg font-black' : 'text-base'} ${overrideStyle ? '' : textClass}`}
         >
           {label}
         </Text>

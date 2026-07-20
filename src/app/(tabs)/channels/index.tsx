@@ -148,6 +148,16 @@ export default function ChannelsScreen() {
       searchPlaceholder="Buscar canales oficiales..."
       searchValue={searchQuery}
       onSearchChange={setSearchQuery}
+      actionButton={
+        <IconButton
+          icon={Plus}
+          label="Crear Canal"
+          onPress={() => router.push('/(tabs)/channels/create' as any)}
+          variant="primary"
+          size="xl"
+          hasBorder={true}
+        />
+      }
       showBack={true}
       heroBanner={
         <HubCover
