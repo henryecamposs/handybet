@@ -7,6 +7,8 @@ import { useHandyBetStore } from '../../store/useHandyBetStore';
 import { useThemeColors, withOpacity } from '../../hooks/useThemeColors';
 import Logo from '../ui/Logo';
 import FloatingPopup from '../ui/FloatingPopup';
+import SupportModal from '../modals/SupportModal';
+import PrivacySecurityModal from '../modals/PrivacySecurityModal';
 
 const POPUP_CHATS = [
   { id: '1', name: 'Soporte La Imaginaria', msg: 'Su recarga por Pago Móvil...', unread: true, avatar: 'https://api.dicebear.com/7.x/identicon/png?seed=imaginaria&backgroundColor=b6e3f4' },
@@ -30,6 +32,8 @@ export default function HandyBetHeader() {
   const [showChatPopup, setShowChatPopup] = useState(false);
   const [showNotifPopup, setShowNotifPopup] = useState(false);
   const [showProfilePopup, setShowProfilePopup] = useState(false);
+  const [showSupportModal, setShowSupportModal] = useState(false);
+  const [showPrivacyModal, setShowPrivacyModal] = useState(false);
   const chatAnchorRef = useRef<View>(null);
   const notifAnchorRef = useRef<View>(null);
   const profileAnchorRef = useRef<View>(null);
@@ -202,7 +206,7 @@ export default function HandyBetHeader() {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => { setShowProfilePopup(false); router.push('/(tabs)/chat'); }}
+              onPress={() => { setShowProfilePopup(false); setShowSupportModal(true); }}
               className="flex-row items-center gap-2.5 p-2.5 rounded-lg hover:bg-background/80"
             >
               <HelpCircle size={16} color={colors.primary} />
@@ -210,7 +214,7 @@ export default function HandyBetHeader() {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => { setShowProfilePopup(false); alert('HandyBet mantiene la máxima seguridad RLS y cifrado de datos.'); }}
+              onPress={() => { setShowProfilePopup(false); setShowPrivacyModal(true); }}
               className="flex-row items-center gap-2.5 p-2.5 rounded-lg hover:bg-background/80"
             >
               <ShieldAlert size={16} color={colors.primary} />
@@ -228,6 +232,15 @@ export default function HandyBetHeader() {
             </TouchableOpacity>
           </View>
         </FloatingPopup>
+        {/* Modales de Soporte y Privacidad */}
+        <SupportModal
+          visible={showSupportModal}
+          onClose={() => setShowSupportModal(false)}
+        />
+        <PrivacySecurityModal
+          visible={showPrivacyModal}
+          onClose={() => setShowPrivacyModal(false)}
+        />
       </View>
     </View>
   );
