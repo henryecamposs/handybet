@@ -21,11 +21,13 @@ import { useToastStore } from '../../../../store/useToastStore';
 import IconButton from '../../../../components/ui/IconButton';
 import HubDetailsUtilities from '../../../../components/layout/hub/HubDetailsUtilities';
 import HubCover from '../../../../components/layout/hub/HubCover';
+import { useHubUtilities } from '../../../../hooks/useHubUtilities';
 
 export default function GrupoDetailScreen() {
   const { id, from } = useLocalSearchParams<{ id: string; from: string }>();
   const router = useRouter();
   const colors = useThemeColors();
+  const { handleBack, handleFollowToggle, handleChat } = useHubUtilities();
 
   // Estados de Apuesta
   const [generatedBetCode, setGeneratedBetCode] = useState<string | null>(null);
@@ -168,18 +170,6 @@ export default function GrupoDetailScreen() {
     }
   };
 
-  const handleBack = () => {
-    if (from === 'channel' && group?.channel_id) {
-      router.push(`/channels/${group.channel_id}` as any);
-    } else {
-      router.push('/(tabs)/grupos' as any);
-    }
-  };
-
-  const handleChatPress = () => {
-    router.push(`/chat/${id}?from=${from}` as any);
-  };
-
   const heroBanner = group && (
     <View className="mb-6">
       {/* Cover Portada */}
@@ -197,12 +187,12 @@ export default function GrupoDetailScreen() {
         title={group.name}
         subtitle={group.short_code || group.name.toLowerCase().replace(' ', '_')}
         stats={[{ value: group.members?.length || 0, label: 'Miembros' }]}
-        onBack={handleBack}
+        onBack={() => handleBack('/(tabs)/grupos')}
         colors={colors}
       >
         <IconButton
           icon={MessageCircle}
-          onPress={handleChatPress}
+          onPress={() => handleChat(id, 'group')}
           variant="ghost"
           rounded="full"
           hasBorder={true}
@@ -210,13 +200,7 @@ export default function GrupoDetailScreen() {
         <IconButton
           icon={isFollowing ? UserCheck : UserPlus}
           label={isFollowing ? "Siguiendo" : "Seguir"}
-          onPress={() => {
-            setIsFollowing(!isFollowing);
-            addToast({
-              title: isFollowing ? 'Dejaste de seguir el grupo' : 'Siguiendo grupo',
-              variant: isFollowing ? 'muted' : 'success'
-            });
-          }}
+          onPress={() => handleFollowToggle(isFollowing, 'group', setIsFollowing)}
           variant={isFollowing ? "ghost" : "primary"}
           rounded="full"
           hasBorder={true}

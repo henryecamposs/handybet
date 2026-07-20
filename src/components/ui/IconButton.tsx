@@ -45,7 +45,7 @@ export default function IconButton({
     else if (size === 'lg') { sizeClasses = 'w-12 h-12'; iconSize = 24; }
   } else {
     if (size === 'xs') { sizeClasses = 'px-2 py-1.5'; iconSize = 14; }
-    else if (size === 'sm') { sizeClasses = 'px-3 py-2'; iconSize = 16; }
+    else if (size === 'sm') { sizeClasses = 'px-3 py-1'; iconSize = 16; }
     else if (size === 'md') { sizeClasses = 'px-4 py-2'; iconSize = 18; }
     else if (size === 'lg') { sizeClasses = 'px-6 py-3'; iconSize = 24; }
   }

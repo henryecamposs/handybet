@@ -26,7 +26,9 @@ export default function HubDetailsUtilities({
       {/* Columna Izquierda: Avatar */}
       <View className=" flex-row items-center gap-1 pr-2">
         <View className=" mr-3 self-start">
-          {avatarNode}
+          <View className="p-1 bg-gradient-to-r from-primary to-background rounded-full border border-primary">
+            {avatarNode}
+          </View>
         </View>
         {onBack && (
           <TouchableOpacity onPress={onBack} className="absolute p-1 -ml-1 rounded-full bg-card hover:bg-primary">

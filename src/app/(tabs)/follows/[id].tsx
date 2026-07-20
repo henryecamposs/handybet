@@ -17,63 +17,45 @@ import CreatePostWidget from '@/components/feed/CreatePostWidget';
 import { useToastStore } from '@/store/useToastStore';
 import HubDetailsUtilities from '@/components/layout/hub/HubDetailsUtilities';
 import HubCover from '@/components/layout/hub/HubCover';
+import { useHubUtilities } from '@/hooks/useHubUtilities';
 
 const SuggestedItemActions = ({ item, type, router }: { item: any; type: 'user' | 'group'; router: any }) => {
   const [isSaved, setIsSaved] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
-  const colors = useThemeColors();
-  const { addToast } = useToastStore();
+  const { handleFollowToggle, handleSaveToggle, handleChat, handleViewProfile } = useHubUtilities();
 
-  const handleSave = () => {
-    setIsSaved(!isSaved);
-    addToast({
-      title: isSaved ? 'Eliminado de guardados' : 'Agregado a guardados',
-      variant: isSaved ? 'muted' : 'success',
-      position: 'bottom'
-    });
-  };
-
-  const handleFollow = () => {
-    setIsFollowing(!isFollowing);
-    addToast({
-      title: isFollowing ? 'Dejaste de seguir' : 'Siguiendo',
-      variant: isFollowing ? 'muted' : 'success',
-      position: 'bottom'
-    });
-  };
-
-  const handleChat = () => {
-    router.push(`/chat/${item.id}?fromType=${type === 'user' ? 'user' : 'group'}` as any);
-  };
-
-  const handleViewPosts = () => {
-    if (type === 'user') {
-      router.push(`/(tabs)/follows/${item.id}` as any);
-    } else {
-      router.push(`/(tabs)/grupos` as any); // fallback to groups
-    }
-  };
+  const onSave = () => handleSaveToggle(isSaved, type, item.name, setIsSaved);
+  const onFollow = () => handleFollowToggle(isFollowing, type, setIsFollowing);
+  const onChat = () => handleChat(item.id, type);
+  const onView = () => handleViewProfile(item.id, type);
 
   return (
-    <View className="flex-row items-center gap-1">
-      <IconButton icon={LayoutList} variant="ghost" rounded="full" onPress={handleViewPosts} />
-      <IconButton icon={MessageCircle} variant="ghost" rounded="full" onPress={handleChat} />
+    <View className="flex-row gap-2 mt-3">
       <IconButton
         icon={Bookmark}
+        onPress={onSave}
+        variant={isSaved ? "primary" : "ghost"}
+        rounded="full"
+        hasBorder={true}
+        size='sm'
+      />
+      <IconButton
+        icon={MessageCircle}
+        onPress={onChat}
         variant="ghost"
         rounded="full"
-        onPress={handleSave}
+        hasBorder={true}
+        size='sm'
       />
-      <View className="ml-1">
-        <IconButton
-          icon={isFollowing ? UserCheck : UserPlus}
-          label={isFollowing ? "Siguiendo" : "Seguir"}
-          variant={isFollowing ? "ghost" : "primary"}
-          rounded="full"
-          onPress={handleFollow}
-          hasBorder={true}
-        />
-      </View>
+      <IconButton
+        icon={isFollowing ? UserCheck : UserPlus}
+        label={isFollowing ? "Siguiendo" : "Seguir"}
+        onPress={onFollow}
+        variant={isFollowing ? "ghost" : "primary"}
+        rounded="full"
+        hasBorder={true}
+        size='sm'
+      />
     </View>
   );
 };
@@ -82,17 +64,14 @@ export default function FollowDetailScreen() {
   const { id } = useLocalSearchParams();
   const router = useRouter();
   const colors = useThemeColors();
-  const [isFollowing, setIsFollowing] = useState(true);
+  const { handleBack, handleFollowToggle, handleChat } = useHubUtilities();
+  const [isFollowing, setIsFollowing] = useState(false);
 
   const user = handyBetUsers.find((u: any) => u.id === id) || {
     name: 'Usuario Desconocido',
     avatar: 'https://i.pravatar.cc/150',
     bio: 'No hay información disponible.',
     username: 'usuario_desconocido'
-  };
-
-  const handleMessagePress = () => {
-    router.push(`/chat/${id}?fromType=user` as any);
   };
 
   const [userPosts, setUserPosts] = React.useState<any[]>([]);
@@ -113,28 +92,21 @@ export default function FollowDetailScreen() {
         setSuggestedGroups(groups);
       });
     } else {
-      // Fallback si no hay sesión
       localDB.users.getAll().then(users => setSuggestedUsers(users.slice(0, 5)));
       localDB.groups.getAll().then(groups => setSuggestedGroups(groups.slice(0, 5)));
     }
   }, [user.username, mockSession?.id]);
 
-  // Eliminar viejo renderSuggestedActions
-
   const heroBanner = (
     <View className="mb-6">
-      {/* Cover Portada */}
       <HubCover variant="muted" />
 
-      {/* Avatar y Utilidades */}
       <HubDetailsUtilities
         avatarNode={
-          <View className="p-1 bg-background rounded-full border border-border-muted">
-            <Image
-              source={{ uri: user.avatar }}
-              className="w-28 h-28 rounded-full bg-background/80"
-            />
-          </View>
+          <Image
+            source={{ uri: user.avatar }}
+            className="w-28 h-28 rounded-full bg-background/80"
+          />
         }
         title={user.name}
         subtitle={(user as any).username || user.name.toLowerCase().replace(' ', '_')}
@@ -142,7 +114,7 @@ export default function FollowDetailScreen() {
           { value: 120, label: 'Seguidores' },
           { value: 15, label: 'Grupos' }
         ]}
-        onBack={() => router.back()}
+        onBack={() => handleBack('/(tabs)/follows')}
         colors={colors}
       >
         <IconButton
@@ -151,21 +123,24 @@ export default function FollowDetailScreen() {
           variant="ghost"
           rounded="full"
           hasBorder={true}
+          size='sm'
         />
         <IconButton
           icon={MessageCircle}
-          onPress={handleMessagePress}
+          onPress={() => handleChat(id as string, 'user')}
           variant="ghost"
           rounded="full"
           hasBorder={true}
+          size='sm'
         />
         <IconButton
           icon={isFollowing ? UserCheck : UserPlus}
           label={isFollowing ? "Siguiendo" : "Seguir"}
-          onPress={() => setIsFollowing(!isFollowing)}
+          onPress={() => handleFollowToggle(isFollowing, 'user', setIsFollowing)}
           variant={isFollowing ? "ghost" : "primary"}
           rounded="full"
           hasBorder={true}
+          size='sm'
         />
       </HubDetailsUtilities>
 

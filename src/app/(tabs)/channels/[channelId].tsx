@@ -15,6 +15,7 @@ import { useToastStore } from '@/store/useToastStore';
 import HubDetailsUtilities from '@/components/layout/hub/HubDetailsUtilities';
 import HubCover from '@/components/layout/hub/HubCover';
 import { TabContainer, SeccionLista } from '@/components/layout/hub';
+import { useHubUtilities } from '@/hooks/useHubUtilities';
 import PostContainer from '@/components/layout/hub/PostContainer';
 import EmptyState from '@/components/ui/EmptyState';
 
@@ -22,6 +23,8 @@ export default function ChannelDetailScreen() {
   const { channelId } = useLocalSearchParams();
   const router = useRouter();
   const colors = useThemeColors();
+  const { handleBack, handleSaveToggle } = useHubUtilities();
+  const [isSaved, setIsSaved] = useState(false);
   const { mockSession } = useHandyBetStore();
 
   const [channel, setChannel] = useState<Channel | null>(null);
@@ -191,13 +194,13 @@ export default function ChannelDetailScreen() {
         title={channel.name}
         subtitle="Canal Oficial"
         stats={[{ value: groups.length, label: 'Salas / Grupos' }]}
-        onBack={() => router.back()}
+        onBack={() => handleBack('/(tabs)/canales')}
         colors={colors}
       >
         <IconButton
           icon={Bookmark}
-          onPress={() => handleSaveChannel(channel.name)}
-          variant="ghost"
+          onPress={() => handleSaveToggle(isSaved, 'channel', channel.name, setIsSaved)}
+          variant={isSaved ? "primary" : "ghost"}
           rounded="full"
           hasBorder={true}
         />
