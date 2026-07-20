@@ -10,7 +10,7 @@ import { useHandyBetStore } from '../../../store/useHandyBetStore';
 import { socialService } from '../../../services/socialService';
 import ListItem from '@/components/ui/ListItem';
 import IconButton from '@/components/ui/IconButton';
-import { MessageCircle, Bookmark, LayoutList, Users, Info, MoreHorizontal, Megaphone } from 'lucide-react-native';
+import { MessageCircle, Bookmark, LayoutList, Users, Info, MoreHorizontal, Megaphone, ArrowLeft } from 'lucide-react-native';
 import { useToastStore } from '@/store/useToastStore';
 import { TabContainer, SeccionLista } from '@/components/layout/hub';
 import PostContainer from '@/components/layout/hub/PostContainer';
@@ -196,7 +196,12 @@ export default function ChannelDetailScreen() {
 
       {/* Datos del Canal */}
       <View className="px-4">
-        <Text className="text-2xl font-black text-foreground tracking-tight">{channel.name}</Text>
+        <View className="flex-row items-center gap-2 mb-1">
+          <TouchableOpacity onPress={() => router.back()} className="p-1 -ml-1">
+            <ArrowLeft size={28} color={colors.foreground} />
+          </TouchableOpacity>
+          <Text className="text-2xl font-black text-foreground tracking-tight">{channel.name}</Text>
+        </View>
         <Text className="text-muted-foreground text-sm font-medium">Canal Oficial</Text>
 
         <Text className="text-foreground mt-4 leading-5 text-sm">Empresa de apuestas aliada. Accede a nuestras salas y subgrupos oficiales.</Text>

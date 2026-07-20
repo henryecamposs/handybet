@@ -217,7 +217,12 @@ export default function GrupoDetailScreen() {
 
       {/* Datos del Grupo */}
       <View className="px-4">
-        <Text className="text-2xl font-black text-foreground tracking-tight">{group.name}</Text>
+        <View className="flex-row items-center gap-2 mb-1">
+          <TouchableOpacity onPress={handleBack} className="p-1 -ml-1">
+            <ArrowLeft size={28} color={colors.foreground} />
+          </TouchableOpacity>
+          <Text className="text-2xl font-black text-foreground tracking-tight">{group.name}</Text>
+        </View>
         <Text className="text-muted-foreground text-sm font-medium">@{group.short_code || group.name.toLowerCase().replace(' ', '_')}</Text>
 
         <Text className="text-foreground mt-4 leading-5 text-sm">Grupo y sala de {groupType === 'apuestas' ? 'apuestas oficiales' : 'contenido multimedia'}. Comparte jugadas e información con la comunidad.</Text>

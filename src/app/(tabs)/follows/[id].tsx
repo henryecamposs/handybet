@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { MessageCircle, UserPlus, UserCheck, MoreHorizontal, Info, Image as ImageIcon, Users, LayoutList, User, Bookmark, Eye } from 'lucide-react-native';
+import { MessageCircle, UserPlus, UserCheck, MoreHorizontal, Info, Image as ImageIcon, Users, LayoutList, User, Bookmark, Eye, ArrowLeft } from 'lucide-react-native';
 import { handyBetUsers } from '../../../mockdata/handyBetMock';
 import { localDB } from '../../../lib/localDB';
 import { socialService } from '../../../services/socialService';
@@ -163,7 +163,12 @@ export default function FollowDetailScreen() {
 
       {/* Datos Personales */}
       <View className="px-4">
-        <Text className="text-2xl font-black text-foreground tracking-tight">{user.name}</Text>
+        <View className="flex-row items-center gap-2 mb-1">
+          <TouchableOpacity onPress={() => router.back()} className="p-1 -ml-1">
+            <ArrowLeft size={28} color={colors.foreground} />
+          </TouchableOpacity>
+          <Text className="text-2xl font-black text-foreground tracking-tight">{user.name}</Text>
+        </View>
         <Text className="text-muted-foreground text-sm font-medium">@{(user as any).username || user.name.toLowerCase().replace(' ', '_')}</Text>
 
         <Text className="text-foreground mt-4 leading-5 text-sm">{(user as any).bio || 'Explorando la red HandyBet. Jugador frecuente en La Imaginaria.'}</Text>
