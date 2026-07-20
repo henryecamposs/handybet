@@ -9,7 +9,7 @@ El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1
 ### Añadido
 - **Cerebro Portátil**: Integración de especificaciones bajo el estándar Johnny.Decimal para documentar Core P2P, Hubs de Creación, Detalles de Posts y Rediseño de Perfiles.
 - **Reestructuración Completa de Base de Datos Relacional**: Migración SQL maestra con 10 ENUMs, UUIDs, RLS, vistas pre-compiladas (`view_user_feed`), funciones RPC (`rpc_place_handybet_bet`, `rpc_get_suggested_users`, `rpc_send_message`, `rpc_toggle_follow`) e índices GIN/Trigram.
-- **Adaptación de Servicios**: `databaseService.ts`, `storageService.ts`, `recommendationService.ts` y `messagingService.ts` adaptados a los campos JSONB dinámicos y endpoints relacionales.
+- **Estructuración de Almacenamiento & Hook `useStorage`**: Estandarización de rutas en Supabase Storage bajo el formato `{bucket}/{entityId}/{timestamp}.{extension}` para grupos, canales, miembros, posts y recibos, e implementación del hook reutilizable `useStorage.ts`.
 
 ## [1.9.0] - 2026-07-20
 

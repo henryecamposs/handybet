@@ -1,5 +1,7 @@
 import { supabase } from '../lib/supabaseClient';
 
+export type StorageBucket = 'avatars' | 'covers' | 'posts' | 'receipts' | 'media_vault';
+
 export interface UploadResult {
   path: string;
   publicUrl: string;
@@ -7,13 +9,23 @@ export interface UploadResult {
 
 /**
  * Servicio de almacenamiento multimedia para HandyBet (Supabase Storage)
+ * Garantiza la estructura estandarizada: `{bucket}/{entityId}/{timestamp}.{extension}`
  */
 export const storageService = {
   /**
-   * Sube un archivo a un bucket de Supabase (ej: 'avatars', 'covers', 'posts', 'receipts')
+   * Genera la ruta estructurada por ID de entidad y Timestamp: `{entityId}/{timestamp}.{extension}`
+   */
+  generateEntityPath(entityId: string, extension: string = 'jpg'): string {
+    const cleanExt = extension.replace(/^\./, '');
+    const timestamp = Date.now();
+    return `${entityId}/${timestamp}.${cleanExt}`;
+  },
+
+  /**
+   * Sube un archivo a un bucket de Supabase indicando la ruta directa
    */
   async uploadFile(
-    bucket: 'avatars' | 'covers' | 'posts' | 'receipts' | 'media_vault',
+    bucket: StorageBucket,
     filePath: string,
     fileBlob: Blob | File
   ): Promise<UploadResult | null> {
@@ -45,10 +57,24 @@ export const storageService = {
   },
 
   /**
-   * Elimina un archivo del bucket correspondiente
+   * Sube un archivo organizando automáticamente la subcarpeta por `entityId`
+   * (ID de grupo, canal, miembro, post, receipt, etc.) y nombrando el archivo como `{timestamp}.{extension}`
+   */
+  async uploadEntityFile(
+    bucket: StorageBucket,
+    entityId: string,
+    fileBlob: Blob | File,
+    fileExtension: string = 'jpg'
+  ): Promise<UploadResult | null> {
+    const filePath = this.generateEntityPath(entityId, fileExtension);
+    return this.uploadFile(bucket, filePath, fileBlob);
+  },
+
+  /**
+   * Elimina uno o más archivos de un bucket específico
    */
   async deleteFile(
-    bucket: 'avatars' | 'covers' | 'posts' | 'receipts' | 'media_vault',
+    bucket: StorageBucket,
     paths: string[]
   ): Promise<boolean> {
     const { error } = await supabase.storage.from(bucket).remove(paths);
@@ -63,7 +89,7 @@ export const storageService = {
    * Genera una URL firmada con tiempo de expiración para multimedia privada
    */
   async getSignedUrl(
-    bucket: string,
+    bucket: StorageBucket,
     path: string,
     expiresInSeconds = 3600
   ): Promise<string | null> {
