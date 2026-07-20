@@ -11,6 +11,7 @@ import ListItem from '../../../components/ui/ListItem';
 import IconButton from '../../../components/ui/IconButton';
 import EmptyState from '../../../components/ui/EmptyState';
 import { useToastStore } from '@/store/useToastStore';
+import HubCover from '../../../components/layout/hub/HubCover';
 
 export default function ChannelsScreen() {
   const router = useRouter();
@@ -77,8 +78,8 @@ export default function ChannelsScreen() {
       <ListItem
         key={channel.id}
         title={channel.name}
-        subtitle="Empresa de Apuestas Aliada"
-        subtitleVariant="muted"
+        subtitle={`${Math.floor(Math.random() * 10) + 1} grupos • ${Math.floor(Math.random() * 1000) + 100} miembros totales`}
+        subtitleVariant="secondary"
         leftElement={
           <View className="w-10 h-10 rounded-full bg-background/80 items-center justify-center border border-border">
             <Megaphone size={18} color={colors.primary} />
@@ -148,6 +149,12 @@ export default function ChannelsScreen() {
       searchValue={searchQuery}
       onSearchChange={setSearchQuery}
       showBack={true}
+      heroBanner={
+        <HubCover 
+          variant="primary" 
+          containerClasses="h-32 rounded-none mb-2" 
+        />
+      }
       isLoading={isLoading}
       seccionLista={
         <SeccionLista
