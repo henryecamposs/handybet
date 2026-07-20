@@ -68,7 +68,7 @@ export default function MessageItem({ msg, onDelete, onReply, onCopy }: MessageI
       >
         {msg.replyTo && (
           <View className="mb-2 pl-2 border-l-4 border-primary bg-background/30 py-1 px-2 rounded-r-md">
-            <Text className="text-xs font-bold text-primary">{msg.replyTo.sender === 'me' ? 'Tú' : 'Soporte La Imaginaria'}</Text>
+            <Text className="text-xs font-bold text-primary">{msg.replyTo.sender === 'me' ? 'Tú' : 'Soporte HandyBet'}</Text>
             <Text className="text-xs text-muted-foreground" numberOfLines={1}>{msg.replyTo.text}</Text>
           </View>
         )}
@@ -89,7 +89,7 @@ export default function MessageItem({ msg, onDelete, onReply, onCopy }: MessageI
 
         {/* Reaction */}
         {reaction && (
-          <View 
+          <View
             className={`absolute -bottom-4 right-2 bg-background border border-border rounded-full px-1.5 py-0.5 flex-row items-center justify-center shadow-sm`}
             style={{ zIndex: 50, elevation: 5 }}
           >

@@ -99,7 +99,7 @@ export default function ChatDetailScreen() {
             >
               <Image source={{ uri: 'https://placehold.co/100' }} className="w-10 h-10 rounded-full border border-border/50 shadow-sm" />
               <View>
-                <Text className="text-foreground font-black text-sm">Soporte La Imaginaria</Text>
+                <Text className="text-foreground font-black text-sm">Soporte HandyBet</Text>
                 <Text className="text-secondary text-xs font-bold uppercase tracking-wider">En línea</Text>
               </View>
             </TouchableOpacity>
@@ -116,12 +116,12 @@ export default function ChatDetailScreen() {
 
         {/* Contenedor de Referencia (Responder) */}
         {replyingTo && (
-          <TouchableOpacity 
+          <TouchableOpacity
             className="px-4 py-2 border-t border-border bg-muted/30 flex-row items-center justify-between"
             onPress={() => { /* Simular scroll al mensaje */ }}
           >
             <View className="flex-1 border-l-4 border-primary pl-2">
-              <Text className="text-xs font-bold text-primary">{replyingTo.sender === 'me' ? 'Tú' : 'Soporte La Imaginaria'}</Text>
+              <Text className="text-xs font-bold text-primary">{replyingTo.sender === 'me' ? 'Tú' : 'Soporte HandyBet'}</Text>
               <Text className="text-xs text-muted-foreground" numberOfLines={1}>{replyingTo.text}</Text>
             </View>
             <IconButton icon={X} onPress={() => setReplyingTo(null)} variant="ghost" size="xs" iconColor={colors.mutedForeground} hasBorder={false} />

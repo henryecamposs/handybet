@@ -31,7 +31,7 @@ export default function PrivacySecurityModal({ visible, onClose }: PrivacySecuri
       onRequestClose={onClose}
     >
       <View className="flex-1 bg-black/70 justify-center items-center p-4 z-50">
-        <View className="bg-background border border-border w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl">
+        <View className="bg-background border border-border w-full max-w-lg max-h-[85vh] rounded-2xl overflow-hidden shadow-2xl flex-col">
           
           {/* Header */}
           <View className="bg-card border-b border-border p-4 flex-row items-center justify-between">
@@ -50,7 +50,7 @@ export default function PrivacySecurityModal({ visible, onClose }: PrivacySecuri
           </View>
 
           {/* Body Content */}
-          <ScrollView className="max-h-[420px] p-5 gap-5">
+          <ScrollView className="flex-1 p-5 gap-5" showsVerticalScrollIndicator={true}>
             
             {/* Status Card RLS */}
             <View className="bg-emerald-500/10 border border-emerald-500/30 p-4 rounded-xl flex-row items-start gap-3">

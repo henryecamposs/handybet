@@ -11,7 +11,7 @@ import SupportModal from '../modals/SupportModal';
 import PrivacySecurityModal from '../modals/PrivacySecurityModal';
 
 const POPUP_CHATS = [
-  { id: '1', name: 'Soporte La Imaginaria', msg: 'Su recarga por Pago Móvil...', unread: true, avatar: 'https://api.dicebear.com/7.x/identicon/png?seed=imaginaria&backgroundColor=b6e3f4' },
+  { id: '1', name: 'Soporte HandyBet', msg: 'Su recarga por Pago Móvil...', unread: true, avatar: 'https://api.dicebear.com/7.x/identicon/png?seed=imaginaria&backgroundColor=b6e3f4' },
   { id: '2', name: 'Joselin La Gata VIP', msg: '🔥 ¡Chicos, ya están disponibles...', unread: true, avatar: 'https://i.pravatar.cc/150?u=joselin' },
   { id: '3', name: 'Pronosticador Oficial', msg: 'Revisa los triples calientes...', unread: false, avatar: 'https://api.dicebear.com/7.x/identicon/png?seed=pronosticos&backgroundColor=caee26' },
 ];
@@ -210,7 +210,7 @@ export default function HandyBetHeader() {
               className="flex-row items-center gap-2.5 p-2.5 rounded-lg hover:bg-background/80"
             >
               <HelpCircle size={16} color={colors.primary} />
-              <Text className="text-foreground font-bold text-xs">Soporte La Imaginaria</Text>
+              <Text className="text-foreground font-bold text-xs">Soporte HandyBet</Text>
             </TouchableOpacity>
 
             <TouchableOpacity

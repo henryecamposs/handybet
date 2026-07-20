@@ -28,7 +28,7 @@ export default function ChatInboxScreen() {
   const directChats = [
     {
       id: 'chat-1',
-      name: 'Soporte La Imaginaria',
+      name: 'Soporte HandyBet',
       avatar: 'https://api.dicebear.com/7.x/identicon/png?seed=imaginaria&backgroundColor=b6e3f4',
       lastMessage: 'Su recarga por Pago Móvil de 150 Bs. ha sido procesada con éxito.',
       time: '11:45 AM',

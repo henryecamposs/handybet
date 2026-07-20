@@ -66,8 +66,8 @@ export default function SupportModal({ visible, onClose }: SupportModalProps) {
       onRequestClose={onClose}
     >
       <View className="flex-1 bg-black/70 justify-center items-center p-4 z-50">
-        <View className="bg-background border border-border w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl">
-          
+        <View className="bg-background border border-border w-full max-w-lg max-h-[85vh] rounded-2xl overflow-hidden shadow-2xl flex-col">
+
           {/* Header */}
           <View className="bg-card border-b border-border p-4 flex-row items-center justify-between">
             <View className="flex-row items-center gap-3">
@@ -75,7 +75,7 @@ export default function SupportModal({ visible, onClose }: SupportModalProps) {
                 <Headphones size={22} color={colors.primary} />
               </View>
               <View>
-                <Text className="text-foreground font-black text-lg">Soporte La Imaginaria</Text>
+                <Text className="text-foreground font-black text-lg">Soporte HandyBet</Text>
                 <Text className="text-muted-foreground text-xs">Atención al cliente y resolución de dudas 24/7.</Text>
               </View>
             </View>
@@ -104,9 +104,8 @@ export default function SupportModal({ visible, onClose }: SupportModalProps) {
           <View className="flex-row border-b border-border bg-card">
             <TouchableOpacity
               onPress={() => setActiveTab('ticket')}
-              className={`flex-1 py-3 items-center border-b-2 ${
-                activeTab === 'ticket' ? 'border-primary bg-background/50' : 'border-transparent'
-              }`}
+              className={`flex-1 py-3 items-center border-b-2 ${activeTab === 'ticket' ? 'border-primary bg-background/50' : 'border-transparent'
+                }`}
             >
               <Text className={`text-xs font-bold ${activeTab === 'ticket' ? 'text-primary' : 'text-muted-foreground'}`}>
                 Enviar Ticket
@@ -114,9 +113,8 @@ export default function SupportModal({ visible, onClose }: SupportModalProps) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => setActiveTab('faq')}
-              className={`flex-1 py-3 items-center border-b-2 ${
-                activeTab === 'faq' ? 'border-primary bg-background/50' : 'border-transparent'
-              }`}
+              className={`flex-1 py-3 items-center border-b-2 ${activeTab === 'faq' ? 'border-primary bg-background/50' : 'border-transparent'
+                }`}
             >
               <Text className={`text-xs font-bold ${activeTab === 'faq' ? 'text-primary' : 'text-muted-foreground'}`}>
                 Preguntas Frecuentes (FAQ)
@@ -125,26 +123,25 @@ export default function SupportModal({ visible, onClose }: SupportModalProps) {
           </View>
 
           {/* Content Body */}
-          <ScrollView className="max-h-[380px] p-5">
+          <ScrollView className="flex-1 p-5" showsVerticalScrollIndicator={true}>
             {activeTab === 'ticket' ? (
               <View className="gap-4">
                 <View>
                   <Text className="text-foreground font-bold text-xs uppercase mb-2">Categoría de la Consulta</Text>
-                  <ScrollView horizontal showsHorizontalScrollIndicator={false} className="flex-row gap-2">
+                  <View className="flex-row flex-wrap gap-2">
                     {categories.map((cat) => (
                       <TouchableOpacity
                         key={cat}
                         onPress={() => setCategory(cat)}
-                        className={`px-3.5 py-2 rounded-full border ${
-                          category === cat ? 'bg-primary/20 border-primary' : 'bg-card border-border'
-                        }`}
+                        className={`px-3.5 py-2 rounded-full border ${category === cat ? 'bg-primary/20 border-primary' : 'bg-card border-border'
+                          }`}
                       >
                         <Text className={`text-xs font-bold ${category === cat ? 'text-primary' : 'text-foreground'}`}>
                           {cat}
                         </Text>
                       </TouchableOpacity>
                     ))}
-                  </ScrollView>
+                  </View>
                 </View>
 
                 <View>
