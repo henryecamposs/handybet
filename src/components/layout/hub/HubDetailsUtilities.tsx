@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { ArrowLeft } from 'lucide-react-native';
+import { ArrowLeft, ChevronLeft } from 'lucide-react-native';
 
 interface HubDetailsUtilitiesProps {
   avatarNode: React.ReactNode;
@@ -24,23 +24,23 @@ export default function HubDetailsUtilities({
   return (
     <View className="px-4 flex-row items-end -mt-16 mb-2">
       {/* Columna Izquierda: Avatar */}
-      <View className="mr-3 self-start">
-        {avatarNode}
+      <View className=" flex-row items-center gap-1 pr-2">
+        <View className=" mr-3 self-start">
+          {avatarNode}
+        </View>
+        {onBack && (
+          <TouchableOpacity onPress={onBack} className="absolute p-1 -ml-1 rounded-full bg-card hover:bg-primary">
+            <ChevronLeft size={20} color={colors.foreground} />
+          </TouchableOpacity>
+        )}
       </View>
 
       {/* Columna Derecha: Título, utilidades y stats */}
       <View className="flex-1 pb-1">
-        <View className="flex-row justify-between items-start mb-1">
+        <View className="flex-row justify-between items-start">
           {/* Título y Botón Volver */}
-          <View className="flex-1 flex-row items-center gap-1 pr-2">
-            {onBack && (
-              <TouchableOpacity onPress={onBack} className="p-1 -ml-1 rounded-full hover:bg-primary/5">
-                <ArrowLeft size={20} color={colors.foreground} />
-              </TouchableOpacity>
-            )}
-            <Text className="text-xl font-black text-foreground tracking-tight" numberOfLines={1}>{title}</Text>
-          </View>
-          
+          <Text className="text-xl font-black text-foreground tracking-tight" numberOfLines={1}>{title}</Text>
+
           {/* Acciones (Botones/Links) */}
           <View className="flex-row gap-2 items-center">
             {children}

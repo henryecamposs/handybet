@@ -13,6 +13,7 @@ import IconButton from '@/components/ui/IconButton';
 import { MessageCircle, Bookmark, LayoutList, Users, Info, MoreHorizontal, Megaphone, ArrowLeft } from 'lucide-react-native';
 import { useToastStore } from '@/store/useToastStore';
 import HubDetailsUtilities from '@/components/layout/hub/HubDetailsUtilities';
+import HubCover from '@/components/layout/hub/HubCover';
 import { TabContainer, SeccionLista } from '@/components/layout/hub';
 import PostContainer from '@/components/layout/hub/PostContainer';
 import EmptyState from '@/components/ui/EmptyState';
@@ -173,9 +174,10 @@ export default function ChannelDetailScreen() {
   const heroBanner = channel && (
     <View className="mb-6">
       {/* Cover Portada */}
-      <View className="h-44 bg-gradient-to-t from-background/80 to-white bg-background/80 relative w-full border-b border-border-muted ">
-        <View className="absolute inset-0 bg-gradient-to-b from-primary/10 to-background/50" />
-      </View>
+      <HubCover 
+        variant="primary" 
+        containerClasses="bg-gradient-to-t from-background/80 to-white bg-background/80" 
+      />
 
       {/* Avatar y Utilidades */}
       <HubDetailsUtilities

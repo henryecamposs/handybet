@@ -16,6 +16,7 @@ import ListItem from '@/components/ui/ListItem';
 import CreatePostWidget from '@/components/feed/CreatePostWidget';
 import { useToastStore } from '@/store/useToastStore';
 import HubDetailsUtilities from '@/components/layout/hub/HubDetailsUtilities';
+import HubCover from '@/components/layout/hub/HubCover';
 
 const SuggestedItemActions = ({ item, type, router }: { item: any; type: 'user' | 'group'; router: any }) => {
   const [isSaved, setIsSaved] = useState(false);
@@ -123,10 +124,7 @@ export default function FollowDetailScreen() {
   const heroBanner = (
     <View className="mb-6">
       {/* Cover Portada */}
-      <View className="h-44 bg-background/80 relative w-full border-b border-border-muted ">
-        {/* Portada simulada con gradiente */}
-        <View className="absolute inset-0 bg-gradient-to-b from-muted to-background/50" />
-      </View>
+      <HubCover variant="muted" />
 
       {/* Avatar y Utilidades */}
       <HubDetailsUtilities

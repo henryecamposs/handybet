@@ -20,6 +20,7 @@ import EmptyState from '../../../../components/ui/EmptyState';
 import { useToastStore } from '../../../../store/useToastStore';
 import IconButton from '../../../../components/ui/IconButton';
 import HubDetailsUtilities from '../../../../components/layout/hub/HubDetailsUtilities';
+import HubCover from '../../../../components/layout/hub/HubCover';
 
 export default function GrupoDetailScreen() {
   const { id, from } = useLocalSearchParams<{ id: string; from: string }>();
@@ -182,9 +183,7 @@ export default function GrupoDetailScreen() {
   const heroBanner = group && (
     <View className="mb-6">
       {/* Cover Portada */}
-      <View className="h-44 bg-background/80 relative w-full border-b border-border-muted ">
-        <View className="absolute inset-0 bg-gradient-to-b from-primary/10 to-background/50" />
-      </View>
+      <HubCover variant="primary" />
 
       {/* Avatar y Utilidades */}
       <HubDetailsUtilities
