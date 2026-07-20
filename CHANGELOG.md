@@ -9,7 +9,8 @@ El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1
 ### Añadido
 - **Cerebro Portátil**: Integración de especificaciones bajo el estándar Johnny.Decimal para documentar Core P2P, Hubs de Creación, Detalles de Posts y Rediseño de Perfiles.
 - **Reestructuración Completa de Base de Datos Relacional**: Migración SQL maestra con 10 ENUMs, UUIDs, RLS, vistas pre-compiladas (`view_user_feed`), funciones RPC (`rpc_place_handybet_bet`, `rpc_get_suggested_users`, `rpc_send_message`, `rpc_toggle_follow`) e índices GIN/Trigram.
-- **Estructuración de Almacenamiento & Hook `useStorage`**: Estandarización de rutas en Supabase Storage bajo el formato `{bucket}/{entityId}/{timestamp}.{extension}` para grupos, canales, miembros, posts y recibos, e implementación del hook reutilizable `useStorage.ts`.
+- **Estructuración de Almacenamiento & Hook `useStorage`**: Estandarización de rutas en Supabase Storage bajo el formato `{bucket}/{entityId}/{timestamp}.{extension}` para grupos, canales, miembros, posts y recibos.
+- **Sistema de Autenticación Híbrida & Google OAuth 2.0**: Soporte para inicio de sesión en 1-click con Google, registro e inicio de sesión por Email/Password, recuperación de claves y Trigger PostgreSQL atómico (`20260720010000_auth_user_profile_trigger.sql`) para la vinculación automática con `public.profiles`. Guía detallada en `docs/google_oauth_setup.md`.
 
 ## [1.9.0] - 2026-07-20
 

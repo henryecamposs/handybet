@@ -36,11 +36,13 @@ export default function LoginScreen() {
       if (isLogin) {
         // Simular Login con Servicio
         const user = await authService.login(username, password);
-        setMockSession({
-          id: user.id,
-          username: user.username,
-          role: user.role,
-        });
+        if (user) {
+          setMockSession({
+            id: user.id,
+            username: user.username,
+            role: user.role,
+          });
+        }
       } else {
         // Simular Registro con Servicio
         const result = await authService.register(
