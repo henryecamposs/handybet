@@ -128,17 +128,16 @@ export default function FollowDetailScreen() {
         <View className="absolute inset-0 bg-gradient-to-b from-muted to-background/50" />
       </View>
 
-      {/* Avatar */}
-      <View className="px-4 -mt-16 mb-2">
-        <View className="p-1 bg-background rounded-full border border-border-muted self-start">
-          <Image
-            source={{ uri: user.avatar }}
-            className="w-28 h-28 rounded-full bg-background/80"
-          />
-        </View>
-      </View>
-
+      {/* Avatar y Utilidades */}
       <HubDetailsUtilities
+        avatarNode={
+          <View className="p-1 bg-background rounded-full border border-border-muted">
+            <Image
+              source={{ uri: user.avatar }}
+              className="w-28 h-28 rounded-full bg-background/80"
+            />
+          </View>
+        }
         title={user.name}
         subtitle={(user as any).username || user.name.toLowerCase().replace(' ', '_')}
         stats={[

@@ -186,16 +186,15 @@ export default function GrupoDetailScreen() {
         <View className="absolute inset-0 bg-gradient-to-b from-primary/10 to-background/50" />
       </View>
 
-      {/* Avatar */}
-      <View className="px-4 -mt-16 mb-2">
-        <View className="p-1 bg-background rounded-full border border-border-muted self-start">
-          <View className="w-28 h-28 rounded-full bg-background/80 items-center justify-center border border-border">
-            <Users size={48} color={colors.primary} />
-          </View>
-        </View>
-      </View>
-
+      {/* Avatar y Utilidades */}
       <HubDetailsUtilities
+        avatarNode={
+          <View className="p-1 bg-background rounded-full border border-border-muted">
+            <View className="w-28 h-28 rounded-full bg-background/80 items-center justify-center border border-border">
+              <Users size={48} color={colors.primary} />
+            </View>
+          </View>
+        }
         title={group.name}
         subtitle={group.short_code || group.name.toLowerCase().replace(' ', '_')}
         stats={[{ value: group.members?.length || 0, label: 'Miembros' }]}

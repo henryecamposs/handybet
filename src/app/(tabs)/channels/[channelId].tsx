@@ -173,20 +173,19 @@ export default function ChannelDetailScreen() {
   const heroBanner = channel && (
     <View className="mb-6">
       {/* Cover Portada */}
-      <View className="h-44 bg-background/80 relative w-full border-b border-border-muted ">
+      <View className="h-44 bg-gradient-to-t from-background/80 to-white bg-background/80 relative w-full border-b border-border-muted ">
         <View className="absolute inset-0 bg-gradient-to-b from-primary/10 to-background/50" />
       </View>
 
-      {/* Avatar */}
-      <View className="px-4 -mt-16 mb-2">
-        <View className="p-1 bg-background rounded-full border border-border-muted self-start">
-          <View className="w-28 h-28 rounded-full bg-background/80 items-center justify-center border border-border">
-            <Megaphone size={48} color={colors.primary} />
-          </View>
-        </View>
-      </View>
-
+      {/* Avatar y Utilidades */}
       <HubDetailsUtilities
+        avatarNode={
+          <View className="p-1 bg-background rounded-full border border-border-muted">
+            <View className="w-28 h-28 rounded-full bg-background/80 items-center justify-center border border-border">
+              <Megaphone size={48} color={colors.primary} />
+            </View>
+          </View>
+        }
         title={channel.name}
         subtitle="Canal Oficial"
         stats={[{ value: groups.length, label: 'Salas / Grupos' }]}
@@ -201,6 +200,7 @@ export default function ChannelDetailScreen() {
           hasBorder={true}
         />
       </HubDetailsUtilities>
+
 
       {/* Datos del Canal */}
       <View className="px-4">

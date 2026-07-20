@@ -62,7 +62,7 @@ export default function LoginScreen() {
 
   return (
     <View className="flex-1 bg-background/80 justify-center items-center p-6">
-      <View className="w-full max-w-sm bg-background/90 border border-border p-8  shadow-xl">
+      <View className="w-full max-w-sm bg-background/90 border border-border p-8  shadow-xl rounded-xl">
         <View className="mb-4">
           <Logo size="lg" layout="vertical" />
         </View>
@@ -86,7 +86,7 @@ export default function LoginScreen() {
               value={username}
               onChangeText={setUsername}
               autoCapitalize="none"
-              className="bg-primary/5 border border-border rounded-xs px-4 py-3 text-white font-bold"
+              className="bg-primary/5 border border-border rounded-full px-4 py-3 text-white font-bold"
             />
           </View>
 
@@ -99,7 +99,8 @@ export default function LoginScreen() {
               value={password}
               onChangeText={setPassword}
               autoCapitalize="none"
-              className="bg-primary/5 border border-border rounded-xs px-4 py-3 text-white font-bold"
+              onSubmitEditing={handleSubmit}
+              className="bg-primary/5 border border-border rounded-full px-4 py-3 text-white font-bold"
             />
           </View>
 
