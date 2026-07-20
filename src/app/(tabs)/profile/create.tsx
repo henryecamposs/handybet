@@ -156,7 +156,7 @@ export default function CreateUserScreen() {
               }}
               placeholder="Ej. José Pérez"
               placeholderTextColor={colors.mutedForeground}
-              className={`bg-background text-foreground p-4 rounded-xl border font-semibold text-sm ${
+              className={`bg-background text-foreground px-4 py-3.5 rounded-full border font-semibold text-sm ${
                 errors.fullName ? 'border-red-500' : 'border-border'
               }`}
             />
@@ -240,7 +240,7 @@ export default function CreateUserScreen() {
               }}
               placeholder="1998-05-15"
               placeholderTextColor={colors.mutedForeground}
-              className={`bg-background text-foreground p-4 rounded-xl border font-semibold text-sm ${
+              className={`bg-background text-foreground px-4 py-3.5 rounded-full border font-semibold text-sm ${
                 errors.birthDate ? 'border-red-500' : 'border-border'
               }`}
             />
@@ -260,7 +260,7 @@ export default function CreateUserScreen() {
                 placeholder="+584121234567"
                 placeholderTextColor={colors.mutedForeground}
                 keyboardType="phone-pad"
-                className="bg-background text-foreground p-4 rounded-xl border border-border font-semibold text-sm"
+                className="bg-background text-foreground px-4 py-3.5 rounded-full border border-border font-semibold text-sm"
               />
             </View>
             <View className="flex-1">
@@ -270,7 +270,7 @@ export default function CreateUserScreen() {
                 onChangeText={setAddress}
                 placeholder="Caracas, Venezuela"
                 placeholderTextColor={colors.mutedForeground}
-                className="bg-background text-foreground p-4 rounded-xl border border-border font-semibold text-sm"
+                className="bg-background text-foreground px-4 py-3.5 rounded-full border border-border font-semibold text-sm"
               />
             </View>
           </View>

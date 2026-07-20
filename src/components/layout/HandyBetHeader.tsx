@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, Image, TextInput, Platform, ScrollView } from 'react-native';
 import React, { useState, useRef } from 'react';
 import { useRouter, usePathname } from 'expo-router';
-import { Search, MessageCircle, Bell, Sun, Moon, Home, Megaphone, Bookmark, Gamepad2 } from 'lucide-react-native';
+import { Search, MessageCircle, Bell, Sun, Moon, Home, Megaphone, Bookmark, Gamepad2, LogOut, HelpCircle, ShieldAlert, User } from 'lucide-react-native';
 import { useColorScheme } from 'nativewind';
 import { useHandyBetStore } from '../../store/useHandyBetStore';
 import { useThemeColors, withOpacity } from '../../hooks/useThemeColors';
@@ -29,8 +29,10 @@ export default function HandyBetHeader() {
 
   const [showChatPopup, setShowChatPopup] = useState(false);
   const [showNotifPopup, setShowNotifPopup] = useState(false);
+  const [showProfilePopup, setShowProfilePopup] = useState(false);
   const chatAnchorRef = useRef<View>(null);
   const notifAnchorRef = useRef<View>(null);
+  const profileAnchorRef = useRef<View>(null);
 
   const handleToggleTheme = () => {
     try {
@@ -161,13 +163,71 @@ export default function HandyBetHeader() {
             ))}
           </ScrollView>
         </FloatingPopup>
-        <TouchableOpacity onPress={() => router.push('/(tabs)/profile')} className="ml-2 flex-row items-center hover:bg-background/80/50 p-1 rounded-full transition-colors border border-transparent hover:border-border/50 pr-3">
-          <Image
-            source={{ uri: mockSession?.avatar || 'https://i.pravatar.cc/150' }}
-            className="w-9 h-9 rounded-full bg-background/80 border border-zinc-600"
-          />
-          <Text className="ml-2 font-semibold text-foreground text-[14px]">{mockSession?.name?.split(' ')[0]}</Text>
-        </TouchableOpacity>
+        <View ref={profileAnchorRef}>
+          <TouchableOpacity
+            onPress={() => setShowProfilePopup(!showProfilePopup)}
+            className="ml-2 flex-row items-center hover:bg-background/80/50 p-1 rounded-full transition-colors border border-transparent hover:border-border/50 pr-3"
+          >
+            <Image
+              source={{ uri: mockSession?.avatar || 'https://i.pravatar.cc/150' }}
+              className="w-9 h-9 rounded-full bg-background/80 border border-zinc-600"
+            />
+            <Text className="ml-2 font-semibold text-foreground text-[14px]">{mockSession?.name?.split(' ')[0]}</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Profile Popover Popup */}
+        <FloatingPopup
+          isVisible={showProfilePopup}
+          onClose={() => setShowProfilePopup(false)}
+          anchorRef={profileAnchorRef as React.RefObject<View>}
+          location="bottom"
+          size="sm"
+        >
+          <View className="p-3 border-b border-border flex-row items-center gap-3">
+            <Image source={{ uri: mockSession?.avatar || 'https://i.pravatar.cc/150' }} className="w-10 h-10 rounded-full border border-primary" />
+            <View className="flex-1">
+              <Text className="text-foreground font-black text-sm">{mockSession?.name || 'Usuario'}</Text>
+              <Text className="text-primary font-bold text-xs">@{mockSession?.name?.toLowerCase().replace(' ', '_') || 'usuario'}</Text>
+            </View>
+          </View>
+
+          <View className="p-1.5 gap-1">
+            <TouchableOpacity
+              onPress={() => { setShowProfilePopup(false); router.push('/(tabs)/profile'); }}
+              className="flex-row items-center gap-2.5 p-2.5 rounded-lg hover:bg-background/80"
+            >
+              <User size={16} color={colors.primary} />
+              <Text className="text-foreground font-bold text-xs">Ver Mi Perfil</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => { setShowProfilePopup(false); router.push('/(tabs)/chat'); }}
+              className="flex-row items-center gap-2.5 p-2.5 rounded-lg hover:bg-background/80"
+            >
+              <HelpCircle size={16} color={colors.primary} />
+              <Text className="text-foreground font-bold text-xs">Soporte La Imaginaria</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => { setShowProfilePopup(false); alert('HandyBet mantiene la máxima seguridad RLS y cifrado de datos.'); }}
+              className="flex-row items-center gap-2.5 p-2.5 rounded-lg hover:bg-background/80"
+            >
+              <ShieldAlert size={16} color={colors.primary} />
+              <Text className="text-foreground font-bold text-xs">Privacidad & Seguridad</Text>
+            </TouchableOpacity>
+
+            <View className="h-px bg-border my-1" />
+
+            <TouchableOpacity
+              onPress={() => { setShowProfilePopup(false); useHandyBetStore.getState().setMockSession(null); }}
+              className="flex-row items-center gap-2.5 p-2.5 rounded-lg hover:bg-rose-500/10"
+            >
+              <LogOut size={16} color={colors.destructive} />
+              <Text className="text-destructive font-bold text-xs">Cerrar Sesión</Text>
+            </TouchableOpacity>
+          </View>
+        </FloatingPopup>
       </View>
     </View>
   );

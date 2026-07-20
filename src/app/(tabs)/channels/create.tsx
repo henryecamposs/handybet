@@ -122,7 +122,7 @@ export default function CreateChannelScreen() {
               onChangeText={setName}
               placeholder="Ej. Consorcio Loterías Unidas"
               placeholderTextColor={colors.mutedForeground}
-              className="bg-background text-foreground p-4 rounded-xl border border-border font-medium"
+              className="bg-background text-foreground px-4 py-3.5 rounded-full border border-border font-medium"
             />
           </View>
 

@@ -1,70 +1,45 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput, Image, Switch, Modal, ScrollView, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, Image, Switch, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Camera, Save, Lock, X, Check, ArrowLeft, AtSign, Globe, Phone, MapPin, Share2, Send } from 'lucide-react-native';
+import { Camera, Save, ArrowLeft, AtSign, Globe, MapPin, Share2, Send, Mail, Phone, Calendar, Image as ImageIcon, Sparkles } from 'lucide-react-native';
 import { useThemeColors } from '@/hooks/useThemeColors';
-import HubDetailLayout from '@/components/layout/HubDetailLayout';
-import { handyBetUsers } from '../../../mockdata/handyBetMock';
+import { useHandyBetStore } from '@/store/useHandyBetStore';
+import { useToastStore } from '@/store/useToastStore';
+import { localDB } from '@/lib/localDB';
 import InterestChipsSelector from '@/components/ui/InterestChipsSelector';
-
-const AVAILABLE_CATEGORIES = [
-  'Deportes ⚽',
-  'Loterías & Animalitos 🎲',
-  'Hipismo 🏇',
-  'Casino 🎰',
-  'Noticias Deportivas 📰',
-  'Minijuegos 🎮'
-];
+import HubCover from '@/components/layout/hub/HubCover';
 
 export default function EditProfileScreen() {
   const router = useRouter();
   const colors = useThemeColors();
+  const { addToast } = useToastStore();
+  const { mockSession, setMockSession } = useHandyBetStore();
 
-  // Cargamos los datos del usuario actual (por defecto usr_admin)
-  const currentUser = handyBetUsers.find((u) => u.id === 'usr_admin') || handyBetUsers[0];
-
-  // Estados locales del formulario
-  const [name, setName] = useState(currentUser.name);
-  const [username, setUsername] = useState(currentUser.username || 'joseperez');
-  const [bio, setBio] = useState(currentUser.bio || '');
-  const [email, setEmail] = useState(currentUser.email || '');
-  const [whatsapp, setWhatsapp] = useState(currentUser.whatsapp || '');
-  const [birthDate, setBirthDate] = useState(currentUser.birthDate || '');
-  const [address, setAddress] = useState(currentUser.location?.state || 'Av. Principal, Edif. Handy, Piso 2');
-  const [country, setCountry] = useState(currentUser.location?.country || '');
-  const [stateName, setStateName] = useState(currentUser.location?.state || '');
+  const [name, setName] = useState(mockSession?.name || '');
+  const [username, setUsername] = useState(mockSession?.name?.toLowerCase().replace(/\s+/g, '_') || 'joseperez');
+  const [bio, setBio] = useState('Apasionado por los pronósticos deportivos y los sorteos en HandyBet.');
+  const [email, setEmail] = useState('usuario@handybet.com');
+  const [whatsapp, setWhatsapp] = useState('+584121234567');
+  const [birthDate, setBirthDate] = useState('1995-08-20');
+  const [address, setAddress] = useState('Caracas, Venezuela');
+  const [coverVariant, setCoverVariant] = useState<'primary' | 'muted'>('primary');
+  const [avatarSeed, setAvatarSeed] = useState(mockSession?.avatar || 'https://i.pravatar.cc/150');
 
   // Redes Sociales
-  const [instagram, setInstagram] = useState('joseperez_official');
-  const [twitter, setTwitter] = useState('joseperez_bets');
-  const [telegram, setTelegram] = useState('t.me/joseperez');
+  const [instagram, setInstagram] = useState('usuario_official');
+  const [twitter, setTwitter] = useState('usuario_bets');
+  const [telegram, setTelegram] = useState('t.me/usuario_hb');
 
-  const [favoriteCategories, setFavoriteCategories] = useState<string[]>(
-    currentUser.preferences?.favoriteCategories || ['Pronósticos', 'Apuestas Deportivas', 'Loterías']
-  );
-  const [receiveNewsletter, setReceiveNewsletter] = useState(
-    currentUser.preferences?.receiveNewsletter ?? true
-  );
-  const [receiveNotifications, setReceiveNotifications] = useState(
-    currentUser.preferences?.receiveNotifications ?? true
-  );
-  const [acceptedTerms, setAcceptedTerms] = useState(
-    currentUser.preferences?.acceptedTerms ?? false
-  );
-
-  const [modalVisible, setModalVisible] = useState(false);
+  const [interests, setInterests] = useState<string[]>(['Pronósticos', 'Apuestas Deportivas', 'Loterías']);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  // Helper para validar mayoría de edad
   const validateAge = (dateStr: string) => {
     if (!dateStr) return false;
     const regex = /^\d{4}-\d{2}-\d{2}$/;
     if (!regex.test(dateStr)) return false;
-
     const today = new Date();
     const birth = new Date(dateStr);
     if (isNaN(birth.getTime())) return false;
-
     let age = today.getFullYear() - birth.getFullYear();
     const m = today.getMonth() - birth.getMonth();
     if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) {
@@ -73,153 +48,175 @@ export default function EditProfileScreen() {
     return age >= 18;
   };
 
-  // Manejar selección de categorías
-  const toggleCategory = (category: string) => {
-    if (favoriteCategories.includes(category)) {
-      setFavoriteCategories(favoriteCategories.filter((c) => c !== category));
-    } else {
-      setFavoriteCategories([...favoriteCategories, category]);
-    }
-  };
-
-  // Validaciones y Guardar
-  const handleSave = () => {
+  const handleSave = async () => {
     const newErrors: Record<string, string> = {};
 
-    // Validar Email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      newErrors.email = 'El formato del correo electrónico no es válido.';
-    }
-
-    // Validar WhatsApp
-    const phoneRegex = /^\+?[0-9]{8,15}$/;
-    if (!phoneRegex.test(whatsapp)) {
-      newErrors.whatsapp = 'Ingresa un número válido con código de país (ej: +584121234567).';
-    }
-
-    // Validar Edad
-    if (!birthDate) {
-      newErrors.birthDate = 'La fecha de nacimiento es requerida.';
-    } else if (!validateAge(birthDate)) {
-      newErrors.birthDate = 'Debes tener al menos 18 años para usar HandyBet.';
-    }
+    if (!name.trim()) newErrors.name = 'El nombre no puede estar vacío.';
+    if (!username.trim()) newErrors.username = 'El handle no puede estar vacío.';
+    if (!email.trim() || !email.includes('@')) newErrors.email = 'El formato del correo electrónico no es válido.';
+    if (!birthDate.trim() || !validateAge(birthDate)) newErrors.birthDate = 'Debes tener al menos 18 años (YYYY-MM-DD).';
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-      Alert.alert('Error de Validación', 'Por favor corrige los campos marcados antes de continuar.');
+      addToast({ title: 'Por favor corrige los campos marcados', variant: 'muted' });
       return;
     }
 
-    // Limpiar errores e imitar guardado en mockdata/DB local
-    setErrors({});
-    const dbUser = handyBetUsers.find((u) => u.id === 'usr_admin');
-    if (dbUser) {
-      dbUser.name = name;
-      dbUser.bio = bio;
-      dbUser.email = email;
-      dbUser.whatsapp = whatsapp;
-      dbUser.birthDate = birthDate;
-      if (dbUser.location) {
-        dbUser.location.country = country;
-        dbUser.location.state = stateName;
-      }
-      if (dbUser.preferences) {
-        dbUser.preferences.favoriteCategories = favoriteCategories;
-        dbUser.preferences.receiveNewsletter = receiveNewsletter;
-        dbUser.preferences.receiveNotifications = receiveNotifications;
-        dbUser.preferences.acceptedTerms = acceptedTerms;
-      }
-    }
+    try {
+      const updatedData = {
+        full_name: name.trim(),
+        username: username.toLowerCase().replace(/[^a-z0-9_]/g, ''),
+        bio: bio.trim(),
+        email: email.trim(),
+        phone_whatsapp: whatsapp.trim(),
+        birth_date: birthDate.trim(),
+        address: address.trim(),
+        interests,
+        avatar_url: avatarSeed,
+        social_links: {
+          instagram: instagram.trim() || undefined,
+          twitter: twitter.trim() || undefined,
+          telegram: telegram.trim() || undefined,
+        },
+      };
 
-    Alert.alert('Éxito', 'Tu perfil ha sido actualizado correctamente.', [
-      { text: 'Aceptar', onPress: () => router.back() }
-    ]);
+      if (mockSession?.id) {
+        await localDB.users.upsert(mockSession.id, updatedData);
+        setMockSession({
+          ...mockSession,
+          name: updatedData.full_name,
+          avatar: updatedData.avatar_url,
+        });
+      }
+
+      addToast({ title: '¡Perfil actualizado con éxito!', variant: 'success' });
+      router.back();
+    } catch (e) {
+      console.error(e);
+      addToast({ title: 'Error al actualizar el perfil', variant: 'muted' });
+    }
+  };
+
+  const cycleAvatar = () => {
+    const randomId = Math.floor(Math.random() * 1000);
+    setAvatarSeed(`https://i.pravatar.cc/150?u=${randomId}`);
+    addToast({ title: 'Nueva foto de perfil seleccionada', variant: 'info' });
+  };
+
+  const cycleCover = () => {
+    const variants: ('primary' | 'muted')[] = ['primary', 'muted'];
+    const nextIndex = (variants.indexOf(coverVariant) + 1) % variants.length;
+    setCoverVariant(variants[nextIndex]);
+    addToast({ title: `Portada cambiada a tema ${variants[nextIndex]}`, variant: 'info' });
   };
 
   return (
-    <HubDetailLayout
-      logoType="default"
-      backRoute="/(tabs)/follows"
-      onBack={() => router.back()}
-      hideHeader={true}
-    >
-      <View className="px-4 pt-1">
-        <View className="mb-6 flex-row items-center">
-          <TouchableOpacity onPress={() => router.back()} className="mr-3 p-2 rounded-full bg-background/80 hover:bg-primary/20 transition-colors border border-border">
-            <ArrowLeft size={22} color={colors.foreground} />
-          </TouchableOpacity>
-          <View className="flex-1">
-            <Text className="text-foreground font-black text-2xl tracking-tight">Editar Perfil</Text>
-            <Text className="text-muted-foreground text-sm mt-1 font-medium">Personaliza tu perfil y configura tus preferencias de juego.</Text>
-          </View>
+    <ScrollView className="flex-1 bg-background px-4 pt-8 pb-16" showsVerticalScrollIndicator={false}>
+      {/* Title */}
+      <View className="flex-row items-center justify-between mb-6">
+        <View>
+          <Text className="text-foreground font-black text-2xl">Editar Perfil</Text>
+          <Text className="text-muted-foreground text-xs mt-1">Personaliza tu información pública y preferencias.</Text>
         </View>
+        <TouchableOpacity onPress={() => router.back()} className="px-3.5 py-2 bg-card border border-border rounded-full flex-row items-center gap-1.5">
+          <ArrowLeft size={14} color={colors.foreground} />
+          <Text className="text-foreground font-bold text-xs">Volver</Text>
+        </TouchableOpacity>
+      </View>
 
-        {/* Sección 1: Información Básica */}
-        <View className="bg-background/80  p-5 border border-border mb-6">
-          <Text className="text-foreground font-black text-sm uppercase tracking-wider mb-5 border-b border-border  pb-2">Información Básica</Text>
-
-          <View className="items-center mb-6 relative">
-            <View className="p-1 bg-background rounded-full border border-border">
-              <Image
-                source={{ uri: currentUser.avatar }}
-                className="w-24 h-24 rounded-full bg-background/80"
-              />
-            </View>
-            <TouchableOpacity className="absolute bottom-0 right-1/3 translate-x-3 bg-primary w-9 h-9 rounded-full items-center justify-center border-4 border-background hover:bg-primary-dark transition-colors">
-              <Camera size={16} color={colors.primaryForeground} />
+      <View className="gap-6 mb-12">
+        {/* CARD 1: Portada y Avatar */}
+        <View className="bg-card border border-border rounded-2xl overflow-hidden p-6 shadow-md gap-4">
+          <Text className="text-foreground font-bold text-sm uppercase tracking-wider text-primary">1. Imágenes de Portada y Perfil</Text>
+          
+          <View className="rounded-xl overflow-hidden border border-border relative">
+            <HubCover variant={coverVariant} containerClasses="h-32" />
+            <TouchableOpacity
+              onPress={cycleCover}
+              className="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20 flex-row items-center gap-1.5"
+            >
+              <ImageIcon size={14} color="#fff" />
+              <Text className="text-white text-[10px] font-bold">Cambiar Portada</Text>
             </TouchableOpacity>
-          </View>
 
-          <View className="space-y-4">
-            <View>
-              <Text className="text-foreground font-bold text-xs uppercase mb-2 tracking-wider">Nombre para mostrar</Text>
-              <TextInput
-                value={name}
-                onChangeText={setName}
-                placeholder="Nombre para mostrar"
-                placeholderTextColor={colors.mutedForeground}
-                className="bg-background/80 text-foreground p-3.5  border border-border font-semibold text-sm"
-              />
-            </View>
-
-            <View>
-              <Text className="text-foreground font-bold text-xs uppercase mb-2 tracking-wider">Identificador en la Red (@Handle)</Text>
-              <View className="relative flex-row items-center bg-background text-foreground border border-border rounded-xl px-3.5">
-                <AtSign size={16} color={colors.primary} className="mr-2" />
-                <TextInput
-                  value={username}
-                  onChangeText={(val) => setUsername(val.toLowerCase().replace(/[^a-z0-9_]/g, ''))}
-                  placeholder="joseperez"
-                  placeholderTextColor={colors.mutedForeground}
-                  className="flex-1 text-foreground py-3.5 font-bold text-sm"
+            <View className="absolute bottom-2 left-4 flex-row items-end">
+              <View className="relative">
+                <Image
+                  source={{ uri: avatarSeed }}
+                  className="w-20 h-20 rounded-full border-2 border-primary bg-background"
                 />
+                <TouchableOpacity
+                  onPress={cycleAvatar}
+                  className="absolute bottom-0 right-0 bg-primary p-1.5 rounded-full border border-background shadow-md"
+                >
+                  <Camera size={14} color="#000" />
+                </TouchableOpacity>
               </View>
-              <Text className="text-muted-foreground text-[10px] mt-1 font-medium">Tu handle público en la red será @{username || 'usuario'}.</Text>
-            </View>
-
-            <View>
-              <Text className="text-foreground font-bold text-xs uppercase mb-2 tracking-wider">Biografía</Text>
-              <TextInput
-                value={bio}
-                onChangeText={setBio}
-                placeholder="Escribe algo sobre ti..."
-                placeholderTextColor={colors.mutedForeground}
-                multiline
-                numberOfLines={3}
-                className="bg-background/80 text-foreground p-3.5  border border-border font-semibold text-sm"
-              />
             </View>
           </View>
         </View>
 
-        {/* Sección 2: Información Personal & Ubicación */}
-        <View className="bg-background/80  p-5 border border-border mb-6">
-          <Text className="text-foreground font-black text-sm uppercase tracking-wider mb-5 border-b border-border  pb-2">Información Personal & Ubicación</Text>
+        {/* CARD 2: Datos de Identificación */}
+        <View className="bg-card border border-border p-6 rounded-2xl gap-4 shadow-md">
+          <Text className="text-foreground font-bold text-sm uppercase tracking-wider text-primary">2. Datos de Identificación</Text>
 
-          <View className="space-y-4">
-            <View>
-              <Text className="text-foreground font-bold text-xs uppercase mb-2 tracking-wider">Correo Electrónico</Text>
+          <View>
+            <Text className="text-foreground font-bold text-xs uppercase mb-2">Nombre para mostrar *</Text>
+            <TextInput
+              value={name}
+              onChangeText={(val) => {
+                setName(val);
+                if (errors.name) setErrors({ ...errors, name: '' });
+              }}
+              placeholder="Nombre Completo"
+              placeholderTextColor={colors.mutedForeground}
+              className={`bg-background text-foreground px-4 py-3.5 rounded-full border font-semibold text-sm ${
+                errors.name ? 'border-red-500' : 'border-border'
+              }`}
+            />
+            {errors.name && <Text className="text-red-500 text-[10px] mt-1 font-bold">{errors.name}</Text>}
+          </View>
+
+          <View>
+            <Text className="text-foreground font-bold text-xs uppercase mb-2">Identificador en la Red (@Handle) *</Text>
+            <View className="flex-row items-center bg-background border border-border rounded-full px-4">
+              <AtSign size={16} color={colors.primary} className="mr-2" />
+              <TextInput
+                value={username}
+                onChangeText={(val) => {
+                  setUsername(val.toLowerCase().replace(/[^a-z0-9_]/g, ''));
+                  if (errors.username) setErrors({ ...errors, username: '' });
+                }}
+                placeholder="joseperez"
+                placeholderTextColor={colors.mutedForeground}
+                className="flex-1 text-foreground py-3.5 font-bold text-sm"
+              />
+            </View>
+            {errors.username && <Text className="text-red-500 text-[10px] mt-1 font-bold">{errors.username}</Text>}
+          </View>
+
+          <View>
+            <Text className="text-foreground font-bold text-xs uppercase mb-2">Biografía / Presentación</Text>
+            <TextInput
+              value={bio}
+              onChangeText={setBio}
+              placeholder="Escribe algo sobre ti..."
+              placeholderTextColor={colors.mutedForeground}
+              multiline
+              numberOfLines={3}
+              className="bg-background text-foreground p-4 rounded-2xl border border-border font-medium"
+            />
+          </View>
+        </View>
+
+        {/* CARD 3: Contacto & Edad (+18) */}
+        <View className="bg-card border border-border p-6 rounded-2xl gap-4 shadow-md">
+          <Text className="text-foreground font-bold text-sm uppercase tracking-wider text-primary">3. Contacto & Verificación de Edad</Text>
+
+          <View>
+            <Text className="text-foreground font-bold text-xs uppercase mb-2">Correo Electrónico *</Text>
+            <View className="flex-row items-center bg-background border border-border rounded-full px-4">
+              <Mail size={16} color={colors.mutedForeground} className="mr-2" />
               <TextInput
                 value={email}
                 onChangeText={(val) => {
@@ -230,29 +227,16 @@ export default function EditProfileScreen() {
                 placeholderTextColor={colors.mutedForeground}
                 keyboardType="email-address"
                 autoCapitalize="none"
-                className={`bg-background/80 text-foreground p-3.5  border font-semibold text-sm ${errors.email ? 'border-red-500' : 'border-border'}`}
+                className="flex-1 text-foreground py-3.5 font-semibold text-sm"
               />
-              {errors.email && <Text className="text-red-500 text-[10px] mt-1 font-semibold">{errors.email}</Text>}
             </View>
+            {errors.email && <Text className="text-red-500 text-[10px] mt-1 font-bold">{errors.email}</Text>}
+          </View>
 
-            <View>
-              <Text className="text-foreground font-bold text-xs uppercase mb-2 tracking-wider">Número de WhatsApp</Text>
-              <TextInput
-                value={whatsapp}
-                onChangeText={(val) => {
-                  setWhatsapp(val);
-                  if (errors.whatsapp) setErrors({ ...errors, whatsapp: '' });
-                }}
-                placeholder="+584121234567"
-                placeholderTextColor={colors.mutedForeground}
-                keyboardType="phone-pad"
-                className={`bg-background/80 text-foreground p-3.5  border font-semibold text-sm ${errors.whatsapp ? 'border-red-500' : 'border-border'}`}
-              />
-              {errors.whatsapp && <Text className="text-red-500 text-[10px] mt-1 font-semibold">{errors.whatsapp}</Text>}
-            </View>
-
-            <View>
-              <Text className="text-foreground font-bold text-xs uppercase mb-2 tracking-wider">Fecha de Nacimiento (YYYY-MM-DD)</Text>
+          <View>
+            <Text className="text-foreground font-bold text-xs uppercase mb-2">Fecha de Nacimiento (YYYY-MM-DD) *</Text>
+            <View className="flex-row items-center bg-background border border-border rounded-full px-4">
+              <Calendar size={16} color={colors.mutedForeground} className="mr-2" />
               <TextInput
                 value={birthDate}
                 onChangeText={(val) => {
@@ -261,255 +245,104 @@ export default function EditProfileScreen() {
                 }}
                 placeholder="YYYY-MM-DD"
                 placeholderTextColor={colors.mutedForeground}
-                className={`bg-background/80 text-foreground p-3.5  border font-semibold text-sm ${errors.birthDate ? 'border-red-500' : 'border-border'}`}
+                className="flex-1 text-foreground py-3.5 font-semibold text-sm"
               />
-              {errors.birthDate ? (
-                <Text className="text-red-500 text-[10px] mt-1 font-semibold">{errors.birthDate}</Text>
-              ) : (
-                <Text className="text-muted-foreground text-[10px] mt-1 font-medium">Debes tener al menos 18 años para usar la plataforma.</Text>
-              )}
             </View>
+            {errors.birthDate ? (
+              <Text className="text-red-500 text-[10px] mt-1 font-bold">{errors.birthDate}</Text>
+            ) : (
+              <Text className="text-muted-foreground text-[10px] mt-1 font-medium">Requisito de mayoría de edad (+18) para operaciones contables.</Text>
+            )}
+          </View>
 
-            <View>
-              <Text className="text-foreground font-bold text-xs uppercase mb-2 tracking-wider">Dirección Física / Habitación</Text>
-              <View className="flex-row items-center bg-background border border-border rounded-xl px-3.5">
+          <View className="flex-row gap-3">
+            <View className="flex-1">
+              <Text className="text-foreground font-bold text-xs uppercase mb-2">WhatsApp / Teléfono</Text>
+              <View className="flex-row items-center bg-background border border-border rounded-full px-4">
+                <Phone size={16} color={colors.mutedForeground} className="mr-2" />
+                <TextInput
+                  value={whatsapp}
+                  onChangeText={setWhatsapp}
+                  placeholder="+584121234567"
+                  placeholderTextColor={colors.mutedForeground}
+                  keyboardType="phone-pad"
+                  className="flex-1 text-foreground py-3.5 font-semibold text-sm"
+                />
+              </View>
+            </View>
+            <View className="flex-1">
+              <Text className="text-foreground font-bold text-xs uppercase mb-2">Ubicación</Text>
+              <View className="flex-row items-center bg-background border border-border rounded-full px-4">
                 <MapPin size={16} color={colors.mutedForeground} className="mr-2" />
                 <TextInput
                   value={address}
                   onChangeText={setAddress}
-                  placeholder="Av. Francisco de Miranda, Edf. Galipán"
+                  placeholder="Caracas, Venezuela"
                   placeholderTextColor={colors.mutedForeground}
                   className="flex-1 text-foreground py-3.5 font-semibold text-sm"
                 />
               </View>
             </View>
+          </View>
+        </View>
 
-            <View className="flex-row gap-4">
-              <View className="flex-1">
-                <Text className="text-foreground font-bold text-xs uppercase mb-2 tracking-wider">País</Text>
-                <TextInput
-                  value={country}
-                  onChangeText={setCountry}
-                  placeholder="Venezuela"
-                  placeholderTextColor={colors.mutedForeground}
-                  className="bg-background/80 text-foreground p-3.5 border border-border font-semibold text-sm rounded-xl"
-                />
-              </View>
-              <View className="flex-1">
-                <Text className="text-foreground font-bold text-xs uppercase mb-2 tracking-wider">Estado / Región</Text>
-                <TextInput
-                  value={stateName}
-                  onChangeText={setStateName}
-                  placeholder="Miranda"
-                  placeholderTextColor={colors.mutedForeground}
-                  className="bg-background/80 text-foreground p-3.5 border border-border font-semibold text-sm rounded-xl"
-                />
-              </View>
+        {/* CARD 4: Redes Sociales */}
+        <View className="bg-card border border-border p-6 rounded-2xl gap-3 shadow-md">
+          <Text className="text-foreground font-bold text-sm uppercase tracking-wider text-primary">4. Redes Sociales & Enlaces</Text>
+          <View className="gap-3">
+            <View className="flex-row items-center bg-background border border-border rounded-full px-4">
+              <Globe size={16} color={colors.primary} className="mr-2" />
+              <TextInput
+                value={instagram}
+                onChangeText={setInstagram}
+                placeholder="usuario_instagram"
+                placeholderTextColor={colors.mutedForeground}
+                className="flex-1 text-foreground py-3 font-semibold text-xs"
+              />
             </View>
-
-            {/* Redes Sociales */}
-            <Text className="text-foreground font-bold text-xs uppercase mb-2 mt-2 tracking-wider text-primary">Redes Sociales y Enlaces</Text>
-            <View className="gap-3">
-              <View className="flex-row items-center bg-background border border-border rounded-xl px-3.5">
-                <Globe size={16} color={colors.primary} className="mr-2" />
-                <TextInput
-                  value={instagram}
-                  onChangeText={setInstagram}
-                  placeholder="usuario_instagram"
-                  placeholderTextColor={colors.mutedForeground}
-                  className="flex-1 text-foreground py-3 font-semibold text-xs"
-                />
-              </View>
-              <View className="flex-row items-center bg-background border border-border rounded-xl px-3.5">
-                <Share2 size={16} color={colors.primary} className="mr-2" />
-                <TextInput
-                  value={twitter}
-                  onChangeText={setTwitter}
-                  placeholder="usuario_twitter"
-                  placeholderTextColor={colors.mutedForeground}
-                  className="flex-1 text-foreground py-3 font-semibold text-xs"
-                />
-              </View>
-              <View className="flex-row items-center bg-background border border-border rounded-xl px-3.5">
-                <Send size={16} color={colors.primary} className="mr-2" />
-                <TextInput
-                  value={telegram}
-                  onChangeText={setTelegram}
-                  placeholder="t.me/usuario_telegram"
-                  placeholderTextColor={colors.mutedForeground}
-                  className="flex-1 text-foreground py-3 font-semibold text-xs"
-                />
-              </View>
+            <View className="flex-row items-center bg-background border border-border rounded-full px-4">
+              <Share2 size={16} color={colors.primary} className="mr-2" />
+              <TextInput
+                value={twitter}
+                onChangeText={setTwitter}
+                placeholder="usuario_twitter"
+                placeholderTextColor={colors.mutedForeground}
+                className="flex-1 text-foreground py-3 font-semibold text-xs"
+              />
+            </View>
+            <View className="flex-row items-center bg-background border border-border rounded-full px-4">
+              <Send size={16} color={colors.primary} className="mr-2" />
+              <TextInput
+                value={telegram}
+                onChangeText={setTelegram}
+                placeholder="t.me/usuario_telegram"
+                placeholderTextColor={colors.mutedForeground}
+                className="flex-1 text-foreground py-3 font-semibold text-xs"
+              />
             </View>
           </View>
         </View>
 
-        {/* Sección 3: Categorías e Intereses Chips */}
-        <View className="bg-background/80 p-5 border border-border mb-6 rounded-2xl">
-          <Text className="text-foreground font-black text-sm uppercase tracking-wider mb-3 border-b border-border pb-2">Intereses & Etiquetas del Perfil</Text>
+        {/* CARD 5: Intereses & Chips */}
+        <View className="bg-card border border-border p-6 rounded-2xl shadow-md">
+          <Text className="text-foreground font-bold text-sm uppercase tracking-wider text-primary mb-3">5. Intereses & Etiquetas</Text>
           <InterestChipsSelector
-            selectedInterests={favoriteCategories}
-            onChange={setFavoriteCategories}
+            selectedInterests={interests}
+            onChange={setInterests}
             label="Tus Temas de Preferencia"
             allowCustom={true}
           />
         </View>
 
-        {/* Sección 4: Notificaciones y Suscripciones */}
-        <View className="bg-background/80  p-5 border border-border mb-6">
-          <Text className="text-foreground font-black text-sm uppercase tracking-wider mb-5 border-b border-border  pb-2">Configuración de Comunicaciones</Text>
-
-          <View className="space-y-4">
-            <View className="flex-row items-center justify-between">
-              <View className="flex-1 pr-4">
-                <Text className="text-foreground font-bold text-sm">Recibir Boletines</Text>
-                <Text className="text-muted-foreground text-xs mt-0.5 font-medium">Alertas semanales, pronósticos destacados y análisis estadísticos.</Text>
-              </View>
-              <Switch
-                value={receiveNewsletter}
-                onValueChange={setReceiveNewsletter}
-                trackColor={{ false: '#3f3f46', true: colors.primary }}
-                thumbColor={receiveNewsletter ? '#000' : '#a1a1aa'}
-              />
-            </View>
-
-            <View className="flex-row items-center justify-between border-t border-border  pt-4">
-              <View className="flex-1 pr-4">
-                <Text className="text-foreground font-bold text-sm">Notificaciones Activas</Text>
-                <Text className="text-muted-foreground text-xs mt-0.5 font-medium">Recibe alertas push sobre sorteos iniciados, respuestas en chats e información de taquilla.</Text>
-              </View>
-              <Switch
-                value={receiveNotifications}
-                onValueChange={setReceiveNotifications}
-                trackColor={{ false: '#3f3f46', true: colors.primary }}
-                thumbColor={receiveNotifications ? '#000' : '#a1a1aa'}
-              />
-            </View>
-          </View>
-        </View>
-
-        {/* Sección 5: Aceptación Legal y Botón Guardar */}
-        <View className="bg-background/80  p-5 border border-border mb-8">
-          <TouchableOpacity
-            onPress={() => setAcceptedTerms(!acceptedTerms)}
-            className="flex-row items-start gap-3 mb-6"
-            activeOpacity={0.8}
-          >
-            <View className={`w-6 h-6 rounded-xs border items-center justify-center mt-0.5 ${acceptedTerms ? 'bg-primary border-primary' : 'border-border'}`}>
-              {acceptedTerms && <Check size={14} color="#000" />}
-            </View>
-            <Text className="text-foreground text-sm flex-1 font-medium leading-5">
-              Declaro que he leído y acepto el{' '}
-              <Text
-                onPress={() => setModalVisible(true)}
-                className="text-primary font-bold underline"
-              >
-                Acuerdo de Uso de la Red Social HandyBet
-              </Text>
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={handleSave}
-            disabled={!acceptedTerms}
-            className={`py-3.5  flex-row justify-center items-center transition-colors ${acceptedTerms ? 'bg-primary' : 'bg-muted border border-border/20'}`}
-          >
-            <Save size={20} color={acceptedTerms ? colors.primaryForeground : colors.mutedForeground} className="mr-2" />
-            <Text className={`font-black text-base ${acceptedTerms ? 'text-primary-foreground' : 'text-muted-foreground'}`}>Guardar Cambios</Text>
-          </TouchableOpacity>
-        </View>
+        {/* Save Button */}
+        <TouchableOpacity
+          onPress={handleSave}
+          className="bg-primary py-4 rounded-full flex-row justify-center items-center mt-2 shadow-lg shadow-primary/20"
+        >
+          <Save size={20} color="#000" className="mr-2" />
+          <Text className="text-black font-black text-base uppercase tracking-wider">Guardar Cambios</Text>
+        </TouchableOpacity>
       </View>
-
-      {/* Modal del Acuerdo de Uso */}
-      <Modal
-        visible={modalVisible}
-        transparent
-        animationType="slide"
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <View className="flex-1 bg-black/60 justify-center items-center p-4">
-          <View className="bg-background border border-border  w-full max-h-[85%] p-5 shadow-2xl">
-            {/* Header del Modal */}
-            <View className="flex-row items-center justify-between border-b border-border  pb-3">
-              <Text className="text-foreground font-black text-base uppercase tracking-wider">Acuerdo de Uso</Text>
-              <TouchableOpacity onPress={() => setModalVisible(false)} className="p-1 rounded-full hover:bg-muted">
-                <X size={20} color={colors.foreground} />
-              </TouchableOpacity>
-            </View>
-
-            {/* Contenido Legal Scrollable */}
-            <ScrollView showsVerticalScrollIndicator={true} className="my-4 pr-1">
-              <Text className="text-foreground font-black text-sm text-center mb-3">
-                ACUERDO DE USO Y CONDICIONES DE SERVICIO DE LA RED SOCIAL HANDYBET
-              </Text>
-              <Text className="text-muted-foreground text-[10px] font-bold text-center mb-4">
-                Última actualización: 17 de Julio de 2026
-              </Text>
-
-              <Text className="text-foreground text-xs leading-5 mb-4 text-justify">
-                Bienvenido a HandyBet, una red social orientada al entretenimiento deportivo, análisis de datos, sorteos e interacción comunitaria. Al registrarte y utilizar nuestra plataforma, aceptas de manera expresa y sin reservas los siguientes términos y condiciones de uso:
-              </Text>
-
-              <Text className="text-foreground font-bold text-xs mb-2">
-                1. CAPACIDAD LEGAL Y JUEGO RESPONSABLE
-              </Text>
-              <Text className="text-muted-foreground text-xs leading-5 mb-4 text-justify">
-                HandyBet es una plataforma reservada exclusivamente para personas mayores de dieciocho (18) años de edad (o la mayoría de edad legal aplicable en su jurisdicción). Está terminantemente prohibido el acceso a menores de edad. Promovemos el juego responsable y el entretenimiento sano; la información y herramientas que proveemos tienen un fin estrictamente recreativo, estadístico e interactivo.
-              </Text>
-
-              <Text className="text-foreground font-bold text-xs mb-2">
-                2. USO DE LA PLATAFORMA Y CONTENIDO DE USUARIO
-              </Text>
-              <Text className="text-muted-foreground text-xs leading-5 mb-4 text-justify">
-                Como usuario de HandyBet, te comprometes a:{"\n"}
-                • Utilizar tu identidad real o alias de forma respetuosa. Está prohibida la suplantación de identidad de terceros o administradores.{"\n"}
-                • No publicar, difundir ni compartir contenido difamatorio, obsceno, acosador, racista, violento o ilegal en nuestros canales, chats o grupos.{"\n"}
-                • No utilizar la plataforma para realizar spam, esquemas piramidales, venta de servicios de apuestas no autorizados o enlaces fraudulentos.
-              </Text>
-
-              <Text className="text-foreground font-bold text-xs mb-2">
-                3. TRATAMIENTO DE DATOS Y PRIVACIDAD
-              </Text>
-              <Text className="text-muted-foreground text-xs leading-5 mb-4 text-justify">
-                Para mejorar tu experiencia, HandyBet recopila y procesa datos personales como tu correo electrónico, número de WhatsApp (para alertas comunitarias y de taquilla), fecha de nacimiento (para validación de mayoría de edad) y tu ubicación geográfica (con el fin de mostrarte taquillas locales y sorteos autorizados en tu zona). Tus datos son tratados de acuerdo con nuestras políticas de confidencialidad y nunca serán vendidos a terceros sin tu consentimiento explícito.
-              </Text>
-
-              <Text className="text-foreground font-bold text-xs mb-2">
-                4. EXCLUSIÓN DE RESPONSABILIDAD
-              </Text>
-              <Text className="text-muted-foreground text-xs leading-5 mb-4 text-justify">
-                HandyBet ofrece simulaciones de apuestas, estadísticas deportivas, pronósticos recreativos y cobro de premios simulados (puntos) para el entretenimiento de la comunidad. No somos una casa de apuestas online ni un operador de juegos de azar con dinero real directo en la app social. Cualquier interacción, apuesta o acuerdo económico privado realizado entre usuarios fuera de las funcionalidades oficiales de la plataforma es responsabilidad exclusiva de las partes.
-              </Text>
-
-              <Text className="text-foreground font-bold text-xs mb-2">
-                5. MODERACIÓN Y CANCELACIÓN DE CUENTA
-              </Text>
-              <Text className="text-muted-foreground text-xs leading-5 mb-4 text-justify">
-                Nos reservamos el derecho de moderar las publicaciones, suspender de forma temporal o cancelar permanentemente cualquier cuenta de usuario que viole las normas de convivencia o este Acuerdo de Uso, sin previo aviso y sin derecho a reclamación alguna.
-              </Text>
-            </ScrollView>
-
-            {/* Footer de Acciones del Modal */}
-            <View className="flex-row gap-3 border-t border-border  pt-3">
-              <TouchableOpacity
-                onPress={() => setModalVisible(false)}
-                className="flex-1 bg-background/80 py-3 rounded-xs border border-border items-center justify-center"
-              >
-                <Text className="text-foreground font-bold text-sm">Cerrar</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  setAcceptedTerms(true);
-                  setModalVisible(false);
-                }}
-                className="flex-1 bg-primary py-3 rounded-xs items-center justify-center"
-              >
-                <Text className="text-black font-bold text-sm">Aceptar</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </Modal>
-    </HubDetailLayout>
+    </ScrollView>
   );
 }

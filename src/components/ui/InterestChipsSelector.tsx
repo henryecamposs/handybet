@@ -110,7 +110,7 @@ export default function InterestChipsSelector({
                 onChangeText={setCustomInput}
                 placeholder="Ej: Análisis Político, Fórmula 1..."
                 placeholderTextColor={colors.mutedForeground}
-                className="flex-1 bg-background border border-primary/50 text-foreground px-3 py-2 rounded-xl text-xs"
+                className="flex-1 bg-background border border-primary/50 text-foreground px-4 py-2.5 rounded-full text-xs"
                 onSubmitEditing={handleAddCustom}
                 autoFocus
               />

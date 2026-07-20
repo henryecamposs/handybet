@@ -186,7 +186,7 @@ export default function CreateGroupScreen() {
               onChangeText={setName}
               placeholder="Ej. VIP Animalitos Los Pinos"
               placeholderTextColor={colors.mutedForeground}
-              className="bg-background text-foreground p-4 rounded-xl border border-border font-medium"
+              className="bg-background text-foreground px-4 py-3.5 rounded-full border border-border font-medium"
             />
           </View>
 
@@ -199,7 +199,7 @@ export default function CreateGroupScreen() {
                 placeholder="Ej. PINO"
                 placeholderTextColor={colors.mutedForeground}
                 maxLength={6}
-                className="bg-background text-foreground p-4 rounded-xl border border-border font-mono uppercase font-bold"
+                className="bg-background text-foreground px-4 py-3.5 rounded-full border border-border font-mono uppercase font-bold"
               />
             </View>
             <View className="flex-1">
