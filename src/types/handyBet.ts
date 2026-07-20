@@ -14,6 +14,8 @@ export interface Profile {
   created_at: string;
   email?: string;
   birth_date?: string;
+  bio?: string;
+  cover_url?: string;
   phone_whatsapp?: string;
   address?: string;
   social_links?: {
