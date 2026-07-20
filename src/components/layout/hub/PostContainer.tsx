@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import PostItem from '../../feed/PostItem';
+import { useAppNavigation } from '../../../hooks/useAppNavigation';
 
 export interface PostContainerProps {
   title?: string;
@@ -19,6 +20,8 @@ export default function PostContainer({
   onLikeToggle,
   onCommentPress,
 }: PostContainerProps) {
+  const { navigateTo } = useAppNavigation();
+
   if (posts.length === 0) return null;
 
   return (
@@ -65,7 +68,13 @@ export default function PostContainer({
               post={postForComponent}
               isLiked={false}
               onLikeToggle={() => onLikeToggle?.(rawPost.id)}
-              onCommentPress={() => onCommentPress?.(rawPost.id)}
+              onCommentPress={() => {
+                if (onCommentPress) {
+                  onCommentPress(rawPost.id);
+                } else {
+                  navigateTo(`/feed/search?id=${rawPost.id}`);
+                }
+              }}
               onSharePress={() => { }}
               onSavePress={() => { }}
             />

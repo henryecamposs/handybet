@@ -73,7 +73,7 @@ export function useHubUtilities() {
    * Navega a la vista de publicaciones (feed filtrado) del elemento especificado.
    */
   const handleViewPosts = (id: string, type: HubEntityType) => {
-    navigateTo(`/(tabs)/feed/search?id=${id}`);
+    navigateTo(`/feed/search?id=${id}`);
   };
 
   return {
