@@ -104,7 +104,7 @@ export default function FollowsScreen() {
                     <View className="flex-row gap-2 mt-2">
                       <IconButton
                         icon={MessageCircle}
-                        onPress={() => navigateTo(`/chat/${user.id}?fromType=user`)}
+                        onPress={() => navigateTo(`/chat/${user.id}`)}
                         variant="default"
                         rounded="full"
                         hasBorder={true}

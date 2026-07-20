@@ -19,7 +19,7 @@ export default function UserProfileScreen() {
   };
 
   const handleMessagePress = () => {
-    router.push(`/chat/${userId}?fromType=user` as any);
+    router.push(`/chat/${userId}` as any);
   };
 
   return (

@@ -53,7 +53,7 @@ export default function GruposScreen() {
   const handleGroupClick = async (group: Group) => {
     // Si ya es miembro, ir directo al chat
     if (misGrupos.some((g: Group) => g.id === group.id)) {
-      navigateTo(`/channels/groups?id=${group.id}&from=groups`);
+      navigateTo(`/channels/groups?id=${group.id}`);
       return;
     }
 
@@ -99,7 +99,7 @@ export default function GruposScreen() {
       setIntentions('');
 
       // Navegar a la sala de chat del grupo
-      navigateTo(`/channels/groups?id=${selectedGroup.id}&from=groups`);
+      navigateTo(`/channels/groups?id=${selectedGroup.id}`);
     } catch (e) {
       console.error(e);
     } finally {
@@ -136,14 +136,14 @@ export default function GruposScreen() {
               />
               <IconButton
                 icon={LayoutList}
-                onPress={() => navigateTo(`/feed/search?id=${group.id}&from=group`)}
+                onPress={() => navigateTo(`/feed/search?id=${group.id}`)}
                 variant="default"
                 rounded="full"
                 hasBorder={true}
               />
               <IconButton
                 icon={MessageCircle}
-                onPress={() => navigateTo(`/chat/${group.id}?fromType=group`)}
+                onPress={() => navigateTo(`/chat/${group.id}`)}
                 variant="default"
                 rounded="full"
                 hasBorder={true}
@@ -161,7 +161,7 @@ export default function GruposScreen() {
           ) : (
             <IconButton
               label="Ver Feed"
-              onPress={() => navigateTo(`/feed/search?id=${group.id}&from=group`)}
+              onPress={() => navigateTo(`/feed/search?id=${group.id}`)}
               variant="ghost"
               hasBorder={true}
               size="xs"

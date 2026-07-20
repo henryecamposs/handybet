@@ -237,22 +237,22 @@ export default function FeedScreen() {
               postLayouts.current[post.id] = e.nativeEvent.layout.y;
             }}
           >
-            <PostItem
-              post={post}
-              isLiked={likedPosts.includes(post)}
-              onLikeToggle={() => setLikedPosts(prev => prev.includes(post) ? prev.filter(p => p !== post) : [...prev, post])}
-              isSaved={savedPosts.includes(post)}
-              onSavePress={() => {
-                const nextVal = !savedPosts.includes(post);
-                setSavedPosts(prev => nextVal ? [...prev, post] : prev.filter(p => p !== post));
-                showToast(nextVal ? 'Guardado en Favoritos' : 'Eliminado de Favoritos');
-              }}
-              onMediaPress={() => {
-                navigateTo(`/feed/${post.id}?from=feed`);
-              }}
-              onCommentPress={() => {
-                navigateTo(`/feed/${post.id}?from=feed`);
-              }}
+            <PostItem 
+                post={post} 
+                isLiked={likedPosts.includes(post)}
+                onLikeToggle={() => setLikedPosts(prev => prev.includes(post) ? prev.filter(p => p !== post) : [...prev, post])}
+                isSaved={savedPosts.includes(post)}
+                onSavePress={() => {
+                  const nextVal = !savedPosts.includes(post);
+                  setSavedPosts(prev => nextVal ? [...prev, post] : prev.filter(p => p !== post));
+                  showToast(nextVal ? 'Guardado en Favoritos' : 'Eliminado de Favoritos');
+                }}
+                onMediaPress={() => {
+                navigateTo(`/feed/${post.id}`);
+                }}
+                onCommentPress={() => {
+                navigateTo(`/feed/${post.id}`);
+                }}
               onSharePress={() => {
                 setSharingPost(post);
                 setShowShareModal(true);

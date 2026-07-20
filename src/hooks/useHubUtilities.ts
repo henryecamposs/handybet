@@ -22,9 +22,7 @@ export function useHubUtilities() {
    * Navega a la pantalla de Chat con los parámetros correctos.
    */
   const handleChat = (id: string, type: HubEntityType) => {
-    const { from } = params;
-    const fromParam = from ? `&from=${from}` : '';
-    navigateTo(`/chat/${id}?fromType=${type}${fromParam}`);
+    navigateTo(`/chat/${id}`);
   };
 
   /**

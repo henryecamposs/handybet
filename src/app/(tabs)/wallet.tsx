@@ -45,7 +45,7 @@ export default function WalletScreen() {
           </View>
           <IconButton
             icon={MessageCircle}
-            onPress={() => router.push(`/chat/${item.id}?fromType=transaction` as any)}
+            onPress={() => router.push(`/chat/${item.id}` as any)}
             variant="ghost"
             rounded="full"
             hasBorder={true}

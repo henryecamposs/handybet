@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import { ChevronRight } from 'lucide-react-native';
+import { useAppNavigation } from '@/hooks/useAppNavigation';
 import { useThemeColors } from '@/hooks/useThemeColors';
 import FloatingPopup from '@/components/ui/FloatingPopup';
 
@@ -26,6 +27,7 @@ export default function SidebarPopover({ icon, label, items, onViewAll, viewAllP
   const [popupTop, setPopupTop] = useState(128); // Default top-32
   const buttonRef = useRef<View>(null);
   const router = useRouter();
+  const { navigateTo } = useAppNavigation();
   const colors = useThemeColors();
   const handleOpen = () => {
     if (buttonRef.current) {
@@ -43,13 +45,13 @@ export default function SidebarPopover({ icon, label, items, onViewAll, viewAllP
 
   const handleNavigate = (path: string) => {
     handleClose();
-    router.push(path as any);
+    navigateTo(path);
   };
 
   const handleViewAll = () => {
     handleClose();
     if (onViewAll) onViewAll();
-    else if (viewAllPath) router.push(viewAllPath as any);
+    else if (viewAllPath) navigateTo(viewAllPath);
   };
 
   return (

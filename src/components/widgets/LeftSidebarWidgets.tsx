@@ -45,7 +45,7 @@ export default function LeftSidebarWidgets() {
         <SidebarPopover
           icon={<Users size={24} color={colors.primary} />}
           label="Miembros"
-          items={suggestions.following.map(f => ({ id: f.id, name: f.name, image: f.avatar, path: `/chat/follow/${f.id}` }))}
+          items={suggestions.following.map(f => ({ id: f.id, name: f.name, image: f.avatar, path: `/(tabs)/follows/${f.id}` }))}
           viewAllPath="/follows"
         />
 
@@ -55,11 +55,11 @@ export default function LeftSidebarWidgets() {
           items={savedItems.map((item) => {
             const targetId = item.target_id || item.id;
             let path = `/favorites/${item.id}`;
-            if (item.type === 'user') path = `/chat/${targetId}?fromType=user`;
+            if (item.type === 'user') path = `/(tabs)/follows/${targetId}`;
             else if (item.type === 'game') path = `/games/${targetId}`;
-            else if (item.type === 'channel') path = `/channels/${targetId}`;
-            else if (item.type === 'group') path = `/chat/${targetId}?fromType=group`;
-            else if (item.type === 'post' || item.type === 'advertisement') path = `/feed/${targetId}?from=favorites`;
+            else if (item.type === 'channel') path = `/(tabs)/channels/${targetId}`;
+            else if (item.type === 'group') path = `/(tabs)/channels/groups?id=${targetId}`;
+            else if (item.type === 'post' || item.type === 'advertisement') path = `/feed/${targetId}`;
             return {
               id: item.id,
               name: item.title || item.name || 'Elemento Guardado',
@@ -72,13 +72,13 @@ export default function LeftSidebarWidgets() {
         <SidebarPopover
           icon={<Megaphone size={24} color={colors.primary} />}
           label="Canales"
-          items={suggestions.channels.map(c => ({ id: c.id, name: c.name, subtitle: c.description, path: `/channels/${c.id}` }))}
+          items={suggestions.channels.map(c => ({ id: c.id, name: c.name, subtitle: c.description, path: `/(tabs)/channels/${c.id}` }))}
           viewAllPath="/channels"
         />
         <SidebarPopover
           icon={<Users size={24} color={colors.primary} />}
           label="Grupos"
-          items={suggestions.groups.map(g => ({ id: g.id, name: g.name, subtitle: `${g.members} miembros`, path: `/chat/${g.id}?fromType=group` }))}
+          items={suggestions.groups.map(g => ({ id: g.id, name: g.name, subtitle: `${g.members} miembros`, path: `/(tabs)/channels/groups?id=${g.id}` }))}
           viewAllPath="/grupos"
         />
         <SidebarPopover

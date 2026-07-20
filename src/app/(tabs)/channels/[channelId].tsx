@@ -139,14 +139,14 @@ export default function ChannelDetailScreen() {
         <View className="flex-row gap-2 items-center">
           <IconButton
             icon={LayoutList}
-            onPress={() => router.push(`/feed/search?id=${group.id}&from=group` as any)}
+            onPress={() => router.push(`/feed/search?id=${group.id}` as any)}
             variant="ghost"
             rounded="full"
             hasBorder={true}
           />
           <IconButton
             icon={MessageCircle}
-            onPress={() => router.push(`/chat/${group.id}?fromType=group` as any)}
+            onPress={() => router.push(`/chat/${group.id}` as any)}
             variant="ghost"
             rounded="full"
             hasBorder={true}

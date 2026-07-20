@@ -197,7 +197,7 @@ export default function ChatInboxScreen() {
               title={chat.name}
               subtitle={chat.lastMessage}
               hasBorderBottom={true}
-              onPress={() => router.push(`/chat/${chat.id}?fromType=group` as any)}
+              onPress={() => router.push(`/chat/${chat.id}` as any)}
               rightElement={
                 <View className="items-end gap-1">
                   <Text className="text-muted-foreground text-[10px] font-bold">{chat.time}</Text>

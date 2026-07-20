@@ -378,7 +378,7 @@ export default function FeedSearchScreen() {
                       onLikeToggle={() => handleLikeToggle(p.id)}
                       isSaved={savedPosts.includes(p.id)}
                       onSavePress={() => handleSaveToggle(p)}
-                      onCommentPress={() => navigateTo(`/feed/${p.id}?from=search&searchId=${id}`)}
+                      onCommentPress={() => navigateTo(`/feed/${p.id}`)}
                     />
                   );
                 })}
@@ -411,7 +411,7 @@ export default function FeedSearchScreen() {
                 onLikeToggle={() => handleLikeToggle(p.id)}
                 isSaved={savedPosts.includes(p.id)}
                 onSavePress={() => handleSaveToggle(p)}
-                onCommentPress={() => navigateTo(`/feed/${p.id}?from=search&searchId=${id}`)}
+                onCommentPress={() => navigateTo(`/feed/${p.id}`)}
               />
             );
           })
