@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { useLocalSearchParams, useRouter } from 'expo-router';
-import { ArrowLeft, Compass, AlertCircle } from 'lucide-react-native';
+import { useLocalSearchParams } from 'expo-router';
+import { ArrowLeft, Compass } from 'lucide-react-native';
 import { localDB } from '../../../lib/localDB';
 import { socialService } from '../../../services/socialService';
 import { useHandyBetStore } from '../../../store/useHandyBetStore';
 import { useThemeColors } from '../../../hooks/useThemeColors';
+import { useAppNavigation } from '../../../hooks/useAppNavigation';
 import PostItem from '../../../components/feed/PostItem';
 import CreatePostWidget from '../../../components/feed/CreatePostWidget';
 import PostDetailView from '../../../components/feed/PostDetailView';
@@ -13,7 +14,7 @@ import { VisibilityLevel } from '../../../types/handyBet';
 
 export default function FeedSearchScreen() {
   const { id, from, all } = useLocalSearchParams<{ id?: string, from?: string, all?: string }>();
-  const router = useRouter();
+  const { navigateTo, goBack } = useAppNavigation();
   const colors = useThemeColors();
   const { mockSession } = useHandyBetStore();
 
@@ -264,7 +265,7 @@ export default function FeedSearchScreen() {
           onLikeToggle={() => handleLikeToggle(entity.id)}
           isSaved={savedPosts.includes(entity.id)}
           onSavePress={() => handleSaveToggle(entity)}
-          onBack={() => router.back()}
+          onBack={() => goBack()}
         />
       </View>
     );
@@ -289,15 +290,15 @@ export default function FeedSearchScreen() {
 
   const handleBack = () => {
     if (from === 'channel') {
-      router.push('/(tabs)/channels' as any);
+      navigateTo('/(tabs)/channels');
     } else if (from === 'group') {
-      router.push('/(tabs)/grupos' as any);
+      navigateTo('/(tabs)/grupos');
     } else if (from === 'follow') {
-      router.push('/(tabs)/follows' as any);
+      navigateTo('/(tabs)/follows');
     } else if (from === 'feed') {
-      router.push('/(tabs)/feed' as any);
+      navigateTo('/(tabs)/feed');
     } else {
-      router.back();
+      goBack();
     }
   };
 
@@ -377,7 +378,7 @@ export default function FeedSearchScreen() {
                       onLikeToggle={() => handleLikeToggle(p.id)}
                       isSaved={savedPosts.includes(p.id)}
                       onSavePress={() => handleSaveToggle(p)}
-                      onCommentPress={() => router.push(`/feed/${p.id}?from=search&searchId=${id}` as any)}
+                      onCommentPress={() => navigateTo(`/feed/${p.id}?from=search&searchId=${id}`)}
                     />
                   );
                 })}
@@ -410,7 +411,7 @@ export default function FeedSearchScreen() {
                 onLikeToggle={() => handleLikeToggle(p.id)}
                 isSaved={savedPosts.includes(p.id)}
                 onSavePress={() => handleSaveToggle(p)}
-                onCommentPress={() => router.push(`/feed/${p.id}?from=search&searchId=${id}` as any)}
+                onCommentPress={() => navigateTo(`/feed/${p.id}?from=search&searchId=${id}`)}
               />
             );
           })

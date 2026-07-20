@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-import { MessageCircle, UserMinus } from 'lucide-react-native';
+import { MessageCircle, UserMinus, Info, LayoutList } from 'lucide-react-native';
 import IconButton from '@/components/ui/IconButton';
 import ListItem from '@/components/ui/ListItem';
 import { handyBetUsers } from '../../../mockdata/handyBetMock';
-import { useRouter } from 'expo-router';
 import { useThemeColors } from '@/hooks/useThemeColors';
-import { HubLayout, Carrusel, SeccionLista, PostContainer, TabContainer } from '../../../components/layout/hub';
+import { HubLayout, PostContainer, TabContainer } from '../../../components/layout/hub';
 import { localDB } from '../../../lib/localDB';
+import { useAppNavigation } from '@/hooks/useAppNavigation';
 
 export default function FollowsScreen() {
-  const router = useRouter();
   const colors = useThemeColors();
+  const { navigateTo } = useAppNavigation();
   const [searchTerm, setSearchTerm] = useState('');
   const [latestPosts, setLatestPosts] = useState<any[]>([]);
   const [followingStates, setFollowingStates] = useState<Record<string, boolean>>(
@@ -66,7 +66,7 @@ export default function FollowsScreen() {
         subtitle={`${user.mutualFollowers} seguidores en común`}
         subtitleVariant="muted"
         avatar={user.avatar}
-        onPress={() => router.push(`/follows/${user.id}` as any)}
+        onPress={() => navigateTo(`/(tabs)/follows/${user.id}`)}
         className="mb-2"
         rightElement={
           <IconButton
@@ -98,21 +98,35 @@ export default function FollowsScreen() {
                   subtitle="Siguiendo"
                   subtitleVariant="secondary"
                   avatar={user.avatar}
-                  onPress={() => router.push(`/follows/${user.id}` as any)}
+                  onPress={() => navigateTo(`/(tabs)/follows/${user.id}`)}
                   className="mb-2"
                   rightElement={
-                    <>
+                    <View className="flex-row gap-2 mt-2">
                       <IconButton
                         icon={MessageCircle}
-                        onPress={() => router.push(`/chat/${user.id}?fromType=user` as any)}
+                        onPress={() => navigateTo(`/chat/${user.id}?fromType=user`)}
                         variant="default"
+                        rounded="full"
+                        hasBorder={true}
+                        size="xs"
                       />
                       <IconButton
-                        icon={UserMinus}
-                        onPress={() => toggleFollow(user.id)}
-                        variant="destructive"
+                        icon={LayoutList}
+                        onPress={() => navigateTo(`/(tabs)/feed/search?id=${user.id}&from=user`)}
+                        variant="default"
+                        rounded="full"
+                        hasBorder={true}
+                        size="xs"
                       />
-                    </>
+                      <IconButton
+                        icon={Info}
+                        onPress={() => navigateTo(`/(tabs)/follows/${user.id}`)}
+                        variant="default"
+                        rounded="full"
+                        hasBorder={true}
+                        size="xs"
+                      />
+                    </View>
                   }
                 />
               ))}
@@ -157,11 +171,13 @@ export default function FollowsScreen() {
       showBack={true}
       tabContainer={<TabContainer tabs={tabs} />}
       postContainer={
-        <PostContainer
-          title="Últimas Publicaciones"
-          posts={latestPosts}
-          onViewAll={latestPosts[0] ? () => router.push(`/feed/search?id=${latestPosts[0].author_id}&from=follow` as any) : undefined}
-        />
+        <View className="mb-4">
+          <PostContainer
+            title="Publicaciones Recientes"
+            posts={latestPosts}
+            onViewAll={latestPosts[0] ? () => navigateTo(`/feed/search?id=${latestPosts[0].author_id}&from=follow`) : undefined}
+          />
+        </View>
       }
     />
   );

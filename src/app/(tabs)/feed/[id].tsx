@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { View, ActivityIndicator, Text, TouchableOpacity } from 'react-native';
-import { useLocalSearchParams, useRouter } from 'expo-router';
+import React, { useEffect, useState, useRef } from 'react';
+import { View, ActivityIndicator, Text, TouchableOpacity, TextInput } from 'react-native';
+import { useLocalSearchParams } from 'expo-router';
 import PostDetailView from '@/components/feed/PostDetailView';
 import { localDB } from '../../../lib/localDB';
 import { useThemeColors } from '@/hooks/useThemeColors';
+import { useAppNavigation } from '@/hooks/useAppNavigation';
 
 export default function FeedPostDetailScreen() {
   const { id, from } = useLocalSearchParams();
-  const router = useRouter();
+  const { navigateTo, goBack } = useAppNavigation();
   const colors = useThemeColors();
   const [post, setPost] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -91,7 +92,7 @@ export default function FeedPostDetailScreen() {
     return (
       <View className="flex-1 bg-background justify-center items-center p-4">
         <Text className="text-foreground text-lg text-center mb-4">La publicación no está disponible o ha sido eliminada.</Text>
-        <TouchableOpacity onPress={() => router.back()} className="px-6 py-3 bg-primary rounded-xs">
+        <TouchableOpacity onPress={() => goBack()} className="px-6 py-3 bg-primary rounded-xs">
           <Text className="text-background font-bold">Volver</Text>
         </TouchableOpacity>
       </View>
@@ -105,11 +106,7 @@ export default function FeedPostDetailScreen() {
         isLiked={false}
         onLikeToggle={() => { }}
         onBack={() => {
-          if (from === 'feed') {
-            router.replace({ pathname: '/(tabs)/feed', params: { scrollToPostId: id } });
-          } else {
-            router.back();
-          }
+          goBack();
         }}
       />
     </View>

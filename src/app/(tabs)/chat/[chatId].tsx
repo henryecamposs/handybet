@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, Platform } from 'react-native';
-import { ImageIcon, X, Mic, Square, Send } from 'lucide-react-native';
+import { ImageIcon, X, Mic, Square, Send, ArrowLeft } from 'lucide-react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import MessageContainer from '../../../components/chat/MessageContainer';
 import { MessageProps } from '../../../components/chat/MessageItem';
@@ -8,10 +8,12 @@ import { useThemeColors } from '@/hooks/useThemeColors';
 import IconButton from '@/components/ui/IconButton';
 import * as Clipboard from 'expo-clipboard';
 import { useToastStore } from '@/store/useToastStore';
+import { useAppNavigation } from '@/hooks/useAppNavigation';
 
 export default function ChatDetailScreen() {
   const { chatId } = useLocalSearchParams();
   const router = useRouter();
+  const { goBack, navigateTo } = useAppNavigation();
   const colors = useThemeColors();
   const [messages, setMessages] = useState<MessageProps[]>([
     {
@@ -86,27 +88,22 @@ export default function ChatDetailScreen() {
       className="flex-1 bg-background"
     >
       <View className="flex-1 pt-2 p-2">
-        {/* Cabecera del Chat */}
         <View className="flex-row items-center justify-between px-6 pb-2 border-b border-border">
-          <TouchableOpacity
-            className="flex-row items-center gap-3 flex-1"
-            onPress={() => router.push(`/(tabs)/follows/${chatId}` as any)}
-          >
-            <Image source={{ uri: 'https://placehold.co/100' }} className="w-10 h-10 rounded-full border border-border/50 shadow-sm" />
-            <View>
-              <Text className="text-foreground font-black text-sm">Soporte La Imaginaria</Text>
-              <Text className="text-secondary text-xs font-bold uppercase tracking-wider">En línea</Text>
-            </View>
-          </TouchableOpacity>
-
-          <IconButton
-            icon={X}
-            onPress={() => router.push('/(tabs)/chat')}
-            variant="ghost"
-            rounded="full"
-            iconColor={colors.mutedForeground}
-            hasBorder={false}
-          />
+          <View className="flex-row items-center gap-2 flex-1">
+            <TouchableOpacity onPress={() => goBack('/(tabs)/chat')} className="mr-1">
+              <ArrowLeft size={24} color={colors.foreground} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              className="flex-row items-center gap-3 flex-1"
+              onPress={() => navigateTo(`/(tabs)/follows/${chatId}`)}
+            >
+              <Image source={{ uri: 'https://placehold.co/100' }} className="w-10 h-10 rounded-full border border-border/50 shadow-sm" />
+              <View>
+                <Text className="text-foreground font-black text-sm">Soporte La Imaginaria</Text>
+                <Text className="text-secondary text-xs font-bold uppercase tracking-wider">En línea</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
 
         {/* Mensajes */}

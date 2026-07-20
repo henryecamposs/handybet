@@ -18,6 +18,7 @@ import ShareModal from '@/components/feed/ShareModal';
 import { Heart, MessageSquare, Share2, MoreVertical, LogOut, Star, User, Megaphone, Gamepad2, Bookmark, UserCheck, Users } from 'lucide-react-native';
 import { useThemeColors, withOpacity } from '@/hooks/useThemeColors';
 import { useDevicePlatform } from '@/hooks/useDevicePlatform';
+import { useAppNavigation } from '@/hooks/useAppNavigation';
 
 export default function FeedScreen() {
   const [posts, setPosts] = useState<any[]>([]);
@@ -25,6 +26,7 @@ export default function FeedScreen() {
   const [isLoading, setIsLoading] = useState(true);
   const { isDesktop } = useDevicePlatform();
   const router = useRouter();
+  const { navigateTo } = useAppNavigation();
   const { scrollToPostId } = useLocalSearchParams();
   const scrollViewRef = React.useRef<ScrollView>(null);
   const postLayouts = React.useRef<Record<string, number>>({});
@@ -211,10 +213,10 @@ export default function FeedScreen() {
 
           {!isDesktop && (
             <View className="flex-row items-center gap-3">
-              <TouchableOpacity onPress={() => router.push('/(tabs)/follows' as any)} className="p-1">
+              <TouchableOpacity onPress={() => navigateTo('/(tabs)/follows')} className="p-1">
                 <UserCheck size={20} color="white" />
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => router.push('/favorites' as any)} className="p-1">
+              <TouchableOpacity onPress={() => navigateTo('/favorites')} className="p-1">
                 <Bookmark size={20} color="white" />
               </TouchableOpacity>
               <TouchableOpacity onPress={() => setShowMobileMenu(true)} className="p-1">
@@ -246,10 +248,10 @@ export default function FeedScreen() {
                 showToast(nextVal ? 'Guardado en Favoritos' : 'Eliminado de Favoritos');
               }}
               onMediaPress={() => {
-                router.push(`/feed/${post.id}?from=feed` as any);
+                navigateTo(`/feed/${post.id}?from=feed`);
               }}
               onCommentPress={() => {
-                router.push(`/feed/${post.id}?from=feed` as any);
+                navigateTo(`/feed/${post.id}?from=feed`);
               }}
               onSharePress={() => {
                 setSharingPost(post);
@@ -338,7 +340,7 @@ export default function FeedScreen() {
 
             <TouchableOpacity
               className="flex-row items-center gap-3 p-3.5 border-b border-border/50 hover:bg-zinc-900"
-              onPress={() => { setShowMobileMenu(false); router.push('/(tabs)/channels' as any); }}
+              onPress={() => { setShowMobileMenu(false); navigateTo('/(tabs)/channels'); }}
             >
               <Megaphone size={18} color="white" />
               <Text className="text-foreground font-semibold">Canales</Text>
@@ -346,7 +348,7 @@ export default function FeedScreen() {
 
             <TouchableOpacity
               className="flex-row items-center gap-3 p-3.5 border-b border-border/50 hover:bg-zinc-900"
-              onPress={() => { setShowMobileMenu(false); router.push('/(tabs)/games' as any); }}
+              onPress={() => { setShowMobileMenu(false); navigateTo('/(tabs)/games'); }}
             >
               <Gamepad2 size={18} color="white" />
               <Text className="text-foreground font-semibold">Juegos</Text>
@@ -354,7 +356,7 @@ export default function FeedScreen() {
 
             <TouchableOpacity
               className="flex-row items-center gap-3 p-3.5 border-b border-border/50 hover:bg-zinc-900"
-              onPress={() => { setShowMobileMenu(false); router.push('/guardados' as any); }}
+              onPress={() => { setShowMobileMenu(false); navigateTo('/guardados'); }}
             >
               <Bookmark size={18} color="white" />
               <Text className="text-foreground font-semibold">Favoritos</Text>
@@ -362,7 +364,7 @@ export default function FeedScreen() {
 
             <TouchableOpacity
               className="flex-row items-center gap-3 p-3.5 border-b border-border/50 hover:bg-zinc-900"
-              onPress={() => { setShowMobileMenu(false); router.push('/(tabs)/profile'); }}
+              onPress={() => { setShowMobileMenu(false); navigateTo('/(tabs)/profile'); }}
             >
               <User size={18} color="white" />
               <Text className="text-foreground font-semibold">Mi Perfil</Text>

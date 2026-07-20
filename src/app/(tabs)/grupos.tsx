@@ -12,10 +12,12 @@ import { HubLayout, Carrusel, SeccionLista, PostContainer, TabContainer } from '
 import ListItem from '../../components/ui/ListItem';
 import IconButton from '../../components/ui/IconButton';
 import EmptyState from '../../components/ui/EmptyState';
+import { useAppNavigation } from '@/hooks/useAppNavigation';
 
 export default function GruposScreen() {
   const router = useRouter();
   const colors = useThemeColors();
+  const { navigateTo } = useAppNavigation();
 
   // Simulamos los grupos del usuario
   const [misGrupos, setMisGrupos] = useState<Group[]>(handyBetGroups.slice(0, 2) as any);
@@ -51,7 +53,7 @@ export default function GruposScreen() {
   const handleGroupClick = async (group: Group) => {
     // Si ya es miembro, ir directo al chat
     if (misGrupos.some((g: Group) => g.id === group.id)) {
-      router.push(`/channels/groups?id=${group.id}&from=groups` as any);
+      navigateTo(`/channels/groups?id=${group.id}&from=groups`);
       return;
     }
 
@@ -97,7 +99,7 @@ export default function GruposScreen() {
       setIntentions('');
 
       // Navegar a la sala de chat del grupo
-      router.push(`/channels/groups?id=${selectedGroup.id}&from=groups` as any);
+      navigateTo(`/channels/groups?id=${selectedGroup.id}&from=groups`);
     } catch (e) {
       console.error(e);
     } finally {
@@ -127,21 +129,21 @@ export default function GruposScreen() {
             <View className="flex-row gap-2 items-center">
               <IconButton
                 icon={InfoIcon}
-                onPress={() => router.push(`/channels/groups?id=${group.id}&from=groups` as any)}
+                onPress={() => navigateTo(`/channels/groups?id=${group.id}&from=groups`)}
                 variant="default"
                 rounded="full"
                 hasBorder={true}
               />
               <IconButton
                 icon={LayoutList}
-                onPress={() => router.push(`/feed/search?id=${group.id}&from=group` as any)}
+                onPress={() => navigateTo(`/feed/search?id=${group.id}&from=group`)}
                 variant="default"
                 rounded="full"
                 hasBorder={true}
               />
               <IconButton
                 icon={MessageCircle}
-                onPress={() => router.push(`/chat/${group.id}?fromType=group` as any)}
+                onPress={() => navigateTo(`/chat/${group.id}?fromType=group`)}
                 variant="default"
                 rounded="full"
                 hasBorder={true}
@@ -159,7 +161,7 @@ export default function GruposScreen() {
           ) : (
             <IconButton
               label="Ver Feed"
-              onPress={() => router.push(`/feed/search?id=${group.id}&from=group` as any)}
+              onPress={() => navigateTo(`/feed/search?id=${group.id}&from=group`)}
               variant="ghost"
               hasBorder={true}
               size="xs"
