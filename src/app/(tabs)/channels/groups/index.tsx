@@ -96,7 +96,9 @@ export default function GrupoDetailScreen() {
 
   useEffect(() => {
     if (groupType === 'compartir_media' && id) {
-      fetchPlansAndSubs();
+      setTimeout(() => {
+        fetchPlansAndSubs();
+      }, 0);
     }
   }, [id, groupType]);
 

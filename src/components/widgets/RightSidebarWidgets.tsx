@@ -13,8 +13,8 @@ export const [mockAds, mockNews, mockFollowSuggestions, mockPrizes] = [[], [], [
 // --- COMPONENTS ---
 
 export const WidgetContainer = ({ title, children, action }: { title: string | React.ReactNode, children: React.ReactNode, action?: React.ReactNode }) => (
-  <View className="mb-4 bg-card border border-border rounded-xl">
-    <View className="bg-muted rounded-t-xl flex-row justify-between items-center  p-1 rounded-xs transition-colors mb-3 px-2">
+  <View className="mb-3 bg-card border border-border rounded-xl">
+    <View className="bg-muted rounded-t-xl flex-row justify-between items-center  p-1 rounded-xs transition-colors mb-2 px-2">
       {typeof title === 'string' ? (
         <Text className="text-xs font-semibold text-foreground">{title}</Text>
       ) : (

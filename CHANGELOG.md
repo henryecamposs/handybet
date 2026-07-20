@@ -4,6 +4,22 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/), y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.0] - 2026-07-20
+
+### Añadido
+- Estados vacíos (`EmptyState`) amigables y consistentes para los contenedores de la barra lateral derecha (`RightSidebarWidgets`) cuando no existen anuncios, noticias, premios o sugerencias, mejorando drásticamente el UX en escenarios sin contenido.
+- Botones en línea de retroceso (`ArrowLeft`) con soporte nativo de router en las vistas de detalle para navegar de vuelta en el historial fácilmente.
+- Mecanismo de auto-etiquetado inteligente en el publicador del Feed de búsqueda: Al intentar publicar en un canal o grupo a través de la búsqueda con id, se añade el handle correspondiente automáticamente.
+
+### Cambiado
+- Ocultamiento inteligente de la barra superior global (`HandyBetHeader`) en pantallas de Detalles (Canales, Grupos y Perfil de Usuario) apoyándose en enrutamiento para maximizar el área de uso de los Hero Banners.
+- Reorganización manual en el Layout (`LeftSidebarWidgets`) y reemplazo de iconos estándar por Megáfonos (`Megaphone`) para el área de Canales, distinguiéndolo más de la sección "Grupos" que utiliza usuarios/salas.
+- Modificación del esquema de color `--card` en Tailwind para mejor contraste oscuro en la UI del sidebar derecho.
+
+### Corregido
+- Eliminada la sobrescritura accidental del Nombre de Autor que impedía que publicaciones elaboradas desde una sala se mostraran correctamente bajo la identidad real del usuario (Henry).
+- El estado vacío ("Sin publicaciones") del feed de búsqueda ahora se concatena inteligentemente indicando el nombre real del canal, grupo o usuario al que se apunta.
+
 ## [1.7.0] - 2026-07-17
 
 ### Añadido

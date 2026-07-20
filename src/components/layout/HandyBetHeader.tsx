@@ -213,3 +213,4 @@ const HeaderAction = React.forwardRef(({ icon: Icon, onPress, colors, children }
     </TouchableOpacity>
   );
 });
+HeaderAction.displayName = 'HeaderAction';
