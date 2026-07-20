@@ -12,15 +12,16 @@ import { MediaPlan, VisibilityLevel } from '../../../../types/handyBet';
 import CreatePostWidget from '../../../../components/feed/CreatePostWidget';
 import { socialService } from '../../../../services/socialService';
 import { useThemeColors } from '../../../../hooks/useThemeColors';
-import { MessageCircle, ArrowLeft, Bookmark, LayoutList, Users, Info, MoreHorizontal, UserCheck, UserPlus, Megaphone } from 'lucide-react-native';
+import { MessageCircle, ArrowLeft, Bookmark, LayoutList, Users, Info, MoreHorizontal, UserCheck, UserPlus, Megaphone, Calendar, Settings, Shield } from 'lucide-react-native';
 import HubDetailLayout from '../../../../components/layout/HubDetailLayout';
-import { TabContainer } from '../../../../components/layout/hub';
+import { TabContainer, SeccionLista } from '../../../../components/layout/hub';
 import PostContainer from '../../../../components/layout/hub/PostContainer';
 import EmptyState from '../../../../components/ui/EmptyState';
 import { useToastStore } from '../../../../store/useToastStore';
 import IconButton from '../../../../components/ui/IconButton';
 import HubDetailsUtilities from '../../../../components/layout/hub/HubDetailsUtilities';
 import HubCover from '../../../../components/layout/hub/HubCover';
+import ListItem from '../../../../components/ui/ListItem';
 import { useHubUtilities } from '../../../../hooks/useHubUtilities';
 
 export default function GrupoDetailScreen() {
@@ -45,6 +46,7 @@ export default function GrupoDetailScreen() {
   const [groupType, setGroupType] = useState<string>('apuestas');
   const [isAdmin, setIsAdmin] = useState(false);
   const [groupPosts, setGroupPosts] = useState<any[]>([]);
+  const [groupMembers, setGroupMembers] = useState<any[]>([]);
   const [isFollowing, setIsFollowing] = useState(true);
   const { addToast } = useToastStore();
   const { mockSession } = useHandyBetStore();
@@ -59,6 +61,11 @@ export default function GrupoDetailScreen() {
         if (mockSession) {
           const channel = await localDB.channels.getById(g.channel_id);
           setIsAdmin(channel?.owner_id === mockSession.id || mockSession.role === 'admin');
+        }
+        if (g.members && g.members.length > 0) {
+          const allProfiles = await localDB.users.getAll();
+          const membersData = allProfiles.filter((prof: any) => g.members.includes(prof.id));
+          setGroupMembers(membersData);
         }
       }
       const allPosts = await localDB.posts.getAll();
@@ -206,20 +213,160 @@ export default function GrupoDetailScreen() {
           hasBorder={true}
         />
       </HubDetailsUtilities>
-
-      {/* Descripción del Grupo */}
-      <View className="px-4">
-        <Text className="text-foreground mt-2 leading-5 text-sm">Grupo y sala de {groupType === 'apuestas' ? 'apuestas oficiales' : 'contenido multimedia'}. Comparte jugadas e información con la comunidad.</Text>
-      </View>
     </View>
   );
 
   const tabs = [
     {
+      id: 'all',
+      label: 'Todos',
+      content: (
+        <View className="mt-4 flex-col lg:flex-row gap-6">
+          {/* Columna Izquierda: Información y Resumen */}
+          <View className="w-full lg:w-1/3 flex-col gap-4">
+            <View className="bg-card border border-border rounded-xl p-4">
+              <View className="flex-row items-center gap-2 mb-3">
+                <Info size={20} color={colors.primary} />
+                <Text className="text-foreground font-bold text-base">Descripción</Text>
+              </View>
+              <Text className="text-foreground/80 text-sm leading-5">
+                Grupo y sala de {groupType === 'apuestas' ? 'apuestas oficiales' : 'contenido multimedia'}. Comparte jugadas e información con la comunidad.
+              </Text>
+            </View>
+
+            <View className="bg-card border border-border rounded-xl p-4">
+              <View className="flex-row items-center gap-2 mb-3">
+                <Settings size={20} color={colors.primary} />
+                <Text className="text-foreground font-bold text-base">Configuración</Text>
+              </View>
+              <View className="flex-row justify-between py-2 border-b border-border/50">
+                <Text className="text-foreground/70 text-sm">Tipo de Billetera</Text>
+                <Text className="text-foreground font-medium text-sm capitalize">{group?.settings?.wallet_type || 'Mixta'}</Text>
+              </View>
+              <View className="flex-row justify-between py-2 border-b border-border/50">
+                <Text className="text-foreground/70 text-sm">Permite Recargas</Text>
+                <Text className="text-foreground font-medium text-sm">{group?.settings?.allows_recharge ? 'Sí' : 'No'}</Text>
+              </View>
+              <View className="flex-row justify-between py-2 border-b border-border/50">
+                <Text className="text-foreground/70 text-sm">Categoría</Text>
+                <Text className="text-foreground font-medium text-sm capitalize">{groupType}</Text>
+              </View>
+            </View>
+
+            <View className="bg-card border border-border rounded-xl p-4">
+              <View className="flex-row items-center gap-2 mb-3">
+                <Calendar size={20} color={colors.primary} />
+                <Text className="text-foreground font-bold text-base">Creación</Text>
+              </View>
+              <Text className="text-foreground/80 text-sm">
+                Creado el {new Date(group?.created_at || Date.now()).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}
+              </Text>
+            </View>
+
+            <View className="bg-card border border-border rounded-xl p-4">
+              <View className="flex-row items-center justify-between mb-3">
+                <View className="flex-row items-center gap-2">
+                  <Users size={20} color={colors.primary} />
+                  <Text className="text-foreground font-bold text-base">Miembros ({groupMembers.length})</Text>
+                </View>
+              </View>
+              {groupMembers.slice(0, 5).map(member => (
+                <View key={member.id} className="flex-row items-center gap-3 py-2">
+                  <View className="w-8 h-8 rounded-full bg-background border border-border items-center justify-center overflow-hidden">
+                    {member.avatar_url ? (
+                      <View className="w-full h-full bg-primary" />
+                    ) : (
+                      <UserCheck size={14} color={colors.foreground} />
+                    )}
+                  </View>
+                  <Text className="text-foreground text-sm font-medium">{member.full_name || member.username}</Text>
+                  {isAdmin && member.id === mockSession?.id && (
+                    <View className="ml-auto bg-primary/20 px-2 py-1 rounded">
+                      <Text className="text-primary text-[10px] uppercase font-bold">Admin</Text>
+                    </View>
+                  )}
+                </View>
+              ))}
+            </View>
+          </View>
+
+          {/* Columna Derecha: Feed y Posts */}
+          <View className="w-full lg:w-2/3">
+            {isAdmin && (
+              <View className="mb-4">
+                <CreatePostWidget
+                  onPublish={handlePublishPost}
+                  forcedTarget={{
+                    id: group?.id || '',
+                    name: group?.name || '',
+                    type: 'group'
+                  }}
+                />
+              </View>
+            )}
+            {groupPosts.length > 0 ? (
+              <PostContainer
+                title="Publicaciones Recientes"
+                posts={groupPosts}
+              />
+            ) : (
+              <EmptyState title="No hay publicaciones en este grupo." icon={LayoutList} variant="dashed" />
+            )}
+          </View>
+        </View>
+      )
+    },
+    {
+      id: 'members',
+      label: 'Miembros',
+      content: (
+        <View className="mt-4">
+          <SeccionLista 
+            title={`Todos los Miembros (${groupMembers.length})`} 
+            items={groupMembers}
+            renderItem={(member: any) => (
+              <ListItem
+                key={member.id}
+                title={member.full_name || member.username}
+                subtitle={`@${member.username}`}
+                leftElement={
+                  <View className="w-10 h-10 rounded-full bg-background border border-border items-center justify-center overflow-hidden">
+                    {member.avatar_url ? (
+                      <View className="w-full h-full bg-primary" />
+                    ) : (
+                      <UserCheck size={18} color={colors.foreground} />
+                    )}
+                  </View>
+                }
+                rightElement={
+                  <View className="flex-row items-center gap-1">
+                    {isAdmin && member.id === mockSession?.id && (
+                      <View className="flex-row items-center gap-1 bg-primary/20 px-2 py-1 rounded mr-2">
+                        <Shield size={12} color={colors.primary} />
+                        <Text className="text-primary text-[10px] uppercase font-bold">Admin</Text>
+                      </View>
+                    )}
+                    <IconButton icon={LayoutList} onPress={() => {}} variant="ghost" size="xs" hasBorder={false} />
+                    <IconButton icon={MessageCircle} onPress={() => handleChat(member.id, 'user')} variant="ghost" size="xs" hasBorder={false} />
+                    <IconButton icon={Bookmark} onPress={() => {}} variant="ghost" size="xs" hasBorder={false} />
+                    <IconButton icon={UserPlus} onPress={() => {}} variant="ghost" size="xs" hasBorder={false} />
+                  </View>
+                }
+                onPress={() => router.push(`/follows/${member.id}` as any)}
+              />
+            )}
+            emptyState={
+              <EmptyState title="No hay miembros todavía" icon={Users} variant="dashed" />
+            }
+          />
+        </View>
+      )
+    },
+    {
       id: 'tool',
       label: groupType === 'apuestas' ? 'Apuestas' : 'Multimedia',
       content: (
-        <View className="mt-2">
+        <View className="mt-4">
           {groupType === 'apuestas' ? (
             <View className="pb-8">
               {generatedBetCode ? (
@@ -276,38 +423,10 @@ export default function GrupoDetailScreen() {
       )
     },
     {
-      id: 'posts',
-      label: 'Publicaciones',
-      content: (
-        <View className="mt-2">
-          {isAdmin && (
-            <View className="mb-4">
-              <CreatePostWidget
-                onPublish={handlePublishPost}
-                forcedTarget={{
-                  id: group?.id || '',
-                  name: group?.name || '',
-                  type: 'group'
-                }}
-              />
-            </View>
-          )}
-          {groupPosts.length > 0 ? (
-            <PostContainer
-              title="Publicaciones Recientes"
-              posts={groupPosts}
-            />
-          ) : (
-            <EmptyState title="No hay publicaciones en este grupo." icon={LayoutList} variant="dashed" />
-          )}
-        </View>
-      )
-    },
-    {
       id: 'info',
       label: 'Información',
       content: (
-        <View className="mt-2 p-4 bg-background/40 border border-border rounded-xl">
+        <View className="mt-4 p-4 bg-background/40 border border-border rounded-xl">
           <Text className="text-white font-black text-sm uppercase tracking-wider mb-2">Reglas del Grupo</Text>
           <Text className="text-zinc-400 text-xs leading-5">
             1. Respete a los demás miembros de la comunidad.{"\n"}
@@ -330,7 +449,7 @@ export default function GrupoDetailScreen() {
       {heroBanner}
       {group && (
         <View className="px-4">
-          <TabContainer tabs={tabs} defaultTabId="tool" />
+          <TabContainer tabs={tabs} defaultTabId="all" />
         </View>
       )}
     </HubDetailLayout>
