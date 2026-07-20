@@ -41,6 +41,10 @@ export default function RootLayout() {
     const inAuthGroup = segments[0] === '(auth)';
     const inDashboardGroup = segments[0] === '(dashboard)';
     const inTabsGroup = segments[0] === '(tabs)';
+    const inAdminGroup = segments[0] === 'admin';
+
+    // Permitir acceso libre a la ruta de admin, ya que tiene su propio sistema de auth
+    if (inAdminGroup) return;
 
     if (!mockSession) {
       // Redirigir a login si no está autenticado
@@ -73,6 +77,7 @@ export default function RootLayout() {
           <Stack.Screen name="(auth)" options={{ headerShown: false }} />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="(dashboard)" options={{ headerShown: false }} />
+          <Stack.Screen name="admin" options={{ headerShown: false }} />
         </Stack>
         <ToastContainer />
       </>

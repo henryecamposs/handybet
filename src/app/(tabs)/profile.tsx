@@ -71,6 +71,7 @@ export default function ProfileScreen() {
   }
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchProfileData();
   }, [mockSession]);
 

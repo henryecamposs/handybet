@@ -4,6 +4,13 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/), y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.11.0] - 2026-07-20
+
+### Añadido
+- **Panel Administrativo (`/admin`)**: Sistema integrado de analíticas protegido por contraseña global (`handybet*2026`) y redirección inteligente desde el layout principal sin afectar a usuarios anónimos ni autenticados en el frontend general.
+- **Analíticas en Supabase**: Tablas `app_analytics_sessions` gestionadas con RLS e inserción pública mediante las funciones RPC `rpc_record_analytics_session` y `rpc_get_admin_kpis`.
+- **Dashboard y Tráfico Multiplataforma**: Interfaces `index.tsx` y `traffic.tsx` (con soporte `@tanstack/react-table` en web) con UI Sidebar interactiva basada en Expo Router.
+
 ## [1.10.0] - 2026-07-20
 
 ### Añadido

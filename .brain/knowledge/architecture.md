@@ -19,6 +19,7 @@ yastaa-app/
 ├── components/            # Componentes compartidos del dominio (apuestas, qr)
 ├── src/
 │   ├── app/               # Sistema de Enrutamiento (Expo Router)
+│   │   ├── admin/         # Panel Administrativo y Estadísticas
 │   │   ├── (auth)/        # Autenticación (Login, Registro)
 │   │   ├── (dashboard)/   # Taquilla de cajero y administración
 │   │   └── (tabs)/        # Barra de navegación principal (5 pestañas)

@@ -53,4 +53,10 @@
   * Empleamos el `HubDetailLayout` en conjunto con `TabContainer` en `FollowDetailScreen` para renderizar el Hero Banner (foto de portada, avatar, métricas) y pestañas modulares (Publicaciones, Información, Fotos, Seguidos, Grupos).
   * Refactorizamos `TabContainer` e `IconButton` utilizando eventos nativos (`onMouseEnter`/`onMouseLeave`) y `useState` para lograr compatibilidad web 100% precisa en los efectos hover (cambios a colores `bg-muted` y `text-secondary`).
   * Desacoplamos la carga de datos del perfil mediante nuevos métodos en `socialService` (`getSuggestedUsers`, `getSuggestedGroups`), integrando íconos estandarizados en listas vacías con `SeccionLista` y `EmptyState`.
-
+## Hito 9: Panel Administrativo Integrado y Captura de Tráfico
+- **Fecha:** 2026-07-20
+- **Contexto:** Habilitar un área administrativa (`/admin`) segura para visualizar los KPIs y el tráfico, sin romper la redirección base ni entorpecer el flujo de usuarios normales.
+- **Decisión:** 
+  * Se configuró Expo Router con una carpeta aislada `app/admin` que posee su propio layout y estado de autenticación (contraseña estática).
+  * Se modificó el `_layout.tsx` principal para omitir la redirección de rutas cuyo segmento inicie con `admin`.
+  * Se integró `@tanstack/react-table` para proveer tablas ordenables de direcciones IP y tiempos de sesión en escritorio web.
