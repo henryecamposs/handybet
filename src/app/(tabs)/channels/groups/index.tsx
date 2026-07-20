@@ -19,6 +19,7 @@ import PostContainer from '../../../../components/layout/hub/PostContainer';
 import EmptyState from '../../../../components/ui/EmptyState';
 import { useToastStore } from '../../../../store/useToastStore';
 import IconButton from '../../../../components/ui/IconButton';
+import HubDetailsUtilities from '../../../../components/layout/hub/HubDetailsUtilities';
 
 export default function GrupoDetailScreen() {
   const { id, from } = useLocalSearchParams<{ id: string; from: string }>();
@@ -185,56 +186,48 @@ export default function GrupoDetailScreen() {
         <View className="absolute inset-0 bg-gradient-to-b from-primary/10 to-background/50" />
       </View>
 
-      {/* Avatar y Acciones Rápidas */}
-      <View className="px-4 flex-row justify-between items-end -mt-16 mb-4">
-        <View className="p-1 bg-background rounded-full border border-border-muted">
+      {/* Avatar */}
+      <View className="px-4 -mt-16 mb-2">
+        <View className="p-1 bg-background rounded-full border border-border-muted self-start">
           <View className="w-28 h-28 rounded-full bg-background/80 items-center justify-center border border-border">
             <Users size={48} color={colors.primary} />
           </View>
         </View>
-        <View className="flex-row gap-2 pb-2">
-          <IconButton
-            icon={MessageCircle}
-            onPress={handleChatPress}
-            variant="ghost"
-            rounded="full"
-            hasBorder={true}
-          />
-          <IconButton
-            icon={isFollowing ? UserCheck : UserPlus}
-            label={isFollowing ? "Siguiendo" : "Seguir"}
-            onPress={() => {
-              setIsFollowing(!isFollowing);
-              addToast({
-                title: isFollowing ? 'Dejaste de seguir el grupo' : 'Siguiendo grupo',
-                variant: isFollowing ? 'muted' : 'success'
-              });
-            }}
-            variant={isFollowing ? "ghost" : "primary"}
-            rounded="full"
-            hasBorder={true}
-          />
-        </View>
       </View>
 
-      {/* Datos del Grupo */}
+      <HubDetailsUtilities
+        title={group.name}
+        subtitle={group.short_code || group.name.toLowerCase().replace(' ', '_')}
+        stats={[{ value: group.members?.length || 0, label: 'Miembros' }]}
+        onBack={handleBack}
+        colors={colors}
+      >
+        <IconButton
+          icon={MessageCircle}
+          onPress={handleChatPress}
+          variant="ghost"
+          rounded="full"
+          hasBorder={true}
+        />
+        <IconButton
+          icon={isFollowing ? UserCheck : UserPlus}
+          label={isFollowing ? "Siguiendo" : "Seguir"}
+          onPress={() => {
+            setIsFollowing(!isFollowing);
+            addToast({
+              title: isFollowing ? 'Dejaste de seguir el grupo' : 'Siguiendo grupo',
+              variant: isFollowing ? 'muted' : 'success'
+            });
+          }}
+          variant={isFollowing ? "ghost" : "primary"}
+          rounded="full"
+          hasBorder={true}
+        />
+      </HubDetailsUtilities>
+
+      {/* Descripción del Grupo */}
       <View className="px-4">
-        <View className="flex-row items-center gap-2 mb-1">
-          <TouchableOpacity onPress={handleBack} className="p-1 -ml-1">
-            <ArrowLeft size={28} color={colors.foreground} />
-          </TouchableOpacity>
-          <Text className="text-2xl font-black text-foreground tracking-tight">{group.name}</Text>
-        </View>
-        <Text className="text-muted-foreground text-sm font-medium">@{group.short_code || group.name.toLowerCase().replace(' ', '_')}</Text>
-
-        <Text className="text-foreground mt-4 leading-5 text-sm">Grupo y sala de {groupType === 'apuestas' ? 'apuestas oficiales' : 'contenido multimedia'}. Comparte jugadas e información con la comunidad.</Text>
-
-        <View className="flex-row gap-4 mt-4">
-          <View className="flex-row items-center">
-            <Text className="text-foreground font-black text-sm">{group.members?.length || 0}</Text>
-            <Text className="text-muted-foreground text-xs ml-1 font-bold uppercase tracking-wider">Miembros</Text>
-          </View>
-        </View>
+        <Text className="text-foreground mt-2 leading-5 text-sm">Grupo y sala de {groupType === 'apuestas' ? 'apuestas oficiales' : 'contenido multimedia'}. Comparte jugadas e información con la comunidad.</Text>
       </View>
     </View>
   );
@@ -347,6 +340,7 @@ export default function GrupoDetailScreen() {
 
   return (
     <HubDetailLayout
+      hideHeader
       backRoute={from === 'channel' && group?.channel_id ? `/channels/${group.channel_id}` : '/(tabs)/grupos'}
       logoType="default"
       notFoundLabel="Grupo no encontrado."

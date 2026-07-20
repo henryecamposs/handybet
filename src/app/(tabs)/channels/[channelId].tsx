@@ -12,6 +12,7 @@ import ListItem from '@/components/ui/ListItem';
 import IconButton from '@/components/ui/IconButton';
 import { MessageCircle, Bookmark, LayoutList, Users, Info, MoreHorizontal, Megaphone, ArrowLeft } from 'lucide-react-native';
 import { useToastStore } from '@/store/useToastStore';
+import HubDetailsUtilities from '@/components/layout/hub/HubDetailsUtilities';
 import { TabContainer, SeccionLista } from '@/components/layout/hub';
 import PostContainer from '@/components/layout/hub/PostContainer';
 import EmptyState from '@/components/ui/EmptyState';
@@ -176,42 +177,34 @@ export default function ChannelDetailScreen() {
         <View className="absolute inset-0 bg-gradient-to-b from-primary/10 to-background/50" />
       </View>
 
-      {/* Avatar y Acciones Rápidas */}
-      <View className="px-4 flex-row justify-between items-end -mt-16 mb-4">
-        <View className="p-1 bg-background rounded-full border border-border-muted">
+      {/* Avatar */}
+      <View className="px-4 -mt-16 mb-2">
+        <View className="p-1 bg-background rounded-full border border-border-muted self-start">
           <View className="w-28 h-28 rounded-full bg-background/80 items-center justify-center border border-border">
             <Megaphone size={48} color={colors.primary} />
           </View>
         </View>
-        <View className="flex-row gap-2 pb-2">
-          <IconButton
-            icon={Bookmark}
-            onPress={() => handleSaveChannel(channel.name)}
-            variant="ghost"
-            rounded="full"
-            hasBorder={true}
-          />
-        </View>
       </View>
+
+      <HubDetailsUtilities
+        title={channel.name}
+        subtitle="Canal Oficial"
+        stats={[{ value: groups.length, label: 'Salas / Grupos' }]}
+        onBack={() => router.back()}
+        colors={colors}
+      >
+        <IconButton
+          icon={Bookmark}
+          onPress={() => handleSaveChannel(channel.name)}
+          variant="ghost"
+          rounded="full"
+          hasBorder={true}
+        />
+      </HubDetailsUtilities>
 
       {/* Datos del Canal */}
       <View className="px-4">
-        <View className="flex-row items-center gap-2 mb-1">
-          <TouchableOpacity onPress={() => router.back()} className="p-1 -ml-1">
-            <ArrowLeft size={28} color={colors.foreground} />
-          </TouchableOpacity>
-          <Text className="text-2xl font-black text-foreground tracking-tight">{channel.name}</Text>
-        </View>
-        <Text className="text-muted-foreground text-sm font-medium">Canal Oficial</Text>
-
-        <Text className="text-foreground mt-4 leading-5 text-sm">Empresa de apuestas aliada. Accede a nuestras salas y subgrupos oficiales.</Text>
-
-        <View className="flex-row gap-4 mt-4">
-          <View className="flex-row items-center">
-            <Text className="text-foreground font-black text-sm">{groups.length}</Text>
-            <Text className="text-muted-foreground text-xs ml-1 font-bold uppercase tracking-wider">Salas / Grupos</Text>
-          </View>
-        </View>
+        <Text className="text-foreground mt-2 leading-5 text-sm">Empresa de apuestas aliada. Accede a nuestras salas y subgrupos oficiales.</Text>
       </View>
     </View>
   );
@@ -264,6 +257,7 @@ export default function ChannelDetailScreen() {
 
   return (
     <HubDetailLayout
+      hideHeader={true}
       backRoute="/(tabs)/channels"
       logoType="channels"
       isLoading={isLoading}

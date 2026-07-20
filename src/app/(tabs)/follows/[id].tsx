@@ -15,6 +15,7 @@ import EmptyState from '@/components/ui/EmptyState';
 import ListItem from '@/components/ui/ListItem';
 import CreatePostWidget from '@/components/feed/CreatePostWidget';
 import { useToastStore } from '@/store/useToastStore';
+import HubDetailsUtilities from '@/components/layout/hub/HubDetailsUtilities';
 
 const SuggestedItemActions = ({ item, type, router }: { item: any; type: 'user' | 'group'; router: any }) => {
   const [isSaved, setIsSaved] = useState(false);
@@ -127,62 +128,53 @@ export default function FollowDetailScreen() {
         <View className="absolute inset-0 bg-gradient-to-b from-muted to-background/50" />
       </View>
 
-      {/* Avatar y Acciones Rápidas */}
-      <View className="px-4 flex-row justify-between items-end -mt-16 mb-4">
-        <View className="p-1 bg-background rounded-full border border-border-muted">
+      {/* Avatar */}
+      <View className="px-4 -mt-16 mb-2">
+        <View className="p-1 bg-background rounded-full border border-border-muted self-start">
           <Image
             source={{ uri: user.avatar }}
             className="w-28 h-28 rounded-full bg-background/80"
           />
         </View>
-        <View className="flex-row gap-2 pb-2">
-          <IconButton
-            icon={MoreHorizontal}
-            onPress={() => { }}
-            variant="ghost"
-            rounded="full"
-            hasBorder={true}
-          />
-          <IconButton
-            icon={MessageCircle}
-            onPress={handleMessagePress}
-            variant="ghost"
-            rounded="full"
-            hasBorder={true}
-          />
-          <IconButton
-            icon={isFollowing ? UserCheck : UserPlus}
-            label={isFollowing ? "Siguiendo" : "Seguir"}
-            onPress={() => setIsFollowing(!isFollowing)}
-            variant={isFollowing ? "ghost" : "primary"}
-            rounded="full"
-            hasBorder={true}
-          />
-        </View>
       </View>
 
-      {/* Datos Personales */}
+      <HubDetailsUtilities
+        title={user.name}
+        subtitle={(user as any).username || user.name.toLowerCase().replace(' ', '_')}
+        stats={[
+          { value: 120, label: 'Seguidores' },
+          { value: 15, label: 'Grupos' }
+        ]}
+        onBack={() => router.back()}
+        colors={colors}
+      >
+        <IconButton
+          icon={MoreHorizontal}
+          onPress={() => { }}
+          variant="ghost"
+          rounded="full"
+          hasBorder={true}
+        />
+        <IconButton
+          icon={MessageCircle}
+          onPress={handleMessagePress}
+          variant="ghost"
+          rounded="full"
+          hasBorder={true}
+        />
+        <IconButton
+          icon={isFollowing ? UserCheck : UserPlus}
+          label={isFollowing ? "Siguiendo" : "Seguir"}
+          onPress={() => setIsFollowing(!isFollowing)}
+          variant={isFollowing ? "ghost" : "primary"}
+          rounded="full"
+          hasBorder={true}
+        />
+      </HubDetailsUtilities>
+
+      {/* Datos Personales Adicionales */}
       <View className="px-4">
-        <View className="flex-row items-center gap-2 mb-1">
-          <TouchableOpacity onPress={() => router.back()} className="p-1 -ml-1">
-            <ArrowLeft size={28} color={colors.foreground} />
-          </TouchableOpacity>
-          <Text className="text-2xl font-black text-foreground tracking-tight">{user.name}</Text>
-        </View>
-        <Text className="text-muted-foreground text-sm font-medium">@{(user as any).username || user.name.toLowerCase().replace(' ', '_')}</Text>
-
-        <Text className="text-foreground mt-4 leading-5 text-sm">{(user as any).bio || 'Explorando la red HandyBet. Jugador frecuente en La Imaginaria.'}</Text>
-
-        <View className="flex-row gap-4 mt-4">
-          <View className="flex-row items-center">
-            <Text className="text-foreground font-black text-sm">120</Text>
-            <Text className="text-muted-foreground text-xs ml-1 font-bold uppercase tracking-wider">Seguidores</Text>
-          </View>
-          <View className="flex-row items-center">
-            <Text className="text-foreground font-black text-sm">15</Text>
-            <Text className="text-muted-foreground text-xs ml-1 font-bold uppercase tracking-wider">Grupos</Text>
-          </View>
-        </View>
+        <Text className="text-foreground mt-2 leading-5 text-sm">{(user as any).bio || 'Explorando la red HandyBet. Jugador frecuente en La Imaginaria.'}</Text>
       </View>
     </View>
   );
@@ -271,6 +263,7 @@ export default function FollowDetailScreen() {
 
   return (
     <HubDetailLayout
+      hideHeader
       logoType="default"
       backRoute="/(tabs)/follows"
     >

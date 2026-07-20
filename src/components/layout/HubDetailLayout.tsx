@@ -108,7 +108,7 @@ export default function HubDetailLayout({
         </View>
       )}
 
-      <ScrollView className="flex-1 px-4 pt-6" showsVerticalScrollIndicator={false}>
+      <ScrollView className="flex-1 " showsVerticalScrollIndicator={false}>
         {isLoading ? (
           <View className="flex-1 justify-center items-center py-20">
             <ActivityIndicator size="large" color={colors.secondary} />
