@@ -4,6 +4,22 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/), y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.9.0] - 2026-07-20
+
+### Añadido
+- **Especificación SDD (`creation-hubs-profiles.spec.md`)**: Cobertura arquitectónica completa para flujos de creación de Canales, Grupos con Bots y Perfiles de Miembros.
+- **Componente `InterestChipsSelector.tsx`**: Selector interactivo de etiquetas categorizadas alimentado desde `mockdata/interests.json` con soporte para añadir etiquetas personalizadas.
+- **Rediseño de Creación de Canales (`channels/create.tsx`)**: Portada Hero, selector de visibilidad, interruptor de contenido +18 obligatorio, tarjetas de Audiencia Target (*Apostadores*, *Creadores*, *Noticias*, *Citas*, *Comercio*, *General*) y selector de Chips.
+- **Rediseño de Creación de Grupos (`grupos/create.tsx`)**: Vinculación a canal matriz, selector de tags y módulo de **Bots de Autorespuesta** (*Bot ERP de Ventas*, *Bot de Loterías*, *Asistente IA*, *Bot de Bienvenida*) inicializados como desactivados por defecto (`is_enabled: false`).
+- **Rediseño de Perfil de Miembro (`profile/edit.tsx`)**: Edición de identificador único `@handle`, datos de contacto (Email, WhatsApp, Fecha de Nacimiento con control +18, Dirección física), redes sociales (Instagram, Twitter/X, Telegram) y chips de interés.
+- **Soporte de Tamaño `xl` en `IconButton.tsx`**: Botón visual grande para acciones principales (`px-7 py-3.5`, icono `28px`, texto `text-lg font-black`).
+- **Propiedad `actionButton` en `HubLayout.tsx`**: Ubicación declarativa de botones de creación (`+ Crear Grupo`, `+ Crear Canal`) al lado derecho del buscador principal.
+
+### Cambiado
+- **Navegación en Sidebar (`SidebarPopover.tsx`)**: Se dividió la interacción para que al presionar la fila/texto del ítem se navegue directamente a la vista general ("Ver todos"), mientras que al hacer clic exclusivamente en el chevron (`>`) se despliegue el menú emergente.
+- **Formulario de Canal**: Se eliminó el campo y bloque de "Registro Fiscal / RIF".
+- **Botón de Publicaciones en Miembros**: Al presionar la acción de publicaciones en listas de miembros o contenedores de posts, la app abre directamente la sala de búsqueda `/feed/search?id=`.
+
 ## [1.8.0] - 2026-07-20
 
 ### Añadido

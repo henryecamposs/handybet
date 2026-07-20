@@ -64,6 +64,15 @@ La bandeja de chat (`HandyChat`) fue rediseñada para usar un sistema de pestañ
 ### 3.9 Pestañas en Hubs (Tabs de Navegación Local)
 Los hubs de Canales, Grupos y Seguidos implementan un sistema de pestañas locales con el componente `<TabContainer>` para alternar limpiamente entre contenidos paralelos (ej: Mis Canales vs Canales Sugeridos, o Siguiendo vs Sugeridos, Perfiles de Usuario). De esta manera, se centralizan las acciones de descubrimiento y de consumo directo en un mismo espacio dinámico. El `TabContainer` maneja automáticamente su estado visual de hover, pintando de fondo `bg-background` y texto `text-secondary` la pestaña sobre la que se pasa el mouse.
 
+## 3.10 Componente de Selección de Intereses (`InterestChipsSelector.tsx`)
+Renderiza etiquetas y chips de interés organizados por categorías desde `interests.json`. Permite la selección interactiva de múltiples etiquetas y ofrece un botón dinámico `+ Otro tema/interés personalizado` para crear etiquetas al vuelo.
+
+## 3.11 Botonera de Acciones en Buscador (`HubLayout.tsx`)
+- **Extensión de `IconButton`**: Soporta el tamaño `size="xl"` (`px-7 py-3.5`, icono `28px`, texto `text-lg font-black`).
+- **Acciones junto a la Barra de Búsqueda**: La propiedad `actionButton` en `HubLayout` coloca botones destacados (como `+ Crear Grupo` o `+ Crear Canal`) al lado derecho de la barra de búsqueda en lugar de saturar las pestañas secundarias.
+
+---
+
 ## 4. Estándares de Color
 - **`--muted`**: Estandarizado para coincidir cromáticamente con el `--primary` (0.657 0.229 29.729 en OKLCH). Las clases `bg-muted` funcionarán visualmente como un tono primario pero se usan para fondos atenuados o estados deshabilitados.
 - **`--muted-foreground`**: Configurado a la mitad de su luminosidad original (50% menos brillo) para suavizar contrastes (ej. textos inactivos o descripciones secundarias).

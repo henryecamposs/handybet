@@ -11,6 +11,14 @@ La tienda global Zustand de la aplicación centraliza estados de la interfaz y a
 - Resuelve problemas nativos del `expo-router` donde `router.back()` pierde contexto direccional.
 - Se gestiona exclusivamente a través del hook `useAppNavigation` que proporciona `navigateTo`, `goBack` y `replaceRoute`.
 
+### 1.2 Custom Hook de Utilidades de Hub (`src/hooks/useHubUtilities.ts`)
+- Centraliza manejadores globales para botones de interacciones comunes (Canal, Grupo, Miembro, Usuario):
+  - `handleChat(id, type)`: Dirige a la conversación directa.
+  - `handleFollowToggle(isFollowing, type, onToggle)`: Ejecuta el cambio de seguimiento y emite un toast global.
+  - `handleSaveToggle(isSaved, type, entityName, onToggle)`: Alterna guardados (bookmarks) con feedback visual.
+  - `handleViewPosts(id, type)`: Dirige al muro filtrado `/feed/search?id=`.
+  - `handleViewProfile(id, type)`: Navega a la vista de perfil o detalle correspondiente.
+
 ---
 
 ## 2. Estado del Servidor con React Query (`src/hooks/useHandyBetQueries.ts`)

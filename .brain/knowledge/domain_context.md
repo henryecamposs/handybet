@@ -60,3 +60,27 @@ El ecosistema opera sobre un esquema físico robusto de base de datos donde la s
 - **Saldos Referenciales:** Las billeteras (wallets) de la aplicación son entornos **virtuales**. Los saldos mostrados son **únicamente referenciales** y funcionan como un administrador contable de operaciones (compras, apuestas, premios).
 - **Sincronización:** Para conocer un comportamiento real del saldo, el usuario debe sincronizar siempre con el grupo al que realiza los depósitos, interactuando con el administrador (ej. mediante comandos sociales como `@pagar`, `@cobrar`, `@saldo`).
 - **Cláusula de Exención de Responsabilidad:** La aplicación no es responsable de las operaciones financieras, depósitos ni de las tasas de conversión en ningún tipo de moneda. Toda transacción y resguardo de fondos recae bajo la responsabilidad de la agencia, taquilla o grupo administrativo.
+
+---
+
+## 8. Canales Oficiales, Audiencias y Restricción de Edad (+18)
+- **Audiencia Objetivo (Targeting):** Al crear un canal oficial, los consorcios seleccionan la audiencia objetivo (*Apostadores & Parley*, *Creadores & Media*, *Noticias & Actualidad*, *Citas & Entretenimiento*, *Comercio & Ventas*, *Público General*).
+- **Control +18 (`is_18_plus`):** Interruptor de seguridad para canales con contenido sensible, juegos de azar o dinero real, restringiendo el acceso a mayores de 18 años.
+
+---
+
+## 9. Grupos y Bots de Autorespuesta
+- **Integración de Bots de Autorespuesta (`configured_bots`):** Los administradores pueden integrar bots automatizados que interactúan en el chat del grupo:
+  1. 🤖 *Bot ERP de Ventas*: Cotizaciones e inventario de productos.
+  2. 🎲 *Bot de Loterías*: Verificación automática de billetes y sorteos.
+  3. 💡 *Asistente IA*: Respuestas automatizadas a preguntas frecuentes.
+  4. 📜 *Bot de Bienvenida*: Mensajes de normas e intenciones.
+- **Desactivación por Defecto:** Todos los bots inician desactivados (`is_enabled: false`) al registrar un nuevo grupo para dar control total al creador.
+
+---
+
+## 10. Perfil de Miembro Extendidos e Intereses en Chips
+- **Identificador Único (`@handle`):** Formato estricto `@username`.
+- **Datos de Contacto:** Email, WhatsApp/Teléfono directo, Dirección física y Fecha de Nacimiento (con control estricto de mayoría de edad).
+- **Redes Sociales:** Enlaces integrados de Instagram, Twitter/X y Telegram.
+- **Chips de Intereses (`InterestChipsSelector`):** Selección múltiple de intereses dinámicos por categorías desde `interests.json` con opción de añadir etiquetas personalizadas.
