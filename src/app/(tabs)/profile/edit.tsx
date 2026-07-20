@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, TextInput, Image, Switch, Modal, ScrollView, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Camera, Save, Lock, X, Check, ArrowLeft } from 'lucide-react-native';
+import { Camera, Save, Lock, X, Check, ArrowLeft, AtSign, Globe, Phone, MapPin, Share2, Send } from 'lucide-react-native';
 import { useThemeColors } from '@/hooks/useThemeColors';
 import HubDetailLayout from '@/components/layout/HubDetailLayout';
 import { handyBetUsers } from '../../../mockdata/handyBetMock';
+import InterestChipsSelector from '@/components/ui/InterestChipsSelector';
 
 const AVAILABLE_CATEGORIES = [
   'Deportes ⚽',
@@ -24,15 +25,22 @@ export default function EditProfileScreen() {
 
   // Estados locales del formulario
   const [name, setName] = useState(currentUser.name);
+  const [username, setUsername] = useState(currentUser.username || 'joseperez');
   const [bio, setBio] = useState(currentUser.bio || '');
   const [email, setEmail] = useState(currentUser.email || '');
   const [whatsapp, setWhatsapp] = useState(currentUser.whatsapp || '');
   const [birthDate, setBirthDate] = useState(currentUser.birthDate || '');
+  const [address, setAddress] = useState(currentUser.location?.state || 'Av. Principal, Edif. Handy, Piso 2');
   const [country, setCountry] = useState(currentUser.location?.country || '');
   const [stateName, setStateName] = useState(currentUser.location?.state || '');
 
+  // Redes Sociales
+  const [instagram, setInstagram] = useState('joseperez_official');
+  const [twitter, setTwitter] = useState('joseperez_bets');
+  const [telegram, setTelegram] = useState('t.me/joseperez');
+
   const [favoriteCategories, setFavoriteCategories] = useState<string[]>(
-    currentUser.preferences?.favoriteCategories || []
+    currentUser.preferences?.favoriteCategories || ['Pronósticos', 'Apuestas Deportivas', 'Loterías']
   );
   const [receiveNewsletter, setReceiveNewsletter] = useState(
     currentUser.preferences?.receiveNewsletter ?? true
@@ -176,17 +184,18 @@ export default function EditProfileScreen() {
             </View>
 
             <View>
-              <Text className="text-foreground font-bold text-xs uppercase mb-2 tracking-wider">Nombre de Usuario (Username)</Text>
-              <View className="relative flex justify-center items-center">
+              <Text className="text-foreground font-bold text-xs uppercase mb-2 tracking-wider">Identificador en la Red (@Handle)</Text>
+              <View className="relative flex-row items-center bg-background text-foreground border border-border rounded-xl px-3.5">
+                <AtSign size={16} color={colors.primary} className="mr-2" />
                 <TextInput
-                  value={currentUser.username}
+                  value={username}
+                  onChangeText={(val) => setUsername(val.toLowerCase().replace(/[^a-z0-9_]/g, ''))}
+                  placeholder="joseperez"
                   placeholderTextColor={colors.mutedForeground}
-                  editable={false}
-                  className="bg-background/30 text-muted-foreground p-3.5  border border-border font-semibold text-sm w-full pr-12"
+                  className="flex-1 text-foreground py-3.5 font-bold text-sm"
                 />
-                <Lock size={16} color={colors.mutedForeground} className="absolute right-4" />
               </View>
-              <Text className="text-muted-foreground text-[10px] mt-1 font-medium">El nombre de usuario no puede ser modificado.</Text>
+              <Text className="text-muted-foreground text-[10px] mt-1 font-medium">Tu handle público en la red será @{username || 'usuario'}.</Text>
             </View>
 
             <View>
@@ -261,6 +270,20 @@ export default function EditProfileScreen() {
               )}
             </View>
 
+            <View>
+              <Text className="text-foreground font-bold text-xs uppercase mb-2 tracking-wider">Dirección Física / Habitación</Text>
+              <View className="flex-row items-center bg-background border border-border rounded-xl px-3.5">
+                <MapPin size={16} color={colors.mutedForeground} className="mr-2" />
+                <TextInput
+                  value={address}
+                  onChangeText={setAddress}
+                  placeholder="Av. Francisco de Miranda, Edf. Galipán"
+                  placeholderTextColor={colors.mutedForeground}
+                  className="flex-1 text-foreground py-3.5 font-semibold text-sm"
+                />
+              </View>
+            </View>
+
             <View className="flex-row gap-4">
               <View className="flex-1">
                 <Text className="text-foreground font-bold text-xs uppercase mb-2 tracking-wider">País</Text>
@@ -269,7 +292,7 @@ export default function EditProfileScreen() {
                   onChangeText={setCountry}
                   placeholder="Venezuela"
                   placeholderTextColor={colors.mutedForeground}
-                  className="bg-background/80 text-foreground p-3.5  border border-border font-semibold text-sm"
+                  className="bg-background/80 text-foreground p-3.5 border border-border font-semibold text-sm rounded-xl"
                 />
               </View>
               <View className="flex-1">
@@ -279,34 +302,57 @@ export default function EditProfileScreen() {
                   onChangeText={setStateName}
                   placeholder="Miranda"
                   placeholderTextColor={colors.mutedForeground}
-                  className="bg-background/80 text-foreground p-3.5  border border-border font-semibold text-sm"
+                  className="bg-background/80 text-foreground p-3.5 border border-border font-semibold text-sm rounded-xl"
+                />
+              </View>
+            </View>
+
+            {/* Redes Sociales */}
+            <Text className="text-foreground font-bold text-xs uppercase mb-2 mt-2 tracking-wider text-primary">Redes Sociales y Enlaces</Text>
+            <View className="gap-3">
+              <View className="flex-row items-center bg-background border border-border rounded-xl px-3.5">
+                <Globe size={16} color={colors.primary} className="mr-2" />
+                <TextInput
+                  value={instagram}
+                  onChangeText={setInstagram}
+                  placeholder="usuario_instagram"
+                  placeholderTextColor={colors.mutedForeground}
+                  className="flex-1 text-foreground py-3 font-semibold text-xs"
+                />
+              </View>
+              <View className="flex-row items-center bg-background border border-border rounded-xl px-3.5">
+                <Share2 size={16} color={colors.primary} className="mr-2" />
+                <TextInput
+                  value={twitter}
+                  onChangeText={setTwitter}
+                  placeholder="usuario_twitter"
+                  placeholderTextColor={colors.mutedForeground}
+                  className="flex-1 text-foreground py-3 font-semibold text-xs"
+                />
+              </View>
+              <View className="flex-row items-center bg-background border border-border rounded-xl px-3.5">
+                <Send size={16} color={colors.primary} className="mr-2" />
+                <TextInput
+                  value={telegram}
+                  onChangeText={setTelegram}
+                  placeholder="t.me/usuario_telegram"
+                  placeholderTextColor={colors.mutedForeground}
+                  className="flex-1 text-foreground py-3 font-semibold text-xs"
                 />
               </View>
             </View>
           </View>
         </View>
 
-        {/* Sección 3: Categorías de Interés */}
-        <View className="bg-background/80  p-5 border border-border mb-6">
-          <Text className="text-foreground font-black text-sm uppercase tracking-wider mb-2 border-b border-border  pb-2">Preferencias Deportivas y de Juego</Text>
-          <Text className="text-muted-foreground text-xs font-medium mb-4">Selecciona tus áreas de interés favoritas para personalizar tu feed:</Text>
-
-          <View className="flex-row flex-wrap gap-2">
-            {AVAILABLE_CATEGORIES.map((category) => {
-              const isSelected = favoriteCategories.includes(category);
-              return (
-                <TouchableOpacity
-                  key={category}
-                  onPress={() => toggleCategory(category)}
-                  className={`px-4 py-2.5 rounded-full border transition-colors ${isSelected ? 'bg-secondary/20 border-secondary' : 'bg-background/80 border-border/50'}`}
-                >
-                  <Text className={`font-bold text-xs ${isSelected ? 'text-primary' : 'text-foreground'}`}>
-                    {category}
-                  </Text>
-                </TouchableOpacity>
-              );
-            })}
-          </View>
+        {/* Sección 3: Categorías e Intereses Chips */}
+        <View className="bg-background/80 p-5 border border-border mb-6 rounded-2xl">
+          <Text className="text-foreground font-black text-sm uppercase tracking-wider mb-3 border-b border-border pb-2">Intereses & Etiquetas del Perfil</Text>
+          <InterestChipsSelector
+            selectedInterests={favoriteCategories}
+            onChange={setFavoriteCategories}
+            label="Tus Temas de Preferencia"
+            allowCustom={true}
+          />
         </View>
 
         {/* Sección 4: Notificaciones y Suscripciones */}

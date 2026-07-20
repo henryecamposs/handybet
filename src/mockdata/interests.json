@@ -1,0 +1,35 @@
+{
+  "categories": [
+    {
+      "id": "apuestas_sorteos",
+      "name": "Apuestas & Sorteos",
+      "icon": "Dice5",
+      "tags": ["Pronósticos", "Apuestas Deportivas", "Loterías", "Parley", "Casino", "Hípica"]
+    },
+    {
+      "id": "comercio_ventas",
+      "name": "Comercio & Ventas",
+      "icon": "ShoppingBag",
+      "tags": ["Ventas Directas", "Ofertas", "Crypto Trading", "Servicios"]
+    },
+    {
+      "id": "noticias_actualidad",
+      "name": "Noticias & Actualidad",
+      "icon": "Newspaper",
+      "tags": ["Noticias Locales", "Internacional", "Deportes", "Economía", "Tecnología"]
+    },
+    {
+      "id": "entretenimiento_social",
+      "name": "Entretenimiento & Social",
+      "icon": "Sparkles",
+      "tags": ["Memes", "Música", "Videojuegos", "Películas & Series", "Citas & Amor"]
+    },
+    {
+      "id": "ia_bots",
+      "name": "IA & Automatización",
+      "icon": "Bot",
+      "tags": ["Consultas IA", "Bot de Ventas", "Bot de Loterías", "Auto-Respuestas"]
+    }
+  ],
+  "default_custom_allowed": true
+}

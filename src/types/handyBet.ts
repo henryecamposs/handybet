@@ -12,12 +12,30 @@ export interface Profile {
   role: HandyBetRole;
   interests: string[]; // ['apuestas', 'pronosticos', 'publicidad', 'compartir_media']
   created_at: string;
+  email?: string;
+  birth_date?: string;
+  phone_whatsapp?: string;
+  address?: string;
+  social_links?: {
+    instagram?: string;
+    twitter?: string;
+    telegram?: string;
+  };
+  preferred_group_ids?: string[];
 }
 
 export interface Channel {
   id: string;
   name: string;
   owner_id: string;
+  description?: string;
+  visibility?: 'public' | 'private';
+  is_18_plus?: boolean;
+  target_audience?: TargetAudience[];
+  interests?: string[];
+  avatar_url?: string;
+  cover_url?: string;
+  plans?: any[];
   created_at: string;
 }
 
@@ -28,6 +46,13 @@ export interface Group {
   name: string;
   type: HandyBetGroupType;
   config: Record<string, any>;
+  description?: string;
+  tags?: string[];
+  configured_bots?: BotConfig[];
+  settings?: {
+    wallet_type: 'mixed' | 'direct_pay' | 'credit';
+    allows_recharge: boolean;
+  };
   members?: string[];
   created_at: string;
 }
@@ -222,5 +247,64 @@ export interface FollowerCircleMembership {
   follower_id: string;
   owner_id: string;
   created_at: string;
+}
+
+export type TargetAudience = 
+  | 'apostadores' 
+  | 'compartidores_contenido' 
+  | 'noticias' 
+  | 'general' 
+  | 'amor_citas' 
+  | 'tecnologia_ventas';
+
+export type BotType = 'bot_sales' | 'bot_lottery' | 'bot_ai_assistant' | 'bot_welcome';
+
+export interface BotConfig {
+  id: string;
+  type: BotType;
+  name: string;
+  description: string;
+  is_enabled: boolean;
+  settings?: Record<string, any>;
+}
+
+export interface ChannelCreationPayload {
+  name: string;
+  description: string;
+  visibility: 'public' | 'private';
+  is_18_plus: boolean;
+  target_audience: TargetAudience[];
+  interests: string[];
+  avatar_url?: string;
+  cover_url?: string;
+}
+
+export interface GroupCreationPayload {
+  channel_id?: string | null;
+  name: string;
+  description: string;
+  type: HandyBetGroupType;
+  tags: string[];
+  configured_bots: BotConfig[];
+  settings: {
+    wallet_type: 'mixed' | 'direct_pay' | 'credit';
+    allows_recharge: boolean;
+  };
+}
+
+export interface MemberProfilePayload {
+  username: string;
+  full_name: string;
+  email: string;
+  birth_date: string;
+  phone_whatsapp?: string;
+  address?: string;
+  interests: string[];
+  social_links?: {
+    instagram?: string;
+    twitter?: string;
+    telegram?: string;
+  };
+  preferred_group_ids?: string[];
 }
 
