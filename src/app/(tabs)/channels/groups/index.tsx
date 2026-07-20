@@ -259,7 +259,7 @@ export default function GrupoDetailScreen() {
                 <Text className="text-foreground font-bold text-base">Creación</Text>
               </View>
               <Text className="text-foreground/80 text-sm">
-                Creado el {new Date(group?.created_at || Date.now()).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}
+                Creado el {new Date(group?.created_at || '2026-07-20T00:00:00Z').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}
               </Text>
             </View>
 

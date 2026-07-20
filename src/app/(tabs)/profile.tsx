@@ -20,7 +20,6 @@ export default function ProfileScreen() {
 
   async function fetchProfileData() {
     try {
-      setIsLoading(true);
       if (!mockSession) return;
 
       // 1. Fetch Profile
@@ -158,7 +157,7 @@ export default function ProfileScreen() {
 
             {profile?.bio ? (
               <Text className="text-foreground text-xs leading-relaxed font-medium bg-background/50 p-3 rounded-xl border border-border/50">
-                "{profile.bio}"
+                &quot;{profile.bio}&quot;
               </Text>
             ) : null}
 

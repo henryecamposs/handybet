@@ -4,6 +4,11 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/), y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.10.0] - 2026-07-20
+
+### Añadido
+- **Cerebro Portátil**: Integración de especificaciones bajo el estándar Johnny.Decimal para documentar Core P2P, Hubs de Creación, Detalles de Posts y Rediseño de Perfiles.
+
 ## [1.9.0] - 2026-07-20
 
 ### Añadido
