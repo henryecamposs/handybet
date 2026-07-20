@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, ActivityIndicator, Image } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { localDB } from '../../../lib/localDB';
 import { Channel, Group, VisibilityLevel } from '../../../types/handyBet';
@@ -178,7 +178,8 @@ export default function ChannelDetailScreen() {
     <View className="mb-6">
       {/* Cover Portada */}
       <HubCover 
-        variant="primary" 
+        variant={channel.cover ? "image" : "primary"}
+        imageUrl={channel.cover}
         containerClasses="bg-gradient-to-t from-background/80 to-white bg-background/80" 
       />
 
@@ -186,9 +187,13 @@ export default function ChannelDetailScreen() {
       <HubDetailsUtilities
         avatarNode={
           <View className="p-1 bg-background rounded-full border border-border-muted">
-            <View className="w-28 h-28 rounded-full bg-background/80 items-center justify-center border border-border">
-              <Megaphone size={48} color={colors.primary} />
-            </View>
+            {channel.avatar ? (
+              <Image source={{ uri: channel.avatar }} className="w-28 h-28 rounded-full border border-border bg-background" />
+            ) : (
+              <View className="w-28 h-28 rounded-full bg-background/80 items-center justify-center border border-border">
+                <Megaphone size={48} color={colors.primary} />
+              </View>
+            )}
           </View>
         }
         title={channel.name}

@@ -79,7 +79,7 @@ export default function ChannelsScreen() {
         key={channel.id}
         title={channel.name}
         subtitle={`${Math.floor(Math.random() * 10) + 1} grupos • ${Math.floor(Math.random() * 1000) + 100} miembros totales`}
-        subtitleVariant="secondary"
+        subtitleVariant="muted"
         leftElement={
           <View className="w-10 h-10 rounded-full bg-background/80 items-center justify-center border border-border">
             <Megaphone size={18} color={colors.primary} />
@@ -150,9 +150,9 @@ export default function ChannelsScreen() {
       onSearchChange={setSearchQuery}
       showBack={true}
       heroBanner={
-        <HubCover 
-          variant="primary" 
-          containerClasses="h-32 rounded-none mb-2" 
+        <HubCover
+          variant="primary"
+          containerClasses="h-32 rounded-none mb-2"
         />
       }
       isLoading={isLoading}
