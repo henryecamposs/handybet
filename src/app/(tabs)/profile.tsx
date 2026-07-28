@@ -1,35 +1,48 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, ActivityIndicator, Image } from 'react-native';
+import { View, Text, TouchableOpacity, ActivityIndicator, Image } from 'react-native';
 import { localDB } from '../../lib/localDB';
 import { useRouter } from 'expo-router';
 import { Wallet, Transaction } from '../../types/handyBet';
 import { useHandyBetStore } from '../../store/useHandyBetStore';
 import { useThemeColors } from '../../hooks/useThemeColors';
-import HubCover from '../../components/layout/hub/HubCover';
-import IconButton from '../../components/ui/IconButton';
-import { Edit3, UserPlus, LogOut, Mail, Phone, MapPin, Calendar, Globe, Share2, Send, Sparkles, Shield, Wallet as WalletIcon, ArrowUpRight, ArrowDownLeft, Award, CheckCircle2 } from 'lucide-react-native';
+import HubDetailLayout from '@/components/layout/HubDetailLayout';
+import HubDetailsUtilities from '@/components/layout/hub/HubDetailsUtilities';
+import HubCover from '@/components/layout/hub/HubCover';
+import { TabContainer, SeccionLista } from '@/components/layout/hub';
+import PostContainer from '@/components/layout/hub/PostContainer';
+import CreatePostWidget from '@/components/feed/CreatePostWidget';
+import EmptyState from '@/components/ui/EmptyState';
+import IconButton from '@/components/ui/IconButton';
+import { useHubUtilities } from '@/hooks/useHubUtilities';
+import { 
+  Edit3, UserPlus, LogOut, Mail, Phone, Globe, Share2, Send, 
+  Sparkles, Wallet as WalletIcon, ArrowUpRight, ArrowDownLeft, 
+  Award, Info, User, ImageIcon, Users, LayoutList 
+} from 'lucide-react-native';
 
 export default function ProfileScreen() {
   const { mockSession, setMockSession } = useHandyBetStore();
   const [profile, setProfile] = useState<any>(null);
   const router = useRouter();
   const colors = useThemeColors();
+  const { handleBack } = useHubUtilities();
   const [wallets, setWallets] = useState<(Wallet & { groupName?: string })[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [userPosts, setUserPosts] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   async function fetchProfileData() {
     try {
-      if (!mockSession) return;
+      const currentSession = mockSession || { id: 'usr_henry', name: 'Henry Campos', role: 'admin', avatar: 'https://i.pravatar.cc/150' };
 
       // 1. Fetch Profile
-      const profileData = await localDB.users.getById(mockSession.id);
-      setProfile(profileData || {
-        id: mockSession.id,
-        username: mockSession.name.toLowerCase().replace(' ', '_'),
-        full_name: mockSession.name,
-        role: mockSession.role || 'player',
-        avatar_url: mockSession.avatar,
+      const profileData = await localDB.users.getById(currentSession.id);
+      const userProf = profileData || {
+        id: currentSession.id,
+        username: currentSession.name.toLowerCase().replace(' ', '_'),
+        full_name: currentSession.name,
+        role: currentSession.role || 'player',
+        avatar_url: currentSession.avatar,
         email: 'usuario@handybet.com',
         birth_date: '1995-08-20',
         bio: 'Apasionado por los pronósticos deportivos y los sorteos en HandyBet.',
@@ -41,14 +54,20 @@ export default function ProfileScreen() {
           twitter: 'usuario_bets',
           telegram: 't.me/usuario_hb'
         }
-      });
+      };
+      setProfile(userProf);
 
-      // 2. Fetch Wallets (simuladas por grupo)
+      // 2. Fetch Posts
+      const allPosts = await localDB.posts.getAll();
+      const filteredPosts = allPosts.filter((p: any) => p.author?.username === userProf.username || p.author_id === currentSession.id);
+      setUserPosts(filteredPosts);
+
+      // 3. Fetch Wallets (simuladas por grupo)
       const allGroups = await localDB.groups.getAll();
-      const userGroups = allGroups.filter((g: any) => g.members?.includes(mockSession.id));
+      const userGroups = allGroups.filter((g: any) => g.members?.includes(currentSession.id));
       const simulatedWallets = userGroups.map((g: any) => ({
         id: `wallet_${g.id}`,
-        user_id: mockSession.id,
+        user_id: currentSession.id,
         group_id: g.id,
         groupName: g.name,
         balance: (profileData?.wallet_balance || 150.0) / (userGroups.length || 1),
@@ -56,7 +75,7 @@ export default function ProfileScreen() {
       }));
       setWallets(simulatedWallets);
 
-      // 3. Fetch Transactions (simuladas)
+      // 4. Fetch Transactions (simuladas)
       const simulatedTx = [
         { id: 'tx_1', amount: 50.00, type: 'deposito', status: 'aprobado', reference_code: 'REF-827391', created_at: new Date(Date.now() - 1000 * 60 * 60 * 2).toISOString() },
         { id: 'tx_2', amount: 15.00, type: 'debito_apuesta', status: 'aprobado', reference_code: 'REF-918237', created_at: new Date(Date.now() - 1000 * 60 * 60 * 5).toISOString() },
@@ -79,88 +98,140 @@ export default function ProfileScreen() {
     setMockSession(null);
   }
 
-  if (isLoading) {
-    return (
-      <View className="flex-1 justify-center items-center bg-background py-20">
-        <ActivityIndicator size="large" color={colors.primary} />
+  const heroBanner = (
+    <View className="mb-6">
+      <HubCover variant="primary" containerClasses="h-36" />
+
+      <HubDetailsUtilities
+        avatarNode={
+          <Image
+            source={{ uri: profile?.avatar_url || mockSession?.avatar || 'https://i.pravatar.cc/150' }}
+            className="w-28 h-28 rounded-full bg-background/80"
+          />
+        }
+        title={profile?.full_name || mockSession?.name || 'Nombre del Usuario'}
+        subtitle={`@${profile?.username || 'usuario'}`}
+        stats={[
+          { value: 120, label: 'Seguidores' },
+          { value: wallets.length || 15, label: 'Grupos' }
+        ]}
+        onBack={() => handleBack('/(tabs)/feed')}
+        colors={colors}
+      >
+        <IconButton
+          icon={Edit3}
+          label="Editar"
+          onPress={() => router.push('/(tabs)/profile/edit' as any)}
+          variant="primary"
+          rounded="full"
+          hasBorder={true}
+          size="sm"
+        />
+        <IconButton
+          icon={UserPlus}
+          onPress={() => router.push('/(tabs)/profile/create' as any)}
+          variant="ghost"
+          rounded="full"
+          hasBorder={true}
+          size="sm"
+        />
+        <IconButton
+          icon={LogOut}
+          onPress={handleLogout}
+          variant="ghost"
+          rounded="full"
+          hasBorder={true}
+          size="sm"
+        />
+      </HubDetailsUtilities>
+
+      <View className="px-4">
+        <Text className="text-foreground mt-2 leading-5 text-sm">
+          {profile?.bio || 'Explorando la red HandyBet. Jugador frecuente en La Imaginaria.'}
+        </Text>
       </View>
-    );
-  }
+    </View>
+  );
 
-  return (
-    <ScrollView className="flex-1 bg-background px-4 pt-4 pb-16" showsVerticalScrollIndicator={false}>
-      
-      {/* 1. CARD HERO PRINCIPAL (Portada, Avatar, Nombre y Acciones) */}
-      <View className="bg-card border border-border rounded-2xl overflow-hidden mb-6 shadow-xl">
-        <HubCover variant="primary" containerClasses="h-36" />
-        
-        <View className="p-6 pt-0">
-          <View className="flex-row justify-between items-end -mt-14 mb-4">
-            <View className="p-1.5 bg-card rounded-full border-2 border-primary shadow-lg">
-              <Image
-                source={{ uri: profile?.avatar_url || mockSession?.avatar || 'https://i.pravatar.cc/150' }}
-                className="w-28 h-28 rounded-full bg-background"
-              />
+  const tabs = [
+    {
+      id: 'posts',
+      label: 'Publicaciones',
+      content: (
+        <View className="flex-col lg:flex-row gap-6 mt-4">
+          {/* Columna Izquierda: Información de Miembro / Usuario */}
+          <View className="w-full lg:w-1/3 gap-4">
+            <View className="bg-card border border-border rounded-xl p-4">
+              <View className="flex-row items-center gap-2 mb-2">
+                <Info size={18} color={colors.primary} />
+                <Text className="text-foreground font-bold text-base">Biografía</Text>
+              </View>
+              <Text className="text-foreground/80 text-sm leading-5">
+                {profile?.bio || 'Apasionado por los pronósticos deportivos y los sorteos en HandyBet.'}
+              </Text>
             </View>
 
-            {/* Acciones Principales */}
-            <View className="flex-row flex-wrap gap-2 pb-1">
-              <TouchableOpacity
-                onPress={() => router.push('/(tabs)/profile/edit' as any)}
-                className="flex-row items-center gap-1.5 bg-primary px-4 py-2.5 rounded-xl border border-primary"
-              >
-                <Edit3 size={16} color="#000" />
-                <Text className="text-black font-black text-xs uppercase tracking-wider">Editar</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                onPress={() => router.push('/(tabs)/profile/create' as any)}
-                className="flex-row items-center gap-1.5 bg-card border border-primary px-3.5 py-2.5 rounded-xl"
-              >
-                <UserPlus size={16} color={colors.primary} />
-                <Text className="text-primary font-bold text-xs">Crear Usuario</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                onPress={handleLogout}
-                className="flex-row items-center gap-1 bg-background/80 border border-border px-3 py-2.5 rounded-xl"
-              >
-                <LogOut size={16} color={colors.destructive} />
-                <Text className="text-destructive font-bold text-xs">Salir</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          {/* Información Básica Header */}
-          <View className="mt-1">
-            <View className="flex-row items-center gap-2">
-              <Text className="text-2xl font-black text-foreground">{profile?.full_name || mockSession?.name || 'Nombre del Usuario'}</Text>
-              <View className="bg-primary/20 px-2.5 py-0.5 rounded-md border border-primary/40">
-                <Text className="text-primary text-[10px] uppercase font-bold tracking-wider">
-                  {profile?.role === 'admin' ? 'Administrador' : profile?.role === 'cashier' ? 'Cajero Oficial' : 'Jugador VIP'}
-                </Text>
+            <View className="bg-card border border-border rounded-xl p-4">
+              <View className="flex-row items-center gap-2 mb-3">
+                <User size={18} color={colors.primary} />
+                <Text className="text-foreground font-bold text-base">Datos de Contacto</Text>
+              </View>
+              <View className="gap-2">
+                <View className="flex-row justify-between py-1.5 border-b border-border/50">
+                  <Text className="text-foreground/70 text-xs">Email</Text>
+                  <Text className="text-foreground font-medium text-xs">{profile?.email || 'usuario@handybet.com'}</Text>
+                </View>
+                <View className="flex-row justify-between py-1.5 border-b border-border/50">
+                  <Text className="text-foreground/70 text-xs">WhatsApp</Text>
+                  <Text className="text-foreground font-medium text-xs">{profile?.phone_whatsapp || '+58 412 1234567'}</Text>
+                </View>
+                <View className="flex-row justify-between py-1.5">
+                  <Text className="text-foreground/70 text-xs">Rol</Text>
+                  <Text className="text-primary font-bold text-xs uppercase">
+                    {profile?.role === 'admin' ? 'Administrador' : 'Jugador VIP'}
+                  </Text>
+                </View>
               </View>
             </View>
-            <Text className="text-primary font-bold text-sm mt-0.5">@{profile?.username || 'usuario'}</Text>
+
+            <View className="bg-card border border-border rounded-xl p-4">
+              <Text className="text-foreground font-bold text-sm mb-3">Intereses y Preferencias</Text>
+              <View className="flex-row flex-wrap gap-2">
+                {(profile?.interests || ['Apuestas Deportivas', 'Pronósticos', 'Loterías']).map((tag: string) => (
+                  <View key={tag} className="px-3 py-1 rounded-full bg-primary/20 border border-primary/40">
+                    <Text className="text-primary text-xs font-bold">✓ {tag}</Text>
+                  </View>
+                ))}
+              </View>
+            </View>
+          </View>
+
+          {/* Columna Derecha: Widget de Creación y Muro de Publicaciones */}
+          <View className="w-full lg:w-2/3">
+            <View className="mb-4">
+              <CreatePostWidget onPublish={async () => true} />
+            </View>
+            {userPosts.length > 0 ? (
+              <PostContainer
+                title="Mis Publicaciones"
+                posts={userPosts}
+              />
+            ) : (
+              <EmptyState title="No has realizado publicaciones todavía." icon={LayoutList} variant="dashed" />
+            )}
           </View>
         </View>
-      </View>
-
-      <View className="flex-col lg:flex-row gap-6 mb-12">
-        {/* Columna Izquierda: Información Personal, Contacto, Redes e Intereses */}
-        <View className="w-full lg:w-1/2 gap-6">
-
-          {/* CARD 2: Información Personal & Contacto */}
-          <View className="bg-card border border-border p-6 rounded-2xl gap-4">
+      )
+    },
+    {
+      id: 'info',
+      label: 'Información',
+      content: (
+        <View className="mt-4 gap-4">
+          <View className="bg-card border border-border rounded-2xl p-6 gap-4">
             <Text className="text-xs font-bold text-primary uppercase tracking-widest border-b border-border pb-2">
               Información Personal & Contacto
             </Text>
-
-            {profile?.bio ? (
-              <Text className="text-foreground text-xs leading-relaxed font-medium bg-background/50 p-3 rounded-xl border border-border/50">
-                &quot;{profile.bio}&quot;
-              </Text>
-            ) : null}
 
             <View className="gap-3">
               <View className="flex-row items-center gap-3 bg-background/60 p-3 rounded-xl border border-border/60">
@@ -178,31 +249,9 @@ export default function ProfileScreen() {
                   <Text className="text-foreground font-semibold text-xs">{profile?.phone_whatsapp || '+58 412 1234567'}</Text>
                 </View>
               </View>
-
-              <View className="flex-row items-center justify-between bg-background/60 p-3 rounded-xl border border-border/60">
-                <View className="flex-row items-center gap-3">
-                  <Calendar size={18} color={colors.primary} />
-                  <View>
-                    <Text className="text-[10px] text-muted-foreground font-bold uppercase">Fecha de Nacimiento</Text>
-                    <Text className="text-foreground font-semibold text-xs">{profile?.birth_date || '1995-08-20'}</Text>
-                  </View>
-                </View>
-                <View className="bg-emerald-500/20 px-2 py-0.5 rounded border border-emerald-500/40">
-                  <Text className="text-emerald-400 text-[10px] font-bold">+18 Años</Text>
-                </View>
-              </View>
-
-              <View className="flex-row items-center gap-3 bg-background/60 p-3 rounded-xl border border-border/60">
-                <MapPin size={18} color={colors.primary} />
-                <View>
-                  <Text className="text-[10px] text-muted-foreground font-bold uppercase">Ubicación / Dirección</Text>
-                  <Text className="text-foreground font-semibold text-xs">{profile?.address || 'Caracas, Venezuela'}</Text>
-                </View>
-              </View>
             </View>
           </View>
 
-          {/* CARD 3: Redes Sociales */}
           <View className="bg-card border border-border p-6 rounded-2xl gap-3">
             <Text className="text-xs font-bold text-primary uppercase tracking-widest border-b border-border pb-2">
               Redes Sociales & Enlaces
@@ -230,30 +279,14 @@ export default function ProfileScreen() {
               </TouchableOpacity>
             </View>
           </View>
-
-          {/* CARD 4: Intereses & Chips */}
-          <View className="bg-card border border-border p-6 rounded-2xl gap-3">
-            <View className="flex-row items-center gap-2 border-b border-border pb-2">
-              <Sparkles size={16} color={colors.primary} />
-              <Text className="text-xs font-bold text-primary uppercase tracking-widest">
-                Intereses & Etiquetas Preferidas
-              </Text>
-            </View>
-            <View className="flex-row flex-wrap gap-2 pt-2">
-              {(profile?.interests || ['Apuestas Deportivas', 'Pronósticos', 'Loterías']).map((tag: string) => (
-                <View key={tag} className="px-3.5 py-1.5 rounded-full bg-primary/20 border border-primary/40">
-                  <Text className="text-primary text-xs font-bold">✓ {tag}</Text>
-                </View>
-              ))}
-            </View>
-          </View>
-
         </View>
-
-        {/* Columna Derecha: Multi-Wallets & Ledger Contable */}
-        <View className="w-full lg:w-1/2 gap-6">
-
-          {/* CARD 5: Multi-Wallets (Balances por Grupo) */}
+      )
+    },
+    {
+      id: 'wallets',
+      label: 'Wallets & Historial',
+      content: (
+        <View className="mt-4 gap-6">
           <View className="bg-card border border-border p-6 rounded-2xl gap-4">
             <View className="flex-row items-center justify-between border-b border-border pb-2">
               <View className="flex-row items-center gap-2">
@@ -293,7 +326,6 @@ export default function ProfileScreen() {
             )}
           </View>
 
-          {/* CARD 6: Historial Contable (Ledger) */}
           <View className="bg-card border border-border p-6 rounded-2xl gap-4">
             <Text className="text-xs font-bold text-primary uppercase tracking-widest border-b border-border pb-2">
               Historial Contable (Ledger)
@@ -327,9 +359,36 @@ export default function ProfileScreen() {
               })}
             </View>
           </View>
-
         </View>
+      )
+    },
+    {
+      id: 'photos',
+      label: 'Fotos',
+      content: <EmptyState title="No has subido fotografías aún." icon={ImageIcon} variant="dashed" />
+    },
+    {
+      id: 'groups',
+      label: 'Grupos',
+      content: (
+        <View className="mt-4 gap-4">
+          <EmptyState title="Perteneces a las comunidades oficiales de HandyBet." icon={Users} variant="dashed" />
+        </View>
+      )
+    }
+  ];
+
+  return (
+    <HubDetailLayout
+      hideHeader
+      logoType="default"
+      backRoute="/(tabs)/feed"
+      isLoading={isLoading}
+    >
+      {heroBanner}
+      <View className="px-4">
+        <TabContainer tabs={tabs} defaultTabId="posts" />
       </View>
-    </ScrollView>
+    </HubDetailLayout>
   );
 }

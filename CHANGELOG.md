@@ -4,6 +4,38 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/), y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.13.0] - 2026-07-28
+
+### Añadido
+- **Arquitectura de Chat Avanzado y Bots**: Implementación completa de chat P2P y grupal con soporte de Bots transaccionales interactivos y barra de acciones (`BotActionBar`, `InteractiveButtonsGroup`). 
+- **Motores de Bot (`genericBotEngine`, `botFlowEngine`)**: Soporte para nodos conversacionales definidos en JSON con respuestas automáticas y recolección de entradas del usuario.
+- **Especificaciones SDD**: Nuevos documentos arquitectónicos (`advanced-chat-bot-architecture.spec.md`, `generic-json-bot-engine.spec.md`, `hubs-ui-alignment.spec.md`).
+- **Migración de Base de Datos**: Migración SQL maestra (`20260722000000_advanced_chat_and_bot_schema.sql`) que da soporte a las nuevas características de mensajería avanzada.
+- **Inicialización de Skills Locales**: Volcado de un amplio catálogo de skills (`deploy`, `graphify`, `obsidian-docs`, `oxlint`, `polli`, `project-init`, `react-hook-form`, `vite`) al directorio `.agents/skills/`.
+
+### Cambiado
+- **Interfaz y Experiencia de Usuario**: Modificaciones en `HandyBetLayout` y refactorización de `LeftSidebarWidgets` para alinear el diseño de los Hubs.
+
+## [1.12.0] - 2026-07-24
+
+### Añadido
+- **Inicialización de Proyecto con `project-init`**: Bootstrapeo y sincronización inteligente de los 20 skills globales de desarrollo, arquitectura y QA a `.agents/skills/`.
+- **Integración y Sincronización Automática con Obsidian (`obsidian-docs`)**: Configuración de `.obsidian-sync.json` y generación del conjunto completo de 11 notas numeradas (000 a 1000) en la bóveda global (`050 - 📱 handy-app`) y espejo local (`obsidian/`).
+- **Volcado Íntegro de CHANGELOG en Obsidian (Nota 400)**: Sincronización 100% fiel de todo el historial de cambios e hitos técnicos en `400 - 📱 handy-app - Historial de Cambios y Relaciones.md`.
+
+### Auditoría & Plan de Pruebas QA (Matriz de Control de Calidad)
+- 🧪 **Pruebas Unitarias e Integración**:
+  - Verificación de consultas RPC en Supabase (`rpc_place_handybet_bet`, `rpc_record_analytics_session`, `rpc_get_admin_kpis`, `rpc_send_message`, `rpc_toggle_follow`).
+  - Cobertura de métodos de estado global con Zustand y validaciones de formularios cliente con Zod.
+- ⚠️ **Pruebas de Borde & Estrés**:
+  - Resistencia a latencia y fallback offline/mock mode en feeds dinámicos (`feed/index.tsx`, `feed/search.tsx`).
+  - Validación horaria bajo huso horario Venezuela `America/Caracas` (VET UTC-4) para el registro de transacciones y sorteos.
+  - Verificación de desbordamientos UI en dispositivos móviles y renderizado responsive de carruseles multimedia.
+- 🔒 **Pruebas de Seguridad & RBAC**:
+  - Control de acceso estricto al Panel Administrativo (`/admin`) mediante contraseña global (`handybet*2026`).
+  - Sanitización de entradas en búsqueda de feeds y parámetros de filtrado para prevenir inyecciones.
+
+
 ## [1.11.0] - 2026-07-20
 
 ### Añadido

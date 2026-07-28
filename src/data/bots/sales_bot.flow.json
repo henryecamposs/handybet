@@ -1,0 +1,107 @@
+{
+  "bot_id": "sales_bot",
+  "name": "Bot ERP de Ventas y Catálogo",
+  "description": "Bot interactivo guiado por JSON para consulta de productos y compras en línea",
+  "default_command_prefix": "@",
+  "triggers": [
+    { "command": "@start", "target_node_id": "node_welcome" },
+    { "command": "@comprar", "target_node_id": "node_search_product" },
+    { "command": "@precios", "target_node_id": "node_search_product" }
+  ],
+  "nodes": {
+    "node_welcome": {
+      "id": "node_welcome",
+      "type": "question",
+      "message_template": "¡Hola {{user_name}}! 👋 Bienvenido al Bot Oficial de Ventas ERP. ¿Qué te gustaría hacer hoy?",
+      "input_type": "single_select",
+      "variable_name": "opcion_bienvenida",
+      "next_node_id": "node_search_product",
+      "options": [
+        { "label": "🛒 Comprar Producto VIP", "value": "comprar", "target_node_id": "node_search_product" },
+        { "label": "🔍 Consultar Precios", "value": "precios", "target_node_id": "node_search_product" }
+      ]
+    },
+    "node_search_product": {
+      "id": "node_search_product",
+      "type": "question",
+      "message_template": "Escribe el nombre del producto que deseas consultar (ej: 'Diamante', 'VIP', 'Ticket'):",
+      "input_type": "text",
+      "variable_name": "producto_buscado",
+      "next_node_id": "node_fetch_api_products"
+    },
+    "node_fetch_api_products": {
+      "id": "node_fetch_api_products",
+      "type": "api_call",
+      "message_template": "🔍 Buscando productos relacionados con '{{producto_buscado}}'...",
+      "variable_name": "items_encontrados",
+      "api_config": {
+        "url": "https://api.handybet.com/v1/products?search={{producto_buscado}}",
+        "method": "GET",
+        "extract_array_path": "data.products",
+        "label_field": "name_with_price",
+        "value_field": "code",
+        "node_id_on_success": "node_show_product_results",
+        "node_id_on_empty": "node_no_products_found",
+        "node_id_on_error": "node_no_products_found"
+      }
+    },
+    "node_no_products_found": {
+      "id": "node_no_products_found",
+      "type": "question",
+      "message_template": "❌ No se encontraron productos para '{{producto_buscado}}'. ¿Qué deseas hacer?",
+      "input_type": "single_select",
+      "variable_name": "opcion_fallo",
+      "options": [
+        { "label": "🔍 Nueva Búsqueda", "value": "reintentar", "target_node_id": "node_search_product" },
+        { "label": "🏠 Volver al Inicio", "value": "inicio", "target_node_id": "node_welcome" }
+      ]
+    },
+    "node_show_product_results": {
+      "id": "node_show_product_results",
+      "type": "question",
+      "message_template": "Resultados para '{{producto_buscado}}' ({{items_encontrados_count}} encontrante/s). Selecciona un ítem:",
+      "input_type": "single_select",
+      "variable_name": "item_seleccionado",
+      "dynamic_options_source": "items_encontrados",
+      "next_node_id": "node_confirm_product",
+      "options": [
+        { "label": "Item #10 - Pack Diamante (50.00 Bs)", "value": "item_10", "target_node_id": "node_confirm_product" },
+        { "label": "Item #12 - Suscripción VIP Semanal (120.00 Bs)", "value": "item_12", "target_node_id": "node_confirm_product" }
+      ]
+    },
+    "node_confirm_product": {
+      "id": "node_confirm_product",
+      "type": "question",
+      "message_template": "Has seleccionado: *{{item_seleccionado}}*.\n\n¿Deseas proceder con la compra?",
+      "input_type": "single_select",
+      "variable_name": "confirma_compra",
+      "next_node_id": "node_select_payment",
+      "options": [
+        { "label": "✅ Sí, Comprar", "value": "Si", "target_node_id": "node_select_payment" },
+        { "label": "❌ No, Buscar otro", "value": "No", "target_node_id": "node_search_product" }
+      ]
+    },
+    "node_select_payment": {
+      "id": "node_select_payment",
+      "type": "question",
+      "message_template": "💳 Selecciona la forma de pago:\n\n1. Pago Móvil (0412-1234567 / Banesco / J-12345678)\n2. Binance P2P (USDT)\n\nIngresa tu número de referencia de pago:",
+      "input_type": "text",
+      "variable_name": "refpago",
+      "next_node_id": "node_wait_human"
+    },
+    "node_wait_human": {
+      "id": "node_wait_human",
+      "type": "human_approval",
+      "message_template": "⏳ Referencia '{{refpago}}' registrada. Esperando verificación del administrador del chat...",
+      "human_approval_config": {
+        "approved_node_id": "node_receipt",
+        "rejected_node_id": "node_no_products_found"
+      }
+    },
+    "node_receipt": {
+      "id": "node_receipt",
+      "type": "generate_receipt",
+      "message_template": "🎉 *ORDEN PROCESADA CON ÉXITO*\n\n• Producto: {{item_seleccionado}}\n• Referencia: {{refpago}}\n• Usuario: {{user_name}}\n\n¡Gracias por tu compra!"
+    }
+  }
+}

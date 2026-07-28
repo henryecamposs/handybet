@@ -48,16 +48,12 @@ export default function HandyBetLayout({ children, title }: HandyBetLayoutProps)
     return <View className="flex-1 bg-background">{children}</View>;
   }
 
-  const isDetailScreen = 
-    (pathname.startsWith('/channels/') && pathname !== '/channels' && pathname !== '/channels/') ||
-    (pathname.startsWith('/follows/') && pathname !== '/follows' && pathname !== '/follows/') ||
-    pathname.startsWith('/chat/group/') ||
-    pathname.startsWith('/channels/groups');
+
 
   return (
     <View className="flex-1 h-screen max-h-screen overflow-hidden bg-background/80 text-foreground flex-col">
       {/* HEADER TOP NAVBAR */}
-      {!isDetailScreen && <HandyBetHeader />}
+      <HandyBetHeader />
 
       {/* BODY DE 3 COLUMNAS */}
       <View className="flex-1 flex-row w-full max-w-[1600px] mx-auto relative bg-background">

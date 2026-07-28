@@ -156,27 +156,82 @@ export default function FollowDetailScreen() {
       id: 'posts',
       label: 'Publicaciones',
       content: (
-        <View className="mt-2">
-          <View className="mb-4">
-            <CreatePostWidget onPublish={async () => true} />
-          </View>
-          {userPosts.length > 0 ? (
-            <PostContainer
-              title="Publicaciones Recientes"
-              posts={userPosts}
-            />
-          ) : (
-            <View>
-              <EmptyState title="No hay publicaciones nuevas." icon={LayoutList} variant="dashed" />
+        <View className="flex-col lg:flex-row gap-6 mt-4">
+          {/* Columna Izquierda: Información de Miembro / Usuario */}
+          <View className="w-full lg:w-1/3 gap-4">
+            <View className="bg-card border border-border rounded-xl p-4">
+              <View className="flex-row items-center gap-2 mb-2">
+                <Info size={18} color={colors.primary} />
+                <Text className="text-foreground font-bold text-base">Descripción</Text>
+              </View>
+              <Text className="text-foreground/80 text-sm leading-5">
+                {(user as any).bio || 'Explorando la red HandyBet. Jugador frecuente en La Imaginaria.'}
+              </Text>
             </View>
-          )}
+
+            <View className="bg-card border border-border rounded-xl p-4">
+              <View className="flex-row items-center gap-2 mb-3">
+                <User size={18} color={colors.primary} />
+                <Text className="text-foreground font-bold text-base">Información del Miembro</Text>
+              </View>
+              <View className="gap-2">
+                <View className="flex-row justify-between py-1.5 border-b border-border/50">
+                  <Text className="text-foreground/70 text-xs">Identificador</Text>
+                  <Text className="text-primary font-bold text-xs">@{(user as any).username || 'usuario'}</Text>
+                </View>
+                <View className="flex-row justify-between py-1.5 border-b border-border/50">
+                  <Text className="text-foreground/70 text-xs">Rol de Usuario</Text>
+                  <Text className="text-foreground font-medium text-xs uppercase">Jugador VIP</Text>
+                </View>
+                <View className="flex-row justify-between py-1.5">
+                  <Text className="text-foreground/70 text-xs">Estado de Cuenta</Text>
+                  <Text className="text-emerald-400 font-bold text-xs">✓ Verificado</Text>
+                </View>
+              </View>
+            </View>
+
+            <View className="bg-card border border-border rounded-xl p-4">
+              <Text className="text-foreground font-bold text-sm mb-3">Intereses y Pronósticos</Text>
+              <View className="flex-row flex-wrap gap-2">
+                {['Apuestas Deportivas', 'Pronósticos VIP', 'Loterías'].map((tag) => (
+                  <View key={tag} className="px-3 py-1 rounded-full bg-primary/20 border border-primary/40">
+                    <Text className="text-primary text-xs font-bold">✓ {tag}</Text>
+                  </View>
+                ))}
+              </View>
+            </View>
+          </View>
+
+          {/* Columna Derecha: Widget de Creación y Muro de Publicaciones */}
+          <View className="w-full lg:w-2/3">
+            <View className="mb-4">
+              <CreatePostWidget onPublish={async () => true} />
+            </View>
+            {userPosts.length > 0 ? (
+              <PostContainer
+                title="Publicaciones Recientes"
+                posts={userPosts}
+              />
+            ) : (
+              <EmptyState title="No hay publicaciones nuevas." icon={LayoutList} variant="dashed" />
+            )}
+          </View>
         </View>
       )
     },
     {
       id: 'info',
       label: 'Información',
-      content: <EmptyState title="No hay información disponible." icon={Info} variant="dashed" />
+      content: (
+        <View className="mt-4 gap-4">
+          <View className="bg-card border border-border rounded-xl p-4">
+            <Text className="text-foreground font-bold text-base mb-2">Biografía Detallada</Text>
+            <Text className="text-foreground/80 text-sm leading-6">
+              {(user as any).bio || 'Este usuario no ha agregado una biografía pública extendida.'}
+            </Text>
+          </View>
+        </View>
+      )
     },
     {
       id: 'photos',
@@ -187,7 +242,7 @@ export default function FollowDetailScreen() {
       id: 'following',
       label: 'Miembros',
       content: (
-        <View>
+        <View className="mt-4">
           <EmptyState title="No sigues a nadie aún." icon={User} variant="dashed" />
           <View className="mt-6">
             <SeccionLista
@@ -211,7 +266,7 @@ export default function FollowDetailScreen() {
       id: 'groups',
       label: 'Grupos',
       content: (
-        <View>
+        <View className="mt-4">
           <EmptyState title="No perteneces a ningún grupo." icon={Users} variant="dashed" />
           <View className="mt-6">
             <SeccionLista

@@ -9,30 +9,33 @@ import IconButton from '@/components/ui/IconButton';
 import * as Clipboard from 'expo-clipboard';
 import { useToastStore } from '@/store/useToastStore';
 import { useAppNavigation } from '@/hooks/useAppNavigation';
+import BotActionBar from '../../../components/chat/BotActionBar';
+import { CopilotMode, InteractiveButton } from '../../../types/chat';
+import { messagingService } from '../../../services/messagingService';
 
 export default function ChatDetailScreen() {
   const { chatId } = useLocalSearchParams();
-  const router = useRouter();
   const { goBack, navigateTo } = useAppNavigation();
   const colors = useThemeColors();
+  const [copilotMode, setCopilotMode] = useState<CopilotMode>('copilot_hybrid');
+  const { addToast } = useToastStore();
+
   const [messages, setMessages] = useState<MessageProps[]>([
     {
       id: 1,
       sender: 'them',
-      text: 'Hola, bienvenido al soporte de La Imaginaria. ¿En qué podemos ayudarte?',
+      text: '¡Hola! Bienvenid@ a Soporte HandyBet y Bot ERP. ¿En qué podemos ayudarte?',
       time: '11:40 AM',
-    },
-    {
-      id: 2,
-      sender: 'them',
-      text: 'Su recarga por Pago Móvil de 150 Bs. ha sido procesada con éxito.',
-      time: '11:45 AM',
+      isBotGenerated: true,
+      buttons: [
+        { id: 'btn_1', label: '🛒 Ver Catalogo VIP (@comprar)', action_type: 'submit_command', payload: '@comprar' },
+        { id: 'btn_2', label: '❓ Preguntas Frecuentes (/ayuda)', action_type: 'submit_command', payload: '/ayuda' }
+      ]
     }
   ]);
   const [inputText, setInputText] = useState('');
   const [isRecording, setIsRecording] = useState(false);
   const [replyingTo, setReplyingTo] = useState<MessageProps | null>(null);
-  const { addToast } = useToastStore();
 
   const handleDelete = (id: string | number) => {
     setMessages(messages.filter(m => m.id !== id));
@@ -49,14 +52,17 @@ export default function ChatDetailScreen() {
     if (msg) setReplyingTo(msg);
   };
 
-  const handleSend = () => {
-    if (!inputText.trim()) return;
+  const handleSendMessage = async (textToSend: string, buttonPayload?: string) => {
+    if (!textToSend.trim() && !buttonPayload) return;
 
-    const newMsg: MessageProps = {
-      id: messages.length + 1,
+    const currentTime = new Date().toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit', hour12: true });
+
+    // 1. Mensaje del Usuario
+    const userMsg: MessageProps = {
+      id: Date.now(),
       sender: 'me',
-      text: inputText.trim(),
-      time: new Date().toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit', hour12: true }),
+      text: textToSend.trim() || buttonPayload || '',
+      time: currentTime,
       replyTo: replyingTo ? {
         id: replyingTo.id,
         text: replyingTo.text,
@@ -64,16 +70,49 @@ export default function ChatDetailScreen() {
       } : undefined,
     };
 
-    setMessages([...messages, newMsg]);
+    const updatedMessages = [...messages, userMsg];
+    setMessages(updatedMessages);
     setInputText('');
     setReplyingTo(null);
+
+    // 2. Si el modo Co-Piloto está activo, procesar mediante el Bot Engine
+    if (copilotMode !== 'human_takeover' && copilotMode !== 'disabled') {
+      const result = await messagingService.sendMessage(
+        (chatId as string) || 'conv_demo',
+        'usr_me',
+        textToSend,
+        'text',
+        undefined,
+        { active_bot_id: 'sales_erp_bot' },
+        buttonPayload
+      );
+
+      if (result.botMessage) {
+        setTimeout(() => {
+          const botMsg: MessageProps = {
+            id: Date.now() + 1,
+            sender: 'them',
+            text: result.botMessage!.content,
+            time: new Date().toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit', hour12: true }),
+            mediaUrl: result.botMessage!.media_url,
+            buttons: result.botMessage!.buttons,
+            isBotGenerated: true
+          };
+          setMessages(prev => [...prev, botMsg]);
+        }, 400);
+      }
+    }
+  };
+
+  const handlePressButton = (btn: InteractiveButton) => {
+    handleSendMessage(btn.label, btn.payload);
   };
 
   const handleToggleRecord = () => {
     setIsRecording(!isRecording);
     if (isRecording) {
       const newMsg: MessageProps = {
-        id: messages.length + 1,
+        id: Date.now(),
         sender: 'me',
         text: '🎤 Nota de voz (0:08)',
         time: new Date().toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit', hour12: true }),
@@ -88,6 +127,7 @@ export default function ChatDetailScreen() {
       className="flex-1 bg-background"
     >
       <View className="flex-1 pt-2 p-2">
+        {/* Encabezado del Chat */}
         <View className="flex-row items-center justify-between px-6 pb-2 border-b border-border">
           <View className="flex-row items-center gap-2 flex-1">
             <TouchableOpacity onPress={() => goBack('/(tabs)/chat')} className="mr-1">
@@ -99,69 +139,75 @@ export default function ChatDetailScreen() {
             >
               <Image source={{ uri: 'https://placehold.co/100' }} className="w-10 h-10 rounded-full border border-border/50 shadow-sm" />
               <View>
-                <Text className="text-foreground font-black text-sm">Soporte HandyBet</Text>
-                <Text className="text-secondary text-xs font-bold uppercase tracking-wider">En línea</Text>
+                <Text className="text-foreground font-black text-sm">Soporte HandyBet & Bot ERP</Text>
+                <Text className="text-primary text-xs font-bold uppercase tracking-wider">En línea • Co-Piloto Activo</Text>
               </View>
             </TouchableOpacity>
           </View>
         </View>
 
-        {/* Mensajes */}
+        {/* Barra de Comandos Rápidos del Bot y Switch Co-Piloto */}
+        <BotActionBar
+          copilotMode={copilotMode}
+          onToggleCopilotMode={setCopilotMode}
+          onSelectCommand={(cmd) => handleSendMessage(cmd, cmd)}
+        />
+
+        {/* Muro de Mensajes Virtualizados */}
         <MessageContainer
           messages={messages}
           onDelete={handleDelete}
           onCopy={handleCopy}
           onReply={handleReply}
+          onPressButton={handlePressButton}
         />
 
         {/* Contenedor de Referencia (Responder) */}
         {replyingTo && (
           <TouchableOpacity
             className="px-4 py-2 border-t border-border bg-muted/30 flex-row items-center justify-between"
-            onPress={() => { /* Simular scroll al mensaje */ }}
           >
             <View className="flex-1 border-l-4 border-primary pl-2">
-              <Text className="text-xs font-bold text-primary">{replyingTo.sender === 'me' ? 'Tú' : 'Soporte HandyBet'}</Text>
+              <Text className="text-xs font-bold text-primary">{replyingTo.sender === 'me' ? 'Tú' : 'Soporte'}</Text>
               <Text className="text-xs text-muted-foreground" numberOfLines={1}>{replyingTo.text}</Text>
             </View>
             <IconButton icon={X} onPress={() => setReplyingTo(null)} variant="ghost" size="xs" iconColor={colors.mutedForeground} hasBorder={false} />
           </TouchableOpacity>
         )}
 
-        {/* Caja de Entrada */}
+        {/* Caja de Entrada de Texto */}
         <View className="p-2 border-t border-border flex-row items-center gap-1 bg-background/40">
           <IconButton
             icon={ImageIcon}
             onPress={() => { }}
             variant="ghost"
-            rounded='full'
+            rounded="full"
             iconColor={colors.mutedForeground}
             hasBorder={false}
           />
 
           <TextInput
-            placeholder={isRecording ? 'Grabando audio...' : 'Escribe tu mensaje...'}
+            placeholder={isRecording ? 'Grabando audio...' : 'Escribe tu mensaje o @comando...'}
             placeholderTextColor={colors.mutedForeground}
             editable={!isRecording}
             value={inputText}
             onChangeText={setInputText}
-            className="flex-1 bg-background/80 border border-border rounded-full px-4 py-3 text-white font-bold  outline-none"
+            onSubmitEditing={() => handleSendMessage(inputText)}
+            className="flex-1 bg-background/80 border border-border rounded-full px-4 py-3 text-white font-bold outline-none"
           />
 
-          {/* Grabadora de Voz Nativa simulada */}
           <IconButton
             icon={isRecording ? Square : Mic}
             onPress={handleToggleRecord}
             variant={isRecording ? 'destructive' : 'ghost'}
-            rounded='full'
+            rounded="full"
             iconColor={isRecording ? 'white' : colors.mutedForeground}
             hasBorder={false}
           />
 
-          {/* Botón de Enviar */}
           <IconButton
             icon={Send}
-            onPress={handleSend}
+            onPress={() => handleSendMessage(inputText)}
             variant={!inputText.trim() ? 'ghost' : 'primary'}
             rounded="full"
             iconColor={!inputText.trim() ? colors.mutedForeground : colors.primary}

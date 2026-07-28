@@ -10,6 +10,8 @@ export interface MessageProps {
   text: string;
   time: string;
   mediaUrl?: string;
+  buttons?: any[];
+  isBotGenerated?: boolean;
   replyTo?: {
     id: string | number;
     text: string;
@@ -22,9 +24,10 @@ interface MessageItemProps {
   onDelete?: (id: string | number) => void;
   onReply?: (id: string | number) => void;
   onCopy?: (text: string) => void;
+  onPressButton?: (button: any) => void;
 }
 
-export default function MessageItem({ msg, onDelete, onReply, onCopy }: MessageItemProps) {
+export default function MessageItem({ msg, onDelete, onReply, onCopy, onPressButton }: MessageItemProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [showEmojis, setShowEmojis] = useState(false);
   const [reaction, setReaction] = useState<string | null>(null);
@@ -63,9 +66,14 @@ export default function MessageItem({ msg, onDelete, onReply, onCopy }: MessageI
 
       {/* Message Content Card */}
       <View
-        className={`w-full p-2 border border-border/50 rounded-xl shadow-sm  ${isMe ? 'bg-primary/10 border-primary/20' : 'bg-background/80'
-          }`}
+        className={`w-full p-3 border border-border/50 rounded-xl shadow-sm ${isMe ? 'bg-primary/10 border-primary/20' : 'bg-background/80'}`}
       >
+        {msg.isBotGenerated && (
+          <View className="flex-row items-center gap-1 bg-primary/20 self-start px-2 py-0.5 rounded border border-primary/40 mb-2">
+            <Text className="text-primary text-[9px] uppercase font-bold tracking-wider">🤖 Bot ERP Assistant</Text>
+          </View>
+        )}
+
         {msg.replyTo && (
           <View className="mb-2 pl-2 border-l-4 border-primary bg-background/30 py-1 px-2 rounded-r-md">
             <Text className="text-xs font-bold text-primary">{msg.replyTo.sender === 'me' ? 'Tú' : 'Soporte HandyBet'}</Text>
@@ -76,13 +84,29 @@ export default function MessageItem({ msg, onDelete, onReply, onCopy }: MessageI
         {msg.mediaUrl && (
           <Image
             source={{ uri: msg.mediaUrl }}
-            className="w-full h-40 bg-muted border border-border/20 mb-3 rounded-none"
+            className="w-full h-40 bg-muted border border-border/20 mb-3 rounded-lg"
             resizeMode="cover"
           />
         )}
         <Text className={`text-sm leading-5 font-medium ${isMe ? 'text-primary' : 'text-foreground'}`}>
           {msg.text}
         </Text>
+
+        {/* Botones Interactivos si el mensaje los incluye */}
+        {msg.buttons && msg.buttons.length > 0 && (
+          <View className="mt-3 gap-2">
+            {msg.buttons.map((btn: any) => (
+              <TouchableOpacity
+                key={btn.id}
+                onPress={() => onPressButton?.(btn)}
+                className="bg-primary border border-primary px-3 py-2 rounded-xl items-center active:opacity-80"
+              >
+                <Text className="text-black font-bold text-xs">{btn.label}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        )}
+
         <Text className={`text-[9px] font-bold text-right mt-2 uppercase font-mono ${isMe ? 'text-muted-foreground' : 'text-muted-foreground'}`}>
           {msg.time}
         </Text>

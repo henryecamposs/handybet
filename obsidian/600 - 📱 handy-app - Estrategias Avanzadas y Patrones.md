@@ -1,0 +1,60 @@
+---
+title: ⚡ Estrategias Avanzadas y Patrones
+project: handy-app
+tags: [estado, zustand, react-query, patrones]
+type: optimización
+---
+
+# ⚡ Estrategias Avanzadas, Estado y Rendimiento
+
+## 📌 Gestión de Estado y Comportamiento (.brain/knowledge/state_and_behavior.md)
+# HandyBet — Manejo de Estado y Comportamiento
+
+## 1. Estado Global con Zustand (`src/store/useHandyBetStore.ts`)
+La tienda global Zustand de la aplicación centraliza estados de la interfaz y autenticación simulada:
+- `mockSession`: Almacena el usuario logueado en la sesión local (`id`, `username`, `role`).
+- `isScannerActive` y `activeTicketCode`: Controla la visualización del visor de cámara QR y el ticket actualmente seleccionado para confirmación de apuestas.
+- **Acciones:** `setMockSession`, `setScannerActive`, `setActiveTicketCode`.
+
+### 1.1 Navegación e Historial (`src/store/useNavigationStore.ts`)
+- Mantiene una pila de historial de navegación (`historyStack`) basada en las rutas previas.
+- Resuelve problemas nativos del `expo-router` donde `router.back()` pierde contexto direccional.
+- Se gestiona exclusivamente a través del hook `useAppNavigation` que proporciona `navigateTo`, `goBack` y `replaceRoute`.
+
+### 1.2 Custom Hook de Utilidades de Hub (`src/hooks/useHubUtilities.ts`)
+- Centraliza manejadores globales para botones de interacciones comunes (Canal, Grupo, Miembro, Usuario):
+  - `handleChat(id, type)`: Dirige a la conversación directa.
+  - `handleFollowToggle(isFollowing, type, onToggle)`: Ejecuta el cambio de seguimiento y emite un toast global.
+  - `handleSaveToggle(isSaved, type, entityName, onToggle)`: Alterna guardados (bookmarks) con feedback visual.
+  - `handleViewPosts(id, type)`: Dirige al muro filtrado `/feed/search?id=`.
+  - `handleViewProfile(id, type)`: Navega a la vista de perfil o detalle correspondiente.
+
+---
+
+## 2. Estado del Servidor con React Query (`src/hooks/useHandyBetQueries.ts`)
+React Query gestiona el estado asíncrono y las peticiones al backend (con Supabase o mock fallbacks):
+- **Queries:**
+  - `useGetBetByCode(code)`: Consulta detalles de un ticket de apuesta mediante su código de control.
+- **Mutations:**
+  - `useConfirmQRBet()`: Confirma una apuesta física deduciendo fondos y actualizando el estado de la base de datos.
+  - `usePayoutQRBet()`: Transfiere fondos para liquidar el premio de un ticket ganador.
+
+---
+
+## 3. Servicios del Backend y Supabase (`src/services/`)
+- **`supabaseClient.ts`:** Inicializa la conexión con Supabase utilizando AsyncStorage para guardar la sesión JWT de forma persistente en React Native y web (seguro contra fallas de SSR).
+- **`socialService.ts`:** Proporciona funciones asíncronas para administrar el feed relacional por capas de visibilidad y las amistades directas. Incluye métodos para la gestión de respuestas:
+  * `getPostComments(postId)`: Obtiene los comentarios de una publicación en orden cronológico.
+  * `createPostComment(postId, commentData)`: Agrega una nueva respuesta a una publicación.
+  * *Nota:* Implementa una capa de persistencia simulada en memoria para probar interacciones sin conexión activa de base de datos.
+- **`groupMonetizationService.ts`:** Gestiona el procesamiento de cuestionarios de onboarding y split de transacciones (90/10) entre la billetera del creador del grupo y la plataforma.
+
+
+---
+## 🤖 Análisis de la IA: Patrones de Rendimiento
+* **Actualizaciones Optimistas (Optimistic Updates)**: Excelente elección para mejorar la experiencia de usuario en acciones inmediatas como apuestas o adición a favoritos.
+* **Sincronización Realtime**: Se recomienda estrechar la integración entre WebSockets y las invalidaciones de React Query para asegurar la consistencia del balance.
+
+---
+## 🔗 Referencias Relacionadas
+[[000 - 📱 handy-app - Visión General|📱 Visión General]]

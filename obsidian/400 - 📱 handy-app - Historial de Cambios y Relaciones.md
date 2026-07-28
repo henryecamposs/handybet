@@ -1,0 +1,277 @@
+---
+title: 📜 Historial de Cambios y Registro de Decisiones
+project: handy-app
+tags: [changelog, adr, historial, decisiones]
+type: changelog
+---
+
+# 📜 Historial de Cambios y Registro de Decisiones (ADR)
+
+## 📌 Registro de Decisiones Arquitectónicas (.brain/history/decision_log.md)
+# HandyBet — Decision Log (ADRs)
+
+## Hito 1: Rebranding del Sistema (Yastaa -> HandyBet)
+- **Fecha:** 2026-07-12
+- **Contexto:** Se decidió cambiar el nombre del sistema de "Yastaa" a "HandyBet" en todos los módulos de la aplicación para mayor alineación comercial.
+- **Decisión:** Refactorizamos todos los archivos clave (useHandyBetStore, handyBetMock, handyBetTypes, etc.), queries de base de datos, migraciones, layouts y UI general. Automatizado mediante script Node.js.
+
+## Hito 2: Reorganización de Navegación y Persistencia del Layout
+- **Fecha:** 2026-07-12
+- **Contexto:** Las sub-páginas o pantallas secundarias dentro de `(tabs)` hacían que Expo Router creara botones fantasma adicionales en el menú inferior. Moverlos fuera rompía el sidebar web.
+- **Decisión:** Mantuvimos todas las rutas secundarias y de creación dentro de `(tabs)` para no perder el wrapper `HandyBetLayout` (persistencia del sidebar web), pero las ocultamos explícitamente en el TabBar inferior declarándolas con `options={{ href: null }}`.
+
+## Hito 3: Identidad y Onboarding de Grupos
+- **Fecha:** 2026-07-12
+- **Contexto:** Los creadores requerían capturar información de WhatsApp y forzar un cuestionario de intenciones al unirse a grupos.
+- **Decisión:** Agregamos `phone_whatsapp` y `whatsapp_handle` al perfil, e implementamos un Pop-up Modal de Onboarding en la pantalla de grupos que exige responder preguntas y aceptar términos antes de activar la membresía.
+
+## Hito 4: Split de Transacciones y Pay-to-Post
+- **Fecha:** 2026-07-12
+- **Contexto:** Habilitar publicaciones patrocinadas comerciales o reglas de cobros de grupo.
+- **Decisión:** Implementamos un flujo en el Muro que congela los posts de tipo `advertisement` en `pendiente_pago` y levanta una interfaz de pago split con distribución de billetera (90% creador / 10% plataforma) verificable por código de referencia.
+
+## Hito 5: Detalle de Posts Estilo Twitter (Sin Popups) y Refactor Modular
+- **Fecha:** 2026-07-16
+- **Contexto:** Transicionar la vista de publicaciones detalladas y comentarios a un contenedor central fluido, simplificar la UI, optimizar la experiencia de scroll en escritorio, y modularizar la arquitectura del layout de la aplicación.
+- **Decisión:**
+  * Reemplazamos los popups/modales de detalle de posts por un componente integrado en el área central (`PostDetailView.tsx`), que muestra estadísticas y respuestas cronológicas.
+  * Reestructuramos la tarjeta `PostItem.tsx` a dos columnas (avatar izquierda, contenido derecha) y convertimos su menú ⋮ en un popover local absoluto.
+  * Solucionamos las barras de scroll redundantes forzando `h-screen max-h-screen overflow-hidden` en `HandyBetLayout.tsx` en escritorio, permitiendo scrollbars fluidos e independientes por columna.
+  * Modularizamos la cabecera del layout a [HandyBetHeader.tsx](file:///c:/Users/DELL/Documents/dPana%20Projects/frontends/handy-app/src/components/layout/HandyBetHeader.tsx) y el panel izquierdo a [LeftSidebarWidgets.tsx](file:///c:/Users/DELL/Documents/dPana%20Projects/frontends/handy-app/src/components/widgets/LeftSidebarWidgets.tsx).
+
+## Hito 6: Refactorización de Perfil, Bandeja de Chat y Navegación en Hubs
+- **Fecha:** 2026-07-17
+- **Contexto:** Se necesitaba mejorar la organización de los chats privados vs grupos, añadir campos extendidos en el perfil de usuario y unificar la navegación (botones Back) en todos los directorios.
+- **Decisión:**
+  * Rediseñamos el `HandyChat` usando un sistema de pestañas (Directos, Grupos, Canales, Menciones) y un carrusel de usuarios activos.
+  * Extendimos `HubLayout.tsx` para soportar un botón universal de retorno al lado de los títulos principales, aplicándolo a todas las vistas de lista.
+  * Agregamos los campos de configuración, suscripciones y check de términos de uso en `profile/edit.tsx` (desvinculando el Header estricto).
+  * Introdujimos la funcionalidad y rutas ocultas para la sección de "Guardados" (`saved`).
+
+## Hito 7: Unificación de Rutas, Idioma de Código e Integración en Hub
+- **Fecha:** 2026-07-17
+- **Contexto:** Las secciones de Guardados, Canales y Juegos estaban mal anidadas o presentaban disparidad en el código entre variables en español y rutas. Adicionalmente, el diseño debía cargar dentro del contenedor central de la app persistiendo las barras laterales.
+- **Decisión:** 
+  * Movimos las rutas de `favorites`, `channels` y `games` de vuelta a la carpeta `(tabs)` y las ocultamos de la barra inferior con `href: null` en `_layout.tsx`, asegurando la renderización en la columna central.
+  * Renombramos variables, tipos y directorios (`canales` -> `channels`, `juegos` -> `games`) para mantener un estándar de código en inglés, conservando únicamente las etiquetas visuales (UI) en español.
+  * Implementamos búsqueda nativa del `HubLayout` en la sección de Guardados y poblamos los listados rápidos en el menú lateral izquierdo (`LeftSidebarWidgets.tsx`).
+
+## Hito 8: Refactorización de Perfil (Follows/Id) y Estandarización de Hover States
+- **Fecha:** 2026-07-18
+- **Contexto:** La vista de perfil carecía de la estructura en pestañas y el Hero Banner requeridos por la nueva UI, además de presentar inconsistencias en los estados de hover en los componentes interactivos (Tabs, IconButtons).
+- **Decisión:**
+  * Empleamos el `HubDetailLayout` en conjunto con `TabContainer` en `FollowDetailScreen` para renderizar el Hero Banner (foto de portada, avatar, métricas) y pestañas modulares (Publicaciones, Información, Fotos, Seguidos, Grupos).
+  * Refactorizamos `TabContainer` e `IconButton` utilizando eventos nativos (`onMouseEnter`/`onMouseLeave`) y `useState` para lograr compatibilidad web 100% precisa en los efectos hover (cambios a colores `bg-muted` y `text-secondary`).
+  * Desacoplamos la carga de datos del perfil mediante nuevos métodos en `socialService` (`getSuggestedUsers`, `getSuggestedGroups`), integrando íconos estandarizados en listas vacías con `SeccionLista` y `EmptyState`.
+## Hito 9: Panel Administrativo Integrado y Captura de Tráfico
+- **Fecha:** 2026-07-20
+- **Contexto:** Habilitar un área administrativa (`/admin`) segura para visualizar los KPIs y el tráfico, sin romper la redirección base ni entorpecer el flujo de usuarios normales.
+- **Decisión:** 
+  * Se configuró Expo Router con una carpeta aislada `app/admin` que posee su propio layout y estado de autenticación (contraseña estática).
+  * Se modificó el `_layout.tsx` principal para omitir la redirección de rutas cuyo segmento inicie con `admin`.
+  * Se integró `@tanstack/react-table` para proveer tablas ordenables de direcciones IP y tiempos de sesión en escritorio web.
+
+
+---
+
+## 📄 CHANGELOG.md Completo
+# Changelog
+
+Todos los cambios notables de este proyecto serán documentados en este archivo.
+
+El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/), y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [1.13.0] - 2026-07-28
+
+### Añadido
+- **Arquitectura de Chat Avanzado y Bots**: Implementación completa de chat P2P y grupal con soporte de Bots transaccionales interactivos y barra de acciones (`BotActionBar`, `InteractiveButtonsGroup`). 
+- **Motores de Bot (`genericBotEngine`, `botFlowEngine`)**: Soporte para nodos conversacionales definidos en JSON con respuestas automáticas y recolección de entradas del usuario.
+- **Especificaciones SDD**: Nuevos documentos arquitectónicos (`advanced-chat-bot-architecture.spec.md`, `generic-json-bot-engine.spec.md`, `hubs-ui-alignment.spec.md`).
+- **Migración de Base de Datos**: Migración SQL maestra (`20260722000000_advanced_chat_and_bot_schema.sql`) que da soporte a las nuevas características de mensajería avanzada.
+- **Inicialización de Skills Locales**: Volcado de un amplio catálogo de skills (`deploy`, `graphify`, `obsidian-docs`, `oxlint`, `polli`, `project-init`, `react-hook-form`, `vite`) al directorio `.agents/skills/`.
+
+### Cambiado
+- **Interfaz y Experiencia de Usuario**: Modificaciones en `HandyBetLayout` y refactorización de `LeftSidebarWidgets` para alinear el diseño de los Hubs.
+
+## [1.12.0] - 2026-07-24
+
+### Añadido
+- **Inicialización de Proyecto con `project-init`**: Bootstrapeo y sincronización inteligente de los 20 skills globales de desarrollo, arquitectura y QA a `.agents/skills/`.
+- **Integración y Sincronización Automática con Obsidian (`obsidian-docs`)**: Configuración de `.obsidian-sync.json` y generación del conjunto completo de 11 notas numeradas (000 a 1000) en la bóveda global (`050 - 📱 handy-app`) y espejo local (`obsidian/`).
+- **Volcado Íntegro de CHANGELOG en Obsidian (Nota 400)**: Sincronización 100% fiel de todo el historial de cambios e hitos técnicos en `400 - 📱 handy-app - Historial de Cambios y Relaciones.md`.
+
+### Auditoría & Plan de Pruebas QA (Matriz de Control de Calidad)
+- 🧪 **Pruebas Unitarias e Integración**:
+  - Verificación de consultas RPC en Supabase (`rpc_place_handybet_bet`, `rpc_record_analytics_session`, `rpc_get_admin_kpis`, `rpc_send_message`, `rpc_toggle_follow`).
+  - Cobertura de métodos de estado global con Zustand y validaciones de formularios cliente con Zod.
+- ⚠️ **Pruebas de Borde & Estrés**:
+  - Resistencia a latencia y fallback offline/mock mode en feeds dinámicos (`feed/index.tsx`, `feed/search.tsx`).
+  - Validación horaria bajo huso horario Venezuela `America/Caracas` (VET UTC-4) para el registro de transacciones y sorteos.
+  - Verificación de desbordamientos UI en dispositivos móviles y renderizado responsive de carruseles multimedia.
+- 🔒 **Pruebas de Seguridad & RBAC**:
+  - Control de acceso estricto al Panel Administrativo (`/admin`) mediante contraseña global (`handybet*2026`).
+  - Sanitización de entradas en búsqueda de feeds y parámetros de filtrado para prevenir inyecciones.
+
+
+## [1.11.0] - 2026-07-20
+
+### Añadido
+- **Panel Administrativo (`/admin`)**: Sistema integrado de analíticas protegido por contraseña global (`handybet*2026`) y redirección inteligente desde el layout principal sin afectar a usuarios anónimos ni autenticados en el frontend general.
+- **Analíticas en Supabase**: Tablas `app_analytics_sessions` gestionadas con RLS e inserción pública mediante las funciones RPC `rpc_record_analytics_session` y `rpc_get_admin_kpis`.
+- **Dashboard y Tráfico Multiplataforma**: Interfaces `index.tsx` y `traffic.tsx` (con soporte `@tanstack/react-table` en web) con UI Sidebar interactiva basada en Expo Router.
+
+## [1.10.0] - 2026-07-20
+
+### Añadido
+- **Cerebro Portátil**: Integración de especificaciones bajo el estándar Johnny.Decimal para documentar Core P2P, Hubs de Creación, Detalles de Posts y Rediseño de Perfiles.
+- **Reestructuración Completa de Base de Datos Relacional**: Migración SQL maestra con 10 ENUMs, UUIDs, RLS, vistas pre-compiladas (`view_user_feed`), funciones RPC (`rpc_place_handybet_bet`, `rpc_get_suggested_users`, `rpc_send_message`, `rpc_toggle_follow`) e índices GIN/Trigram.
+- **Estructuración de Almacenamiento & Hook `useStorage`**: Estandarización de rutas en Supabase Storage bajo el formato `{bucket}/{entityId}/{timestamp}.{extension}` para grupos, canales, miembros, posts y recibos.
+- **Sistema de Autenticación Híbrida & Google OAuth 2.0**: Soporte para inicio de sesión en 1-click con Google, registro e inicio de sesión por Email/Password, recuperación de claves y Trigger PostgreSQL atómico (`20260720010000_auth_user_profile_trigger.sql`) para la vinculación automática con `public.profiles`. Guía detallada en `docs/google_oauth_setup.md`.
+
+## [1.9.0] - 2026-07-20
+
+### Añadido
+- **Especificación SDD (`creation-hubs-profiles.spec.md`)**: Cobertura arquitectónica completa para flujos de creación de Canales, Grupos con Bots y Perfiles de Miembros.
+- **Componente `InterestChipsSelector.tsx`**: Selector interactivo de etiquetas categorizadas alimentado desde `mockdata/interests.json` con soporte para añadir etiquetas personalizadas.
+- **Rediseño de Creación de Canales (`channels/create.tsx`)**: Portada Hero, selector de visibilidad, interruptor de contenido +18 obligatorio, tarjetas de Audiencia Target (*Apostadores*, *Creadores*, *Noticias*, *Citas*, *Comercio*, *General*) y selector de Chips.
+- **Rediseño de Creación de Grupos (`grupos/create.tsx`)**: Vinculación a canal matriz, selector de tags y módulo de **Bots de Autorespuesta** (*Bot ERP de Ventas*, *Bot de Loterías*, *Asistente IA*, *Bot de Bienvenida*) inicializados como desactivados por defecto (`is_enabled: false`).
+- **Rediseño de Perfil de Miembro (`profile/edit.tsx`)**: Edición de identificador único `@handle`, datos de contacto (Email, WhatsApp, Fecha de Nacimiento con control +18, Dirección física), redes sociales (Instagram, Twitter/X, Telegram) y chips de interés.
+- **Soporte de Tamaño `xl` en `IconButton.tsx`**: Botón visual grande para acciones principales (`px-7 py-3.5`, icono `28px`, texto `text-lg font-black`).
+- **Propiedad `actionButton` en `HubLayout.tsx`**: Ubicación declarativa de botones de creación (`+ Crear Grupo`, `+ Crear Canal`) al lado derecho del buscador principal.
+
+### Cambiado
+- **Navegación en Sidebar (`SidebarPopover.tsx`)**: Se dividió la interacción para que al presionar la fila/texto del ítem se navegue directamente a la vista general ("Ver todos"), mientras que al hacer clic exclusivamente en el chevron (`>`) se despliegue el menú emergente.
+- **Formulario de Canal**: Se eliminó el campo y bloque de "Registro Fiscal / RIF".
+- **Botón de Publicaciones en Miembros**: Al presionar la acción de publicaciones en listas de miembros o contenedores de posts, la app abre directamente la sala de búsqueda `/feed/search?id=`.
+
+## [1.8.0] - 2026-07-20
+
+### Añadido
+- Estados vacíos (`EmptyState`) amigables y consistentes para los contenedores de la barra lateral derecha (`RightSidebarWidgets`) cuando no existen anuncios, noticias, premios o sugerencias, mejorando drásticamente el UX en escenarios sin contenido.
+- Botones en línea de retroceso (`ArrowLeft`) con soporte nativo de router en las vistas de detalle para navegar de vuelta en el historial fácilmente.
+- Mecanismo de auto-etiquetado inteligente en el publicador del Feed de búsqueda: Al intentar publicar en un canal o grupo a través de la búsqueda con id, se añade el handle correspondiente automáticamente.
+- Se agregó el componente `HubCover` a manera de Hero Banner en el tope del directorio de canales.
+- Ahora los ítems de canales muestran estadísticas reales/mock de Grupos y Miembros Totales.
+
+### Cambiado
+- Ocultamiento inteligente de la barra superior global (`HandyBetHeader`) en pantallas de Detalles (Canales, Grupos y Perfil de Usuario) apoyándose en enrutamiento para maximizar el área de uso de los Hero Banners.
+- Reorganización manual en el Layout (`LeftSidebarWidgets`) y reemplazo de iconos estándar por Megáfonos (`Megaphone`) para el área de Canales, distinguiéndolo más de la sección "Grupos" que utiliza usuarios/salas.
+- Modificación del esquema de color `--card` en Tailwind para mejor contraste oscuro en la UI del sidebar derecho.
+- Los popovers de atajos de la barra lateral izquierda ahora enlazan correctamente a los perfiles, canales y grupos en vez de abrir inmediatamente un chat de manera forzada.
+- Removidos los parámetros huérfanos `from` y `fromType` de las URL al depender enteramente de la pila de historial en `useAppNavigation`.
+
+### Corregido
+- Eliminada la sobrescritura accidental del Nombre de Autor que impedía que publicaciones elaboradas desde una sala se mostraran correctamente bajo la identidad real del usuario (Henry).
+- El estado vacío ("Sin publicaciones") del feed de búsqueda ahora se concatena inteligentemente indicando el nombre real del canal, grupo o usuario al que se apunta.
+
+## [1.7.0] - 2026-07-17
+
+### Añadido
+- Subcomponentes modulares para `HubLayout` en la carpeta `src/components/layout/hub`: `HeroBanner.tsx`, `Carrusel.tsx`, `SeccionLista.tsx`, `TabContainer.tsx` y `PostContainer.tsx`.
+- Pestañas internas en las vistas de Canales, Grupos y Seguidos para separar y organizar contenidos (ej: Mis Canales vs Canales Sugeridos).
+
+### Cambiado
+- Refactorización de las vistas de Canales, Grupos y Seguidos para utilizar los subcomponentes compostados (`TabContainer`, `SeccionLista`, `PostContainer`) en lugar de código inline.
+- Estandarización de los estados de íconos activos en el menú superior (`HandyBetHeader.tsx`) utilizando `pathname.startsWith` para resolver la omisión de grupos de rutas (`(tabs)`).
+- Unificación visual del renderizado de posts en Canales, Grupos y Seguidos a través del componente común `PostItem`, vinculando el click a la ruta `/feed/[id]`.
+
+### Corregido
+- Corrección de la ruta de importación de `PostItem` en la vista de seguidos (`follows/index.tsx`) para Metro bundler.
+- Solución de sintaxis duplicada de bloques `return` generados durante la inyección de código de los hubs de canales y grupos.
+
+## [1.6.0] - 2026-07-17
+
+### Añadido
+- Nueva pantalla de feed de búsqueda `/feed/search?id=` para visualizar el muro particular de un Canal, un Grupo de Chat o un Usuario con soporte in-situ para publicación de posts de admins.
+- Sección de "Últimas Publicaciones" en el Hub de Grupos (`grupos.tsx`) mostrando las últimas 5 novedades y un botón directo para acceder a la sala de feed correspondiente.
+- Integración del widget de creación y publicación de posts (`CreatePostWidget`) directamente en las vistas detalladas de Canales (`channels/[channelId].tsx`) y Grupos (`channels/grupo/[grupoId].tsx`) para dueños/administradores.
+
+### Cambiado
+- Eliminación de la pestaña "profile" en la barra principal de tabs (`src/app/(tabs)/_layout.tsx`) ocultando la pestaña del layout principal mientras mantiene el registro de la ruta interna.
+- Rebranding de la marca HandyChannel: Se eliminó el logo antiguo y se creó el componente estandarizado `HandyRoomLogo.tsx` reflejando "HandyRoom".
+- Soporte en `socialService.createPost` y en la interfaz de usuario de creación de posts para que los administradores elijan si publican de forma personal o en representación del grupo o canal que gestionan.
+- Ajuste de hoisting y dependencias de React Hooks (ESLint) en `PostMediaCarousel.tsx`, `RepliesSection.tsx`, `friends/index.tsx` (eliminando Math.random para pureza), `favorites/index.tsx`, `favorites/[id].tsx`, `feed/[id].tsx`, y `feed/search.tsx`.
+
+## [1.5.0] - 2026-07-17
+
+### Añadido
+- Vista de detalle de usuario `friends/[id].tsx` para visualizar perfil de seguidores, independizándolo del componente de perfil propio.
+- Resolución enriquecida de autores de posts en el detalle del Feed mediante `localDB.resolvePostWithAuthor`.
+
+### Cambiado
+- Corrección del enrutamiento de Guardados (`favorites/index.tsx`) y el widget lateral para que los perfiles de usuarios guíen a `/friends/[id]`.
+- Refactorización de la pantalla Muro (`feed/index.tsx`) para eliminar el renderizado en línea, utilizando ahora una navegación directa a `feed/[id]`.
+- Implementación de estado de contexto (`from`) para determinar si el usuario llegó al detalle del Post desde Guardados o desde el Feed, controlando la lógica del botón de Retroceso (`router.back` vs `router.replace`).
+- Implementación de scroll automático al volver desde el detalle de publicación hacia el Feed (`scrollToPostId` con referencias de layout `y`).
+- Refinamiento del renderizado de detalles y disclaimers colapsables en la pantalla de Billetera (`wallet/[id].tsx`).
+- Integración de los componentes de logo estandarizados `HandyPayLogo` y `HandyChannelLogo` en los Hubs correspondientes.
+- Solución de falsos positivos en el Linter (React Hooks deps y ref access) en el componente `Toast.tsx`.
+
+## [1.4.0] - 2026-07-16
+
+### Añadido
+- Componente estandarizado `<RepliesSection />` para reutilizar el comportamiento y la interfaz de respuestas/comentarios en múltiples widgets y feeds.
+- Componente contenedor reutilizable `<HubLayout />` para estructurar de manera coherente las vistas iniciales de Canales, Grupos y Juegos.
+- Componente contenedor reutilizable `<HubDetailLayout />` para estandarizar las vistas detalladas de un elemento seleccionado (como en Canales/[canalId]).
+
+### Cambiado
+- Estandarización de colores: Configuración del color base `--muted` para que coincida con `--primary`, atenuación del `--muted-foreground` a un 50% menos de luminosidad (brillo).
+- Se configuró el `--border` nativo de la aplicación al equivalente OKLCH del color hexadecimal `#49130D` (marron/rojizo oscuro) y se estableció en Tailwind con 20% de opacidad.
+- Se refactorizaron `NewsCenterView` y `PostDetailView` para utilizar el nuevo componente `<RepliesSection />`, manteniendo consistencia visual.
+- Se corrigieron variables no declaradas y dependencias de React Hooks (linting errors) en `NewsCenterView`, `PrizesCenterView`, `RightSidebarWidgets` y `FriendRequestsCenterView`.
+
+## [1.3.0] - 2026-07-13
+- Barra compacta de creación de post (vista reducida) en `CreatePostWidget.tsx` con avatar del usuario y accesos rápidos de multimedia/sentimientos.
+- Modal de composición completo para crear publicaciones, desplegado al pulsar la barra compacta.
+- Botón interactivo de "Seguir/Siguiendo" en el encabezado de `PostItem.tsx` con retroalimentación visual.
+- Menú de opciones en fila horizontal (Compartir, Notificaciones, No mostrar) en la tarjeta de publicación (`PostItem.tsx`).
+- Capacidad de ocultar posts localmente ("No mostrar") con banner informativo de reemplazo y botón funcional "Deshacer".
+- Modal de compartido avanzado (`ShareModal.tsx`) con pestañas para Grupos, Canales, Usuarios y Amigos, con buscador activo.
+- Publicidad patrocinada interactiva en `PostMediaViewer.tsx` cuando se abren los comentarios de posts que no poseen imágenes.
+- Sistema de notificaciones Toast flotante para alertas rápidas en el Feed.
+
+### Cambiado
+- Corregido error de doble ScrollView anidado en `feed.tsx` que rompía el comportamiento de scroll en web.
+- Asignada altura útil de pantalla (`calc(100vh - 64px)`) y scroll independiente en el sidebar derecho (`RightSidebarWidgets.tsx`).
+- Aplicado estilo `font-bold` en la segunda palabra del texto de todos los logos de la suite (Post, Chat, Love, News, Pay, Play, Show, Store, etc.).
+- Corregidos errores de ESLint por acceso antes de declaración (Temporal Dead Zone) reestructurando y elevando las declaraciones en `monetizacion-ads.tsx` y `[canalId].tsx`.
+
+## [1.2.0] - 2026-07-12
+
+### Añadido
+- Toggle (Switch) para cambiar dinámicamente entre el modo oscuro y claro en el Header Principal (`feed.tsx`).
+- Helper `withOpacity` en `useThemeColors.ts` para inyectar canal alpha a colores OKLCH mediante JS.
+- Modularización de widgets en el sidebar derecho (`RightSidebarWidgets.tsx`), reemplazando el código estático anterior.
+- Soporte para dos tamaños (grande y pequeño) en los Anuncios de Publicidad (`AdWidget`), renderizados en un sistema de filas flex-row automatizado.
+
+### Cambiado
+- Refactorización global de colores (`global.css` y `tailwind.config.js`) eliminando `oklch()` de las variables CSS y delegando la función de construcción a Tailwind con la variable `<alpha-value>`.
+- Removidos los íconos del Header interno del `feed.tsx` para un look más limpio.
+- Corrección de clases de Tailwind inválidas en `QRCameraScanner.tsx`.
+
+## [1.1.0] - 2026-07-12
+
+### Añadido
+- Identidad gráfica completa de **HandyBet** con soporte paramétrico (Logo.tsx).
+- Flujo de *Onboarding* de Grupos con cuestionarios de intenciones.
+- Flujo de monetización *Pay-to-Post* y simulador de *Split de Transacciones* (90/10).
+- Atributos `phone_whatsapp` y `whatsapp_handle` en los perfiles de usuario.
+- Cerebro portátil (`.brain/`) para documentar arquitectura, dependencias y registro de decisiones.
+- Skill local `deploy-and-brain` para gestión automatizada del ciclo de despliegue y documentación.
+
+### Cambiado
+- Rebranding completo de la aplicación (de Yastaa a HandyBet).
+- Reorganización arquitectónica del esquema de base de datos (`handybet-core.spec.md` y migraciones SQL) para incorporar la Capa Social (Grupos, Posts, Amistades, Planes).
+- Refactor del `(tabs)/_layout.tsx` para forzar un diseño estricto de 5 pestañas persistentes (hiding sub-routes) para mantener compatibilidad Web/Móvil.
+- Centrado y reestructuración del contenedor de iconos en la barra de reacciones (`feed.tsx`) al 50% de ancho.
+- Migración de emojis a íconos vectoriales `lucide-react-native` (`Heart`, `MessageSquare`, `Share2`, `Bell`).
+
+
+---
+## 🤖 Análisis de la IA: Evolución del Sistema
+* **Trazabilidad Arquitectónica**: Las decisiones registradas (ADRs) demuestran una resolución efectiva de problemas de layout y modularización de componentes.
+* **Control de Versiones**: El seguimiento con Keep a Changelog asegura transparencia en los despliegues.
+
+---
+## 🔗 Referencias Relacionadas
+[[000 - 📱 handy-app - Visión General|📱 Visión General]]

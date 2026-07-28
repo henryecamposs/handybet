@@ -1,0 +1,120 @@
+{
+  "bot_id": "betting_bot",
+  "name": "Bot de Apuestas y Loterías VIP",
+  "description": "Bot interactivo guiado por JSON para apuestas deportivas, loterías y jugadas compuestas con acumulación",
+  "default_command_prefix": "@",
+  "triggers": [
+    { "command": "@start", "target_node_id": "node_fetch_games" },
+    { "command": "@apostar", "target_node_id": "node_fetch_games" },
+    { "command": "@juegos", "target_node_id": "node_fetch_games" }
+  ],
+  "nodes": {
+    "node_fetch_games": {
+      "id": "node_fetch_games",
+      "type": "api_call",
+      "message_template": "🎲 Cargando juegos activos desde la central de apuestas...",
+      "variable_name": "juegos_activos",
+      "api_config": {
+        "url": "https://api.handybet.com/v1/games/active",
+        "method": "GET",
+        "extract_array_path": "data.games",
+        "label_field": "title",
+        "value_field": "code",
+        "node_id_on_success": "node_select_juegos",
+        "node_id_on_empty": "node_no_games_found",
+        "node_id_on_error": "node_no_games_found"
+      }
+    },
+    "node_no_games_found": {
+      "id": "node_no_games_found",
+      "type": "question",
+      "message_template": "❌ No se encontraron juegos o sorteos activos en este momento. ¿Qué deseas hacer?",
+      "input_type": "single_select",
+      "variable_name": "opcion_fallo_juegos",
+      "options": [
+        { "label": "🔄 Reintentar Cargar Juegos", "value": "reintentar", "target_node_id": "node_fetch_games" },
+        { "label": "🏠 Volver al Inicio", "value": "inicio", "target_node_id": "node_fetch_games" }
+      ]
+    },
+    "node_select_juegos": {
+      "id": "node_select_juegos",
+      "type": "question",
+      "message_template": "🎰 *Selección de Juegos*\nElige el juego o sorteo al cual deseas apostar:",
+      "input_type": "single_select",
+      "variable_name": "juego_seleccionado",
+      "dynamic_options_source": "juegos_activos",
+      "next_node_id": "node_input_numbers",
+      "options": [
+        { "label": "🎲 Lotto Activo (Sorteo 10 AM)", "value": "Lotto Activo", "target_node_id": "node_input_numbers" },
+        { "label": "🦁 La Granjita (Sorteo 11 AM)", "value": "La Granjita", "target_node_id": "node_input_numbers" },
+        { "label": "⚽ Parlay Deportivo (Champ. League)", "value": "Parlay Deportivo", "target_node_id": "node_input_numbers" }
+      ]
+    },
+    "node_input_numbers": {
+      "id": "node_input_numbers",
+      "type": "question",
+      "message_template": "🔢 Escribe los números a apostar para *{{juego_seleccionado}}* separados por coma (ejemplo: '05, 12, 23'):",
+      "input_type": "array_csv",
+      "variable_name": "numeros",
+      "next_node_id": "node_input_amount"
+    },
+    "node_input_amount": {
+      "id": "node_input_amount",
+      "type": "question",
+      "message_template": "💵 Escribe el monto individual en Bs. a apostar por cada número (ejemplo: '10' o '25.5'):",
+      "input_type": "number",
+      "variable_name": "monto_apuesta",
+      "next_node_id": "node_loop_accumulator"
+    },
+    "node_loop_accumulator": {
+      "id": "node_loop_accumulator",
+      "type": "loop_accumulator",
+      "message_template": "✅ *Jugada agregada al ticket*\n• Juego: {{juego_seleccionado}}\n• Números: {{numeros}}\n• Monto c/u: {{monto_apuesta}} Bs.\n\n¿Deseas agregar otra jugada al ticket?",
+      "input_type": "single_select",
+      "variable_name": "opcion_repetir",
+      "next_node_id": "node_checkout_summary",
+      "accumulator_config": {
+        "target_array_variable": "apuestas",
+        "items_to_push": ["juego_seleccionado", "numeros", "monto_apuesta"],
+        "repeat_target_node_id": "node_select_juegos",
+        "finish_target_node_id": "node_checkout_summary"
+      },
+      "options": [
+        { "label": "➕ Sí, agregar otra jugada", "value": "Si", "target_node_id": "node_select_juegos" },
+        { "label": "🏁 No, finalizar e ir a pagar", "value": "No", "target_node_id": "node_checkout_summary" }
+      ]
+    },
+    "node_checkout_summary": {
+      "id": "node_checkout_summary",
+      "type": "question",
+      "message_template": "🧾 *RESUMEN DE JUGADAS ACUMULADAS*\nHas registrado {{total_apuestas_count}} jugada(s) en tu ticket.\n\n💳 *Datos de Pago Móvil*\n• Banco: Banesco (0134)\n• Teléfono: 0412-1234567\n• C.I / RIF: J-12345678\n\nPor favor, realiza el pago e ingresa el número de referencia:",
+      "input_type": "text",
+      "variable_name": "refpago",
+      "next_node_id": "node_wait_owner_approval"
+    },
+    "node_wait_owner_approval": {
+      "id": "node_wait_owner_approval",
+      "type": "human_approval",
+      "message_template": "⌛ Referencia *{{refpago}}* recibida.\nEl taquillero dueño del chat está verificando el depósito...",
+      "human_approval_config": {
+        "approved_node_id": "node_generate_ticket",
+        "rejected_node_id": "node_ticket_rejected"
+      }
+    },
+    "node_ticket_rejected": {
+      "id": "node_ticket_rejected",
+      "type": "question",
+      "message_template": "❌ El depósito con referencia '{{refpago}}' no pudo ser verificado. Por favor, reintenta el pago.",
+      "input_type": "single_select",
+      "variable_name": "opcion_reintento",
+      "options": [
+        { "label": "🔄 Reintentar Pago", "value": "reintentar", "target_node_id": "node_checkout_summary" }
+      ]
+    },
+    "node_generate_ticket": {
+      "id": "node_generate_ticket",
+      "type": "generate_receipt",
+      "message_template": "🎟️ *TICKET DE APUESTA PROCESADO*\n\n• Código Ticket: #TK-{{random_code}}\n• Referencia Pago: {{refpago}}\n• Estado: CONFIRMADO ✅\n\n¡Mucha suerte en tus jugadas!"
+    }
+  }
+}

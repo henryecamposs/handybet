@@ -7,9 +7,10 @@ interface MessageContainerProps {
   onDelete?: (id: string | number) => void;
   onReply?: (id: string | number) => void;
   onCopy?: (text: string) => void;
+  onPressButton?: (button: any) => void;
 }
 
-export default function MessageContainer({ messages, onDelete, onReply, onCopy }: MessageContainerProps) {
+export default function MessageContainer({ messages, onDelete, onReply, onCopy, onPressButton }: MessageContainerProps) {
   const scrollViewRef = useRef<ScrollView>(null);
 
   return (
@@ -27,6 +28,7 @@ export default function MessageContainer({ messages, onDelete, onReply, onCopy }
             onDelete={onDelete}
             onReply={onReply}
             onCopy={onCopy}
+            onPressButton={onPressButton}
           />
         ))}
       </View>

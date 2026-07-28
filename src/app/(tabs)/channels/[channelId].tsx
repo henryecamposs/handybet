@@ -216,30 +216,86 @@ export default function ChannelDetailScreen() {
 
   const tabs = [
     {
-      id: 'posts',
-      label: 'Publicaciones',
+      id: 'todos',
+      label: 'TODOS',
       content: (
-        <View className="mt-2">
-          {isAdmin && (
-            <View className="mb-4">
-              <CreatePostWidget
-                onPublish={handlePublishPost}
-                forcedTarget={{
-                  id: channel?.id || '',
-                  name: channel?.name || '',
-                  type: 'channel'
-                }}
-              />
+        <View className="flex-col lg:flex-row gap-6 mt-4">
+          {/* Columna Izquierda: Información y Salas del Canal */}
+          <View className="w-full lg:w-1/3 gap-4">
+            <View className="bg-card border border-border rounded-xl p-4">
+              <View className="flex-row items-center gap-2 mb-2">
+                <Info size={18} color={colors.primary} />
+                <Text className="text-foreground font-bold text-base">Descripción</Text>
+              </View>
+              <Text className="text-foreground/80 text-sm leading-5">
+                {channel?.description || 'Empresa de apuestas aliada. Accede a nuestras salas y subgrupos oficiales.'}
+              </Text>
             </View>
-          )}
-          {channelPosts.length > 0 ? (
-            <PostContainer
-              title="Publicaciones Recientes"
-              posts={channelPosts}
-            />
-          ) : (
-            <EmptyState title="No hay publicaciones en este canal." icon={LayoutList} variant="dashed" />
-          )}
+
+            <View className="bg-card border border-border rounded-xl p-4">
+              <View className="flex-row items-center gap-2 mb-3">
+                <Megaphone size={18} color={colors.primary} />
+                <Text className="text-foreground font-bold text-base">Detalles del Canal</Text>
+              </View>
+              <View className="gap-2">
+                <View className="flex-row justify-between py-1.5 border-b border-border/50">
+                  <Text className="text-foreground/70 text-xs">Salas Habilitadas</Text>
+                  <Text className="text-primary font-bold text-xs">{groups.length} Grupos</Text>
+                </View>
+                <View className="flex-row justify-between py-1.5 border-b border-border/50">
+                  <Text className="text-foreground/70 text-xs">Tipo de Entidad</Text>
+                  <Text className="text-foreground font-medium text-xs">Canal Oficial</Text>
+                </View>
+                <View className="flex-row justify-between py-1.5">
+                  <Text className="text-foreground/70 text-xs">Verificación</Text>
+                  <Text className="text-emerald-400 font-bold text-xs">✓ Empresa Aliada</Text>
+                </View>
+              </View>
+            </View>
+
+            <View className="bg-card border border-border rounded-xl p-4">
+              <View className="flex-row items-center justify-between mb-3">
+                <View className="flex-row items-center gap-2">
+                  <Users size={18} color={colors.primary} />
+                  <Text className="text-foreground font-bold text-base">Salas Destacadas ({groups.length})</Text>
+                </View>
+              </View>
+              {groups.slice(0, 3).map((group) => (
+                <TouchableOpacity
+                  key={group.id}
+                  onPress={() => router.push(`/channels/groups?id=${group.id}&from=channel` as any)}
+                  className="flex-row items-center justify-between py-2 border-b border-border/40 last:border-0"
+                >
+                  <Text className="text-foreground text-xs font-semibold" numberOfLines={1}>{group.name}</Text>
+                  <Text className="text-primary text-[10px] uppercase font-bold">Ver Sala ›</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
+
+          {/* Columna Derecha: Widget de Creación y Muro de Publicaciones */}
+          <View className="w-full lg:w-2/3">
+            {isAdmin && (
+              <View className="mb-4">
+                <CreatePostWidget
+                  onPublish={handlePublishPost}
+                  forcedTarget={{
+                    id: channel?.id || '',
+                    name: channel?.name || '',
+                    type: 'channel'
+                  }}
+                />
+              </View>
+            )}
+            {channelPosts.length > 0 ? (
+              <PostContainer
+                title="Publicaciones Recientes"
+                posts={channelPosts}
+              />
+            ) : (
+              <EmptyState title="No hay publicaciones en este canal." icon={LayoutList} variant="dashed" />
+            )}
+          </View>
         </View>
       )
     },
@@ -247,7 +303,7 @@ export default function ChannelDetailScreen() {
       id: 'groups',
       label: 'Grupos / Salas',
       content: (
-        <View className="mt-2">
+        <View className="mt-4">
           {groups.length === 0 ? (
             <EmptyState title="Esta empresa no cuenta con grupos habilitados aún." icon={Users} variant="dashed" />
           ) : (
@@ -255,6 +311,18 @@ export default function ChannelDetailScreen() {
               {groups.map((group) => renderGroupItem(group))}
             </View>
           )}
+        </View>
+      )
+    },
+    {
+      id: 'info',
+      label: 'Información',
+      content: (
+        <View className="mt-4 p-4 bg-background/40 border border-border rounded-xl">
+          <Text className="text-white font-black text-sm uppercase tracking-wider mb-2">Acerca del Canal Oficial</Text>
+          <Text className="text-zinc-400 text-xs leading-5">
+            Canal verificado de la red HandyBet. Todas las salas y subgrupos vinculados a este canal cuentan con soporte directo del administrador.
+          </Text>
         </View>
       )
     }
