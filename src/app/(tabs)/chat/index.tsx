@@ -11,12 +11,16 @@ import IconButton from '@/components/ui/IconButton';
 import { localDB } from '../../../lib/localDB';
 
 const ACTIVE_USERS = [
-  { id: 'usr_joselin', name: 'Joselin La Gata', avatar: 'https://i.pravatar.cc/150?u=joselin' },
-  { id: 'usr_diego', name: 'Diego', avatar: 'https://i.pravatar.cc/150?u=diego' },
-  { id: 'usr_carlos', name: 'Carlos', avatar: 'https://i.pravatar.cc/150?u=carlos' },
-  { id: 'usr_maria', name: 'María', avatar: 'https://i.pravatar.cc/150?u=maria' },
-  { id: 'usr_ana', name: 'Ana', avatar: 'https://i.pravatar.cc/150?u=ana' },
-  { id: 'usr_roberto', name: 'Roberto', avatar: 'https://i.pravatar.cc/150?u=roberto' }
+  { id: 'usr_joselin', name: 'Joselin La Gata', avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150' },
+  { id: 'usr_valeria', name: 'Valeria Gómez', avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150' },
+  { id: 'usr_nicole', name: 'Nicole Rossi', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150' },
+  { id: 'usr_roberto', name: 'Roberto Tips', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150' },
+  { id: 'usr_don_animalito', name: 'Don Animalito', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150' },
+  { id: 'usr_diego', name: 'Diego Herrera', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150' },
+  { id: 'usr_carlos', name: 'Carlos Ruiz', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150' },
+  { id: 'usr_maria', name: 'María Bet', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150' },
+  { id: 'usr_daniella', name: 'Daniella Poker', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150' },
+  { id: 'usr_kevin', name: 'Kevin Crash', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150' }
 ];
 
 export default function ChatInboxScreen() {
@@ -27,22 +31,58 @@ export default function ChatInboxScreen() {
 
   const directChats = [
     {
+      id: 'chat_joselin_vip',
+      name: 'Joselin La Gata (VIP)',
+      avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150',
+      lastMessage: '📸 Te dejé una sesión de fotos exclusiva en la piscina que no subí a redes...',
+      time: '14:15 PM',
+      unreadCount: 2,
+      isActive: true
+    },
+    {
+      id: 'chat_valeria_vip',
+      name: 'Valeria Gómez (VIP)',
+      avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150',
+      lastMessage: '🔥 Set exclusivo post-entreno listo para desbloquear en el chat privado',
+      time: '10:05 AM',
+      unreadCount: 1,
+      isActive: true
+    },
+    {
+      id: 'chat_nicole_vip',
+      name: 'Nicole Rossi Privé',
+      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150',
+      lastMessage: '🎥 Video pasarela y backstage en alta definición disponible',
+      time: 'Ayer',
+      unreadCount: 1,
+      isActive: false
+    },
+    {
+      id: 'chat_roberto_tips',
+      name: 'Roberto Pronósticos (El Rey)',
+      avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150',
+      lastMessage: '📊 Parley de 4 logros MLB listo con cuota 6.50 garantizada',
+      time: 'Ayer',
+      unreadCount: 0,
+      isActive: false
+    },
+    {
+      id: 'chat_pedro_taquilla',
+      name: 'Pedro Ramírez (Taquilla Caracas)',
+      avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150',
+      lastMessage: '🎟️ Ticket generado con éxito: TKT-44889922. ¡Mucho éxito en la jugada!',
+      time: 'Hace 2 días',
+      unreadCount: 0,
+      isActive: false
+    },
+    {
       id: 'chat-1',
-      name: 'Soporte HandyBet',
+      name: 'Soporte Oficial HandyBet',
       avatar: 'https://api.dicebear.com/7.x/identicon/png?seed=imaginaria&backgroundColor=b6e3f4',
       lastMessage: 'Su recarga por Pago Móvil de 150 Bs. ha sido procesada con éxito.',
       time: '11:45 AM',
       unreadCount: 1,
       isActive: true
-    },
-    {
-      id: 'chat-2',
-      name: 'Pronosticador Oficial',
-      avatar: 'https://api.dicebear.com/7.x/identicon/png?seed=pronosticos&backgroundColor=caee26',
-      lastMessage: 'Revisa los triples calientes cargados en la bóveda multimedia.',
-      time: 'Ayer',
-      unreadCount: 0,
-      isActive: false
     }
   ];
 

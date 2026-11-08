@@ -86,6 +86,17 @@ type: changelog
 - **Decisión:**
   * Creamos `GamesHeroBanner.tsx` con una barra de desplazamiento visual interactiva (track con thumb dinámico en color primario), cálculo de progreso exacto, soporte de clic para saltos en la barra, flechas direccionales flotantes y scroll con rueda de ratón en web (`onWheel`).
 
+## Hito 12: Ecosistema Masivo de Mockdata, Paywalls de Chat VIP, Suscripciones y Simulador Aviator Crash
+- **Fecha:** 2026-11-08
+- **Contexto:** La plataforma requería poblar completamente todos los módulos con datos masivos y funcionales (+50 usuarios, +50 canales, +50 grupos, +50 juegos en 7 categorías, premios ganados, apuestas, relaciones), además de dotar a la UI de dinamismo real: monetización VIP en chat mediante paywall multimedia, suscripción a planes de tipsters en posts, y un simulador interactivo de crash games con créditos ficticios.
+- **Decisión:**
+  * Implementamos `scripts/generate_massive_mockdata.js` para generar datasets coherentes en `src/data/` (57 usuarios con roles reales, 52 canales, 56 grupos, 52 juegos en 7 categorías, 22 premios ganados, 32 apuestas, 25 conversaciones de chat, 62 posts y 285 enlaces relacionales).
+  * Extendimos `useHandyBetStore` con saldo global reactivo (`walletBalance`), control de medios desbloqueados (`unlockedMediaIds`), métodos de descuento (`deductBalance`), recarga (`addBalance`) y desbloqueo (`unlockMedia`).
+  * Enriquecimos el chat privado (`MessageItem.tsx`) con un paywall multimedia interactivo que oculta imágenes bajo blur/candado y permite comprarlas en 1-clic debitando de la billetera.
+  * Dotamos a los posts del feed (`PostItem.tsx`) de un botón "Suscribirse ⭐" con selector modular de planes (`TierPlanSelector.tsx`), activando membresías exclusivas con toasts informativos.
+  * Diseñamos y construimos `CrashDemoGame.tsx`, un simulador completo de Aviator Crash con curva exponencial, animación de despegue, balance demo recargable, retiro ("Cash Out") y feed en vivo de jugadores comunitarios.
+  * Conectamos los Hubs de Juegos (`index.tsx` y `[gameId].tsx`), Miembros (`follows`), Grupos (`grupos.tsx`) y Billetera (`wallet.tsx`) a la base local masiva, permitiendo emitir boletos con números de serie reales y recargar fondos con Pago Móvil simulado.
+
 
 ---
 
@@ -95,6 +106,43 @@ type: changelog
 Todos los cambios notables de este proyecto serán documentados en este archivo.
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/), y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [1.15.0] - 2026-11-08
+
+### Añadido
+- **Ecosistema Masivo de Mockdata Activo y Completo**: Generación y carga dinámica de datos de alta fidelidad en `src/data/` y persistencia en `localDB`:
+  - `users.json`: 57 usuarios (Administradores, Creadoras VIP, Pronosticadores, Taquilleros, Apostadores).
+  - `channels.json`: 52 canales con planes de monetización y descripción.
+  - `groups.json`: 56 grupos comunitarios asociados a canales con reglas y bots.
+  - `games.json`: 52 juegos distribuidos en 7 categorías (`animalitos`, `quinielas`, `minijuegos`, `bingos`, `parley`, `rifas`, `loterias`).
+  - `prizes.json`: 22 premios ganados con códigos de boleto y montos en VES.
+  - `bets.json`: 32 boletos de apuestas con estados de confirmación y cobro.
+  - `chats.json`: 25 salas de chat directo con paywalls de contenido multimedia.
+  - `posts.json`: 62 publicaciones con planes de suscripción de creadores y tags deportivos.
+  - `news.json`: 20 noticias y boletines oficiales de sorteos y actualidad.
+  - `relationships.json`: 285 enlaces de seguimiento y recomendaciones cruzadas.
+- **Paywall Multimedia Interactivo en Chat VIP (`MessageItem.tsx`)**: Visualización de contenido bloqueado con efecto blur, insignia de candado, precio en VES/Puntos y botón reactivo para desbloquear con el saldo de la billetera en `useHandyBetStore`.
+- **Botón y Modal de Suscripción en Publicaciones (`PostItem.tsx` + `TierPlanSelector.tsx`)**: Integración de planes de membresía (`Datos Libres`, `VIP Oro`, `Club del Animalito`) en publicaciones de creadores con modal de suscripción, deducción de balance en 1-clic y retroalimentación con toasts.
+- **Simulador Interactivo Crash Game Aviator (`CrashDemoGame.tsx`)**: Minijuego con curva exponencial de multiplicador, animación de cohete, balance demo con recarga ilimitada, retiro manual ("Cash Out") y feed en vivo de apuestas comunitarias.
+- **Expansión de Hub de Juegos a 7 Categorías (`(tabs)/games/index.tsx`)**: Carga dinámica desde `localDB.games`, pestañas de navegación horizontal fluida y contenedor de minijuegos con el simulador Crash integrado.
+- **Zona de Apuestas Oficial e Interactiva en Detalle de Juego (`(tabs)/games/[gameId].tsx`)**: Emisión de boletos con código serial, registro automático en `localDB.bets`, deducción de saldo y simulador Crash para juegos de tipo demo.
+- **Billetera y Taquillas Dinámica (`(tabs)/wallet.tsx`)**: Vinculación del saldo global reactivo (`walletBalance`), listado de premios cobrables desde `localDB.prizes`, historial de jugadas y modal interactivo para recargas inmediatas con Pago Móvil simulado.
+
+### Modificado
+- **Contenedor de Pestañas con Desplazamiento Horizontal (`TabContainer.tsx`)**: Soporte de scroll horizontal (`showsHorizontalScrollIndicator={false}`) para alojar sin desbordes las 7 categorías de sorteos y grupos.
+- **Widgets de Barra Lateral Derecha (`RightSidebarWidgets.tsx`)**: Resiliencia y fallback automático para sugerencias de seguimiento y premios ganados, evitando cajas vacías o estados huérfanos.
+- **Caché Reactiva de Base de Datos Local (`localDB.ts`)**: Validación automática de volumen de datos (`users.length >= 50 && games.length >= 50`) para re-sembrar automáticamente el storage si existían datos heredados.
+
+### Corregido
+- **Variantes de Notificaciones Toast**: Corrección de valores de variante de Toast a `'danger'` y tipado TypeScript estricto en todos los componentes interactivos.
+
+### Recomendaciones y Pruebas de QA
+- 🧪 **Pruebas de Desbloqueo VIP**:
+  - Abrir chat con creadoras VIP (ej. Joselin, Valeria) y verificar el botón "Desbloquear (15.00 VES)". Confirmar descuento reactivo del balance global y revelación de imagen en alta resolución.
+- 🚀 **Pruebas de Simulador Crash**:
+  - Ingresar a la pestaña "Mini Juegos" o `/games/g_aviator_crash`, apostar 25 créditos demo, presionar "Despegar" y comprobar que "Cobrar (Cash Out)" acredita las ganancias al balance ficticio antes del estallido.
+- ⭐ **Pruebas de Suscripción a Pronosticadores**:
+  - En el Feed, pulsar "Suscribirse ⭐" en publicaciones de tipsters (ej. Don Animalito o Roberto). Elegir plan y confirmar la activación del estado "Suscrito".
 
 ## [1.14.0] - 2026-11-08
 

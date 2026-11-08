@@ -19,8 +19,8 @@ export default function GruposScreen() {
   const colors = useThemeColors();
   const { navigateTo } = useAppNavigation();
 
-  // Simulamos los grupos del usuario
-  const [misGrupos, setMisGrupos] = useState<Group[]>(handyBetGroups.slice(0, 2) as any);
+  const [allGroups, setAllGroups] = useState<Group[]>([]);
+  const [misGrupos, setMisGrupos] = useState<Group[]>([]);
   const [selectedGroup, setSelectedGroup] = useState<Group | null>(null);
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [loadingOnboarding, setLoadingOnboarding] = useState(false);
@@ -29,6 +29,24 @@ export default function GruposScreen() {
   const [latestPosts, setLatestPosts] = useState<any[]>([]);
 
   useEffect(() => {
+    async function loadGroupsData() {
+      try {
+        const loaded = await localDB.groups.getAll();
+        if (loaded && loaded.length > 0) {
+          setAllGroups(loaded);
+          setMisGrupos(loaded.slice(0, 6));
+        } else {
+          setAllGroups(handyBetGroups as any);
+          setMisGrupos(handyBetGroups.slice(0, 2) as any);
+        }
+      } catch (e) {
+        console.warn('Error loading groups:', e);
+        setAllGroups(handyBetGroups as any);
+        setMisGrupos(handyBetGroups.slice(0, 2) as any);
+      }
+    }
+    loadGroupsData();
+
     async function fetchLatestPosts() {
       try {
         const allPosts = await localDB.posts.getAll();
@@ -107,9 +125,11 @@ export default function GruposScreen() {
     }
   };
 
-  const filteredDiscoverGroups = handyBetGroups.slice(2).filter((group) =>
-    group.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredDiscoverGroups = allGroups
+    .filter((group) => !misGrupos.some((mg) => mg.id === group.id))
+    .filter((group) =>
+      group.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
   const renderGroupItem = (group: any) => {
     const isMember = misGrupos.some((g: Group) => g.id === group.id);

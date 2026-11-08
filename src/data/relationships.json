@@ -1,49 +1,3712 @@
 {
   "follows": [
-    { "follower_id": "usr_henry", "following_id": "usr_joselin", "created_at": "2025-02-15T10:00:00Z" },
-    { "follower_id": "usr_henry", "following_id": "usr_diego", "created_at": "2025-01-20T08:00:00Z" },
-    { "follower_id": "usr_henry", "following_id": "usr_roberto", "created_at": "2025-03-10T12:00:00Z" },
-    { "follower_id": "usr_carlos", "following_id": "usr_henry", "created_at": "2025-03-10T11:00:00Z" },
-    { "follower_id": "usr_carlos", "following_id": "usr_joselin", "created_at": "2025-03-12T14:00:00Z" },
-    { "follower_id": "usr_carlos", "following_id": "usr_roberto", "created_at": "2025-04-01T09:00:00Z" },
-    { "follower_id": "usr_carlos", "following_id": "usr_ana", "created_at": "2025-04-15T16:00:00Z" },
-    { "follower_id": "usr_maria", "following_id": "usr_joselin", "created_at": "2025-04-02T13:00:00Z" },
-    { "follower_id": "usr_maria", "following_id": "usr_henry", "created_at": "2025-04-05T10:30:00Z" },
-    { "follower_id": "usr_maria", "following_id": "usr_carlos", "created_at": "2025-04-10T15:00:00Z" },
-    { "follower_id": "usr_ana", "following_id": "usr_joselin", "created_at": "2025-04-20T11:00:00Z" },
-    { "follower_id": "usr_ana", "following_id": "usr_henry", "created_at": "2025-04-22T09:00:00Z" },
-    { "follower_id": "usr_ana", "following_id": "usr_roberto", "created_at": "2025-05-01T14:00:00Z" },
-    { "follower_id": "usr_ana", "following_id": "usr_diego", "created_at": "2025-05-03T10:00:00Z" },
-    { "follower_id": "usr_joselin", "following_id": "usr_henry", "created_at": "2025-02-12T09:00:00Z" },
-    { "follower_id": "usr_joselin", "following_id": "usr_ana", "created_at": "2025-05-10T11:30:00Z" },
-    { "follower_id": "usr_roberto", "following_id": "usr_henry", "created_at": "2025-03-05T08:00:00Z" },
-    { "follower_id": "usr_roberto", "following_id": "usr_diego", "created_at": "2025-03-08T10:00:00Z" },
-    { "follower_id": "usr_roberto", "following_id": "usr_ana", "created_at": "2025-05-15T13:00:00Z" },
-    { "follower_id": "usr_diego", "following_id": "usr_henry", "created_at": "2025-01-18T07:00:00Z" },
-    { "follower_id": "usr_diego", "following_id": "usr_pedro", "created_at": "2025-02-01T09:00:00Z" },
-    { "follower_id": "usr_valentina", "following_id": "usr_joselin", "created_at": "2025-06-05T14:00:00Z" },
-    { "follower_id": "usr_valentina", "following_id": "usr_henry", "created_at": "2025-06-05T14:05:00Z" },
-    { "follower_id": "usr_valentina", "following_id": "usr_ana", "created_at": "2025-06-06T10:00:00Z" },
-    { "follower_id": "usr_gabriel", "following_id": "usr_roberto", "created_at": "2025-05-20T16:00:00Z" },
-    { "follower_id": "usr_gabriel", "following_id": "usr_carlos", "created_at": "2025-05-22T11:00:00Z" },
-    { "follower_id": "usr_isabella", "following_id": "usr_henry", "created_at": "2025-04-10T09:00:00Z" },
-    { "follower_id": "usr_isabella", "following_id": "usr_diego", "created_at": "2025-04-10T09:05:00Z" },
-    { "follower_id": "usr_pedro", "following_id": "usr_diego", "created_at": "2025-02-05T08:00:00Z" },
-    { "follower_id": "usr_pedro", "following_id": "usr_henry", "created_at": "2025-02-06T09:00:00Z" },
-    { "follower_id": "usr_laura", "following_id": "usr_diego", "created_at": "2025-03-20T10:00:00Z" },
-    { "follower_id": "usr_laura", "following_id": "usr_pedro", "created_at": "2025-03-20T10:05:00Z" }
+    {
+      "follower_id": "usr_admin",
+      "following_id": "usr_henry",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_admin",
+      "following_id": "usr_joselin",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_admin",
+      "following_id": "usr_valeria",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_admin",
+      "following_id": "usr_nicole",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_admin",
+      "following_id": "usr_camila",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_henry",
+      "following_id": "usr_joselin",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_henry",
+      "following_id": "usr_valeria",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_henry",
+      "following_id": "usr_nicole",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_henry",
+      "following_id": "usr_camila",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_henry",
+      "following_id": "usr_isabella",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_joselin",
+      "following_id": "usr_valeria",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_joselin",
+      "following_id": "usr_nicole",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_joselin",
+      "following_id": "usr_camila",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_joselin",
+      "following_id": "usr_isabella",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_joselin",
+      "following_id": "usr_andrea",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_valeria",
+      "following_id": "usr_nicole",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_valeria",
+      "following_id": "usr_camila",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_valeria",
+      "following_id": "usr_isabella",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_valeria",
+      "following_id": "usr_andrea",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_valeria",
+      "following_id": "usr_gabriela",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_nicole",
+      "following_id": "usr_camila",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_nicole",
+      "following_id": "usr_isabella",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_nicole",
+      "following_id": "usr_andrea",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_nicole",
+      "following_id": "usr_gabriela",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_nicole",
+      "following_id": "usr_stefany",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_camila",
+      "following_id": "usr_isabella",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_camila",
+      "following_id": "usr_andrea",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_camila",
+      "following_id": "usr_gabriela",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_camila",
+      "following_id": "usr_stefany",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_camila",
+      "following_id": "usr_natalia",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_isabella",
+      "following_id": "usr_andrea",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_isabella",
+      "following_id": "usr_gabriela",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_isabella",
+      "following_id": "usr_stefany",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_isabella",
+      "following_id": "usr_natalia",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_isabella",
+      "following_id": "usr_carolina",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_andrea",
+      "following_id": "usr_gabriela",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_andrea",
+      "following_id": "usr_stefany",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_andrea",
+      "following_id": "usr_natalia",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_andrea",
+      "following_id": "usr_carolina",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_andrea",
+      "following_id": "usr_roberto",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_gabriela",
+      "following_id": "usr_stefany",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_gabriela",
+      "following_id": "usr_natalia",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_gabriela",
+      "following_id": "usr_carolina",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_gabriela",
+      "following_id": "usr_roberto",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_gabriela",
+      "following_id": "usr_don_animalito",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_stefany",
+      "following_id": "usr_natalia",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_stefany",
+      "following_id": "usr_carolina",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_stefany",
+      "following_id": "usr_roberto",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_stefany",
+      "following_id": "usr_don_animalito",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_stefany",
+      "following_id": "usr_brujo_triples",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_natalia",
+      "following_id": "usr_carolina",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_natalia",
+      "following_id": "usr_roberto",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_natalia",
+      "following_id": "usr_don_animalito",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_natalia",
+      "following_id": "usr_brujo_triples",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_natalia",
+      "following_id": "usr_parley_master",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_carolina",
+      "following_id": "usr_roberto",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_carolina",
+      "following_id": "usr_don_animalito",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_carolina",
+      "following_id": "usr_brujo_triples",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_carolina",
+      "following_id": "usr_parley_master",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_carolina",
+      "following_id": "usr_profesor_fija",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_roberto",
+      "following_id": "usr_don_animalito",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_roberto",
+      "following_id": "usr_brujo_triples",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_roberto",
+      "following_id": "usr_parley_master",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_roberto",
+      "following_id": "usr_profesor_fija",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_roberto",
+      "following_id": "usr_hipismo_gold",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_don_animalito",
+      "following_id": "usr_brujo_triples",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_don_animalito",
+      "following_id": "usr_parley_master",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_don_animalito",
+      "following_id": "usr_profesor_fija",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_don_animalito",
+      "following_id": "usr_hipismo_gold",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_don_animalito",
+      "following_id": "usr_analista_nba",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_brujo_triples",
+      "following_id": "usr_parley_master",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_brujo_triples",
+      "following_id": "usr_profesor_fija",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_brujo_triples",
+      "following_id": "usr_hipismo_gold",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_brujo_triples",
+      "following_id": "usr_analista_nba",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_brujo_triples",
+      "following_id": "usr_futbol_picks",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_parley_master",
+      "following_id": "usr_profesor_fija",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_parley_master",
+      "following_id": "usr_hipismo_gold",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_parley_master",
+      "following_id": "usr_analista_nba",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_parley_master",
+      "following_id": "usr_futbol_picks",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_parley_master",
+      "following_id": "usr_selva_guru",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_profesor_fija",
+      "following_id": "usr_hipismo_gold",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_profesor_fija",
+      "following_id": "usr_analista_nba",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_profesor_fija",
+      "following_id": "usr_futbol_picks",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_profesor_fija",
+      "following_id": "usr_selva_guru",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_profesor_fija",
+      "following_id": "usr_triple_zulia",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_hipismo_gold",
+      "following_id": "usr_analista_nba",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_hipismo_gold",
+      "following_id": "usr_futbol_picks",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_hipismo_gold",
+      "following_id": "usr_selva_guru",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_hipismo_gold",
+      "following_id": "usr_triple_zulia",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_hipismo_gold",
+      "following_id": "usr_tenis_ace",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_analista_nba",
+      "following_id": "usr_futbol_picks",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_analista_nba",
+      "following_id": "usr_selva_guru",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_analista_nba",
+      "following_id": "usr_triple_zulia",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_analista_nba",
+      "following_id": "usr_tenis_ace",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_analista_nba",
+      "following_id": "usr_crypto_bets",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_futbol_picks",
+      "following_id": "usr_selva_guru",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_futbol_picks",
+      "following_id": "usr_triple_zulia",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_futbol_picks",
+      "following_id": "usr_tenis_ace",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_futbol_picks",
+      "following_id": "usr_crypto_bets",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_futbol_picks",
+      "following_id": "usr_diego",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_selva_guru",
+      "following_id": "usr_triple_zulia",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_selva_guru",
+      "following_id": "usr_tenis_ace",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_selva_guru",
+      "following_id": "usr_crypto_bets",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_selva_guru",
+      "following_id": "usr_diego",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_selva_guru",
+      "following_id": "usr_pedro",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_triple_zulia",
+      "following_id": "usr_tenis_ace",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_triple_zulia",
+      "following_id": "usr_crypto_bets",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_triple_zulia",
+      "following_id": "usr_diego",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_triple_zulia",
+      "following_id": "usr_pedro",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_triple_zulia",
+      "following_id": "usr_laura",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_tenis_ace",
+      "following_id": "usr_crypto_bets",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_tenis_ace",
+      "following_id": "usr_diego",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_tenis_ace",
+      "following_id": "usr_pedro",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_tenis_ace",
+      "following_id": "usr_laura",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_tenis_ace",
+      "following_id": "usr_carmen",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_crypto_bets",
+      "following_id": "usr_diego",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_crypto_bets",
+      "following_id": "usr_pedro",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_crypto_bets",
+      "following_id": "usr_laura",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_crypto_bets",
+      "following_id": "usr_carmen",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_crypto_bets",
+      "following_id": "usr_javier",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_diego",
+      "following_id": "usr_pedro",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_diego",
+      "following_id": "usr_laura",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_diego",
+      "following_id": "usr_carmen",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_diego",
+      "following_id": "usr_javier",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_diego",
+      "following_id": "usr_patricia",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_pedro",
+      "following_id": "usr_laura",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_pedro",
+      "following_id": "usr_carmen",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_pedro",
+      "following_id": "usr_javier",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_pedro",
+      "following_id": "usr_patricia",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_pedro",
+      "following_id": "usr_miguel",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_laura",
+      "following_id": "usr_carmen",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_laura",
+      "following_id": "usr_javier",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_laura",
+      "following_id": "usr_patricia",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_laura",
+      "following_id": "usr_miguel",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_laura",
+      "following_id": "usr_elena",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_carmen",
+      "following_id": "usr_javier",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_carmen",
+      "following_id": "usr_patricia",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_carmen",
+      "following_id": "usr_miguel",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_carmen",
+      "following_id": "usr_elena",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_carmen",
+      "following_id": "usr_raul",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_javier",
+      "following_id": "usr_patricia",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_javier",
+      "following_id": "usr_miguel",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_javier",
+      "following_id": "usr_elena",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_javier",
+      "following_id": "usr_raul",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_javier",
+      "following_id": "usr_yaneth",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_patricia",
+      "following_id": "usr_miguel",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_patricia",
+      "following_id": "usr_elena",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_patricia",
+      "following_id": "usr_raul",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_patricia",
+      "following_id": "usr_yaneth",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_patricia",
+      "following_id": "usr_carlos",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_miguel",
+      "following_id": "usr_elena",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_miguel",
+      "following_id": "usr_raul",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_miguel",
+      "following_id": "usr_yaneth",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_miguel",
+      "following_id": "usr_carlos",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_miguel",
+      "following_id": "usr_maria",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_elena",
+      "following_id": "usr_raul",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_elena",
+      "following_id": "usr_yaneth",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_elena",
+      "following_id": "usr_carlos",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_elena",
+      "following_id": "usr_maria",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_elena",
+      "following_id": "usr_gabriel",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_raul",
+      "following_id": "usr_yaneth",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_raul",
+      "following_id": "usr_carlos",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_raul",
+      "following_id": "usr_maria",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_raul",
+      "following_id": "usr_gabriel",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_raul",
+      "following_id": "usr_valentina",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_yaneth",
+      "following_id": "usr_carlos",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_yaneth",
+      "following_id": "usr_maria",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_yaneth",
+      "following_id": "usr_gabriel",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_yaneth",
+      "following_id": "usr_valentina",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_yaneth",
+      "following_id": "usr_yorman",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_carlos",
+      "following_id": "usr_maria",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_carlos",
+      "following_id": "usr_gabriel",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_carlos",
+      "following_id": "usr_valentina",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_carlos",
+      "following_id": "usr_yorman",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_carlos",
+      "following_id": "usr_luis_alfonso",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_maria",
+      "following_id": "usr_gabriel",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_maria",
+      "following_id": "usr_valentina",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_maria",
+      "following_id": "usr_yorman",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_maria",
+      "following_id": "usr_luis_alfonso",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_maria",
+      "following_id": "usr_andres_champions",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_gabriel",
+      "following_id": "usr_valentina",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_gabriel",
+      "following_id": "usr_yorman",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_gabriel",
+      "following_id": "usr_luis_alfonso",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_gabriel",
+      "following_id": "usr_andres_champions",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_gabriel",
+      "following_id": "usr_daniella",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_valentina",
+      "following_id": "usr_yorman",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_valentina",
+      "following_id": "usr_luis_alfonso",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_valentina",
+      "following_id": "usr_andres_champions",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_valentina",
+      "following_id": "usr_daniella",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_valentina",
+      "following_id": "usr_samuel",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_yorman",
+      "following_id": "usr_luis_alfonso",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_yorman",
+      "following_id": "usr_andres_champions",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_yorman",
+      "following_id": "usr_daniella",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_yorman",
+      "following_id": "usr_samuel",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_yorman",
+      "following_id": "usr_fernanda",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_luis_alfonso",
+      "following_id": "usr_andres_champions",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_luis_alfonso",
+      "following_id": "usr_daniella",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_luis_alfonso",
+      "following_id": "usr_samuel",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_luis_alfonso",
+      "following_id": "usr_fernanda",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_luis_alfonso",
+      "following_id": "usr_javier_kino",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_andres_champions",
+      "following_id": "usr_daniella",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_andres_champions",
+      "following_id": "usr_samuel",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_andres_champions",
+      "following_id": "usr_fernanda",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_andres_champions",
+      "following_id": "usr_javier_kino",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_andres_champions",
+      "following_id": "usr_claudia",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_daniella",
+      "following_id": "usr_samuel",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_daniella",
+      "following_id": "usr_fernanda",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_daniella",
+      "following_id": "usr_javier_kino",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_daniella",
+      "following_id": "usr_claudia",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_daniella",
+      "following_id": "usr_ricardo",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_samuel",
+      "following_id": "usr_fernanda",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_samuel",
+      "following_id": "usr_javier_kino",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_samuel",
+      "following_id": "usr_claudia",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_samuel",
+      "following_id": "usr_ricardo",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_samuel",
+      "following_id": "usr_jessica",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_fernanda",
+      "following_id": "usr_javier_kino",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_fernanda",
+      "following_id": "usr_claudia",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_fernanda",
+      "following_id": "usr_ricardo",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_fernanda",
+      "following_id": "usr_jessica",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_fernanda",
+      "following_id": "usr_gustavo",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_javier_kino",
+      "following_id": "usr_claudia",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_javier_kino",
+      "following_id": "usr_ricardo",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_javier_kino",
+      "following_id": "usr_jessica",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_javier_kino",
+      "following_id": "usr_gustavo",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_javier_kino",
+      "following_id": "usr_paola",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_claudia",
+      "following_id": "usr_ricardo",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_claudia",
+      "following_id": "usr_jessica",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_claudia",
+      "following_id": "usr_gustavo",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_claudia",
+      "following_id": "usr_paola",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_claudia",
+      "following_id": "usr_victor",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_ricardo",
+      "following_id": "usr_jessica",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_ricardo",
+      "following_id": "usr_gustavo",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_ricardo",
+      "following_id": "usr_paola",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_ricardo",
+      "following_id": "usr_victor",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_ricardo",
+      "following_id": "usr_adriana",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_jessica",
+      "following_id": "usr_gustavo",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_jessica",
+      "following_id": "usr_paola",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_jessica",
+      "following_id": "usr_victor",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_jessica",
+      "following_id": "usr_adriana",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_jessica",
+      "following_id": "usr_rodrigo",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_gustavo",
+      "following_id": "usr_paola",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_gustavo",
+      "following_id": "usr_victor",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_gustavo",
+      "following_id": "usr_adriana",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_gustavo",
+      "following_id": "usr_rodrigo",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_gustavo",
+      "following_id": "usr_mariana",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_paola",
+      "following_id": "usr_victor",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_paola",
+      "following_id": "usr_adriana",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_paola",
+      "following_id": "usr_rodrigo",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_paola",
+      "following_id": "usr_mariana",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_paola",
+      "following_id": "usr_alberto",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_victor",
+      "following_id": "usr_adriana",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_victor",
+      "following_id": "usr_rodrigo",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_victor",
+      "following_id": "usr_mariana",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_victor",
+      "following_id": "usr_alberto",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_victor",
+      "following_id": "usr_sofia",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_adriana",
+      "following_id": "usr_rodrigo",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_adriana",
+      "following_id": "usr_mariana",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_adriana",
+      "following_id": "usr_alberto",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_adriana",
+      "following_id": "usr_sofia",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_adriana",
+      "following_id": "usr_kevin",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_rodrigo",
+      "following_id": "usr_mariana",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_rodrigo",
+      "following_id": "usr_alberto",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_rodrigo",
+      "following_id": "usr_sofia",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_rodrigo",
+      "following_id": "usr_kevin",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_rodrigo",
+      "following_id": "usr_admin",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_mariana",
+      "following_id": "usr_alberto",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_mariana",
+      "following_id": "usr_sofia",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_mariana",
+      "following_id": "usr_kevin",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_mariana",
+      "following_id": "usr_admin",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_mariana",
+      "following_id": "usr_henry",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_alberto",
+      "following_id": "usr_sofia",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_alberto",
+      "following_id": "usr_kevin",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_alberto",
+      "following_id": "usr_admin",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_alberto",
+      "following_id": "usr_henry",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_alberto",
+      "following_id": "usr_joselin",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_sofia",
+      "following_id": "usr_kevin",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_sofia",
+      "following_id": "usr_admin",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_sofia",
+      "following_id": "usr_henry",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_sofia",
+      "following_id": "usr_joselin",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_sofia",
+      "following_id": "usr_valeria",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_kevin",
+      "following_id": "usr_admin",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_kevin",
+      "following_id": "usr_henry",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_kevin",
+      "following_id": "usr_joselin",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_kevin",
+      "following_id": "usr_valeria",
+      "created_at": "2025-02-01T00:00:00Z"
+    },
+    {
+      "follower_id": "usr_kevin",
+      "following_id": "usr_nicole",
+      "created_at": "2025-02-01T00:00:00Z"
+    }
   ],
-  "circles": [
-    { "id": "crc_vip_henry", "owner_id": "usr_henry", "name": "Equipo Core", "members": ["usr_diego", "usr_pedro", "usr_joselin"], "created_at": "2025-02-01T08:00:00Z" },
-    { "id": "crc_vip_joselin", "owner_id": "usr_joselin", "name": "Fans VIP", "members": ["usr_carlos", "usr_ana", "usr_maria"], "created_at": "2025-03-01T10:00:00Z" },
-    { "id": "crc_pronosticos", "owner_id": "usr_roberto", "name": "Círculo Premium", "members": ["usr_carlos", "usr_gabriel", "usr_ana"], "created_at": "2025-04-01T12:00:00Z" }
-  ],
+  "circles": [],
   "follow_suggestions": [
-    { "id": "fs_1", "user_id": "usr_henry", "suggested_id": "usr_gabriel", "mutual_followers": 3, "reason": "Sigue a personas que tú sigues" },
-    { "id": "fs_2", "user_id": "usr_henry", "suggested_id": "usr_valentina", "mutual_followers": 2, "reason": "Nueva en la plataforma" },
-    { "id": "fs_3", "user_id": "usr_henry", "suggested_id": "usr_laura", "mutual_followers": 4, "reason": "Trabaja en Taquillas Valencia" },
-    { "id": "fs_4", "user_id": "usr_henry", "suggested_id": "usr_isabella", "mutual_followers": 2, "reason": "Publicista en la plataforma" },
-    { "id": "fs_5", "user_id": "usr_carlos", "suggested_id": "usr_gabriel", "mutual_followers": 5, "reason": "Intereses similares" },
-    { "id": "fs_6", "user_id": "usr_carlos", "suggested_id": "usr_diego", "mutual_followers": 3, "reason": "Dueño de La Imaginaria" }
+    {
+      "id": "sug_usr_admin_usr_nicole_0",
+      "user_id": "usr_admin",
+      "suggested_id": "usr_nicole",
+      "mutual_followers": 12,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_admin_usr_gabriela_1",
+      "user_id": "usr_admin",
+      "suggested_id": "usr_gabriela",
+      "mutual_followers": 13,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_admin_usr_brujo_triples_2",
+      "user_id": "usr_admin",
+      "suggested_id": "usr_brujo_triples",
+      "mutual_followers": 9,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_admin_usr_selva_guru_3",
+      "user_id": "usr_admin",
+      "suggested_id": "usr_selva_guru",
+      "mutual_followers": 27,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_admin_usr_laura_4",
+      "user_id": "usr_admin",
+      "suggested_id": "usr_laura",
+      "mutual_followers": 9,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_henry_usr_camila_0",
+      "user_id": "usr_henry",
+      "suggested_id": "usr_camila",
+      "mutual_followers": 11,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_henry_usr_stefany_1",
+      "user_id": "usr_henry",
+      "suggested_id": "usr_stefany",
+      "mutual_followers": 24,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_henry_usr_parley_master_2",
+      "user_id": "usr_henry",
+      "suggested_id": "usr_parley_master",
+      "mutual_followers": 11,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_henry_usr_triple_zulia_3",
+      "user_id": "usr_henry",
+      "suggested_id": "usr_triple_zulia",
+      "mutual_followers": 22,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_henry_usr_carmen_4",
+      "user_id": "usr_henry",
+      "suggested_id": "usr_carmen",
+      "mutual_followers": 23,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_joselin_usr_isabella_0",
+      "user_id": "usr_joselin",
+      "suggested_id": "usr_isabella",
+      "mutual_followers": 24,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_joselin_usr_natalia_1",
+      "user_id": "usr_joselin",
+      "suggested_id": "usr_natalia",
+      "mutual_followers": 21,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_joselin_usr_profesor_fija_2",
+      "user_id": "usr_joselin",
+      "suggested_id": "usr_profesor_fija",
+      "mutual_followers": 27,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_joselin_usr_tenis_ace_3",
+      "user_id": "usr_joselin",
+      "suggested_id": "usr_tenis_ace",
+      "mutual_followers": 22,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_joselin_usr_javier_4",
+      "user_id": "usr_joselin",
+      "suggested_id": "usr_javier",
+      "mutual_followers": 26,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_valeria_usr_andrea_0",
+      "user_id": "usr_valeria",
+      "suggested_id": "usr_andrea",
+      "mutual_followers": 5,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_valeria_usr_carolina_1",
+      "user_id": "usr_valeria",
+      "suggested_id": "usr_carolina",
+      "mutual_followers": 6,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_valeria_usr_hipismo_gold_2",
+      "user_id": "usr_valeria",
+      "suggested_id": "usr_hipismo_gold",
+      "mutual_followers": 13,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_valeria_usr_crypto_bets_3",
+      "user_id": "usr_valeria",
+      "suggested_id": "usr_crypto_bets",
+      "mutual_followers": 6,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_valeria_usr_patricia_4",
+      "user_id": "usr_valeria",
+      "suggested_id": "usr_patricia",
+      "mutual_followers": 8,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_nicole_usr_gabriela_0",
+      "user_id": "usr_nicole",
+      "suggested_id": "usr_gabriela",
+      "mutual_followers": 18,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_nicole_usr_roberto_1",
+      "user_id": "usr_nicole",
+      "suggested_id": "usr_roberto",
+      "mutual_followers": 19,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_nicole_usr_analista_nba_2",
+      "user_id": "usr_nicole",
+      "suggested_id": "usr_analista_nba",
+      "mutual_followers": 25,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_nicole_usr_diego_3",
+      "user_id": "usr_nicole",
+      "suggested_id": "usr_diego",
+      "mutual_followers": 16,
+      "reason": "Jugador popular",
+      "category": "company_owner"
+    },
+    {
+      "id": "sug_usr_nicole_usr_miguel_4",
+      "user_id": "usr_nicole",
+      "suggested_id": "usr_miguel",
+      "mutual_followers": 19,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_camila_usr_stefany_0",
+      "user_id": "usr_camila",
+      "suggested_id": "usr_stefany",
+      "mutual_followers": 3,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_camila_usr_don_animalito_1",
+      "user_id": "usr_camila",
+      "suggested_id": "usr_don_animalito",
+      "mutual_followers": 20,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_camila_usr_futbol_picks_2",
+      "user_id": "usr_camila",
+      "suggested_id": "usr_futbol_picks",
+      "mutual_followers": 24,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_camila_usr_pedro_3",
+      "user_id": "usr_camila",
+      "suggested_id": "usr_pedro",
+      "mutual_followers": 17,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_camila_usr_elena_4",
+      "user_id": "usr_camila",
+      "suggested_id": "usr_elena",
+      "mutual_followers": 9,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_isabella_usr_natalia_0",
+      "user_id": "usr_isabella",
+      "suggested_id": "usr_natalia",
+      "mutual_followers": 24,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_isabella_usr_brujo_triples_1",
+      "user_id": "usr_isabella",
+      "suggested_id": "usr_brujo_triples",
+      "mutual_followers": 12,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_isabella_usr_selva_guru_2",
+      "user_id": "usr_isabella",
+      "suggested_id": "usr_selva_guru",
+      "mutual_followers": 12,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_isabella_usr_laura_3",
+      "user_id": "usr_isabella",
+      "suggested_id": "usr_laura",
+      "mutual_followers": 5,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_isabella_usr_raul_4",
+      "user_id": "usr_isabella",
+      "suggested_id": "usr_raul",
+      "mutual_followers": 4,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_andrea_usr_carolina_0",
+      "user_id": "usr_andrea",
+      "suggested_id": "usr_carolina",
+      "mutual_followers": 12,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_andrea_usr_parley_master_1",
+      "user_id": "usr_andrea",
+      "suggested_id": "usr_parley_master",
+      "mutual_followers": 3,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_andrea_usr_triple_zulia_2",
+      "user_id": "usr_andrea",
+      "suggested_id": "usr_triple_zulia",
+      "mutual_followers": 24,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_andrea_usr_carmen_3",
+      "user_id": "usr_andrea",
+      "suggested_id": "usr_carmen",
+      "mutual_followers": 4,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_andrea_usr_yaneth_4",
+      "user_id": "usr_andrea",
+      "suggested_id": "usr_yaneth",
+      "mutual_followers": 21,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_gabriela_usr_roberto_0",
+      "user_id": "usr_gabriela",
+      "suggested_id": "usr_roberto",
+      "mutual_followers": 27,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_gabriela_usr_profesor_fija_1",
+      "user_id": "usr_gabriela",
+      "suggested_id": "usr_profesor_fija",
+      "mutual_followers": 7,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_gabriela_usr_tenis_ace_2",
+      "user_id": "usr_gabriela",
+      "suggested_id": "usr_tenis_ace",
+      "mutual_followers": 18,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_gabriela_usr_javier_3",
+      "user_id": "usr_gabriela",
+      "suggested_id": "usr_javier",
+      "mutual_followers": 12,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_gabriela_usr_carlos_4",
+      "user_id": "usr_gabriela",
+      "suggested_id": "usr_carlos",
+      "mutual_followers": 26,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_stefany_usr_don_animalito_0",
+      "user_id": "usr_stefany",
+      "suggested_id": "usr_don_animalito",
+      "mutual_followers": 17,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_stefany_usr_hipismo_gold_1",
+      "user_id": "usr_stefany",
+      "suggested_id": "usr_hipismo_gold",
+      "mutual_followers": 6,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_stefany_usr_crypto_bets_2",
+      "user_id": "usr_stefany",
+      "suggested_id": "usr_crypto_bets",
+      "mutual_followers": 15,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_stefany_usr_patricia_3",
+      "user_id": "usr_stefany",
+      "suggested_id": "usr_patricia",
+      "mutual_followers": 16,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_stefany_usr_maria_4",
+      "user_id": "usr_stefany",
+      "suggested_id": "usr_maria",
+      "mutual_followers": 12,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_natalia_usr_brujo_triples_0",
+      "user_id": "usr_natalia",
+      "suggested_id": "usr_brujo_triples",
+      "mutual_followers": 25,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_natalia_usr_analista_nba_1",
+      "user_id": "usr_natalia",
+      "suggested_id": "usr_analista_nba",
+      "mutual_followers": 17,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_natalia_usr_diego_2",
+      "user_id": "usr_natalia",
+      "suggested_id": "usr_diego",
+      "mutual_followers": 20,
+      "reason": "Jugador popular",
+      "category": "company_owner"
+    },
+    {
+      "id": "sug_usr_natalia_usr_miguel_3",
+      "user_id": "usr_natalia",
+      "suggested_id": "usr_miguel",
+      "mutual_followers": 19,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_natalia_usr_gabriel_4",
+      "user_id": "usr_natalia",
+      "suggested_id": "usr_gabriel",
+      "mutual_followers": 5,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_carolina_usr_parley_master_0",
+      "user_id": "usr_carolina",
+      "suggested_id": "usr_parley_master",
+      "mutual_followers": 17,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_carolina_usr_futbol_picks_1",
+      "user_id": "usr_carolina",
+      "suggested_id": "usr_futbol_picks",
+      "mutual_followers": 11,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_carolina_usr_pedro_2",
+      "user_id": "usr_carolina",
+      "suggested_id": "usr_pedro",
+      "mutual_followers": 11,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_carolina_usr_elena_3",
+      "user_id": "usr_carolina",
+      "suggested_id": "usr_elena",
+      "mutual_followers": 16,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_carolina_usr_valentina_4",
+      "user_id": "usr_carolina",
+      "suggested_id": "usr_valentina",
+      "mutual_followers": 13,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_roberto_usr_profesor_fija_0",
+      "user_id": "usr_roberto",
+      "suggested_id": "usr_profesor_fija",
+      "mutual_followers": 26,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_roberto_usr_selva_guru_1",
+      "user_id": "usr_roberto",
+      "suggested_id": "usr_selva_guru",
+      "mutual_followers": 23,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_roberto_usr_laura_2",
+      "user_id": "usr_roberto",
+      "suggested_id": "usr_laura",
+      "mutual_followers": 27,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_roberto_usr_raul_3",
+      "user_id": "usr_roberto",
+      "suggested_id": "usr_raul",
+      "mutual_followers": 10,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_roberto_usr_yorman_4",
+      "user_id": "usr_roberto",
+      "suggested_id": "usr_yorman",
+      "mutual_followers": 18,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_don_animalito_usr_hipismo_gold_0",
+      "user_id": "usr_don_animalito",
+      "suggested_id": "usr_hipismo_gold",
+      "mutual_followers": 3,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_don_animalito_usr_triple_zulia_1",
+      "user_id": "usr_don_animalito",
+      "suggested_id": "usr_triple_zulia",
+      "mutual_followers": 9,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_don_animalito_usr_carmen_2",
+      "user_id": "usr_don_animalito",
+      "suggested_id": "usr_carmen",
+      "mutual_followers": 12,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_don_animalito_usr_yaneth_3",
+      "user_id": "usr_don_animalito",
+      "suggested_id": "usr_yaneth",
+      "mutual_followers": 23,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_don_animalito_usr_luis_alfonso_4",
+      "user_id": "usr_don_animalito",
+      "suggested_id": "usr_luis_alfonso",
+      "mutual_followers": 23,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_brujo_triples_usr_analista_nba_0",
+      "user_id": "usr_brujo_triples",
+      "suggested_id": "usr_analista_nba",
+      "mutual_followers": 17,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_brujo_triples_usr_tenis_ace_1",
+      "user_id": "usr_brujo_triples",
+      "suggested_id": "usr_tenis_ace",
+      "mutual_followers": 7,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_brujo_triples_usr_javier_2",
+      "user_id": "usr_brujo_triples",
+      "suggested_id": "usr_javier",
+      "mutual_followers": 24,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_brujo_triples_usr_carlos_3",
+      "user_id": "usr_brujo_triples",
+      "suggested_id": "usr_carlos",
+      "mutual_followers": 11,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_brujo_triples_usr_andres_champions_4",
+      "user_id": "usr_brujo_triples",
+      "suggested_id": "usr_andres_champions",
+      "mutual_followers": 26,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_parley_master_usr_futbol_picks_0",
+      "user_id": "usr_parley_master",
+      "suggested_id": "usr_futbol_picks",
+      "mutual_followers": 7,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_parley_master_usr_crypto_bets_1",
+      "user_id": "usr_parley_master",
+      "suggested_id": "usr_crypto_bets",
+      "mutual_followers": 4,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_parley_master_usr_patricia_2",
+      "user_id": "usr_parley_master",
+      "suggested_id": "usr_patricia",
+      "mutual_followers": 20,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_parley_master_usr_maria_3",
+      "user_id": "usr_parley_master",
+      "suggested_id": "usr_maria",
+      "mutual_followers": 16,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_parley_master_usr_daniella_4",
+      "user_id": "usr_parley_master",
+      "suggested_id": "usr_daniella",
+      "mutual_followers": 11,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_profesor_fija_usr_selva_guru_0",
+      "user_id": "usr_profesor_fija",
+      "suggested_id": "usr_selva_guru",
+      "mutual_followers": 16,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_profesor_fija_usr_diego_1",
+      "user_id": "usr_profesor_fija",
+      "suggested_id": "usr_diego",
+      "mutual_followers": 7,
+      "reason": "Jugador popular",
+      "category": "company_owner"
+    },
+    {
+      "id": "sug_usr_profesor_fija_usr_miguel_2",
+      "user_id": "usr_profesor_fija",
+      "suggested_id": "usr_miguel",
+      "mutual_followers": 10,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_profesor_fija_usr_gabriel_3",
+      "user_id": "usr_profesor_fija",
+      "suggested_id": "usr_gabriel",
+      "mutual_followers": 5,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_profesor_fija_usr_samuel_4",
+      "user_id": "usr_profesor_fija",
+      "suggested_id": "usr_samuel",
+      "mutual_followers": 15,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_hipismo_gold_usr_triple_zulia_0",
+      "user_id": "usr_hipismo_gold",
+      "suggested_id": "usr_triple_zulia",
+      "mutual_followers": 21,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_hipismo_gold_usr_pedro_1",
+      "user_id": "usr_hipismo_gold",
+      "suggested_id": "usr_pedro",
+      "mutual_followers": 9,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_hipismo_gold_usr_elena_2",
+      "user_id": "usr_hipismo_gold",
+      "suggested_id": "usr_elena",
+      "mutual_followers": 4,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_hipismo_gold_usr_valentina_3",
+      "user_id": "usr_hipismo_gold",
+      "suggested_id": "usr_valentina",
+      "mutual_followers": 10,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_hipismo_gold_usr_fernanda_4",
+      "user_id": "usr_hipismo_gold",
+      "suggested_id": "usr_fernanda",
+      "mutual_followers": 7,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_analista_nba_usr_tenis_ace_0",
+      "user_id": "usr_analista_nba",
+      "suggested_id": "usr_tenis_ace",
+      "mutual_followers": 4,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_analista_nba_usr_laura_1",
+      "user_id": "usr_analista_nba",
+      "suggested_id": "usr_laura",
+      "mutual_followers": 4,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_analista_nba_usr_raul_2",
+      "user_id": "usr_analista_nba",
+      "suggested_id": "usr_raul",
+      "mutual_followers": 4,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_analista_nba_usr_yorman_3",
+      "user_id": "usr_analista_nba",
+      "suggested_id": "usr_yorman",
+      "mutual_followers": 11,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_analista_nba_usr_javier_kino_4",
+      "user_id": "usr_analista_nba",
+      "suggested_id": "usr_javier_kino",
+      "mutual_followers": 24,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_futbol_picks_usr_crypto_bets_0",
+      "user_id": "usr_futbol_picks",
+      "suggested_id": "usr_crypto_bets",
+      "mutual_followers": 27,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_futbol_picks_usr_carmen_1",
+      "user_id": "usr_futbol_picks",
+      "suggested_id": "usr_carmen",
+      "mutual_followers": 14,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_futbol_picks_usr_yaneth_2",
+      "user_id": "usr_futbol_picks",
+      "suggested_id": "usr_yaneth",
+      "mutual_followers": 6,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_futbol_picks_usr_luis_alfonso_3",
+      "user_id": "usr_futbol_picks",
+      "suggested_id": "usr_luis_alfonso",
+      "mutual_followers": 13,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_futbol_picks_usr_claudia_4",
+      "user_id": "usr_futbol_picks",
+      "suggested_id": "usr_claudia",
+      "mutual_followers": 12,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_selva_guru_usr_diego_0",
+      "user_id": "usr_selva_guru",
+      "suggested_id": "usr_diego",
+      "mutual_followers": 17,
+      "reason": "Jugador popular",
+      "category": "company_owner"
+    },
+    {
+      "id": "sug_usr_selva_guru_usr_javier_1",
+      "user_id": "usr_selva_guru",
+      "suggested_id": "usr_javier",
+      "mutual_followers": 7,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_selva_guru_usr_carlos_2",
+      "user_id": "usr_selva_guru",
+      "suggested_id": "usr_carlos",
+      "mutual_followers": 15,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_selva_guru_usr_andres_champions_3",
+      "user_id": "usr_selva_guru",
+      "suggested_id": "usr_andres_champions",
+      "mutual_followers": 23,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_selva_guru_usr_ricardo_4",
+      "user_id": "usr_selva_guru",
+      "suggested_id": "usr_ricardo",
+      "mutual_followers": 8,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_triple_zulia_usr_pedro_0",
+      "user_id": "usr_triple_zulia",
+      "suggested_id": "usr_pedro",
+      "mutual_followers": 22,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_triple_zulia_usr_patricia_1",
+      "user_id": "usr_triple_zulia",
+      "suggested_id": "usr_patricia",
+      "mutual_followers": 26,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_triple_zulia_usr_maria_2",
+      "user_id": "usr_triple_zulia",
+      "suggested_id": "usr_maria",
+      "mutual_followers": 8,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_triple_zulia_usr_daniella_3",
+      "user_id": "usr_triple_zulia",
+      "suggested_id": "usr_daniella",
+      "mutual_followers": 19,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_triple_zulia_usr_jessica_4",
+      "user_id": "usr_triple_zulia",
+      "suggested_id": "usr_jessica",
+      "mutual_followers": 17,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_tenis_ace_usr_laura_0",
+      "user_id": "usr_tenis_ace",
+      "suggested_id": "usr_laura",
+      "mutual_followers": 19,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_tenis_ace_usr_miguel_1",
+      "user_id": "usr_tenis_ace",
+      "suggested_id": "usr_miguel",
+      "mutual_followers": 10,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_tenis_ace_usr_gabriel_2",
+      "user_id": "usr_tenis_ace",
+      "suggested_id": "usr_gabriel",
+      "mutual_followers": 17,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_tenis_ace_usr_samuel_3",
+      "user_id": "usr_tenis_ace",
+      "suggested_id": "usr_samuel",
+      "mutual_followers": 11,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_tenis_ace_usr_gustavo_4",
+      "user_id": "usr_tenis_ace",
+      "suggested_id": "usr_gustavo",
+      "mutual_followers": 11,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_crypto_bets_usr_carmen_0",
+      "user_id": "usr_crypto_bets",
+      "suggested_id": "usr_carmen",
+      "mutual_followers": 20,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_crypto_bets_usr_elena_1",
+      "user_id": "usr_crypto_bets",
+      "suggested_id": "usr_elena",
+      "mutual_followers": 12,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_crypto_bets_usr_valentina_2",
+      "user_id": "usr_crypto_bets",
+      "suggested_id": "usr_valentina",
+      "mutual_followers": 18,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_crypto_bets_usr_fernanda_3",
+      "user_id": "usr_crypto_bets",
+      "suggested_id": "usr_fernanda",
+      "mutual_followers": 21,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_crypto_bets_usr_paola_4",
+      "user_id": "usr_crypto_bets",
+      "suggested_id": "usr_paola",
+      "mutual_followers": 8,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_diego_usr_javier_0",
+      "user_id": "usr_diego",
+      "suggested_id": "usr_javier",
+      "mutual_followers": 19,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_diego_usr_raul_1",
+      "user_id": "usr_diego",
+      "suggested_id": "usr_raul",
+      "mutual_followers": 25,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_diego_usr_yorman_2",
+      "user_id": "usr_diego",
+      "suggested_id": "usr_yorman",
+      "mutual_followers": 14,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_diego_usr_javier_kino_3",
+      "user_id": "usr_diego",
+      "suggested_id": "usr_javier_kino",
+      "mutual_followers": 19,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_diego_usr_victor_4",
+      "user_id": "usr_diego",
+      "suggested_id": "usr_victor",
+      "mutual_followers": 6,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_pedro_usr_patricia_0",
+      "user_id": "usr_pedro",
+      "suggested_id": "usr_patricia",
+      "mutual_followers": 21,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_pedro_usr_yaneth_1",
+      "user_id": "usr_pedro",
+      "suggested_id": "usr_yaneth",
+      "mutual_followers": 12,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_pedro_usr_luis_alfonso_2",
+      "user_id": "usr_pedro",
+      "suggested_id": "usr_luis_alfonso",
+      "mutual_followers": 20,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_pedro_usr_claudia_3",
+      "user_id": "usr_pedro",
+      "suggested_id": "usr_claudia",
+      "mutual_followers": 13,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_pedro_usr_adriana_4",
+      "user_id": "usr_pedro",
+      "suggested_id": "usr_adriana",
+      "mutual_followers": 25,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_laura_usr_miguel_0",
+      "user_id": "usr_laura",
+      "suggested_id": "usr_miguel",
+      "mutual_followers": 22,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_laura_usr_carlos_1",
+      "user_id": "usr_laura",
+      "suggested_id": "usr_carlos",
+      "mutual_followers": 18,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_laura_usr_andres_champions_2",
+      "user_id": "usr_laura",
+      "suggested_id": "usr_andres_champions",
+      "mutual_followers": 6,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_laura_usr_ricardo_3",
+      "user_id": "usr_laura",
+      "suggested_id": "usr_ricardo",
+      "mutual_followers": 8,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_laura_usr_rodrigo_4",
+      "user_id": "usr_laura",
+      "suggested_id": "usr_rodrigo",
+      "mutual_followers": 10,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_carmen_usr_elena_0",
+      "user_id": "usr_carmen",
+      "suggested_id": "usr_elena",
+      "mutual_followers": 25,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_carmen_usr_maria_1",
+      "user_id": "usr_carmen",
+      "suggested_id": "usr_maria",
+      "mutual_followers": 6,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_carmen_usr_daniella_2",
+      "user_id": "usr_carmen",
+      "suggested_id": "usr_daniella",
+      "mutual_followers": 22,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_carmen_usr_jessica_3",
+      "user_id": "usr_carmen",
+      "suggested_id": "usr_jessica",
+      "mutual_followers": 18,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_carmen_usr_mariana_4",
+      "user_id": "usr_carmen",
+      "suggested_id": "usr_mariana",
+      "mutual_followers": 17,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_javier_usr_raul_0",
+      "user_id": "usr_javier",
+      "suggested_id": "usr_raul",
+      "mutual_followers": 20,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_javier_usr_gabriel_1",
+      "user_id": "usr_javier",
+      "suggested_id": "usr_gabriel",
+      "mutual_followers": 18,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_javier_usr_samuel_2",
+      "user_id": "usr_javier",
+      "suggested_id": "usr_samuel",
+      "mutual_followers": 3,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_javier_usr_gustavo_3",
+      "user_id": "usr_javier",
+      "suggested_id": "usr_gustavo",
+      "mutual_followers": 11,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_javier_usr_alberto_4",
+      "user_id": "usr_javier",
+      "suggested_id": "usr_alberto",
+      "mutual_followers": 23,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_patricia_usr_yaneth_0",
+      "user_id": "usr_patricia",
+      "suggested_id": "usr_yaneth",
+      "mutual_followers": 15,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    },
+    {
+      "id": "sug_usr_patricia_usr_valentina_1",
+      "user_id": "usr_patricia",
+      "suggested_id": "usr_valentina",
+      "mutual_followers": 11,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_patricia_usr_fernanda_2",
+      "user_id": "usr_patricia",
+      "suggested_id": "usr_fernanda",
+      "mutual_followers": 16,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_patricia_usr_paola_3",
+      "user_id": "usr_patricia",
+      "suggested_id": "usr_paola",
+      "mutual_followers": 5,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_patricia_usr_sofia_4",
+      "user_id": "usr_patricia",
+      "suggested_id": "usr_sofia",
+      "mutual_followers": 24,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_miguel_usr_carlos_0",
+      "user_id": "usr_miguel",
+      "suggested_id": "usr_carlos",
+      "mutual_followers": 5,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_miguel_usr_yorman_1",
+      "user_id": "usr_miguel",
+      "suggested_id": "usr_yorman",
+      "mutual_followers": 20,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_miguel_usr_javier_kino_2",
+      "user_id": "usr_miguel",
+      "suggested_id": "usr_javier_kino",
+      "mutual_followers": 19,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_miguel_usr_victor_3",
+      "user_id": "usr_miguel",
+      "suggested_id": "usr_victor",
+      "mutual_followers": 11,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_miguel_usr_kevin_4",
+      "user_id": "usr_miguel",
+      "suggested_id": "usr_kevin",
+      "mutual_followers": 6,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_elena_usr_maria_0",
+      "user_id": "usr_elena",
+      "suggested_id": "usr_maria",
+      "mutual_followers": 25,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_elena_usr_luis_alfonso_1",
+      "user_id": "usr_elena",
+      "suggested_id": "usr_luis_alfonso",
+      "mutual_followers": 7,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_elena_usr_claudia_2",
+      "user_id": "usr_elena",
+      "suggested_id": "usr_claudia",
+      "mutual_followers": 16,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_elena_usr_adriana_3",
+      "user_id": "usr_elena",
+      "suggested_id": "usr_adriana",
+      "mutual_followers": 7,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_elena_usr_admin_4",
+      "user_id": "usr_elena",
+      "suggested_id": "usr_admin",
+      "mutual_followers": 12,
+      "reason": "Jugador popular",
+      "category": "admin"
+    },
+    {
+      "id": "sug_usr_raul_usr_gabriel_0",
+      "user_id": "usr_raul",
+      "suggested_id": "usr_gabriel",
+      "mutual_followers": 12,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_raul_usr_andres_champions_1",
+      "user_id": "usr_raul",
+      "suggested_id": "usr_andres_champions",
+      "mutual_followers": 16,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_raul_usr_ricardo_2",
+      "user_id": "usr_raul",
+      "suggested_id": "usr_ricardo",
+      "mutual_followers": 24,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_raul_usr_rodrigo_3",
+      "user_id": "usr_raul",
+      "suggested_id": "usr_rodrigo",
+      "mutual_followers": 14,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_raul_usr_henry_4",
+      "user_id": "usr_raul",
+      "suggested_id": "usr_henry",
+      "mutual_followers": 25,
+      "reason": "Jugador popular",
+      "category": "admin"
+    },
+    {
+      "id": "sug_usr_yaneth_usr_valentina_0",
+      "user_id": "usr_yaneth",
+      "suggested_id": "usr_valentina",
+      "mutual_followers": 26,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_yaneth_usr_daniella_1",
+      "user_id": "usr_yaneth",
+      "suggested_id": "usr_daniella",
+      "mutual_followers": 25,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_yaneth_usr_jessica_2",
+      "user_id": "usr_yaneth",
+      "suggested_id": "usr_jessica",
+      "mutual_followers": 8,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_yaneth_usr_mariana_3",
+      "user_id": "usr_yaneth",
+      "suggested_id": "usr_mariana",
+      "mutual_followers": 6,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_yaneth_usr_joselin_4",
+      "user_id": "usr_yaneth",
+      "suggested_id": "usr_joselin",
+      "mutual_followers": 23,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_carlos_usr_yorman_0",
+      "user_id": "usr_carlos",
+      "suggested_id": "usr_yorman",
+      "mutual_followers": 13,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_carlos_usr_samuel_1",
+      "user_id": "usr_carlos",
+      "suggested_id": "usr_samuel",
+      "mutual_followers": 16,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_carlos_usr_gustavo_2",
+      "user_id": "usr_carlos",
+      "suggested_id": "usr_gustavo",
+      "mutual_followers": 20,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_carlos_usr_alberto_3",
+      "user_id": "usr_carlos",
+      "suggested_id": "usr_alberto",
+      "mutual_followers": 6,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_carlos_usr_valeria_4",
+      "user_id": "usr_carlos",
+      "suggested_id": "usr_valeria",
+      "mutual_followers": 25,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_maria_usr_luis_alfonso_0",
+      "user_id": "usr_maria",
+      "suggested_id": "usr_luis_alfonso",
+      "mutual_followers": 23,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_maria_usr_fernanda_1",
+      "user_id": "usr_maria",
+      "suggested_id": "usr_fernanda",
+      "mutual_followers": 15,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_maria_usr_paola_2",
+      "user_id": "usr_maria",
+      "suggested_id": "usr_paola",
+      "mutual_followers": 6,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_maria_usr_sofia_3",
+      "user_id": "usr_maria",
+      "suggested_id": "usr_sofia",
+      "mutual_followers": 27,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_maria_usr_nicole_4",
+      "user_id": "usr_maria",
+      "suggested_id": "usr_nicole",
+      "mutual_followers": 27,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_gabriel_usr_andres_champions_0",
+      "user_id": "usr_gabriel",
+      "suggested_id": "usr_andres_champions",
+      "mutual_followers": 3,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_gabriel_usr_javier_kino_1",
+      "user_id": "usr_gabriel",
+      "suggested_id": "usr_javier_kino",
+      "mutual_followers": 11,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_gabriel_usr_victor_2",
+      "user_id": "usr_gabriel",
+      "suggested_id": "usr_victor",
+      "mutual_followers": 21,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_gabriel_usr_kevin_3",
+      "user_id": "usr_gabriel",
+      "suggested_id": "usr_kevin",
+      "mutual_followers": 7,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_gabriel_usr_camila_4",
+      "user_id": "usr_gabriel",
+      "suggested_id": "usr_camila",
+      "mutual_followers": 11,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_valentina_usr_daniella_0",
+      "user_id": "usr_valentina",
+      "suggested_id": "usr_daniella",
+      "mutual_followers": 11,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_valentina_usr_claudia_1",
+      "user_id": "usr_valentina",
+      "suggested_id": "usr_claudia",
+      "mutual_followers": 3,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_valentina_usr_adriana_2",
+      "user_id": "usr_valentina",
+      "suggested_id": "usr_adriana",
+      "mutual_followers": 18,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_valentina_usr_admin_3",
+      "user_id": "usr_valentina",
+      "suggested_id": "usr_admin",
+      "mutual_followers": 23,
+      "reason": "Jugador popular",
+      "category": "admin"
+    },
+    {
+      "id": "sug_usr_valentina_usr_isabella_4",
+      "user_id": "usr_valentina",
+      "suggested_id": "usr_isabella",
+      "mutual_followers": 6,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_yorman_usr_samuel_0",
+      "user_id": "usr_yorman",
+      "suggested_id": "usr_samuel",
+      "mutual_followers": 21,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_yorman_usr_ricardo_1",
+      "user_id": "usr_yorman",
+      "suggested_id": "usr_ricardo",
+      "mutual_followers": 24,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_yorman_usr_rodrigo_2",
+      "user_id": "usr_yorman",
+      "suggested_id": "usr_rodrigo",
+      "mutual_followers": 23,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_yorman_usr_henry_3",
+      "user_id": "usr_yorman",
+      "suggested_id": "usr_henry",
+      "mutual_followers": 25,
+      "reason": "Jugador popular",
+      "category": "admin"
+    },
+    {
+      "id": "sug_usr_yorman_usr_andrea_4",
+      "user_id": "usr_yorman",
+      "suggested_id": "usr_andrea",
+      "mutual_followers": 26,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_luis_alfonso_usr_fernanda_0",
+      "user_id": "usr_luis_alfonso",
+      "suggested_id": "usr_fernanda",
+      "mutual_followers": 16,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_luis_alfonso_usr_jessica_1",
+      "user_id": "usr_luis_alfonso",
+      "suggested_id": "usr_jessica",
+      "mutual_followers": 21,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_luis_alfonso_usr_mariana_2",
+      "user_id": "usr_luis_alfonso",
+      "suggested_id": "usr_mariana",
+      "mutual_followers": 26,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_luis_alfonso_usr_joselin_3",
+      "user_id": "usr_luis_alfonso",
+      "suggested_id": "usr_joselin",
+      "mutual_followers": 21,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_luis_alfonso_usr_gabriela_4",
+      "user_id": "usr_luis_alfonso",
+      "suggested_id": "usr_gabriela",
+      "mutual_followers": 15,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_andres_champions_usr_javier_kino_0",
+      "user_id": "usr_andres_champions",
+      "suggested_id": "usr_javier_kino",
+      "mutual_followers": 20,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_andres_champions_usr_gustavo_1",
+      "user_id": "usr_andres_champions",
+      "suggested_id": "usr_gustavo",
+      "mutual_followers": 18,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_andres_champions_usr_alberto_2",
+      "user_id": "usr_andres_champions",
+      "suggested_id": "usr_alberto",
+      "mutual_followers": 6,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_andres_champions_usr_valeria_3",
+      "user_id": "usr_andres_champions",
+      "suggested_id": "usr_valeria",
+      "mutual_followers": 13,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_andres_champions_usr_stefany_4",
+      "user_id": "usr_andres_champions",
+      "suggested_id": "usr_stefany",
+      "mutual_followers": 7,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_daniella_usr_claudia_0",
+      "user_id": "usr_daniella",
+      "suggested_id": "usr_claudia",
+      "mutual_followers": 19,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_daniella_usr_paola_1",
+      "user_id": "usr_daniella",
+      "suggested_id": "usr_paola",
+      "mutual_followers": 11,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_daniella_usr_sofia_2",
+      "user_id": "usr_daniella",
+      "suggested_id": "usr_sofia",
+      "mutual_followers": 22,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_daniella_usr_nicole_3",
+      "user_id": "usr_daniella",
+      "suggested_id": "usr_nicole",
+      "mutual_followers": 24,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_daniella_usr_natalia_4",
+      "user_id": "usr_daniella",
+      "suggested_id": "usr_natalia",
+      "mutual_followers": 24,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_samuel_usr_ricardo_0",
+      "user_id": "usr_samuel",
+      "suggested_id": "usr_ricardo",
+      "mutual_followers": 10,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_samuel_usr_victor_1",
+      "user_id": "usr_samuel",
+      "suggested_id": "usr_victor",
+      "mutual_followers": 7,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_samuel_usr_kevin_2",
+      "user_id": "usr_samuel",
+      "suggested_id": "usr_kevin",
+      "mutual_followers": 11,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_samuel_usr_camila_3",
+      "user_id": "usr_samuel",
+      "suggested_id": "usr_camila",
+      "mutual_followers": 19,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_samuel_usr_carolina_4",
+      "user_id": "usr_samuel",
+      "suggested_id": "usr_carolina",
+      "mutual_followers": 24,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_fernanda_usr_jessica_0",
+      "user_id": "usr_fernanda",
+      "suggested_id": "usr_jessica",
+      "mutual_followers": 8,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_fernanda_usr_adriana_1",
+      "user_id": "usr_fernanda",
+      "suggested_id": "usr_adriana",
+      "mutual_followers": 26,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_fernanda_usr_admin_2",
+      "user_id": "usr_fernanda",
+      "suggested_id": "usr_admin",
+      "mutual_followers": 20,
+      "reason": "Jugador popular",
+      "category": "admin"
+    },
+    {
+      "id": "sug_usr_fernanda_usr_isabella_3",
+      "user_id": "usr_fernanda",
+      "suggested_id": "usr_isabella",
+      "mutual_followers": 19,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_fernanda_usr_roberto_4",
+      "user_id": "usr_fernanda",
+      "suggested_id": "usr_roberto",
+      "mutual_followers": 24,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_javier_kino_usr_gustavo_0",
+      "user_id": "usr_javier_kino",
+      "suggested_id": "usr_gustavo",
+      "mutual_followers": 24,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_javier_kino_usr_rodrigo_1",
+      "user_id": "usr_javier_kino",
+      "suggested_id": "usr_rodrigo",
+      "mutual_followers": 26,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_javier_kino_usr_henry_2",
+      "user_id": "usr_javier_kino",
+      "suggested_id": "usr_henry",
+      "mutual_followers": 24,
+      "reason": "Jugador popular",
+      "category": "admin"
+    },
+    {
+      "id": "sug_usr_javier_kino_usr_andrea_3",
+      "user_id": "usr_javier_kino",
+      "suggested_id": "usr_andrea",
+      "mutual_followers": 26,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_javier_kino_usr_don_animalito_4",
+      "user_id": "usr_javier_kino",
+      "suggested_id": "usr_don_animalito",
+      "mutual_followers": 21,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_claudia_usr_paola_0",
+      "user_id": "usr_claudia",
+      "suggested_id": "usr_paola",
+      "mutual_followers": 4,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_claudia_usr_mariana_1",
+      "user_id": "usr_claudia",
+      "suggested_id": "usr_mariana",
+      "mutual_followers": 13,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_claudia_usr_joselin_2",
+      "user_id": "usr_claudia",
+      "suggested_id": "usr_joselin",
+      "mutual_followers": 18,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_claudia_usr_gabriela_3",
+      "user_id": "usr_claudia",
+      "suggested_id": "usr_gabriela",
+      "mutual_followers": 27,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_claudia_usr_brujo_triples_4",
+      "user_id": "usr_claudia",
+      "suggested_id": "usr_brujo_triples",
+      "mutual_followers": 27,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_ricardo_usr_victor_0",
+      "user_id": "usr_ricardo",
+      "suggested_id": "usr_victor",
+      "mutual_followers": 22,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_ricardo_usr_alberto_1",
+      "user_id": "usr_ricardo",
+      "suggested_id": "usr_alberto",
+      "mutual_followers": 15,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_ricardo_usr_valeria_2",
+      "user_id": "usr_ricardo",
+      "suggested_id": "usr_valeria",
+      "mutual_followers": 19,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_ricardo_usr_stefany_3",
+      "user_id": "usr_ricardo",
+      "suggested_id": "usr_stefany",
+      "mutual_followers": 26,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_ricardo_usr_parley_master_4",
+      "user_id": "usr_ricardo",
+      "suggested_id": "usr_parley_master",
+      "mutual_followers": 19,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_jessica_usr_adriana_0",
+      "user_id": "usr_jessica",
+      "suggested_id": "usr_adriana",
+      "mutual_followers": 13,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_jessica_usr_sofia_1",
+      "user_id": "usr_jessica",
+      "suggested_id": "usr_sofia",
+      "mutual_followers": 10,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_jessica_usr_nicole_2",
+      "user_id": "usr_jessica",
+      "suggested_id": "usr_nicole",
+      "mutual_followers": 21,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_jessica_usr_natalia_3",
+      "user_id": "usr_jessica",
+      "suggested_id": "usr_natalia",
+      "mutual_followers": 25,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_jessica_usr_profesor_fija_4",
+      "user_id": "usr_jessica",
+      "suggested_id": "usr_profesor_fija",
+      "mutual_followers": 25,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_gustavo_usr_rodrigo_0",
+      "user_id": "usr_gustavo",
+      "suggested_id": "usr_rodrigo",
+      "mutual_followers": 24,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_gustavo_usr_kevin_1",
+      "user_id": "usr_gustavo",
+      "suggested_id": "usr_kevin",
+      "mutual_followers": 21,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_gustavo_usr_camila_2",
+      "user_id": "usr_gustavo",
+      "suggested_id": "usr_camila",
+      "mutual_followers": 24,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_gustavo_usr_carolina_3",
+      "user_id": "usr_gustavo",
+      "suggested_id": "usr_carolina",
+      "mutual_followers": 11,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_gustavo_usr_hipismo_gold_4",
+      "user_id": "usr_gustavo",
+      "suggested_id": "usr_hipismo_gold",
+      "mutual_followers": 10,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_paola_usr_mariana_0",
+      "user_id": "usr_paola",
+      "suggested_id": "usr_mariana",
+      "mutual_followers": 18,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_paola_usr_admin_1",
+      "user_id": "usr_paola",
+      "suggested_id": "usr_admin",
+      "mutual_followers": 16,
+      "reason": "Jugador popular",
+      "category": "admin"
+    },
+    {
+      "id": "sug_usr_paola_usr_isabella_2",
+      "user_id": "usr_paola",
+      "suggested_id": "usr_isabella",
+      "mutual_followers": 15,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_paola_usr_roberto_3",
+      "user_id": "usr_paola",
+      "suggested_id": "usr_roberto",
+      "mutual_followers": 26,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_paola_usr_analista_nba_4",
+      "user_id": "usr_paola",
+      "suggested_id": "usr_analista_nba",
+      "mutual_followers": 18,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_victor_usr_alberto_0",
+      "user_id": "usr_victor",
+      "suggested_id": "usr_alberto",
+      "mutual_followers": 6,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_victor_usr_henry_1",
+      "user_id": "usr_victor",
+      "suggested_id": "usr_henry",
+      "mutual_followers": 19,
+      "reason": "Jugador popular",
+      "category": "admin"
+    },
+    {
+      "id": "sug_usr_victor_usr_andrea_2",
+      "user_id": "usr_victor",
+      "suggested_id": "usr_andrea",
+      "mutual_followers": 14,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_victor_usr_don_animalito_3",
+      "user_id": "usr_victor",
+      "suggested_id": "usr_don_animalito",
+      "mutual_followers": 21,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_victor_usr_futbol_picks_4",
+      "user_id": "usr_victor",
+      "suggested_id": "usr_futbol_picks",
+      "mutual_followers": 23,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_adriana_usr_sofia_0",
+      "user_id": "usr_adriana",
+      "suggested_id": "usr_sofia",
+      "mutual_followers": 21,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_adriana_usr_joselin_1",
+      "user_id": "usr_adriana",
+      "suggested_id": "usr_joselin",
+      "mutual_followers": 20,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_adriana_usr_gabriela_2",
+      "user_id": "usr_adriana",
+      "suggested_id": "usr_gabriela",
+      "mutual_followers": 18,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_adriana_usr_brujo_triples_3",
+      "user_id": "usr_adriana",
+      "suggested_id": "usr_brujo_triples",
+      "mutual_followers": 17,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_adriana_usr_selva_guru_4",
+      "user_id": "usr_adriana",
+      "suggested_id": "usr_selva_guru",
+      "mutual_followers": 12,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_rodrigo_usr_kevin_0",
+      "user_id": "usr_rodrigo",
+      "suggested_id": "usr_kevin",
+      "mutual_followers": 18,
+      "reason": "Jugador popular",
+      "category": "player"
+    },
+    {
+      "id": "sug_usr_rodrigo_usr_valeria_1",
+      "user_id": "usr_rodrigo",
+      "suggested_id": "usr_valeria",
+      "mutual_followers": 19,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_rodrigo_usr_stefany_2",
+      "user_id": "usr_rodrigo",
+      "suggested_id": "usr_stefany",
+      "mutual_followers": 25,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_rodrigo_usr_parley_master_3",
+      "user_id": "usr_rodrigo",
+      "suggested_id": "usr_parley_master",
+      "mutual_followers": 8,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_rodrigo_usr_triple_zulia_4",
+      "user_id": "usr_rodrigo",
+      "suggested_id": "usr_triple_zulia",
+      "mutual_followers": 6,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_mariana_usr_admin_0",
+      "user_id": "usr_mariana",
+      "suggested_id": "usr_admin",
+      "mutual_followers": 15,
+      "reason": "Jugador popular",
+      "category": "admin"
+    },
+    {
+      "id": "sug_usr_mariana_usr_nicole_1",
+      "user_id": "usr_mariana",
+      "suggested_id": "usr_nicole",
+      "mutual_followers": 4,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_mariana_usr_natalia_2",
+      "user_id": "usr_mariana",
+      "suggested_id": "usr_natalia",
+      "mutual_followers": 6,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_mariana_usr_profesor_fija_3",
+      "user_id": "usr_mariana",
+      "suggested_id": "usr_profesor_fija",
+      "mutual_followers": 5,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_mariana_usr_tenis_ace_4",
+      "user_id": "usr_mariana",
+      "suggested_id": "usr_tenis_ace",
+      "mutual_followers": 14,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_alberto_usr_henry_0",
+      "user_id": "usr_alberto",
+      "suggested_id": "usr_henry",
+      "mutual_followers": 20,
+      "reason": "Jugador popular",
+      "category": "admin"
+    },
+    {
+      "id": "sug_usr_alberto_usr_camila_1",
+      "user_id": "usr_alberto",
+      "suggested_id": "usr_camila",
+      "mutual_followers": 7,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_alberto_usr_carolina_2",
+      "user_id": "usr_alberto",
+      "suggested_id": "usr_carolina",
+      "mutual_followers": 11,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_alberto_usr_hipismo_gold_3",
+      "user_id": "usr_alberto",
+      "suggested_id": "usr_hipismo_gold",
+      "mutual_followers": 5,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_alberto_usr_crypto_bets_4",
+      "user_id": "usr_alberto",
+      "suggested_id": "usr_crypto_bets",
+      "mutual_followers": 20,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_sofia_usr_joselin_0",
+      "user_id": "usr_sofia",
+      "suggested_id": "usr_joselin",
+      "mutual_followers": 13,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_sofia_usr_isabella_1",
+      "user_id": "usr_sofia",
+      "suggested_id": "usr_isabella",
+      "mutual_followers": 19,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_sofia_usr_roberto_2",
+      "user_id": "usr_sofia",
+      "suggested_id": "usr_roberto",
+      "mutual_followers": 17,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_sofia_usr_analista_nba_3",
+      "user_id": "usr_sofia",
+      "suggested_id": "usr_analista_nba",
+      "mutual_followers": 10,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_sofia_usr_diego_4",
+      "user_id": "usr_sofia",
+      "suggested_id": "usr_diego",
+      "mutual_followers": 12,
+      "reason": "Jugador popular",
+      "category": "company_owner"
+    },
+    {
+      "id": "sug_usr_kevin_usr_valeria_0",
+      "user_id": "usr_kevin",
+      "suggested_id": "usr_valeria",
+      "mutual_followers": 23,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_kevin_usr_andrea_1",
+      "user_id": "usr_kevin",
+      "suggested_id": "usr_andrea",
+      "mutual_followers": 21,
+      "reason": "Creadora destacada",
+      "category": "vip_creator"
+    },
+    {
+      "id": "sug_usr_kevin_usr_don_animalito_2",
+      "user_id": "usr_kevin",
+      "suggested_id": "usr_don_animalito",
+      "mutual_followers": 4,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_kevin_usr_futbol_picks_3",
+      "user_id": "usr_kevin",
+      "suggested_id": "usr_futbol_picks",
+      "mutual_followers": 6,
+      "reason": "82% de aciertos",
+      "category": "tipster"
+    },
+    {
+      "id": "sug_usr_kevin_usr_pedro_4",
+      "user_id": "usr_kevin",
+      "suggested_id": "usr_pedro",
+      "mutual_followers": 21,
+      "reason": "Jugador popular",
+      "category": "cashier"
+    }
   ]
 }

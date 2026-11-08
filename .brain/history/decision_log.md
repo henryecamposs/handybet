@@ -75,3 +75,14 @@
 - **Contexto:** En la pantalla de Juegos y Sorteos (`/games`), el carrusel de tarjetas hero cortaba las tarjetas adyacentes y carecía de scrollbar o controles visibles para usuarios de escritorio.
 - **Decisión:**
   * Creamos `GamesHeroBanner.tsx` con una barra de desplazamiento visual interactiva (track con thumb dinámico en color primario), cálculo de progreso exacto, soporte de clic para saltos en la barra, flechas direccionales flotantes y scroll con rueda de ratón en web (`onWheel`).
+
+## Hito 12: Ecosistema Masivo de Mockdata, Paywalls de Chat VIP, Suscripciones y Simulador Aviator Crash
+- **Fecha:** 2026-11-08
+- **Contexto:** La plataforma requería poblar completamente todos los módulos con datos masivos y funcionales (+50 usuarios, +50 canales, +50 grupos, +50 juegos en 7 categorías, premios ganados, apuestas, relaciones), además de dotar a la UI de dinamismo real: monetización VIP en chat mediante paywall multimedia, suscripción a planes de tipsters en posts, y un simulador interactivo de crash games con créditos ficticios.
+- **Decisión:**
+  * Implementamos `scripts/generate_massive_mockdata.js` para generar datasets coherentes en `src/data/` (57 usuarios con roles reales, 52 canales, 56 grupos, 52 juegos en 7 categorías, 22 premios ganados, 32 apuestas, 25 conversaciones de chat, 62 posts y 285 enlaces relacionales).
+  * Extendimos `useHandyBetStore` con saldo global reactivo (`walletBalance`), control de medios desbloqueados (`unlockedMediaIds`), métodos de descuento (`deductBalance`), recarga (`addBalance`) y desbloqueo (`unlockMedia`).
+  * Enriquecimos el chat privado (`MessageItem.tsx`) con un paywall multimedia interactivo que oculta imágenes bajo blur/candado y permite comprarlas en 1-clic debitando de la billetera.
+  * Dotamos a los posts del feed (`PostItem.tsx`) de un botón "Suscribirse ⭐" con selector modular de planes (`TierPlanSelector.tsx`), activando membresías exclusivas con toasts informativos.
+  * Diseñamos y construimos `CrashDemoGame.tsx`, un simulador completo de Aviator Crash con curva exponencial, animación de despegue, balance demo recargable, retiro ("Cash Out") y feed en vivo de jugadores comunitarios.
+  * Conectamos los Hubs de Juegos (`index.tsx` y `[gameId].tsx`), Miembros (`follows`), Grupos (`grupos.tsx`) y Billetera (`wallet.tsx`) a la base local masiva, permitiendo emitir boletos con números de serie reales y recargar fondos con Pago Móvil simulado.

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image, Platform } from 'react-native';
-import { Smile, Reply, Copy, Trash2 } from 'lucide-react-native';
+import { Smile, Reply, Copy, Trash2, Lock, Unlock, Sparkles } from 'lucide-react-native';
 import { useTextColors, useBrandColors } from '@/hooks/useThemeColors';
 import IconButton from '../ui/IconButton';
+import { useHandyBetStore } from '@/store/useHandyBetStore';
+import { useToastStore } from '@/store/useToastStore';
 
 export interface MessageProps {
   id: string | number;
@@ -17,6 +19,10 @@ export interface MessageProps {
     text: string;
     sender: 'me' | 'them';
   };
+  is_locked?: boolean;
+  unlock_price?: number;
+  preview_url?: string;
+  media_type?: string;
 }
 
 interface MessageItemProps {
@@ -31,6 +37,10 @@ export default function MessageItem({ msg, onDelete, onReply, onCopy, onPressBut
   const [isHovered, setIsHovered] = useState(false);
   const [showEmojis, setShowEmojis] = useState(false);
   const [reaction, setReaction] = useState<string | null>(null);
+
+  const { unlockedMediaIds, unlockMedia } = useHandyBetStore();
+  const { addToast } = useToastStore();
+  const isUnlocked = !msg.is_locked || unlockedMediaIds.includes(String(msg.id));
 
   const emojis = ['👍', '❤️', '😂', '😮', '😢'];
   const isMe = msg.sender === 'me';
@@ -82,12 +92,59 @@ export default function MessageItem({ msg, onDelete, onReply, onCopy, onPressBut
           </View>
         )}
 
-        {msg.mediaUrl && (
-          <Image
-            source={{ uri: msg.mediaUrl }}
-            className="w-64 h-40 bg-black/20 border border-white/10 mb-3 rounded-xl"
-            resizeMode="cover"
-          />
+        {/* Paywall / Contenido Bloqueado VIP */}
+        {msg.is_locked && !isUnlocked ? (
+          <View className="w-64 bg-black/50 border border-amber-500/40 rounded-xl overflow-hidden mb-3 relative">
+            <Image
+              source={{ uri: msg.preview_url || msg.mediaUrl }}
+              className="w-full h-44 opacity-30"
+              blurRadius={Platform.OS === 'web' ? 20 : 15}
+              resizeMode="cover"
+            />
+            <View className="absolute inset-0 items-center justify-center p-3 bg-black/40">
+              <View className="w-10 h-10 rounded-full bg-amber-500/20 items-center justify-center mb-1.5 border border-amber-500/40">
+                <Lock size={18} color="#f59e0b" />
+              </View>
+              <Text className="text-white font-extrabold text-xs text-center mb-0.5">
+                Contenido VIP Exclusivo
+              </Text>
+              <Text className="text-amber-400 font-black text-xs mb-2">
+                💎 {msg.unlock_price ?? 15}.00 VES / Pts
+              </Text>
+              <TouchableOpacity
+                onPress={() => {
+                  const success = unlockMedia(String(msg.id), msg.unlock_price ?? 15);
+                  if (success) {
+                    addToast({ title: '¡Contenido Desbloqueado con éxito! 🔓', variant: 'success' });
+                  } else {
+                    addToast({ title: 'Saldo insuficiente en tu billetera. Recarga saldo.', variant: 'danger' });
+                  }
+                }}
+                className="bg-amber-500 hover:bg-amber-400 active:scale-95 px-4 py-2 rounded-full flex-row items-center gap-1.5 shadow-lg"
+              >
+                <Sparkles size={14} color="#000000" />
+                <Text className="text-black font-black text-[11px] uppercase tracking-wider">
+                  Desbloquear
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        ) : (
+          (msg.mediaUrl || (msg.is_locked && isUnlocked)) && (
+            <View className="mb-3">
+              <Image
+                source={{ uri: msg.mediaUrl || msg.preview_url }}
+                className="w-64 h-44 bg-black/20 border border-white/10 rounded-xl"
+                resizeMode="cover"
+              />
+              {msg.is_locked && isUnlocked && (
+                <View className="flex-row items-center gap-1 mt-1.5 self-start bg-emerald-500/20 px-2 py-0.5 rounded border border-emerald-500/30">
+                  <Unlock size={11} color="#10b981" />
+                  <Text className="text-emerald-400 text-[10px] font-bold">Desbloqueado</Text>
+                </View>
+              )}
+            </View>
+          )
         )}
         <Text className={`text-sm leading-relaxed font-medium text-foreground`}>
           {msg.text}

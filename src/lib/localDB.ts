@@ -15,6 +15,7 @@ import seedBets from '../data/bets.json';
 import seedMediaVault from '../data/media_vault.json';
 import seedUserSubscriptions from '../data/user_subscriptions.json';
 import seedSavedItems from '../data/saved_items.json';
+import seedGames from '../data/games.json';
 
 const DB_KEY = 'handybet_local_db';
 
@@ -30,6 +31,7 @@ export interface LocalDatabase {
   chats: any[];
   prizes: any[];
   bets: any[];
+  games: any[];
   media_vault: any[];
   user_subscriptions: any[];
   saved_items: any[];
@@ -52,6 +54,19 @@ async function initDB(): Promise<LocalDatabase> {
     if (stored) {
       db = JSON.parse(stored);
       if (db && db._initialized) {
+        if (!db.games || db.games.length < 50 || !db.users || db.users.length < 50 || !db.relationships?.follow_suggestions?.[0]?.suggested_id) {
+          db.users = seedUsers as any[];
+          db.channels = seedChannels as any[];
+          db.groups = seedGroups as any[];
+          db.games = seedGames as any[];
+          db.posts = seedPosts as any[];
+          db.prizes = seedPrizes as any[];
+          db.bets = seedBets as any[];
+          db.news = seedNews as any[];
+          db.chats = seedChats as any[];
+          db.relationships = seedRelationships as any;
+          await AsyncStorage.setItem(DB_KEY, JSON.stringify(db));
+        }
         if (!db.saved_items) {
           db.saved_items = seedSavedItems as any[];
           await AsyncStorage.setItem(DB_KEY, JSON.stringify(db));
@@ -76,6 +91,7 @@ async function initDB(): Promise<LocalDatabase> {
     chats: seedChats as any[],
     prizes: seedPrizes as any[],
     bets: seedBets as any[],
+    games: seedGames as any[],
     media_vault: seedMediaVault as any[],
     user_subscriptions: seedUserSubscriptions as any[],
     saved_items: seedSavedItems as any[],
@@ -345,6 +361,7 @@ export const localDB = {
   groups: createCollection<any>('groups'),
   prizes: createCollection<any>('prizes'),
   bets: createCollection<any>('bets'),
+  games: createCollection<any>('games'),
   media_vault: createCollection<any>('media_vault'),
   user_subscriptions: createCollection<any>('user_subscriptions'),
   saved_items: createCollection<any>('saved_items'),

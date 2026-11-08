@@ -4,13 +4,18 @@
     "username": "admin",
     "password": "admin",
     "full_name": "Administrador Principal",
-    "avatar_url": "https://i.pravatar.cc/150?u=admin",
+    "avatar_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150",
     "role": "admin",
-    "bio": "Superusuario del sistema HandyBet 🛡️",
-    "interests": ["sistema", "moderación"],
-    "wallet_balance": 999999.00,
-    "followers_count": 0,
-    "following_count": 0,
+    "bio": "Superusuario y moderación de HandyBet 🛡️",
+    "interests": [
+      "sistema",
+      "moderación",
+      "apuestas"
+    ],
+    "wallet_balance": 999999,
+    "followers_count": 520,
+    "following_count": 35,
+    "phone_whatsapp": "+584120000001",
     "created_at": "2025-01-01T00:00:00Z"
   },
   {
@@ -18,13 +23,19 @@
     "username": "henry_campos",
     "password": "admin123",
     "full_name": "Henry Campos",
-    "avatar_url": "https://i.pravatar.cc/150?u=henry_campos",
+    "avatar_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150",
     "role": "admin",
-    "bio": "Fundador de HandyBet 🎯 | Innovación en apuestas digitales",
-    "interests": ["apuestas", "tecnología", "negocios"],
-    "wallet_balance": 15000.00,
-    "followers_count": 342,
-    "following_count": 28,
+    "bio": "Fundador de HandyBet 🎯 | Innovación en entretenimiento y apuestas digitales",
+    "interests": [
+      "apuestas",
+      "tecnología",
+      "parley",
+      "champions"
+    ],
+    "wallet_balance": 24500,
+    "followers_count": 1450,
+    "following_count": 85,
+    "phone_whatsapp": "+584141112233",
     "created_at": "2025-01-15T08:00:00Z"
   },
   {
@@ -32,153 +43,1011 @@
     "username": "joselin_lagata",
     "password": "password123",
     "full_name": "Joselin La Gata",
-    "avatar_url": "https://i.pravatar.cc/150?u=joselin_lagata",
-    "role": "company_owner",
-    "bio": "Creadora de contenido 🐾 | Canal VIP activo | Solo para mayores",
-    "interests": ["videos", "media", "entretenimiento"],
-    "wallet_balance": 8750.50,
-    "followers_count": 12400,
-    "following_count": 85,
+    "avatar_url": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150",
+    "role": "vip_creator",
+    "bio": "Creadora de contenido VIP 🐾 | Sesiones exclusivas y chat privado",
+    "interests": [
+      "fotos_vip",
+      "entretenimiento",
+      "eventos"
+    ],
+    "wallet_balance": 8750.5,
+    "followers_count": 24500,
+    "following_count": 42,
+    "phone_whatsapp": "+584129990011",
     "created_at": "2025-02-10T14:30:00Z"
+  },
+  {
+    "id": "usr_valeria",
+    "username": "valeria_vip",
+    "password": "password123",
+    "full_name": "Valeria Gómez",
+    "avatar_url": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150",
+    "role": "vip_creator",
+    "bio": "Modelo fitness & creadora digital 💖 Desbloquea mis sets privados en el chat",
+    "interests": [
+      "fotos_vip",
+      "fitness",
+      "moda"
+    ],
+    "wallet_balance": 14200,
+    "followers_count": 18900,
+    "following_count": 60,
+    "phone_whatsapp": "+584148887766",
+    "created_at": "2025-02-12T10:00:00Z"
+  },
+  {
+    "id": "usr_nicole",
+    "username": "nicole_rossi",
+    "password": "password123",
+    "full_name": "Nicole Rossi",
+    "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150",
+    "role": "vip_creator",
+    "bio": "Rubia apasionada por los deportes y la buena vida ✨ Canal VIP activo",
+    "interests": [
+      "fotos_vip",
+      "deportes",
+      "viajes"
+    ],
+    "wallet_balance": 9340,
+    "followers_count": 15400,
+    "following_count": 55,
+    "phone_whatsapp": "+584163334455",
+    "created_at": "2025-02-20T11:00:00Z"
+  },
+  {
+    "id": "usr_camila",
+    "username": "camila_santos",
+    "password": "password123",
+    "full_name": "Camila Santos",
+    "avatar_url": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150",
+    "role": "vip_creator",
+    "bio": "Bailarina y host de eventos 💃 Videos y contenido diario sin censura",
+    "interests": [
+      "fotos_vip",
+      "baile",
+      "música"
+    ],
+    "wallet_balance": 6200,
+    "followers_count": 12200,
+    "following_count": 48,
+    "phone_whatsapp": "+584241239876",
+    "created_at": "2025-03-01T15:00:00Z"
+  },
+  {
+    "id": "usr_isabella",
+    "username": "isabella_luxe",
+    "password": "password123",
+    "full_name": "Isabella Morales",
+    "avatar_url": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150",
+    "role": "vip_creator",
+    "bio": "Tu compañía favorita en HandyBet 💋 Pide fotos personalizadas al DM",
+    "interests": [
+      "fotos_vip",
+      "entretenimiento",
+      "citas"
+    ],
+    "wallet_balance": 11050,
+    "followers_count": 21000,
+    "following_count": 38,
+    "phone_whatsapp": "+584125556677",
+    "created_at": "2025-03-05T09:00:00Z"
+  },
+  {
+    "id": "usr_andrea",
+    "username": "andrea_caracas",
+    "password": "password123",
+    "full_name": "Andrea Castillo",
+    "avatar_url": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150",
+    "role": "vip_creator",
+    "bio": "Caraqueña 100% 🇻🇪 Fotos de estudio y detrás de cámara exclusivo",
+    "interests": [
+      "fotos_vip",
+      "modelaje"
+    ],
+    "wallet_balance": 7800,
+    "followers_count": 9800,
+    "following_count": 70,
+    "phone_whatsapp": "+584149998811",
+    "created_at": "2025-03-10T12:00:00Z"
+  },
+  {
+    "id": "usr_gabriela",
+    "username": "gaby_sweet",
+    "password": "password123",
+    "full_name": "Gabriela Mendoza",
+    "avatar_url": "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=150",
+    "role": "vip_creator",
+    "bio": "Chica gamer y cosplayer 🎮 Fotos exclusivas para suscriptores",
+    "interests": [
+      "fotos_vip",
+      "gaming",
+      "anime"
+    ],
+    "wallet_balance": 8400,
+    "followers_count": 14000,
+    "following_count": 90,
+    "phone_whatsapp": "+584167778899",
+    "created_at": "2025-03-15T18:00:00Z"
+  },
+  {
+    "id": "usr_stefany",
+    "username": "stefany_blond",
+    "password": "password123",
+    "full_name": "Stefany Rivas",
+    "avatar_url": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=150",
+    "role": "vip_creator",
+    "bio": "Abogada de día, creadora de noche 🥂 Descubre mi lado atrevido",
+    "interests": [
+      "fotos_vip",
+      "fiestas",
+      "viajes"
+    ],
+    "wallet_balance": 13500,
+    "followers_count": 17600,
+    "following_count": 45,
+    "phone_whatsapp": "+584124443322",
+    "created_at": "2025-03-20T16:00:00Z"
+  },
+  {
+    "id": "usr_natalia",
+    "username": "nathy_queen",
+    "password": "password123",
+    "full_name": "Natalia Peña",
+    "avatar_url": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150",
+    "role": "vip_creator",
+    "bio": "Reina de belleza y anfitriona en eventos de póker 👑 Contenido VIP",
+    "interests": [
+      "fotos_vip",
+      "poker",
+      "lujo"
+    ],
+    "wallet_balance": 19800,
+    "followers_count": 28400,
+    "following_count": 110,
+    "phone_whatsapp": "+584245551122",
+    "created_at": "2025-03-25T14:00:00Z"
+  },
+  {
+    "id": "usr_carolina",
+    "username": "caro_glam",
+    "password": "password123",
+    "full_name": "Carolina Herrera V.",
+    "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150",
+    "role": "vip_creator",
+    "bio": "Glamour, moda y contenido premium ✨ Suscríbete para chat directo 24/7",
+    "interests": [
+      "fotos_vip",
+      "glamour",
+      "moda"
+    ],
+    "wallet_balance": 15400,
+    "followers_count": 22100,
+    "following_count": 65,
+    "phone_whatsapp": "+584126669988",
+    "created_at": "2025-04-01T20:00:00Z"
+  },
+  {
+    "id": "usr_roberto",
+    "username": "roberto_tips",
+    "password": "password123",
+    "full_name": "Roberto López (El Rey del Parley)",
+    "avatar_url": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150",
+    "role": "tipster",
+    "bio": "Pronosticador certificado con 82% de efectividad en MLB y Fútbol Europeo 📊",
+    "interests": [
+      "parley",
+      "beisbol",
+      "champions"
+    ],
+    "wallet_balance": 35000,
+    "followers_count": 18500,
+    "following_count": 32,
+    "phone_whatsapp": "+584145550011",
+    "created_at": "2025-01-20T08:00:00Z"
+  },
+  {
+    "id": "usr_don_animalito",
+    "username": "don_animalito",
+    "password": "password123",
+    "full_name": "Don Animalito Oficial",
+    "avatar_url": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150",
+    "role": "tipster",
+    "bio": "El matemático de los animalitos 🧮 Datos fijos para Lotto Activo y La Granjita",
+    "interests": [
+      "lotto_activo",
+      "animalitos",
+      "ruleta"
+    ],
+    "wallet_balance": 19400,
+    "followers_count": 31200,
+    "following_count": 20,
+    "phone_whatsapp": "+584128889900",
+    "created_at": "2025-01-22T09:00:00Z"
+  },
+  {
+    "id": "usr_brujo_triples",
+    "username": "el_brujo_triples",
+    "password": "password123",
+    "full_name": "El Brujo de los Triples",
+    "avatar_url": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150",
+    "role": "tipster",
+    "bio": "Especialista en Triples de Zulia, Chance y Táchira 🔮 Acertando día a día",
+    "interests": [
+      "loterias",
+      "apuestas"
+    ],
+    "wallet_balance": 12800,
+    "followers_count": 25400,
+    "following_count": 15,
+    "phone_whatsapp": "+584162223344",
+    "created_at": "2025-01-25T11:00:00Z"
+  },
+  {
+    "id": "usr_parley_master",
+    "username": "parley_master_ve",
+    "password": "password123",
+    "full_name": "Marcos Parley Master",
+    "avatar_url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150",
+    "role": "tipster",
+    "bio": "Combinadas de alto rendimiento (cuotas 3.50 a 10.00) 📈 Sígueme para ganar",
+    "interests": [
+      "parley",
+      "nba",
+      "champions"
+    ],
+    "wallet_balance": 28900,
+    "followers_count": 16800,
+    "following_count": 40,
+    "phone_whatsapp": "+584241113355",
+    "created_at": "2025-02-01T10:00:00Z"
+  },
+  {
+    "id": "usr_profesor_fija",
+    "username": "profesor_la_fija",
+    "password": "password123",
+    "full_name": "Profesor La Fija",
+    "avatar_url": "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=150",
+    "role": "tipster",
+    "bio": "Análisis estadístico sabatino y dominical para carreras hípicas y parley 🏇",
+    "interests": [
+      "parley",
+      "apuestas"
+    ],
+    "wallet_balance": 16500,
+    "followers_count": 14200,
+    "following_count": 22,
+    "phone_whatsapp": "+584147771122",
+    "created_at": "2025-02-05T14:00:00Z"
+  },
+  {
+    "id": "usr_hipismo_gold",
+    "username": "hipismo_gold",
+    "password": "password123",
+    "full_name": "César Hipismo Gold",
+    "avatar_url": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150",
+    "role": "tipster",
+    "bio": "Datos y líneas para el 5y6 nacional de La Rinconada 🐎 ¡Líneas garantizadas!",
+    "interests": [
+      "apuestas",
+      "parley"
+    ],
+    "wallet_balance": 21300,
+    "followers_count": 19800,
+    "following_count": 30,
+    "phone_whatsapp": "+584127776655",
+    "created_at": "2025-02-10T11:00:00Z"
+  },
+  {
+    "id": "usr_analista_nba",
+    "username": "nba_picks_pro",
+    "password": "password123",
+    "full_name": "Gabriel NBA Picks",
+    "avatar_url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150",
+    "role": "tipster",
+    "bio": "Over/Under y hándicaps diarios de la NBA 🏀 78% de aciertos esta temporada",
+    "interests": [
+      "nba",
+      "parley"
+    ],
+    "wallet_balance": 18450,
+    "followers_count": 11200,
+    "following_count": 18,
+    "phone_whatsapp": "+584168884433",
+    "created_at": "2025-02-15T15:00:00Z"
+  },
+  {
+    "id": "usr_futbol_picks",
+    "username": "futve_y_europa",
+    "password": "password123",
+    "full_name": "Alejandro Golazo Picks",
+    "avatar_url": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150",
+    "role": "tipster",
+    "bio": "Especialista en Liga FUTVE, Champions League y Copa Libertadores ⚽",
+    "interests": [
+      "futve",
+      "champions",
+      "parley"
+    ],
+    "wallet_balance": 14200,
+    "followers_count": 13500,
+    "following_count": 25,
+    "phone_whatsapp": "+584143336699",
+    "created_at": "2025-02-20T17:00:00Z"
+  },
+  {
+    "id": "usr_selva_guru",
+    "username": "selva_guru",
+    "password": "password123",
+    "full_name": "El Gurú de la Selva",
+    "avatar_url": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150",
+    "role": "tipster",
+    "bio": "Pronósticos exclusivos para Selva Plus y Ruleta Activa 🦁 El león manda",
+    "interests": [
+      "animalitos",
+      "lotto_activo"
+    ],
+    "wallet_balance": 9800,
+    "followers_count": 16700,
+    "following_count": 14,
+    "phone_whatsapp": "+584121118844",
+    "created_at": "2025-03-01T08:00:00Z"
+  },
+  {
+    "id": "usr_triple_zulia",
+    "username": "zulia_exacto",
+    "password": "password123",
+    "full_name": "Zulia y Chance Exacto",
+    "avatar_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150",
+    "role": "tipster",
+    "bio": "Jugadas directas sin caída para las loterías más jugadas de Venezuela 🎯",
+    "interests": [
+      "loterias",
+      "apuestas"
+    ],
+    "wallet_balance": 22100,
+    "followers_count": 24100,
+    "following_count": 19,
+    "phone_whatsapp": "+584247770022",
+    "created_at": "2025-03-05T12:00:00Z"
+  },
+  {
+    "id": "usr_tenis_ace",
+    "username": "tenis_ace_tips",
+    "password": "password123",
+    "full_name": "Mateo Tenis Picks",
+    "avatar_url": "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=150",
+    "role": "tipster",
+    "bio": "Grand Slams y torneos ATP/WTA 🎾 Especialista en apuestas en vivo",
+    "interests": [
+      "parley",
+      "apuestas"
+    ],
+    "wallet_balance": 11900,
+    "followers_count": 8900,
+    "following_count": 33,
+    "phone_whatsapp": "+584164447788",
+    "created_at": "2025-03-10T14:00:00Z"
+  },
+  {
+    "id": "usr_crypto_bets",
+    "username": "crypto_bets_ve",
+    "password": "password123",
+    "full_name": "Daniel Crypto & Bets",
+    "avatar_url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150",
+    "role": "tipster",
+    "bio": "Crash games, Plinko y pronósticos con USDT y VES 🪙 Multiplica seguro",
+    "interests": [
+      "crypto",
+      "ruleta",
+      "apuestas"
+    ],
+    "wallet_balance": 45600,
+    "followers_count": 27800,
+    "following_count": 45,
+    "phone_whatsapp": "+584120009988",
+    "created_at": "2025-03-15T19:00:00Z"
+  },
+  {
+    "id": "usr_diego",
+    "username": "diego_herrera",
+    "password": "password123",
+    "full_name": "Diego Herrera (La Imaginaria)",
+    "avatar_url": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150",
+    "role": "company_owner",
+    "bio": "Director General de Agencias La Imaginaria | Red líder de taquillas físicas",
+    "interests": [
+      "taquillas",
+      "loterias",
+      "animalitos"
+    ],
+    "wallet_balance": 125000,
+    "followers_count": 8900,
+    "following_count": 120,
+    "phone_whatsapp": "+584142220099",
+    "created_at": "2025-01-10T07:00:00Z"
+  },
+  {
+    "id": "usr_pedro",
+    "username": "pedro_cajero",
+    "password": "password123",
+    "full_name": "Pedro Ramírez",
+    "avatar_url": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150",
+    "role": "cashier",
+    "bio": "Cajero principal - Taquilla Caracas Centro 🎟️ Pagos al instante",
+    "interests": [
+      "taquillas",
+      "apuestas"
+    ],
+    "wallet_balance": 5400,
+    "followers_count": 3200,
+    "following_count": 15,
+    "phone_whatsapp": "+584123334411",
+    "created_at": "2025-01-12T08:00:00Z"
+  },
+  {
+    "id": "usr_laura",
+    "username": "laura_valencia",
+    "password": "password123",
+    "full_name": "Laura Méndez",
+    "avatar_url": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150",
+    "role": "cashier",
+    "bio": "Encargada Taquillas Valencia Norte | Recargas Pago Móvil y Efectivo 💵",
+    "interests": [
+      "taquillas",
+      "lotto_activo"
+    ],
+    "wallet_balance": 8900,
+    "followers_count": 4100,
+    "following_count": 28,
+    "phone_whatsapp": "+584145558833",
+    "created_at": "2025-01-18T10:00:00Z"
+  },
+  {
+    "id": "usr_carmen",
+    "username": "carmen_maracaibo",
+    "password": "password123",
+    "full_name": "Carmen Urdaneta",
+    "avatar_url": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150",
+    "role": "cashier",
+    "bio": "Taquilla 5 de Julio Maracaibo ☀️ Atención rápida y verificación de tickets",
+    "interests": [
+      "taquillas",
+      "loterias"
+    ],
+    "wallet_balance": 6700,
+    "followers_count": 2900,
+    "following_count": 14,
+    "phone_whatsapp": "+584161112255",
+    "created_at": "2025-01-25T11:00:00Z"
+  },
+  {
+    "id": "usr_javier",
+    "username": "javier_barquisimeto",
+    "password": "password123",
+    "full_name": "Javier Colmenares",
+    "avatar_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150",
+    "role": "cashier",
+    "bio": "Agencia Centro Lara Barquisimeto | Tu jugada segura en HandyBet",
+    "interests": [
+      "taquillas",
+      "parley"
+    ],
+    "wallet_balance": 9100,
+    "followers_count": 3600,
+    "following_count": 21,
+    "phone_whatsapp": "+584245559988",
+    "created_at": "2025-02-01T09:00:00Z"
+  },
+  {
+    "id": "usr_patricia",
+    "username": "patricia_maracay",
+    "password": "password123",
+    "full_name": "Patricia Silva",
+    "avatar_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150",
+    "role": "cashier",
+    "bio": "Taquilla Las Delicias Maracay 🎲 Cobro de premios sin comisiones",
+    "interests": [
+      "taquillas",
+      "animalitos"
+    ],
+    "wallet_balance": 7200,
+    "followers_count": 3400,
+    "following_count": 18,
+    "phone_whatsapp": "+584129994433",
+    "created_at": "2025-02-10T12:00:00Z"
+  },
+  {
+    "id": "usr_miguel",
+    "username": "miguel_puerto_ordaz",
+    "password": "password123",
+    "full_name": "Miguel Ángel Rivas",
+    "avatar_url": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150",
+    "role": "cashier",
+    "bio": "Taquilla Alta Vista Puerto Ordaz 🏭 Pagos inmediatos en Bs y USDT",
+    "interests": [
+      "taquillas",
+      "crypto"
+    ],
+    "wallet_balance": 11500,
+    "followers_count": 2800,
+    "following_count": 24,
+    "phone_whatsapp": "+584148882211",
+    "created_at": "2025-02-15T14:00:00Z"
+  },
+  {
+    "id": "usr_elena",
+    "username": "elena_lecheria",
+    "password": "password123",
+    "full_name": "Elena Fuentes",
+    "avatar_url": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150",
+    "role": "cashier",
+    "bio": "Agencia Plaza Mayor Lechería ⛵ Terminal oficial de HandyBet",
+    "interests": [
+      "taquillas",
+      "loterias"
+    ],
+    "wallet_balance": 8300,
+    "followers_count": 3900,
+    "following_count": 19,
+    "phone_whatsapp": "+584163337711",
+    "created_at": "2025-02-20T16:00:00Z"
+  },
+  {
+    "id": "usr_raul",
+    "username": "raul_san_cristobal",
+    "password": "password123",
+    "full_name": "Raúl Zambrano",
+    "avatar_url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150",
+    "role": "cashier",
+    "bio": "Taquilla Barrio Obrero San Cristóbal 🏔️ Sellado de lotería Táchira y Zulia",
+    "interests": [
+      "taquillas",
+      "loterias"
+    ],
+    "wallet_balance": 14800,
+    "followers_count": 4500,
+    "following_count": 22,
+    "phone_whatsapp": "+584247774433",
+    "created_at": "2025-02-28T09:00:00Z"
+  },
+  {
+    "id": "usr_yaneth",
+    "username": "yaneth_margarita",
+    "password": "password123",
+    "full_name": "Yaneth Marcano",
+    "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150",
+    "role": "cashier",
+    "bio": "Taquilla Porlamar Isla de Margarita 🏖️ Atención al turista y residente",
+    "interests": [
+      "taquillas",
+      "bingo"
+    ],
+    "wallet_balance": 9600,
+    "followers_count": 3100,
+    "following_count": 26,
+    "phone_whatsapp": "+584125550099",
+    "created_at": "2025-03-05T13:00:00Z"
   },
   {
     "id": "usr_carlos",
     "username": "carlos_ruiz",
     "password": "password123",
     "full_name": "Carlos Ruiz",
-    "avatar_url": "https://i.pravatar.cc/150?u=carlos_ruiz",
+    "avatar_url": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150",
     "role": "player",
-    "bio": "Apostador profesional 🎰 | Triple y animalitos | Caracas",
-    "interests": ["apuestas", "pronosticos", "deportes"],
-    "wallet_balance": 2340.00,
-    "followers_count": 156,
-    "following_count": 210,
-    "created_at": "2025-03-05T10:15:00Z"
+    "bio": "Aficionado al béisbol y a los triples de la tarde ⚾ Ganador de premios HandyBet",
+    "interests": [
+      "parley",
+      "beisbol",
+      "lotto_activo"
+    ],
+    "wallet_balance": 5450,
+    "followers_count": 340,
+    "following_count": 45,
+    "phone_whatsapp": "+584141234567",
+    "created_at": "2025-01-20T08:00:00Z"
   },
   {
     "id": "usr_maria",
-    "username": "maria_gonzalez",
+    "username": "maria_bet",
     "password": "password123",
-    "full_name": "María González",
-    "avatar_url": "https://i.pravatar.cc/150?u=maria_gonzalez",
+    "full_name": "María Fernández",
+    "avatar_url": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150",
     "role": "player",
-    "bio": "Amante de los animalitos 🦁 | Siempre apostando al león",
-    "interests": ["apuestas", "animalitos", "comunidad"],
-    "wallet_balance": 890.75,
-    "followers_count": 89,
-    "following_count": 145,
-    "created_at": "2025-03-20T16:45:00Z"
-  },
-  {
-    "id": "usr_pedro",
-    "username": "pedro_martinez",
-    "password": "password123",
-    "full_name": "Pedro Martínez",
-    "avatar_url": "https://i.pravatar.cc/150?u=pedro_martinez",
-    "role": "cashier",
-    "bio": "Cajero oficial Taquillas Caracas 💼 | Atención rápida y segura",
-    "interests": ["apuestas", "finanzas"],
-    "wallet_balance": 45000.00,
-    "followers_count": 67,
-    "following_count": 34,
-    "created_at": "2025-01-25T09:00:00Z"
-  },
-  {
-    "id": "usr_ana",
-    "username": "ana_silva",
-    "password": "password123",
-    "full_name": "Ana Silva",
-    "avatar_url": "https://i.pravatar.cc/150?u=ana_silva",
-    "role": "player",
-    "bio": "Streamer de apuestas en vivo 🎥 | Tips gratis los viernes",
-    "interests": ["streaming", "apuestas", "entretenimiento"],
-    "wallet_balance": 3200.00,
-    "followers_count": 5670,
-    "following_count": 190,
-    "created_at": "2025-04-12T11:30:00Z"
-  },
-  {
-    "id": "usr_diego",
-    "username": "diego_herrera",
-    "password": "password123",
-    "full_name": "Diego Herrera",
-    "avatar_url": "https://i.pravatar.cc/150?u=diego_herrera",
-    "role": "company_owner",
-    "bio": "Dueño de La Imaginaria 🏪 | La mejor agencia de loterías de Caracas",
-    "interests": ["negocios", "apuestas", "loterías"],
-    "wallet_balance": 125000.00,
-    "followers_count": 890,
-    "following_count": 45,
-    "created_at": "2025-01-10T07:00:00Z"
-  },
-  {
-    "id": "usr_valentina",
-    "username": "vale_mendoza",
-    "password": "password123",
-    "full_name": "Valentina Mendoza",
-    "avatar_url": "https://i.pravatar.cc/150?u=vale_mendoza",
-    "role": "player",
-    "bio": "Nueva en HandyBet 🌟 | Aprendiendo sobre animalitos",
-    "interests": ["apuestas", "comunidad", "aprendizaje"],
-    "wallet_balance": 150.00,
-    "followers_count": 23,
-    "following_count": 78,
-    "created_at": "2025-06-01T13:00:00Z"
-  },
-  {
-    "id": "usr_roberto",
-    "username": "roberto_lopez",
-    "password": "password123",
-    "full_name": "Roberto López",
-    "avatar_url": "https://i.pravatar.cc/150?u=roberto_lopez",
-    "role": "player",
-    "bio": "El Pronosticador 🔮 | 78% de acierto en triples | Resultados verificables",
-    "interests": ["pronosticos", "apuestas", "estadísticas"],
-    "wallet_balance": 6780.00,
-    "followers_count": 3400,
-    "following_count": 120,
-    "created_at": "2025-02-28T15:20:00Z"
-  },
-  {
-    "id": "usr_laura",
-    "username": "laura_torres",
-    "password": "password123",
-    "full_name": "Laura Torres",
-    "avatar_url": "https://i.pravatar.cc/150?u=laura_torres",
-    "role": "cashier",
-    "bio": "Cajera Taquillas Valencia 💰 | Pagos inmediatos",
-    "interests": ["finanzas", "apuestas"],
-    "wallet_balance": 32000.00,
-    "followers_count": 45,
-    "following_count": 22,
-    "created_at": "2025-03-15T08:30:00Z"
+    "bio": "Jugadora de bingo y animalitos 🦁 Fanática de las quinielas de fútbol",
+    "interests": [
+      "bingo",
+      "animalitos",
+      "champions"
+    ],
+    "wallet_balance": 1820,
+    "followers_count": 190,
+    "following_count": 62,
+    "phone_whatsapp": "+584129876543",
+    "created_at": "2025-01-22T10:00:00Z"
   },
   {
     "id": "usr_gabriel",
-    "username": "gabriel_vargas",
+    "username": "gabo_parley",
     "password": "password123",
-    "full_name": "Gabriel Vargas",
-    "avatar_url": "https://i.pravatar.cc/150?u=gabriel_vargas",
+    "full_name": "Gabriel Torres",
+    "avatar_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150",
     "role": "player",
-    "bio": "Jugador casual 🎲 | A veces gano, siempre me divierto",
-    "interests": ["apuestas", "deportes", "entretenimiento"],
-    "wallet_balance": 450.25,
-    "followers_count": 34,
-    "following_count": 156,
-    "created_at": "2025-05-10T17:00:00Z"
+    "bio": "El rey de las combinadas locas 🤑 Si no paga 10x no me interesa",
+    "interests": [
+      "parley",
+      "nba",
+      "champions"
+    ],
+    "wallet_balance": 4200,
+    "followers_count": 510,
+    "following_count": 120,
+    "phone_whatsapp": "+584164567890",
+    "created_at": "2025-02-01T12:00:00Z"
   },
   {
-    "id": "usr_isabella",
-    "username": "isabella_rios",
+    "id": "usr_valentina",
+    "username": "valen_suerte",
     "password": "password123",
-    "full_name": "Isabella Ríos",
-    "avatar_url": "https://i.pravatar.cc/150?u=isabella_rios",
-    "role": "company_owner",
-    "bio": "Agencia de publicidad digital 📱 | Anuncios en HandyBet",
-    "interests": ["publicidad", "marketing", "negocios"],
-    "wallet_balance": 18500.00,
-    "followers_count": 560,
-    "following_count": 89,
-    "created_at": "2025-04-01T10:00:00Z"
+    "full_name": "Valentina Rojas",
+    "avatar_url": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150",
+    "role": "player",
+    "bio": "La suerte me sonríe siempre 🍀 Suscriptora de canales VIP y jugadora de bingo",
+    "interests": [
+      "bingo",
+      "fotos_vip",
+      "animalitos"
+    ],
+    "wallet_balance": 3100,
+    "followers_count": 270,
+    "following_count": 58,
+    "phone_whatsapp": "+584243210987",
+    "created_at": "2025-02-05T15:00:00Z"
+  },
+  {
+    "id": "usr_yorman",
+    "username": "yorman_el_duro",
+    "password": "password123",
+    "full_name": "Yorman Bastidas",
+    "avatar_url": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150",
+    "role": "player",
+    "bio": "Apostando desde Petare con fe y cabeza fría 👊 Fijo con los animalitos",
+    "interests": [
+      "animalitos",
+      "lotto_activo",
+      "parley"
+    ],
+    "wallet_balance": 1450,
+    "followers_count": 420,
+    "following_count": 75,
+    "phone_whatsapp": "+584145556611",
+    "created_at": "2025-02-12T09:00:00Z"
+  },
+  {
+    "id": "usr_luis_alfonso",
+    "username": "luis_alfonso_picks",
+    "password": "password123",
+    "full_name": "Luis Alfonso Salazar",
+    "avatar_url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150",
+    "role": "player",
+    "bio": "Ingeniero y analista de números en mis tiempos libres 📐",
+    "interests": [
+      "loterias",
+      "champions"
+    ],
+    "wallet_balance": 6780,
+    "followers_count": 310,
+    "following_count": 40,
+    "phone_whatsapp": "+584127771199",
+    "created_at": "2025-02-18T14:00:00Z"
+  },
+  {
+    "id": "usr_andres_champions",
+    "username": "andres_ucl",
+    "password": "password123",
+    "full_name": "Andrés Morales",
+    "avatar_url": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150",
+    "role": "player",
+    "bio": "Fanático del Real Madrid y apostador de Champions ⚪ Hala Madrid",
+    "interests": [
+      "champions",
+      "parley",
+      "futve"
+    ],
+    "wallet_balance": 8900,
+    "followers_count": 650,
+    "following_count": 88,
+    "phone_whatsapp": "+584140003322",
+    "created_at": "2025-02-25T11:00:00Z"
+  },
+  {
+    "id": "usr_daniella",
+    "username": "dani_poker",
+    "password": "password123",
+    "full_name": "Daniella Briceño",
+    "avatar_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150",
+    "role": "player",
+    "bio": "Texas Holdem y Crash games 🚀 Cazadora de multiplicadores altos",
+    "interests": [
+      "ruleta",
+      "crypto",
+      "apuestas"
+    ],
+    "wallet_balance": 12400,
+    "followers_count": 890,
+    "following_count": 95,
+    "phone_whatsapp": "+584168880011",
+    "created_at": "2025-03-01T16:00:00Z"
+  },
+  {
+    "id": "usr_samuel",
+    "username": "samuel_mlb",
+    "password": "password123",
+    "full_name": "Samuel Vargas",
+    "avatar_url": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150",
+    "role": "player",
+    "bio": "Leones del Caracas en invierno, Yankees en verano ⚾ Parley todos los días",
+    "interests": [
+      "beisbol",
+      "parley"
+    ],
+    "wallet_balance": 3890,
+    "followers_count": 280,
+    "following_count": 50,
+    "phone_whatsapp": "+584241118833",
+    "created_at": "2025-03-05T10:00:00Z"
+  },
+  {
+    "id": "usr_fernanda",
+    "username": "fer_bingos",
+    "password": "password123",
+    "full_name": "Fernanda Ortiz",
+    "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150",
+    "role": "player",
+    "bio": "No me pierdo ningún bingo de las 9PM 🎫 La suerte es de los que perseveran",
+    "interests": [
+      "bingo",
+      "rifas"
+    ],
+    "wallet_balance": 2150,
+    "followers_count": 175,
+    "following_count": 39,
+    "phone_whatsapp": "+584123330088",
+    "created_at": "2025-03-10T15:00:00Z"
+  },
+  {
+    "id": "usr_javier_kino",
+    "username": "javier_kino",
+    "password": "password123",
+    "full_name": "Javier Pacheco",
+    "avatar_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150",
+    "role": "player",
+    "bio": "Jugador del Gran Kino y sorteos semanales 🏆",
+    "interests": [
+      "loterias",
+      "rifas"
+    ],
+    "wallet_balance": 1450,
+    "followers_count": 120,
+    "following_count": 30,
+    "phone_whatsapp": "+584147775522",
+    "created_at": "2025-03-12T12:00:00Z"
+  },
+  {
+    "id": "usr_claudia",
+    "username": "clau_lucky",
+    "password": "password123",
+    "full_name": "Claudia Medina",
+    "avatar_url": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150",
+    "role": "player",
+    "bio": "Me encanta compartir jugadas ganadoras en el muro 📱",
+    "interests": [
+      "animalitos",
+      "fotos_vip"
+    ],
+    "wallet_balance": 4120,
+    "followers_count": 310,
+    "following_count": 65,
+    "phone_whatsapp": "+584160002233",
+    "created_at": "2025-03-15T09:00:00Z"
+  },
+  {
+    "id": "usr_ricardo",
+    "username": "richi_parley",
+    "password": "password123",
+    "full_name": "Ricardo Espinoza",
+    "avatar_url": "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=150",
+    "role": "player",
+    "bio": "Directo al grano: altas y bajas de goles en ligas europeas ⚽",
+    "interests": [
+      "parley",
+      "champions"
+    ],
+    "wallet_balance": 5600,
+    "followers_count": 490,
+    "following_count": 70,
+    "phone_whatsapp": "+584249991144",
+    "created_at": "2025-03-18T17:00:00Z"
+  },
+  {
+    "id": "usr_jessica",
+    "username": "jessi_vip_fan",
+    "password": "password123",
+    "full_name": "Jéssica Lucena",
+    "avatar_url": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150",
+    "role": "player",
+    "bio": "Fan #1 de Joselin y Valeria 💖 Apoyando a las creadoras de HandyBet",
+    "interests": [
+      "fotos_vip",
+      "entretenimiento"
+    ],
+    "wallet_balance": 2900,
+    "followers_count": 220,
+    "following_count": 44,
+    "phone_whatsapp": "+584128881133",
+    "created_at": "2025-03-20T11:00:00Z"
+  },
+  {
+    "id": "usr_gustavo",
+    "username": "tavo_apuesta",
+    "password": "password123",
+    "full_name": "Gustavo Adolfo Prado",
+    "avatar_url": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150",
+    "role": "player",
+    "bio": "El 11-GATO y el 22-CAMELLO nunca me fallan en la Granjita 🐪",
+    "interests": [
+      "animalitos",
+      "lotto_activo"
+    ],
+    "wallet_balance": 1980,
+    "followers_count": 260,
+    "following_count": 52,
+    "phone_whatsapp": "+584144440011",
+    "created_at": "2025-03-22T13:00:00Z"
+  },
+  {
+    "id": "usr_paola",
+    "username": "pao_fitness",
+    "password": "password123",
+    "full_name": "Paola Andrea Silva",
+    "avatar_url": "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=150",
+    "role": "player",
+    "bio": "Vida fitness y apuestas sanas los fines de semana 💪",
+    "interests": [
+      "fitness",
+      "champions"
+    ],
+    "wallet_balance": 3400,
+    "followers_count": 410,
+    "following_count": 80,
+    "phone_whatsapp": "+584165559922",
+    "created_at": "2025-03-25T16:00:00Z"
+  },
+  {
+    "id": "usr_victor",
+    "username": "victor_triples",
+    "password": "password123",
+    "full_name": "Víctor Manuel Gil",
+    "avatar_url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150",
+    "role": "player",
+    "bio": "Buscando el número millonario todos los días en Chance y Zulia 💸",
+    "interests": [
+      "loterias",
+      "apuestas"
+    ],
+    "wallet_balance": 4780,
+    "followers_count": 350,
+    "following_count": 48,
+    "phone_whatsapp": "+584242224466",
+    "created_at": "2025-03-28T10:00:00Z"
+  },
+  {
+    "id": "usr_adriana",
+    "username": "adri_maracay",
+    "password": "password123",
+    "full_name": "Adriana Colmenares",
+    "avatar_url": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=150",
+    "role": "player",
+    "bio": "Amante de los animales y de los sorteos de la mañana 🐾",
+    "interests": [
+      "animalitos",
+      "bingo"
+    ],
+    "wallet_balance": 1670,
+    "followers_count": 180,
+    "following_count": 36,
+    "phone_whatsapp": "+584126663300",
+    "created_at": "2025-04-01T14:00:00Z"
+  },
+  {
+    "id": "usr_rodrigo",
+    "username": "rodrigo_futve",
+    "password": "password123",
+    "full_name": "Rodrigo Benítez",
+    "avatar_url": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150",
+    "role": "player",
+    "bio": "Caracas FC a muerte 🔴 Apuestas de fútbol local e internacional",
+    "interests": [
+      "futve",
+      "champions"
+    ],
+    "wallet_balance": 3120,
+    "followers_count": 290,
+    "following_count": 54,
+    "phone_whatsapp": "+584149991188",
+    "created_at": "2025-04-05T18:00:00Z"
+  },
+  {
+    "id": "usr_mariana",
+    "username": "mariana_loto",
+    "password": "password123",
+    "full_name": "Mariana Duarte",
+    "avatar_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150",
+    "role": "player",
+    "bio": "¡A celebrar cuando caiga el pozo del Gran Kino! 🎉",
+    "interests": [
+      "loterias",
+      "rifas"
+    ],
+    "wallet_balance": 2850,
+    "followers_count": 210,
+    "following_count": 42,
+    "phone_whatsapp": "+584167770044",
+    "created_at": "2025-04-08T09:00:00Z"
+  },
+  {
+    "id": "usr_alberto",
+    "username": "beto_parley",
+    "password": "password123",
+    "full_name": "Alberto José Núñez",
+    "avatar_url": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150",
+    "role": "player",
+    "bio": "Picks de NBA noche tras noche 🏀 El baloncesto es dinero seguro",
+    "interests": [
+      "nba",
+      "parley"
+    ],
+    "wallet_balance": 6200,
+    "followers_count": 460,
+    "following_count": 67,
+    "phone_whatsapp": "+584248882299",
+    "created_at": "2025-04-10T21:00:00Z"
+  },
+  {
+    "id": "usr_sofia",
+    "username": "sofi_ruleta",
+    "password": "password123",
+    "full_name": "Sofía Castellanos",
+    "avatar_url": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150",
+    "role": "player",
+    "bio": "Ruleta activa y juegos rápidos 🎰 Me gusta la adrenalina",
+    "interests": [
+      "ruleta",
+      "crypto"
+    ],
+    "wallet_balance": 3890,
+    "followers_count": 340,
+    "following_count": 60,
+    "phone_whatsapp": "+584121113377",
+    "created_at": "2025-04-12T11:00:00Z"
+  },
+  {
+    "id": "usr_kevin",
+    "username": "kevin_crash",
+    "password": "password123",
+    "full_name": "Kevin Alexander Pinto",
+    "avatar_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150",
+    "role": "player",
+    "bio": "Especialista en Crash Games 🚀 Salgo siempre en 2.0x o 3.0x",
+    "interests": [
+      "crypto",
+      "ruleta"
+    ],
+    "wallet_balance": 7850,
+    "followers_count": 530,
+    "following_count": 72,
+    "phone_whatsapp": "+584143339900",
+    "created_at": "2025-04-15T16:00:00Z"
   }
 ]

@@ -135,22 +135,41 @@ export default function RightSidebarWidgets({ onSelectNews, onSelectPrize, onSel
 
       // Follow suggestions
       const userId = mockSession?.id || 'usr_henry';
-      const allSuggestions = await localDB.relationships.getFollowSuggestions(userId);
-      const resolvedSuggestions = await Promise.all(allSuggestions.map(async (s: any) => {
-        const user = await localDB.users.getById(s.suggested_id);
+      let allSuggestions = await localDB.relationships.getFollowSuggestions(userId);
+      
+      // Fallback si la lista de sugerencias está vacía
+      if (!allSuggestions || allSuggestions.length === 0) {
+        const allUsers = await localDB.users.getAll();
+        const cand = allUsers.filter((u: any) => u.id !== userId && (u.role === 'vip_creator' || u.role === 'tipster' || u.role === 'cashier'));
+        allSuggestions = cand.slice(0, 5).map((u: any, idx: number) => ({
+          id: `sug_fb_${idx}`,
+          suggested_id: u.id,
+          mutual_followers: Math.floor(Math.random() * 20) + 5
+        }));
+      }
+
+      const resolvedSuggestions = (await Promise.all(allSuggestions.slice(0, 6).map(async (s: any) => {
+        const targetId = s.suggested_id || s.user_id;
+        const user = await localDB.users.getById(targetId);
+        if (!user || user.id === userId) return null;
         return {
-          id: s.id,
-          name: user?.full_name || 'Usuario',
+          id: s.id || `sug_${user.id}`,
+          name: user?.full_name || user?.username || 'Usuario',
           avatar: user?.avatar_url || 'https://i.pravatar.cc/150',
-          time: '2 d',
-          mutualFollowers: s.mutual_followers || 0,
+          time: 'Activo',
+          mutualFollowers: s.mutual_followers || user.followers_count || 12,
         };
-      }));
+      }))).filter(Boolean);
       setSuggestions(resolvedSuggestions);
 
       // Prizes
       const allPrizes = await localDB.prizes.getAll();
-      const userPrizes = allPrizes.filter((p: any) => p.user_id === userId);
+      let userPrizes = allPrizes.filter((p: any) => p.user_id === userId);
+      // Si el usuario tiene pocos premios o ninguno, completar con los premios mayores recientes de la plataforma
+      if (userPrizes.length < 3) {
+        const communityPrizes = allPrizes.filter((p: any) => p.user_id !== userId);
+        userPrizes = [...userPrizes, ...communityPrizes].slice(0, 4);
+      }
       setPrizes(userPrizes.map((p: any) => ({
         id: p.id,
         title: p.title,

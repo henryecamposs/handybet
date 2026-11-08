@@ -1,196 +1,2316 @@
 [
   {
-    "id": "grp_taquilla_ccs",
+    "id": "grp_imaginaria",
     "channel_id": "ch_imaginaria",
-    "name": "Taquillas Caracas",
-    "short_code": "TAQCCS",
-    "type": "apuestas",
-    "is_public": false,
-    "members": ["usr_henry", "usr_diego", "usr_pedro", "usr_carlos", "usr_maria", "usr_gabriel"],
-    "admins": ["usr_diego", "usr_pedro"],
-    "config": { "wallet_type": "mixed", "allows_recharge": true },
+    "name": "Comunidad Agencias La Imaginaria",
+    "short_code": "AGE10",
+    "type": "taquillas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_diego"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_diego"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
     "rules": {
       "permitir_publicar_feeds": true,
       "permitir_publicar_publicidad": false,
-      "terms_text": "Al unirte aceptas las reglas de apuestas responsables. No compartir spam.",
+      "terms_text": "Reglas de convivencia de Agencias La Imaginaria. Respeto y juego responsable.",
       "pay_to_post_enabled": false,
       "pay_to_post_fee": 0
     },
     "plans": [
-      { "id": "plan_taq_free", "name": "Miembro", "price": 0, "billing_type": "free" }
+      {
+        "id": "plan_imaginaria_free",
+        "name": "Cliente General",
+        "price": 0,
+        "billing_type": "free",
+        "benefits": [
+          "Consulta de resultados",
+          "Soporte taquilla"
+        ]
+      },
+      {
+        "id": "plan_imaginaria_vip",
+        "name": "Agenciero VIP",
+        "price": 10,
+        "billing_type": "mensual",
+        "benefits": [
+          "Comisiones preferenciales",
+          "Reportes de ventas"
+        ]
+      }
     ],
-    "created_at": "2025-01-15T08:00:00Z"
+    "created_at": "2025-01-10T07:00:00Z"
+  },
+  {
+    "id": "grp_loteria_nacional",
+    "channel_id": "ch_loteria_nacional",
+    "name": "Comunidad Lotería Nacional Resultados",
+    "short_code": "LOT11",
+    "type": "apuestas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_henry"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_henry"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Lotería Nacional Resultados. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_loteria_nacional_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-01-05T07:00:00Z"
+  },
+  {
+    "id": "grp_lotto_activo_oficial",
+    "channel_id": "ch_lotto_activo_oficial",
+    "name": "Comunidad Lotto Activo Resultados",
+    "short_code": "LOT12",
+    "type": "apuestas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_diego"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_diego"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Lotto Activo Resultados. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_lotto_activo_oficial_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-01-08T08:00:00Z"
+  },
+  {
+    "id": "grp_la_granjita_oficial",
+    "channel_id": "ch_la_granjita_oficial",
+    "name": "Comunidad La Granjita Oficial",
+    "short_code": "LA13",
+    "type": "apuestas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_diego"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_diego"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de La Granjita Oficial. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_la_granjita_oficial_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-01-12T09:00:00Z"
+  },
+  {
+    "id": "grp_triple_zulia_oficial",
+    "channel_id": "ch_triple_zulia_oficial",
+    "name": "Comunidad Triple Zulia En Vivo",
+    "short_code": "TRI14",
+    "type": "apuestas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_triple_zulia"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_triple_zulia"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Triple Zulia En Vivo. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_triple_zulia_oficial_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-01-15T10:00:00Z"
+  },
+  {
+    "id": "grp_triple_chance_oficial",
+    "channel_id": "ch_triple_chance_oficial",
+    "name": "Comunidad Triple Chance Astral",
+    "short_code": "TRI15",
+    "type": "apuestas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_diego"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_diego"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Triple Chance Astral. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_triple_chance_oficial_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-01-18T11:00:00Z"
+  },
+  {
+    "id": "grp_triple_tachira_oficial",
+    "channel_id": "ch_triple_tachira_oficial",
+    "name": "Comunidad Lotería del Táchira",
+    "short_code": "LOT16",
+    "type": "apuestas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_raul"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_raul"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Lotería del Táchira. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_triple_tachira_oficial_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-01-20T12:00:00Z"
+  },
+  {
+    "id": "grp_selva_plus_oficial",
+    "channel_id": "ch_selva_plus_oficial",
+    "name": "Comunidad Selva Plus Animalitos",
+    "short_code": "SEL17",
+    "type": "apuestas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_selva_guru"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_selva_guru"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Selva Plus Animalitos. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_selva_plus_oficial_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-01-25T13:00:00Z"
+  },
+  {
+    "id": "grp_ruleta_activa_oficial",
+    "channel_id": "ch_ruleta_activa_oficial",
+    "name": "Comunidad Ruleta Activa Internacional",
+    "short_code": "RUL18",
+    "type": "apuestas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_diego"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_diego"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Ruleta Activa Internacional. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_ruleta_activa_oficial_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-02-01T14:00:00Z"
+  },
+  {
+    "id": "grp_gran_kino_oficial",
+    "channel_id": "ch_gran_kino_oficial",
+    "name": "Comunidad Gran Kino Táchira",
+    "short_code": "GRA19",
+    "type": "apuestas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_henry"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_henry"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Gran Kino Táchira. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_gran_kino_oficial_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-02-05T15:00:00Z"
+  },
+  {
+    "id": "grp_joselin",
+    "channel_id": "ch_joselin",
+    "name": "Comunidad Joselin La Gata VIP",
+    "short_code": "JOS20",
+    "type": "multimedia",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_joselin"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_joselin"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Joselin La Gata VIP. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_jos_free",
+        "name": "Gratis",
+        "price": 0,
+        "billing_type": "free",
+        "benefits": [
+          "Fotos públicas",
+          "Comentarios en muro"
+        ]
+      },
+      {
+        "id": "plan_jos_medium",
+        "name": "Fan Plata",
+        "price": 4.99,
+        "billing_type": "mensual",
+        "benefits": [
+          "Galería detrás de cámaras",
+          "Insignia de fan"
+        ]
+      },
+      {
+        "id": "plan_jos_pro",
+        "name": "VIP Oro",
+        "price": 14.99,
+        "billing_type": "mensual",
+        "benefits": [
+          "Chat directo 24/7",
+          "Videos exclusivos",
+          "Descuento en paywall"
+        ]
+      }
+    ],
+    "created_at": "2025-02-10T14:30:00Z"
+  },
+  {
+    "id": "grp_valeria",
+    "channel_id": "ch_valeria",
+    "name": "Comunidad Valeria Gómez Fitness VIP",
+    "short_code": "VAL21",
+    "type": "multimedia",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_valeria"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_valeria"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Valeria Gómez Fitness VIP. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_val_free",
+        "name": "Gratis",
+        "price": 0,
+        "billing_type": "free",
+        "benefits": [
+          "Historias públicas"
+        ]
+      },
+      {
+        "id": "plan_val_vip",
+        "name": "VIP Elite",
+        "price": 9.99,
+        "billing_type": "mensual",
+        "benefits": [
+          "Sets de fotos completos",
+          "Chat privado"
+        ]
+      }
+    ],
+    "created_at": "2025-02-12T10:00:00Z"
+  },
+  {
+    "id": "grp_nicole",
+    "channel_id": "ch_nicole",
+    "name": "Comunidad Nicole Rossi Privé",
+    "short_code": "NIC22",
+    "type": "multimedia",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_nicole"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_nicole"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Nicole Rossi Privé. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_nic_medium",
+        "name": "Silver Pass",
+        "price": 6.99,
+        "billing_type": "mensual",
+        "benefits": [
+          "Galería HD",
+          "Reacciones exclusivas"
+        ]
+      },
+      {
+        "id": "plan_nic_pro",
+        "name": "Black Diamond",
+        "price": 19.99,
+        "billing_type": "mensual",
+        "benefits": [
+          "Llamada mensual",
+          "Audio personalizado",
+          "Contenido sin censura"
+        ]
+      }
+    ],
+    "created_at": "2025-02-20T11:00:00Z"
+  },
+  {
+    "id": "grp_camila",
+    "channel_id": "ch_camila",
+    "name": "Comunidad Camila Santos Dance & Glam",
+    "short_code": "CAM23",
+    "type": "multimedia",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_camila"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_camila"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Camila Santos Dance & Glam. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_cam_free",
+        "name": "Gratis",
+        "price": 0,
+        "billing_type": "free",
+        "benefits": [
+          "Posts diarios"
+        ]
+      },
+      {
+        "id": "plan_cam_vip",
+        "name": "Suscripción VIP",
+        "price": 7.99,
+        "billing_type": "mensual",
+        "benefits": [
+          "Videos completos",
+          "Chat privado"
+        ]
+      }
+    ],
+    "created_at": "2025-03-01T15:00:00Z"
+  },
+  {
+    "id": "grp_isabella",
+    "channel_id": "ch_isabella",
+    "name": "Comunidad Isabella Morales Romance",
+    "short_code": "ISA24",
+    "type": "multimedia",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_isabella"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_isabella"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Isabella Morales Romance. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_isa_vip",
+        "name": "Club de Fans",
+        "price": 8.5,
+        "billing_type": "mensual",
+        "benefits": [
+          "Fotos exclusivas",
+          "Chat desbloqueado"
+        ]
+      }
+    ],
+    "created_at": "2025-03-05T09:00:00Z"
+  },
+  {
+    "id": "grp_andrea",
+    "channel_id": "ch_andrea",
+    "name": "Comunidad Andrea Caracas VIP",
+    "short_code": "AND25",
+    "type": "multimedia",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_andrea"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_andrea"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Andrea Caracas VIP. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_and_vip",
+        "name": "Playa VIP",
+        "price": 5.99,
+        "billing_type": "mensual",
+        "benefits": [
+          "Galería de bikinis",
+          "Direct Message"
+        ]
+      }
+    ],
+    "created_at": "2025-03-10T12:00:00Z"
+  },
+  {
+    "id": "grp_gabriela",
+    "channel_id": "ch_gabriela",
+    "name": "Comunidad Gaby Gaming & Cosplay",
+    "short_code": "GAB26",
+    "type": "multimedia",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_gabriela"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_gabriela"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Gaby Gaming & Cosplay. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_gab_gamer",
+        "name": "Gamer Pass",
+        "price": 6,
+        "billing_type": "mensual",
+        "benefits": [
+          "Sesiones de Discord/Chat",
+          "Cosplays HD"
+        ]
+      }
+    ],
+    "created_at": "2025-03-15T18:00:00Z"
+  },
+  {
+    "id": "grp_stefany",
+    "channel_id": "ch_stefany",
+    "name": "Comunidad Stefany Rivas Platinum",
+    "short_code": "STE27",
+    "type": "multimedia",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_stefany"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_stefany"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Stefany Rivas Platinum. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_stef_vip",
+        "name": "Platinum Pass",
+        "price": 12,
+        "billing_type": "mensual",
+        "benefits": [
+          "Galería sin censura",
+          "Mensajería prioritaria"
+        ]
+      }
+    ],
+    "created_at": "2025-03-20T16:00:00Z"
+  },
+  {
+    "id": "grp_natalia",
+    "channel_id": "ch_natalia",
+    "name": "Comunidad Natalia Peña Poker Queen",
+    "short_code": "NAT28",
+    "type": "multimedia",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_natalia"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_natalia"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Natalia Peña Poker Queen. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_nat_vip",
+        "name": "Corona de Oro",
+        "price": 15,
+        "billing_type": "mensual",
+        "benefits": [
+          "Acceso total a contenidos",
+          "Fotos en torneos"
+        ]
+      }
+    ],
+    "created_at": "2025-03-25T14:00:00Z"
+  },
+  {
+    "id": "grp_carolina",
+    "channel_id": "ch_carolina",
+    "name": "Comunidad Carolina Glamour 360",
+    "short_code": "CAR29",
+    "type": "multimedia",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_carolina"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_carolina"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Carolina Glamour 360. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_caro_vip",
+        "name": "Glamour VIP",
+        "price": 11.99,
+        "billing_type": "mensual",
+        "benefits": [
+          "Videos 4K",
+          "Descuento Paywall 50%"
+        ]
+      }
+    ],
+    "created_at": "2025-04-01T20:00:00Z"
+  },
+  {
+    "id": "grp_roberto_tips",
+    "channel_id": "ch_roberto_tips",
+    "name": "Comunidad Roberto Pronósticos VIP",
+    "short_code": "ROB30",
+    "type": "apuestas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_roberto"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_roberto"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Roberto Pronósticos VIP. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_rob_free",
+        "name": "Datos Libres",
+        "price": 0,
+        "billing_type": "free",
+        "benefits": [
+          "1 jugada diaria",
+          "Resumen nocturno"
+        ]
+      },
+      {
+        "id": "plan_rob_vip",
+        "name": "Suscripción VIP Ganadora",
+        "price": 9.99,
+        "billing_type": "mensual",
+        "benefits": [
+          "3 parleys diarios",
+          "Jugada de poder",
+          "Alerta en tiempo real"
+        ]
+      }
+    ],
+    "created_at": "2025-01-20T08:00:00Z"
+  },
+  {
+    "id": "grp_don_animalito_vip",
+    "channel_id": "ch_don_animalito_vip",
+    "name": "Comunidad La Cátedra de Don Animalito",
+    "short_code": "LA31",
+    "type": "apuestas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_don_animalito"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_don_animalito"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de La Cátedra de Don Animalito. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_don_vip",
+        "name": "Club del Animalito",
+        "price": 5,
+        "billing_type": "mensual",
+        "benefits": [
+          "Datos de las 10AM y 4PM",
+          "Grupo exclusivo"
+        ]
+      }
+    ],
+    "created_at": "2025-01-22T09:00:00Z"
+  },
+  {
+    "id": "grp_el_brujo_triples",
+    "channel_id": "ch_el_brujo_triples",
+    "name": "Comunidad Triples Millonarios del Brujo",
+    "short_code": "TRI32",
+    "type": "apuestas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_brujo_triples"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_brujo_triples"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Triples Millonarios del Brujo. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_brujo_vip",
+        "name": "Línea Directa",
+        "price": 7.5,
+        "billing_type": "mensual",
+        "benefits": [
+          "2 triples sin caída",
+          "Mensajes WhatsApp directos"
+        ]
+      }
+    ],
+    "created_at": "2025-01-25T11:00:00Z"
+  },
+  {
+    "id": "grp_parley_master",
+    "channel_id": "ch_parley_master",
+    "name": "Comunidad Parley Master Combinadas",
+    "short_code": "PAR33",
+    "type": "apuestas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_parley_master"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_parley_master"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Parley Master Combinadas. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_pm_vip",
+        "name": "Master Club",
+        "price": 12,
+        "billing_type": "mensual",
+        "benefits": [
+          "Todas las combinadas",
+          "Seguro de fallo 1 logro"
+        ]
+      }
+    ],
+    "created_at": "2025-02-01T10:00:00Z"
+  },
+  {
+    "id": "grp_nba_picks",
+    "channel_id": "ch_nba_picks",
+    "name": "Comunidad NBA Elite Picks",
+    "short_code": "NBA34",
+    "type": "apuestas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_analista_nba"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_analista_nba"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de NBA Elite Picks. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_nba_vip",
+        "name": "Pase de Temporada",
+        "price": 8.99,
+        "billing_type": "mensual",
+        "benefits": [
+          "Picks de toda la jornada",
+          "Estadísticas avanzadas"
+        ]
+      }
+    ],
+    "created_at": "2025-02-15T15:00:00Z"
+  },
+  {
+    "id": "grp_hipismo_rinconada",
+    "channel_id": "ch_hipismo_rinconada",
+    "name": "Comunidad El 5y6 de La Rinconada",
+    "short_code": "EL35",
+    "type": "apuestas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_hipismo_gold"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_hipismo_gold"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de El 5y6 de La Rinconada. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_hip_vip",
+        "name": "Línea de Oro",
+        "price": 6,
+        "billing_type": "mensual",
+        "benefits": [
+          "Cuadro del 5y6",
+          "Marcas para todas las carreras"
+        ]
+      }
+    ],
+    "created_at": "2025-02-10T11:00:00Z"
+  },
+  {
+    "id": "grp_golazo_futve",
+    "channel_id": "ch_golazo_futve",
+    "name": "Comunidad FUTVE y Libertadores Al Día",
+    "short_code": "FUT36",
+    "type": "apuestas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_futbol_picks"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_futbol_picks"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de FUTVE y Libertadores Al Día. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_golazo_futve_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-02-20T17:00:00Z"
+  },
+  {
+    "id": "grp_selva_plus_tips",
+    "channel_id": "ch_selva_plus_tips",
+    "name": "Comunidad Datos Calientes Selva Plus",
+    "short_code": "DAT37",
+    "type": "apuestas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_selva_guru"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_selva_guru"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Datos Calientes Selva Plus. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_selv_vip",
+        "name": "Selva VIP",
+        "price": 4.5,
+        "billing_type": "mensual",
+        "benefits": [
+          "Animal fijo de cada sorteo"
+        ]
+      }
+    ],
+    "created_at": "2025-03-01T08:00:00Z"
+  },
+  {
+    "id": "grp_zulia_directo",
+    "channel_id": "ch_zulia_directo",
+    "name": "Comunidad Zulia y Chance Directos",
+    "short_code": "ZUL38",
+    "type": "apuestas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_triple_zulia"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_triple_zulia"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Zulia y Chance Directos. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_zulia_directo_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-03-05T12:00:00Z"
+  },
+  {
+    "id": "grp_tenis_picks",
+    "channel_id": "ch_tenis_picks",
+    "name": "Comunidad Tenis y Wimbledon Picks",
+    "short_code": "TEN39",
+    "type": "apuestas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_tenis_ace"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_tenis_ace"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Tenis y Wimbledon Picks. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_tenis_picks_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-03-10T14:00:00Z"
+  },
+  {
+    "id": "grp_crypto_crash",
+    "channel_id": "ch_crypto_crash",
+    "name": "Comunidad Crash Games & Multiplicadores",
+    "short_code": "CRA40",
+    "type": "apuestas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_crypto_bets"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_crypto_bets"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Crash Games & Multiplicadores. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_cr_vip",
+        "name": "Bot de Señales Crash",
+        "price": 14.99,
+        "billing_type": "mensual",
+        "benefits": [
+          "Alertas de multiplicador 10x+",
+          "Estrategias automatizadas"
+        ]
+      }
+    ],
+    "created_at": "2025-03-15T19:00:00Z"
+  },
+  {
+    "id": "grp_combinadas_béisbol",
+    "channel_id": "ch_combinadas_béisbol",
+    "name": "Comunidad Parley Béisbol MLB & LVBP",
+    "short_code": "PAR41",
+    "type": "apuestas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_roberto"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_roberto"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Parley Béisbol MLB & LVBP. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_combinadas_béisbol_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-03-20T10:00:00Z"
+  },
+  {
+    "id": "grp_taquilla_ccs",
+    "channel_id": "ch_taquilla_ccs",
+    "name": "Comunidad Taquilla Caracas Centro",
+    "short_code": "TAQ42",
+    "type": "taquillas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_pedro"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_pedro"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Taquilla Caracas Centro. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_taquilla_ccs_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-01-12T08:00:00Z"
   },
   {
     "id": "grp_taquilla_val",
-    "channel_id": "ch_imaginaria",
-    "name": "Taquillas Valencia",
-    "short_code": "TAQVAL",
+    "channel_id": "ch_taquilla_val",
+    "name": "Comunidad Taquilla Valencia Norte",
+    "short_code": "TAQ43",
+    "type": "taquillas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_laura"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_laura"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Taquilla Valencia Norte. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_taquilla_val_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-01-18T10:00:00Z"
+  },
+  {
+    "id": "grp_taquilla_mar",
+    "channel_id": "ch_taquilla_mar",
+    "name": "Comunidad Taquilla 5 de Julio Maracaibo",
+    "short_code": "TAQ44",
+    "type": "taquillas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_carmen"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_carmen"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Taquilla 5 de Julio Maracaibo. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_taquilla_mar_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-01-25T11:00:00Z"
+  },
+  {
+    "id": "grp_taquilla_barq",
+    "channel_id": "ch_taquilla_barq",
+    "name": "Comunidad Taquilla Barquisimeto Este",
+    "short_code": "TAQ45",
+    "type": "taquillas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_javier"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_javier"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Taquilla Barquisimeto Este. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_taquilla_barq_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-02-01T09:00:00Z"
+  },
+  {
+    "id": "grp_taquilla_mcy",
+    "channel_id": "ch_taquilla_mcy",
+    "name": "Comunidad Taquilla Las Delicias Maracay",
+    "short_code": "TAQ46",
+    "type": "taquillas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_patricia"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_patricia"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Taquilla Las Delicias Maracay. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_taquilla_mcy_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-02-10T12:00:00Z"
+  },
+  {
+    "id": "grp_taquilla_pto",
+    "channel_id": "ch_taquilla_pto",
+    "name": "Comunidad Taquilla Puerto Ordaz Alta Vista",
+    "short_code": "TAQ47",
+    "type": "taquillas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_miguel"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_miguel"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Taquilla Puerto Ordaz Alta Vista. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_taquilla_pto_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-02-15T14:00:00Z"
+  },
+  {
+    "id": "grp_taquilla_lech",
+    "channel_id": "ch_taquilla_lech",
+    "name": "Comunidad Taquilla Lechería Plaza Mayor",
+    "short_code": "TAQ48",
+    "type": "taquillas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_elena"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_elena"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Taquilla Lechería Plaza Mayor. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_taquilla_lech_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-02-20T16:00:00Z"
+  },
+  {
+    "id": "grp_taquilla_sc",
+    "channel_id": "ch_taquilla_sc",
+    "name": "Comunidad Taquilla San Cristóbal Centro",
+    "short_code": "TAQ49",
+    "type": "taquillas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_raul"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_raul"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Taquilla San Cristóbal Centro. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_taquilla_sc_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-02-28T09:00:00Z"
+  },
+  {
+    "id": "grp_taquilla_marg",
+    "channel_id": "ch_taquilla_marg",
+    "name": "Comunidad Taquilla Porlamar Margarita",
+    "short_code": "TAQ50",
+    "type": "taquillas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_yaneth"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_yaneth"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Taquilla Porlamar Margarita. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_taquilla_marg_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-03-05T13:00:00Z"
+  },
+  {
+    "id": "grp_taquilla_chacao",
+    "channel_id": "ch_taquilla_chacao",
+    "name": "Comunidad Taquilla Chacao VIP",
+    "short_code": "TAQ51",
+    "type": "taquillas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_diego"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_diego"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Taquilla Chacao VIP. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_taquilla_chacao_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-03-12T10:00:00Z"
+  },
+  {
+    "id": "grp_bingo_nacional",
+    "channel_id": "ch_bingo_nacional",
+    "name": "Comunidad Bingo Nacional Millonario",
+    "short_code": "BIN52",
     "type": "apuestas",
-    "is_public": false,
-    "members": ["usr_diego", "usr_laura", "usr_gabriel", "usr_valentina"],
-    "admins": ["usr_diego", "usr_laura"],
-    "config": { "wallet_type": "mixed", "allows_recharge": true },
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_henry"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_henry"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
     "rules": {
       "permitir_publicar_feeds": true,
       "permitir_publicar_publicidad": false,
-      "terms_text": "Reglas estándar de la agencia La Imaginaria. Juego responsable.",
+      "terms_text": "Reglas de convivencia de Bingo Nacional Millonario. Respeto y juego responsable.",
       "pay_to_post_enabled": false,
       "pay_to_post_fee": 0
     },
     "plans": [
-      { "id": "plan_val_free", "name": "Miembro", "price": 0, "billing_type": "free" }
+      {
+        "id": "plan_grp_bingo_nacional_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
     ],
-    "created_at": "2025-03-15T08:00:00Z"
+    "created_at": "2025-01-15T15:00:00Z"
   },
   {
-    "id": "grp_joselin_fans",
-    "channel_id": "ch_joselin",
-    "name": "Fans de Joselin",
-    "short_code": "JOSFAN",
-    "type": "compartir_media",
-    "is_public": true,
-    "members": ["usr_joselin", "usr_carlos", "usr_maria", "usr_ana", "usr_valentina", "usr_gabriel"],
-    "admins": ["usr_joselin"],
-    "config": { "media_sharing": true },
-    "rules": {
-      "permitir_publicar_feeds": true,
-      "permitir_publicar_publicidad": false,
-      "terms_text": "Respeta a los demás miembros. No se permite contenido ofensivo ni spam.",
-      "pay_to_post_enabled": true,
-      "pay_to_post_fee": 2.50
-    },
-    "plans": [
-      { "id": "plan_fan_free", "name": "Fan", "price": 0, "billing_type": "free" },
-      { "id": "plan_fan_vip", "name": "Fan VIP", "price": 9.99, "billing_type": "mensual" }
-    ],
-    "created_at": "2025-02-15T10:00:00Z"
-  },
-  {
-    "id": "grp_pronosticos",
-    "channel_id": "ch_roberto_tips",
-    "name": "Pronósticos Diarios",
-    "short_code": "PRODIA",
-    "type": "pronosticos",
-    "is_public": true,
-    "members": ["usr_roberto", "usr_carlos", "usr_ana", "usr_gabriel", "usr_henry"],
-    "admins": ["usr_roberto"],
-    "config": { "prediction_tracking": true },
-    "rules": {
-      "permitir_publicar_feeds": false,
-      "permitir_publicar_publicidad": false,
-      "terms_text": "Los pronósticos son meramente informativos. Juega con responsabilidad.",
-      "pay_to_post_enabled": false,
-      "pay_to_post_fee": 0
-    },
-    "plans": [
-      { "id": "plan_pro_free", "name": "Observador", "price": 0, "billing_type": "free" },
-      { "id": "plan_pro_premium", "name": "Premium", "price": 500, "billing_type": "mensual" }
-    ],
-    "created_at": "2025-03-01T12:00:00Z"
-  },
-  {
-    "id": "grp_general",
-    "channel_id": null,
-    "name": "Comunidad HandyBet",
-    "short_code": "COMHB",
-    "type": "publicidad",
-    "is_public": true,
-    "members": ["usr_henry", "usr_joselin", "usr_carlos", "usr_maria", "usr_ana", "usr_roberto", "usr_diego", "usr_pedro", "usr_valentina", "usr_gabriel", "usr_isabella", "usr_laura"],
-    "admins": ["usr_henry"],
-    "config": {},
-    "rules": {
-      "permitir_publicar_feeds": true,
-      "permitir_publicar_publicidad": true,
-      "terms_text": "Grupo general de la comunidad. Comparte contenido relevante.",
-      "pay_to_post_enabled": false,
-      "pay_to_post_fee": 0
-    },
-    "plans": [],
-    "created_at": "2025-01-10T08:00:00Z"
-  },
-  {
-    "id": "grp_taquilla_maracay",
-    "channel_id": "ch_imaginaria",
-    "name": "Taquillas Maracay",
-    "short_code": "TAQMCY",
+    "id": "grp_bingo_bailable",
+    "channel_id": "ch_bingo_bailable",
+    "name": "Comunidad Bingo Bailable Los Fines de Semana",
+    "short_code": "BIN53",
     "type": "apuestas",
-    "is_public": false,
-    "members": ["usr_diego", "usr_henry", "usr_gabriel"],
-    "admins": ["usr_diego"],
-    "config": { "wallet_type": "mixed", "allows_recharge": true },
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_maria"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_maria"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
     "rules": {
       "permitir_publicar_feeds": true,
       "permitir_publicar_publicidad": false,
-      "terms_text": "Agencia La Imaginaria Maracay. Juego responsable.",
+      "terms_text": "Reglas de convivencia de Bingo Bailable Los Fines de Semana. Respeto y juego responsable.",
       "pay_to_post_enabled": false,
       "pay_to_post_fee": 0
     },
     "plans": [
-      { "id": "plan_mcy_free", "name": "Miembro", "price": 0, "billing_type": "free" }
+      {
+        "id": "plan_grp_bingo_bailable_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
     ],
-    "created_at": "2025-03-20T08:00:00Z"
+    "created_at": "2025-01-20T18:00:00Z"
   },
   {
-    "id": "grp_resultados_triple_a",
-    "channel_id": "ch_loteria_nacional",
-    "name": "Resultados Triple A",
-    "short_code": "RES-TPA",
-    "type": "resultados",
+    "id": "grp_rifas_motos",
+    "channel_id": "ch_rifas_motos",
+    "name": "Comunidad Gran Rifa de Motos 0KM",
+    "short_code": "GRA54",
+    "type": "apuestas",
     "is_public": true,
-    "members": ["usr_henry", "usr_diego", "usr_roberto"],
-    "admins": ["usr_henry"],
-    "config": { "read_only": true },
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_diego"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_diego"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
     "rules": {
-      "permitir_publicar_feeds": false,
+      "permitir_publicar_feeds": true,
       "permitir_publicar_publicidad": false,
-      "terms_text": "Solo se publican resultados oficiales.",
+      "terms_text": "Reglas de convivencia de Gran Rifa de Motos 0KM. Respeto y juego responsable.",
       "pay_to_post_enabled": false,
       "pay_to_post_fee": 0
     },
-    "plans": [],
-    "created_at": "2025-01-06T09:00:00Z"
+    "plans": [
+      {
+        "id": "plan_grp_rifas_motos_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-02-01T12:00:00Z"
   },
   {
-    "id": "grp_resultados_animalitos",
-    "channel_id": "ch_loteria_nacional",
-    "name": "Resultados Animalitos Activos",
-    "short_code": "RES-ANI",
-    "type": "resultados",
+    "id": "grp_rifas_tecnologia",
+    "channel_id": "ch_rifas_tecnologia",
+    "name": "Comunidad Rifas Pro Tech (iPhones & TVs)",
+    "short_code": "RIF55",
+    "type": "apuestas",
     "is_public": true,
-    "members": ["usr_henry", "usr_diego", "usr_roberto"],
-    "admins": ["usr_henry"],
-    "config": { "read_only": true },
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_henry"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_henry"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
     "rules": {
-      "permitir_publicar_feeds": false,
+      "permitir_publicar_feeds": true,
       "permitir_publicar_publicidad": false,
-      "terms_text": "Solo se publican resultados oficiales de granjitas y animalitos.",
+      "terms_text": "Reglas de convivencia de Rifas Pro Tech (iPhones & TVs). Respeto y juego responsable.",
       "pay_to_post_enabled": false,
       "pay_to_post_fee": 0
     },
-    "plans": [],
-    "created_at": "2025-01-06T09:30:00Z"
+    "plans": [
+      {
+        "id": "plan_grp_rifas_tecnologia_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-02-10T14:00:00Z"
   },
   {
-    "id": "grp_pronosticos_vip",
-    "channel_id": "ch_roberto_tips",
-    "name": "Pronósticos VIP Alta Certeza",
-    "short_code": "PROVIP",
+    "id": "grp_bingo_express",
+    "channel_id": "ch_bingo_express",
+    "name": "Comunidad Bingo Flash 24 Horas",
+    "short_code": "BIN56",
+    "type": "apuestas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_fernanda"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_fernanda"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Bingo Flash 24 Horas. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_bingo_express_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-02-18T10:00:00Z"
+  },
+  {
+    "id": "grp_rifa_dolares",
+    "channel_id": "ch_rifa_dolares",
+    "name": "Comunidad Rifa Millonaria en Dólares",
+    "short_code": "RIF57",
+    "type": "apuestas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_diego"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_diego"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Rifa Millonaria en Dólares. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_rifa_dolares_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-02-25T16:00:00Z"
+  },
+  {
+    "id": "grp_bingo_dorado",
+    "channel_id": "ch_bingo_dorado",
+    "name": "Comunidad Bingo Dorado VIP",
+    "short_code": "BIN58",
+    "type": "apuestas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_henry"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_henry"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Bingo Dorado VIP. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_bingo_dorado_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-03-01T19:00:00Z"
+  },
+  {
+    "id": "grp_quinielas_comunidad",
+    "channel_id": "ch_quinielas_comunidad",
+    "name": "Comunidad Quinielas de la Comunidad HandyBet",
+    "short_code": "QUI59",
+    "type": "apuestas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_carlos"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_carlos"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Quinielas de la Comunidad HandyBet. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_quinielas_comunidad_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-03-08T11:00:00Z"
+  },
+  {
+    "id": "grp_rifas_navidenas",
+    "channel_id": "ch_rifas_navidenas",
+    "name": "Comunidad Gran Rifa Extraordinaria",
+    "short_code": "GRA60",
+    "type": "apuestas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_diego"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_diego"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Gran Rifa Extraordinaria. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_rifas_navidenas_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-03-15T15:00:00Z"
+  },
+  {
+    "id": "grp_bingo_tradicional",
+    "channel_id": "ch_bingo_tradicional",
+    "name": "Comunidad Bingo Tradicional 75 Bolas",
+    "short_code": "BIN61",
+    "type": "apuestas",
+    "is_public": true,
+    "members": [
+      "usr_henry",
+      "usr_carlos",
+      "usr_maria",
+      "usr_diego",
+      "usr_fernanda"
+    ],
+    "admins": [
+      "usr_henry",
+      "usr_fernanda"
+    ],
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Reglas de convivencia de Bingo Tradicional 75 Bolas. Respeto y juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_bingo_tradicional_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-03-22T17:00:00Z"
+  },
+  {
+    "id": "grp_parley_nba_vip",
+    "channel_id": "ch_nba_picks",
+    "name": "Debate NBA Madrugada",
+    "short_code": "NBANOC",
     "type": "pronosticos",
-    "is_public": false,
-    "members": ["usr_roberto", "usr_henry"],
-    "admins": ["usr_roberto"],
-    "config": { "prediction_tracking": true },
+    "members": [
+      "usr_carlos",
+      "usr_alberto"
+    ],
+    "admins": [
+      "usr_analista_nba"
+    ],
+    "is_public": true,
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
     "rules": {
-      "permitir_publicar_feeds": false,
+      "permitir_publicar_feeds": true,
       "permitir_publicar_publicidad": false,
-      "terms_text": "Pronósticos exclusivos con más del 80% de acierto. Prohibido compartir capturas.",
+      "terms_text": "Juego responsable.",
       "pay_to_post_enabled": false,
       "pay_to_post_fee": 0
     },
     "plans": [
-      { "id": "plan_pro_premium_alta", "name": "Premium VIP", "price": 1000, "billing_type": "mensual" }
+      {
+        "id": "plan_grp_parley_nba_vip_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
     ],
-    "created_at": "2025-03-05T12:00:00Z"
+    "created_at": "2025-02-15T12:00:00Z"
+  },
+  {
+    "id": "grp_champions_live",
+    "channel_id": "ch_quinielas_comunidad",
+    "name": "Tertulia Champions League",
+    "short_code": "CHAMPL",
+    "type": "social",
+    "members": [
+      "usr_henry",
+      "usr_andres_champions"
+    ],
+    "admins": [
+      "usr_henry"
+    ],
+    "is_public": true,
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_champions_live_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-02-15T12:00:00Z"
+  },
+  {
+    "id": "grp_lotto_10am",
+    "channel_id": "ch_lotto_activo_oficial",
+    "name": "La Jugada de las 10:00 AM",
+    "short_code": "LOTT10",
+    "type": "apuestas",
+    "members": [
+      "usr_don_animalito",
+      "usr_yorman"
+    ],
+    "admins": [
+      "usr_don_animalito"
+    ],
+    "is_public": true,
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_lotto_10am_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-02-15T12:00:00Z"
+  },
+  {
+    "id": "grp_crash_hunters",
+    "channel_id": "ch_crypto_crash",
+    "name": "Cazadores de Cohetes 100x",
+    "short_code": "CRASHX",
+    "type": "apuestas",
+    "members": [
+      "usr_kevin",
+      "usr_daniella"
+    ],
+    "admins": [
+      "usr_crypto_bets"
+    ],
+    "is_public": true,
+    "config": {
+      "wallet_type": "mixed",
+      "allows_recharge": true
+    },
+    "rules": {
+      "permitir_publicar_feeds": true,
+      "permitir_publicar_publicidad": false,
+      "terms_text": "Juego responsable.",
+      "pay_to_post_enabled": false,
+      "pay_to_post_fee": 0
+    },
+    "plans": [
+      {
+        "id": "plan_grp_crash_hunters_free",
+        "name": "Miembro",
+        "price": 0,
+        "billing_type": "free"
+      }
+    ],
+    "created_at": "2025-02-15T12:00:00Z"
   }
 ]

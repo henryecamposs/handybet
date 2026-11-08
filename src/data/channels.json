@@ -1,30 +1,35 @@
 [
   {
-    "id": "ch_joselin",
-    "name": "Joselin La Gata VIP",
-    "type": "media_sharing",
-    "owner_id": "usr_joselin",
-    "description": "Contenido exclusivo de videos y fotos",
-    "avatar_url": "https://i.pravatar.cc/150?u=joselin_lagata",
-    "is_public": true,
-    "subscribers_count": 4500,
-    "plans": [
-      { "id": "plan_free", "name": "Gratis", "price": 0, "billing_type": "free", "benefits": ["Acceso a contenido público", "Comentarios básicos"] },
-      { "id": "plan_medium", "name": "Medio", "price": 5.99, "billing_type": "mensual", "benefits": ["Videos exclusivos", "Insignia de fan", "Chat grupal"] },
-      { "id": "plan_pro", "name": "Pro", "price": 14.99, "billing_type": "mensual", "benefits": ["Chat directo", "Videos sin censura", "Pedidos personalizados", "Contenido anticipado"] }
-    ],
-    "created_at": "2025-02-10T14:30:00Z"
-  },
-  {
     "id": "ch_imaginaria",
     "name": "Agencias La Imaginaria",
     "type": "taquillas",
     "owner_id": "usr_diego",
-    "description": "La mejor agencia de loterías y animalitos. Red de taquillas.",
-    "avatar_url": "https://i.pravatar.cc/150?u=diego_herrera",
+    "description": "La red más grande de agencias y taquillas de loterías y animalitos de Venezuela 🇻🇪",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
     "is_public": true,
-    "subscribers_count": 8200,
-    "plans": [],
+    "subscribers_count": 18500,
+    "plans": [
+      {
+        "id": "plan_imaginaria_free",
+        "name": "Cliente General",
+        "price": 0,
+        "billing_type": "free",
+        "benefits": [
+          "Consulta de resultados",
+          "Soporte taquilla"
+        ]
+      },
+      {
+        "id": "plan_imaginaria_vip",
+        "name": "Agenciero VIP",
+        "price": 10,
+        "billing_type": "mensual",
+        "benefits": [
+          "Comisiones preferenciales",
+          "Reportes de ventas"
+        ]
+      }
+    ],
     "created_at": "2025-01-10T07:00:00Z"
   },
   {
@@ -32,41 +37,869 @@
     "name": "Lotería Nacional Resultados",
     "type": "loterias",
     "owner_id": "usr_henry",
-    "description": "Canal oficial para resultados de sorteos de lotería nacional",
-    "avatar_url": "https://i.pravatar.cc/150?u=loteria",
+    "description": "Canal oficial con transmisiones en directo y boletines oficiales de sorteos nacionales 🎯",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
     "is_public": true,
-    "subscribers_count": 15000,
+    "subscribers_count": 32000,
     "plans": [],
     "created_at": "2025-01-05T07:00:00Z"
+  },
+  {
+    "id": "ch_lotto_activo_oficial",
+    "name": "Lotto Activo Resultados",
+    "type": "loterias",
+    "owner_id": "usr_diego",
+    "description": "Resultados al segundo de la ruleta de la suerte (9:00 AM a 7:00 PM) 🦁",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
+    "is_public": true,
+    "subscribers_count": 45000,
+    "plans": [],
+    "created_at": "2025-01-08T08:00:00Z"
+  },
+  {
+    "id": "ch_la_granjita_oficial",
+    "name": "La Granjita Oficial",
+    "type": "loterias",
+    "owner_id": "usr_diego",
+    "description": "Sorteos en vivo de La Granjita. Consulta las jugadas premiadas y estadísticas 🐔",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
+    "is_public": true,
+    "subscribers_count": 28900,
+    "plans": [],
+    "created_at": "2025-01-12T09:00:00Z"
+  },
+  {
+    "id": "ch_triple_zulia_oficial",
+    "name": "Triple Zulia En Vivo",
+    "type": "loterias",
+    "owner_id": "usr_triple_zulia",
+    "description": "Sorteos A, B y Zodiacal de Triple Zulia (12:45 PM y 7:00 PM) 🎰",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
+    "is_public": true,
+    "subscribers_count": 21500,
+    "plans": [],
+    "created_at": "2025-01-15T10:00:00Z"
+  },
+  {
+    "id": "ch_triple_chance_oficial",
+    "name": "Triple Chance Astral",
+    "type": "loterias",
+    "owner_id": "usr_diego",
+    "description": "Resultados y transmisiones de Triple Chance y Chance Astral 🔮",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
+    "is_public": true,
+    "subscribers_count": 19800,
+    "plans": [],
+    "created_at": "2025-01-18T11:00:00Z"
+  },
+  {
+    "id": "ch_triple_tachira_oficial",
+    "name": "Lotería del Táchira",
+    "type": "loterias",
+    "owner_id": "usr_raul",
+    "description": "Canal oficial de la Lotería del Táchira. El juego más tradicional de los andes 🏔️",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
+    "is_public": true,
+    "subscribers_count": 17200,
+    "plans": [],
+    "created_at": "2025-01-20T12:00:00Z"
+  },
+  {
+    "id": "ch_selva_plus_oficial",
+    "name": "Selva Plus Animalitos",
+    "type": "loterias",
+    "owner_id": "usr_selva_guru",
+    "description": "Ruleta Selva Plus: animales premiados, tabla de pagos y multiplicadores 🐯",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
+    "is_public": true,
+    "subscribers_count": 14600,
+    "plans": [],
+    "created_at": "2025-01-25T13:00:00Z"
+  },
+  {
+    "id": "ch_ruleta_activa_oficial",
+    "name": "Ruleta Activa Internacional",
+    "type": "loterias",
+    "owner_id": "usr_diego",
+    "description": "La ruleta con sorteos cada hora. Datos y análisis estadístico en vivo 🎡",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
+    "is_public": true,
+    "subscribers_count": 16100,
+    "plans": [],
+    "created_at": "2025-02-01T14:00:00Z"
+  },
+  {
+    "id": "ch_gran_kino_oficial",
+    "name": "Gran Kino Táchira",
+    "type": "loterias",
+    "owner_id": "usr_henry",
+    "description": "El juego que premia a toda la familia venezolana. Pozo acumulado millonario 💎",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
+    "is_public": true,
+    "subscribers_count": 38000,
+    "plans": [],
+    "created_at": "2025-02-05T15:00:00Z"
+  },
+  {
+    "id": "ch_joselin",
+    "name": "Joselin La Gata VIP",
+    "type": "media_sharing",
+    "owner_id": "usr_joselin",
+    "description": "Contenido exclusivo de videos, fotos y chat directo con Joselin 💖",
+    "avatar_url": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150",
+    "is_public": true,
+    "subscribers_count": 8900,
+    "plans": [
+      {
+        "id": "plan_jos_free",
+        "name": "Gratis",
+        "price": 0,
+        "billing_type": "free",
+        "benefits": [
+          "Fotos públicas",
+          "Comentarios en muro"
+        ]
+      },
+      {
+        "id": "plan_jos_medium",
+        "name": "Fan Plata",
+        "price": 4.99,
+        "billing_type": "mensual",
+        "benefits": [
+          "Galería detrás de cámaras",
+          "Insignia de fan"
+        ]
+      },
+      {
+        "id": "plan_jos_pro",
+        "name": "VIP Oro",
+        "price": 14.99,
+        "billing_type": "mensual",
+        "benefits": [
+          "Chat directo 24/7",
+          "Videos exclusivos",
+          "Descuento en paywall"
+        ]
+      }
+    ],
+    "created_at": "2025-02-10T14:30:00Z"
+  },
+  {
+    "id": "ch_valeria",
+    "name": "Valeria Gómez Fitness VIP",
+    "type": "media_sharing",
+    "owner_id": "usr_valeria",
+    "description": "Rutinas, bikinis y sesiones en privado para fans selectos 🔥",
+    "avatar_url": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150",
+    "is_public": true,
+    "subscribers_count": 7400,
+    "plans": [
+      {
+        "id": "plan_val_free",
+        "name": "Gratis",
+        "price": 0,
+        "billing_type": "free",
+        "benefits": [
+          "Historias públicas"
+        ]
+      },
+      {
+        "id": "plan_val_vip",
+        "name": "VIP Elite",
+        "price": 9.99,
+        "billing_type": "mensual",
+        "benefits": [
+          "Sets de fotos completos",
+          "Chat privado"
+        ]
+      }
+    ],
+    "created_at": "2025-02-12T10:00:00Z"
+  },
+  {
+    "id": "ch_nicole",
+    "name": "Nicole Rossi Privé",
+    "type": "media_sharing",
+    "owner_id": "usr_nicole",
+    "description": "Fotos de pasarela, lencería y transmisiones en vivo solo para miembros ✨",
+    "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150",
+    "is_public": true,
+    "subscribers_count": 6200,
+    "plans": [
+      {
+        "id": "plan_nic_medium",
+        "name": "Silver Pass",
+        "price": 6.99,
+        "billing_type": "mensual",
+        "benefits": [
+          "Galería HD",
+          "Reacciones exclusivas"
+        ]
+      },
+      {
+        "id": "plan_nic_pro",
+        "name": "Black Diamond",
+        "price": 19.99,
+        "billing_type": "mensual",
+        "benefits": [
+          "Llamada mensual",
+          "Audio personalizado",
+          "Contenido sin censura"
+        ]
+      }
+    ],
+    "created_at": "2025-02-20T11:00:00Z"
+  },
+  {
+    "id": "ch_camila",
+    "name": "Camila Santos Dance & Glam",
+    "type": "media_sharing",
+    "owner_id": "usr_camila",
+    "description": "Coreografías sensuales y acceso a ensayos privados 💃",
+    "avatar_url": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150",
+    "is_public": true,
+    "subscribers_count": 5100,
+    "plans": [
+      {
+        "id": "plan_cam_free",
+        "name": "Gratis",
+        "price": 0,
+        "billing_type": "free",
+        "benefits": [
+          "Posts diarios"
+        ]
+      },
+      {
+        "id": "plan_cam_vip",
+        "name": "Suscripción VIP",
+        "price": 7.99,
+        "billing_type": "mensual",
+        "benefits": [
+          "Videos completos",
+          "Chat privado"
+        ]
+      }
+    ],
+    "created_at": "2025-03-01T15:00:00Z"
+  },
+  {
+    "id": "ch_isabella",
+    "name": "Isabella Morales Romance",
+    "type": "media_sharing",
+    "owner_id": "usr_isabella",
+    "description": "Tu crush virtual 💋 Fotos exclusivas de buenos días y buenas noches",
+    "avatar_url": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150",
+    "is_public": true,
+    "subscribers_count": 8100,
+    "plans": [
+      {
+        "id": "plan_isa_vip",
+        "name": "Club de Fans",
+        "price": 8.5,
+        "billing_type": "mensual",
+        "benefits": [
+          "Fotos exclusivas",
+          "Chat desbloqueado"
+        ]
+      }
+    ],
+    "created_at": "2025-03-05T09:00:00Z"
+  },
+  {
+    "id": "ch_andrea",
+    "name": "Andrea Caracas VIP",
+    "type": "media_sharing",
+    "owner_id": "usr_andrea",
+    "description": "Lo mejor de Caracas en fotos y sesiones de playa exclusivas 🏖️",
+    "avatar_url": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150",
+    "is_public": true,
+    "subscribers_count": 4200,
+    "plans": [
+      {
+        "id": "plan_and_vip",
+        "name": "Playa VIP",
+        "price": 5.99,
+        "billing_type": "mensual",
+        "benefits": [
+          "Galería de bikinis",
+          "Direct Message"
+        ]
+      }
+    ],
+    "created_at": "2025-03-10T12:00:00Z"
+  },
+  {
+    "id": "ch_gabriela",
+    "name": "Gaby Gaming & Cosplay",
+    "type": "media_sharing",
+    "owner_id": "usr_gabriela",
+    "description": "Cosplays atrevidos y streamings jugando con fans 🎮",
+    "avatar_url": "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=150",
+    "is_public": true,
+    "subscribers_count": 5900,
+    "plans": [
+      {
+        "id": "plan_gab_gamer",
+        "name": "Gamer Pass",
+        "price": 6,
+        "billing_type": "mensual",
+        "benefits": [
+          "Sesiones de Discord/Chat",
+          "Cosplays HD"
+        ]
+      }
+    ],
+    "created_at": "2025-03-15T18:00:00Z"
+  },
+  {
+    "id": "ch_stefany",
+    "name": "Stefany Rivas Platinum",
+    "type": "media_sharing",
+    "owner_id": "usr_stefany",
+    "description": "Contenido exclusivo para personas exigentes. Citas, elegancia y estilo 🥂",
+    "avatar_url": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=150",
+    "is_public": true,
+    "subscribers_count": 6700,
+    "plans": [
+      {
+        "id": "plan_stef_vip",
+        "name": "Platinum Pass",
+        "price": 12,
+        "billing_type": "mensual",
+        "benefits": [
+          "Galería sin censura",
+          "Mensajería prioritaria"
+        ]
+      }
+    ],
+    "created_at": "2025-03-20T16:00:00Z"
+  },
+  {
+    "id": "ch_natalia",
+    "name": "Natalia Peña Poker Queen",
+    "type": "media_sharing",
+    "owner_id": "usr_natalia",
+    "description": "La reina de las mesas de apuestas y creadora de alta gama 👑",
+    "avatar_url": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150",
+    "is_public": true,
+    "subscribers_count": 11400,
+    "plans": [
+      {
+        "id": "plan_nat_vip",
+        "name": "Corona de Oro",
+        "price": 15,
+        "billing_type": "mensual",
+        "benefits": [
+          "Acceso total a contenidos",
+          "Fotos en torneos"
+        ]
+      }
+    ],
+    "created_at": "2025-03-25T14:00:00Z"
+  },
+  {
+    "id": "ch_carolina",
+    "name": "Carolina Glamour 360",
+    "type": "media_sharing",
+    "owner_id": "usr_carolina",
+    "description": "Videos en 4K, sesiones de estudio y detrás de cámara en Europa 📸",
+    "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150",
+    "is_public": true,
+    "subscribers_count": 9800,
+    "plans": [
+      {
+        "id": "plan_caro_vip",
+        "name": "Glamour VIP",
+        "price": 11.99,
+        "billing_type": "mensual",
+        "benefits": [
+          "Videos 4K",
+          "Descuento Paywall 50%"
+        ]
+      }
+    ],
+    "created_at": "2025-04-01T20:00:00Z"
   },
   {
     "id": "ch_roberto_tips",
     "name": "Roberto Pronósticos VIP",
     "type": "pronosticadores",
     "owner_id": "usr_roberto",
-    "description": "Pronósticos verificados con 78% de acierto",
-    "avatar_url": "https://i.pravatar.cc/150?u=roberto_lopez",
+    "description": "Parleys de MLB, NBA y Fútbol con 82% de acierto comprobado 📊",
+    "avatar_url": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150",
     "is_public": true,
-    "subscribers_count": 2100,
+    "subscribers_count": 14200,
     "plans": [
-      { "id": "plan_roberto_basic", "name": "Básico", "price": 0, "billing_type": "free", "benefits": ["Pronóstico diario gratuito"] },
-      { "id": "plan_roberto_premium", "name": "Premium", "price": 500, "billing_type": "mensual", "benefits": ["3 pronósticos diarios", "Análisis de tendencias", "Acceso al círculo premium", "Historial verificado"] }
+      {
+        "id": "plan_rob_free",
+        "name": "Datos Libres",
+        "price": 0,
+        "billing_type": "free",
+        "benefits": [
+          "1 jugada diaria",
+          "Resumen nocturno"
+        ]
+      },
+      {
+        "id": "plan_rob_vip",
+        "name": "Suscripción VIP Ganadora",
+        "price": 9.99,
+        "billing_type": "mensual",
+        "benefits": [
+          "3 parleys diarios",
+          "Jugada de poder",
+          "Alerta en tiempo real"
+        ]
+      }
     ],
-    "created_at": "2025-02-28T15:20:00Z"
+    "created_at": "2025-01-20T08:00:00Z"
   },
   {
-    "id": "ch_isabella_ads",
-    "name": "HandyAds - Publicidad Digital",
-    "type": "advertising",
-    "owner_id": "usr_isabella",
-    "description": "Conectamos negocios con la comunidad de HandyBet",
-    "avatar_url": "https://i.pravatar.cc/150?u=isabella_rios",
+    "id": "ch_don_animalito_vip",
+    "name": "La Cátedra de Don Animalito",
+    "type": "pronosticadores",
+    "owner_id": "usr_don_animalito",
+    "description": "Los 3 animales fijos del día para Lotto Activo y La Granjita 🧮",
+    "avatar_url": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150",
     "is_public": true,
-    "subscribers_count": 340,
+    "subscribers_count": 22800,
     "plans": [
-      { "id": "plan_ads_basic", "name": "Anuncio Básico", "price": 15, "billing_type": "pay_per_action", "benefits": ["1 anuncio en sidebar", "48 horas de exposición"] },
-      { "id": "plan_ads_premium", "name": "Anuncio Premium", "price": 50, "billing_type": "mensual", "benefits": ["Anuncio destacado", "Feed patrocinado", "Métricas de rendimiento"] }
+      {
+        "id": "plan_don_vip",
+        "name": "Club del Animalito",
+        "price": 5,
+        "billing_type": "mensual",
+        "benefits": [
+          "Datos de las 10AM y 4PM",
+          "Grupo exclusivo"
+        ]
+      }
     ],
-    "created_at": "2025-04-01T10:00:00Z"
+    "created_at": "2025-01-22T09:00:00Z"
+  },
+  {
+    "id": "ch_el_brujo_triples",
+    "name": "Triples Millonarios del Brujo",
+    "type": "pronosticadores",
+    "owner_id": "usr_brujo_triples",
+    "description": "Triples y terminales con cálculo cabalístico para Zulia y Chance 🔮",
+    "avatar_url": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150",
+    "is_public": true,
+    "subscribers_count": 18900,
+    "plans": [
+      {
+        "id": "plan_brujo_vip",
+        "name": "Línea Directa",
+        "price": 7.5,
+        "billing_type": "mensual",
+        "benefits": [
+          "2 triples sin caída",
+          "Mensajes WhatsApp directos"
+        ]
+      }
+    ],
+    "created_at": "2025-01-25T11:00:00Z"
+  },
+  {
+    "id": "ch_parley_master",
+    "name": "Parley Master Combinadas",
+    "type": "pronosticadores",
+    "owner_id": "usr_parley_master",
+    "description": "Cuotas de 5.00 a 15.00 todos los fines de semana. ¡Gana en grande! 💵",
+    "avatar_url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150",
+    "is_public": true,
+    "subscribers_count": 12500,
+    "plans": [
+      {
+        "id": "plan_pm_vip",
+        "name": "Master Club",
+        "price": 12,
+        "billing_type": "mensual",
+        "benefits": [
+          "Todas las combinadas",
+          "Seguro de fallo 1 logro"
+        ]
+      }
+    ],
+    "created_at": "2025-02-01T10:00:00Z"
+  },
+  {
+    "id": "ch_nba_picks",
+    "name": "NBA Elite Picks",
+    "type": "pronosticadores",
+    "owner_id": "usr_analista_nba",
+    "description": "Picks matemáticos de básquetbol estadounidense 🏀 Altas, bajas y spreads",
+    "avatar_url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150",
+    "is_public": true,
+    "subscribers_count": 9800,
+    "plans": [
+      {
+        "id": "plan_nba_vip",
+        "name": "Pase de Temporada",
+        "price": 8.99,
+        "billing_type": "mensual",
+        "benefits": [
+          "Picks de toda la jornada",
+          "Estadísticas avanzadas"
+        ]
+      }
+    ],
+    "created_at": "2025-02-15T15:00:00Z"
+  },
+  {
+    "id": "ch_hipismo_rinconada",
+    "name": "El 5y6 de La Rinconada",
+    "type": "pronosticadores",
+    "owner_id": "usr_hipismo_gold",
+    "description": "La información hípica más certera del óvalo de Coche 🏇 Datos de última hora",
+    "avatar_url": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150",
+    "is_public": true,
+    "subscribers_count": 15400,
+    "plans": [
+      {
+        "id": "plan_hip_vip",
+        "name": "Línea de Oro",
+        "price": 6,
+        "billing_type": "mensual",
+        "benefits": [
+          "Cuadro del 5y6",
+          "Marcas para todas las carreras"
+        ]
+      }
+    ],
+    "created_at": "2025-02-10T11:00:00Z"
+  },
+  {
+    "id": "ch_golazo_futve",
+    "name": "FUTVE y Libertadores Al Día",
+    "type": "pronosticadores",
+    "owner_id": "usr_futbol_picks",
+    "description": "Todo el fútbol venezolano y de Conmebol analizado para apostar ⚽",
+    "avatar_url": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150",
+    "is_public": true,
+    "subscribers_count": 8700,
+    "plans": [],
+    "created_at": "2025-02-20T17:00:00Z"
+  },
+  {
+    "id": "ch_selva_plus_tips",
+    "name": "Datos Calientes Selva Plus",
+    "type": "pronosticadores",
+    "owner_id": "usr_selva_guru",
+    "description": "El delfín, el tigre y la leona: los datos que más pagan en Selva Plus 🐯",
+    "avatar_url": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150",
+    "is_public": true,
+    "subscribers_count": 11200,
+    "plans": [
+      {
+        "id": "plan_selv_vip",
+        "name": "Selva VIP",
+        "price": 4.5,
+        "billing_type": "mensual",
+        "benefits": [
+          "Animal fijo de cada sorteo"
+        ]
+      }
+    ],
+    "created_at": "2025-03-01T08:00:00Z"
+  },
+  {
+    "id": "ch_zulia_directo",
+    "name": "Zulia y Chance Directos",
+    "type": "pronosticadores",
+    "owner_id": "usr_triple_zulia",
+    "description": "Pronósticos exclusivos de triples con alta probabilidad de acierto 🎯",
+    "avatar_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150",
+    "is_public": true,
+    "subscribers_count": 13900,
+    "plans": [],
+    "created_at": "2025-03-05T12:00:00Z"
+  },
+  {
+    "id": "ch_tenis_picks",
+    "name": "Tenis y Wimbledon Picks",
+    "type": "pronosticadores",
+    "owner_id": "usr_tenis_ace",
+    "description": "Los mejores sets, games y ganadores directos de los torneos Grand Slam 🎾",
+    "avatar_url": "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=150",
+    "is_public": true,
+    "subscribers_count": 7200,
+    "plans": [],
+    "created_at": "2025-03-10T14:00:00Z"
+  },
+  {
+    "id": "ch_crypto_crash",
+    "name": "Crash Games & Multiplicadores",
+    "type": "pronosticadores",
+    "owner_id": "usr_crypto_bets",
+    "description": "Estrategias de salida para Aviator, Mines y Plinko con dinero real 🚀",
+    "avatar_url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150",
+    "is_public": true,
+    "subscribers_count": 19500,
+    "plans": [
+      {
+        "id": "plan_cr_vip",
+        "name": "Bot de Señales Crash",
+        "price": 14.99,
+        "billing_type": "mensual",
+        "benefits": [
+          "Alertas de multiplicador 10x+",
+          "Estrategias automatizadas"
+        ]
+      }
+    ],
+    "created_at": "2025-03-15T19:00:00Z"
+  },
+  {
+    "id": "ch_combinadas_béisbol",
+    "name": "Parley Béisbol MLB & LVBP",
+    "type": "pronosticadores",
+    "owner_id": "usr_roberto",
+    "description": "La pasión del diamante: pitchers abridores, líneas de dinero y carreras ⚾",
+    "avatar_url": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150",
+    "is_public": true,
+    "subscribers_count": 16700,
+    "plans": [],
+    "created_at": "2025-03-20T10:00:00Z"
+  },
+  {
+    "id": "ch_taquilla_ccs",
+    "name": "Taquilla Caracas Centro",
+    "type": "taquillas",
+    "owner_id": "usr_pedro",
+    "description": "Atención física en Sabana Grande y Av. Urdaneta 🎟️",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
+    "is_public": true,
+    "subscribers_count": 6500,
+    "plans": [],
+    "created_at": "2025-01-12T08:00:00Z"
+  },
+  {
+    "id": "ch_taquilla_val",
+    "name": "Taquilla Valencia Norte",
+    "type": "taquillas",
+    "owner_id": "usr_laura",
+    "description": "Punto de recarga y cobro rápido en Av. Bolívar de Valencia 💵",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
+    "is_public": true,
+    "subscribers_count": 5800,
+    "plans": [],
+    "created_at": "2025-01-18T10:00:00Z"
+  },
+  {
+    "id": "ch_taquilla_mar",
+    "name": "Taquilla 5 de Julio Maracaibo",
+    "type": "taquillas",
+    "owner_id": "usr_carmen",
+    "description": "La agencia más rápida del Zulia para cobrar tus premios ☀️",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
+    "is_public": true,
+    "subscribers_count": 7200,
+    "plans": [],
+    "created_at": "2025-01-25T11:00:00Z"
+  },
+  {
+    "id": "ch_taquilla_barq",
+    "name": "Taquilla Barquisimeto Este",
+    "type": "taquillas",
+    "owner_id": "usr_javier",
+    "description": "Cobro de triples y parley en Lara sin filas 🏜️",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
+    "is_public": true,
+    "subscribers_count": 4900,
+    "plans": [],
+    "created_at": "2025-02-01T09:00:00Z"
+  },
+  {
+    "id": "ch_taquilla_mcy",
+    "name": "Taquilla Las Delicias Maracay",
+    "type": "taquillas",
+    "owner_id": "usr_patricia",
+    "description": "Sella tu parley y cobra tus animalitos en Aragua 🎲",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
+    "is_public": true,
+    "subscribers_count": 5300,
+    "plans": [],
+    "created_at": "2025-02-10T12:00:00Z"
+  },
+  {
+    "id": "ch_taquilla_pto",
+    "name": "Taquilla Puerto Ordaz Alta Vista",
+    "type": "taquillas",
+    "owner_id": "usr_miguel",
+    "description": "Punto oficial HandyBet en el estado Bolívar 🏭",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
+    "is_public": true,
+    "subscribers_count": 4200,
+    "plans": [],
+    "created_at": "2025-02-15T14:00:00Z"
+  },
+  {
+    "id": "ch_taquilla_lech",
+    "name": "Taquilla Lechería Plaza Mayor",
+    "type": "taquillas",
+    "owner_id": "usr_elena",
+    "description": "Agencia premium en Anzoátegui para cobro y recarga de saldo ⛵",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
+    "is_public": true,
+    "subscribers_count": 4800,
+    "plans": [],
+    "created_at": "2025-02-20T16:00:00Z"
+  },
+  {
+    "id": "ch_taquilla_sc",
+    "name": "Taquilla San Cristóbal Centro",
+    "type": "taquillas",
+    "owner_id": "usr_raul",
+    "description": "Lotería del Táchira y sellado seguro en la frontera 🏔️",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
+    "is_public": true,
+    "subscribers_count": 6100,
+    "plans": [],
+    "created_at": "2025-02-28T09:00:00Z"
+  },
+  {
+    "id": "ch_taquilla_marg",
+    "name": "Taquilla Porlamar Margarita",
+    "type": "taquillas",
+    "owner_id": "usr_yaneth",
+    "description": "Tu jugada en la isla con pago inmediato en bolívares y dólares 🏖️",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
+    "is_public": true,
+    "subscribers_count": 4600,
+    "plans": [],
+    "created_at": "2025-03-05T13:00:00Z"
+  },
+  {
+    "id": "ch_taquilla_chacao",
+    "name": "Taquilla Chacao VIP",
+    "type": "taquillas",
+    "owner_id": "usr_diego",
+    "description": "Espacio exclusivo para grandes apostadores en Caracas 🏛️",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
+    "is_public": true,
+    "subscribers_count": 8900,
+    "plans": [],
+    "created_at": "2025-03-12T10:00:00Z"
+  },
+  {
+    "id": "ch_bingo_nacional",
+    "name": "Bingo Nacional Millonario",
+    "type": "bingos",
+    "owner_id": "usr_henry",
+    "description": "Salas de bingo en vivo todas las noches a las 9:00 PM con grandes premios 🎫",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
+    "is_public": true,
+    "subscribers_count": 24500,
+    "plans": [],
+    "created_at": "2025-01-15T15:00:00Z"
+  },
+  {
+    "id": "ch_bingo_bailable",
+    "name": "Bingo Bailable Los Fines de Semana",
+    "type": "bingos",
+    "owner_id": "usr_maria",
+    "description": "Música, cartones y premios en efectivo cada sábado y domingo 💃",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
+    "is_public": true,
+    "subscribers_count": 16800,
+    "plans": [],
+    "created_at": "2025-01-20T18:00:00Z"
+  },
+  {
+    "id": "ch_rifas_motos",
+    "name": "Gran Rifa de Motos 0KM",
+    "type": "rifas",
+    "owner_id": "usr_diego",
+    "description": "Gana motos Bera y Empire 0KM con boletos de tan solo 2.00 Bs 🏍️",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
+    "is_public": true,
+    "subscribers_count": 31000,
+    "plans": [],
+    "created_at": "2025-02-01T12:00:00Z"
+  },
+  {
+    "id": "ch_rifas_tecnologia",
+    "name": "Rifas Pro Tech (iPhones & TVs)",
+    "type": "rifas",
+    "owner_id": "usr_henry",
+    "description": "Sorteos verificados por Lotería del Zulia de iPhones 16 Pro y Smart TVs 📱",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
+    "is_public": true,
+    "subscribers_count": 28400,
+    "plans": [],
+    "created_at": "2025-02-10T14:00:00Z"
+  },
+  {
+    "id": "ch_bingo_express",
+    "name": "Bingo Flash 24 Horas",
+    "type": "bingos",
+    "owner_id": "usr_fernanda",
+    "description": "Rondas automáticas cada 15 minutos. Cartones desde 1.00 Bs ⚡",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
+    "is_public": true,
+    "subscribers_count": 14200,
+    "plans": [],
+    "created_at": "2025-02-18T10:00:00Z"
+  },
+  {
+    "id": "ch_rifa_dolares",
+    "name": "Rifa Millonaria en Dólares",
+    "type": "rifas",
+    "owner_id": "usr_diego",
+    "description": "Premios de 500$, 1,000$ y 5,000$ en efectivo directo a tu cuenta 💵",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
+    "is_public": true,
+    "subscribers_count": 29500,
+    "plans": [],
+    "created_at": "2025-02-25T16:00:00Z"
+  },
+  {
+    "id": "ch_bingo_dorado",
+    "name": "Bingo Dorado VIP",
+    "type": "bingos",
+    "owner_id": "usr_henry",
+    "description": "Partidas con pozos acumulados de más de 50,000 Puntos 🏆",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
+    "is_public": true,
+    "subscribers_count": 17800,
+    "plans": [],
+    "created_at": "2025-03-01T19:00:00Z"
+  },
+  {
+    "id": "ch_quinielas_comunidad",
+    "name": "Quinielas de la Comunidad HandyBet",
+    "type": "deportes",
+    "owner_id": "usr_carlos",
+    "description": "Pronostica el marcador exacto de cada fin de semana y gana el pozo total ⚽",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
+    "is_public": true,
+    "subscribers_count": 21300,
+    "plans": [],
+    "created_at": "2025-03-08T11:00:00Z"
+  },
+  {
+    "id": "ch_rifas_navidenas",
+    "name": "Gran Rifa Extraordinaria",
+    "type": "rifas",
+    "owner_id": "usr_diego",
+    "description": "Sorteos mensuales con múltiples ganadores de premios sorpresa 🎁",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
+    "is_public": true,
+    "subscribers_count": 18900,
+    "plans": [],
+    "created_at": "2025-03-15T15:00:00Z"
+  },
+  {
+    "id": "ch_bingo_tradicional",
+    "name": "Bingo Tradicional 75 Bolas",
+    "type": "bingos",
+    "owner_id": "usr_fernanda",
+    "description": "El formato clásico de bingo familiar con locutor en vivo por streaming 🎤",
+    "avatar_url": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150",
+    "is_public": true,
+    "subscribers_count": 13500,
+    "plans": [],
+    "created_at": "2025-03-22T17:00:00Z"
   }
 ]

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, Platform } from 'react-native';
 import { ImageIcon, X, Mic, Square, Send, ArrowLeft } from 'lucide-react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
@@ -12,6 +12,7 @@ import { useAppNavigation } from '@/hooks/useAppNavigation';
 import BotActionBar from '../../../components/chat/BotActionBar';
 import { CopilotMode, InteractiveButton } from '../../../types/chat';
 import { messagingService } from '../../../services/messagingService';
+import { localDB } from '../../../lib/localDB';
 
 export default function ChatDetailScreen() {
   const { chatId } = useLocalSearchParams();
@@ -36,6 +37,34 @@ export default function ChatDetailScreen() {
   const [inputText, setInputText] = useState('');
   const [isRecording, setIsRecording] = useState(false);
   const [replyingTo, setReplyingTo] = useState<MessageProps | null>(null);
+
+  useEffect(() => {
+    async function loadChatMessages() {
+      if (!chatId) return;
+      try {
+        const allChats = await localDB.chats.getAll();
+        const found = allChats.find((c: any) => c.id === chatId);
+        if (found && found.messages && found.messages.length > 0) {
+          const formatted: MessageProps[] = found.messages.map((m: any, idx: number) => ({
+            id: m.id || idx,
+            sender: m.sender_id === 'usr_henry' ? 'me' : 'them',
+            text: m.content || m.text || '',
+            time: m.created_at ? new Date(m.created_at).toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit', hour12: true }) : '12:00 PM',
+            mediaUrl: m.media_url,
+            is_locked: m.is_locked,
+            unlock_price: m.unlock_price,
+            preview_url: m.preview_url,
+            media_type: m.media_type,
+            buttons: m.buttons
+          }));
+          setMessages(formatted);
+        }
+      } catch (err) {
+        console.warn('Error loading chat messages:', err);
+      }
+    }
+    loadChatMessages();
+  }, [chatId]);
 
   const handleDelete = (id: string | number) => {
     setMessages(messages.filter(m => m.id !== id));

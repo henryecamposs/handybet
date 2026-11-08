@@ -1,13 +1,15 @@
 import React, { useState, useRef } from 'react';
 import { View, Text, Image, TouchableOpacity, ScrollView, Modal } from 'react-native';
-import { MessageSquare, Share2, Bell, EyeOff, X, Trash2 } from 'lucide-react-native';
+import { MessageSquare, Share2, Bell, EyeOff, X, Trash2, Sparkles } from 'lucide-react-native';
 import Logo from '../ui/Logo';
 import FloatingPopup from '../ui/FloatingPopup';
 import IconButton from '../ui/IconButton';
 import { useBrandColors, useTextColors, withOpacity } from '../../hooks/useThemeColors';
 import PostActionButtons from './PostActionButtons';
 import PostMediaCarousel from './PostMediaCarousel';
+import TierPlanSelector from '../media/TierPlanSelector';
 import { useToastStore } from '../../store/useToastStore';
+import { useHandyBetStore } from '../../store/useHandyBetStore';
 import { useDevicePlatform } from '../../hooks/useDevicePlatform';
 
 interface PostItemProps {
@@ -30,10 +32,104 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
   const [isNotificationsEnabled, setIsNotificationsEnabled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const [showPlanModal, setShowPlanModal] = useState(false);
+  const [activeSubscriptions, setActiveSubscriptions] = useState<string[]>([]);
+  const { walletBalance, deductBalance } = useHandyBetStore();
   const brandColors = useBrandColors();
   const textColors = useTextColors();
   const { isDesktop } = useDevicePlatform();
   const isMobile = !isDesktop;
+
+  const hasPlans = Array.isArray(post.plans) && post.plans.length > 0;
+  const isSubscribed = activeSubscriptions.some((subId) =>
+    post.plans?.some((p: any) => p.id === subId)
+  );
+
+  const formattedPlans = hasPlans
+    ? post.plans.map((p: any) => ({
+        id: p.id,
+        group_id: p.group_id || 'grp_general',
+        name: p.name,
+        price: Number(p.price || 0),
+        max_photos: p.max_photos ?? 100,
+        max_videos: p.max_videos ?? 50,
+        duration_days: p.duration_days ?? 30,
+        created_at: p.created_at || new Date().toISOString(),
+      }))
+    : [];
+
+  const renderPlanModal = () => {
+    if (!hasPlans) return null;
+    return (
+      <Modal
+        visible={showPlanModal}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={() => setShowPlanModal(false)}
+      >
+        <View className="flex-1 bg-black/85 items-center justify-center p-4">
+          <View className="bg-card border border-white/10 rounded-2xl w-full max-w-2xl overflow-hidden p-6 relative shadow-2xl">
+            {/* Header Modal */}
+            <View className="flex-row justify-between items-start mb-4">
+              <View className="flex-row items-center gap-3">
+                <Image source={{ uri: post.avatar }} className="w-12 h-12 rounded-full border border-amber-500/40" />
+                <View>
+                  <Text className="text-foreground font-black text-lg">Membresía Oficial • {post.author}</Text>
+                  <Text className="text-muted-foreground text-xs font-semibold">
+                    Saldo disponible en tu wallet: <Text className="text-primary font-bold">{walletBalance.toFixed(2)} Bs.</Text>
+                  </Text>
+                </View>
+              </View>
+              <TouchableOpacity
+                onPress={() => setShowPlanModal(false)}
+                className="w-8 h-8 rounded-full bg-white/10 items-center justify-center hover:bg-white/20 active:scale-95"
+              >
+                <X size={18} color="#fff" />
+              </TouchableOpacity>
+            </View>
+
+            {/* Selector de Planes */}
+            <TierPlanSelector
+              plans={formattedPlans}
+              userActiveSubscriptions={activeSubscriptions}
+              onPurchasePlan={async (planId: string) => {
+                const targetPlan = formattedPlans.find((p: any) => p.id === planId);
+                if (!targetPlan) return;
+
+                if (targetPlan.price === 0) {
+                  setActiveSubscriptions((prev) => [...prev, planId]);
+                  addToast({
+                    title: `¡Plan ${targetPlan.name} activado gratis!`,
+                    variant: 'secondary',
+                    position: 'top-right',
+                  });
+                  setShowPlanModal(false);
+                  return;
+                }
+
+                const success = deductBalance(targetPlan.price);
+                if (success) {
+                  setActiveSubscriptions((prev) => [...prev, planId]);
+                  addToast({
+                    title: `¡Suscripción exitosa a ${targetPlan.name}!`,
+                    variant: 'secondary',
+                    position: 'top-right',
+                  });
+                  setShowPlanModal(false);
+                } else {
+                  addToast({
+                    title: `Saldo insuficiente (${walletBalance.toFixed(2)} Bs.). Requiere ${targetPlan.price.toFixed(2)} Bs.`,
+                    variant: 'danger',
+                    position: 'top-right',
+                  });
+                }
+              }}
+            />
+          </View>
+        </View>
+      </Modal>
+    );
+  };
 
   if (isHidden) {
     return (
@@ -70,6 +166,18 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
             </View>
           </View>
           <View className="flex-row items-center gap-2">
+            {hasPlans && (
+              <TouchableOpacity
+                onPress={() => setShowPlanModal(true)}
+                activeOpacity={0.8}
+                className="flex-row items-center gap-1 bg-amber-500/20 border border-amber-500/40 px-2.5 py-1 rounded-full active:scale-95"
+              >
+                <Sparkles size={11} color="#f59e0b" />
+                <Text className="text-amber-400 font-extrabold text-[10px] uppercase tracking-wider">
+                  {isSubscribed ? 'Suscrito' : 'Suscribirse ⭐'}
+                </Text>
+              </TouchableOpacity>
+            )}
             <IconButton
               label={isFollowing ? 'Siguiendo' : 'Seguir'}
               onPress={() => {
@@ -246,6 +354,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
             </View>
           </View>
         )}
+        {renderPlanModal()}
       </View>
     );
   }
@@ -267,6 +376,18 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
             <Text className="text-muted-foreground text-xs font-medium">{post.username} • {post.time}</Text>
           </View>
           <View className="flex-row items-center gap-2">
+            {hasPlans && (
+              <TouchableOpacity
+                onPress={() => setShowPlanModal(true)}
+                activeOpacity={0.8}
+                className="flex-row items-center gap-1 bg-amber-500/20 border border-amber-500/40 px-2.5 py-1 rounded-full active:scale-95"
+              >
+                <Sparkles size={11} color="#f59e0b" />
+                <Text className="text-amber-400 font-extrabold text-[10px] uppercase tracking-wider">
+                  {isSubscribed ? 'Suscrito' : 'Suscribirse ⭐'}
+                </Text>
+              </TouchableOpacity>
+            )}
             <IconButton
               label={isFollowing ? 'Siguiendo' : 'Seguir'}
               onPress={() => {
@@ -411,6 +532,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
             />
           </View>
         </View>
+        {renderPlanModal()}
       </View>
     </View>
   );
