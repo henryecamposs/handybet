@@ -18,7 +18,7 @@ export default function InteractiveButtonsGroup({
   const getVariantStyles = (variant?: string) => {
     switch (variant) {
       case 'primary':
-        return 'bg-primary border-primary text-black font-bold';
+        return 'bg-primary border-primary text-foreground font-bold';
       case 'secondary':
         return 'bg-secondary border-border text-foreground font-semibold';
       case 'destructive':
@@ -36,7 +36,7 @@ export default function InteractiveButtonsGroup({
           key={btn.id}
           onPress={() => onPressButton(btn)}
           disabled={disabled}
-          className={`px-4 py-2.5 rounded-xl border flex-row items-center justify-center shadow-sm active:opacity-75 ${getVariantStyles(btn.variant)}`}
+          className={`px-4 py-2.5 rounded-full border flex-row items-center justify-center shadow-sm active:opacity-75 ${getVariantStyles(btn.variant)}`}
         >
           <Text className="text-xs text-center font-bold">{btn.label}</Text>
         </TouchableOpacity>

@@ -9,6 +9,13 @@ HandyBet utiliza un tema semántico y responsivo basado en colores OKLCH declara
 - **Destacados Secundarios:** `text-secondary` / `bg-secondary` (Color secundario de acentuación).
 - **Destacados de Éxito / Destructive:** Mapeados dinámicamente a través de `text-secondary` o variables semánticas `--destructive`.
 
+### 1.1 Hooks Modulares de Color (`useThemeColors.ts`)
+Para evitar consumos monolíticos del objeto completo de temas, la arquitectura expone ganchos especializados:
+- `useBrandColors()`: Acceso a `primary`, `secondary`, `accent`, `destructive`, `ring` y sus variantes claras/oscuras/foreground.
+- `useTextColors()`: Acceso a `foreground`, `muted`, `mutedForeground`.
+- `useBackgroundColors()`: Acceso a `background`, `backgroundDark`, `card`, `popover`, `border`, `input`.
+- `withOpacity(colorString, opacity)`: Utilidad pura para inyectar canal alfa en colores hex o rgb dinámicos.
+
 ---
 
 ## 2. Tipografía y Micro-animaciones

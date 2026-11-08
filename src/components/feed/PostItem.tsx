@@ -4,7 +4,7 @@ import { MessageSquare, Share2, Bell, EyeOff, X, Trash2 } from 'lucide-react-nat
 import Logo from '../ui/Logo';
 import FloatingPopup from '../ui/FloatingPopup';
 import IconButton from '../ui/IconButton';
-import { useThemeColors, withOpacity } from '../../hooks/useThemeColors';
+import { useBrandColors, useTextColors, withOpacity } from '../../hooks/useThemeColors';
 import PostActionButtons from './PostActionButtons';
 import PostMediaCarousel from './PostMediaCarousel';
 import { useToastStore } from '../../store/useToastStore';
@@ -24,50 +24,49 @@ interface PostItemProps {
 
 export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, onCommentPress, onSharePress, isSaved, onSavePress, onDeletePress }: PostItemProps) {
   const { addToast } = useToastStore();
-  const [layoutWidth, setLayoutWidth] = useState(0);
   const [showOptionsModal, setShowOptionsModal] = useState(false);
   const optionsButtonRef = useRef<View>(null);
   const [isFollowing, setIsFollowing] = useState(false);
   const [isNotificationsEnabled, setIsNotificationsEnabled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const [expanded, setExpanded] = useState(false);
-  const colors = useThemeColors();
+  const brandColors = useBrandColors();
+  const textColors = useTextColors();
   const { isDesktop } = useDevicePlatform();
   const isMobile = !isDesktop;
 
   if (isHidden) {
     return (
-      <View className="bg-muted border-b border-border-muted p-5  mb-1 flex-row items-center justify-between shadow-sm">
-        <Text className="text-muted-foreground text-xs font-bold">Publicación oculta de {post.author}</Text>
+      <View className="bg-card/40 border border-white/5 p-4 rounded-2xl mb-4 flex-row items-center justify-between shadow-md backdrop-blur-sm">
+        <Text className="text-muted-foreground text-xs font-semibold">Publicación oculta de {post.author}</Text>
         <TouchableOpacity
           onPress={() => {
             setIsHidden(false);
-            addToast({ title: 'Este anuncio ya no está disponible', variant: 'success', position: "bottom" });
           }}
-          className="bg-primary/20 px-3.5 py-1.5 rounded-full border border-border"
+          className="bg-primary/20 px-4 py-2 rounded-full border border-primary/30 active:scale-95"
         >
-          <Text className="text-primary text-[10px] font-black uppercase">Deshacer</Text>
+          <Text className="text-primary text-[10px] font-extrabold uppercase tracking-wider">Deshacer</Text>
         </TouchableOpacity>
       </View>
     );
   }
 
-  if (isMobile) {
-    const hasMedia = post.mediaUrls && post.mediaUrls.length > 0;
-    const limit = hasMedia ? 90 : 240;
-    const postText = post.text || '';
-    const isLongText = postText.length > limit;
-    const displayText = isLongText && !expanded ? `${postText.slice(0, limit)}...` : postText;
+  const hasMedia = post.mediaUrls && post.mediaUrls.length > 0;
+  const limit = hasMedia ? 90 : 240;
+  const postText = post.text || '';
+  const isLongText = postText.length > limit;
+  const displayText = isLongText && !expanded ? `${postText.slice(0, limit)}...` : postText;
 
+  if (isMobile) {
     return (
-      <View className="bg-background border border-border p-4  mb-6 shadow-md flex-col">
+      <View className="bg-card/75 border border-white/10 p-5 rounded-2xl mb-5 shadow-lg flex-col backdrop-blur-md">
         {/* Header: Mostrar avatar de usuario y nombre, seguir y el icono con popup */}
-        <View className="flex-row items-center justify-between mb-3 relative z-50">
+        <View className="flex-row items-center justify-between mb-4 relative z-50">
           <View className="flex-row items-center gap-3">
-            <Image source={{ uri: post.avatar }} className="w-10 h-10 rounded-full border-2 border-border" />
+            <Image source={{ uri: post.avatar }} className="w-10 h-10 rounded-full border border-white/20" />
             <View>
-              <Text className="text-foreground font-black text-sm">{post.author}</Text>
-              <Text className="text-muted-foreground text-[10px] font-medium">{post.time}</Text>
+              <Text className="text-foreground font-bold text-sm">{post.author}</Text>
+              <Text className="text-muted-foreground text-[10px] font-medium mt-0.5">{post.time}</Text>
             </View>
           </View>
           <View className="flex-row items-center gap-2">
@@ -86,10 +85,10 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
               rounded="full"
               variant={isFollowing ? 'muted' : 'primary'}
               isActive={!isFollowing}
-              hasBorder={true}
+              hasBorder={false}
             />
-            <TouchableOpacity ref={optionsButtonRef} onPress={() => setShowOptionsModal(!showOptionsModal)}>
-              <Text className="text-primary font-black text-xl px-1">⋮</Text>
+            <TouchableOpacity ref={optionsButtonRef} onPress={() => setShowOptionsModal(!showOptionsModal)} className="p-1">
+              <Text className="text-primary font-black text-lg">⋮</Text>
             </TouchableOpacity>
           </View>
 
@@ -100,9 +99,9 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
             anchorRef={optionsButtonRef as React.RefObject<View>}
             location="bottom"
             size="sm"
-            bgColor="bg-background"
+            bgColor="bg-card"
           >
-            <View className="p-1.5 w-40">
+            <View className="p-2 w-44 bg-card border border-white/10 rounded-xl shadow-2xl">
               <IconButton
                 icon={Share2}
                 label="Compartir"
@@ -113,7 +112,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                 size="xs"
                 variant="ghost"
                 hasBorder={false}
-                className="w-full justify-start"
+                className="w-full justify-start py-2.5"
               />
 
               <IconButton
@@ -132,8 +131,8 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                 size="xs"
                 variant="ghost"
                 hasBorder={false}
-                iconColor={isNotificationsEnabled ? colors.primary : colors.foreground}
-                className="w-full justify-start"
+                iconColor={isNotificationsEnabled ? brandColors.primary : textColors.foreground}
+                className="w-full justify-start py-2.5"
               />
 
               <IconButton
@@ -142,20 +141,15 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                 onPress={() => {
                   setIsHidden(true);
                   setShowOptionsModal(false);
-                  addToast({
-                    title: "Publicación oculta",
-                    variant: 'warning',
-                    position: 'bottom'
-                  });
                 }}
                 size="xs"
                 variant="ghost"
                 hasBorder={false}
-                iconColor={colors.destructive}
-                className="w-full justify-start"
+                iconColor={brandColors.destructive}
+                className="w-full justify-start py-2.5"
               />
 
-              <View className="mt-1 border-t border-border/50 pt-1">
+              <View className="mt-1.5 border-t border-white/10 pt-1.5">
                 <IconButton
                   icon={Trash2}
                   label="Eliminar"
@@ -165,26 +159,21 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                       onDeletePress();
                     } else {
                       setIsHidden(true);
-                      addToast({
-                        title: "Anuncio eliminado",
-                        variant: 'danger',
-                        position: 'bottom'
-                      });
                     }
                   }}
                   size="xs"
                   variant="destructive"
                   hasBorder={false}
-                  className="w-full justify-start"
+                  className="w-full justify-start py-2.5"
                 />
-              </View>
             </View>
+          </View>
           </FloatingPopup>
         </View>
 
-        {/* Texto con límite de líneas y botón Ver más */}
-        <TouchableOpacity activeOpacity={0.9} onPress={onCommentPress} className="mb-2 px-1">
-          <Text className="text-foreground text-sm leading-relaxed">
+        {/* Texto clickeable */}
+        <TouchableOpacity activeOpacity={0.9} onPress={onCommentPress} className="mb-3 px-1">
+          <Text className="text-foreground text-sm leading-relaxed font-normal">
             {displayText}
             {isLongText && !expanded && (
               <Text
@@ -192,7 +181,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                   e.stopPropagation();
                   setExpanded(true);
                 }}
-                className="text-primary font-black ml-1"
+                className="text-primary font-bold ml-1"
               >
                 {' '}Ver más
               </Text>
@@ -201,19 +190,19 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
         </TouchableOpacity>
 
         {/* Sentimiento y Barra de Acciones (si no hay media) */}
-        <View className="flex-row items-center justify-between border-border/50 py-1 my-1 px-1">
+        <View className="flex-row items-center justify-between my-2 px-1">
           <View className="flex-1">
             {post.feeling && (
-              <View className="flex-row items-center gap-1.5 bg-background/80 border border-border px-2.5 py-1 rounded-full self-start">
+              <View className="flex-row items-center gap-1.5 bg-black/30 border border-white/5 px-3 py-1.5 rounded-full self-start">
                 {post.feeling.icon && React.createElement(post.feeling.icon, { size: 12, color: post.feeling.color })}
-                <Text className="text-muted-foreground text-[10px] font-bold">
+                <Text className="text-muted-foreground text-[10px] font-semibold">
                   <Text style={{ color: post.feeling.color }}>{post.feeling.text}</Text>
                 </Text>
               </View>
             )}
           </View>
           {!hasMedia && (
-            <View className="flex-row items-center justify-center flex-1 ml-4 mt-1">
+            <View className="flex-row items-center justify-center flex-1 ml-4">
               <PostActionButtons
                 isLiked={isLiked}
                 likeCount={isLiked ? '1.2k' : '1.1k'}
@@ -229,19 +218,19 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
           )}
         </View>
 
-        {/* Media content expandido en alto y ancho */}
+        {/* Media content expandido */}
         {hasMedia && (
-          <View className="w-full  overflow-hidden mt-1 relative">
+          <View className="w-full overflow-hidden mt-2 rounded-xl relative border border-white/10">
             <PostMediaCarousel
               mediaUrls={post.mediaUrls}
               mediaType={post.mediaType}
               onMediaPress={onMediaPress}
-              height={320}
+              height={260}
               resizeMode="cover"
             />
-            {/* Action Bar Overlay sobre el contenido multimedia centrado horizontalmente */}
+            {/* Action Bar Overlay */}
             <View className="absolute bottom-3 w-full items-center z-10">
-              <View className="bg-black/50 backdrop-blur-md  px-2 py-1 shadow-lg border border-white/10">
+              <View className="bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 shadow-lg">
                 <PostActionButtons
                   isLiked={isLiked}
                   likeCount={isLiked ? '1.2k' : '1.1k'}
@@ -260,20 +249,22 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
       </View>
     );
   }
+
+  // Vista Escritorio (Desktop)
   return (
-    <View className="bg-background border-b border-border p-2  mb-4 shadow-md flex-row gap-2">
+    <View className="bg-card/75 border border-white/10 p-5 rounded-2xl mb-5 shadow-lg flex-row gap-4 backdrop-blur-md">
       {/* Columna Izquierda: Foto de Perfil */}
       <View className="items-center">
-        <Image source={{ uri: post.avatar }} className="w-12 h-12 rounded-full border-2 border-border" />
+        <Image source={{ uri: post.avatar }} className="w-12 h-12 rounded-full border border-white/20" />
       </View>
 
       {/* Columna Derecha: Todo el resto del contenido */}
       <View className="flex-1 relative">
         {/* Header Publicación */}
-        <View className="flex-row items-center justify-between mb-1">
-          <View className="flex-row items-center gap-1.5 flex-wrap">
-            <Text className="text-foreground font-semibold text-base">{post.author}</Text>
-            <Text className="text-muted-foreground text-xs font-semibold">{post.username} • {post.time}</Text>
+        <View className="flex-row items-center justify-between mb-2">
+          <View className="flex-row items-center gap-2 flex-wrap">
+            <Text className="text-foreground font-bold text-base">{post.author}</Text>
+            <Text className="text-muted-foreground text-xs font-medium">{post.username} • {post.time}</Text>
           </View>
           <View className="flex-row items-center gap-2">
             <IconButton
@@ -291,10 +282,10 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
               rounded="full"
               variant={isFollowing ? 'muted' : 'primary'}
               isActive={!isFollowing}
-              hasBorder={true}
+              hasBorder={false}
             />
-            <TouchableOpacity ref={optionsButtonRef} onPress={() => setShowOptionsModal(!showOptionsModal)}>
-              <Text className="text-primary font-black text-xl px-1">⋮</Text>
+            <TouchableOpacity ref={optionsButtonRef} onPress={() => setShowOptionsModal(!showOptionsModal)} className="p-1">
+              <Text className="text-primary font-black text-lg">⋮</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -306,9 +297,9 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
           anchorRef={optionsButtonRef as React.RefObject<View>}
           location="bottom"
           size="sm"
-          bgColor="bg-background"
+          bgColor="bg-card"
         >
-          <View className="p-1.5 w-40">
+          <View className="p-2 w-44 bg-card border border-white/10 rounded-xl shadow-2xl">
             <IconButton
               icon={Share2}
               label="Compartir"
@@ -319,7 +310,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
               size="xs"
               variant="ghost"
               hasBorder={false}
-              className="w-full justify-start"
+              className="w-full justify-start py-2.5"
             />
 
             <IconButton
@@ -338,8 +329,8 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
               size="xs"
               variant="ghost"
               hasBorder={false}
-              iconColor={isNotificationsEnabled ? colors.primary : colors.foreground}
-              className="w-full justify-start"
+              iconColor={isNotificationsEnabled ? brandColors.primary : textColors.foreground}
+              className="w-full justify-start py-2.5"
             />
 
             <IconButton
@@ -348,20 +339,15 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
               onPress={() => {
                 setIsHidden(true);
                 setShowOptionsModal(false);
-                addToast({
-                  title: "Publicación oculta",
-                  variant: 'warning',
-                  position: 'bottom'
-                });
               }}
               size="xs"
               variant="ghost"
               hasBorder={false}
-              iconColor="#ef4444"
-              className="w-full justify-start"
+              iconColor={brandColors.destructive}
+              className="w-full justify-start py-2.5"
             />
 
-            <View className="mt-1 border-t border-border/50 pt-1">
+            <View className="mt-1.5 border-t border-white/10 pt-1.5">
               <IconButton
                 icon={Trash2}
                 label="Eliminar"
@@ -371,44 +357,39 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
                     onDeletePress();
                   } else {
                     setIsHidden(true);
-                    addToast({
-                      title: "Publicación eliminada",
-                      variant: 'danger',
-                      position: 'bottom'
-                    });
                   }
                 }}
                 size="xs"
                 variant="destructive"
                 hasBorder={false}
-                className="w-full justify-start"
+                className="w-full justify-start py-2.5"
               />
             </View>
           </View>
         </FloatingPopup>
 
-        {/* Texto clickable */}
-        <TouchableOpacity activeOpacity={0.8} onPress={onCommentPress} className="mb-1">
-          <Text className="text-foreground text-sm leading-relaxed">{post.text}</Text>
+        {/* Texto clickeable */}
+        <TouchableOpacity activeOpacity={0.8} onPress={onCommentPress} className="mb-3">
+          <Text className="text-foreground text-sm leading-relaxed font-normal">{post.text}</Text>
         </TouchableOpacity>
 
         {/* Media */}
         {post.mediaUrls && post.mediaUrls.length > 0 && (
-          <View className="w-full mb-1">
+          <View className="w-full mb-3 rounded-xl overflow-hidden border border-white/10">
             <PostMediaCarousel
               mediaUrls={post.mediaUrls}
               mediaType={post.mediaType}
               onMediaPress={onMediaPress}
-              height={192}
+              height={260}
               resizeMode="cover"
             />
           </View>
         )}
 
         {/* Reacciones y Sentimiento Inferior */}
-        <View className="items-center mt-3 pt-3 w-full">
+        <View className="items-center mt-2 pt-2 w-full border-t border-white/5">
           {post.feeling && (
-            <View className="flex-row items-center gap-2 bg-background/80 border border-border self-start px-3 py-1.5 rounded-full mb-3">
+            <View className="flex-row items-center gap-2 bg-black/30 border border-white/5 self-start px-3 py-1.5 rounded-full mb-3">
               {post.feeling.icon && React.createElement(post.feeling.icon, { size: 14, color: post.feeling.color })}
               <Text className="text-muted-foreground text-xs font-semibold">
                 Me siento <Text style={{ color: post.feeling.color }}>{post.feeling.text}</Text>
@@ -416,7 +397,7 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
             </View>
           )}
 
-          <View className="flex-row justify-center w-full">
+          <View className="flex-row justify-start w-full">
             <PostActionButtons
               isLiked={isLiked}
               likeCount={isLiked ? '1.2k' : '1.1k'}
@@ -431,8 +412,6 @@ export default function PostItem({ post, isLiked, onLikeToggle, onMediaPress, on
           </View>
         </View>
       </View>
-
-
     </View>
   );
 }

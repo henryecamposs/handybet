@@ -6,6 +6,8 @@ La tienda global Zustand de la aplicación centraliza estados de la interfaz y a
 - `isScannerActive` y `activeTicketCode`: Controla la visualización del visor de cámara QR y el ticket actualmente seleccionado para confirmación de apuestas.
 - **Acciones:** `setMockSession`, `setScannerActive`, `setActiveTicketCode`.
 
+> **Nota Arquitectónica:** Según análisis topológicos (Graphify), `useHandyBetStore` es un "God Node" (nodo altamente acoplado con >50 conexiones). Muchas de estas dependencias provienen de utilidades secundarias (ej. `QRCameraScanner`). Como regla de diseño, se debe evitar inyectar este store en componentes de presentación pura para prevenir re-renders innecesarios o acoplamientos rígidos.
+
 ### 1.1 Navegación e Historial (`src/store/useNavigationStore.ts`)
 - Mantiene una pila de historial de navegación (`historyStack`) basada en las rutas previas.
 - Resuelve problemas nativos del `expo-router` donde `router.back()` pierde contexto direccional.

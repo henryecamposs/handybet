@@ -1,10 +1,9 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
-import { View, Text } from 'react-native';
 import { useDevicePlatform } from '../../hooks/useDevicePlatform';
 import HandyBetLayout from '../../components/layout/HandyBetLayout';
-import Logo from '../../components/ui/Logo';
 import { useThemeColors } from '@/hooks/useThemeColors';
+import { ChatIcon, GroupsIcon, FeedIcon, WalletIcon } from '../../components/ui/icons';
 
 export default function TabsLayout() {
   const { isDesktop } = useDevicePlatform();
@@ -16,17 +15,18 @@ export default function TabsLayout() {
           headerShown: false,
           tabBarStyle: {
             display: isDesktop ? 'none' : 'flex',
-            backgroundColor: '#09090b', // zinc-955
-            borderTopColor: '#27272a', // zinc-800
+            backgroundColor: '#0c0d14', // glass-card
+            borderTopColor: 'rgba(255,255,255,0.08)', // glass-border
             height: 64,
             paddingBottom: 8,
             paddingTop: 8,
           },
           tabBarActiveTintColor: colors.primary,
-          tabBarInactiveTintColor: colors.muted,
+          tabBarInactiveTintColor: '#71717a', // zinc-400
           tabBarLabelStyle: {
             fontSize: 10,
             fontWeight: 'bold',
+            marginTop: 4,
           },
         }}
       >
@@ -35,7 +35,7 @@ export default function TabsLayout() {
           options={{
             title: 'Chats',
             tabBarIcon: ({ color }) => (
-              <Text style={{ color, fontSize: 20 }}>💬</Text>
+              <ChatIcon color={color} size={20} />
             ),
           }}
         />
@@ -44,18 +44,16 @@ export default function TabsLayout() {
           options={{
             title: 'Grupos',
             tabBarIcon: ({ color }) => (
-              <Text style={{ color, fontSize: 20 }}>👥</Text>
+              <GroupsIcon color={color} size={20} />
             ),
           }}
         />
         <Tabs.Screen
           name="feed"
           options={{
-            title: '',
-            tabBarIcon: ({ focused }) => (
-              <View className="mt-3">
-                <Logo size="sm" showImage={true} showText={false} />
-              </View>
+            title: 'Muro',
+            tabBarIcon: ({ color }) => (
+              <FeedIcon color={color} size={20} />
             ),
           }}
         />
@@ -64,7 +62,7 @@ export default function TabsLayout() {
           options={{
             title: 'Billetera',
             tabBarIcon: ({ color }) => (
-              <Text style={{ color, fontSize: 20 }}>💳</Text>
+              <WalletIcon color={color} size={20} />
             ),
           }}
         />

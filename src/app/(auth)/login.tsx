@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ActivityIndicator, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ActivityIndicator, ImageBackground } from 'react-native';
 import { useHandyBetStore } from '../../store/useHandyBetStore';
 import { authService } from '../../services/authService';
 import Logo from '../../components/ui/Logo';
 import { useThemeColors, withOpacity } from '@/hooks/useThemeColors';
+
 export default function LoginScreen() {
   const [isLogin, setIsLogin] = useState(true);
   const [username, setUsername] = useState('');
@@ -17,6 +18,7 @@ export default function LoginScreen() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const setMockSession = useHandyBetStore((state) => state.setMockSession);
   const colors = useThemeColors();
+
   const handleSubmit = async () => {
     if (isLoading) return;
     setErrorMessage(null);
@@ -34,7 +36,6 @@ export default function LoginScreen() {
     setIsLoading(true);
     try {
       if (isLogin) {
-        // Simular Login con Servicio
         const user = await authService.login(username, password);
         if (user) {
           setMockSession({
@@ -44,7 +45,6 @@ export default function LoginScreen() {
           });
         }
       } else {
-        // Simular Registro con Servicio
         const result = await authService.register(
           username,
           password,
@@ -63,81 +63,86 @@ export default function LoginScreen() {
   };
 
   return (
-    <View className="flex-1 bg-background/80 justify-center items-center p-6">
-      <View className="w-full max-w-sm bg-background/90 border border-border p-8  shadow-xl rounded-xl">
-        <View className="mb-4">
+    <ImageBackground
+      source={require('../../assets/images/background.png')}
+      resizeMode="cover"
+      className="flex-1 w-full justify-center items-center p-6 bg-background"
+    >
+      <View className="w-full max-w-sm bg-card/85 border border-white/10 p-8 shadow-2xl rounded-2xl backdrop-blur-xl">
+        <View className="mb-6 items-center">
           <Logo size="lg" layout="vertical" />
         </View>
-        <Text className="text-foreground text-xs font-bold text-center uppercase tracking-widest mb-8">
+
+        <Text className="text-primary font-bold text-center uppercase tracking-widest mb-6 text-sm">
           {isLogin ? 'Iniciar Sesión' : 'Crear Cuenta'}
         </Text>
 
         {errorMessage && (
-          <View className="bg-rose-500/10 border border-rose-500/20 p-3.5 rounded-xs mb-4">
-            <Text className="text-rose-500 text-xs font-bold text-center">{errorMessage}</Text>
+          <View className="bg-rose-500/10 border border-rose-500/20 p-3.5 rounded-xl mb-5">
+            <Text className="text-rose-400 text-xs font-bold text-center">{errorMessage}</Text>
           </View>
         )}
 
         {/* Inputs */}
         <View className="space-y-4">
           <View>
-            <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-1.5">Usuario</Text>
+            <Text className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">Usuario</Text>
             <TextInput
-              placeholder="Ej: admin o joselin_lagata"
-              placeholderTextColor={withOpacity(colors.foreground, 0.2)}
+              placeholder="Ej: admin o pedro_bet"
+              placeholderTextColor={withOpacity(colors.foreground, 0.3)}
               value={username}
               onChangeText={setUsername}
               autoCapitalize="none"
-              className="bg-primary/5 border border-border rounded-full px-4 py-3 text-white font-bold"
+              className="bg-black/40 border border-white/10 rounded-full px-5 py-3.5 text-white font-semibold focus:border-primary"
             />
           </View>
 
           <View>
-            <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-1.5">Contraseña</Text>
+            <Text className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">Contraseña</Text>
             <TextInput
               placeholder="••••••••"
-              placeholderTextColor="#64748b"
+              placeholderTextColor={withOpacity(colors.foreground, 0.3)}
               secureTextEntry
               value={password}
               onChangeText={setPassword}
               autoCapitalize="none"
               onSubmitEditing={handleSubmit}
-              className="bg-primary/5 border border-border rounded-full px-4 py-3 text-white font-bold"
+              className="bg-black/40 border border-white/10 rounded-full px-5 py-3.5 text-white font-semibold focus:border-primary"
             />
           </View>
 
           {!isLogin && (
             <>
               <View>
-                <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-1.5">Nombre Completo</Text>
+                <Text className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">Nombre Completo</Text>
                 <TextInput
                   placeholder="Ej: Pedro Pérez"
-                  placeholderTextColor="#64748b"
+                  placeholderTextColor={withOpacity(colors.foreground, 0.3)}
                   value={fullName}
                   onChangeText={setFullName}
-                  className="bg-background/80 border border-border rounded-xs px-4 py-3 text-white font-bold"
+                  className="bg-black/40 border border-white/10 rounded-full px-5 py-3.5 text-white font-semibold focus:border-primary"
                 />
               </View>
               <View>
-                <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-1.5">WhatsApp (Teléfono)</Text>
+                <Text className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">WhatsApp (Teléfono)</Text>
                 <TextInput
-                  placeholder="Ej: +584120000000"
-                  placeholderTextColor="#64748b"
+                  placeholder="Ej: +58412000000"
+                  placeholderTextColor={withOpacity(colors.foreground, 0.3)}
                   value={phoneWhatsapp}
                   onChangeText={setPhoneWhatsapp}
                   keyboardType="phone-pad"
-                  className="bg-background/80 border border-border rounded-xs px-4 py-3 text-white font-bold"
+                  className="bg-black/40 border border-white/10 rounded-full px-5 py-3.5 text-white font-semibold focus:border-primary"
                 />
               </View>
               <View>
-                <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-1.5">WhatsApp Handle (@usuario)</Text>
+                <Text className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">WhatsApp Handle (@usuario)</Text>
                 <TextInput
                   placeholder="Ej: @pedrop"
-                  placeholderTextColor="#64748b"
+                  placeholderTextColor={withOpacity(colors.foreground, 0.3)}
                   value={whatsappHandle}
                   onChangeText={setWhatsappHandle}
                   autoCapitalize="none"
-                  className="bg-background/80 border border-border rounded-xs px-4 py-3 text-white font-bold"
+                  className="bg-black/40 border border-white/10 rounded-full px-5 py-3.5 text-white font-semibold focus:border-primary"
                 />
               </View>
             </>
@@ -145,28 +150,28 @@ export default function LoginScreen() {
 
           {/* Selección de Rol si es Registro */}
           {!isLogin && (
-            <View>
-              <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-2">Rol de Acceso</Text>
-              <View className="flex-row gap-2">
+            <View className="pt-2">
+              <Text className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-3">Rol de Acceso</Text>
+              <View className="flex-row gap-3">
                 <TouchableOpacity
                   onPress={() => setRole('player')}
-                  className={`flex-1 py-2.5 rounded-xs border items-center ${role === 'player'
-                    ? 'bg-secondary/20 border-secondary'
-                    : 'bg-background/80 border-border'
+                  className={`flex-1 py-3 rounded-full border items-center transition-all ${role === 'player'
+                    ? 'bg-primary/20 border-primary shadow-lg shadow-primary/20'
+                    : 'bg-black/40 border-white/10'
                     }`}
                 >
-                  <Text className={`font-bold text-xs ${role === 'player' ? 'text-secondary' : 'text-foreground'}`}>
+                  <Text className={`font-bold text-xs ${role === 'player' ? 'text-primary' : 'text-muted-foreground'}`}>
                     Jugador P2P
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => setRole('cashier')}
-                  className={`flex-1 py-2.5 rounded-xs border items-center ${role === 'cashier'
-                    ? 'bg-secondary/20 border-secondary'
-                    : 'bg-background/80 border-border'
+                  className={`flex-1 py-3 rounded-full border items-center transition-all ${role === 'cashier'
+                    ? 'bg-primary/20 border-primary shadow-lg shadow-primary/20'
+                    : 'bg-black/40 border-white/10'
                     }`}
                 >
-                  <Text className={`font-bold text-xs ${role === 'cashier' ? 'text-secondary' : 'text-foreground'}`}>
+                  <Text className={`font-bold text-xs ${role === 'cashier' ? 'text-primary' : 'text-muted-foreground'}`}>
                     Cajero Taquilla
                   </Text>
                 </TouchableOpacity>
@@ -179,12 +184,12 @@ export default function LoginScreen() {
         <TouchableOpacity
           onPress={handleSubmit}
           disabled={isLoading}
-          className="bg-primary py-3.5 rounded-full items-center border  mt-6 active:scale-[0.98]"
+          className="bg-primary py-4 rounded-full items-center shadow-lg shadow-primary/20 mt-8 active:scale-[0.97]"
         >
           {isLoading ? (
-            <ActivityIndicator color="#0f172a" />
+            <ActivityIndicator color={colors.background} />
           ) : (
-            <Text className="text-foreground font-black text-sm uppercase">
+            <Text className="text-background font-extrabold text-sm uppercase tracking-widest">
               {isLogin ? 'Acceder' : 'Registrar'}
             </Text>
           )}
@@ -195,11 +200,11 @@ export default function LoginScreen() {
           onPress={() => setIsLogin(!isLogin)}
           className="mt-6"
         >
-          <Text className="text-foreground text-xs font-bold text-center">
+          <Text className="text-muted-foreground hover:text-primary text-xs font-bold text-center transition-colors">
             {isLogin ? '¿No tienes cuenta? Regístrate aquí' : '¿Ya tienes cuenta? Inicia Sesión'}
           </Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ImageBackground>
   );
 }

@@ -60,3 +60,12 @@
   * Se configuró Expo Router con una carpeta aislada `app/admin` que posee su propio layout y estado de autenticación (contraseña estática).
   * Se modificó el `_layout.tsx` principal para omitir la redirección de rutas cuyo segmento inicie con `admin`.
   * Se integró `@tanstack/react-table` para proveer tablas ordenables de direcciones IP y tiempos de sesión en escritorio web.
+
+## Hito 10: Sistema de Temas Modular, Impeccable Design & Tipado Estricto de Iconos
+- **Fecha:** 2026-11-08
+- **Contexto:** Refactorización transversal de estilos e interfaces bajo estándares Impeccable Design, modularización del hook de temas en capas funcionales y corrección de compatibilidad en tipados SVG de pestañas.
+- **Decisión:**
+  * Segmentamos `useThemeColors.ts` en ganchos especializados: `useBrandColors`, `useTextColors` y `useBackgroundColors` para evitar re-renderizados innecesarios y mejorar la legibilidad.
+  * Modernizamos `Toast.tsx` con animaciones nativas fluidas, estados semánticos dinámicos e integración de Lucide Icons.
+  * Corregimos los tipos en `src/components/ui/icons.tsx` (`IconProps` acepta `ColorValue` de React Native) asegurando compatibilidad 100% con `tabBarIcon` en Expo Router.
+  * Perfeccionamos `HandyBetHeader`, `PostItem` y pantallas de Auth/Hub con diseño oscuro pulido y estados reactivos.

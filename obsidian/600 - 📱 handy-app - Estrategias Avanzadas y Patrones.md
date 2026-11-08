@@ -1,11 +1,11 @@
 ---
 title: ⚡ Estrategias Avanzadas y Patrones
 project: handy-app
-tags: [estado, zustand, react-query, patrones]
+tags: [estrategias, zustand, react-query, rendimiento, animación, optimización]
 type: optimización
 ---
 
-# ⚡ Estrategias Avanzadas, Estado y Rendimiento
+# ⚡ Estrategias Avanzadas, Funciones Especiales y Rendimiento
 
 ## 📌 Gestión de Estado y Comportamiento (.brain/knowledge/state_and_behavior.md)
 # HandyBet — Manejo de Estado y Comportamiento
@@ -15,6 +15,8 @@ La tienda global Zustand de la aplicación centraliza estados de la interfaz y a
 - `mockSession`: Almacena el usuario logueado en la sesión local (`id`, `username`, `role`).
 - `isScannerActive` y `activeTicketCode`: Controla la visualización del visor de cámara QR y el ticket actualmente seleccionado para confirmación de apuestas.
 - **Acciones:** `setMockSession`, `setScannerActive`, `setActiveTicketCode`.
+
+> **Nota Arquitectónica:** Según análisis topológicos (Graphify), `useHandyBetStore` es un "God Node" (nodo altamente acoplado con >50 conexiones). Muchas de estas dependencias provienen de utilidades secundarias (ej. `QRCameraScanner`). Como regla de diseño, se debe evitar inyectar este store en componentes de presentación pura para prevenir re-renders innecesarios o acoplamientos rígidos.
 
 ### 1.1 Navegación e Historial (`src/store/useNavigationStore.ts`)
 - Mantiene una pila de historial de navegación (`historyStack`) basada en las rutas previas.
@@ -51,9 +53,30 @@ React Query gestiona el estado asíncrono y las peticiones al backend (con Supab
 
 
 ---
+
+## 🚀 Estrategias Tecnológicas y Funciones Especiales
+
+### 1. Gestión de Caché e Invalidation Strategies (TanStack React Query v5)
+- **Invalidación Selectiva**: Las mutaciones de apuestas (`usePlaceBet`) y transacciones (`useCreateTransaction`) invocan la invalidación de claves de consulta (`wallet-balance`, `transactions-list`) para actualización instantánea sin recarga de página.
+- **Stale Time Optimizado**: Se configuran tiempos de expiración diferenciados entre el catálogo de juegos (estático/duradero) y el saldo del usuario (dinámico/reactivo).
+
+### 2. Actualizaciones Optimistas (Optimistic UI Updates)
+- Cuando el usuario realiza una jugada o registro de transacción, el estado de Zustand refrena visualmente el saldo antes de confirmar el payload en la base de datos, eliminando la latencia percibida.
+
+### 3. Rendimiento en Listado de Assets con FlashList
+- Uso de `@shopify/flash-list` en lugar de `FlatList` estándar para renderizar catálogos de juegos y tablas transaccionales masivas sin caídas de framerate en dispositivos móviles ni en Web.
+
+### 4. Animaciones de Alta Fidelidad y Micro-interacciones
+- **React Native Reanimated 4**: Animaciones procesadas a nivel nativo en el UI Thread sin saturar el JS Bridge.
+- **NativeWind v4 + Tailwind CSS**: Estilos compilados con utilidades CSS óptimas, garantizando una estética oscura premium sin sobrecarga de runtime.
+
+### 5. Optimización Head & SEO Dinámico
+- Integración de `react-helmet-async` para actualizar etiquetas OpenGraph, títulos y descripciones de meta dinámicamente según la vista activa.
+
+---
 ## 🤖 Análisis de la IA: Patrones de Rendimiento
-* **Actualizaciones Optimistas (Optimistic Updates)**: Excelente elección para mejorar la experiencia de usuario en acciones inmediatas como apuestas o adición a favoritos.
-* **Sincronización Realtime**: Se recomienda estrechar la integración entre WebSockets y las invalidaciones de React Query para asegurar la consistencia del balance.
+* **Evaluación de Fluidez**: La integración de FlashList y React Native Reanimated coloca la aplicación en el estándar de apps nativas de alta gama.
+* **Sincronización Realtime**: Se recomienda estrechar la integración entre WebSockets de Supabase y las invalidaciones de React Query para asegurar consistencia del balance ante eventos concurrentes.
 
 ---
 ## 🔗 Referencias Relacionadas

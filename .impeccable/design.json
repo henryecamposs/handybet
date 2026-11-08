@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-28T09:49:00Z",
+  "title": "Design System: HandyBet",
+  "extensions": {
+    "colorMeta": {
+      "primary": { "role": "primary", "displayName": "Primary Active", "canonical": "oklch(0.657 0.229 29.729)" },
+      "secondary": { "role": "secondary", "displayName": "Secondary Action", "canonical": "oklch(0.872 0.274 143.533)" },
+      "accent": { "role": "accent", "displayName": "Accent Highlight", "canonical": "oklch(0.403 0.273 266.181)" },
+      "background": { "role": "neutral", "displayName": "Background", "canonical": "oklch(0.13 0.02 30.73)" },
+      "card": { "role": "neutral", "displayName": "Card", "canonical": "oklch(0.2 0.04 27.17)" },
+      "border": { "role": "neutral", "displayName": "Border", "canonical": "oklch(0.277 0.083 29.660)" },
+      "muted": { "role": "neutral", "displayName": "Muted", "canonical": "oklch(0.17 0.02 25.92)" },
+      "foreground": { "role": "neutral", "displayName": "Foreground", "canonical": "oklch(0.991 0.002 23.598)" },
+      "destructive": { "role": "neutral", "displayName": "Destructive", "canonical": "oklch(0.611 0.244 13.521)" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Main headers, large numeric scores, and wallet balances." },
+      "body": { "displayName": "Body", "purpose": "Primary readable text, messages, and social posts." }
+    },
+    "shadows": [
+      { "name": "neon-glow-primary", "value": "0 0 15px oklch(0.657 0.229 29.729 / 0.3)", "purpose": "Highlighting active bets or winnings." },
+      { "name": "neon-glow-secondary", "value": "0 0 15px oklch(0.872 0.274 143.533 / 0.3)", "purpose": "Highlighting active chat badges or notifications." }
+    ],
+    "motion": [
+      { "name": "scale-press", "value": "scale(0.98)", "purpose": "Feedback on interactive buttons when pressed." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Glass Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Translucent container with subtle borders for posts, settings, and widgets.",
+      "html": "<div class=\"ds-glass-card\"><h3 class=\"ds-card-title\">Premium Card</h3><p class=\"ds-card-body\">Content inside glass card container.</p></div>",
+      "css": ".ds-glass-card { background: oklch(0.2 0.04 27.17 / 0.8); border: 1px solid oklch(0.277 0.083 29.660); border-radius: 12px; padding: 16px; backdrop-filter: blur(12px); color: oklch(0.991 0.002 23.598); } .ds-card-title { font-family: sans-serif; font-weight: 600; font-size: 16px; margin: 0 0 8px 0; } .ds-card-body { font-family: sans-serif; font-size: 14px; color: oklch(0.17 0.02 25.92); margin: 0; }"
+    },
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Vibrant capsule button for high-importance actions.",
+      "html": "<button class=\"ds-btn-primary\">ACCEDER</button>",
+      "css": ".ds-btn-primary { background: oklch(0.657 0.229 29.729); color: oklch(0.991 0.002 23.598); font-weight: 800; font-size: 14px; border: none; border-radius: 9999px; padding: 12px 24px; cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em; transition: transform 0.1s; } .ds-btn-primary:active { transform: scale(0.98); } .ds-btn-primary:hover { opacity: 0.9; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Obsidian Neon Room",
+    "overview": "HandyBet is a premium, high-energy P2P social betting platform. Its visual identity rejected the flat, dull corporate interfaces in favor of a sleek, dark cyber-casino lounge. It relies heavily on translucent glassmorphism layers, glowing accent lights, and clean technical typography.",
+    "keyCharacteristics": [
+      "Deep obsidian and midnight blue backgrounds.",
+      "High-contrast, vibrant neon indicators (Mint/Emerald, Indigo, Gold).",
+      "Subtle, semi-transparent borders to simulate physical glass panes.",
+      "Generous, ergonomic spacing designed for comfortable mobile and desktop navigation."
+    ],
+    "rules": [
+      { "name": "The Neon Rarity Rule", "body": "Neon accents should not cover more than 10% of any screen. Their vibrance is meant to draw attention, not flood the user's vision.", "section": "colors" },
+      { "name": "The Matte Glass Rule", "body": "Card backdrops must use an opacity between 70% and 90% combined with a heavy blur to maintain legibility.", "section": "colors" }
+    ],
+    "dos": [
+      "Do use backdrop-blur-md on all floating layout panels and headers.",
+      "Do use font-mono or font-bold tracking-wider for numeric values, tickets, and codes.",
+      "Do wrap icons in rounded-full backgrounds with 10% opacity of the icon color."
+    ],
+    "donts": [
+      "Don't use solid gray borders (e.g. #cccccc). Use translucent white borders (border-white/10).",
+      "Don't use emojis as primary navigation tab icons. Replaced entirely by SVG icons."
+    ]
+  }
+}

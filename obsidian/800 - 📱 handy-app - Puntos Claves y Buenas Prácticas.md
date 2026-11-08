@@ -19,6 +19,13 @@ HandyBet utiliza un tema semántico y responsivo basado en colores OKLCH declara
 - **Destacados Secundarios:** `text-secondary` / `bg-secondary` (Color secundario de acentuación).
 - **Destacados de Éxito / Destructive:** Mapeados dinámicamente a través de `text-secondary` o variables semánticas `--destructive`.
 
+### 1.1 Hooks Modulares de Color (`useThemeColors.ts`)
+Para evitar consumos monolíticos del objeto completo de temas, la arquitectura expone ganchos especializados:
+- `useBrandColors()`: Acceso a `primary`, `secondary`, `accent`, `destructive`, `ring` y sus variantes claras/oscuras/foreground.
+- `useTextColors()`: Acceso a `foreground`, `muted`, `mutedForeground`.
+- `useBackgroundColors()`: Acceso a `background`, `backgroundDark`, `card`, `popover`, `border`, `input`.
+- `withOpacity(colorString, opacity)`: Utilidad pura para inyectar canal alfa en colores hex o rgb dinámicos.
+
 ---
 
 ## 2. Tipografía y Micro-animaciones
@@ -92,7 +99,7 @@ Renderiza etiquetas y chips de interés organizados por categorías desde `inter
 ---
 ## 🤖 Análisis de la IA: Calidad de Interfaz (UI/UX)
 * **Consistencia Visual**: El enfoque "Aesthetically Premium" en modo oscuro ofrece una experiencia envolvente acorde con los estándares de plataformas de gaming.
-* **Rendimiento Gráfico**: El truncado inteligente y la reutilización de componentes atómicos (`MiniGameCard`) mitigan los saltos visuales durante el renderizado.
+* **Rendimiento Gráfico**: El truncado inteligente y la reutilización de componentes atómicos mitigan los saltos visuales durante el renderizado.
 
 ---
 ## 🔗 Referencias Relacionadas

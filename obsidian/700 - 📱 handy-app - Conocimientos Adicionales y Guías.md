@@ -1,11 +1,11 @@
 ---
 title: 📖 Conocimientos Adicionales y Guías
 project: handy-app
-tags: [negocio, dominio, reglas, billetera]
+tags: [negocio, dominio, reglas, billetera, pasarelas, bancos, gateways]
 type: guía-negocio
 ---
 
-# 📖 Dominio de Negocio y Reglas Operativas
+# 📖 Dominio de Negocio, Guías e Integraciones Externas
 
 ## 📌 Contexto de Dominio (.brain/knowledge/domain_context.md)
 # HandyBet — Dominio del Negocio y Reglas
@@ -97,9 +97,23 @@ El ecosistema opera sobre un esquema físico robusto de base de datos donde la s
 
 
 ---
+
+## 🏦 Funciones Conectadas a Otras Aplicaciones (Bancos & Pasarelas de Pago)
+
+### 1. Pasarelas de Pago & Métodos de Recarga / Retiro (Gateways)
+* **Pago Móvil (Bolívares - VED)**: Integración con referencias bancarias y validación de comprobantes de pago de bancos nacionales (Mercantil, Banesco, Provincial, BDV).
+* **Transferencias Bancarias Nacionales e Internacionales**: Módulo de registro de depósitos y solicitud de retiros con validación por número de referencia.
+* **Criptomonedas & USDT**: Soporte conceptual y técnico para pasarelas de pago digitales y billeteras de activo estable.
+
+### 2. Reglas de Validación Financiera
+* **Billetera Multidivisa**: Control de saldos en divisa local y divisas de referencia.
+* **Restricción de Saldo Negativo**: Salvaguardas a nivel de lógica de negocio y restricciones SQL (`CHECK (balance >= 0)`) en la base de datos para impedir operaciones sobregiro.
+* **Inmutabilidad del Historial**: Toda transacción genera un registro inmutable con timestamp UTC e identificador de referencia único.
+
+---
 ## 🤖 Análisis de la IA: Dominio y Reglas Financieras
-* **Control de Billetera Multidivisa**: Prohibir saldos negativos a nivel de base de datos (mediante restricciones CHECK en Postgres) es una salvaguarda crítica.
-* **Inmutabilidad**: La estructura de transacciones inmutables permite auditorías precisas sobre depósitos, retiros y apuestas.
+* **Seguridad en Pasarelas**: La verificación previa mediante `walletService.ts` asegura que los fondos solo se acrediten tras la confirmación de la pasarela bancaria correspondiente.
+* **Auditoría Transaccional**: La inmutabilidad de los registros transaccionales es clave para resolver disputas de clientes y conciliación bancaria.
 
 ---
 ## 🔗 Referencias Relacionadas

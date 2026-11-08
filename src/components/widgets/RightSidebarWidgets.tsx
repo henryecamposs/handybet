@@ -13,16 +13,16 @@ export const [mockAds, mockNews, mockFollowSuggestions, mockPrizes] = [[], [], [
 // --- COMPONENTS ---
 
 export const WidgetContainer = ({ title, children, action }: { title: string | React.ReactNode, children: React.ReactNode, action?: React.ReactNode }) => (
-  <View className="mb-3 bg-card border border-border rounded-xl">
-    <View className="bg-muted rounded-t-xl flex-row justify-between items-center  p-1 rounded-xs transition-colors mb-2 px-2">
+  <View className="mb-4 bg-card/45 border border-white/10 rounded-2xl overflow-hidden shadow-lg backdrop-blur-md">
+    <View className="bg-white/5 flex-row justify-between items-center p-3.5 border-b border-white/5">
       {typeof title === 'string' ? (
-        <Text className="text-xs font-semibold text-foreground">{title}</Text>
+        <Text className="text-xs font-bold uppercase tracking-wider text-primary">{title}</Text>
       ) : (
         title
       )}
       {action && action}
     </View>
-    <View className="bg-transparent space-y-2 p-1">
+    <View className="p-3 gap-2 bg-transparent">
       {children}
     </View>
   </View>
@@ -31,15 +31,15 @@ export const WidgetContainer = ({ title, children, action }: { title: string | R
 export const AdWidget = ({ image, title, domain, size = 'large' }: { image: string, title: string, domain: string, size?: string }) => {
   if (size === 'small') {
     return (
-      <TouchableOpacity className="flex-1 hover:bg-background/50 p-1 rounded-xs transition-colors">
-        <Image source={{ uri: image }} className="w-full aspect-square rounded-lg" resizeMode="cover" />
+      <TouchableOpacity className="flex-1 hover:bg-white/5 p-1 rounded-xl transition-all">
+        <Image source={{ uri: image }} className="w-full aspect-square rounded-xl border border-white/10" resizeMode="cover" />
       </TouchableOpacity>
     );
   }
 
   return (
-    <TouchableOpacity className="hover:bg-background/50 p-1 rounded-xs transition-colors mb-2">
-      <Image source={{ uri: image }} className="w-full h-24 rounded-lg" resizeMode="cover" />
+    <TouchableOpacity className="hover:bg-white/5 p-1 rounded-xl transition-all mb-2">
+      <Image source={{ uri: image }} className="w-full h-24 rounded-xl border border-white/10" resizeMode="cover" />
     </TouchableOpacity>
   );
 };
@@ -47,11 +47,11 @@ export const AdWidget = ({ image, title, domain, size = 'large' }: { image: stri
 export const NewsWidget = ({ id, title, time, onSelectNews }: { id: string, title: string, time: string, onSelectNews?: (id: string) => void }) => {
   return (
     <TouchableOpacity
-      className="px-1 mb-1 hover:bg-background/50 rounded-lg py-1 transition-colors"
+      className="px-2 py-2 mb-1 hover:bg-white/5 rounded-xl transition-all"
       onPress={() => onSelectNews ? onSelectNews(id) : undefined}
     >
-      <Text className="text-foreground font-semibold text-sm mb-1 hover:underline">{title}</Text>
-      <Text className="text-foreground text-xs">{time}</Text>
+      <Text className="text-foreground font-bold text-xs leading-normal hover:text-primary transition-colors">{title}</Text>
+      <Text className="text-muted-foreground text-[10px] mt-1 font-semibold">{time}</Text>
     </TouchableOpacity>
   );
 };
@@ -60,28 +60,28 @@ export const FollowSuggestionWidget = ({ name, avatar, time, mutualFollowers, on
   const [isFollowing, setIsFollowing] = React.useState(false);
 
   return (
-    <View className="flex-row items-center p-2 hover:bg-background/80 rounded-xs transition-colors">
-      <Image source={{ uri: avatar }} className="w-16 h-16 rounded-full mr-3" />
+    <View className="flex-row items-start p-2.5 bg-white/5 hover:bg-white/10 border border-white/5 rounded-xl mb-2 transition-all">
+      <Image source={{ uri: avatar }} className="w-10 h-10 rounded-full mr-3 border border-white/20" />
       <View className="flex-1">
         <View className="flex-row justify-between items-center">
-          <Text className="font-semibold text-foreground text-sm">{name}</Text>
-          <Text className="text-foreground text-xs">{time}</Text>
+          <Text className="font-bold text-foreground text-xs">{name}</Text>
+          <Text className="text-muted-foreground text-[10px] font-medium">{time}</Text>
         </View>
-        <Text className="text-foreground text-xs mb-2">{mutualFollowers} seguidores en común</Text>
+        <Text className="text-muted-foreground text-[10px] mb-2 font-medium">{mutualFollowers} seguidores en común</Text>
         <View className="flex-row gap-2">
           <TouchableOpacity
             onPress={() => {
               setIsFollowing(!isFollowing);
               if (onFollow) onFollow();
             }}
-            className={`flex-1 py-1.5 rounded-lg items-center ${isFollowing ? 'bg-background/80 border border-border' : 'bg-primary'}`}
+            className={`flex-1 py-1.5 rounded-full items-center active:scale-[0.97] transition-all ${isFollowing ? 'bg-white/10 border border-white/20' : 'bg-primary'}`}
           >
-            <Text className={`font-bold text-xs ${isFollowing ? 'text-foreground' : 'text-primary-foreground'}`}>
+            <Text className={`font-bold text-[10px] uppercase tracking-wider ${isFollowing ? 'text-foreground' : 'text-background'}`}>
               {isFollowing ? 'Siguiendo' : 'Seguir'}
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity className="flex-1 bg-background/80 py-1.5 rounded-lg items-center border border-border">
-            <Text className="text-foreground font-bold text-xs">Descartar</Text>
+          <TouchableOpacity className="flex-1 bg-white/5 py-1.5 rounded-full items-center border border-white/10 active:scale-[0.97] transition-all">
+            <Text className="text-foreground font-bold text-[10px] uppercase tracking-wider">Descartar</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -170,7 +170,7 @@ export default function RightSidebarWidgets({ onSelectNews, onSelectPrize, onSel
   return (
     <ScrollView
       style={{ height: 'calc(100vh - 64px)' as any }}
-      className="w-[25%] p-1 bg-primary/5 border border-l-primary/20 hover-scrollbar"
+      className="w-[25%] p-4 bg-card/20 border-l border-white/10 hover-scrollbar"
       showsVerticalScrollIndicator={true}
     >
 

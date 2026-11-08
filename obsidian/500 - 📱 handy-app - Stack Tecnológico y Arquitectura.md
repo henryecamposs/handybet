@@ -67,17 +67,32 @@ La aplicación utiliza un esquema de enrutamiento basado en **Expo Router** opti
 - **`PostActionButtons.tsx`:** Barra universal de acciones (Me gusta, Comentar, Compartir) reutilizable. Permite variantes según su contexto de uso (iconos completos o compactos).
 - **`PostMediaViewer.tsx`:** Visor de comentarios. Implementa lógica de fallback publicitario contextual (`HandyAds`) cuando la publicación no tiene elementos multimedia.
 - **`ShareModal.tsx`:** Modal de compartido avanzado segmentado en pestañas (Grupo, Canal, Usuario, Amigo) con buscador interactivo.
-- **`src/components/layout/hub/`**: Contiene los subcomponentes modulares (`Carrusel`, `SeccionLista`, `TabContainer`, `PostContainer`, `HeroBanner`) para ensamblar de forma declarativa las páginas de los hubs de manera reutilizable.
+- `src/components/layout/hub/`: Contiene los subcomponentes modulares (`Carrusel`, `SeccionLista`, `TabContainer`, `PostContainer`, `HeroBanner`) para ensamblar de forma declarativa las páginas de los hubs de manera reutilizable.
+
+---
+
+## 5. Topología del Proyecto (Análisis Graphify)
+Tras la auditoría estructural (Graphify), se han identificado las siguientes métricas y "God Nodes" (nodos de alta centralidad) que determinan el peso arquitectónico:
+- **Métricas Generales:** ~3,114 nodos y ~3,740 aristas. Existen 429 comunidades detectadas.
+- **Nodos de Alta Densidad (God Nodes):**
+  1. `useHandyBetStore` (53 conexiones): Tienda central que sufre riesgo de acoplamiento. Su refactorización está en la mira para descentralizar los estados de UI transitorios.
+  2. `expo-router` (47 conexiones): Eje lógico del proyecto.
+  3. `useToastStore` (40 conexiones): Tienda global de notificaciones.
+  4. `types/handyBet.ts` (29 conexiones): Eje tipográfico central de la aplicación.
+- **Evolución y Desacoplamiento (Caso `useThemeColors`):**
+  Históricamente, `useThemeColors` fue el nodo más acoplado (103 aristas). Para mitigar cuellos de botella de renderizado, se deprecó su uso directo y se segregó en sub-hooks más limpios: `useBrandColors()`, `useTextColors()` y `useBackgroundColors()`. La política arquitectónica actual recomienda utilizar clases nativas de Tailwind/NativeWind en lugar de inyección en JavaScript para estilos base.
 
 
 ## 📁 Inventario de Módulos Detectados en `src/`
 * **Vistas / Pantallas**: 43 archivos detectados.
 * **Stores Globales (Zustand)**: 0 módulos detectados.
+* **Hooks Personalizados**: 6 módulos detectados.
+* **Módulos de Librería (`src/lib/`)**: 2 módulos detectados.
 
 ---
 ## 🤖 Análisis de la IA: Evaluación de Arquitectura
 * **Separación de Responsabilidades**: La arquitectura modular organizada por roles y dominios facilita la incorporación de nuevas pantallas sin colisionar con componentes existentes.
-* **Flexibilidad Universal**: La combinación de Expo con React Router DOM garantiza compatibilidad multiplataforma eficiente.
+* **Flexibilidad Universal**: La combinación de Expo con React Router DOM garantiza compatibilidad multiplataforma eficiente en Web, iOS y Android.
 
 ---
 ## 🔗 Referencias Relacionadas

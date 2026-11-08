@@ -4,6 +4,34 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/), y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.14.0] - 2026-11-08
+
+### Añadido
+- **Hooks Modulares de Tema (`useThemeColors`)**: Desacoplamiento del hook central en ganchos especializados (`useBrandColors`, `useTextColors`, `useBackgroundColors`) y optimización de la función utilitaria `withOpacity` para componentes deportivos dinámicos.
+- **Sistema de Feedback & Notificaciones Visuales (`Toast.tsx`)**: Rediseño integral de notificaciones flotantes con soporte de variantes semánticas (`success`, `error`, `warning`, `info`), mapeo dinámico de Lucide Icons y animaciones suaves combinadas de opacidad y desplazamiento (`Animated.parallel`).
+- **Directrices y Tokens Impeccable Design**: Creación de documentación de diseño en `DESIGN.md`, `PRODUCT.md` y `.impeccable/design.json` para estandarización estética en modo oscuro de alta fidelidad.
+
+### Modificado
+- **Refactorización de Cabecera Global (`HandyBetHeader.tsx`)**: Reorganización de elementos de navegación, mejoras responsivas para desktop y mobile, avatar interactivo de usuario e integración con el sistema modular de colores.
+- **Estructura y Estilizado de Publicaciones (`PostItem.tsx`)**: Refinamiento tipográfico y de márgenes en tarjetas de posts, tags de apuestas y botones de interacción social unificados.
+- **Formularios de Autenticación (`login.tsx`)**: Optimización de estados de entrada, validaciones y diseño glass-dark consistente con la experiencia premium de la app.
+- **Componentes de Layout (`HubLayout.tsx`, `HubDetailLayout.tsx`)**: Alineación visual de portadas Hero y posicionamiento ergonómico de acciones primarias (`actionButton`).
+
+### Corregido
+- **Tipado TypeScript en Iconos de Pestañas (`icons.tsx` & `(tabs)/_layout.tsx`)**: Se corrigió el error `TS2322 (ColorValue no asignable a string | undefined)` permitiendo que `IconProps` acepte `ColorValue` (`OpaqueColorValue` / `string`), garantizando compilación estricta y limpia con Expo Router y React Native.
+- **Limpieza de Importaciones Huérfanas**: Eliminadas variables y módulos sin uso (`View`, `Logo`, `withOpacity`) en layouts y widgets laterales reportados por linters.
+
+### Recomendaciones y Pruebas de QA
+- 🧪 **Pruebas de Componentes UI y Notificaciones**:
+  - Verificar la correcta aparición, permanencia y auto-cierre con animación fluida del componente `Toast` en sus cuatro variantes (`success`, `error`, `warning`, `info`).
+  - Probar el comportamiento de renderizado del `HandyBetHeader` en pantallas reducidas (< 768px) comprobando el despliegue del menú y la navegación inferior de pestañas.
+- 📱 **Validación de Navegación y Rutas Expo Router**:
+  - Validar que los iconos de pestañas (`ChatIcon`, `GroupsIcon`, `FeedIcon`, `WalletIcon`) adopten correctamente los colores de tinte activo (`primary`) e inactivo (`zinc-400`) sin alertas de tipos en tiempo de ejecución.
+  - Asegurar que las sub-rutas con `options={{ href: null }}` se mantengan completamente invisibles en la barra inferior móvil.
+- 🎨 **Pruebas de Borde & Consistencia Visual**:
+  - Comprobar que los nuevos hooks de color (`useBrandColors`, `useTextColors`, `useBackgroundColors`) respondan adecuadamente a cambios de modo oscuro/claro si el dispositivo conmuta temas.
+  - Verificar que las publicaciones con carruseles multimedia o imágenes de dimensiones atípicas en `PostItem.tsx` mantengan la alineación de dos columnas sin desbordar el contenedor.
+
 ## [1.13.0] - 2026-07-28
 
 ### Añadido

@@ -4,7 +4,7 @@ import { useRouter, usePathname } from 'expo-router';
 import { Search, MessageCircle, Bell, Sun, Moon, Home, Megaphone, Bookmark, Gamepad2, LogOut, HelpCircle, ShieldAlert, User } from 'lucide-react-native';
 import { useColorScheme } from 'nativewind';
 import { useHandyBetStore } from '../../store/useHandyBetStore';
-import { useThemeColors, withOpacity } from '../../hooks/useThemeColors';
+import { useBrandColors, useTextColors, withOpacity } from '../../hooks/useThemeColors';
 import Logo from '../ui/Logo';
 import FloatingPopup from '../ui/FloatingPopup';
 import SupportModal from '../modals/SupportModal';
@@ -27,7 +27,8 @@ export default function HandyBetHeader() {
   const pathname = usePathname();
   const { mockSession } = useHandyBetStore();
   const { colorScheme, toggleColorScheme } = useColorScheme();
-  const colors = useThemeColors();
+  const brandColors = useBrandColors();
+  const textColors = useTextColors();
 
   const [showChatPopup, setShowChatPopup] = useState(false);
   const [showNotifPopup, setShowNotifPopup] = useState(false);
@@ -54,16 +55,16 @@ export default function HandyBetHeader() {
   ];
 
   return (
-    <View className="h-16 bg-background border-b border-border flex-row items-center justify-between px-4 z-50 shadow-sm">
+    <View className="h-16 bg-background border-b border-white/10 flex-row items-center justify-between px-6 z-50 shadow-xl">
       {/* Izquierda: Logo y Buscador */}
       <View className="flex-row items-center pr-4">
         <Logo size="sm" layout="horizontal" style={{ marginRight: 16 }} />
-        <View className="bg-input rounded-full flex-row items-center px-4 h-10 flex-1 max-w-[280px] border border-border-muted">
-          <Search size={18} color={colors.mutedForeground} className="mr-2" />
+        <View className="bg-black/30 rounded-full flex-row items-center px-4 h-10 flex-1 max-w-[280px] border border-white/10 focus:border-primary">
+          <Search size={16} color={brandColors.primary} className="mr-2" />
           <TextInput
             placeholder="Buscar en HandyBet..."
-            placeholderTextColor={withOpacity(colors.foreground, 0.2)}
-            className="text-white text-[14px] flex-1 outline-none"
+            placeholderTextColor={withOpacity(textColors.foreground, 0.3)}
+            className="text-white text-[13px] flex-1 outline-none font-medium"
           />
         </View>
       </View>
@@ -78,7 +79,8 @@ export default function HandyBetHeader() {
               item={item}
               isActive={isActive}
               onPress={() => router.push(item.path as any)}
-              colors={colors}
+              brandColors={brandColors}
+              textColors={textColors}
             />
           );
         })}
@@ -89,12 +91,14 @@ export default function HandyBetHeader() {
         <HeaderAction
           icon={colorScheme === 'dark' ? Moon : Sun}
           onPress={handleToggleTheme}
-          colors={colors}
+          brandColors={brandColors}
+          textColors={textColors}
         />
         <View ref={chatAnchorRef}>
           <HeaderAction
             icon={MessageCircle}
-            colors={colors}
+            brandColors={brandColors}
+            textColors={textColors}
             onPress={() => setShowChatPopup(!showChatPopup)}
           />
         </View>
@@ -106,37 +110,40 @@ export default function HandyBetHeader() {
           location="bottom"
           size="md"
         >
-          <View className="flex-row items-center p-3 border-b border-border gap-2">
-            <Image source={{ uri: mockSession?.avatar || 'https://i.pravatar.cc/150' }} className="w-8 h-8 rounded-full border border-border" />
-            <Text className="text-foreground font-black text-sm flex-1">Mensajes</Text>
-            <TouchableOpacity onPress={() => { setShowChatPopup(false); router.push('/(tabs)/chat'); }}>
-              <Text className="text-primary font-black text-xs uppercase">Ver Todos</Text>
-            </TouchableOpacity>
-          </View>
-          <ScrollView className="max-h-64">
-            {POPUP_CHATS.map(chat => (
-              <TouchableOpacity key={chat.id} className="p-3 border-b border-border flex-row items-center gap-3 bg-background/80 hover:bg-muted" onPress={() => { setShowChatPopup(false); router.push(`/chat/${chat.id}` as any); }}>
-                <Image source={{ uri: chat.avatar }} className="w-10 h-10 rounded-full border border-border" />
-                <View className="flex-1">
-                  <Text className={`text-sm ${chat.unread ? 'text-foreground font-black' : 'text-muted-foreground font-normal'}`}>{chat.name}</Text>
-                  <Text className={`text-xs mt-0.5 ${chat.unread ? 'text-foreground font-bold' : 'text-muted-foreground font-normal'}`} numberOfLines={1}>{chat.msg}</Text>
-                </View>
-                {chat.unread && (
-                  <View className="w-2 h-2 rounded-full bg-secondary" />
-                )}
+          <View className="bg-card/95 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-xl overflow-hidden">
+            <View className="flex-row items-center p-3 border-b border-white/10 gap-2 bg-black/20">
+              <Image source={{ uri: mockSession?.avatar || 'https://i.pravatar.cc/150' }} className="w-8 h-8 rounded-full border border-white/20" />
+              <Text className="text-foreground font-bold text-sm flex-1">Mensajes</Text>
+              <TouchableOpacity onPress={() => { setShowChatPopup(false); router.push('/(tabs)/chat'); }}>
+                <Text className="text-primary font-bold text-xs uppercase tracking-wider">Ver Todos</Text>
               </TouchableOpacity>
-            ))}
-          </ScrollView>
+            </View>
+            <ScrollView className="max-h-64">
+              {POPUP_CHATS.map(chat => (
+                <TouchableOpacity key={chat.id} className="p-3 border-b border-white/5 flex-row items-center gap-3 bg-card/20 hover:bg-white/5" onPress={() => { setShowChatPopup(false); router.push(`/chat/${chat.id}` as any); }}>
+                  <Image source={{ uri: chat.avatar }} className="w-10 h-10 rounded-full border border-white/15" />
+                  <View className="flex-1">
+                    <Text className={`text-sm ${chat.unread ? 'text-foreground font-bold' : 'text-muted-foreground font-normal'}`}>{chat.name}</Text>
+                    <Text className={`text-xs mt-0.5 ${chat.unread ? 'text-foreground font-semibold' : 'text-muted-foreground font-normal'}`} numberOfLines={1}>{chat.msg}</Text>
+                  </View>
+                  {chat.unread && (
+                    <View className="w-2.5 h-2.5 rounded-full bg-secondary shadow-lg shadow-secondary/50" />
+                  )}
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </View>
         </FloatingPopup>
 
         <View ref={notifAnchorRef}>
           <HeaderAction
             icon={Bell}
-            colors={colors}
+            brandColors={brandColors}
+            textColors={textColors}
             onPress={() => setShowNotifPopup(!showNotifPopup)}
           >
-            <View className="absolute -top-1 -right-1 w-4 h-4 bg-primary rounded-full border-2 border-border items-center justify-center">
-              <Text className="text-[9px] font-black text-black">2</Text>
+            <View className="absolute -top-1 -right-1 w-4 h-4 bg-primary rounded-full items-center justify-center shadow-md shadow-primary/30">
+              <Text className="text-[9px] font-extrabold text-background">2</Text>
             </View>
           </HeaderAction>
         </View>
@@ -148,35 +155,37 @@ export default function HandyBetHeader() {
           location="bottom"
           size="md"
         >
-          <View className="flex-row items-center p-3 border-b border-border gap-2">
-            <Image source={{ uri: mockSession?.avatar || 'https://i.pravatar.cc/150' }} className="w-8 h-8 rounded-full border border-border" />
-            <Text className="text-foreground font-black text-sm flex-1">Notificaciones</Text>
-            <TouchableOpacity onPress={() => { setShowNotifPopup(false); router.push('/(tabs)/notifications'); }}>
-              <Text className="text-primary font-black text-xs uppercase">Ver Todas</Text>
-            </TouchableOpacity>
-          </View>
-          <ScrollView className="max-h-64">
-            {POPUP_NOTIFS.map(notif => (
-              <TouchableOpacity key={notif.id} className="p-3 border-b border-border flex-row items-start gap-3 bg-background/80 hover:bg-muted" onPress={() => setShowNotifPopup(false)}>
-                <View className="mt-1 w-2 h-2 rounded-full bg-secondary opacity-0" style={{ opacity: notif.unread ? 1 : 0 }} />
-                <View className="flex-1">
-                  <Text className={`text-sm ${notif.unread ? 'text-foreground font-black' : 'text-muted-foreground font-normal'}`}>{notif.text}</Text>
-                  <Text className="text-muted-foreground text-[10px] mt-1 font-bold">{notif.time}</Text>
-                </View>
+          <View className="bg-card/95 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-xl overflow-hidden">
+            <View className="flex-row items-center p-3 border-b border-white/10 gap-2 bg-black/20">
+              <Image source={{ uri: mockSession?.avatar || 'https://i.pravatar.cc/150' }} className="w-8 h-8 rounded-full border border-white/20" />
+              <Text className="text-foreground font-bold text-sm flex-1">Notificaciones</Text>
+              <TouchableOpacity onPress={() => { setShowNotifPopup(false); router.push('/(tabs)/notifications'); }}>
+                <Text className="text-primary font-bold text-xs uppercase tracking-wider">Ver Todas</Text>
               </TouchableOpacity>
-            ))}
-          </ScrollView>
+            </View>
+            <ScrollView className="max-h-64">
+              {POPUP_NOTIFS.map(notif => (
+                <TouchableOpacity key={notif.id} className="p-3 border-b border-white/5 flex-row items-start gap-3 bg-card/20 hover:bg-white/5" onPress={() => setShowNotifPopup(false)}>
+                  <View className="mt-1.5 w-2 h-2 rounded-full bg-secondary shadow-lg shadow-secondary/50 opacity-0" style={{ opacity: notif.unread ? 1 : 0 }} />
+                  <View className="flex-1">
+                    <Text className={`text-sm ${notif.unread ? 'text-foreground font-semibold' : 'text-muted-foreground font-normal'}`}>{notif.text}</Text>
+                    <Text className="text-muted-foreground text-[10px] mt-1 font-semibold">{notif.time}</Text>
+                  </View>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </View>
         </FloatingPopup>
         <View ref={profileAnchorRef}>
           <TouchableOpacity
             onPress={() => setShowProfilePopup(!showProfilePopup)}
-            className="ml-2 flex-row items-center hover:bg-background/80/50 p-1 rounded-full transition-colors border border-transparent hover:border-border/50 pr-3"
+            className="ml-2 flex-row items-center bg-white/5 hover:bg-white/10 p-1.5 rounded-full border border-white/10 transition-colors pr-3"
           >
             <Image
               source={{ uri: mockSession?.avatar || 'https://i.pravatar.cc/150' }}
-              className="w-9 h-9 rounded-full bg-background/80 border border-zinc-600"
+              className="w-8 h-8 rounded-full border border-white/20"
             />
-            <Text className="ml-2 font-semibold text-foreground text-[14px]">{mockSession?.name?.split(' ')[0]}</Text>
+            <Text className="ml-2 font-bold text-foreground text-xs">{mockSession?.name?.split(' ')[0]}</Text>
           </TouchableOpacity>
         </View>
 
@@ -188,48 +197,50 @@ export default function HandyBetHeader() {
           location="bottom"
           size="sm"
         >
-          <View className="p-3 border-b border-border flex-row items-center gap-3">
-            <Image source={{ uri: mockSession?.avatar || 'https://i.pravatar.cc/150' }} className="w-10 h-10 rounded-full border border-primary" />
-            <View className="flex-1">
-              <Text className="text-foreground font-black text-sm">{mockSession?.name || 'Usuario'}</Text>
-              <Text className="text-primary font-bold text-xs">@{mockSession?.name?.toLowerCase().replace(' ', '_') || 'usuario'}</Text>
+          <View className="bg-card/95 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-xl overflow-hidden">
+            <View className="p-4 border-b border-white/10 flex-row items-center gap-3 bg-black/20">
+              <Image source={{ uri: mockSession?.avatar || 'https://i.pravatar.cc/150' }} className="w-10 h-10 rounded-full border border-primary/40" />
+              <View className="flex-1">
+                <Text className="text-foreground font-bold text-sm">{mockSession?.name || 'Usuario'}</Text>
+                <Text className="text-primary font-bold text-xs">@{mockSession?.name?.toLowerCase().replace(' ', '_') || 'usuario'}</Text>
+              </View>
             </View>
-          </View>
 
-          <View className="p-1.5 gap-1">
-            <TouchableOpacity
-              onPress={() => { setShowProfilePopup(false); router.push('/(tabs)/profile'); }}
-              className="flex-row items-center gap-2.5 p-2.5 rounded-lg hover:bg-background/80"
-            >
-              <User size={16} color={colors.primary} />
-              <Text className="text-foreground font-bold text-xs">Ver Mi Perfil</Text>
-            </TouchableOpacity>
+            <View className="p-2 gap-1 bg-card/40">
+              <TouchableOpacity
+                onPress={() => { setShowProfilePopup(false); router.push('/(tabs)/profile'); }}
+                className="flex-row items-center gap-2.5 p-2.5 rounded-xl hover:bg-white/5 active:bg-white/10 transition-colors"
+              >
+                <User size={15} color={brandColors.primary} />
+                <Text className="text-foreground font-bold text-xs">Ver Mi Perfil</Text>
+              </TouchableOpacity>
 
-            <TouchableOpacity
-              onPress={() => { setShowProfilePopup(false); setShowSupportModal(true); }}
-              className="flex-row items-center gap-2.5 p-2.5 rounded-lg hover:bg-background/80"
-            >
-              <HelpCircle size={16} color={colors.primary} />
-              <Text className="text-foreground font-bold text-xs">Soporte HandyBet</Text>
-            </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => { setShowProfilePopup(false); setShowSupportModal(true); }}
+                className="flex-row items-center gap-2.5 p-2.5 rounded-xl hover:bg-white/5 active:bg-white/10 transition-colors"
+              >
+                <HelpCircle size={15} color={brandColors.primary} />
+                <Text className="text-foreground font-bold text-xs">Soporte HandyBet</Text>
+              </TouchableOpacity>
 
-            <TouchableOpacity
-              onPress={() => { setShowProfilePopup(false); setShowPrivacyModal(true); }}
-              className="flex-row items-center gap-2.5 p-2.5 rounded-lg hover:bg-background/80"
-            >
-              <ShieldAlert size={16} color={colors.primary} />
-              <Text className="text-foreground font-bold text-xs">Privacidad & Seguridad</Text>
-            </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => { setShowProfilePopup(false); setShowPrivacyModal(true); }}
+                className="flex-row items-center gap-2.5 p-2.5 rounded-xl hover:bg-white/5 active:bg-white/10 transition-colors"
+              >
+                <ShieldAlert size={15} color={brandColors.primary} />
+                <Text className="text-foreground font-bold text-xs">Privacidad & Seguridad</Text>
+              </TouchableOpacity>
 
-            <View className="h-px bg-border my-1" />
+              <View className="h-px bg-white/10 my-1.5" />
 
-            <TouchableOpacity
-              onPress={() => { setShowProfilePopup(false); useHandyBetStore.getState().setMockSession(null); }}
-              className="flex-row items-center gap-2.5 p-2.5 rounded-lg hover:bg-rose-500/10"
-            >
-              <LogOut size={16} color={colors.destructive} />
-              <Text className="text-destructive font-bold text-xs">Cerrar Sesión</Text>
-            </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => { setShowProfilePopup(false); useHandyBetStore.getState().setMockSession(null); }}
+                className="flex-row items-center gap-2.5 p-2.5 rounded-xl hover:bg-rose-500/10 active:bg-rose-500/20 transition-colors"
+              >
+                <LogOut size={15} color={brandColors.destructive} />
+                <Text className="text-destructive font-bold text-xs">Cerrar Sesión</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </FloatingPopup>
         {/* Modales de Soporte y Privacidad */}
@@ -246,11 +257,11 @@ export default function HandyBetHeader() {
   );
 }
 
-function HeaderTab({ item, isActive, onPress, colors }: { item: any, isActive: boolean, onPress: () => void, colors: any }) {
+function HeaderTab({ item, isActive, onPress, brandColors, textColors }: { item: any, isActive: boolean, onPress: () => void, brandColors: any, textColors: any }) {
   const [isHovered, setIsHovered] = useState(false);
   const IconComponent = item.icon;
 
-  const iconColor = isActive ? colors.primary : (isHovered ? colors.secondary : colors.mutedForeground);
+  const iconColor = isActive ? brandColors.primary : (isHovered ? brandColors.secondary : textColors.mutedForeground);
 
   return (
     <TouchableOpacity
@@ -259,17 +270,17 @@ function HeaderTab({ item, isActive, onPress, colors }: { item: any, isActive: b
       onMouseEnter={() => Platform.OS === 'web' && setIsHovered(true)}
       // @ts-ignore
       onMouseLeave={() => Platform.OS === 'web' && setIsHovered(false)}
-      className={`px-10 h-full items-center justify-center border-b-[3px] transition-colors ${isActive ? 'border-primary' : (isHovered ? 'border-secondary bg-background/50' : 'border-transparent hover:bg-background/50')}`}
+      className={`px-10 h-full items-center justify-center border-b-[3px] transition-all duration-200 ${isActive ? 'border-primary' : (isHovered ? 'border-secondary bg-white/5' : 'border-transparent hover:bg-white/5')}`}
     >
-      <IconComponent size={28} color={iconColor} />
+      <IconComponent size={22} color={iconColor} />
     </TouchableOpacity>
   );
 }
 
-const HeaderAction = React.forwardRef(({ icon: Icon, onPress, colors, children }: { icon: any, onPress?: () => void, colors: any, children?: React.ReactNode }, ref: any) => {
+const HeaderAction = React.forwardRef(({ icon: Icon, onPress, brandColors, textColors, children }: { icon: any, onPress?: () => void, brandColors: any, textColors: any, children?: React.ReactNode }, ref: any) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  const iconColor = isHovered ? colors.secondary : colors.mutedForeground;
+  const iconColor = isHovered ? brandColors.primary : textColors.mutedForeground;
 
   return (
     <TouchableOpacity
@@ -279,9 +290,9 @@ const HeaderAction = React.forwardRef(({ icon: Icon, onPress, colors, children }
       onMouseEnter={() => Platform.OS === 'web' && setIsHovered(true)}
       // @ts-ignore
       onMouseLeave={() => Platform.OS === 'web' && setIsHovered(false)}
-      className={`w-10 h-10 rounded-full items-center justify-center transition-colors ${isHovered ? 'bg-muted border border-secondary' : 'bg-background'}`}
+      className={`w-9 h-9 rounded-full items-center justify-center transition-all ${isHovered ? 'bg-white/10 border border-white/20' : 'bg-white/5'}`}
     >
-      <Icon size={20} color={iconColor} />
+      <Icon size={16} color={iconColor} />
       {children}
     </TouchableOpacity>
   );

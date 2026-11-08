@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, Text, ViewStyle, Platform } from 'react-native';
-import { useThemeColors } from '../../hooks/useThemeColors';
+import { useBrandColors, useTextColors } from '../../hooks/useThemeColors';
 
 export interface IconButtonProps {
   icon?: any;
@@ -29,7 +29,8 @@ export default function IconButton({
   className = '',
   style
 }: IconButtonProps) {
-  const colors = useThemeColors();
+  const brandColors = useBrandColors();
+  const textColors = useTextColors();
 
   const [isHovered, setIsHovered] = useState(false);
 
@@ -56,24 +57,24 @@ export default function IconButton({
 
   let bgClass = 'bg-background/80';
   let borderClass = hasBorder ? 'border border-border' : '';
-  let textIconColor = iconColor || colors.primary;
+  let textIconColor = iconColor || brandColors.primary;
   let textClass = 'text-primary';
 
   if (variant === 'destructive') {
-    textIconColor = iconColor || colors.destructive;
+    textIconColor = iconColor || brandColors.destructive;
     textClass = 'text-destructive';
   } else if (variant === 'secondary') {
-    textIconColor = iconColor || colors.secondary;
+    textIconColor = iconColor || brandColors.secondary;
     textClass = 'text-secondary';
   } else if (variant === 'ghost') {
     bgClass = 'bg-transparent';
-    textIconColor = iconColor || colors.foreground;
+    textIconColor = iconColor || textColors.foreground;
     textClass = 'text-foreground';
   } else if (variant === 'muted') {
-    textIconColor = iconColor || colors.mutedForeground;
+    textIconColor = iconColor || textColors.mutedForeground;
     textClass = 'text-muted-foreground';
   } else if (variant === 'default') {
-    textIconColor = iconColor || colors.foreground;
+    textIconColor = iconColor || textColors.foreground;
     textClass = 'text-foreground';
   }
 
@@ -82,18 +83,18 @@ export default function IconButton({
   if (isActive) {
     bgClass = 'bg-primary/10';
     borderClass = hasBorder ? 'border border-primary' : '';
-    textIconColor = iconColor || colors.primary;
+    textIconColor = iconColor || brandColors.primary;
     textClass = 'text-primary';
   }
 
   if (isHovered && !isActive) {
     bgClass = 'bg-muted';
     if (variant === 'ghost' || variant === 'secondary') {
-      textIconColor = colors.secondary;
+      textIconColor = brandColors.secondary;
       textClass = 'text-secondary';
       overrideStyle = undefined;
     } else {
-      textIconColor = iconColor || colors.secondary;
+      textIconColor = iconColor || brandColors.secondary;
       textClass = 'text-secondary';
     }
   }

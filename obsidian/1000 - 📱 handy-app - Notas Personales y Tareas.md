@@ -26,8 +26,8 @@ Observaciones del programador y deudas técnicas.
 
 ---
 ## 🤖 Análisis de la IA: Plan de Acción Sugerido
-1. **Prioridad 1**: Solucionar el tipado estricto en `AdminGamesList` y `AdminHomeSectionsList`.
-2. **Prioridad 2**: Reemplazar la simulación local del balance en Zustand por la persistencia e integración Realtime directa de Supabase.
+1. **Prioridad 1**: Consolidar la sincronización en tiempo real de la billetera con Supabase Realtime.
+2. **Prioridad 2**: Expandir las pruebas automatizadas QA para los endpoints de transacciones financieras.
 
 ---
 ## 🔗 Referencias Relacionadas

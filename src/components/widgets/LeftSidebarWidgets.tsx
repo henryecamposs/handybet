@@ -3,7 +3,7 @@ import { ScrollView, TouchableOpacity, View, Image, Text } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Users, Bookmark, Megaphone, Wallet, Gamepad2 } from 'lucide-react-native';
 import { useHandyBetStore } from '../../store/useHandyBetStore';
-import { useThemeColors, withOpacity } from '../../hooks/useThemeColors';
+import { useThemeColors } from '../../hooks/useThemeColors';
 import SidebarPopover from '../layout/SidebarPopover';
 import { handyBetGroups, handyBetChannels, handyBetUsers } from '../../mockdata/handyBetMock';
 import { localDB } from '../../lib/localDB';
@@ -33,11 +33,11 @@ export default function LeftSidebarWidgets() {
   };
 
   return (
-    <ScrollView className="w-[15%] p-4 bg-primary/5 border border-r-primary/20" showsVerticalScrollIndicator={false}>
+    <ScrollView className="w-[15%] p-4 bg-card/20 border-r border-white/10 shadow-xl" showsVerticalScrollIndicator={false}>
       {/* Perfil de Usuario */}
-      <TouchableOpacity onPress={() => router.push('/(tabs)/profile')} className="flex-row items-center p-2 rounded-xs hover:bg-background/80/50 mb-2">
-        <Image source={{ uri: mockSession?.avatar || 'https://i.pravatar.cc/150' }} className="w-9 h-9 rounded-full" />
-        <Text className="font-semibold text-foreground ml-3 text-[15px]">{mockSession?.name}</Text>
+      <TouchableOpacity onPress={() => router.push('/(tabs)/profile')} className="flex-row items-center p-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors mb-4 shadow-sm">
+        <Image source={{ uri: mockSession?.avatar || 'https://i.pravatar.cc/150' }} className="w-8 h-8 rounded-full border border-white/20" />
+        <Text className="font-bold text-foreground ml-2.5 text-sm">{mockSession?.name?.split(' ')[0]}</Text>
       </TouchableOpacity>
 
       {/* Menú de Popovers */}

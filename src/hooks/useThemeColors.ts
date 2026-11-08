@@ -67,6 +67,9 @@ export const darkColors = {
  * Uso:
  * const colors = useThemeColors();
  * <ActivityIndicator color={colors.primary} />
+ * 
+ * @deprecated Usa `useBrandColors`, `useTextColors`, o `useBackgroundColors` en su lugar, 
+ * o idealmente utiliza clases de Tailwind (`bg-primary`, `text-muted-foreground`).
  */
 export function useThemeColors() {
   const { colorScheme } = useColorScheme();
@@ -75,10 +78,61 @@ export function useThemeColors() {
 }
 
 /**
+ * Hook para colores de marca (primary, secondary, accent, destructive, ring)
+ */
+export function useBrandColors() {
+  const colors = useThemeColors();
+  return {
+    primary: colors.primary,
+    primaryLight: colors.primaryLight,
+    primaryDark: colors.primaryDark,
+    primaryForeground: colors.primaryForeground,
+    secondary: colors.secondary,
+    secondaryLight: colors.secondaryLight,
+    secondaryDark: colors.secondaryDark,
+    secondaryForeground: colors.secondaryForeground,
+    accent: colors.accent,
+    accentForeground: colors.accentForeground,
+    destructive: colors.destructive,
+    destructiveForeground: colors.destructiveForeground,
+    ring: colors.ring,
+  };
+}
+
+/**
+ * Hook para colores de texto (foreground, muted, mutedForeground)
+ */
+export function useTextColors() {
+  const colors = useThemeColors();
+  return {
+    foreground: colors.foreground,
+    muted: colors.muted,
+    mutedForeground: colors.mutedForeground,
+  };
+}
+
+/**
+ * Hook para colores de fondo y estructurales (background, card, popover, border, input)
+ */
+export function useBackgroundColors() {
+  const colors = useThemeColors();
+  return {
+    background: colors.background,
+    backgroundDark: colors.backgroundDark,
+    card: colors.card,
+    cardForeground: colors.cardForeground,
+    popover: colors.popover,
+    popoverForeground: colors.popoverForeground,
+    border: colors.border,
+    input: colors.input,
+  };
+}
+
+/**
  * Función utilitaria para aplicar opacidad a un color devuelto por useThemeColors
  * 
  * Uso:
- * const colors = useThemeColors();
+ * const colors = useBrandColors();
  * <Icon color={withOpacity(colors.primary, 0.2)} />
  */
 export function withOpacity(colorString: string, opacity: number) {

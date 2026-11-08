@@ -1,11 +1,11 @@
 ---
 title: ⚙️ Configuración y Entorno (.env)
 project: handy-app
-tags: [entorno, configuración, variables, scripts]
+tags: [entorno, configuración, variables, scripts, rutas-api]
 type: configuración
 ---
 
-# ⚙️ Configuración del Entorno y Variables (.env)
+# ⚙️ Configuración del Entorno, Rutas API y Variables (.env)
 
 ## 📌 Datos Extraídos del Proyecto
 * **Categoría**: Aplicación Móvil / Web Universal (Expo / React Native)
@@ -29,6 +29,21 @@ type: configuración
 
 ---
 
+### 🌐 Configuración del Entorno y Rutas API Consumidas
+
+#### 📡 Endpoints Base y Servicios Configurados
+- **Supabase Backend Services**:
+  - **URL Base**: `EXPO_PUBLIC_SUPABASE_URL` / `VITE_SUPABASE_URL`
+  - **Anon Key**: `EXPO_PUBLIC_SUPABASE_ANON_KEY` / `VITE_SUPABASE_ANON_KEY`
+  - **Servicios Integrados**: PostgreSQL, Auth, Realtime WebSockets, Storage RLS.
+- **Pollinations AI API**:
+  - **URL Base**: `https://pollinations.ai/p/` & `https://text.pollinations.ai/`
+  - **Recursos**: Generación multimedia de imágenes, audio, video y completado de modelos LLM.
+- **Pasarela / Gateways de Pago & Bancos**:
+  - Rutas transaccionales de pago móvil, depósitos bancarios y gestión de saldo de billetera integradas mediante Supabase RPC / REST endpoints.
+
+---
+
 ### 📜 Scripts de Ejecución (`package.json`)
 - `npm run start`: `expo start`
 - `npm run reset-project`: `node ./scripts/reset-project.js`
@@ -40,8 +55,8 @@ type: configuración
 ---
 ## 🤖 Análisis de la IA: Seguridad y Entornos
 * **Registro de Variables de Entorno**: Se han escaneado dinámicamente 4 variables de entorno. Se aplica una máscara de protección a credenciales sensibles para prevenir filtraciones en la documentación.
+* **Manejo de Rutas API**: La aplicación centraliza la conexión con APIs externas mediante clientes instanciados en `src/lib/` (ej. Supabase SDK) y hooks reactivos en `src/hooks/queries/`.
 * **Aislamiento de Entornos**: Asegurar que los archivos con credenciales reales (`.env.local`) permanezcan ignorados por Git y que únicamente las plantillas (`.env.example`) sean versionadas.
-* **Optimización de Scripts**: Los comandos de ejecución cliente están bien alineados con las herramientas estándar del ecosistema.
 
 ---
 ## 🔗 Referencias Relacionadas

@@ -97,10 +97,10 @@ export default function HubDetailLayout({
     <View className="flex-1 bg-background">
       {/* Header estilo Twitter (Imagen 2) */}
       {!hideHeader && (
-        <View className="flex-row items-center justify-between border-b border-border py-2 px-4 bg-background/85 sticky top-0 z-10">
+        <View className="flex-row items-center justify-between border-b border-white/10 py-3 px-6 bg-background sticky top-0 z-10">
           <View className="flex-row items-center">
-            <TouchableOpacity onPress={handleBack} className="mr-2 p-2 rounded-full hover:bg-primary/20 transition-colors">
-              <ArrowLeft size={22} color={colors.foreground} />
+            <TouchableOpacity onPress={handleBack} className="mr-3 p-2 bg-white/5 border border-white/10 rounded-full hover:bg-white/10 active:scale-95 transition-all">
+              <ArrowLeft size={18} color={colors.foreground} />
             </TouchableOpacity>
             {renderHeaderLogo()}
           </View>
@@ -108,18 +108,18 @@ export default function HubDetailLayout({
         </View>
       )}
 
-      <ScrollView className="flex-1 " showsVerticalScrollIndicator={false}>
+      <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         {isLoading ? (
           <View className="flex-1 justify-center items-center py-20">
-            <ActivityIndicator size="large" color={colors.secondary} />
+            <ActivityIndicator size="large" color={colors.primary} />
           </View>
         ) : (
-          <View>
+          <View className="px-6 pt-5">
             {/* Encabezado del Detalle */}
             {title && (
               <View className="mb-6">
                 {categoryText && (
-                  <Text className="text-[10px] font-black text-primary uppercase tracking-widest">
+                  <Text className="text-[10px] font-extrabold text-primary uppercase tracking-widest">
                     {categoryText}
                   </Text>
                 )}
@@ -131,14 +131,14 @@ export default function HubDetailLayout({
 
             {/* Listado Principal de Salas/Subgrupos si existe */}
             {listTitle && (
-              <Text className="text-xs font-bold text-foreground uppercase tracking-widest mb-4">
+              <Text className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4">
                 {listTitle}
               </Text>
             )}
 
             {listTitle && items.length === 0 ? (
-              <View className="bg-background/80 border border-border p-6  items-center border-dashed">
-                <Text className="text-foreground font-bold text-sm text-center">
+              <View className="bg-card/50 border border-white/10 border-dashed rounded-2xl p-6 items-center backdrop-blur-md">
+                <Text className="text-muted-foreground font-bold text-sm text-center">
                   {emptyLabel}
                 </Text>
               </View>
@@ -152,7 +152,9 @@ export default function HubDetailLayout({
           </View>
         )}
 
-        {children}
+        <View className="px-6">
+          {children}
+        </View>
         <View className="h-16" />
       </ScrollView>
     </View>

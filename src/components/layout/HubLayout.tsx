@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity, ActivityIndicator, TextInput } from 'react-native';
 import { Search, Plus, ArrowLeft } from 'lucide-react-native';
-import { useThemeColors } from '@/hooks/useThemeColors';
+import { useThemeColors, withOpacity } from '@/hooks/useThemeColors';
 import { useRouter } from 'expo-router';
 
 export interface HubLayoutTab {
@@ -94,20 +94,20 @@ export default function HubLayout({
   const hasMyItemsSection = myItemsTitle && (myItems.length > 0 || onAddNewItem);
 
   return (
-    <ScrollView className="flex-1 bg-background px-4 pt-2" showsVerticalScrollIndicator={false}>
+    <ScrollView className="flex-1 bg-background px-6 pt-4" showsVerticalScrollIndicator={false}>
       {/* Header */}
-      <View className="mb-4 flex-row items-center">
+      <View className="mb-6 flex-row items-center">
         {(showBack || onBack) && (
           <TouchableOpacity
             onPress={() => onBack ? onBack() : router.push('/')}
-            className="mr-3 p-1 rounded-full  hover:bg-muted transition-colors"
+            className="mr-3 p-2 bg-white/5 border border-white/10 rounded-full hover:bg-white/10 active:scale-95 transition-all"
           >
-            <ArrowLeft size={22} color={colors.foreground} />
+            <ArrowLeft size={18} color={colors.foreground} />
           </TouchableOpacity>
         )}
         <View className="flex-1 flex-row justify-between items-center">
-          <Text className="text-foreground font-bold text-2xl">{title}</Text>
-          <Text className="text-muted-foreground hidden md:flex text-sm mt-1">{subtitle}</Text>
+          <Text className="text-foreground font-black text-2xl tracking-tight">{title}</Text>
+          <Text className="text-muted-foreground hidden md:flex text-xs font-semibold mt-1">{subtitle}</Text>
         </View>
       </View>
 
@@ -118,14 +118,14 @@ export default function HubLayout({
       {(onSearchChange || actionButton) && (
         <View className="flex-row items-center justify-between gap-4 mb-6">
           {onSearchChange && (
-            <View className="bg-input rounded-full flex-row items-center px-4 py-2 border border-border flex-1 max-w-lg">
-              <Search size={20} color={colors.mutedForeground} />
+            <View className="bg-black/30 rounded-full flex-row items-center px-4 py-2 border border-white/10 flex-1 max-w-lg focus:border-primary">
+              <Search size={16} color={colors.primary} />
               <TextInput
                 placeholder={searchPlaceholder}
-                placeholderTextColor={colors.mutedForeground}
+                placeholderTextColor={withOpacity(colors.foreground, 0.3)}
                 value={searchValue}
                 onChangeText={onSearchChange}
-                className="flex-1 text-foreground ml-3 outline-none"
+                className="flex-1 text-foreground ml-3 outline-none text-sm font-semibold"
               />
             </View>
           )}
@@ -142,13 +142,13 @@ export default function HubLayout({
               <TouchableOpacity
                 key={tab.id}
                 onPress={() => onTabChange?.(tab.id)}
-                className={`flex-1 py-3 items-center justify-center transition-colors border-b-[3px] ${isActive
+                className={`flex-1 py-3 items-center justify-center transition-all border-b-[3px] ${isActive
                   ? 'border-primary'
-                  : 'border-transparent hover:bg-background/50'
+                  : 'border-transparent hover:bg-white/5 rounded-t-xl'
                   }`}
               >
                 {tab.icon}
-                <Text className={`font-bold text-center mt-2 text-sm ${isActive ? 'text-primary' : 'text-foreground'}`}>
+                <Text className={`font-bold text-center mt-2 text-xs uppercase tracking-wider ${isActive ? 'text-primary' : 'text-muted-foreground'}`}>
                   {tab.label}
                 </Text>
               </TouchableOpacity>
@@ -175,12 +175,12 @@ export default function HubLayout({
             {onAddNewItem && (
               <TouchableOpacity
                 onPress={onAddNewItem}
-                className="w-32 h-36 bg-muted  border border-dashed border-border items-center justify-center mr-4 hover:bg-background/80/80 transition-colors"
+                className="w-32 h-36 bg-card/60 border border-dashed border-white/15 rounded-2xl items-center justify-center mr-4 hover:bg-white/5 active:scale-95 transition-all"
               >
-                <View className="w-12 h-12 rounded-full bg-card items-center justify-center mb-2">
-                  <Plus size={24} color={colors.secondary} />
+                <View className="w-10 h-10 rounded-full bg-white/5 border border-white/10 items-center justify-center mb-2">
+                  <Plus size={20} color={colors.primary} />
                 </View>
-                <Text className="text-foreground font-bold text-sm text-center">{addNewItemLabel}</Text>
+                <Text className="text-foreground font-bold text-xs text-center px-2">{addNewItemLabel}</Text>
               </TouchableOpacity>
             )}
 
@@ -193,10 +193,9 @@ export default function HubLayout({
       {/* Sección Principal / Descubrimiento (Legacy) */}
       {isLoading ? (
         <View className="flex-1 justify-center items-center py-20">
-          <ActivityIndicator size="large" color={colors.secondary} />
+          <ActivityIndicator size="large" color={colors.primary} />
         </View>
       ) : discoverItems.length === 0 && myItems.length === 0 && !carrusel && !tabContainer && !seccionLista ? (
-        // Si no hay nada, mostrar empty state
         emptyState
       ) : (
         // Si hay ítems a descubrir/listar
