@@ -75,3 +75,4 @@ Para asegurar que rutas profundas (ej: `/feed/search?id=...`, `/chat/grupo/123`,
 
 3. **`wrangler.toml`**:
    Configura el nombre del proyecto y la carpeta de salida `dist` para despliegues instantáneos vía CLI.
+

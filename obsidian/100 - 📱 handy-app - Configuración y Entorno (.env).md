@@ -51,6 +51,10 @@ type: configuración
 - `npm run ios`: `expo start --ios`
 - `npm run web`: `expo start --web`
 - `npm run lint`: `expo lint`
+- `npm run build:web`: `expo export -p web`
+- `npm run build`: `npm run build:web`
+- `npm run deploy:cloudflare`: `npm run build:web && npx wrangler pages deploy dist`
+- `npm run preview:cloudflare`: `npm run build:web && npx wrangler pages dev dist`
 
 ---
 ## 🤖 Análisis de la IA: Seguridad y Entornos

@@ -15,6 +15,10 @@ type: pruebas
 ---
 ## 📜 Itinerario Histórico de Pruebas y Recomendaciones de QA (Línea de Tiempo)
 
+## 📜 Itinerario Histórico de Pruebas y Recomendaciones de QA (Línea de Tiempo)
+
+---
+
 ### Recomendaciones y Pruebas de QA
 - 🧪 **Pruebas de Componentes UI y Notificaciones**:
   - Verificar la correcta aparición, permanencia y auto-cierre con animación fluida del componente `Toast` en sus cuatro variantes (`success`, `error`, `warning`, `info`).
@@ -25,6 +29,8 @@ type: pruebas
 - 🎨 **Pruebas de Borde & Consistencia Visual**:
   - Comprobar que los nuevos hooks de color (`useBrandColors`, `useTextColors`, `useBackgroundColors`) respondan adecuadamente a cambios de modo oscuro/claro si el dispositivo conmuta temas.
   - Verificar que las publicaciones con carruseles multimedia o imágenes de dimensiones atípicas en `PostItem.tsx` mantengan la alineación de dos columnas sin desbordar el contenedor.
+
+---
 
 ---
 
@@ -39,6 +45,8 @@ type: pruebas
 - 🔒 **Pruebas de Seguridad & RBAC**:
   - Control de acceso estricto al Panel Administrativo (`/admin`) mediante contraseña global (`handybet*2026`).
   - Sanitización de entradas en búsqueda de feeds y parámetros de filtrado para prevenir inyecciones.
+
+---
 
 ---
 ## 🤖 Análisis de la IA: Calidad y Pruebas
