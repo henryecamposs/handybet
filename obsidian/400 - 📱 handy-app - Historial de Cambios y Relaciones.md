@@ -80,6 +80,12 @@ type: changelog
   * Corregimos los tipos en `src/components/ui/icons.tsx` (`IconProps` acepta `ColorValue` de React Native) asegurando compatibilidad 100% con `tabBarIcon` en Expo Router.
   * Perfeccionamos `HandyBetHeader`, `PostItem` y pantallas de Auth/Hub con diseño oscuro pulido y estados reactivos.
 
+## Hito 11: Scrollbar y Controles de Desplazamiento para Juegos y Sorteos
+- **Fecha:** 2026-11-08
+- **Contexto:** En la pantalla de Juegos y Sorteos (`/games`), el carrusel de tarjetas hero cortaba las tarjetas adyacentes y carecía de scrollbar o controles visibles para usuarios de escritorio.
+- **Decisión:**
+  * Creamos `GamesHeroBanner.tsx` con una barra de desplazamiento visual interactiva (track con thumb dinámico en color primario), cálculo de progreso exacto, soporte de clic para saltos en la barra, flechas direccionales flotantes y scroll con rueda de ratón en web (`onWheel`).
+
 
 ---
 
@@ -93,6 +99,7 @@ El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1
 ## [1.14.0] - 2026-11-08
 
 ### Añadido
+- **Barra de Desplazamiento y Carrusel Interactivo (`GamesHeroBanner.tsx`)**: Implementación de barra de desplazamiento personalizada (scroll track y thumb interactivo) para la sección de Juegos y Sorteos, con soporte de desplazamiento con rueda de ratón en web (`onWheel`), botones de navegación direccionales flotantes y mini-controles auxiliares.
 - **Hooks Modulares de Tema (`useThemeColors`)**: Desacoplamiento del hook central en ganchos especializados (`useBrandColors`, `useTextColors`, `useBackgroundColors`) y optimización de la función utilitaria `withOpacity` para componentes deportivos dinámicos.
 - **Sistema de Feedback & Notificaciones Visuales (`Toast.tsx`)**: Rediseño integral de notificaciones flotantes con soporte de variantes semánticas (`success`, `error`, `warning`, `info`), mapeo dinámico de Lucide Icons y animaciones suaves combinadas de opacidad y desplazamiento (`Animated.parallel`).
 - **Directrices y Tokens Impeccable Design**: Creación de documentación de diseño en `DESIGN.md`, `PRODUCT.md` y `.impeccable/design.json` para estandarización estética en modo oscuro de alta fidelidad.

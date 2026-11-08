@@ -69,3 +69,9 @@
   * Modernizamos `Toast.tsx` con animaciones nativas fluidas, estados semánticos dinámicos e integración de Lucide Icons.
   * Corregimos los tipos en `src/components/ui/icons.tsx` (`IconProps` acepta `ColorValue` de React Native) asegurando compatibilidad 100% con `tabBarIcon` en Expo Router.
   * Perfeccionamos `HandyBetHeader`, `PostItem` y pantallas de Auth/Hub con diseño oscuro pulido y estados reactivos.
+
+## Hito 11: Scrollbar y Controles de Desplazamiento para Juegos y Sorteos
+- **Fecha:** 2026-11-08
+- **Contexto:** En la pantalla de Juegos y Sorteos (`/games`), el carrusel de tarjetas hero cortaba las tarjetas adyacentes y carecía de scrollbar o controles visibles para usuarios de escritorio.
+- **Decisión:**
+  * Creamos `GamesHeroBanner.tsx` con una barra de desplazamiento visual interactiva (track con thumb dinámico en color primario), cálculo de progreso exacto, soporte de clic para saltos en la barra, flechas direccionales flotantes y scroll con rueda de ratón en web (`onWheel`).

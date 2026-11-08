@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView } from 'react-native';
-import { Trophy, Ticket, Dice1, Gamepad2 } from 'lucide-react-native';
+import { View, Text } from 'react-native';
+import { Ticket } from 'lucide-react-native';
 import { useRouter } from 'expo-router';
 import { useThemeColors } from '@/hooks/useThemeColors';
-import { HubLayout, SeccionLista, TabContainer } from '@/components/layout/hub';
+import { HubLayout, SeccionLista, TabContainer, GamesHeroBanner } from '@/components/layout/hub';
 import ListItem from '@/components/ui/ListItem';
 import IconButton from '@/components/ui/IconButton';
 import EmptyState from '@/components/ui/EmptyState';
@@ -21,47 +21,6 @@ export default function GamesScreen() {
     { id: 'd5', title: 'Flappy Bird Crypto', sub: 'Juega gratis', emoji: '🎮', category: 'minijuegos' },
     { id: 'd6', title: 'Bingo Bailable', sub: 'Empieza a las 9 PM', emoji: '🎫', category: 'bingos' },
   ];
-
-  const heroBanner = (
-    <View className="mb-4 mt-2">
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} className="flex-row rounded-2xl overflow-hidden">
-        <View className="w-[85vw] md:w-[600px] bg-primary/20 p-6 border border-border relative overflow-hidden justify-center mr-4 rounded-2xl">
-          <View className="bg-primary px-3 py-1 rounded-full self-start mb-3">
-            <Text className="text-black font-bold text-xs uppercase">Sorteo Activo</Text>
-          </View>
-          <Text className="text-primary font-black text-3xl mb-2">Gran Kino Imaginario</Text>
-          <Text className="text-foreground font-medium mb-4">¡Gana hasta 5,000 Puntos hoy a las 8:00 PM!</Text>
-          <View className="self-start">
-            <IconButton
-              label="Jugar Ahora"
-              onPress={() => router.push('/games/d1' as any)}
-              variant="primary"
-              rounded="full"
-              hasBorder={false}
-            />
-          </View>
-          <Trophy size={120} color="rgba(202, 238, 38, 0.2)" className="absolute right-4 bottom-4 z-0 pointer-events-none" />
-        </View>
-        <View className="w-[85vw] md:w-[600px] bg-secondary/20 p-6 border border-border relative overflow-hidden justify-center rounded-2xl mr-4">
-          <View className="bg-secondary px-3 py-1 rounded-full self-start mb-3">
-            <Text className="text-white font-bold text-xs uppercase">Nuevo</Text>
-          </View>
-          <Text className="text-secondary font-black text-3xl mb-2">Bingo Mega X</Text>
-          <Text className="text-foreground font-medium mb-4">Cartones desde 5.00 Bs. ¡Participa ya!</Text>
-          <View className="self-start">
-            <IconButton
-              label="Comprar Cartón"
-              onPress={() => router.push('/games/d6' as any)}
-              variant="secondary"
-              rounded="full"
-              hasBorder={false}
-            />
-          </View>
-          <Gamepad2 size={120} color="rgba(16, 185, 129, 0.2)" className="absolute right-4 bottom-4 z-0 pointer-events-none" />
-        </View>
-      </ScrollView>
-    </View>
-  );
 
   const renderDrawCard = (draw: any) => (
     <ListItem
@@ -141,7 +100,7 @@ export default function GamesScreen() {
     <HubLayout
       title="Juegos y Sorteos"
       subtitle="Diviértete y participa en los sorteos de La Imaginaria."
-      heroBanner={heroBanner}
+      heroBanner={<GamesHeroBanner />}
       tabContainer={<TabContainer tabs={tabs} />}
       showBack={true}
     />
