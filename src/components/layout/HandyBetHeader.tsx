@@ -58,7 +58,13 @@ export default function HandyBetHeader() {
     <View className="h-16 bg-background border-b border-white/10 flex-row items-center justify-between px-6 z-50 shadow-xl">
       {/* Izquierda: Logo y Buscador */}
       <View className="flex-row items-center pr-4">
-        <Logo size="sm" layout="horizontal" style={{ marginRight: 16 }} />
+        <TouchableOpacity
+          onPress={() => router.push('/(tabs)/feed')}
+          activeOpacity={0.8}
+          className="cursor-pointer"
+        >
+          <Logo size="sm" layout="horizontal" style={{ marginRight: 16 }} />
+        </TouchableOpacity>
         <View className="bg-black/30 rounded-full flex-row items-center px-4 h-10 flex-1 max-w-[280px] border border-white/10 focus:border-primary">
           <Search size={16} color={brandColors.primary} className="mr-2" />
           <TextInput

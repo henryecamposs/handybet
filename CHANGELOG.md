@@ -4,6 +4,27 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/), y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.18.0] - 2026-11-08
+
+### Añadido
+- **Generación Masiva de 495 Publicaciones Contextuales por Oficio y Entidad (`generate_contextual_posts.js`)**:
+  - **3 Publicaciones por Miembro (171 posts)** adaptadas estrictamente a su rol y oficio:
+    - `vip_creator` (Joselin La Gata, Valeria Gómez, Nicole Rossi, etc.): Sesiones de fotos privadas, sets de playa y fitness, invitación al chat privado con paywall y planes de membresía VIP Fans.
+    - `tipster` (Roberto López, Don Animalito, El Brujo, etc.): Análisis matemático de animalitos (Lotto Activo, La Granjita), parleys combinados multilogro (MLB, Champions League) con cuotas y verificación de tickets cobrados.
+    - `cashier` (Taquillas Caracas, Valencia, etc.): Horarios de atención, confirmaciones de cobro de premios, recargas inmediatas con Pago Móvil y promociones en boletos de lotería.
+    - `company_owner` / `admin` (Henry Campos, Administrador Principal): Comunicados de seguridad, garantías de liquidez, lanzamiento de simuladores y pozos acumulados.
+    - `player`: Celebración de boletos premiados, apuestas en vivo y comentarios de partidos.
+  - **3 Publicaciones por Canal (156 posts)**: Anuncios oficiales de sorteos diarios, acumulados y resultados certificados enlazados con `channel_id`.
+  - **3 Publicaciones por Grupo (168 posts)**: Debates en sala, señales en vivo y felicitaciones a ganadores en sala enlazados con `group_id`.
+- **Navegación en el Logo Principal a `/feed` (`HandyBetHeader.tsx`)**: El logotipo HandyBet ahora actúa como botón reactivo que redirige al muro principal (`/(tabs)/feed`).
+
+### Modificado
+- **Barra Lateral Derecha Flat & Minimalista (`RightSidebarWidgets.tsx`)**:
+  - Se eliminaron las cajas card voluminosas (`WidgetContainer`, `FollowSuggestionWidget`, `PrizeNotificationWidget`).
+  - Sugerencias de seguimiento convertidas en filas planas elegantes directamente sobre la superficie con avatar circular, información concisa y botón de acción minimalista ("Seguir" / "Siguiendo").
+- **Mapeo de Nombres de Usuario y Planes en el Muro (`feed/index.tsx`)**: Soporte completo para `@username` real de autores y propagación de planes de suscripción para el modal `TierPlanSelector`.
+- **Re-seeding Automático de Base de Datos Local (`localDB.ts`)**: Se añadió condición para actualizar automáticamente la base de datos si el almacenamiento local contiene menos de 200 posts, garantizando que el nuevo catálogo masivo esté disponible de inmediato.
+
 ## [1.17.0] - 2026-11-08
 
 ### Modificado

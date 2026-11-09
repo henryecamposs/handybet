@@ -54,7 +54,7 @@ async function initDB(): Promise<LocalDatabase> {
     if (stored) {
       db = JSON.parse(stored);
       if (db && db._initialized) {
-        if (!db.games || db.games.length < 50 || !db.users || db.users.length < 50 || !db.relationships?.follow_suggestions?.[0]?.suggested_id) {
+        if (!db.games || db.games.length < 50 || !db.users || db.users.length < 50 || !db.posts || db.posts.length < 200 || !db.relationships?.follow_suggestions?.[0]?.suggested_id) {
           db.users = seedUsers as any[];
           db.channels = seedChannels as any[];
           db.groups = seedGroups as any[];

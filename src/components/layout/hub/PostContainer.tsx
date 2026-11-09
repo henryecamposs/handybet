@@ -58,6 +58,7 @@ export default function PostContainer({
             mediaType: rawPost.media_type || 'photo',
             mediaUrls: rawPost.media_urls || (rawPost.media_url ? [rawPost.media_url] : []),
             feeling: rawPost.feeling || null,
+            plans: rawPost.plans || null,
             group_id: rawPost.group_id,
             channel_id: rawPost.channel_id
           };

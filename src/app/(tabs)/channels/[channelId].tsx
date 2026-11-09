@@ -339,7 +339,7 @@ export default function ChannelDetailScreen() {
       {heroBanner}
       {channel && (
         <View className="px-4">
-          <TabContainer tabs={tabs} defaultTabId="posts" />
+          <TabContainer tabs={tabs} defaultTabId="todos" />
         </View>
       )}
     </HubDetailLayout>

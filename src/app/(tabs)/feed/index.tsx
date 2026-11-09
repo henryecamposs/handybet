@@ -73,20 +73,22 @@ export default function FeedScreen() {
     try {
       const data = await socialService.getFeedPosts(mockSession?.id || 'usr_player1');
       const mapped = data.map((p) => {
-        let authorName = p.author?.full_name || 'Usuario';
-        let username = `@${p.author_id.slice(0, 8)}`;
-        let avatar = p.author?.avatar_url || 'https://i.pravatar.cc/150';
+        let authorName = p.author?.full_name || (p as any).author_name || 'Usuario';
+        let authorObj = p.author as any;
+        let username = authorObj?.username ? `@${authorObj.username}` : `@${(p as any).author_name?.toLowerCase().replace(/\s+/g, '_') || p.author_id.slice(0, 8)}`;
+        let avatar = p.author?.avatar_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150';
 
         return {
           id: p.id,
           author: authorName,
           username: username,
           avatar: avatar,
-          time: p.created_at ? new Date(p.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'Hace un momento',
+          time: p.created_at ? new Date(p.created_at).toLocaleDateString([], { month: 'short', day: 'numeric' }) : 'Reciente',
           text: p.content,
           mediaType: p.media_type || 'photo',
           mediaUrls: (p as any).media_urls || (p.media_url ? [p.media_url] : []),
           feeling: (p as any).feeling || null,
+          plans: (p as any).plans || null,
           group_id: p.group_id,
           channel_id: p.channel_id
         };

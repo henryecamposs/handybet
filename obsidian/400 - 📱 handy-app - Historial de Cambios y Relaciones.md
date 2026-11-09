@@ -113,6 +113,15 @@ type: changelog
   * Rediseñamos `src/app/(tabs)/follows/index.tsx` eliminando los contenedores de tarjeta maestros y presentando las filas de miembros directamente sobre la superficie general con paginación de 10 elementos.
   * Ajustamos `PostContainer.tsx` para que cada publicación se renderice como una tarjeta aislada sin envoltorios adicionales.
 
+## Hito 15: Publicaciones Contextuales por Oficio y Entidad (+495 Posts), Enlace en Logo a Feed y Sidebar Flat
+- **Fecha:** 2026-11-08
+- **Contexto:** El usuario solicitó poblar masivamente el feed con 3 publicaciones contextualizadas por cada miembro (según su oficio real: modelos VIP ofreciendo fotos/chat privado, pronosticadores ofreciendo parleys y animalitos, taquilleros ofreciendo loterías y recargas, etc.), 3 publicaciones por canal y 3 por grupo. Asimismo, requirió que el logo HandyBet en la cabecera redirija a `/feed`, y que la barra lateral derecha elimine los contenedores voluminosos de tarjetas hacia un diseño flat minimalista.
+- **Decisión:**
+  * Creamos `scripts/generate_contextual_posts.js` y actualizamos `scripts/generate_massive_mockdata.js` para generar 495 posts vinculados a sus respectivos autores (`author_id`), canales (`channel_id`) y grupos (`group_id`), con planes de suscripción para creadores y tipsters y `visibility_level: 'todos'`.
+  * Configuramos `HandyBetHeader.tsx` para envolver el logotipo en un `TouchableOpacity` que navega a `/(tabs)/feed`.
+  * Simplificamos los widgets de la barra lateral derecha (`RightSidebarWidgets.tsx`) a filas planas sin cajas envolventes oscuras ni botones invasivos, respetando la estética minimalista y limpia aprobada.
+  * Actualizamos `localDB.ts` con chequeo de re-seeding automático para garantizar que cualquier navegador cargue inmediatamente la base de 495 publicaciones.
+
 
 ---
 
@@ -122,6 +131,27 @@ type: changelog
 Todos los cambios notables de este proyecto serán documentados en este archivo.
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/), y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [1.18.0] - 2026-11-08
+
+### Añadido
+- **Generación Masiva de 495 Publicaciones Contextuales por Oficio y Entidad (`generate_contextual_posts.js`)**:
+  - **3 Publicaciones por Miembro (171 posts)** adaptadas estrictamente a su rol y oficio:
+    - `vip_creator` (Joselin La Gata, Valeria Gómez, Nicole Rossi, etc.): Sesiones de fotos privadas, sets de playa y fitness, invitación al chat privado con paywall y planes de membresía VIP Fans.
+    - `tipster` (Roberto López, Don Animalito, El Brujo, etc.): Análisis matemático de animalitos (Lotto Activo, La Granjita), parleys combinados multilogro (MLB, Champions League) con cuotas y verificación de tickets cobrados.
+    - `cashier` (Taquillas Caracas, Valencia, etc.): Horarios de atención, confirmaciones de cobro de premios, recargas inmediatas con Pago Móvil y promociones en boletos de lotería.
+    - `company_owner` / `admin` (Henry Campos, Administrador Principal): Comunicados de seguridad, garantías de liquidez, lanzamiento de simuladores y pozos acumulados.
+    - `player`: Celebración de boletos premiados, apuestas en vivo y comentarios de partidos.
+  - **3 Publicaciones por Canal (156 posts)**: Anuncios oficiales de sorteos diarios, acumulados y resultados certificados enlazados con `channel_id`.
+  - **3 Publicaciones por Grupo (168 posts)**: Debates en sala, señales en vivo y felicitaciones a ganadores en sala enlazados con `group_id`.
+- **Navegación en el Logo Principal a `/feed` (`HandyBetHeader.tsx`)**: El logotipo HandyBet ahora actúa como botón reactivo que redirige al muro principal (`/(tabs)/feed`).
+
+### Modificado
+- **Barra Lateral Derecha Flat & Minimalista (`RightSidebarWidgets.tsx`)**:
+  - Se eliminaron las cajas card voluminosas (`WidgetContainer`, `FollowSuggestionWidget`, `PrizeNotificationWidget`).
+  - Sugerencias de seguimiento convertidas en filas planas elegantes directamente sobre la superficie con avatar circular, información concisa y botón de acción minimalista ("Seguir" / "Siguiendo").
+- **Mapeo de Nombres de Usuario y Planes en el Muro (`feed/index.tsx`)**: Soporte completo para `@username` real de autores y propagación de planes de suscripción para el modal `TierPlanSelector`.
+- **Re-seeding Automático de Base de Datos Local (`localDB.ts`)**: Se añadió condición para actualizar automáticamente la base de datos si el almacenamiento local contiene menos de 200 posts, garantizando que el nuevo catálogo masivo esté disponible de inmediato.
 
 ## [1.17.0] - 2026-11-08
 

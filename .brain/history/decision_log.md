@@ -102,3 +102,12 @@
   * Eliminamos los fondos y bordes cápsula en `TabContainer.tsx`, dejando las pestañas con fondo 100% transparente y la línea indicadora activa pegada al texto.
   * Rediseñamos `src/app/(tabs)/follows/index.tsx` eliminando los contenedores de tarjeta maestros y presentando las filas de miembros directamente sobre la superficie general con paginación de 10 elementos.
   * Ajustamos `PostContainer.tsx` para que cada publicación se renderice como una tarjeta aislada sin envoltorios adicionales.
+
+## Hito 15: Publicaciones Contextuales por Oficio y Entidad (+495 Posts), Enlace en Logo a Feed y Sidebar Flat
+- **Fecha:** 2026-11-08
+- **Contexto:** El usuario solicitó poblar masivamente el feed con 3 publicaciones contextualizadas por cada miembro (según su oficio real: modelos VIP ofreciendo fotos/chat privado, pronosticadores ofreciendo parleys y animalitos, taquilleros ofreciendo loterías y recargas, etc.), 3 publicaciones por canal y 3 por grupo. Asimismo, requirió que el logo HandyBet en la cabecera redirija a `/feed`, y que la barra lateral derecha elimine los contenedores voluminosos de tarjetas hacia un diseño flat minimalista.
+- **Decisión:**
+  * Creamos `scripts/generate_contextual_posts.js` y actualizamos `scripts/generate_massive_mockdata.js` para generar 495 posts vinculados a sus respectivos autores (`author_id`), canales (`channel_id`) y grupos (`group_id`), con planes de suscripción para creadores y tipsters y `visibility_level: 'todos'`.
+  * Configuramos `HandyBetHeader.tsx` para envolver el logotipo en un `TouchableOpacity` que navega a `/(tabs)/feed`.
+  * Simplificamos los widgets de la barra lateral derecha (`RightSidebarWidgets.tsx`) a filas planas sin cajas envolventes oscuras ni botones invasivos, respetando la estética minimalista y limpia aprobada.
+  * Actualizamos `localDB.ts` con chequeo de re-seeding automático para garantizar que cualquier navegador cargue inmediatamente la base de 495 publicaciones.

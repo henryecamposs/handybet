@@ -13,8 +13,8 @@ export const [mockAds, mockNews, mockFollowSuggestions, mockPrizes] = [[], [], [
 // --- COMPONENTS ---
 
 export const WidgetContainer = ({ title, children, action }: { title: string | React.ReactNode, children: React.ReactNode, action?: React.ReactNode }) => (
-  <View className="mb-4 bg-card/45 border border-white/10 rounded-2xl overflow-hidden shadow-lg backdrop-blur-md">
-    <View className="bg-white/5 flex-row justify-between items-center p-3.5 border-b border-white/5">
+  <View className="mb-6">
+    <View className="flex-row justify-between items-center pb-2.5 mb-2 border-b border-white/10">
       {typeof title === 'string' ? (
         <Text className="text-xs font-bold uppercase tracking-wider text-primary">{title}</Text>
       ) : (
@@ -22,7 +22,7 @@ export const WidgetContainer = ({ title, children, action }: { title: string | R
       )}
       {action && action}
     </View>
-    <View className="p-3 gap-2 bg-transparent">
+    <View className="gap-1 bg-transparent">
       {children}
     </View>
   </View>
@@ -31,14 +31,14 @@ export const WidgetContainer = ({ title, children, action }: { title: string | R
 export const AdWidget = ({ image, title, domain, size = 'large' }: { image: string, title: string, domain: string, size?: string }) => {
   if (size === 'small') {
     return (
-      <TouchableOpacity className="flex-1 hover:bg-white/5 p-1 rounded-xl transition-all">
+      <TouchableOpacity className="flex-1 hover:opacity-90 rounded-xl transition-all overflow-hidden">
         <Image source={{ uri: image }} className="w-full aspect-square rounded-xl border border-white/10" resizeMode="cover" />
       </TouchableOpacity>
     );
   }
 
   return (
-    <TouchableOpacity className="hover:bg-white/5 p-1 rounded-xl transition-all mb-2">
+    <TouchableOpacity className="hover:opacity-90 rounded-xl transition-all mb-2 overflow-hidden">
       <Image source={{ uri: image }} className="w-full h-24 rounded-xl border border-white/10" resizeMode="cover" />
     </TouchableOpacity>
   );
@@ -47,11 +47,11 @@ export const AdWidget = ({ image, title, domain, size = 'large' }: { image: stri
 export const NewsWidget = ({ id, title, time, onSelectNews }: { id: string, title: string, time: string, onSelectNews?: (id: string) => void }) => {
   return (
     <TouchableOpacity
-      className="px-2 py-2 mb-1 hover:bg-white/5 rounded-xl transition-all"
+      className="px-1.5 py-1.5 hover:bg-white/5 rounded-lg transition-all"
       onPress={() => onSelectNews ? onSelectNews(id) : undefined}
     >
       <Text className="text-foreground font-bold text-xs leading-normal hover:text-primary transition-colors">{title}</Text>
-      <Text className="text-muted-foreground text-[10px] mt-1 font-semibold">{time}</Text>
+      <Text className="text-muted-foreground text-[10px] mt-0.5 font-medium">{time}</Text>
     </TouchableOpacity>
   );
 };
@@ -60,46 +60,44 @@ export const FollowSuggestionWidget = ({ name, avatar, time, mutualFollowers, on
   const [isFollowing, setIsFollowing] = React.useState(false);
 
   return (
-    <View className="flex-row items-start p-2.5 bg-white/5 hover:bg-white/10 border border-white/5 rounded-xl mb-2 transition-all">
-      <Image source={{ uri: avatar }} className="w-10 h-10 rounded-full mr-3 border border-white/20" />
-      <View className="flex-1">
-        <View className="flex-row justify-between items-center">
-          <Text className="font-bold text-foreground text-xs">{name}</Text>
-          <Text className="text-muted-foreground text-[10px] font-medium">{time}</Text>
-        </View>
-        <Text className="text-muted-foreground text-[10px] mb-2 font-medium">{mutualFollowers} seguidores en común</Text>
-        <View className="flex-row gap-2">
-          <TouchableOpacity
-            onPress={() => {
-              setIsFollowing(!isFollowing);
-              if (onFollow) onFollow();
-            }}
-            className={`flex-1 py-1.5 rounded-full items-center active:scale-[0.97] transition-all ${isFollowing ? 'bg-white/10 border border-white/20' : 'bg-primary'}`}
-          >
-            <Text className={`font-bold text-[10px] uppercase tracking-wider ${isFollowing ? 'text-foreground' : 'text-background'}`}>
-              {isFollowing ? 'Siguiendo' : 'Seguir'}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity className="flex-1 bg-white/5 py-1.5 rounded-full items-center border border-white/10 active:scale-[0.97] transition-all">
-            <Text className="text-foreground font-bold text-[10px] uppercase tracking-wider">Descartar</Text>
-          </TouchableOpacity>
+    <View className="flex-row items-center justify-between py-2 px-1 hover:bg-white/5 rounded-xl transition-all">
+      <View className="flex-row items-center flex-1 mr-2">
+        <Image source={{ uri: avatar }} className="w-9 h-9 rounded-full mr-2.5 border border-white/10" />
+        <View className="flex-1">
+          <Text className="font-bold text-foreground text-xs" numberOfLines={1}>{name}</Text>
+          <Text className="text-muted-foreground text-[10px] font-medium" numberOfLines={1}>
+            {mutualFollowers} seguidores en común
+          </Text>
         </View>
       </View>
+      <TouchableOpacity
+        onPress={() => {
+          setIsFollowing(!isFollowing);
+          if (onFollow) onFollow();
+        }}
+        className={`px-3 py-1 rounded-full items-center active:scale-[0.97] transition-all ${
+          isFollowing ? 'bg-white/10 border border-white/20' : 'bg-primary'
+        }`}
+      >
+        <Text className={`font-bold text-[10px] uppercase tracking-wider ${isFollowing ? 'text-foreground' : 'text-black'}`}>
+          {isFollowing ? 'Siguiendo' : 'Seguir'}
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
 export const PrizeNotificationWidget = ({ id, title, description, onSelectPrize }: { id: string, title: string, description: string, onSelectPrize?: (id: string) => void }) => (
   <TouchableOpacity
-    className="bg-background/80 border border-border p-4 rounded-xs flex-row items-center gap-4 mx-2 shadow-sm hover:bg-background/80 transition-colors"
+    className="p-2 hover:bg-white/5 rounded-xl flex-row items-center gap-3 transition-colors"
     onPress={() => onSelectPrize ? onSelectPrize(id) : undefined}
   >
-    <View className="w-12 h-12 bg-secondary/10 rounded-full items-center justify-center">
-      <Trophy size={24} color="#00C800" />
+    <View className="w-8 h-8 bg-secondary/10 rounded-full items-center justify-center border border-secondary/20">
+      <Trophy size={15} color="#10b981" />
     </View>
     <View className="flex-1">
-      <Text className="text-foreground font-bold text-sm">{title}</Text>
-      <Text className="text-secondary text-xs font-semibold mt-1">{description}</Text>
+      <Text className="text-foreground font-bold text-xs" numberOfLines={1}>{title}</Text>
+      <Text className="text-secondary text-[10px] font-semibold mt-0.5" numberOfLines={1}>{description}</Text>
     </View>
   </TouchableOpacity>
 );
