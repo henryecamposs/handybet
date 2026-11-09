@@ -97,6 +97,14 @@ type: changelog
   * Diseñamos y construimos `CrashDemoGame.tsx`, un simulador completo de Aviator Crash con curva exponencial, animación de despegue, balance demo recargable, retiro ("Cash Out") y feed en vivo de jugadores comunitarios.
   * Conectamos los Hubs de Juegos (`index.tsx` y `[gameId].tsx`), Miembros (`follows`), Grupos (`grupos.tsx`) y Billetera (`wallet.tsx`) a la base local masiva, permitiendo emitir boletos con números de serie reales y recargar fondos con Pago Móvil simulado.
 
+## Hito 13: Corrección de Altura en Pestañas, Bloques Modulares con Scroll y Paginación a 10 Elementos
+- **Fecha:** 2026-11-08
+- **Contexto:** Se reportaron tres problemas de diseño derivados de la navegación y el renderizado en React Native Web: (1) Las pestañas se estiraban verticalmente a una altura desmedida dejando un hueco negro y la línea roja al fondo, (2) En la pantalla de miembros, las publicaciones aparecían superpuestas sobre la lista de miembros, y (3) La lista de miembros carecía de paginación para limitar el volumen visual.
+- **Decisión:**
+  * Refactorizamos `TabContainer.tsx` limitando la barra de pestañas a una altura fija de 46px (`h-[46px]`, `flexGrow: 0`, `flexShrink: 0`) con centrado vertical, eliminando la expansión infinita de flex en todas las pantallas.
+  * Rediseñamos `src/app/(tabs)/follows/index.tsx` creando dos bloques contenedores independientes (`bg-card/75 border border-white/10 rounded-2xl p-5 shadow-xl backdrop-blur-md`): uno para el Directorio de Miembros y otro para las Publicaciones Recientes, evitando cualquier superposición.
+  * Implementamos un sistema de paginación de 10 elementos por página con botones numéricos, controles "Anterior"/"Siguiente" y resumen de conteo (`PAGE_SIZE = 10`), además de búsqueda en tiempo real que reajusta la página automáticamente.
+
 
 ---
 
@@ -106,6 +114,22 @@ type: changelog
 Todos los cambios notables de este proyecto serán documentados en este archivo.
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/), y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [1.16.0] - 2026-11-08
+
+### Corregido
+- **Altura y Estiramiento Vertical en Pestañas (`TabContainer.tsx`)**: Se corrigió el estiramiento vertical excesivo del contenedor de pestañas en React Native Web fijando una altura compacta estricta de 46px (`h-[46px]`, `flexGrow: 0`, `flexShrink: 0`) y posicionando la línea indicadora activa directamente debajo de las etiquetas de pestañas en todos los módulos (`/follows`, `/channels`, `/games`, `/grupos`, `/wallet`).
+- **Superposición de Publicaciones sobre la Lista de Miembros (`follows/index.tsx`)**: Eliminada la superposición visual mediante la división de la pantalla en dos bloques modulares independientes con estilos de tarjeta glassmorphism (`bg-card/75 border border-white/10 rounded-2xl`).
+
+### Añadido
+- **Paginación a 10 Elementos en Directorio de Miembros (`follows/index.tsx`)**:
+  - Paginación dinámica que muestra exactamente 10 usuarios por página.
+  - Controles ergonómicos con contador de rango (`Mostrando 1 - 10 de 25 miembros`), botones de salto numérico de página y botones directos `Anterior` y `Siguiente`.
+  - Búsqueda en tiempo real que reajusta automáticamente la paginación a la página inicial.
+- **Bloque de Muro y Publicaciones Recientes Aislado**: Contenedor secundario con cabecera y enlace rápido al muro completo (`/feed`), garantizando un flujo de lectura limpio sin colisiones entre listas.
+
+### Modificado
+- **Tarjetas de Salas y Grupos en Detalle de Canal (`channels/[channelId].tsx`)**: Estilizado con `bg-card/60 border border-white/10 rounded-xl p-1` para evitar desbordes y mejorar la jerarquía visual de acciones en dispositivos de escritorio y móviles.
 
 ## [1.15.0] - 2026-11-08
 

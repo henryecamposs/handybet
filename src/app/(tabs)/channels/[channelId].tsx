@@ -168,7 +168,7 @@ export default function ChannelDetailScreen() {
         </View>
       }
       onPress={() => router.push(`/channels/groups?id=${group.id}&from=channel` as any)}
-      className="mb-2 bg-background/80"
+      className="mb-2 bg-card/60 border border-white/10 rounded-xl p-1"
     />
   );
 

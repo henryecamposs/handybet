@@ -86,3 +86,11 @@
   * Dotamos a los posts del feed (`PostItem.tsx`) de un botón "Suscribirse ⭐" con selector modular de planes (`TierPlanSelector.tsx`), activando membresías exclusivas con toasts informativos.
   * Diseñamos y construimos `CrashDemoGame.tsx`, un simulador completo de Aviator Crash con curva exponencial, animación de despegue, balance demo recargable, retiro ("Cash Out") y feed en vivo de jugadores comunitarios.
   * Conectamos los Hubs de Juegos (`index.tsx` y `[gameId].tsx`), Miembros (`follows`), Grupos (`grupos.tsx`) y Billetera (`wallet.tsx`) a la base local masiva, permitiendo emitir boletos con números de serie reales y recargar fondos con Pago Móvil simulado.
+
+## Hito 13: Corrección de Altura en Pestañas, Bloques Modulares con Scroll y Paginación a 10 Elementos
+- **Fecha:** 2026-11-08
+- **Contexto:** Se reportaron tres problemas de diseño derivados de la navegación y el renderizado en React Native Web: (1) Las pestañas se estiraban verticalmente a una altura desmedida dejando un hueco negro y la línea roja al fondo, (2) En la pantalla de miembros, las publicaciones aparecían superpuestas sobre la lista de miembros, y (3) La lista de miembros carecía de paginación para limitar el volumen visual.
+- **Decisión:**
+  * Refactorizamos `TabContainer.tsx` limitando la barra de pestañas a una altura fija de 46px (`h-[46px]`, `flexGrow: 0`, `flexShrink: 0`) con centrado vertical, eliminando la expansión infinita de flex en todas las pantallas.
+  * Rediseñamos `src/app/(tabs)/follows/index.tsx` creando dos bloques contenedores independientes (`bg-card/75 border border-white/10 rounded-2xl p-5 shadow-xl backdrop-blur-md`): uno para el Directorio de Miembros y otro para las Publicaciones Recientes, evitando cualquier superposición.
+  * Implementamos un sistema de paginación de 10 elementos por página con botones numéricos, controles "Anterior"/"Siguiente" y resumen de conteo (`PAGE_SIZE = 10`), además de búsqueda en tiempo real que reajusta la página automáticamente.

@@ -38,6 +38,8 @@ type: pruebas
 
 ---
 
+---
+
 ### Auditoría & Plan de Pruebas QA (Matriz de Control de Calidad)
 - 🧪 **Pruebas Unitarias e Integración**:
   - Verificación de consultas RPC en Supabase (`rpc_place_handybet_bet`, `rpc_record_analytics_session`, `rpc_get_admin_kpis`, `rpc_send_message`, `rpc_toggle_follow`).
@@ -49,6 +51,8 @@ type: pruebas
 - 🔒 **Pruebas de Seguridad & RBAC**:
   - Control de acceso estricto al Panel Administrativo (`/admin`) mediante contraseña global (`handybet*2026`).
   - Sanitización de entradas en búsqueda de feeds y parámetros de filtrado para prevenir inyecciones.
+
+---
 
 ---
 

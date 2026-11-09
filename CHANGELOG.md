@@ -4,6 +4,22 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/), y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.16.0] - 2026-11-08
+
+### Corregido
+- **Altura y Estiramiento Vertical en Pestañas (`TabContainer.tsx`)**: Se corrigió el estiramiento vertical excesivo del contenedor de pestañas en React Native Web fijando una altura compacta estricta de 46px (`h-[46px]`, `flexGrow: 0`, `flexShrink: 0`) y posicionando la línea indicadora activa directamente debajo de las etiquetas de pestañas en todos los módulos (`/follows`, `/channels`, `/games`, `/grupos`, `/wallet`).
+- **Superposición de Publicaciones sobre la Lista de Miembros (`follows/index.tsx`)**: Eliminada la superposición visual mediante la división de la pantalla en dos bloques modulares independientes con estilos de tarjeta glassmorphism (`bg-card/75 border border-white/10 rounded-2xl`).
+
+### Añadido
+- **Paginación a 10 Elementos en Directorio de Miembros (`follows/index.tsx`)**:
+  - Paginación dinámica que muestra exactamente 10 usuarios por página.
+  - Controles ergonómicos con contador de rango (`Mostrando 1 - 10 de 25 miembros`), botones de salto numérico de página y botones directos `Anterior` y `Siguiente`.
+  - Búsqueda en tiempo real que reajusta automáticamente la paginación a la página inicial.
+- **Bloque de Muro y Publicaciones Recientes Aislado**: Contenedor secundario con cabecera y enlace rápido al muro completo (`/feed`), garantizando un flujo de lectura limpio sin colisiones entre listas.
+
+### Modificado
+- **Tarjetas de Salas y Grupos en Detalle de Canal (`channels/[channelId].tsx`)**: Estilizado con `bg-card/60 border border-white/10 rounded-xl p-1` para evitar desbordes y mejorar la jerarquía visual de acciones en dispositivos de escritorio y móviles.
+
 ## [1.15.0] - 2026-11-08
 
 ### Añadido

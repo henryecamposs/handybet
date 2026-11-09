@@ -11,55 +11,71 @@ export interface TabItem {
 export interface TabContainerProps {
   tabs: TabItem[];
   defaultTabId?: string;
+  onTabChange?: (tabId: string) => void;
 }
 
-export default function TabContainer({ tabs, defaultTabId }: TabContainerProps) {
+export default function TabContainer({ tabs, defaultTabId, onTabChange }: TabContainerProps) {
   const [activeTabId, setActiveTabId] = useState(defaultTabId || tabs[0]?.id);
 
-  const activeTab = tabs.find((t) => t.id === activeTabId);
+  const handleSelectTab = (id: string) => {
+    setActiveTabId(id);
+    onTabChange?.(id);
+  };
+
+  const activeTab = tabs.find((t) => t.id === activeTabId) || tabs[0];
 
   return (
-    <View className="flex-1">
-      {/* Selector de pestañas con scroll horizontal */}
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        className="mb-6 border-b border-border-muted"
-        contentContainerStyle={{ flexGrow: 1 }}
-      >
-        <View className="flex-row min-w-full">
-          {tabs.map((tab) => {
-            const isActive = activeTabId === tab.id;
-            return (
-              <TabItemComponent
-                key={tab.id}
-                tab={tab}
-                isActive={isActive}
-                onPress={() => setActiveTabId(tab.id)}
-              />
-            );
-          })}
-        </View>
-      </ScrollView>
+    <View className="w-full">
+      {/* Barra de pestañas con altura compacta y scroll horizontal controlado */}
+      <View className="w-full border-b border-white/10 mb-4 bg-white/5 rounded-xl overflow-hidden shrink-0">
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={{ flexGrow: 0, height: 46 }}
+          contentContainerStyle={{ alignItems: 'center', height: 46 }}
+        >
+          <View className="flex-row items-center h-[46px] min-w-full">
+            {tabs.map((tab) => {
+              const isActive = activeTabId === tab.id;
+              return (
+                <TabItemComponent
+                  key={tab.id}
+                  tab={tab}
+                  isActive={isActive}
+                  onPress={() => handleSelectTab(tab.id)}
+                />
+              );
+            })}
+          </View>
+        </ScrollView>
+      </View>
 
-      {/* Contenido de la pestaña activa */}
-      <View className="flex-1 pb-4 border-b-[3px] border-border-muted">
+      {/* Contenido de la pestaña activa en flujo natural */}
+      <View className="w-full">
         {activeTab?.content}
       </View>
     </View>
   );
 }
 
-function TabItemComponent({ tab, isActive, onPress }: { tab: TabItem; isActive: boolean; onPress: () => void }) {
+function TabItemComponent({
+  tab,
+  isActive,
+  onPress,
+}: {
+  tab: TabItem;
+  isActive: boolean;
+  onPress: () => void;
+}) {
   const [isHovered, setIsHovered] = useState(false);
 
-  let bgClass = isActive ? 'bg-background' : 'bg-muted';
-  let textClass = isActive ? 'text-primary' : 'text-muted-foreground';
-  let borderClass = isActive ? 'border-primary' : 'border-b-[1px] border-border-muted';
+  let bgClass = isActive ? 'bg-primary/10' : 'bg-transparent';
+  let textClass = isActive ? 'text-primary font-black' : 'text-muted-foreground font-semibold';
+  let borderClass = isActive ? 'border-primary' : 'border-transparent';
 
   if (isHovered && !isActive) {
-    bgClass = 'bg-background';
-    textClass = 'text-secondary';
+    bgClass = 'bg-white/5';
+    textClass = 'text-foreground';
   }
 
   return (
@@ -69,11 +85,13 @@ function TabItemComponent({ tab, isActive, onPress }: { tab: TabItem; isActive: 
       onMouseEnter={() => Platform.OS === 'web' && setIsHovered(true)}
       // @ts-ignore - Web only
       onMouseLeave={() => Platform.OS === 'web' && setIsHovered(false)}
-      className={`min-w-[110px] md:flex-1 py-2 px-3 items-center justify-center transition-colors border-b-[3px] ${bgClass} ${borderClass}`}
+      className={`min-w-[120px] md:flex-1 h-[46px] px-5 flex-row items-center justify-center transition-colors border-b-2 ${bgClass} ${borderClass}`}
     >
-      {tab.icon}
+      {tab.icon && <View className="mr-2">{tab.icon}</View>}
       {typeof tab.label === 'string' ? (
-        <Text className={`font-black text-center mt-2 text-xs uppercase tracking-wider transition-colors ${textClass}`}>
+        <Text
+          className={`text-center text-xs uppercase tracking-wider transition-colors ${textClass}`}
+        >
           {tab.label}
         </Text>
       ) : typeof tab.label === 'function' ? (
@@ -84,4 +102,3 @@ function TabItemComponent({ tab, isActive, onPress }: { tab: TabItem; isActive: 
     </TouchableOpacity>
   );
 }
-
