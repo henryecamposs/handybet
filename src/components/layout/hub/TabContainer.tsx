@@ -26,15 +26,15 @@ export default function TabContainer({ tabs, defaultTabId, onTabChange }: TabCon
 
   return (
     <View className="w-full">
-      {/* Barra de pestañas con altura compacta y scroll horizontal controlado */}
-      <View className="w-full border-b border-white/10 mb-4 bg-white/5 rounded-xl overflow-hidden shrink-0">
+      {/* Barra de pestañas minimalista sin fondo, con línea indicadora limpia */}
+      <View className="w-full border-b border-white/10 mb-4 bg-transparent shrink-0">
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          style={{ flexGrow: 0, height: 46 }}
-          contentContainerStyle={{ alignItems: 'center', height: 46 }}
+          style={{ flexGrow: 0, height: 44 }}
+          contentContainerStyle={{ alignItems: 'center', height: 44 }}
         >
-          <View className="flex-row items-center h-[46px] min-w-full">
+          <View className="flex-row items-center h-[44px] min-w-full">
             {tabs.map((tab) => {
               const isActive = activeTabId === tab.id;
               return (
@@ -69,12 +69,10 @@ function TabItemComponent({
 }) {
   const [isHovered, setIsHovered] = useState(false);
 
-  let bgClass = isActive ? 'bg-primary/10' : 'bg-transparent';
-  let textClass = isActive ? 'text-primary font-black' : 'text-muted-foreground font-semibold';
+  let textClass = isActive ? 'text-primary font-bold' : 'text-muted-foreground font-semibold';
   let borderClass = isActive ? 'border-primary' : 'border-transparent';
 
   if (isHovered && !isActive) {
-    bgClass = 'bg-white/5';
     textClass = 'text-foreground';
   }
 
@@ -85,7 +83,7 @@ function TabItemComponent({
       onMouseEnter={() => Platform.OS === 'web' && setIsHovered(true)}
       // @ts-ignore - Web only
       onMouseLeave={() => Platform.OS === 'web' && setIsHovered(false)}
-      className={`min-w-[120px] md:flex-1 h-[46px] px-5 flex-row items-center justify-center transition-colors border-b-2 ${bgClass} ${borderClass}`}
+      className={`min-w-[120px] md:flex-1 h-[44px] px-4 flex-row items-center justify-center transition-colors border-b-2 bg-transparent ${borderClass}`}
     >
       {tab.icon && <View className="mr-2">{tab.icon}</View>}
       {typeof tab.label === 'string' ? (

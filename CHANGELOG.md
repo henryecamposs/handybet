@@ -4,6 +4,13 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/), y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.17.0] - 2026-11-08
+
+### Modificado
+- **Pestañas 100% Transparentes y Minimalistas (`TabContainer.tsx`)**: Eliminado por completo el fondo gris/pill (`bg-white/5`, `rounded-xl`) y los fondos de ítems. Las pestañas ahora descansan limpiamente sobre el fondo oscuro natural de la app con la línea roja indicadora activa (`border-b-2 border-primary`) y tipografía tenue en estado inactivo.
+- **Eliminación de Contenedores Outer-Card en Miembros (`follows/index.tsx`)**: Se eliminaron los contenedores envolventes gruesos. La lista de miembros se presenta directamente sobre el fondo de la pantalla con filas de usuario limpias y hover sutil, conservando la paginación de 10 elementos por página y los controles de anterior/siguiente.
+- **Filosofía Minimalista "Cada Publicación en un Card" (`PostContainer.tsx`)**: Cabecera transparente sin cajas maestras; cada post vive en su propia tarjeta independiente (`PostItem`) con bordes sutiles y glassmorphism elegante.
+
 ## [1.16.0] - 2026-11-08
 
 ### Corregido

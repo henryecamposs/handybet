@@ -26,11 +26,11 @@ export default function PostContainer({
 
   return (
     <View className="mb-8 mt-6">
-      <View className="flex-row justify-between bg-muted border-b border-border-muted items-center mb-4 p-2">
-        <Text className="text-foreground font-semibold text-lig uppercase tracking-wider  ">{title}</Text>
+      <View className="flex-row justify-between items-center mb-4 pb-2 border-b border-white/10 px-1">
+        <Text className="text-foreground font-black text-xs uppercase tracking-wider">{title}</Text>
         {onViewAll && (
           <TouchableOpacity onPress={onViewAll}>
-            <Text className="text-muted-foreground text-xs font-bold  hover:text-secondary">{viewAllLabel}</Text>
+            <Text className="text-primary text-xs font-bold hover:underline">{viewAllLabel}</Text>
           </TouchableOpacity>
         )}
       </View>

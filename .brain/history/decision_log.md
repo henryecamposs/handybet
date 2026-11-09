@@ -94,3 +94,11 @@
   * Refactorizamos `TabContainer.tsx` limitando la barra de pestañas a una altura fija de 46px (`h-[46px]`, `flexGrow: 0`, `flexShrink: 0`) con centrado vertical, eliminando la expansión infinita de flex en todas las pantallas.
   * Rediseñamos `src/app/(tabs)/follows/index.tsx` creando dos bloques contenedores independientes (`bg-card/75 border border-white/10 rounded-2xl p-5 shadow-xl backdrop-blur-md`): uno para el Directorio de Miembros y otro para las Publicaciones Recientes, evitando cualquier superposición.
   * Implementamos un sistema de paginación de 10 elementos por página con botones numéricos, controles "Anterior"/"Siguiente" y resumen de conteo (`PAGE_SIZE = 10`), además de búsqueda en tiempo real que reajusta la página automáticamente.
+
+## Hito 14: Pestañas Transparentes Minimalistas y Supresión de Cajas Outer-Card
+- **Fecha:** 2026-11-08
+- **Contexto:** El usuario solicitó simplificar la estética visual hacia un estilo minimalista y plano: eliminar el fondo gris tipo cápsula de las pestañas en todas las pantallas, retirar las cajas contenedoras de tarjetas maestras en el directorio de miembros (desplegando los miembros directamente sobre el fondo limpio), y asegurar que cada publicación se mantenga en su propia tarjeta individual.
+- **Decisión:**
+  * Eliminamos los fondos y bordes cápsula en `TabContainer.tsx`, dejando las pestañas con fondo 100% transparente y la línea indicadora activa pegada al texto.
+  * Rediseñamos `src/app/(tabs)/follows/index.tsx` eliminando los contenedores de tarjeta maestros y presentando las filas de miembros directamente sobre la superficie general con paginación de 10 elementos.
+  * Ajustamos `PostContainer.tsx` para que cada publicación se renderice como una tarjeta aislada sin envoltorios adicionales.
